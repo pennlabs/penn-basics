@@ -1,0 +1,19 @@
+{
+  "name": "penncentral",
+  "version": "1.0.0",
+  "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pennlabs/penncentral.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pennlabs/penncentral/issues"
+  },
+  "homepage": "https://github.com/pennlabs/penncentral#readme"
+}
