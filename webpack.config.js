@@ -2,10 +2,10 @@ var webpack = require('webpack')
 var path = require('path')
 
 var BUILD_DIR = path.join(__dirname, 'public','js');
-var APP_DIR = path.join(__dirname, 'src', 'shared', 'components');
+var APP_DIR = path.join(__dirname, 'src', 'shared');
 
 var config = {
-  entry: APP_DIR + 'App.js',
+  entry: APP_DIR + '/index.js',
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
