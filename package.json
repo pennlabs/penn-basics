@@ -4,6 +4,7 @@
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "babel-node src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/pennlabs/penncentral/issues"
   },
-  "homepage": "https://github.com/pennlabs/penncentral#readme"
+  "homepage": "https://github.com/pennlabs/penncentral#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "express": "^4.16.0",
+    "mongoose": "^4.11.13"
+  }
 }
