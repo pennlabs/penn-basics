@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "babel-node src/server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "express": "^4.16.0",
-    "mongoose": "^4.11.13"
+    "mongoose": "^4.11.13",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "webpack": "^3.6.0"
   }
 }
