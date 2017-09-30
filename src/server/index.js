@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 app.use('/api', apiRouter(DB));
 app.use('/', frontendRouter(DB));
 
-const PORT = process.env.PORT ? process.env.PORT : 3000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
