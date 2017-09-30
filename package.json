@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel-node src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack"
+    "webpack": "webpack --watch",
+    "dev": "concurrently \"yarn start\" \"yarn webpack\""
   },
   "repository": {
     "type": "git",
