@@ -1,10 +1,10 @@
-var webpack = require('webpack')
-var path = require('path')
+const webpack = require('webpack')
+const path = require('path')
 
-var BUILD_DIR = path.join(__dirname, 'public','js');
-var APP_DIR = path.join(__dirname, 'src', 'shared');
+const BUILD_DIR = path.join(__dirname, 'public','js');
+const APP_DIR = path.join(__dirname, 'src', 'shared');
 
-var config = {
+const config = {
   entry: APP_DIR + '/index.js',
   output: {
     path: BUILD_DIR,
@@ -21,9 +21,19 @@ var config = {
             presets: ['es2015', 'react']
           }
         }
+      }, 
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader" // creates style nodes from JS strings
+        }, {
+          loader: "css-loader" // translates CSS into CommonJS
+        }, {
+          loader: "sass-loader" // compiles Sass to CSS
+        }]
       }
     ]
   }
 };
 
-module.exports = config
+module.exports = config;
