@@ -1,0 +1,99 @@
+/**
+ * GENERAL SPACING
+ */
+
+// Text stying
+
+.bold {
+  font-weight: bold;
+}
+
+// General spacer elements
+
+.space-0,
+.space-1,
+.space-2,
+.space-3,
+.space-4 {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.space-0 {
+  height: 0rem;
+}
+
+.space-1 {
+  height: 1rem;
+}
+
+.space-2 {
+  height: 2rem;
+}
+
+.space-3 {
+  height: 3rem;
+}
+
+.space-4 {
+  height: 4rem;
+}
+
+/**
+ * SIDEBAR
+ */
+
+#wrapper {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: stretch;
+
+  .sidebar {
+    background: rgba(0, 0, 0, 0.0375);
+    padding: 1rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  #app {
+    flex: 1;
+  }
+}
+
+/**
+ * NAVBAR
+ */
+
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+
+  h1 {
+    padding: 1rem;
+  }
+
+  ul {
+    flex: 1;
+    text-align: right;
+    padding: 0rem 0.5rem;
+
+    li {
+      display: inline-block;
+      padding: 1rem 0.5rem;
+    }
+  }
+}
+
+/**
+ * FOOTER
+ */
+footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.0375);
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}

@@ -5,10 +5,15 @@ class Footer extends Component {
     render(){
         return(
           <footer>
-            <h2>
-              I am the footer
-            </h2>
-            <Links />
+            <div className="container">
+              <h1>
+                PennCentral
+              </h1>
+              <p>
+                A centralized source of information at Penn.
+              </p>
+              <Links />
+            </div>
           </footer>
         )
     }

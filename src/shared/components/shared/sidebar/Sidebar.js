@@ -5,8 +5,10 @@ class Sidebar extends Component {
   render(){
     return(
       <div className="sidebar">
-        <h2>I am the sidebar</h2>
+        <h2>OPEN NOW</h2>
         <List />
+        <div className="space-1"></div>
+        <h2>OPEN SOON</h2>
       </div>
     )
   }

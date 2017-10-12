@@ -4,7 +4,7 @@ import Links from './Links';
 class Nav extends Component {
     render(){
         return(
-            <nav>
+            <nav className="navbar">
               <h1>
                 PennCentral
               </h1>
