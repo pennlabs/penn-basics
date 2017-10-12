@@ -4,6 +4,7 @@ const path = require('path');
 import frontendRouter from './routes/frontend';
 import apiRouter from './routes/api';
 import DB from './database/db';
+require('dotenv').config();
 
 global.__basedir = path.join(__dirname, '..', '..');
 
