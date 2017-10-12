@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
+import ListItem from './ListItem';
 
 class List extends Component {
   render(){
     return(
       <ul>
-        <li>Thing 1</li>
-        <li>Thing 2</li>
-        <li>Thing 3</li>
-        <li>Thing 4</li>
+        <ListItem name="1920 Commons" isOpen={true} />
+        <ListItem name="Hill" isOpen={true} />
+        <ListItem name="New College House" isOpen={false} />
       </ul>
     )
   }
