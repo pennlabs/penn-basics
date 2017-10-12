@@ -4,7 +4,7 @@ import LinkItem from './LinkItem';
 class Links extends Component {
   render(){
     return(
-      <div>
+      <div className="footer-nav">
         <h3>Navigation</h3>
         <ul>
           <LinkItem url="#" name="Home"/>

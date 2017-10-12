@@ -6,12 +6,17 @@ class Footer extends Component {
         return(
           <footer>
             <div className="container">
-              <h1>
-                PennCentral
-              </h1>
-              <p>
-                A centralized source of information at Penn.
-              </p>
+              <div className="text">
+                <h1>
+                  PennCentral
+                </h1>
+                <p className="marg-bot-05">
+                  A centralized source of information at Penn.
+                </p>
+                <p className="light-gray-text is-size-7">
+                  Copyright &copy; 2017 PennLabs.
+                </p>
+              </div>
               <Links />
             </div>
           </footer>
