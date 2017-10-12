@@ -5,7 +5,7 @@ class LinkItem extends Component {
     return(
       <li>
         <a href={this.props.url}>
-          {this.props.title}
+          {this.props.name}
         </a>
       </li>
     )
