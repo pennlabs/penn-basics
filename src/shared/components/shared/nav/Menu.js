@@ -9,19 +9,20 @@ class Menu extends Component {
 
   handleClick(e) {
     var sidebar = document.getElementById("sidebar");
-    var shaddow = document.getElementById("shaddow");
+    var shaddow = document.getElementById("shade");
     var width = sidebar.style.width;
     shaddow.classList.toggle("fade-in");
     sidebar.classList.toggle("active");
   }
 
+  // Shadow
   render(){
     return(
       <div id="sidebar-toggle" onClick={this.handleClick}>
         <div className="bar"></div>
         <div className="bar"></div>
         <div className="bar"></div>
-        <div id="shaddow"></div>
+        <div id="shade"></div>
       </div>
     )
   }

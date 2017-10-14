@@ -41,3 +41,15 @@ footer {
     }
   }
 }
+
+@media screen and (max-width: 582px) {
+  footer .container {
+    display: block;
+  }
+}
+
+@media screen and (max-device-width: 582px) {
+  footer .container {
+    display: block;
+  }
+}
