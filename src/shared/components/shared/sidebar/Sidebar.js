@@ -4,7 +4,7 @@ import List from './List';
 class Sidebar extends Component {
   render(){
     return(
-      <div className="sidebar">
+      <div className="sidebar" id="sidebar">
         <h2>OPEN NOW</h2>
         <List />
         <div className="space-1"></div>
