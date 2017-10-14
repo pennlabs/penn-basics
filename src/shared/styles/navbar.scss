@@ -100,3 +100,33 @@
     }
   }
 }
+
+@media screen and (max-device-width: 448px) {
+  .navbar {
+    display: block;
+    padding: 0rem;
+
+    #sidebar-toggle {
+      display: inline-block;
+    }
+
+    h1 {
+      position: absolute;
+      top: 0;
+      display: inline-block;
+    }
+
+    ul {
+      width: 100%;
+      background: $snow;
+      flex: none;
+      width: 100%;
+      text-align: left;
+      border-top: 1px solid rgba(0, 0, 0, 0.075);
+
+      li {
+        padding: 0.25rem 0.5rem;
+      }
+    }
+  }
+}
