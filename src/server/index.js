@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
 import frontendRouter from './routes/frontend';
 import apiRouter from './routes/api';
@@ -23,6 +24,9 @@ if (process.env.NODE_ENV !== 'production') {
     publicPath: config.output.publicPathdist
   }));
 }
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use('/api', apiRouter(DB));
 app.use('/', frontendRouter(DB));
