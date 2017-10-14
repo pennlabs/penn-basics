@@ -8,10 +8,11 @@ class Menu extends Component {
   }
 
   handleClick(e) {
-    console.log("lit");
     var sidebar = document.getElementById("sidebar");
-    var display = sidebar.style.display;
-    sidebar.style.display = display === "none" ? "block" : "none";
+    var shaddow = document.getElementById("shaddow");
+    var width = sidebar.style.width;
+    shaddow.classList.toggle("fade-in");
+    sidebar.classList.toggle("active");
   }
 
   render(){
@@ -20,6 +21,7 @@ class Menu extends Component {
         <div className="bar"></div>
         <div className="bar"></div>
         <div className="bar"></div>
+        <div id="shaddow"></div>
       </div>
     )
   }

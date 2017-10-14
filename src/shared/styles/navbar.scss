@@ -35,6 +35,7 @@
   }
 
   #sidebar-toggle {
+    display: none;
     margin: 1rem;
     width: 2rem;
     cursor: hand;
@@ -55,5 +56,17 @@
         background: $medium-gray;
       }
     }
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .navbar #sidebar-toggle {
+    display: block;
+  }
+}
+
+@media screen and (max-device-width: 720px) {
+  .navbar #sidebar-toggle {
+    display: block;
   }
 }
