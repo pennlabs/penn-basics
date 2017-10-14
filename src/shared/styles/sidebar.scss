@@ -1,0 +1,56 @@
+/**
+ * SIDEBAR
+ */
+
+#wrapper {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: stretch;
+
+  .sidebar {
+    background: $snow;
+    padding: 1rem;
+    border-right: 1px solid $allbirds-gray;
+    box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.0375);
+
+    .open,
+    .closed {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      margin-bottom: 0.125rem;
+      background: $light-gray;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .open {
+      background: $green;
+    }
+
+    .closed {
+      background: $red;
+    }
+
+    h2 {
+      color: $light-gray;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  }
+
+  #app {
+    flex: 1;
+  }
+}
+
+// Responsive screen styling on large screen
+@media screen and (min-device-width: 848px) and (min-width: 1024px) {
+  .sidebar {
+    padding: 1rem 2rem !important;
+  }
+
+  .sidebar {
+    max-width: 50vw;
+  }
+}

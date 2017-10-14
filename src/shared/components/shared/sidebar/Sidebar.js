@@ -9,6 +9,7 @@ class Sidebar extends Component {
         <List />
         <div className="space-1"></div>
         <h2>OPEN SOON</h2>
+        <List />
       </div>
     )
   }

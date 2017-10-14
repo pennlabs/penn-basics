@@ -1,0 +1,43 @@
+/**
+ * FOOTER
+ */
+
+footer {
+  border-top: 1px solid $allbirds-gray;
+  padding: 1rem 1rem 2rem 1rem;
+  background: $snow;
+
+  .container {
+    display: flex;
+
+    .footer-nav,
+    .text {
+      flex: 1;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      margin-top: 0.4rem;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      li {
+        a {
+          color: $light-gray;
+
+          &:hover,
+          &:focus,
+          &:active {
+            color: $medium-gray;
+          }
+        }
+      }
+    }
+  }
+}
