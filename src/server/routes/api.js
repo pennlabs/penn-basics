@@ -1,8 +1,11 @@
 const router = require('express').Router();
 
 export default function apiRouter(DB){
-    //api routes
+  router.get('/', (req, res) => {
+    res.status(200).json({
+      message: "Welcome to the API!"
+    });
+  });
 
-
-    return router;
+  return router;
 }
