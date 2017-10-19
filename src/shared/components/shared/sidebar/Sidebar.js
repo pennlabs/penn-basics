@@ -1,12 +1,48 @@
 import React, {Component} from 'react';
-import List from './List';
+import SidebarSection from './SidebarSection';
 
 class Sidebar extends Component {
   render(){
+    const sections = [
+      {
+        "title": "Open now",
+        "links": [
+          {
+            "name": "1920 Commons",
+            "isOpen": true,
+          },
+          {
+            "name": "Hill",
+            "isOpen": true,
+          },
+        ],
+      },
+      {
+        "title": "Closed",
+        "links": [
+          {
+            "name": "Kings Court",
+            "isOpen": false,
+          },
+          {
+            "name": "New College House",
+            "isOpen": false,
+          },
+          {
+            "name": "Bridge",
+            "isOpen": false,
+          },
+        ],
+      }
+    ]
+
+    const content = sections.map((section, index) => {
+      return <SidebarSection title={section.title} links={section.links} key={index} />;
+    });
+
     return(
-      <div className="sidebar">
-        <h2>I am the sidebar</h2>
-        <List />
+      <div className="sidebar" id="sidebar">
+        { content }
       </div>
     )
   }

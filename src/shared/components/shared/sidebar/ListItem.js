@@ -5,9 +5,7 @@ class ListItem extends Component {
     return(
       <li>
         <span className={this.props.isOpen ? "open" : "closed"}></span>
-        <p>
-          {this.props.name}
-        </p>
+        {this.props.name}
       </li>
     )
   }

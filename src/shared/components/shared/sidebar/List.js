@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import ListItem from './ListItem';
 
 class List extends Component {
+
   render(){
+    const links = this.props.links;
+    const list = links.map((link, index) =>
+      <ListItem name={link.name} isOpen={link.isOpen} key={index} />
+    );
+
     return(
       <ul>
-        <ListItem name="1920 Commons" isOpen={true} />
-        <ListItem name="Hill" isOpen={true} />
-        <ListItem name="New College House" isOpen={false} />
+        { list }
       </ul>
     )
   }
