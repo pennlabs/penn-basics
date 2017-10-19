@@ -10,7 +10,7 @@ class Card extends Component {
             { this.props.title }
           </p>
           { this.props.subtitle ?
-            <p class="subtitle">
+            <p class="subtitle medium-gray-text">
               { this.props.subtitle}
             </p>
             :

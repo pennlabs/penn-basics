@@ -94,7 +94,7 @@
 
 // Responsive screen styling on large screen
 @media screen and (min-device-width: 848px) and (min-width: 1024px) {
-  .sidebar {
+  #wrapper .sidebar {
     max-width: 40vw;
 
     .sidebarSection {
