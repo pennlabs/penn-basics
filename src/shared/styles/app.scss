@@ -4,3 +4,8 @@
 @import './footer';
 @import './text';
 @import './sidebar';
+
+#app {
+  background: $snow;
+  padding: 1rem;
+}

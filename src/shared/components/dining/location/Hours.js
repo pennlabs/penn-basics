@@ -21,7 +21,7 @@ class Hours extends Component {
       <div className="hours">
         <h4>Hours of operation</h4>
         <ul>
-          {hours()}
+          { hours() }
         </ul>
       </div>
     )

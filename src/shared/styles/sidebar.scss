@@ -23,6 +23,11 @@
         background: rgba(0, 0, 0, 0.0375);
       }
 
+      &:focus,
+      &:active {
+        background: rgba(0, 0, 0, 0.075);
+      }
+
       .open,
       .closed {
         display: inline-block;
@@ -56,10 +61,8 @@
     transition: all 1s ease;
     width: 100%;
 
-    &.hidden {
-      // flex: none;
-      // position: absolute;
-    }
+    // Position it behind the sidebar to display the shadow
+    z-index: -1;
   }
 }
 
