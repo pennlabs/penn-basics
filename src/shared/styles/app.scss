@@ -8,4 +8,14 @@
 #app {
   background: $snow;
   padding: 1rem;
+
+  // Ensure the height of the app is at least the height of the screen
+  min-height: calc(100vh - 50px);
+
+  .card {
+    border: 0px solid transparent;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    background: white;
+    opacity: 1;
+  }
 }
