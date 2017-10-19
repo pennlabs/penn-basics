@@ -1,6 +1,6 @@
 const fs = require('fs');
 const router = require('express').Router();
-const EVENT_LIST = JSON.parse(fs.readFileSync(__basedir + '/src/server/resources/events.json'));
+const EVENT_LIST = require(__basedir + '/src/server/resources/events');
 
 export default function apiRouter(DB){
   router.get('/', (req, res) => {
