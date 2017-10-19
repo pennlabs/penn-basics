@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Check from './Check';
 
 class Filter extends Component {
   constructor(props) {
@@ -23,11 +24,9 @@ class Filter extends Component {
         <div className="columns is-desktop" id="filterContent">
           <div className="column">
             <h2>Dank</h2>
-            <ul>
-              <li>Filter 1</li>
-              <li>Filter 2</li>
-              <li>Filter 3</li>
-            </ul>
+            <Check description="Filter1" />
+            <Check description="Filter2" />
+            <Check description="Filter3" />
           </div>
         </div>
       </div>

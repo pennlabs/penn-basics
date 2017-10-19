@@ -15,6 +15,7 @@
   h2 {
     font-weight: bold;
     font-size: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   li {
@@ -22,6 +23,8 @@
   }
 
   .filterToggleWrapper {
+    cursor: hand;
+    cursor: pointer;
     text-align: right;
     width: 100%;
 
@@ -34,6 +37,38 @@
 
       &:hover {
         color: $medium-gray;
+      }
+    }
+  }
+
+  .checkWrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    p {
+      flex: 1;
+    }
+
+    .check {
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.5rem;
+      background: transparent;
+      border: 2px solid $allbirds-gray;
+
+      &.active {
+        color: $blue;
+        border: 2px solid $dark-blue;
+      }
+    }
+
+    &:hover {
+      .check {
+        background: $allbirds-gray;
+        border: 2px solid $light-gray;
       }
     }
   }
