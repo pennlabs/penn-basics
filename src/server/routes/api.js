@@ -1,5 +1,6 @@
-const router = require('express').Router();
 const fs = require('fs');
+const router = require('express').Router();
+const EVENT_LIST = JSON.parse(fs.readFileSync(__basedir + '/src/server/resources/events.json'));
 
 export default function apiRouter(DB){
   router.get('/', (req, res) => {
@@ -8,12 +9,14 @@ export default function apiRouter(DB){
     });
   });
 
+  // POST /events
+  // Parameters: 'start' date as integer 
+  // Output: events that 'start' date lies between
   router.post('/events', (req, res) => {
-    const eventList = JSON.parse(fs.readFileSync(__basedir + '/src/server/resources/events.json'));
     const start = req.body.start;
 
     let events = [];
-    eventList.forEach(event => {
+    EVENT_LIST.forEach(event => {
       if (start >= Date.parse(event.start) && start <= Date.parse(event.end)) {
         events.push(event);
       }
