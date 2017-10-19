@@ -1,0 +1,22 @@
+@import "./node_modules/bulma/sass/utilities/initial-variables";
+// @import "./fonts/AvenirNextLTPro-Regular.otf";
+
+$blue: #6190E8;
+$green: #5BD3B8;
+$primary: $green;
+$danger: #F2BE64;
+$success: #EAEAEA;
+
+.spacer {
+  height: 30px;
+  width: 100vw;
+}
+.whiteCard {
+  background-color: white !important;
+  text-align: center;
+  padding: 30px;
+}
+.subtitle {
+  color: 737373 !important;
+  // font-family: "Avenir Next" sans-serif;
+}
