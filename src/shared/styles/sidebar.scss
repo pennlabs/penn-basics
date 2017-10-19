@@ -8,35 +8,46 @@
   align-items: stretch;
 
   .sidebar {
+    padding: 1rem 0rem;
     display: block;
-    background: $snow;
-    padding: 1rem;
+    background: $white;
     border-right: 1px solid $allbirds-gray;
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.0375);
 
-    .open,
-    .closed {
-      display: inline-block;
-      width: 0.5rem;
-      height: 0.5rem;
-      margin-bottom: 0.125rem;
-      background: $light-gray;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-    }
+    li {
+      cursor: hand;
+      cursor: pointer;
+      padding: 0.25rem 1.25rem;
 
-    .open {
-      background: $green;
-    }
+      &:hover {
+        background: rgba(0, 0, 0, 0.0375);
+      }
 
-    .closed {
-      background: $red;
+      .open,
+      .closed {
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-bottom: 0.125rem;
+        background: $light-gray;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+
+      .open {
+        background: $green;
+      }
+
+      .closed {
+        background: $red;
+      }
     }
 
     h2 {
+      padding: 0rem 1.25rem;
       color: $light-gray;
       font-weight: bold;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
   }
 
@@ -78,7 +89,13 @@
 // Responsive screen styling on large screen
 @media screen and (min-device-width: 848px) and (min-width: 1024px) {
   .sidebar {
-    padding: 1rem 2rem !important;
+    li {
+      padding: 0.25rem 2rem;
+    }
+
+    h2 {
+      padding: 0rem 2rem;
+    }
   }
 
   .sidebar {
