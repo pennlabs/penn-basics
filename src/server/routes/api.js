@@ -11,7 +11,6 @@ export default function apiRouter(DB){
   router.post('/events', (req, res) => {
     const eventList = JSON.parse(fs.readFileSync(__basedir + '/src/server/resources/events.json'));
     const start = req.body.start;
-    const end = req.body.end;
 
     let events = [];
     eventList.forEach(event => {
