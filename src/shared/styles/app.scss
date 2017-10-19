@@ -4,6 +4,7 @@
 @import './footer';
 @import './text';
 @import './sidebar';
+@import './filter';
 
 /**
  * General styling for the whole application
@@ -27,4 +28,8 @@
 .hover {
   cursor: hand;
   cursor: pointer;
+}
+
+.display-none {
+  display: none !important;
 }
