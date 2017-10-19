@@ -1,6 +1,7 @@
 const fs = require('fs');
+const path = require('path');
 const router = require('express').Router();
-const EVENT_LIST = require(__basedir + '/src/server/resources/events');
+const EVENT_LIST = require('../resources/events');
 
 export default function apiRouter(DB){
   router.get('/', (req, res) => {
