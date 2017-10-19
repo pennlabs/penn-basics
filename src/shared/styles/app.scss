@@ -5,6 +5,10 @@
 @import './text';
 @import './sidebar';
 
+/**
+ * General styling for the whole application
+ */
+
 #app {
   background: $snow;
   padding: 1rem;
@@ -18,4 +22,9 @@
     background: white;
     opacity: 1;
   }
+}
+
+.hover {
+  cursor: hand;
+  cursor: pointer;
 }

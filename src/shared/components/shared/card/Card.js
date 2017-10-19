@@ -4,7 +4,7 @@ class Card extends Component {
   render(){
     return(
       <div className="column is-half-desktop">
-        <div className="card">
+        <div className={ this.props.hover ? 'card hover' : 'card' }>
           <div className="card-content">
           <p class="title">
             { this.props.title }
