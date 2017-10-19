@@ -40,5 +40,5 @@ export default () => (
         </div>
       </div>
       <Footer />
-    </div>  
+    </div>
 );
