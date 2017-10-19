@@ -6,11 +6,11 @@ class Card extends Component {
       <div className="column is-half-desktop">
         <div className={ this.props.hover ? 'card hover' : 'card' }>
           <div className="card-content">
-          <p class="title">
+          <p className="title">
             { this.props.title }
           </p>
           { this.props.subtitle ?
-            <p class="subtitle medium-gray-text">
+            <p className="subtitle medium-gray-text">
               { this.props.subtitle}
             </p>
             :

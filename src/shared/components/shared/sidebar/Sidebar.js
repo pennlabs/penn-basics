@@ -36,8 +36,8 @@ class Sidebar extends Component {
       }
     ]
 
-    const content = sections.map((section) => {
-      return <SidebarSection title={section.title} links={section.links} />;
+    const content = sections.map((section, index) => {
+      return <SidebarSection title={section.title} links={section.links} key={index} />;
     });
 
     return(
