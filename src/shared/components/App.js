@@ -17,7 +17,8 @@ class App extends Component {
               <Card title="Study spaces" subtitle="Get on the grind"/>
             </div>
             <div className="columns is-desktop">
-              <Card title="Laundry" />
+              <Card title="Laundry" subtitle="See which machines are open right now" />
+              <Card title="Reserve a room" subtitle="Get a group and get to work" />
             </div>
           </div>
         </div>

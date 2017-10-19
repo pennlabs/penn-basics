@@ -11,7 +11,7 @@ class Card extends Component {
           </p>
           { this.props.subtitle ?
             <p class="subtitle">
-              Find something good to eat.
+              { this.props.subtitle}
             </p>
             :
             ''
