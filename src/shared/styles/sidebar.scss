@@ -13,46 +13,52 @@
     background: $white;
     border-right: 1px solid $allbirds-gray;
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.0375);
+    max-width: 25vw;
 
-    li {
-      cursor: hand;
-      cursor: pointer;
-      padding: 0.25rem 1.25rem;
+    .sidebarSection {
+      margin-bottom: 1rem;
 
-      &:hover {
-        background: rgba(0, 0, 0, 0.0375);
+      li {
+        cursor: hand;
+        cursor: pointer;
+        padding: 0.25rem 1.25rem;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.0375);
+        }
+
+        &:focus,
+        &:active {
+          background: rgba(0, 0, 0, 0.075);
+        }
+
+        .open,
+        .closed {
+          display: inline-block;
+          width: 0.5rem;
+          height: 0.5rem;
+          margin-bottom: 0.125rem;
+          background: $light-gray;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+
+        .open {
+          background: $green;
+        }
+
+        .closed {
+          background: $red;
+        }
       }
 
-      &:focus,
-      &:active {
-        background: rgba(0, 0, 0, 0.075);
+      h2 {
+        text-transform: uppercase;
+        padding: 0rem 1.25rem;
+        color: $light-gray;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
       }
-
-      .open,
-      .closed {
-        display: inline-block;
-        width: 0.5rem;
-        height: 0.5rem;
-        margin-bottom: 0.125rem;
-        background: $light-gray;
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
-
-      .open {
-        background: $green;
-      }
-
-      .closed {
-        background: $red;
-      }
-    }
-
-    h2 {
-      padding: 0rem 1.25rem;
-      color: $light-gray;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
     }
   }
 
@@ -92,17 +98,17 @@
 // Responsive screen styling on large screen
 @media screen and (min-device-width: 848px) and (min-width: 1024px) {
   .sidebar {
-    li {
-      padding: 0.25rem 2rem;
-    }
+    max-width: 40vw;
 
-    h2 {
-      padding: 0rem 2rem;
-    }
-  }
+    .sidebarSection {
+      li {
+        padding: 0.25rem 2rem;
+      }
 
-  .sidebar {
-    max-width: 50vw;
+      h2 {
+        padding: 0rem 2rem;
+      }
+    }
   }
 }
 
