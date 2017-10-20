@@ -13,6 +13,7 @@
   }
 
   h2 {
+    color: $light-gray;
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -42,12 +43,15 @@
   }
 
   .checkWrapper {
+    cursor: hand;
+    cursor: pointer;
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
 
     p {
       flex: 1;
+      color: $light-gray;
     }
 
     .check {
@@ -60,8 +64,7 @@
       border: 2px solid $allbirds-gray;
 
       &.active {
-        color: $blue;
-        border: 2px solid $dark-blue;
+        background: $green !important;
       }
     }
 
@@ -69,6 +72,10 @@
       .check {
         background: $allbirds-gray;
         border: 2px solid $light-gray;
+      }
+
+      p {
+        color: $medium-gray;
       }
     }
   }
