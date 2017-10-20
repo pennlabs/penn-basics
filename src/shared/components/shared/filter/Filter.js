@@ -23,7 +23,7 @@ class Filter extends Component {
 
         <div className="columns is-desktop" id="filterContent">
           <div className="column">
-            <h2>Dank</h2>
+            <h2>Filter title</h2>
             <Check description="Filter1" />
             <Check description="Filter2" />
             <Check description="Filter3" />
