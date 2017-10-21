@@ -26,6 +26,30 @@
   }
 }
 
+.btn {
+  color: $medium-gray;
+  padding: 0.6rem 1rem;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.075);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  background: white;
+  border-radius: 0.4rem;
+  opacity: 1;
+  outline: $medium-gray !important;
+
+  &:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background: #FAFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus,
+  &:active {
+    background: #F8F8F8;
+    outline: $medium-gray !important;
+  }
+}
+
 .hover {
   cursor: hand;
   cursor: pointer;
