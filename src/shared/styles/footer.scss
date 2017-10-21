@@ -16,11 +16,14 @@ footer {
     }
 
     h1 {
+      font-weight: bold;
       font-size: 1.4rem;
       margin-bottom: 0.5rem;
     }
 
     h3 {
+      color: $medium-gray;
+      font-weight: bold;
       margin-top: 0.4rem;
       font-size: 1rem;
       margin-bottom: 0.5rem;
