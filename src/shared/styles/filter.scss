@@ -62,9 +62,15 @@
       margin-right: 0.5rem;
       background: transparent;
       border: 2px solid $allbirds-gray;
+    }
 
-      &.active {
+    &.active {
+      .check {
         background: $green !important;
+      }
+
+      p {
+        color: $medium-gray;
       }
     }
 
