@@ -7,9 +7,11 @@ class Footer extends Component {
           <footer>
             <div className="container">
               <div className="text">
-                <h1>
-                  PennCentral
-                </h1>
+                <a href="/">
+                  <h1>
+                    PennCentral
+                  </h1>
+                </a>
                 <p className="marg-bot-05">
                   A centralized source of information at Penn.
                 </p>

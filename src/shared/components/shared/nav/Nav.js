@@ -7,9 +7,11 @@ class Nav extends Component {
     return(
       <nav className="navbar" id="navbar">
         <Menu />
-        <h1>
-          PennCentral
-        </h1>
+        <a href="/">
+          <h1>
+            PennCentral
+          </h1>
+        </a>
         <Links />
       </nav>
     )
