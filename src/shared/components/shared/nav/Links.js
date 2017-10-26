@@ -5,7 +5,7 @@ class Links extends Component {
   render(){
     return(
       <ul>
-        <LinkItem url="#" name="Dining"/>
+        <LinkItem url="/dining" name="Dining"/>
         <LinkItem url="#" name="Laundry"/>
         <LinkItem url="#" name="Study spaces"/>
         <LinkItem url="#" name="Reserve a room"/>

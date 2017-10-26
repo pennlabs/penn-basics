@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Card extends Component {
   render(){
@@ -22,9 +23,9 @@ class Card extends Component {
     if (this.props.url) {
       return (
         <div className="column is-half-desktop">
-          <a href={this.props.url}>
+          <Link to={this.props.url}>
             {content}
-          </a>
+          </Link>
         </div>
       );
     } else {
