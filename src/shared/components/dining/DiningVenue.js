@@ -1,18 +1,31 @@
 import React, {Component} from 'react';
 import {getDiningData} from '../../actions/index'
+import {connect} from 'react-redux'
 
 class DiningVenue extends Component {
   constructor(props){
     super(props)
-    getDiningData(523)
+    this.props.getDiningDataDispatch(523)
   }
   render(){
     return(
       <div>
-        <h2>I am Commons</h2>
+        <h2>I am commons</h2>
       </div>
     )
   }
 }
 
-export default DiningVenue;
+const mapStateToProps = (state) => {
+  return {
+    diningData: state.dining.diningData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getDiningDataDispatch: (venue_id) => {dispatch(getDiningData(venue_id))}    
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue);
