@@ -7,6 +7,7 @@ import Card from './shared/card/Card';
 import Home from './home/App';
 import NotFound from './shared/NotFound';
 import Dining from './dining/App';
+import DiningVenue from './dining/DiningVenue';
 
 export default () => (
     <div>
@@ -17,6 +18,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
+            <Route exact path="/dining/:id" component={DiningVenue} />
             <Route path="*" component={NotFound}/>
           </Switch>
         </div>
