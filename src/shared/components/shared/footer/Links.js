@@ -7,11 +7,11 @@ class Links extends Component {
       <div className="footer-nav">
         <h3>Navigation</h3>
         <ul>
-          <LinkItem url="#" name="About"/>
-          <LinkItem url="./dining" name="Dining"/>
-          <LinkItem url="#" name="Laundry"/>
-          <LinkItem url="#" name="Study spaces"/>
-          <LinkItem url="#" name="Reserve a room"/>
+          <LinkItem url="./" name="Home"/>
+          <LinkItem url="/dining" name="Dining"/>
+          <LinkItem url="/laundry" name="Laundry"/>
+          <LinkItem url="/studyspaces" name="Study spaces"/>
+          <LinkItem url="/reservations" name="Reserve a room"/>
         </ul>
       </div>
     )
