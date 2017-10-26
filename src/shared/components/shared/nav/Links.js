@@ -6,9 +6,9 @@ class Links extends Component {
     return(
       <ul>
         <LinkItem url="/dining" name="Dining"/>
-        <LinkItem url="#" name="Laundry"/>
-        <LinkItem url="#" name="Study spaces"/>
-        <LinkItem url="#" name="Reserve a room"/>
+        <LinkItem url="/laundry" name="Laundry"/>
+        <LinkItem url="/studyspaces" name="Study spaces"/>
+        <LinkItem url="/reservations" name="Reserve a room"/>
       </ul>
     )
   }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
 export default function NotFound() {
   return(
@@ -7,7 +8,9 @@ export default function NotFound() {
       <p>
         It seems like the content you are looking for was either moved or does not exist.
       </p>
-      <a href="/" className="btn marg-top-1">Back to home</a>
+      <Link to="/" className="btn marg-top-1">
+        Back to home
+      </Link>
     </div>
   );
 }
