@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 class DiningVenue extends Component {
   constructor(props){
     super(props)
-    this.props.getDiningDataDispatch(523)
+    const venue_id = this.props.match.params.id
+    this.props.getDiningDataDispatch(venue_id)
   }
   render(){
     return(
@@ -18,7 +19,9 @@ class DiningVenue extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    diningData: state.dining.diningData
+    diningData: state.dining.diningData,
+    error: state.dining.error,
+    pending: state.dining.pending
   }
 }
 
