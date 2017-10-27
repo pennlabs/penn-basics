@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {getDiningData} from '../../actions/index'
-import {connect} from 'react-redux'
+import {getDiningData} from '../../actions/index';
+import {connect} from 'react-redux';
+import NotFound from '../shared/NotFound';
 
 class DiningVenue extends Component {
   constructor(props){
@@ -9,11 +10,19 @@ class DiningVenue extends Component {
     this.props.getDiningDataDispatch(venue_id)
   }
   render(){
-    return(
-      <div>
-        <h2>I am commons</h2>
-      </div>
-    )
+    if (this.props.pending) {
+      return null;
+    } else {
+      if (this.props.error) {
+        return (<NotFound title="Venue not found" />);
+      } else {
+        return  (
+          <div>
+            <h2>I am commons</h2>
+          </div>
+        );
+      }
+    }
   }
 }
 
@@ -27,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDiningDataDispatch: (venue_id) => {dispatch(getDiningData(venue_id))}    
+    getDiningDataDispatch: (venue_id) => {dispatch(getDiningData(venue_id))}
   }
 }
 
