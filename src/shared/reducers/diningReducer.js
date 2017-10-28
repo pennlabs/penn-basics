@@ -4,7 +4,7 @@ import {
   getDiningDataFulfilled
 } from '../actions/action_types'
 
-const diningReducer = (state = {pending: false}, action) => {
+const diningReducer = (state = {pending: true}, action) => {
   switch(action.type){
       case getDiningDataRequested:
           return {
@@ -22,7 +22,7 @@ const diningReducer = (state = {pending: false}, action) => {
           }
       default:
           return {
-              pending: false
+              pending: true
           }
   }
 }

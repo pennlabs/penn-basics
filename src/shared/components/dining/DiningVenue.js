@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getDiningData} from '../../actions/index';
 import {connect} from 'react-redux';
 import NotFound from '../shared/NotFound';
+import moment from 'moment';
 
 class DiningVenue extends Component {
   constructor(props){
@@ -22,9 +23,12 @@ class DiningVenue extends Component {
           />
         );
       } else {
+        const dateFormatted = moment(new Date()).format('MM/DD/YYYY');
+        const curr = this.props.diningData[dateFormatted];
+        console.dir(curr);
         return  (
           <div>
-            <h2>Halo</h2>
+            <h2>{dateFormatted}</h2>
           </div>
         );
       }
