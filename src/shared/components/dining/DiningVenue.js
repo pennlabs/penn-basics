@@ -5,20 +5,26 @@ import NotFound from '../shared/NotFound';
 
 class DiningVenue extends Component {
   constructor(props){
-    super(props)
-    const venue_id = this.props.match.params.id
-    this.props.getDiningDataDispatch(venue_id)
+    super(props);
+    const venue_id = this.props.match.params.id;
+    this.props.getDiningDataDispatch(venue_id);
   }
   render(){
     if (this.props.pending) {
       return null;
     } else {
       if (this.props.error) {
-        return (<NotFound title="Venue not found" />);
+        return (
+          <NotFound
+            title={"Venue with ID " + this.props.match.params.id + " not found"}
+            url="/dining"
+            urlText="Back to dining"
+          />
+        );
       } else {
         return  (
           <div>
-            <h2>I am commons</h2>
+            <h2>Halo</h2>
           </div>
         );
       }
