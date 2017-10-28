@@ -24,12 +24,12 @@
         padding: 0.25rem 1.25rem;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.0375);
+          background: $hover-gray;
         }
 
         &:focus,
         &:active {
-          background: rgba(0, 0, 0, 0.075);
+          background: $focus-gray;
         }
 
         .open,
