@@ -29,6 +29,7 @@
 
 .btn {
   color: $medium-gray;
+  font-weight: bold;
   padding: 0.6rem 1rem;
   display: inline-block;
   border: 1px solid rgba(0, 0, 0, 0.075);
@@ -58,4 +59,28 @@
 
 .display-none {
   display: none !important;
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 848px) {
+  #app {
+    padding: 2rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 956px) {
+  #app {
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 1024px) {
+  #app {
+    padding: 2rem 6rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 1208px) {
+  #app {
+    padding: 2rem 8rem;
+  }
 }
