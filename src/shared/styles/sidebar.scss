@@ -18,6 +18,10 @@
     .sidebarSection {
       margin-bottom: 1rem;
 
+      a {
+        color: $medium-gray;
+      }
+
       li {
         cursor: hand;
         cursor: pointer;

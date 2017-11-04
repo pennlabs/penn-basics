@@ -5,6 +5,7 @@ import {
 } from '../actions/action_types'
 
 const diningReducer = (state = {pending: true}, action) => {
+  console.log(action)
   switch(action.type){
       case getDiningDataRequested:
           return {

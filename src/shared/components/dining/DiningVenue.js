@@ -14,6 +14,14 @@ class DiningVenue extends Component {
     this.props.getDiningDataDispatch(venue_id);
   }
 
+  componentWillUpdate(props) {
+    const currentVenueId = this.props.match.params.id
+    const nextVenueId = props.match.params.id
+    if (currentVenueId !== nextVenueId) {
+      this.props.getDiningDataDispatch(nextVenueId)
+    }
+  }
+
   render(){
     if (this.props.pending) {
       return null;
