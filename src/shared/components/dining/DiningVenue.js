@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import NotFound from '../shared/NotFound';
 import moment from 'moment';
 import DiningQuery from './DiningQuery';
+import DiningOverview from './DiningOverview';
 
 class DiningVenue extends Component {
   constructor(props){
@@ -33,6 +34,8 @@ class DiningVenue extends Component {
         console.dir(curr);
         return  (
           <div>
+            <DiningOverview />
+            
             <h2>{dateToString}</h2>
 
             <DiningQuery />
