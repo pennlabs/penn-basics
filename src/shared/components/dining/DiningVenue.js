@@ -5,6 +5,7 @@ import NotFound from '../shared/NotFound';
 import moment from 'moment';
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
+import DiningMenu from './DiningMenu';
 
 class DiningVenue extends Component {
   constructor(props){
@@ -35,10 +36,9 @@ class DiningVenue extends Component {
         return  (
           <div>
             <DiningOverview />
-            
             <h2>{dateToString}</h2>
-
             <DiningQuery />
+            <DiningMenu />
           </div>
         );
       }

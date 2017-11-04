@@ -31,9 +31,15 @@ class DiningOverview extends Component {
           </div>
         </div>
         <div className={ this.state.active == "status" ? "tab active" : "tab" }>
-          <h1 className="title">
-            Status
-          </h1>
+          <p>
+            Serving dinner for...
+          </p>
+          <div className="timeRemaining">
+            1 hr, 27 min
+          </div>
+          <p>
+            Until 9 PM
+          </p>
         </div>
         <div className={ this.state.active == "announcements" ? "tab active" : "tab" }>
           <h1 className="title">
