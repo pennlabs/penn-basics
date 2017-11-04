@@ -14,18 +14,16 @@ class DiningQuery extends Component {
   }
 
   render(){
-    const diningOptions = ["Breakfast", "Lunch"];
-    const dayOptions = ["Tomorrow"]
+    const diningOptions = ["Breakfast", "Lunch", "Dinner"];
+    const dayOptions = ["Today", "Tomorrow", "Day after tomorrow"]
 
     return(
       <div className="diningQuery">
         <p>What's for</p>
         <Dropdown
-          value="Dinner"
           options={diningOptions}
         />
         <Dropdown
-          value="Today"
           options={dayOptions}
         />
       </div>
