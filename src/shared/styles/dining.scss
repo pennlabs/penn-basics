@@ -145,14 +145,17 @@
 .menuSectionWrapper {
   padding-bottom: 1rem;
   display: inline-block;
+  width: 100%;
 
   .menuSection {
     padding: 1rem 1rem 0.2rem 1rem;
+    width: 100%;
 
     h3.title {
       font-size: 1rem;
       text-transform: uppercase;
       margin-bottom: 1rem;
+      color: $light-gray;
     }
 
     .menuItem {
@@ -160,7 +163,7 @@
 
       .title {
         font-size: 0.8rem;
-        font-weight: 400;
+        font-weight: bold;
         margin-bottom: 0.2rem;
 
         &::first-letter {

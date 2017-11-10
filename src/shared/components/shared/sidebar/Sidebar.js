@@ -10,7 +10,7 @@ class Sidebar extends Component {
           {
             "name": "1920 Commons",
             "isOpen": true,
-            "venueID": 523,
+            "venueID": 593,
           },
           {
             "name": "Hill",
