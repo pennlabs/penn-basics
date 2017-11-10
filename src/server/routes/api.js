@@ -6,7 +6,7 @@ const EVENT_LIST = require('../resources/events');
 export default function apiRouter(DB){
   router.get('/', (req, res) => {
     res.status(200).json({
-      message: "Welcome to the API!"
+      message: "Welcome to the API!",
     });
   });
 
@@ -26,6 +26,13 @@ export default function apiRouter(DB){
     res.status(200).json({
       events
     });
+  });
+
+  // POST /spaces
+  router.post('/spaces', (req, res) => {
+    res.status(200).json({
+      message: "Just study where u can",
+    })
   });
 
   return router;
