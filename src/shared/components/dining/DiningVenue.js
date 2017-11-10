@@ -6,6 +6,7 @@ import moment from 'moment';
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
+import {mappings} from './mappings';
 
 class DiningVenue extends Component {
   constructor(props){
@@ -38,15 +39,18 @@ class DiningVenue extends Component {
         const date = new Date();
         const momentDate = moment(date);
         const dateFormatted = momentDate.format('MM/DD/YYYY');
-        const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");;
+        const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
         const curr = this.props.diningData[dateFormatted];
-        console.dir(curr);
+
         return  (
           <div>
+            <h1 className="title">
+              { mappings[this.props.match.params.id] }
+            </h1>
             <DiningOverview />
             <h2>{dateToString}</h2>
             <DiningQuery />
-            <DiningMenu />
+            <DiningMenu diningData={this.props.diningData} dateFormatted={dateFormatted} />
           </div>
         );
       }

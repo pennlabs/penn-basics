@@ -1,22 +1,16 @@
 import React, {Component} from 'react';
 
-class DiningMenu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { "active": "status", };
-  }
 
-  handleClick(e, tab) {
-    this.setState({ "active": tab });
-  }
+const DiningMenu = ({diningData, dateFormatted, meal}) => {
+  console.dir(diningData[dateFormatted[meal]]);
 
-  render(){
-    return(
-      <div className="menu">
-        Menu!
-      </div>
-    )
-  }
-}
+  return (
+    <div className="menu">
+      <h2>
+        Dan's daily dish
+      </h2>
+    </div>
+  );
+};
 
 export default DiningMenu;
