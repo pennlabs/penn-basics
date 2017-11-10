@@ -8,11 +8,13 @@ const Section = ({title, items}) => {
   ));
 
   return (
-    <div className="menuSection card">
-      <h3 className="title">
-        { title }
-      </h3>
-      { sectionItems }
+    <div className="menuSectionWrapper">
+      <div className="menuSection card">
+        <h3 className="title">
+          { title }
+        </h3>
+        { sectionItems }
+      </div>
     </div>
   );
 };
