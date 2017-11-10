@@ -28,7 +28,7 @@ export default function spacesRouter(DB){
     for (let i = 0; i < SPACE_LIST.length; i++) {
       const open = SPACE_LIST[i].open_hours;
       const close = SPACE_LIST[i].close_hours;
-      if (moment().hour() >= open[moment().day()] && moment().hour() < close[moment().day()]) {
+      if (moment().isBetween(open[moment().day()], close[moment().day()])) {
         spaces.push(SPACE_LIST[i]);
       }
 
