@@ -50,7 +50,7 @@ class DiningVenue extends Component {
             <DiningOverview />
             <h2>{dateToString}</h2>
             <DiningQuery />
-            <DiningMenu diningData={this.props.diningData} dateFormatted={dateFormatted} />
+            <DiningMenu diningData={this.props.diningData} dateFormatted={dateFormatted} meal="Lunch" />
           </div>
         );
       }

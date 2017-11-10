@@ -124,9 +124,43 @@
 .menu {
   margin-top: 1.2rem;
   width: 100%;
-  background: white;
-  padding: 1rem;
-  border-radius: 0.4rem;
-  border: 1px solid $allbirds-gray;
-  box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.025);
+  // background: white;
+  // padding: 1rem;
+  // border-radius: 0.4rem;
+  // border: 1px solid $allbirds-gray;
+  // box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.025);
+}
+
+.menuSection {
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 0.2rem 1rem;
+
+  h3.title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .menuItem {
+    margin-bottom: 1rem;
+
+    .title {
+      font-size: 0.8rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+
+    .description {
+      font-size: 0.8rem;
+      color: $medium-gray;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
 }

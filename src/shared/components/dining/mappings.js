@@ -1,5 +1,5 @@
 export const mappings = {
-    523: "1920 Commons",
+    593: "1920 Commons",
     636: "Hill House",
     637: "English House",
     638: "Falk Kosher Dining",
