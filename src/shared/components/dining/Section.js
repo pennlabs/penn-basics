@@ -5,7 +5,9 @@ import uuid from 'uuid/v4';
 const Section = ({title, items, shouldBeList }) => {
   let sectionItems = "";
 
-  if (!shouldBeList) {
+  if (title == "salad bar") {
+    sectionItems = <MenuItem title={items[0].title} description={items[0].description} tags={items[0].tags} key={ uuid() } />
+  } else if (!shouldBeList) {
     sectionItems = items.map(item => (
       <MenuItem title={item.title} description={item.description} tags={item.tags} key={ uuid() } />
     ));
