@@ -37,10 +37,16 @@ const MenuItem = ({title, description, tags}) => {
     });
   }
 
+  // Format the tags
+  const formattedTags = tags.map(tag => (
+    <span className="tag">{ tag }</span>
+  ));
+
   return (
     <div className="menuItem">
       <p className="title">
         { title }
+        { formattedTags }
       </p>
       {
         formattedDescription &&

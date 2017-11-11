@@ -7,6 +7,16 @@ const Section = ({title, items, shouldBeList }) => {
 
   if (title == "salad bar") {
     sectionItems = <MenuItem title={items[0].title} description={items[0].description} tags={items[0].tags} key={ uuid() } />
+  } else if (title == "fruit salad") {
+    sectionItems = items.map(item => {
+      if (item.description) {
+        return (
+          <MenuItem title={item.title} description={item.description} tags={item.tags} key={ uuid() } />
+        );
+      } else {
+        return "";
+      }
+    });
   } else if (!shouldBeList) {
     sectionItems = items.map(item => (
       <MenuItem title={item.title} description={item.description} tags={item.tags} key={ uuid() } />
