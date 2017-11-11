@@ -170,15 +170,15 @@
           text-transform: uppercase;
         }
       }
-
-      .description {
-        font-size: 0.8rem;
-        color: $medium-gray;
-
-        &::first-letter {
-          text-transform: uppercase;
-        }
-      }
     }
+  }
+}
+
+.description {
+  font-size: 0.8rem;
+  color: $medium-gray;
+
+  &::first-letter {
+    text-transform: uppercase;
   }
 }

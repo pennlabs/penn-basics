@@ -52,6 +52,10 @@
   }
 }
 
+.marg-bot-1 {
+  margin-bottom: 1rem;
+}
+
 .hover {
   cursor: hand;
   cursor: pointer;
@@ -60,6 +64,10 @@
 .display-none {
   display: none !important;
 }
+
+/**
+ * Padding on different screen sizes
+ */
 
 @media screen and (min-device-width: 1024px) and (min-width: 848px) {
   #app {
