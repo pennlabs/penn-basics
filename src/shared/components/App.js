@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
 import Footer from './shared/footer/Footer';
@@ -7,6 +7,14 @@ import Home from './home/Home';
 
 const NotFound = () => (
   <h1> Content not found </h1>
+);
+
+const Home = () => (
+  <h1>Home stuff</h1>
+);
+
+const Dining = () => (
+  <h1>Dining stuff</h1>
 );
 
 export default () => (
@@ -17,7 +25,8 @@ export default () => (
         <div id="app">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="*" component={NotFound}/>
+            <Route exact path="/dining" component={Dining} />
+            <Route path="*" component={NotFound}/>
           </Switch>
         </div>
       </div>
