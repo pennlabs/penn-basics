@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
+import Dining from './Dining';
+import Laundry from './Laundry';
+import Studyspaces from './Studyspaces';
+import Reserve from './Reserve';
+
 import '../../styles/home.scss';
 
 class Home extends Component {
@@ -14,32 +19,18 @@ class Home extends Component {
         <div className="spacer"></div>
         <div className="tile is-ancestor">
           <div className="tile is-parent is-6">
-            <article className="tile is-child notification whiteCard">
-              <h1 className="title is-3">Dining</h1>
-              <h3 className="subtitle is-5">1920 Commons looks like a great
-                place to eat right now.</h3>
-            </article>
+            <Dining />
           </div>
           <div className="tile is-parent is-6">
-            <article className="tile is-child notification whiteCard">
-              <h1 className="title is-3">Laundry</h1>
-              <h3 className="subtitle is-5">Rodin 5th floor is busy.</h3>
-            </article>
+            <Laundry />
           </div>
         </div>
         <div className="tile is-ancestor">
           <div className="tile is-parent is-6">
-            <article className="tile is-child notification whiteCard">
-              <h1 className="title is-3">Studyspaces</h1>
-              <h3 className="subtitle is-5">How about studying at VP?</h3>
-            </article>
+            <Studyspaces />
           </div>
           <div className="tile is-parent is-6">
-            <article className="tile is-child notification whiteCard">
-              <h1 className="title is-3">Reserve a room</h1>
-              <h3 className="subtitle is-5">Select one of the spaces below
-              to book a room now.</h3>
-            </article>
+            <Reserve />
           </div>
         </div>
       </div>
