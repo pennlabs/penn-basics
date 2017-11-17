@@ -13,6 +13,10 @@ const Dining = () => (
   <h1>Dining stuff</h1>
 );
 
+const Laundry = () => (
+  <h1>Laundry stuff</h1>
+);
+
 export default () => (
     <div>
       <Nav />
@@ -21,6 +25,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
+            <Route exact path="/laundry" component={Laundry} />
             <Route path="*" component={NotFound}/>
           </Switch>
         </div>

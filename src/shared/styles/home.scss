@@ -1,5 +1,4 @@
 @import "./node_modules/bulma/sass/utilities/initial-variables";
-// @import "./fonts/AvenirNextLTPro-Regular.otf";
 
 $blue: #6190E8;
 $green: #5BD3B8;
@@ -31,4 +30,8 @@ $success: #EAEAEA;
 
 .tag {
   margin: 5px !important;
+}
+
+.link {
+  text-decoration: none;
 }

@@ -9,11 +9,13 @@ class Laundry extends Component {
   }
   render () {
     return (
-      <article className="tile is-child notification whiteCard">
-        <h1 className="title is-3">Laundry</h1>
-        <h3 className="subtitle is-5">Rodin 5th floor is busy.</h3>
-        <img src="https://i.imgur.com/pFxwvuU.png" style={{width: '50%'}}/>
-      </article>
+      <Link to={`/laundry`} className="link">
+        <article className="tile is-child notification whiteCard">
+          <h1 className="title is-3">Laundry</h1>
+          <h3 className="subtitle is-5">Click to find an open machine.</h3>
+          <img src="https://i.imgur.com/JDX9ism.png" style={{width: '50%'}}/>
+        </article>
+      </Link>
     )
   }
 }
