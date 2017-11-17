@@ -21,7 +21,6 @@ class StudyCards extends Component {
               <strong>{this.state.name}</strong>
               <br/>
               <small>Hours: {this.state.hours}</small> <br />
-              <small>Noise Level: {this.state.noise.toString()}</small> <br/>
               <small>{this.state.groups && <span className="tag is-danger">Groups</span>}</small>
               <small>{this.state.noise > 3 && <span className="tag is-warning">Loud</span>}</small>
             </p>

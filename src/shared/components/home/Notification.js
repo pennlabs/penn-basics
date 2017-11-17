@@ -5,14 +5,11 @@ import '../../styles/home.scss';
 class Notification extends Component {
   constructor(props) {
     super (props);
-      this.state = {
-        show: this.props.show
-      }
   }
   render () {
     return (
       <div className="notification is-info">
-        <button className="delete" onClick={this.setState({show: false})}></button>
+        <button className="delete" onClick={this.props.show}></button>
         <p style={{textAlign: 'center'}}>
           ⚡ It's currently
           <strong> Advanced Registration </strong>⚡

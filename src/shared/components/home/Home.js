@@ -12,19 +12,18 @@ class Home extends Component {
   constructor(props) {
     super (props);
       this.state = {
-        toast: true,
+        show: true,
       }
-
+      this.close = this.close.bind(this);
+  }
+  close() {
+    this.setState({show: false});
   }
   render () {
     return (
-
+      <div>
+        {this.state.show && <Notification show={this.close}/>}
       <div style={{padding: "30px"}}>
-        <div className="horizontal">
-          <h1 className="title" style={{width: '50%'}}>✌ Hey Nihar!</h1>
-          {this.state.toast && <Notification show={this.state.toast}/>}
-        </div>
-        <div className="spacer"></div>
         <div className="tile is-ancestor">
           <div className="tile is-parent is-6">
             <Dining />
@@ -42,6 +41,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
+    </div>
     )
   }
 }
