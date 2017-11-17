@@ -23,7 +23,7 @@ export default function spacesRouter(DB){
     });
   });
 
-  router.get('/home', (req, res) => {
+  router.get('/homepage', (req, res) => {
     let spaces = [];
     for (let i = 0; i < SPACE_LIST.length; i++) {
       const open = SPACE_LIST[i].open_hours;
