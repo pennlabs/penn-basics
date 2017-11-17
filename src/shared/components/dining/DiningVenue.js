@@ -13,6 +13,19 @@ class DiningVenue extends Component {
     super(props);
     const venue_id = this.props.match.params.id;
     this.props.getDiningDataDispatch(venue_id);
+
+    const date = new Date();
+    const momentDate = moment(date);
+    const dateFormatted = momentDate.format('MM/DD/YYYY');
+    const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
+
+    console.log(momentDate)
+
+    this.state = {
+      dateFormatted: dateFormatted,
+      dateToString: dateToString,
+      meal: "Lunch" //TODO: MAKE THIS PROGRAMMATIC
+    }
   }
 
   componentWillUpdate(props) {
@@ -36,21 +49,15 @@ class DiningVenue extends Component {
           />
         );
       } else {
-        const date = new Date();
-        const momentDate = moment(date);
-        const dateFormatted = momentDate.format('MM/DD/YYYY');
-        const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
-        const curr = this.props.diningData[dateFormatted];
-
         return  (
           <div>
             <h1 className="title">
               { mappings[this.props.match.params.id] }
             </h1>
             <DiningOverview />
-            <h2>{dateToString}</h2>
+            <h2>{this.state.dateToString}</h2>
             <DiningQuery />
-            {!this.props.diningData.pending && <DiningMenu diningData={this.props.diningData} dateFormatted={dateFormatted}  meal="Brunch" />}
+            {!this.props.diningData.pending && <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]}/>}
           </div>
         );
       }
