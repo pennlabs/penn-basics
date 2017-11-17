@@ -12,6 +12,7 @@ class Laundry extends Component {
       <article className="tile is-child notification whiteCard">
         <h1 className="title is-3">Laundry</h1>
         <h3 className="subtitle is-5">Rodin 5th floor is busy.</h3>
+        <img src="https://i.imgur.com/pFxwvuU.png" style={{width: '50%'}}/>
       </article>
     )
   }

@@ -11,6 +11,9 @@ import '../../styles/home.scss';
 class Home extends Component {
   constructor(props) {
     super (props);
+      this.state = {
+        toast: true,
+      }
 
   }
   render () {
@@ -19,7 +22,7 @@ class Home extends Component {
       <div style={{padding: "40px"}}>
         <div className="horizontal">
           <h1 className="title" style={{width: '50%'}}>✌ Hey Nihar!</h1>
-          <Notification />
+          {this.state.toast && <Notification show={this.state.toast}/>}
         </div>
         <div className="spacer"></div>
         <div className="tile is-ancestor">
