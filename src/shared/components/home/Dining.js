@@ -7,7 +7,7 @@ class Dining extends Component {
   constructor(props) {
     super (props);
       this.state = {
-        object: null
+        object: false
       }
   }
   render () {
