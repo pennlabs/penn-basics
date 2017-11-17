@@ -18,7 +18,6 @@ $success: #EAEAEA;
 }
 .subtitle {
   color: 737373 !important;
-  // font-family: "Avenir Next" sans-serif;
 }
 .horizontal {
   display: flex;
@@ -28,4 +27,8 @@ $success: #EAEAEA;
 .spacer-20 {
   width: 20px;
   height: 10px;
+}
+
+.tag {
+  margin: 5px !important;
 }

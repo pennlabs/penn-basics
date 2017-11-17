@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import {Switch, Route, Link} from 'react-router-dom';
 import '../../styles/home.scss';
 
-class SmallCards extends Component {
+class RARCards extends Component {
   constructor(props) {
     super (props);
       this.state = {
-        name: this.props.name || 'Kings Court English House',
-        hours: this.props.hours || '24/7',
+        name: this.props.name || 'Education Commons 247',
+        hours: this.props.hours || '8:30pm to 10:00pm',
         type: this.props.type || 0,
       }
   }
@@ -15,9 +15,13 @@ class SmallCards extends Component {
     return (
       <article className="media">
         <div className="media-left">
-          <figure className="image is-64x64">
-            <img src='https://i.imgur.com/K2s8V3j.png' alt="Image"/>
-          </figure>
+          <a className="button is-primary is-medium">
+            <span className="icon">
+              <i className="fa fa-hand-peace-o"></i>
+            </span>
+            <span style={{width: '5px'}}></span>
+            Book Now
+          </a>
         </div>
         <div className="spacer-20"></div>
         <div className="media-content">
@@ -33,4 +37,4 @@ class SmallCards extends Component {
     )
   }
 }
-export default SmallCards;
+export default RARCards;

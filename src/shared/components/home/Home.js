@@ -19,7 +19,7 @@ class Home extends Component {
   render () {
     return (
 
-      <div style={{padding: "40px"}}>
+      <div style={{padding: "30px"}}>
         <div className="horizontal">
           <h1 className="title" style={{width: '50%'}}>✌ Hey Nihar!</h1>
           {this.state.toast && <Notification show={this.state.toast}/>}
