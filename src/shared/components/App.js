@@ -9,10 +9,6 @@ const NotFound = () => (
   <h1> Content not found </h1>
 );
 
-const Home = () => (
-  <h1>Home stuff</h1>
-);
-
 const Dining = () => (
   <h1>Dining stuff</h1>
 );
@@ -21,7 +17,6 @@ export default () => (
     <div>
       <Nav />
       <div id="wrapper">
-        {/* <Sidebar /> */}
         <div id="app">
           <Switch>
             <Route exact path="/" component={Home} />

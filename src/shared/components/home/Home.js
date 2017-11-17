@@ -4,6 +4,7 @@ import Dining from './Dining';
 import Laundry from './Laundry';
 import Studyspaces from './Studyspaces';
 import Reserve from './Reserve';
+import Notification from './Notification';
 
 import '../../styles/home.scss';
 
@@ -14,8 +15,12 @@ class Home extends Component {
   }
   render () {
     return (
+
       <div style={{padding: "40px"}}>
-        <h1 className="title">Howdy Nihar!</h1>
+        <div className="horizontal">
+          <h1 className="title" style={{width: '50%'}}>✌ Hey Nihar!</h1>
+          <Notification />
+        </div>
         <div className="spacer"></div>
         <div className="tile is-ancestor">
           <div className="tile is-parent is-6">
