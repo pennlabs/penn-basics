@@ -32,7 +32,6 @@ const Section = ({title, items, shouldBeList }) => {
     });
   }
 
-
   return (
     <div className="menuSectionWrapper">
       <div className="menuSection card">

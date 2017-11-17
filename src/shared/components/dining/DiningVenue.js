@@ -57,7 +57,11 @@ class DiningVenue extends Component {
             <DiningOverview />
             <h2>{this.state.dateToString}</h2>
             <DiningQuery />
+<<<<<<< Updated upstream
             {!this.props.diningData.pending && <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]}/>}
+=======
+            {!this.props.diningData.pending && <DiningMenu diningData={this.props.diningData} dateFormatted={dateFormatted}  meal="Lunch" />}
+>>>>>>> Stashed changes
           </div>
         );
       }

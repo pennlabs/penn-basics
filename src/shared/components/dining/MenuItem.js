@@ -38,16 +38,47 @@ const MenuItem = ({title, description, tags}) => {
   }
 
   // Format the tags
-  const formattedTags = tags.map(tag => (
-    <span className="tag">{ tag }</span>
-  ));
+  const formattedTags = tags.map(tag => {
+    let tagClass = "";
+    switch(tag) {
+      case "Made without Gluten- Containing Ingredients" :
+        tag = "Gluten Free";
+        tagClass = "gf";
+        break;
+      case "In Balance" :
+        tag = "Balanced";
+        tagClass = "balanced";
+        break;
+      case "Vegan" :
+        tagClass = "vegan";
+        break;
+      case "Vegetarian" :
+        tagClass = "vegetarian";
+        break;
+      case "Farm to Fork" :
+        tagClass = "farm";
+        break;
+      case "Humane" :
+        tagClass = "humane";
+        break;
+      case "Seafood Watch" :
+        tagClass = "seafoodWatch";
+        break;
+      default :
+        break;
+    }
+
+    return(
+      <span className={ "tag " + tagClass }>{ tag }</span>
+    );
+  });
 
   return (
     <div className="menuItem">
       <p className="title">
         { title }
-        { formattedTags }
       </p>
+      { formattedTags }
       {
         formattedDescription &&
         <div className="description">

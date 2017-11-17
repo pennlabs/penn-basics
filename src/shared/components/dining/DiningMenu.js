@@ -2,8 +2,15 @@ import React, {Component} from 'react';
 import Section from './Section';
 import uuid from 'uuid/v4';
 
+<<<<<<< Updated upstream
 const DiningMenu = ({sectionsObj}) => {
   const hi = "hi";
+=======
+const DiningMenu = ({diningData, dateFormatted, meal}) => {
+  console.log(diningData)
+  const sectionsObj = diningData[dateFormatted][meal];
+  console.log(sectionsObj);
+>>>>>>> Stashed changes
   const sectionTitles = Object.keys(sectionsObj);
   const sections = sectionTitles.map(title => {
     // Check if this section should be a list or not
