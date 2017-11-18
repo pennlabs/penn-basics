@@ -15,29 +15,29 @@ class StudyCards extends Component {
   }
   noise () {
     if (this.state.noise === 0) {
-      return <span className="tag is-info">Silent</span>
+      return <span className="tag tag-is-blue">Silent</span>
     } else if (this.state.noise === 1) {
-      return <span className="tag is-warning">Moderate</span>
+      return <span className="tag tag-is-yellow">Moderate</span>
     } else {
-      return <span className="tag is-danger">Loud</span>
+      return <span className="tag tag-is-green">Loud</span>
     }
   }
   groups ()  {
     if (this.state.groups === 0) {
       return <span className="tag is-info">No</span>
     } else if (this.state.groups === 1) {
-      return <span className="tag is-warning">Okay</span>
+      return <span className="tag tag-is-yellow">Okay</span>
     } else {
-      return <span className="tag is-danger">Yes</span>
+      return <span className="tag tag-is-green">Yes</span>
     }
   }
   outlets () {
     if (this.state.outlets === 0) {
       return <span className="tag is-info">None</span>
     } else if (this.state.outlets === 1) {
-      return <span className="tag is-warning">Sparse</span>
+      return <span className="tag tag-is-yellow">Sparse</span>
     } else {
-      return <span className="tag is-danger">Plenty</span>
+      return <span className="tag tag-is-green">Plenty</span>
     }
   }
   render () {

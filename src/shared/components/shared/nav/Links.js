@@ -7,8 +7,8 @@ class Links extends Component {
       <ul>
         <LinkItem url="dining" name="Dining"/>
         <LinkItem url="laundry" name="Laundry"/>
-        <LinkItem url="studyspaces" name="Study spaces"/>
-        <LinkItem url="rar" name="Reserve a room"/>
+        <LinkItem url="studyspaces" name="Study Spaces"/>
+        <LinkItem url="rar" name="Reserve a Room"/>
       </ul>
     )
   }
