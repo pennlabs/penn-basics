@@ -27,13 +27,6 @@ export default function apiRouter(DB){
       events
     });
   });
-
-  // POST /spaces
-  router.post('/spaces', (req, res) => {
-    res.status(200).json({
-      message: "Just study where u can",
-    })
-  });
-
+  
   return router;
 }
