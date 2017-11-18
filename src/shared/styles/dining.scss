@@ -206,3 +206,96 @@
     padding: 0rem 0rem 1.2rem 0rem;
   }
 }
+
+.hoursWrapper {
+  padding-top: 1rem;
+  padding-left: 3.2rem;
+
+  .hours {
+    width: 100%;
+    display: flex;
+
+    .hour {
+      flex: 1;
+      font-size: 0.8rem;
+      color: $medium-gray;
+    }
+  }
+}
+
+.hoursVisualization {
+  display: flex;
+  width: 100%;
+
+  .days {
+    .day {
+      height: 1.8rem;
+      border: 1px solid transparent;
+      width: 3.2rem;
+      overflow: hidden !important;
+      color: $medium-gray;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      text-align: right;
+    }
+  }
+
+  .grid {
+    flex: 1;
+    border-right: 1px solid $light-gray;
+    border-bottom: 1px solid $light-gray;
+
+    .hoursRow {
+      height: 1.8rem;
+      display: flex;
+
+      .hoursCol {
+        flex: 1;
+        border-width: 1px 0px 0px 1px;
+        border-style: solid;
+        border-color: $light-gray;
+
+        // Open during full hour
+        &.open {
+          background: $light-blue;
+
+          &:hover {
+            background: $light-blue-hover;
+          }
+        }
+
+        // Open during later half hour
+        &.open-right {
+          background: white;
+          background: -webkit-linear-gradient(left, white 50%, $light-blue 50%);
+          background: -o-linear-gradient(right, white 50%, $light-blue 50%);
+          background: -moz-linear-gradient(right, white 50%, $light-blue 50%);
+          background: linear-gradient(to right, white 50%, $light-blue 50%);
+
+          &:hover {
+            background: -webkit-linear-gradient(left, white 50%, $light-blue-hover 50%);
+            background: -o-linear-gradient(right, white 50%, $light-blue-hover 50%);
+            background: -moz-linear-gradient(right, white 50%, $light-blue-hover 50%);
+            background: linear-gradient(to right, white 50%, $light-blue-hover 50%);
+          }
+        }
+
+        // OPen during earlier half hour
+        &.open-left {
+          background: white;
+          background: -webkit-linear-gradient(left, $light-blue 50%, white 50%);
+          background: -o-linear-gradient(right, $light-blue 50%, white 50%);
+          background: -moz-linear-gradient(right, $light-blue 50%, white 50%);
+          background: linear-gradient(to right, $light-blue 50%, white 50%);
+
+          &:hover {
+            background: -webkit-linear-gradient(left, $light-blue-hover 50%, white 50%);
+            background: -o-linear-gradient(right, $light-blue-hover 50%, white 50%);
+            background: -moz-linear-gradient(right, $light-blue-hover 50%, white 50%);
+            background: linear-gradient(to right, $light-blue-hover 50%, white 50%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,7 +24,7 @@ class DiningVenue extends Component {
     this.state = {
       dateFormatted: dateFormatted,
       dateToString: dateToString,
-      meal: "Lunch" //TODO: MAKE THIS PROGRAMMATIC
+      meal: "Brunch" //TODO: MAKE THIS PROGRAMMATIC
     }
   }
 
