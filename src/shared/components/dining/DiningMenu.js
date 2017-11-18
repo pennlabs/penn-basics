@@ -16,7 +16,10 @@ const DiningMenu = ({sectionsObj}) => {
       "condiments and toppings"
     ].includes(title);
 
-    let descriptionsOnly = title.includes("commons deli");
+    let descriptionsOnly = [
+      "commons deli",
+      "pizza",
+    ].includes(title);
 
     // Return the section formatted
     return (
