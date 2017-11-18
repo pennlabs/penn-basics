@@ -23,7 +23,7 @@ class Home extends Component {
     return (
       <div>
         {this.state.show && <Notification show={this.close}/>}
-      <div style={{padding: "30px"}}>
+      <div style={{padding: "60px"}}>
         <div className="tile is-ancestor">
           <div className="tile is-parent is-6">
             <Dining />

@@ -9,7 +9,8 @@ class StudyCards extends Component {
         name: this.props.name || 'Huntsman 380 Computer Lab',
         hours: this.props.hours || '24/7',
         noise: this.props.noise || 0,
-        groups: this.props.type || true,
+        groups: this.props.type || 2,
+        outlets: this.props.outlets || 1,
       }
   }
   noise () {
@@ -19,6 +20,24 @@ class StudyCards extends Component {
       return <span className="tag is-warning">Moderate</span>
     } else {
       return <span className="tag is-danger">Loud</span>
+    }
+  }
+  groups ()  {
+    if (this.state.groups === 0) {
+      return <span className="tag is-info">No</span>
+    } else if (this.state.groups === 1) {
+      return <span className="tag is-warning">Okay</span>
+    } else {
+      return <span className="tag is-danger">Yes</span>
+    }
+  }
+  outlets () {
+    if (this.state.outlets === 0) {
+      return <span className="tag is-info">None</span>
+    } else if (this.state.outlets === 1) {
+      return <span className="tag is-warning">Sparse</span>
+    } else {
+      return <span className="tag is-danger">Plenty</span>
     }
   }
   render () {
@@ -32,7 +51,8 @@ class StudyCards extends Component {
               <small>Hours: {this.state.hours}</small> <br />
               <small>Noise Level: {this.noise()}
               </small> <br />
-              <small>{this.state.groups && <span className="tag is-danger">Groups</span>}</small>
+              <small>Good for groups: {this.groups()}</small> <br/>
+              <small>Outlets: {this.outlets()}</small>
             </p>
           </div>
         </div>
