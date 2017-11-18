@@ -19,8 +19,6 @@ class DiningVenue extends Component {
     const dateFormatted = momentDate.format('MM/DD/YYYY');
     const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
 
-    console.log(momentDate)
-
     this.state = {
       dateFormatted: dateFormatted,
       dateToString: dateToString,
