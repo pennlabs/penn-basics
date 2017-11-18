@@ -17,7 +17,6 @@ export default () => (
     <div>
       <Nav />
       <div id="wrapper">
-        <Sidebar />
         <div id="app">
           <Switch>
             <Route exact path="/" component={Home} />
