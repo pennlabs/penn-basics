@@ -146,31 +146,31 @@
   background: $light-gray !important;
 
   &.vegetarian {
-    background: $green !important;
+    background: $vegetarian !important;
   }
 
-  &.gf {
-    background: $gold !important;
+  &.gluten-free {
+    background: $gluten-free !important;
   }
 
   &.humane {
-    background: $red !important;
+    background: $humane !important;
   }
 
-  &.seafoodWatch {
-    background: $blue !important;
+  &.seafood-watch {
+    background: $seafood-watch !important;
   }
 
   &.vegan {
-    background: $forest !important;
+    background: $vegan !important;
   }
 
   &.balanced {
-    background: $purple !important;
+    background: $balanced !important;
   }
 
-  &.farm {
-    background: $brown !important;
+  &.farm-to-table {
+    background: $farm-to-table !important;
   }
 
   &:hover {

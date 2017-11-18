@@ -43,7 +43,7 @@ const MenuItem = ({title, description, tags}) => {
     switch(tag) {
       case "Made without Gluten- Containing Ingredients" :
         tag = "Gluten Free";
-        tagClass = "gf";
+        tagClass = "gluten-free";
         break;
       case "In Balance" :
         tag = "Balanced";
@@ -56,13 +56,20 @@ const MenuItem = ({title, description, tags}) => {
         tagClass = "vegetarian";
         break;
       case "Farm to Fork" :
-        tagClass = "farm";
+        tagClass = "farm-to-fork";
         break;
       case "Humane" :
         tagClass = "humane";
         break;
       case "Seafood Watch" :
-        tagClass = "seafoodWatch";
+        tagClass = "seafood-watch";
+        break;
+      case "Jain" :
+        tagClass = "jain";
+        break;
+      case "Locally Crafted" :
+        tag = "Local";
+        tagClass = "local"
         break;
       default :
         break;
