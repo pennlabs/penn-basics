@@ -21,7 +21,11 @@
   },
   "homepage": "https://github.com/pennlabs/penncentral#readme",
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.17.1",
+=======
+    "axios": "^0.17.0",
+>>>>>>> master
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -42,7 +46,8 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

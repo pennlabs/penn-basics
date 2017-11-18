@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Card extends Component {
   render(){
-    return(
-      <div className="column is-half-desktop">
-        <div className={ this.props.hover ? 'card hover' : 'card' }>
-          <div className="card-content">
+    const content = (
+      <div className="card">
+        <div className="card-content">
           <p className="title">
             { this.props.title }
           </p>
@@ -16,10 +16,25 @@ class Card extends Component {
             :
             ''
           }
-          </div>
         </div>
       </div>
-    )
+    );
+
+    if (this.props.url) {
+      return (
+        <div className="column is-half-desktop">
+          <Link to={this.props.url}>
+            {content}
+          </Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="column is-half-desktop">
+          {content}
+        </div>
+      );
+    }
   }
 }
 

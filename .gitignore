@@ -1,3 +1,4 @@
 /node_modules/
 env.sh
 /public/js/bundle.js
+.DS_Store

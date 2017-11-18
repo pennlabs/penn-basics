@@ -18,18 +18,22 @@
     .sidebarSection {
       margin-bottom: 1rem;
 
+      a {
+        color: $medium-gray;
+      }
+
       li {
         cursor: hand;
         cursor: pointer;
         padding: 0.25rem 1.25rem;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.0375);
+          background: $hover-gray;
         }
 
         &:focus,
         &:active {
-          background: rgba(0, 0, 0, 0.075);
+          background: $focus-gray;
         }
 
         .open,
@@ -64,7 +68,6 @@
 
   #app {
     flex: 1;
-    transition: all 1s ease;
     width: 100%;
   }
 }

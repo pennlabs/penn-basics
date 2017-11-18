@@ -6,7 +6,11 @@ class Notification extends Component {
   constructor(props) {
     super (props);
       this.state = {
+<<<<<<< HEAD
         text: this.props.text
+=======
+        text: this.props.text || []
+>>>>>>> master
       }
   }
   print() {

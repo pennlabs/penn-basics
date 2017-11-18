@@ -8,10 +8,17 @@
   display: flex;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
 
-  h1 {
+  a h1 {
     font-weight: bold;
     font-size: 1.4rem;
     padding: 0.7rem 0.5rem;
+    color: $dark-gray;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $black;
+    }
   }
 
   ul {
