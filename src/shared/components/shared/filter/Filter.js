@@ -12,7 +12,7 @@ class Filter extends Component {
     filterContent.classList.toggle("active");
   }
 
-  render(){
+  render() {
     return(
       <div className="filter">
         <div className="filterToggleWrapper">

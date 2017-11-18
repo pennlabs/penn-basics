@@ -69,7 +69,7 @@ const MenuItem = ({title, description, tags}) => {
     }
 
     return(
-      <span className={ "tag " + tagClass }>{ tag }</span>
+      <span className={ "tag " + tagClass } key={ uuid() }>{ tag }</span>
     );
   });
 
