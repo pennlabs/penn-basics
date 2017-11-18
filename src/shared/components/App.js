@@ -17,7 +17,10 @@ export default () => (
     <div>
       <Nav />
       <div id="wrapper">
-        <Sidebar />
+        <Switch>
+          <Route exact path="/" component={null} />
+          <Route exact path="*" component={Sidebar} />
+        </Switch>
         <div id="app">
           <Switch>
             <Route exact path="/" component={Home} />
