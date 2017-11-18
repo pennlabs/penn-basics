@@ -5,6 +5,7 @@
 @import './text';
 @import './sidebar';
 @import './filter';
+@import './dining';
 
 /**
  * General styling for the whole application
@@ -26,6 +27,35 @@
   }
 }
 
+.btn {
+  color: $medium-gray;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.075);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  background: white;
+  border-radius: 0.4rem;
+  opacity: 1;
+  outline: $medium-gray !important;
+
+  &:hover {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background: #FAFAFA;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus,
+  &:active {
+    background: #F8F8F8;
+    outline: $medium-gray !important;
+  }
+}
+
+.marg-bot-1 {
+  margin-bottom: 1rem;
+}
+
 .hover {
   cursor: hand;
   cursor: pointer;
@@ -33,4 +63,32 @@
 
 .display-none {
   display: none !important;
+}
+
+/**
+ * Padding on different screen sizes
+ */
+
+@media screen and (min-device-width: 1024px) and (min-width: 848px) {
+  #app {
+    padding: 2rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 956px) {
+  #app {
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 1024px) {
+  #app {
+    padding: 2rem 6rem;
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (min-width: 1208px) {
+  #app {
+    padding: 2rem 8rem;
+  }
 }
