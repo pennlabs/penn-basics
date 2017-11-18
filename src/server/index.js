@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
 import frontendRouter from './routes/frontend';
 import apiRouter from './routes/api';
+import spacesRouter from './routes/spaces';
 import DB from './database/db';
 require('dotenv').config();
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use('/api/spaces', spacesRouter(DB));
 app.use('/api', apiRouter(DB));
 app.use('/', frontendRouter(DB));
 
