@@ -10,7 +10,7 @@ class Nav extends Component {
         <Menu />
         <Link to="/">
           <h1>
-            PennCentral
+            PennBasics
           </h1>
         </Link>
         <Links />

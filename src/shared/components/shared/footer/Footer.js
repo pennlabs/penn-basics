@@ -10,7 +10,7 @@ class Footer extends Component {
               <div className="text">
                 <Link to="/">
                   <h1>
-                    PennCentral
+                    PennBasics
                   </h1>
                 </Link>
                 <p className="marg-bot-05">
