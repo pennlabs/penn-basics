@@ -16,9 +16,17 @@ const DiningMenu = ({sectionsObj}) => {
       "condiments and toppings"
     ].includes(title);
 
+    let descriptionsOnly = title.includes("commons deli");
+
     // Return the section formatted
     return (
-      <Section title={ title } items={sectionsObj[title]} shouldBeList={ shouldBeList } key={ uuid() } />
+      <Section
+        title={ title }
+        items={sectionsObj[title]}
+        shouldBeList={ shouldBeList }
+        descriptionsOnly={ descriptionsOnly}
+        key={ uuid() }
+      />
     );
   });
 

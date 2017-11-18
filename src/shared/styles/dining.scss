@@ -169,8 +169,16 @@
     background: $balanced !important;
   }
 
-  &.farm-to-table {
-    background: $farm-to-table !important;
+  &.farm-to-fork {
+    background: $farm-to-fork !important;
+  }
+
+  &.jain {
+    background: $jain !important;
+  }
+
+  &.local {
+    background: $local !important;
   }
 
   &:hover {
