@@ -7,14 +7,23 @@ const Section = ({title, items, shouldBeList, descriptionsOnly }) => {
 
   if (title === "salad bar" || title === "grill") {
     // If only the first item should be displayed
-    sectionItems = <MenuItem title={items[0].title} description={items[0].description} tags={items[0].tags} key={ uuid() } />
+    sectionItems = <MenuItem
+      title={items[0].title}
+      description={items[0].description}
+      tags={items[0].tags} key={ uuid() }
+    />
   } else if (title === "fruit salad" || title === "commons deli") {
     // If items wihtout descriptions should not be displayed
     sectionItems = items.map(item => {
       if (item.description && item.description.length && !item.description.startsWith("1")) {
         console.log(item.description);
         return (
-          <MenuItem title={item.title} description={item.description} tags={item.tags} key={ uuid() } />
+          <MenuItem
+            title={ item.title }
+            description={ item.description }
+            tags={ item.tags }
+            key={ uuid() }
+          />
         );
       } else {
         return "";
@@ -23,7 +32,12 @@ const Section = ({title, items, shouldBeList, descriptionsOnly }) => {
   } else if (!shouldBeList) {
     // If the items should not be in a list
     sectionItems = items.map(item => (
-      <MenuItem title={item.title} description={item.description} tags={item.tags} key={ uuid() } />
+      <MenuItem
+        title={ item.title }
+        description={ item.description }
+        tags={ item.tags }
+        key={ uuid() }
+      />
     ));
   } else {
     // Comma separate the items which should be in a list

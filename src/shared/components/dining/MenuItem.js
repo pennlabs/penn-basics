@@ -42,7 +42,7 @@ const MenuItem = ({title, description, tags}) => {
     let tagClass = "";
     switch(tag) {
       case "Made without Gluten- Containing Ingredients" :
-        tag = "Gluten Free";
+        tag = "Gluten Free*";
         tagClass = "gluten-free";
         break;
       case "In Balance" :

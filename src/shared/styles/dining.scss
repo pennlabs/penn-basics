@@ -185,3 +185,24 @@
     opacity: 1;
   }
 }
+
+.legend {
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: $medium-gray;
+
+  strong {
+    display: block;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+
+  .legend-item {
+    .tag {
+      margin-bottom: 0.4rem;
+      opacity: 1;
+    }
+    padding: 0rem 0rem 1.2rem 0rem;
+  }
+}
