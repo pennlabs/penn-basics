@@ -29,15 +29,12 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
-<<<<<<< HEAD
             <Route exact path="/laundry" component={Laundry} />
-=======
             <Route exact path="/dining/:id" component={DiningVenue} />
             <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />
             <Route exact path="/studyspaces/:id" component={StudySpacesVenue} />
             <Route exact path="/reservations" component={Reservations} />
->>>>>>> master
             <Route path="*" component={NotFound}/>
           </Switch>
         </div>

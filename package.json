@@ -21,11 +21,7 @@
   },
   "homepage": "https://github.com/pennlabs/penncentral#readme",
   "dependencies": {
-<<<<<<< HEAD
     "axios": "^0.17.1",
-=======
-    "axios": "^0.17.0",
->>>>>>> master
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
