@@ -299,3 +299,27 @@
     }
   }
 }
+
+.dining-venue-preview {
+  color: white;
+  border-radius: 0.4rem;
+  box-shadow: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  font-weight: bold !important;
+  text-shadow: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  .gradient {
+    padding: 8rem 1rem 1rem 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    background: -webkit-linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
+    background: -o-linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
+    background: -moz-linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
+    border-radius: 0.4rem;
+  }
+}

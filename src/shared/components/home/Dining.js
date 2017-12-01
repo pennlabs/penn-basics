@@ -6,9 +6,9 @@ import '../../styles/home.scss';
 class Dining extends Component {
   constructor(props) {
     super (props);
-      this.state = {
-        object: false
-      }
+    this.state = {
+      object: false,
+    }
   }
   render () {
     return (

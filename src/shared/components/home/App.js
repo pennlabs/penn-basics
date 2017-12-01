@@ -3,7 +3,7 @@ import Card from '../shared/card/Card';
 import Home from './Home';
 
 class App extends Component {
-  render(){
+  render() {
     return(
       <Home />
     )
