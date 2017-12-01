@@ -18,6 +18,7 @@ export default () => (
       <Nav />
       <div id="wrapper">
         <Switch>
+          {/* Render the sidebar on all pages except the homepage */}
           <Route exact path="/" component={null} />
           <Route exact path="*" component={Sidebar} />
         </Switch>

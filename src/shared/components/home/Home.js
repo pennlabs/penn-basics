@@ -21,27 +21,27 @@ class Home extends Component {
   }
   render () {
     return (
-      <div>
+      <div className="home">
         {this.state.show && <Notification show={this.close}/>}
-      <div style={{padding: "30px"}}>
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-6">
-            <Dining />
+        <div style={{padding: "30px"}}>
+          <div className="tile is-ancestor">
+            <div className="tile is-parent is-6">
+              <Dining />
+            </div>
+            <div className="tile is-parent is-6">
+              <Laundry />
+            </div>
           </div>
-          <div className="tile is-parent is-6">
-            <Laundry />
-          </div>
-        </div>
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-6">
-            <Studyspaces />
-          </div>
-          <div className="tile is-parent is-6">
-            <Reserve />
+          <div className="tile is-ancestor">
+            <div className="tile is-parent is-6">
+              <Studyspaces />
+            </div>
+            <div className="tile is-parent is-6">
+              <Reserve />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     )
   }
 }

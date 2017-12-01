@@ -4,15 +4,21 @@ import Menu from './Menu';
 import {Link} from 'react-router-dom';
 
 class Nav extends Component {
+  /**
+   * TODO only render menu if we are not on the homepage
+   */
   render(){
+    console.log(window.location.pathname);
     return(
       <nav className="navbar" id="navbar">
-        <Menu />
-        <Link to="/">
-          <h1>
-            PennBasics
-          </h1>
-        </Link>
+        <div className="navbar-wrapper">
+          { window.location.pathname !== "/" && <Menu /> }
+          <Link to="/">
+            <h1>
+              PennBasics
+            </h1>
+          </Link>
+        </div>
         <Links />
       </nav>
     )
