@@ -38,6 +38,14 @@ export default function spacesRouter(DB){
       quiet: req.body.quiet,
       groups: req.body.groups
     };
+
+    for (key in space) {
+      if (typeof space[key] === "undefined" || space[key] === "") {
+        res.status(400).json({
+          message: "One or more of the parameters for a new space is undefined or empty. Check the request again."
+        });
+      }
+    }
     
     DB.insertSpace(space).then(() => {
       res.status(200).json({
