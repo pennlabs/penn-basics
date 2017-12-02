@@ -10,7 +10,6 @@ function findAllSpaces() {
 // params: filter object = (open: Boolean, outlets: Integer, noise: Integer, groups: Integer)
 function filterSpaces(open, outletLevel, quietLevel, groupLevel) {
   if (open) {
-    const day = moment().day(), hour = moment().hour();
     return Space.find({start: {$lte: hour}, end: {$gt: hour}, outlets: {$gte: outletLevel}, 
       quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
   } else {
