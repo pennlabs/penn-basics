@@ -11,7 +11,8 @@ export default function apiRouter(DB){
   });
 
   router.get('/events/:date', (req, res) => {
-    const date = req.params[0];
+    const date = parseInt(req.params.date);
+    console.log(date);
 
     let events = [];
     EVENT_LIST.forEach(event => {
