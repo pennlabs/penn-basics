@@ -13,6 +13,10 @@ import StudySpaces from './studyspaces/App';
 import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
 
+const Laundry = () => (
+  <h1>Laundry stuff</h1>
+);
+
 export default () => (
     <div>
       <Nav />
@@ -25,6 +29,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
+            <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/dining/:id" component={DiningVenue} />
             <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />

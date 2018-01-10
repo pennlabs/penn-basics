@@ -7,14 +7,19 @@ class Dining extends Component {
   constructor(props) {
     super (props);
       this.state = {
-        object: false
+        show: this.props.show,
+
       }
   }
+
   render () {
     return (
+
       <article className="tile is-child notification whiteCard">
+        <Link to={`/dining`} className="link">
         <h1 className="title is-3">Dining</h1>
-        {this.state.object == null ?
+        </Link>
+        {this.state.show == false ?
         <h3 className="subtitle is-5">Sorry! Nothing is open right now.</h3> :
         <h3 className="subtitle is-5">1920 Commons looks like a great
           place to eat right now.</h3>
