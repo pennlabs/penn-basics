@@ -13,10 +13,6 @@ import StudySpaces from './studyspaces/App';
 import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
 
-const Laundry = () => (
-  <h1>Laundry stuff</h1>
-);
-
 export default () => (
     <div>
       <Nav />
