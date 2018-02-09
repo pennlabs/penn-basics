@@ -48,6 +48,7 @@ class Laundry extends Component {
       "total_number_of_dryers": 9.0,
     };
   }
+
   // Helper method to render the bars
   renderBars() {
     const bars = Object.keys(this.state.dryer_data).map((key) => {

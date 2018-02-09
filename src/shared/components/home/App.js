@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import Card from '../shared/card/Card';
 import Home from './Home';
 
+/**
+ * Renders the homepage
+ */
 class App extends Component {
   render() {
     return(

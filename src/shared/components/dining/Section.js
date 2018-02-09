@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MenuItem from './MenuItem';
 import uuid from 'uuid/v4';
 
-const Section = ({title, items, shouldBeList, descriptionsOnly }) => {
+const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
   let sectionItems = "";
 
   if (title === "salad bar" || title === "grill") {
