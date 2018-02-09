@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import MenuItem from './MenuItem';
 import uuid from 'uuid/v4';
 
-const Section = ({title, items, shouldBeList, descriptionsOnly }) => {
+const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
   let sectionItems = "";
 
   if (title === "salad bar" || title === "grill") {
@@ -16,7 +16,6 @@ const Section = ({title, items, shouldBeList, descriptionsOnly }) => {
     // If items wihtout descriptions should not be displayed
     sectionItems = items.map(item => {
       if (item.description && item.description.length && !item.description.startsWith("1")) {
-        console.log(item.description);
         return (
           <MenuItem
             title={ item.title }

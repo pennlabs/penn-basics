@@ -41,27 +41,27 @@ class Home extends Component {
   render () {
     return (
       <div>
-        {this.state.show && <Notification show={this.close}
-                             text={this.state.notification}/>}
-      <div style={{padding: "60px"}}>
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-6">
-            <Dining show={this.state.dining}/>
-          </div>
-          <div className="tile is-parent is-6">
-            <Laundry />
-          </div>
-        </div>
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-6">
-            <Studyspaces />
-          </div>
-          <div className="tile is-parent is-6">
-            <Reserve />
+        {
+          this.state.show && (
+            <Notification show={this.close} text={this.state.notification}/>
+          )
+        }
+        <div style={{padding: "60px"}}>
+          <div className="tile is-ancestor">
+            <div className="tile is-parent is-6">
+              <Dining show={this.state.dining}/>
+            </div>
+            <div className="tile is-ancestor">
+              <div className="tile is-parent is-6">
+                <Studyspaces />
+              </div>
+              <div className="tile is-parent is-6">
+                <Reserve />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     )
   }
 }

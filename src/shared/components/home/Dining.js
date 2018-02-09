@@ -6,10 +6,10 @@ import '../../styles/home.scss';
 class Dining extends Component {
   constructor(props) {
     super (props);
-      this.state = {
-        show: this.props.show,
-
-      }
+    this.state = {
+      object: false,
+      show: this.props.show,
+    }
   }
 
   render () {

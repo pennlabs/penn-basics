@@ -1,14 +1,14 @@
-# Penn Central
+# Penn Basics
 
-General documentation for the Penn Central codebase is available [here](https://www.notion.so/Penn-Central-Documentation-d0096d11e9694ea991093937590e7139) and is updated as new features are pushed to the code repository.
+General documentation for the Penn Basics codebase is available [here](https://www.notion.so/pennlabs/PennBasics-2043ee53cc784e739bb654352a516609) and is updated as new features are pushed to the code repository.
 
 ## Usage 
 
 After a `env.sh` file containing `PORT` and `MONGO_URL` values is created:
 
-`git clone https://github.com/pennlabs/penncentral.git`
+`git clone https://github.com/pennlabs/pennbasics.git`
 
-`cd penncentral && yarn`
+`cd pennbasics && yarn`
 
 `yarn dev`
 
