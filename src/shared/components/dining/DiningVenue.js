@@ -9,6 +9,10 @@ import DiningMenu from './DiningMenu';
 import {mappings} from './mappings';
 
 class DiningVenue extends Component {
+  /**
+   * Constructor method
+   * TODO make loading component
+   */
   constructor(props){
     super(props);
     const venue_id = this.props.match.params.id;
@@ -19,15 +23,16 @@ class DiningVenue extends Component {
     const dateFormatted = momentDate.format('MM/DD/YYYY');
     const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
 
-    console.log(momentDate)
-
     this.state = {
       dateFormatted: dateFormatted,
       dateToString: dateToString,
-      meal: "Brunch" //TODO: MAKE THIS PROGRAMMATIC
+      meal: "Brunch" /*TODO: MAKE THIS PROGRAMMATIC*/
     }
   }
 
+  /**
+   * When the component will update
+   */
   componentWillUpdate(props) {
     const currentVenueId = this.props.match.params.id
     const nextVenueId = props.match.params.id
@@ -36,9 +41,16 @@ class DiningVenue extends Component {
     }
   }
 
-  render(){
+  /**
+   * Render the component
+   */
+  render() {
     if (this.props.pending) {
-      return null;
+      return (
+        <div>
+          Loading...
+        </div>
+      );
     } else {
       if (this.props.error) {
         return (
@@ -49,13 +61,20 @@ class DiningVenue extends Component {
           />
         );
       } else {
-        return  (
+        return (
           <div>
+            {/* Render the title of the dining page */}
             <h1 className="title">
               { mappings[this.props.match.params.id] }
             </h1>
+
+            {/* Render the overview card at the top of the dining view */}
             <DiningOverview />
-            <h2>{this.state.dateToString}</h2>
+
+            {/* Render the current date */}
+            <h2>
+              {this.state.dateToString}
+            </h2>
             <DiningQuery />
             {!this.props.diningData.pending && <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]}/>}
           </div>

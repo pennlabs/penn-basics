@@ -79,7 +79,7 @@
   }
 }
 
-@media screen and (max-width: 672px) {
+@media screen and (max-width: 764px) {
   .navbar {
     display: block;
     padding: 0rem;
@@ -106,10 +106,14 @@
         padding: 0.25rem 0.5rem;
       }
     }
+
+    .navbar-wrapper {
+      min-height: 56.38px;
+    }
   }
 }
 
-@media screen and (max-device-width: 672px) {
+@media screen and (max-device-width: 764px) {
   .navbar {
     display: block;
     padding: 0rem;

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
-export default function NotFound(props) {
+const NotFound = ({ title, message, url, urlText}) => {
   return(
     <div>
       <h1 className="is-size-3 medium-gray-text">
-        { props.title ? props.title : '404: Content not found' }
+        { title ? title : '404: Content not found' }
       </h1>
       <p>
-        { props.message ? props.message : 'It seems like the content you are looking for was either moved or does not exist.' }
+        { message ? message : 'It seems like the content you are looking for was either moved or does not exist.' }
       </p>
-      <Link to={props.url ? props.url : '/'} className="btn marg-top-1">
-        { props.urlText ? props.urlText : 'Back to home' }
+      <Link to={url ? url : '/'} className="btn marg-top-1">
+        { urlText ? urlText : 'Back to home' }
       </Link>
     </div>
   );

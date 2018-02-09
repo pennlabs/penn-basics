@@ -8,6 +8,9 @@ class Nav extends Component {
     return(
       <nav className="navbar" id="navbar">
         <Menu />
+        <figure className="image is-48x48" style={{margin: '10px'}}>
+          <img src="https://i.imgur.com/JhifMZc.png"/>
+        </figure>
         <Link to="/">
           <h1>
             PennBasics
