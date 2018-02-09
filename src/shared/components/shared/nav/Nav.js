@@ -7,14 +7,15 @@ class Nav extends Component {
   render(){
     return(
       <nav className="navbar" id="navbar">
-        <div className="navbar-wrapper">
-          { window.location.pathname !== "/" && <Menu /> }
-          <Link to="/">
-            <h1>
-              PennBasics
-            </h1>
-          </Link>
-        </div>
+        <Menu />
+        <figure className="image is-48x48" style={{margin: '10px'}}>
+          <img src="https://i.imgur.com/JhifMZc.png"/>
+        </figure>
+        <Link to="/">
+          <h1>
+            PennBasics
+          </h1>
+        </Link>
         <Links />
       </nav>
     )
