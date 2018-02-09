@@ -16,15 +16,15 @@ class Menu extends Component {
   }
 
   // Shadow
-  render(){
+  render() {
     return(
       <div id="sidebar-toggle" onClick={this.handleClick}>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div id="shade"></div>
+        <div className="bar" />
+        <div className="bar" />
+        <div className="bar" />
+        <div id="shade" />
       </div>
-    )
+    );
   }
 }
 

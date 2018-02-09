@@ -4,7 +4,7 @@ import Menu from './Menu';
 import {Link} from 'react-router-dom';
 
 class Nav extends Component {
-  render(){
+  render() {
     return(
       <nav className="navbar" id="navbar">
         <Menu />
@@ -18,7 +18,7 @@ class Nav extends Component {
         </Link>
         <Links />
       </nav>
-    )
+    );
   }
 }
 

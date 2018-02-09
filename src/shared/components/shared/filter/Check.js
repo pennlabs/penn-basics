@@ -11,15 +11,15 @@ class Check extends Component {
     this.setState({active: !this.state.active});
   }
 
-  render(){
+  render() {
     return(
       <div className={ this.state.active ? "checkWrapper active" : "checkWrapper"} onClick={this.handleClick}>
-        <span className="check"></span>
+        <span className="check" />
         <p>
           {this.props.description}
         </p>
       </div>
-    )
+    );
   }
 }
 

@@ -6,7 +6,7 @@ const DiningMenu = ({sectionsObj}) => {
   const sectionTitles = Object.keys(sectionsObj);
   const sections = sectionTitles.map(title => {
     // Check if this section should be a list or not
-    let shouldBeList = [
+    const shouldBeList = [
       "breakfast kettles",
       "Coffee",
       "beverages",
@@ -16,7 +16,7 @@ const DiningMenu = ({sectionsObj}) => {
       "condiments and toppings"
     ].includes(title);
 
-    let descriptionsOnly = [
+    const descriptionsOnly = [
       "commons deli",
       "pizza",
     ].includes(title);

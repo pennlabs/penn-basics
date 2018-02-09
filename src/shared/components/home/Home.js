@@ -11,34 +11,34 @@ import '../../styles/home.scss';
 
 class Home extends Component {
   constructor(props) {
-    super (props);
-      this.state = {
-        show: true,
-        notification: [],
-        dining: false,
-      }
-      this.close = this.close.bind(this);
+    super(props);
+    this.state = {
+      show: true,
+      notification: [],
+      dining: false,
+    };
+    this.close = this.close.bind(this);
   }
   componentDidMount() {
-    axios.post('/api/events', {
-                start: Date.now()
-              })
+    axios.get('/api/events', {
+      start: Date.now()
+    })
       .then((resp) => {
         if (resp.data.events.length === 0) {
-          this.setState({show: false})
+          this.setState({show: false});
         } else {
-          this.setState({show: true, notification: resp.data.events})
+          this.setState({show: true, notification: resp.data.events});
         }
         console.log("DATE RESP", resp.data.events);
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
   close() {
     this.setState({show: false});
   }
-  render () {
+  render() {
     return (
       <div>
         {
@@ -62,7 +62,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 export default Home;

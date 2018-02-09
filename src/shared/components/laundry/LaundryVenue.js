@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import LaundryOverview from './LaundryOverview';
 
 class LaundryVenue extends Component {
-  render(){
+  render() {
     return(
       <div>
         <h1 className="title">
@@ -10,7 +10,7 @@ class LaundryVenue extends Component {
         </h1>
         <LaundryOverview />
       </div>
-    )
+    );
   }
 }
 

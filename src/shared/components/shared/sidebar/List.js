@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import ListItem from './ListItem';
 
 class List extends Component {
-
-  render(){
+  render() {
     const links = this.props.links;
     const list = links.map((link, index) =>
       <ListItem name={link.name} isOpen={link.isOpen} venueID={link.venueID} key={index} />
@@ -13,7 +12,7 @@ class List extends Component {
       <ul>
         { list }
       </ul>
-    )
+    );
   }
 }
 

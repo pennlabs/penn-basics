@@ -22,50 +22,50 @@ const DiningOverview = () => (
       </div>
       <div className="grid">
         <div className="hoursRow">
-          <div className="hoursCol open-right"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open-left"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open-right" />
+          <div className="hoursCol open" />
+          <div className="hoursCol open-left" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
         <div className="hoursRow">
-          <div className="hoursCol open"></div>
-          <div className="hoursCol open"></div>
-          <div className="hoursCol"></div>
-          <div className="hoursCol"></div>
+          <div className="hoursCol open" />
+          <div className="hoursCol open" />
+          <div className="hoursCol" />
+          <div className="hoursCol" />
         </div>
       </div>
     </div>
   </div>
-)
+);
 
 export default DiningOverview;

@@ -1,12 +1,13 @@
 // Import frameworks
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Import components
 import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
 import Footer from './shared/footer/Footer';
-import Card from './shared/card/Card';
+
+// Import page components
 import Home from './home/App';
 import NotFound from './shared/NotFound';
 import Dining from './dining/App';
@@ -18,14 +19,13 @@ import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
 
 // Render the component
-export default () => (
+const App = () => (
   <div>
     <Nav />
     <div id="wrapper">
       <Switch>
         {/* Render the sidebar on all pages except the homepage */}
-        <Route exact path="/" component={null} />
-        <Route exact path="*" component={Sidebar} />
+        <Route exact path="/:anything_except_home" component={Sidebar} />
       </Switch>
       <div id="app">
         <Switch>
@@ -44,3 +44,5 @@ export default () => (
     <Footer />
   </div>
 );
+
+export default App;

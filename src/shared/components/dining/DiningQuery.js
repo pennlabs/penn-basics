@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Dropdown from './Dropdown';
 
 class DiningQuery extends Component {
-  render(){
+  render() {
     const diningOptions = ["Breakfast", "Lunch", "Dinner"];
-    const dayOptions = ["Today", "Tomorrow", "Day after tomorrow"]
+    const dayOptions = ["Today", "Tomorrow", "Day after tomorrow"];
 
     return(
       <div className="diningQuery">
@@ -16,7 +16,7 @@ class DiningQuery extends Component {
           options={dayOptions}
         />
       </div>
-    )
+    );
   }
 }
 

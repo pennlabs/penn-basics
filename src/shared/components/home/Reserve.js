@@ -5,10 +5,9 @@ import RARCards from './RARCards';
 
 class Reserve extends Component {
   constructor(props) {
-    super (props);
-
+    super(props);
   }
-  render () {
+  render() {
     return (
       <article className="tile is-child notification whiteCard">
         <h1 className="title is-3">Reserve a room</h1>
@@ -18,7 +17,7 @@ class Reserve extends Component {
         <RARCards />
         <RARCards />
       </article>
-    )
+    );
   }
 }
 export default Reserve;

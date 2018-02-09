@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+/**
+ * Render a card with a white background, slight dropshadow, and slightly rounded borders
+ */
 class Card extends Component {
-  render(){
+  render() {
     const content = (
       <div className="card">
         <div className="card-content">
@@ -28,13 +31,12 @@ class Card extends Component {
           </Link>
         </div>
       );
-    } else {
-      return (
-        <div className="column is-half-desktop">
-          {content}
-        </div>
-      );
     }
+    return (
+      <div className="column is-half-desktop">
+        {content}
+      </div>
+    );
   }
 }
 

@@ -4,32 +4,32 @@ import '../../styles/home.scss';
 
 class Notification extends Component {
   constructor(props) {
-    super (props);
-      this.state = {
-        text: this.props.text || []
-      }
+    super(props);
+    this.state = {
+      text: this.props.text || []
+    };
   }
   print() {
     var ret;
     for (var i = 0; i < this.state.text.length; i++) {
       if (i === this.state.text.length - 1) {
-        ret = ret + " " + this.state.text[i]
+        ret = ret + " " + this.state.text[i];
       } else {
-        ret = ret + " " + this.state.text[i] + ","
+        ret = ret + " " + this.state.text[i] + ",";
       }
     }
     return ret;
   }
-  render () {
+  render() {
     return (
       <div className="notification is-info">
-        <button className="delete" onClick={this.props.show}></button>
+        <button className="delete" onClick={this.props.show} />
         <p style={{textAlign: 'center'}}>
           ⚡ It's currently
           <strong> {this.print()} </strong>⚡
         </p>
       </div>
-    )
+    );
   }
 }
 export default Notification;

@@ -6,7 +6,7 @@ const MenuItem = ({title, description, tags}) => {
   // Descriptions starting with 1 should be excluded
   // Descriptions with line breaks need to be parsed
   const descriptions = description.split("<br />");
-  let formattedDescription= ""
+  let formattedDescription = "";
   if (descriptions.length <= 3) {
     // If the description is 3 paragraphs or less
     // Display each paragraph in its own p tag
@@ -17,9 +17,8 @@ const MenuItem = ({title, description, tags}) => {
             { value }
           </p>
         );
-      } else {
-        return "";
       }
+      return "";
     });
   } else {
     // If the description is longer than 3 paragraphs
@@ -28,12 +27,10 @@ const MenuItem = ({title, description, tags}) => {
       if (value && value.length > 0 && !value.startsWith("1")) {
         if (index != descriptions.length - 1) {
           return value + ", ";
-        } else {
-          return value;
         }
-      } else {
-        return "";
+        return value;
       }
+      return "";
     });
   }
 
@@ -69,7 +66,7 @@ const MenuItem = ({title, description, tags}) => {
         break;
       case "Locally Crafted" :
         tag = "Local";
-        tagClass = "local"
+        tagClass = "local";
         break;
       default :
         break;

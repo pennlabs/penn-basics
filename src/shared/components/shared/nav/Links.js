@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import LinkItem from './LinkItem';
 
 class Links extends Component {
-  render(){
+  render() {
     return(
       <ul>
         <LinkItem url="/dining" name="Dining"/>
@@ -10,7 +10,7 @@ class Links extends Component {
         <LinkItem url="/studyspaces" name="Study spaces"/>
         <LinkItem url="/reservations" name="Reserve a room"/>
       </ul>
-    )
+    );
   }
 }
 

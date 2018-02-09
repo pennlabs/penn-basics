@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import LinkItem from './LinkItem';
 
 class Links extends Component {
-  render(){
+  render() {
     return(
       <div className="footer-nav">
         <h3>Navigation</h3>
@@ -14,7 +14,7 @@ class Links extends Component {
           <LinkItem url="/reservations" name="Reserve a room"/>
         </ul>
       </div>
-    )
+    );
   }
 }
 

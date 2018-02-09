@@ -15,4 +15,4 @@ const NotFound = ({ title, message, url, urlText}) => {
       </Link>
     </div>
   );
-}
+};

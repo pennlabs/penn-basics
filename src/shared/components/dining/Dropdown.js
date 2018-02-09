@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import uuid from 'uuid/v4';
 
 class Dropdown extends Component {
-  render(){
+  render() {
     const content = this.props.options.map(option => {
       return (<option key={ uuid() } value={ option }>{ option }</option>);
     });

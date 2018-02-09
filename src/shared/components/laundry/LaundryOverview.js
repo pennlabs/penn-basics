@@ -72,8 +72,7 @@ class Laundry extends Component {
           <div className="bars">
             { this.renderBars() }
           </div>
-          <div className="hours">
-          </div>
+          <div className="hours" />
         </div>
       </div>
     );

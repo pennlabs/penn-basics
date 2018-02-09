@@ -20,7 +20,7 @@ class App extends Component {
           image: "http://www.admissions.upenn.edu/images/uploads/hero/744x300_HillDiningHall.jpg",
         },
       ],
-    }
+    };
   }
 
   // Helper function to render dining hall previews
@@ -44,7 +44,7 @@ class App extends Component {
           { this.renderPreviews() }
         </div>
       </div>
-    )
+    );
   }
 }
 

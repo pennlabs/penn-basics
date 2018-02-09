@@ -5,10 +5,9 @@ import StudyCards from './StudyCards';
 
 class Studyspaces extends Component {
   constructor(props) {
-    super (props);
-
+    super(props);
   }
-  render () {
+  render() {
     return (
       <article className="tile is-child notification whiteCard">
         <h1 className="title is-3">Studyspaces</h1>
@@ -16,7 +15,7 @@ class Studyspaces extends Component {
         <StudyCards />
         <StudyCards />
       </article>
-    )
+    );
   }
 }
 export default Studyspaces;
