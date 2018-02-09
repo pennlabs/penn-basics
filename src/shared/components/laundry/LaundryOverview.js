@@ -9,6 +9,11 @@ class Laundry extends Component {
     /**
      * Set the state
      * TODO replace dummy data
+     * api.pennlabs.org/laundry/
+     * /halls/ids --> returns all halls and all ids
+     * /hall/:id
+     * /hall/0/1  --> returns in 1 call 2 laundry halls
+     * /usage/:id --> usage data for that hall
      */
     this.state = {
       "dryer_data": {
