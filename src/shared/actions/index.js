@@ -6,14 +6,14 @@ import {
 
 import axios from 'axios';
 
-const BASE = 'https://hidden-scrubland-81317.herokuapp.com/api';
+const BASE = 'https://dining-api-v2.herokuapp.com/api';
 
-export function getDiningData(venue_id) {
+export function getDiningData(venueId) {
   return dispatch => {
     dispatch({
       type: getDiningDataRequested
     });
-    axios.get(`${BASE}/weekly_menu/${venue_id}`)
+    axios.get(`${BASE}/weekly_menu/${venueId}`)
       .then(res => {
         const diningData = res.data;
         dispatch({
@@ -24,7 +24,7 @@ export function getDiningData(venue_id) {
       .catch(error => {
         dispatch({
           type: getDiningDataRejected,
-          error,
+          error: error.message,
         });
       });
   };

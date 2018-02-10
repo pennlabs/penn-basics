@@ -2,13 +2,16 @@
 import React from 'react';
 import { getDiningData } from '../../actions/index';
 import { connect } from 'react-redux';
-import NotFound from '../shared/NotFound';
 import moment from 'moment';
+import { mappings } from './mappings';
+import PropTypes from 'prop-types';
+
+// Import components
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
-import { mappings } from './mappings';
-import PropTypes from 'prop-types';
+import NotFound from '../shared/NotFound';
+import ErrorMessage from '../shared/ErrorMessage';
 
 /**
  * Render the view for a dining venue
@@ -25,14 +28,24 @@ class DiningVenue extends React.Component {
     // Format the current date
     const date = new Date();
     const momentDate = moment(date);
-    const dateFormatted = momentDate.format('MM/DD/YYYY');
+    let dateFormatted = momentDate.format('MM/DD/YYYY');
+
+    // Remove a leading 0 if there is one
+    if (dateFormatted.startsWith("0")) {
+      dateFormatted = dateFormatted.substring(1);
+    }
     const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
 
     this.state = {
       dateFormatted: dateFormatted,
       dateToString: dateToString,
-      meal: "Brunch",
+      meal: "",
+      meals: [],
     };
+
+    // Bind this to helper method
+    this.checkForErrors = this.checkForErrors.bind(this);
+    this.findMeals = this.findMeals.bind(this);
   }
 
   /**
@@ -44,32 +57,109 @@ class DiningVenue extends React.Component {
     const nextVenueId = props.match.params.id;
     if (currentVenueId !== nextVenueId) {
       this.props.getDiningDataDispatch(nextVenueId);
+
+      // Clear some of the state
+      this.setState({
+        meal: "",
+        error: "",
+      });
     }
+  }
+
+  /**
+   * When the component updates
+   */
+  componentDidUpdate() {
+    this.findMeals();
+  }
+
+  /**
+   * Find meals
+   */
+  findMeals() {
+    // Find the relevant meal
+    if (this.props.diningData &&
+        this.state.dateFormatted &&
+        !this.props.diningData.pending &&
+        !this.state.meal) {
+      const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
+
+      // Update the state
+      // TODO don't always pick the first meal
+      this.setState({
+        meals: meals,
+        meal: meals[0],
+      });
+    }
+  }
+
+  /**
+   * Check for errors
+   */
+  checkForErrors() {
+    // Check for errors
+    let error = "";
+
+    // If no mapping is found
+    if (!mappings[this.props.match.params.id]) {
+      error = "Dining with passed in ID not found";
+    } else if (this.props.diningData && this.state.dateFormatted) {
+      if (!this.props.diningData[this.state.dateFormatted]) {
+        error = "Dining data not found for today's date";
+      } else if (this.state.meal && !this.props.diningData[this.state.dateFormatted][this.state.meal]) {
+        error = `Dining data not found for meal: "${ this.state.meal }"`;
+      } else {
+        error = "";
+      }
+    } else if (!this.props.diningData) {
+      error = "Dining data is undefined";
+    } else {
+      error = "";
+    }
+
+    // Return the error
+    return error;
   }
 
   /**
    * Render the component
    */
   render() {
+    if (!this.state.pending && this.props.diningData && !this.props.diningData.pending) {
+      console.log(this.props.diningData);
+      console.log(this.state.dateFormatted);
+      console.log(Object.keys(this.props.diningData)[4]);
+    }
+
+    // Check for errors
+    const error = this.checkForErrors();
+
+    // Render based on state
     if (this.props.pending) {
+      // If data or an error is still pending
       return (
         <div>
           Loading...
         </div>
       );
     } else if (this.props.error) {
-      /**
-       * TODO handle more errors
-       */
+      // If there was some other error
       return (
-        <NotFound
-          title={"Venue with ID " + this.props.match.params.id + " not found"}
-          url="/dining"
-          urlText="Back to dining"
-        />
+        <ErrorMessage message={ this.props.error } />
+      );
+    } else if (this.state.error) {
+      // If there is a state error
+      return (
+        <ErrorMessage message={ this.state.error } />
+      );
+    } else if (error) {
+      return (
+        <ErrorMessage message={ error } />
       );
     }
+
     return (
+      // If there is no error and the data is not pending
       <div>
         {/* Render the title of the dining page */}
         <h1 className="title">
@@ -81,11 +171,19 @@ class DiningVenue extends React.Component {
 
         {/* Render the current date */}
         <h2>
-          {this.state.dateToString}
+          { this.state.dateToString }
         </h2>
-        <DiningQuery />
+
+        <DiningQuery
+          meal={ this.state.meal }
+          meals={ this.state.meals }
+          days={["Today", "Tomorrow", "Day after tomorrow"]}
+        />
+
         {
-          !this.props.diningData.pending && (
+          (this.props.diningData.pending || !this.state.meal) ? (
+            "Loading..."
+          ) : (
             <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
           )
         }
@@ -118,4 +216,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue);
+// Redux config
+DiningVenue = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DiningVenue);
+
+export default DiningVenue;

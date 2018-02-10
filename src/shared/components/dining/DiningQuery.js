@@ -1,23 +1,31 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Dropdown from './Dropdown';
+import PropTypes from 'prop-types';
 
-class DiningQuery extends Component {
-  render() {
-    const diningOptions = ["Breakfast", "Lunch", "Dinner"];
-    const dayOptions = ["Today", "Tomorrow", "Day after tomorrow"];
-
-    return(
-      <div className="diningQuery">
-        <p>What's for</p>
-        <Dropdown
-          options={diningOptions}
-        />
-        <Dropdown
-          options={dayOptions}
-        />
-      </div>
-    );
+const DiningQuery = ({ meals, days, meal }) => {
+  // Ensure that all props are defined
+  if (!meals || !meals.length || !days || !days.length || !meal) {
+    return null;
   }
-}
+
+  return(
+    <div className="diningQuery">
+      <p>What's for</p>
+      <Dropdown
+        selected={ meal }
+        options={ meals }
+      />
+      <Dropdown
+        options={ days }
+      />
+    </div>
+  );
+};
+
+DiningQuery.propTypes = {
+  meal: PropTypes.string,
+  meals: PropTypes.array,
+  days: PropTypes.array,
+};
 
 export default DiningQuery;
