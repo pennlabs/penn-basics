@@ -17,6 +17,15 @@ class Dropdown extends React.Component {
     this.handleChangeState = this.handleChangeState.bind(this);
   }
 
+  // When the component updates
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selected !== this.state.selected) {
+      if (this.props.callback) {
+        this.props.callback(this.state.selected);
+      }
+    }
+  }
+
   // Handle a change to the dropdown state
   handleChangeState(event) {
     this.setState({

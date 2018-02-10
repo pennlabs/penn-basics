@@ -25,7 +25,8 @@ const App = () => (
     <div id="wrapper">
       <Switch>
         {/* Render the sidebar on all pages except the homepage */}
-        <Route exact path="/:anything_except_home" component={Sidebar} />
+        <Route exact path="/:anything_but_home" component={Sidebar} />
+        <Route exact path="/:anything_but_home/*" component={Sidebar} />
       </Switch>
       <div id="app">
         <Switch>

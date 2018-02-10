@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
-import NotFound from '../shared/NotFound';
 import ErrorMessage from '../shared/ErrorMessage';
 
 /**
@@ -46,6 +45,7 @@ class DiningVenue extends React.Component {
     // Bind this to helper method
     this.checkForErrors = this.checkForErrors.bind(this);
     this.findMeals = this.findMeals.bind(this);
+    this.handleChangeMeal = this.handleChangeMeal.bind(this);
   }
 
   /**
@@ -91,6 +91,15 @@ class DiningVenue extends React.Component {
         meal: meals[0],
       });
     }
+  }
+
+  /**
+   * Handle change to selection of meal to render
+   */
+  handleChangeMeal(meal) {
+    this.setState({
+      meal: meal,
+    });
   }
 
   /**
@@ -177,6 +186,7 @@ class DiningVenue extends React.Component {
         <DiningQuery
           meal={ this.state.meal }
           meals={ this.state.meals }
+          mealCallback={ this.handleChangeMeal }
           days={["Today", "Tomorrow", "Day after tomorrow"]}
         />
 

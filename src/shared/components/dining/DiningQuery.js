@@ -2,7 +2,7 @@ import React from 'react';
 import Dropdown from './Dropdown';
 import PropTypes from 'prop-types';
 
-const DiningQuery = ({ meals, days, meal }) => {
+const DiningQuery = ({ meals, days, meal, mealCallback }) => {
   // Ensure that all props are defined
   if (!meals || !meals.length || !days || !days.length || !meal) {
     return null;
@@ -16,6 +16,7 @@ const DiningQuery = ({ meals, days, meal }) => {
       <Dropdown
         selected={ meal }
         options={ meals }
+        callback={ mealCallback }
       />
       <Dropdown
         options={ days }
@@ -28,6 +29,7 @@ DiningQuery.propTypes = {
   meal: PropTypes.string,
   meals: PropTypes.array,
   days: PropTypes.array,
+  mealCallback: PropTypes.func,
 };
 
 export default DiningQuery;
