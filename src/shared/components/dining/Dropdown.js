@@ -1,31 +1,60 @@
-import React, {Component} from 'react';
+import React from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 /**
  * Show a dropdown item
  */
-const Dropdown = ({ options, selected }) => {
-  const content = options.map(option => {
-    return (
-      <option key={ uuid() } value={ option } selected={ option === selected ? "selected" : "" }>
-        { option }
-      </option>
-    );
-  });
+class Dropdown extends React.Component {
+  // Constructor
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: this.props.selected,
+    };
 
-  return (
-    <div className="select">
-      <select className="dropdown" id="meal">
-        { content }
-      </select>
-    </div>
-  );
-};
+    // Bind this to helper functions
+    this.handleChangeState = this.handleChangeState.bind(this);
+  }
+
+  // Handle a change to the dropdown state
+  handleChangeState(event) {
+    this.setState({
+      selected: event.target.value
+    });
+  }
+
+  // Render the dropdown
+  render() {
+    const content = this.props.options.map(option => {
+      if (option === this.state.selected) {
+        return (
+          <option key={ uuid() } value={ option } defaultValue>
+            { option }
+          </option>
+        );
+      }
+      return (
+        <option key={ uuid() } value={ option }>
+          { option }
+        </option>
+      );
+    });
+
+    return (
+      <div className="select">
+        <select className="dropdown" id="meal" onChange={ this.handleChangeState } value={ this.state.selected }>
+          { content }
+        </select>
+      </div>
+    );
+  }
+}
 
 Dropdown.propTypes = {
   options: PropTypes.array,
   selected: PropTypes.string,
+  callback: PropTypes.func,
 };
 
 export default Dropdown;

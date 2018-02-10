@@ -10,7 +10,9 @@ const DiningQuery = ({ meals, days, meal }) => {
 
   return(
     <div className="diningQuery">
-      <p>What's for</p>
+      <p>
+        What's for
+      </p>
       <Dropdown
         selected={ meal }
         options={ meals }
