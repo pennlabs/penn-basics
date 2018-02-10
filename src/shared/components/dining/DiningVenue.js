@@ -33,19 +33,33 @@ class DiningVenue extends React.Component {
     if (dateFormatted.startsWith("0")) {
       dateFormatted = dateFormatted.substring(1);
     }
-    const dateToString = "Today, " + momentDate.format("dddd MMMM Do YYYY");
 
+    // Set up the state
     this.state = {
+      dateFormattedToday: dateFormatted,
       dateFormatted: dateFormatted,
-      dateToString: dateToString,
       meal: "",
       meals: [],
+      days: [],
     };
 
     // Bind this to helper method
     this.checkForErrors = this.checkForErrors.bind(this);
     this.findMeals = this.findMeals.bind(this);
+    this.findDays = this.findDays.bind(this);
     this.handleChangeMeal = this.handleChangeMeal.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
+  }
+
+  /**
+   * When the component mounts
+   */
+  componentDidMount() {
+    // Find meals
+    this.findMeals();
+
+    // Find dates
+    this.findDays();
   }
 
   /**
@@ -61,6 +75,9 @@ class DiningVenue extends React.Component {
       // Clear some of the state
       this.setState({
         meal: "",
+        meals: [],
+        dateFormatted: this.state.dateFormattedToday,
+        dates: [],
         error: "",
       });
     }
@@ -69,8 +86,71 @@ class DiningVenue extends React.Component {
   /**
    * When the component updates
    */
-  componentDidUpdate() {
-    this.findMeals();
+  componentDidUpdate(prevProps, prevState) {
+    /**
+     * TODO this is being called too many times
+     */
+
+    // Refresh the meals state if necessary
+    if (!this.state.meal ||
+        (prevState.meal !== this.state.meal) ||
+        !this.state.meals.length) {
+      this.findMeals();
+    }
+
+    // Refresh the days state if necessary
+    if (!this.state.dateFormatted ||
+        (prevState.dateFormatted !== this.state.dateFormatted) ||
+        !this.state.days.length) {
+      this.findDays();
+    }
+  }
+
+  /**
+   * Find days
+   */
+  findDays() {
+    // Find the relevant meal
+    if (this.props.diningData &&
+        this.state.dateFormatted &&
+        !this.props.diningData.pending &&
+        !this.state.meal) {
+      // Get all days passed to us from the API
+      // These are of the form MM/DD/YYYY EXCEPT in the case that the month
+      // begins with a "0", in which case the format is M/DD/YYYY
+      const days = Object.keys(this.props.diningData);
+
+      // Iterate over the days until we find the current day
+      // This is stored in the state as this.state.dateFormattedToday
+      let matched = false;
+
+      // Construct an array of all days that the user will be able to select from
+      const daysToShow = [this.state.dateFormattedToday];
+
+      // Include at most 2 days in addition to today
+      let count = 2;
+
+      // Iterate
+      days.forEach(day => {
+        // Check for a match if we have not yet found one
+        if (!matched) {
+          if (day === this.state.dateFormattedToday) {
+            matched = true;
+          }
+        } else if (count > 0) {
+          // Add the day to the list
+          daysToShow.push(day);
+
+          // Decrement the count
+          count--;
+        }
+      });
+
+      // Update the state
+      this.setState({
+        days: daysToShow,
+      });
+    }
   }
 
   /**
@@ -99,6 +179,15 @@ class DiningVenue extends React.Component {
   handleChangeMeal(meal) {
     this.setState({
       meal: meal,
+    });
+  }
+
+  /**
+   * Handle the change of day to render
+   */
+  handleChangeDate(day) {
+    this.setState({
+      dateFormatted: day,
     });
   }
 
@@ -134,12 +223,6 @@ class DiningVenue extends React.Component {
    * Render the component
    */
   render() {
-    if (!this.state.pending && this.props.diningData && !this.props.diningData.pending) {
-      console.log(this.props.diningData);
-      console.log(this.state.dateFormatted);
-      console.log(Object.keys(this.props.diningData)[4]);
-    }
-
     // Check for errors
     const error = this.checkForErrors();
 
@@ -178,16 +261,14 @@ class DiningVenue extends React.Component {
         {/* Render the overview card at the top of the dining view */}
         <DiningOverview />
 
-        {/* Render the current date */}
-        <h2>
-          { this.state.dateToString }
-        </h2>
-
+        {/* Render dropdowns for selecting dates and meals */}
         <DiningQuery
           meal={ this.state.meal }
           meals={ this.state.meals }
           mealCallback={ this.handleChangeMeal }
-          days={["Today", "Tomorrow", "Day after tomorrow"]}
+          dayCallback={ this.handleChangeDate }
+          days={ this.state.days }
+          day={ this.state.dateFormatted }
         />
 
         {
