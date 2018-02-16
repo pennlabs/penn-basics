@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import React, {Component} from 'react';
 import StudySpacesVenue from './StudySpacesVenue';
-=======
-import React, { Component } from 'react';
->>>>>>> master
+
 
 class App extends Component {
   render() {
