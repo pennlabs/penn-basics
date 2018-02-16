@@ -17,7 +17,6 @@ import StudySpaces from './studyspaces/App';
 import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
 
-// Render the component
 export default () => (
   <div>
     <Nav />
@@ -37,7 +36,7 @@ export default () => (
           <Route exact path="/studyspaces" component={StudySpaces} />
           <Route exact path="/studyspaces/:id" component={StudySpacesVenue} />
           <Route exact path="/reservations" component={Reservations} />
-          <Route path="*" component={NotFound}/>
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     </div>

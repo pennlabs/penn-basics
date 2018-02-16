@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Dropdown from './Dropdown';
 
 class DiningQuery extends Component {
-  render(){
+  render() {
     const diningOptions = ["Breakfast", "Lunch", "Dinner"];
     const dayOptions = ["Today", "Tomorrow", "Day after tomorrow"]
 
-    return(
+    return (
       <div className="diningQuery">
         <p>What's for</p>
         <Dropdown
