@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 
-const BUILD_DIR = path.join(__dirname, 'public','js');
+const BUILD_DIR = path.join(__dirname, 'public', 'js');
 const APP_DIR = path.join(__dirname, 'src', 'shared');
 
 const config = {
@@ -18,18 +18,18 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'react']
+            presets: ['react', 'env', 'stage-2']
           }
         }
       },
       {
         test: /\.scss$/,
         use: [{
-            loader: "style-loader" // creates style nodes from JS strings
+          loader: "style-loader" // creates style nodes from JS strings
         }, {
-            loader: "css-loader" // translates CSS into CommonJS
+          loader: "css-loader" // translates CSS into CommonJS
         }, {
-            loader: "sass-loader" // compiles Sass to CSS
+          loader: "sass-loader" // compiles Sass to CSS
         }]
       }
     ]
