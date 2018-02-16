@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SidebarSection from './SidebarSection';
 
 class Sidebar extends Component {
-  render(){
+  render() {
     const sections = [
       {
         "title": "Open now",
@@ -42,9 +42,9 @@ class Sidebar extends Component {
       return <SidebarSection title={section.title} links={section.links} key={index} />;
     });
 
-    return(
+    return (
       <div className="sidebar" id="sidebar">
-        { content }
+        {content}
       </div>
     )
   }

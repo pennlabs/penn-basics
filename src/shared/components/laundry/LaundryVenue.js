@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import LaundryOverview from './LaundryOverview';
 
 class LaundryVenue extends Component {
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <h1 className="title">
           Laundry venue name

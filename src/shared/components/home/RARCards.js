@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';
 
 class RARCards extends Component {
-  constructor(props) {
-    super (props);
-      this.state = {
-        name: this.props.name || 'Education Commons 247',
-        hours: this.props.hours || '8:30pm to 10:00pm',
-        type: this.props.type || 0,
-      }
+
+  static defaultProps = {
+    name: 'Education Commons 247',
+    hours: '8:30pm to 10:00pm',
+    type: 0,
   }
-  render () {
+
+  render() {
     return (
       <article className="media">
         <div className="media-left">
@@ -19,7 +18,7 @@ class RARCards extends Component {
             <span className="icon">
               <i className="fa fa-hand-peace-o"></i>
             </span>
-            <span style={{width: '5px'}}></span>
+            <span style={{ width: '5px' }}></span>
             Book Now
           </a>
         </div>
@@ -27,9 +26,9 @@ class RARCards extends Component {
         <div className="media-content">
           <div className="content" >
             <p className="is-size-5">
-              <strong>{this.state.name}</strong>
-              <br/>
-              <small>{this.state.hours}</small>
+              <strong>{this.props.name}</strong>
+              <br />
+              <small>{this.props.hours}</small>
             </p>
           </div>
         </div>
