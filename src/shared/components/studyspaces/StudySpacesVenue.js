@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class StudySpacesVenue extends Component {
+<<<<<<< HEAD
   render(){
     return(
       <div class="columns">
@@ -16,6 +17,12 @@ class StudySpacesVenue extends Component {
         <div class="column">
           Fourth column
         </div>
+=======
+  render() {
+    return (
+      <div>
+        <h2>I am the 5th floor bump space</h2>
+>>>>>>> master
       </div>
     )
   }

@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Card extends Component {
-  render(){
+  render() {
     const content = (
       <div className="card">
         <div className="card-content">
           <p className="title">
-            { this.props.title }
+            {this.props.title}
           </p>
-          { this.props.subtitle ?
-            <p className="subtitle medium-gray-text">
-              { this.props.subtitle}
-            </p>
-            :
-            ''
+          {
+            this.props.subtitle
+              ? <p className="subtitle medium-gray-text">
+                {this.props.subtitle}
+              </p>
+              : ''
           }
         </div>
       </div>
@@ -28,13 +28,12 @@ class Card extends Component {
           </Link>
         </div>
       );
-    } else {
-      return (
-        <div className="column is-half-desktop">
-          {content}
-        </div>
-      );
     }
+    return (
+      <div className="column is-half-desktop">
+        {content}
+      </div>
+    );
   }
 }
 

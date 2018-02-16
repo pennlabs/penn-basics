@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import Dining from './Dining';
 import Laundry from './Laundry';
 import Studyspaces from './Studyspaces';
@@ -37,18 +37,19 @@ class Home extends Component {
   close() {
     this.setState({show: false});
   }
-  render () {
+
+  render() {
     return (
       <div>
         {
           this.state.show && (
-            <Notification show={this.close} text={this.state.notification}/>
+            <Notification show={this.close} text={this.state.notification} />
           )
         }
-        <div style={{padding: "60px"}}>
+        <div style={{ padding: "60px" }}>
           <div className="tile is-ancestor">
             <div className="tile is-parent is-6">
-              <Dining show={this.state.dining}/>
+              <Dining show={this.state.dining} />
             </div>
             <div className="tile is-parent is-6">
               <Dining show={this.state.dining}/>

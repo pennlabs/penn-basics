@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Home from './Home';
 
+/**
+ * Renders the homepage
+ */
 class App extends Component {
   render() {
     return (
-      <div>
-        <h2>I am the reservations app</h2>
-      </div>
+      <Home />
     )
   }
 }
