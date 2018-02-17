@@ -12,8 +12,8 @@ class DiningVenue extends Component {
   // TODO make loading component
 
   componentDidMount() {
-    // venue id
-    this.props.getDiningDataDispatch(this.props.match.params.id);
+    const venueID = this.props.match.params.id
+    this.props.getDiningDataDispatch(venueID);
   }
 
   state = (function() {
@@ -69,6 +69,7 @@ class DiningVenue extends Component {
           {this.state.dateToString}
         </h2>
         <DiningQuery />
+        {/* TODO: is this the right pending?  Probably should be props.pending */}
         {!this.props.diningData.pending && <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />}
       </div>
     );
