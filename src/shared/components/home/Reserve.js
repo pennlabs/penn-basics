@@ -13,6 +13,12 @@ class Reserve extends Component {
         <RARCards />
         <RARCards />
         <RARCards />
+        <RARCards />
+        <RARCards />
+        <RARCards />
+        <RARCards />
+        <RARCards />
+        <RARCards />
       </div>
 
     )
