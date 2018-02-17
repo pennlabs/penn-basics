@@ -1,6 +1,4 @@
-/**
- * SIDEBAR
- */
+// SIDEBAR
 
 #wrapper {
   min-height: calc(100vh - 56px);
@@ -13,9 +11,17 @@
     background: $white;
     border-right: 1px solid $allbirds-gray;
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.0375);
-    max-width: 25vw;
+    width: 18vw;
 
     .sidebarSection {
+
+      .sidebarSectionTitle {
+        cursor: pointer;
+        &:hover {
+          background: $hover-gray;
+        }
+      }
+
       margin-bottom: 1rem;
 
       a {

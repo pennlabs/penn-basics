@@ -1,53 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
+import uuid from 'uuid/v4';
 import SidebarSection from './SidebarSection';
 
+import {
+  sidebarDining,
+  sidebarLaundry,
+  sidebarReservations,
+  sidebarStudyspaces
+} from '../../../actions/action_types'
+
 class Sidebar extends Component {
+
+  static propTypes = {
+    sections: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        links: PropTypes.arrayOf(
+          PropTypes.shape({
+            name: PropTypes.string,
+            isOpen: PropTypes.bool,
+            venueID: PropTypes.number
+          })
+        )
+      })
+    )
+  }
+
+  renderSections() {
+    return this.props.sections.map(section =>
+      <SidebarSection
+        {...section}
+        key={uuid()}
+      />
+    );
+  }
+
   render() {
-    const sections = [
-      {
-        "title": "Open now",
-        "links": [
-          {
-            "name": "1920 Commons",
-            "isOpen": true,
-            "venueID": 593,
-          },
-          {
-            "name": "Hill",
-            "isOpen": true,
-            "venueID": 636,
-          },
-        ],
-      },
-      {
-        "title": "Closed",
-        "links": [
-          {
-            "name": "Kings Court",
-            "isOpen": false,
-          },
-          {
-            "name": "New College House",
-            "isOpen": false,
-          },
-          {
-            "name": "Bridge",
-            "isOpen": false,
-          },
-        ],
-      }
-    ]
-
-    const content = sections.map((section, index) => {
-      return <SidebarSection title={section.title} links={section.links} key={index} />;
-    });
-
     return (
       <div className="sidebar" id="sidebar">
-        {content}
+        {this.renderSections()}
       </div>
     )
   }
 }
 
-export default Sidebar;
+const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar }) => {
+  switch (sidebar) {
+    case sidebarDining:
+      return { sections: diningSidebarInfo }
+    default:
+      throw Exception('Sidebar does not yet handle info from non-dining sections')
+  }
+}
+
+export default connect(mapStateToProps)(Sidebar);

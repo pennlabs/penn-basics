@@ -38,6 +38,11 @@ class Home extends Component {
     this.setState({show: false});
   }
 
+<<<<<<< HEAD
+=======
+//Renders the homepage
+class App extends Component {
+>>>>>>> master
   render() {
     return (
       <div>
