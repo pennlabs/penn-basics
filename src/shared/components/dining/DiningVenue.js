@@ -9,9 +9,7 @@ import DiningMenu from './DiningMenu';
 import { mappings } from './mappings';
 
 class DiningVenue extends Component {
-  /**
-   * TODO make loading component
-   */
+  // TODO make loading component
 
   componentDidMount() {
     // venue id
