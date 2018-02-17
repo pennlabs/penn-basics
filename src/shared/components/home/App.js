@@ -47,7 +47,13 @@ class Home extends Component {
         }
 
         <div className="tile is-ancestor">
-          <div className="tile is-parent">
+          <div className="tile is-parent is-vertical">
+            <div className="tile is-child box">
+                <h1 className="title is-3">☀️ Good morning!</h1>
+                <p className="content is-medium">Insert some inspirational quote here from various people at
+                Penn. It will make people happy and give everyone some life.
+                </p>
+            </div>
             <Reserve/>
           </div>
           <div className="tile is-5 is-vertical is-parent">
@@ -62,20 +68,3 @@ class Home extends Component {
   }
 }
 export default Home;
-
-/* <div style={{ padding: "30px" }} className="tile is-ancestor">
-  <div className="tile is-ancestor is-vertical">
-    <div className="tile is-parent">
-      <Reserve />
-
-    </div>
-  </div>
-  <div className="tile is-ancestor is-vertical">
-    <div className="tile is-parent">
-      <Dining show={this.state.dining}/>
-    </div>
-    <div className="tile is-parent">
-      <Studyspaces />
-    </div>
-  </div>
-</div> */

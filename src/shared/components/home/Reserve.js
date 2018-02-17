@@ -18,19 +18,9 @@ class Reserve extends Component {
         <RARCards />
         <RARCards />
         <RARCards />
-        <RARCards />
       </div>
-
     )
   }
 }
 
 export default Reserve;
-/* <div className="home">
-  <article className="tile is-child white-card">
-    <h1 className="title is-3">Reserve a room</h1>
-    <RARCards />
-    <RARCards />
-    <RARCards />
-  </article>
-</div> */
