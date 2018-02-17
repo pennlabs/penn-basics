@@ -19,17 +19,17 @@ class Home extends Component {
     axios.post('/api/events', {
       start: Date.now()
     })
-      .then(resp => {
-        if (resp.data.events.length === 0) {
-          this.setState({ show: false })
-        } else {
-          this.setState({ show: true, notification: resp.data.events })
-        }
-        console.log("DATE RESP", resp.data.events);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    .then(resp => {
+      if (resp.data.events.length === 0) {
+        this.setState({ show: false })
+      } else {
+        this.setState({ show: true, notification: resp.data.events })
+      }
+      console.log("DATE RESP", resp.data.events);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   close = () => {
