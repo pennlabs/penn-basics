@@ -46,10 +46,6 @@ class App extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <h2>I am the study spaces app</h2>
-        <StudySpacesVenue/>
-=======
       {
         this.state.spaces && Object.keys(this.state.spaces).map(spaceId => {
           const space = this.state.spaces[spaceId];
@@ -57,7 +53,6 @@ class App extends Component {
         })
       }
       <SpaceModal {...this.state.modalSpace} closeModal={this.closeModal.bind(this)}/>
->>>>>>> master
       </div>
     )
   }

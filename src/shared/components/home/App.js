@@ -37,12 +37,6 @@ class Home extends Component {
   close() {
     this.setState({show: false});
   }
-
-<<<<<<< HEAD
-=======
-//Renders the homepage
-class App extends Component {
->>>>>>> master
   render() {
     return (
       <div>
@@ -51,22 +45,6 @@ class App extends Component {
             <Notification show={this.close} text={this.state.notification} />
           )
         }
-        {/* <div style={{ padding: "30px" }} className="tile is-ancestor">
-          <div className="tile is-ancestor is-vertical">
-            <div className="tile is-parent">
-              <Reserve />
-
-            </div>
-          </div>
-          <div className="tile is-ancestor is-vertical">
-            <div className="tile is-parent">
-              <Dining show={this.state.dining}/>
-            </div>
-            <div className="tile is-parent">
-              <Studyspaces />
-            </div>
-          </div>
-        </div> */}
 
         <div className="tile is-ancestor">
           <div className="tile is-parent">
@@ -84,3 +62,20 @@ class App extends Component {
   }
 }
 export default Home;
+
+/* <div style={{ padding: "30px" }} className="tile is-ancestor">
+  <div className="tile is-ancestor is-vertical">
+    <div className="tile is-parent">
+      <Reserve />
+
+    </div>
+  </div>
+  <div className="tile is-ancestor is-vertical">
+    <div className="tile is-parent">
+      <Dining show={this.state.dining}/>
+    </div>
+    <div className="tile is-parent">
+      <Studyspaces />
+    </div>
+  </div>
+</div> */
