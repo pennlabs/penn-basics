@@ -6,10 +6,9 @@
 @import './sidebar';
 @import './filter';
 @import './dining';
+@import './home';
 
-/**
- * General styling for the whole application
- */
+//General styling for the whole application
 
 #app {
   background: $snow;

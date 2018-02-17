@@ -1,10 +1,6 @@
-// @import "./node_modules/bulma/sass/utilities/initial-variables";
+//Styling for home components
+@import '/palette.scss';
 
-// $blue: #6190E8;
-// $green: #5BD3B8;
-// $primary: $green;
-// $danger: #F2BE64;
-// $success: #EAEAEA;
 
 .home {
   .spacer {
@@ -12,7 +8,7 @@
     width: 100vw;
   }
 
-  .whiteCard {
+  .white-card {
     background-color: white !important;
     text-align: center;
     padding: 30px;
@@ -43,16 +39,16 @@
 }
 
 .tag-is-blue {
-  background-color: #8390E1 !important;
-  color: white !important;
+  background-color: $purple;
+  color: $white !important;
 }
 
 .tag-is-yellow {
   background-color: #FFBA40 !important;
-  color: white !important;
+  color: $white !important;
 }
 
 .tag-is-green {
-  background-color: #8EC82D !important;
-  color: white !important;
+  background-color: $green !important;
+  color: $white !important;
 }

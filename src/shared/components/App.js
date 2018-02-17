@@ -7,7 +7,7 @@ import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
 import Footer from './shared/footer/Footer';
 import Card from './shared/card/Card';
-import Home from './home/Home';
+import Home from './home/App';
 import NotFound from './shared/NotFound';
 import Dining from './dining/App';
 import DiningVenue from './dining/DiningVenue';
