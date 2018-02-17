@@ -1,43 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import uuid from 'uuid/v4';
 import SidebarSection from './SidebarSection';
 
-class Sidebar extends Component {
+import {
+  sidebarDining,
+  sidebarLaundry,
+  sidebarReservations,
+  sidebarStudyspaces
+} from '../../../actions/action_types'
 
-  static defaultProps = {
-    sections: [{
-      "title": "Open now",
-      "links": [
-        {
-          "name": "1920 Commons",
-          "isOpen": true,
-          "venueID": 593,
-        },
-        {
-          "name": "Hill",
-          "isOpen": true,
-          "venueID": 636,
-        },
-      ],
-    }, {
-      "title": "Closed",
-      "links": [
-        {
-          "name": "Kings Court",
-          "isOpen": false,
-        },
-        {
-          "name": "New College House",
-          "isOpen": false,
-        },
-        {
-          "name": "Bridge",
-          "isOpen": false,
-        },
-      ],
-    }]
-  }
+class Sidebar extends Component {
 
   static propTypes = {
     sections: PropTypes.arrayOf(
@@ -72,4 +46,13 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar }) => {
+  switch (sidebar) {
+    case sidebarDining:
+      return { sections: diningSidebarInfo }
+    default:
+      throw Exception('Sidebar does not yet handle info from non-dining sections')
+  }
+}
+
+export default connect(mapStateToProps)(Sidebar);
