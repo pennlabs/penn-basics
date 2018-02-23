@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+/**
+ * Component to render the not found component
+ */
 const NotFound = ({ title, message, url, urlText}) => {
   return(
     <div>
@@ -16,3 +20,13 @@ const NotFound = ({ title, message, url, urlText}) => {
     </div>
   );
 };
+
+// Prop validations
+NotFound.propTypes = {
+  title: PropTypes.string,
+  message: PropTypes.string,
+  url: PropTypes.string,
+  urlText: PropTypes.string,
+};
+
+export default NotFound;

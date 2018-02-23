@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 
 class Menu extends Component {
+  // Constructor method
   constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
+  // Handle when the meny is clicked
+  handleClick() {
     var sidebar = document.getElementById("sidebar");
     var shaddow = document.getElementById("shade");
-    var width = sidebar.style.width;
     shaddow.classList.toggle("fade-in");
     sidebar.classList.toggle("active");
   }
