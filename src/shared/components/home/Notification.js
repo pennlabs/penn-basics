@@ -29,7 +29,7 @@ class Notification extends Component {
 // Prop validations
 Notification.propTypes = {
   show: PropTypes.func,
-  text: PropTypes.string,
+  text: PropTypes.array,
 };
 
 export default Notification;

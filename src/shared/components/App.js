@@ -44,5 +44,3 @@ export default () => (
     <Footer />
   </div>
 );
-
-export default App;
