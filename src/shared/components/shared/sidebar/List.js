@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ListItem from './ListItem';
 
 class List extends Component {
 
-  render(){
-    const links = this.props.links;
-    const list = links.map((link, index) =>
+  render() {
+    const list = this.props.links.map((link, index) =>
       <ListItem name={link.name} isOpen={link.isOpen} venueID={link.venueID} key={index} />
     );
-
-    return(
+    return (
       <ul>
-        { list }
+        {list}
       </ul>
     )
   }

@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Home from './Home';
 
-/**
- * Renders the homepage
- */
+//Renders the homepage
 class App extends Component {
   render() {
-    return(
+    return (
       <Home />
     )
   }
