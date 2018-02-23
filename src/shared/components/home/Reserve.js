@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';
 import RARCards from './RARCards';
 
@@ -15,7 +14,7 @@ class Reserve extends Component {
         <RARCards />
         <RARCards />
       </article>
-    )
+    );
   }
 }
 

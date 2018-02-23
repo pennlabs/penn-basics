@@ -10,7 +10,7 @@ class Links extends Component {
         <LinkItem url="/studyspaces" name="Study spaces" />
         <LinkItem url="/reservations" name="Reserve a room" />
       </ul>
-    )
+    );
   }
 }
 

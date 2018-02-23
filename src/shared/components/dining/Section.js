@@ -6,11 +6,13 @@ const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
   let sectionItems = "";
   if (title === "salad bar" || title === "grill") {
     // If only the first item should be displayed
-    sectionItems = <MenuItem
-      title={items[0].title}
-      description={items[0].description}
-      tags={items[0].tags} key={uuid()}
-    />
+    sectionItems = (
+      <MenuItem
+        title={items[0].title}
+        description={items[0].description}
+        tags={items[0].tags} key={uuid()}
+      />
+    );
   } else if (title === "fruit salad" || title === "commons deli") {
     // If items wihtout descriptions should not be displayed
     sectionItems = items.map(item => {
@@ -41,9 +43,8 @@ const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
     sectionItems = items.map((item, index) => {
       if (index == items.length - 1) {
         return item.title;
-      } else {
-        return item.title + ", ";
       }
+      return item.title + ", ";
     });
   }
 

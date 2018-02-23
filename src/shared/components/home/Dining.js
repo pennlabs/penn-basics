@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { Switch, Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import DiningCards from './DiningCards';
 import '../../styles/home.scss';
 
 class Dining extends Component {
-
   static propTypes = {
     show: PropTypes.bool
   }
@@ -27,7 +26,7 @@ class Dining extends Component {
           place to eat right now.</h3>
         }
         {
-          this.state.object == null
+          this.state.object === null
             ? <img src="https://i.imgur.com/fFniYax.png" width="500px" />
             : <div>
               <DiningCards name={"Kings Court English House"} type={0} />
@@ -35,7 +34,7 @@ class Dining extends Component {
             </div>
         }
       </article>
-    )
+    );
   }
 }
 export default Dining;

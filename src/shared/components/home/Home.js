@@ -9,33 +9,44 @@ import axios from 'axios';
 
 import '../../styles/home.scss';
 
+/**
+ * Component to render the home page
+ */
 class Home extends Component {
+  // Set the state
   state = {
     show: true,
     notification: [],
     dining: false,
   }
+
+  // When the component mounts
   componentDidMount() {
     axios.post('/api/events', {
-      start: Date.now()
+      start: Date.now(),
     })
-    .then(resp => {
-      if (resp.data.events.length === 0) {
-        this.setState({ show: false })
-      } else {
-        this.setState({ show: true, notification: resp.data.events })
-      }
-      console.log("DATE RESP", resp.data.events);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(resp => {
+        if (resp.data.events.length === 0) {
+          this.setState({ show: false });
+        } else {
+          this.setState({
+            show: true,
+            notification: resp.data.events
+          });
+        }
+        console.log("DATE RESP", resp.data.events);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
+  // Close the notification
   close = () => {
     this.setState({ show: false });
   }
 
+  // Render the homepage
   render() {
     return (
       <div>
@@ -60,7 +71,8 @@ class Home extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
+
 export default Home;

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const router = require('express').Router();
 
-export default function spacesRouter(DB){
+export default function spacesRouter(DB) {
   router.get('/all', (req, res) => {
     DB.findAllSpaces().then(spaces => {
       res.status(200).json({
@@ -14,7 +14,7 @@ export default function spacesRouter(DB){
 
   router.get('/homepage', (req, res) => {
     DB.filterSpaces(true, 0, 0, 0).then(spaces => {
-      let space1 = Math.floor(Math.random() * spaces.length);
+      const space1 = Math.floor(Math.random() * spaces.length);
       let space2 = Math.floor(Math.random() * spaces.length);
 
       while (space2 != space1) {
@@ -46,14 +46,14 @@ export default function spacesRouter(DB){
         });
       }
     }
-    
+
     DB.insertSpace(space).then(() => {
       res.status(200).json({
         message: "Space successfully created."
-      }); 
+      });
     });
   });
-  
+
   router.get('/:id', (req, res) => {
     const spaceId = req.params[0];
     DB.getSpace(spaceId).then(space => {
