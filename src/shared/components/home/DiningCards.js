@@ -1,3 +1,6 @@
+// DiningCards: card subcomponents that go into the homepage dining section.
+// each card displays the information about the dining hall/retail.
+
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';

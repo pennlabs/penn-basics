@@ -1,3 +1,4 @@
+// Dining: outside component that holds the cards.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Switch, Route, Link } from 'react-router-dom';
@@ -27,10 +28,7 @@ class Dining extends Component {
               ? <img src="https://i.imgur.com/fFniYax.png" width="500px" />
               : <div>
                 <DiningCards name={"Kings Court English House"} type={0} />
-                <DiningCards name={"1920 Commons"} type={0} />
                 <DiningCards name={"Pret a Manger"} type={1} />
-                <DiningCards name={"Pret a Manger"} type={1} />
-
               </div>
           }
       </div>

@@ -12,7 +12,7 @@ class Home extends Component {
   constructor(props) {
     super (props);
       this.state = {
-        show: false,
+        show: true,
         notification: [],
         dining: false,
       }
