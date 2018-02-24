@@ -10,8 +10,7 @@ class Links extends Component {
           <LinkItem url="./" name="Home" />
           <LinkItem url="/dining" name="Dining" />
           <LinkItem url="/laundry" name="Laundry" />
-          <LinkItem url="/studyspaces" name="Study spaces" />
-          <LinkItem url="/reservations" name="Reserve a room" />
+          <LinkItem url="/studyspaces" name="Studyspaces" />
         </ul>
       </div>
     );
