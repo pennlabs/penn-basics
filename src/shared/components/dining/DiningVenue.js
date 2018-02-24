@@ -160,6 +160,7 @@ class DiningVenue extends React.Component {
     // Find the relevant meal
     if (this.props.diningData &&
         this.state.dateFormatted &&
+        this.props.diningData[this.state.dateFormatted] &&
         !this.props.diningData.pending &&
         !this.state.meal) {
       const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
@@ -170,30 +171,29 @@ class DiningVenue extends React.Component {
         meals: meals,
         meal: meals[0],
       });
+    } else {
+      console.log("DINING DATA");
+      console.log(this.props.diningData);
+      console.log("DATE FORMATTED");
+      console.log(this.state.dateFormatted);
     }
   }
 
-  /**
-   * Handle change to selection of meal to render
-   */
+  //  Handle change to selection of meal to render
   handleChangeMeal(meal) {
     this.setState({
       meal: meal,
     });
   }
 
-  /**
-   * Handle the change of day to render
-   */
+  // Handle the change of day to render
   handleChangeDate(day) {
     this.setState({
       dateFormatted: day,
     });
   }
 
-  /**
-   * Check for errors
-   */
+  // Check for errors
   checkForErrors() {
     // Check for errors
     let error = "";
@@ -219,9 +219,7 @@ class DiningVenue extends React.Component {
     return error;
   }
 
-  /**
-   * Render the component
-   */
+  // Render the component
   render() {
     // Check for errors
     const error = this.checkForErrors();

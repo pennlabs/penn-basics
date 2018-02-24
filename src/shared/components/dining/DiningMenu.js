@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from './Section';
 import uuid from 'uuid/v4';
+import PropTypes from 'prop-types';
 
 const DiningMenu = ({ sectionsObj }) => {
   const sectionTitles = Object.keys(sectionsObj);
@@ -84,6 +85,10 @@ const DiningMenu = ({ sectionsObj }) => {
       </div>
     </div>
   );
+};
+
+DiningMenu.propTypes = {
+  sectionsObj: PropTypes.obj,
 };
 
 export default DiningMenu;

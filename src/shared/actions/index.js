@@ -3,7 +3,6 @@ import {
   getDiningDataRejected,
   getDiningDataFulfilled
 } from '../actions/action_types';
-
 import axios from 'axios';
 
 const BASE = 'https://dining-api-v2.herokuapp.com/api';
