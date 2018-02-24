@@ -9,13 +9,13 @@
   }
 
   .white-card {
-    background-color: white !important;
+    background-color: white;
     text-align: center;
     padding: 30px;
   }
 
   .subtitle {
-    color: 737373 !important;
+    color: 737373;
   }
 
   .horizontal {
@@ -30,12 +30,12 @@
   }
 
   .tag {
-    margin: 5px !important;
+    margin: 5px;
   }
 }
 
 .link {
-  text-decoration: none !important;
+  text-decoration: none;
 }
 
 .tag-is-blue {
@@ -45,10 +45,10 @@
 
 .tag-is-yellow {
   background-color: #FFBA40 !important;
-  color: $white !important;
+  color: $white;
 }
 
 .tag-is-green {
   background-color: $green !important;
-  color: $white !important;
+  color: $white;
 }
