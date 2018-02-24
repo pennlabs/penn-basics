@@ -55,7 +55,7 @@ class StudyCards extends Component {
       <article className="media">
         <div className="media-content">
           <div className="content" >
-            <p className="is-size-5">
+            <p className="is-size-6">
               <strong>{this.props.name}</strong>
               <br />
               <small>Hours: {this.props.hours}</small>
