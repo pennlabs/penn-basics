@@ -12,7 +12,7 @@ class Filter extends Component {
       <div className="filter">
         <div className="filterToggleWrapper">
           <div className="filterToggle hover" onClick={this.handleClick}>
-            <i className="fa fa-filter"></i> Filter
+            <i className="fa fa-filter" /> Filter
           </div>
         </div>
         <div className="columns is-desktop" id="filterContent">
@@ -24,7 +24,7 @@ class Filter extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

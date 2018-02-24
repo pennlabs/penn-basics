@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';
 import StudyCards from './StudyCards';
 
@@ -13,7 +12,7 @@ class Studyspaces extends Component {
           <StudyCards/>
           <StudyCards/>
       </div>
-    )
+    );
   }
 }
 

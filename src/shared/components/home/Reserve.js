@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';
 
 class Reserve extends Component {
@@ -10,7 +9,7 @@ class Reserve extends Component {
         <h2 className="subtitle is-5">Book a room quickly across campus: at VP,
           Huntsman, Ed Commons, and more.</h2>
       </div>
-    )
+    );
   }
 }
 

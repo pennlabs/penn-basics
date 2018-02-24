@@ -1,12 +1,11 @@
 // Dining: outside component that holds the cards.
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import { Switch, Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import DiningCards from './DiningCards';
 import '../../styles/home.scss';
 
 class Dining extends Component {
-
   static propTypes = {
     show: PropTypes.bool
   }
@@ -32,7 +31,7 @@ class Dining extends Component {
               </div>
           }
       </div>
-    )
+    );
   }
 }
 export default Dining;

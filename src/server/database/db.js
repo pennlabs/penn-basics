@@ -10,11 +10,10 @@ function findAllSpaces() {
 // params: filter object = (open: Boolean, outlets: Integer, noise: Integer, groups: Integer)
 function filterSpaces(open, outletLevel, quietLevel, groupLevel) {
   if (open) {
-    return Space.find({start: {$lte: hour}, end: {$gt: hour}, outlets: {$gte: outletLevel}, 
+    return Space.find({start: {$lte: hour}, end: {$gt: hour}, outlets: {$gte: outletLevel},
       quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
-  } else {
-    return Space.find({outlets: {$gte: outletLevel}, quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
   }
+  return Space.find({outlets: {$gte: outletLevel}, quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
 }
 
 // params: spaceId
@@ -32,4 +31,4 @@ export default {
   getSpace,
   insertSpace,
   findAllSpaces
-}
+};

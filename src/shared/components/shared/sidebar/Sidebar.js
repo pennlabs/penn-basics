@@ -12,7 +12,6 @@ import {
 } from '../../../actions/action_types'
 
 class Sidebar extends Component {
-
   static propTypes = {
     sections: PropTypes.arrayOf(
       PropTypes.shape({
@@ -42,17 +41,17 @@ class Sidebar extends Component {
       <div className="sidebar" id="sidebar">
         {this.renderSections()}
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar }) => {
   switch (sidebar) {
     case sidebarDining:
-      return { sections: diningSidebarInfo }
+      return { sections: diningSidebarInfo };
     default:
-      throw Exception('Sidebar does not yet handle info from non-dining sections')
+      throw Error('Sidebar does not yet handle info from non-dining sections');
   }
-}
+};
 
 export default connect(mapStateToProps)(Sidebar);

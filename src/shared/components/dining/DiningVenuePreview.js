@@ -12,6 +12,6 @@ const DiningVenuePreview = ({ name, id, image }) => (
       </div>
     </div>
   </Link>
-)
+);
 
 export default DiningVenuePreview;

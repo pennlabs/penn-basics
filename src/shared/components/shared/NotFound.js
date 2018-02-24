@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
+/**
+ * Component to render when a page is not found
+ */
 class NotFound extends Component {
-
+  // Set the default props
   static defaultProps = {
     title: '404: Content not found',
     message: 'It seems like the content you are looking for was either moved or does not exist.',
@@ -11,6 +13,7 @@ class NotFound extends Component {
     url: '/'
   }
 
+  // Render the component
   render() {
     return (
       <div>

@@ -18,7 +18,7 @@ class StudySpacesVenue extends Component {
           Fourth column
         </div>
       </div>
-      )
-    }
+    );
+  }
 }
 export default StudySpacesVenue;
