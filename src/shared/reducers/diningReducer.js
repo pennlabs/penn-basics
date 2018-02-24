@@ -2,7 +2,7 @@ import {
   getDiningDataRequested,
   getDiningDataRejected,
   getDiningDataFulfilled
-} from '../actions/action_types'
+} from '../actions/action_types';
 
 const defaultState = {
   pending: true,
@@ -37,7 +37,7 @@ const defaultState = {
       },
     ],
   }]
-}
+};
 
 const diningReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -45,21 +45,21 @@ const diningReducer = (state = defaultState, action) => {
       return {
         ...state,
         pending: true,
-      }
+      };
     case getDiningDataRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
-      }
+      };
     case getDiningDataFulfilled:
       return {
         ...state,
         pending: false,
         diningData: action.diningData,
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
-export default diningReducer
+};
+export default diningReducer;

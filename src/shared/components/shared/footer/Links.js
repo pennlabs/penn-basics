@@ -14,7 +14,7 @@ class Links extends Component {
           <LinkItem url="/reservations" name="Reserve a room" />
         </ul>
       </div>
-    )
+    );
   }
 }
 

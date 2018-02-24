@@ -1,5 +1,5 @@
-const webpack = require('webpack')
-const path = require('path')
+const webpack = require('webpack');
+const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'public', 'js');
 const APP_DIR = path.join(__dirname, 'src', 'shared');

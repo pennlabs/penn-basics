@@ -1,9 +1,11 @@
+// Import frameworks
 import React, { Component } from 'react';
 import Filter from '../shared/filter/Filter';
 import DiningVenuePreview from './DiningVenuePreview';
 import uuid from 'uuid/v4';
 
 class App extends Component {
+  // TODO remove dummy state
   state = {
     venues: [
       {
@@ -38,7 +40,7 @@ class App extends Component {
           {this.renderPreviews()}
         </div>
       </div>
-    )
+    );
   }
 }
 

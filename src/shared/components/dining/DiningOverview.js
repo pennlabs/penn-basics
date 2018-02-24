@@ -9,6 +9,6 @@ const DiningOverview = () => (
 
     <HoursVisualization />
   </div>
-)
+);
 
 export default DiningOverview;

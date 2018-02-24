@@ -6,7 +6,7 @@ class StudySpacesVenue extends Component {
       <div>
         <h2>I am the 5th floor bump space</h2>
       </div>
-    )
+    );
   }
 }
 
