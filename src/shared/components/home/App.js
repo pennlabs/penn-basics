@@ -45,7 +45,6 @@ class Home extends Component {
             <Notification show={this.close} text={this.state.notification} />
           )
         }
-
         <div className="tile is-ancestor">
           <div className="tile is-parent is-vertical">
             <div className="tile is-child box">
@@ -61,8 +60,6 @@ class Home extends Component {
             <Studyspaces />
           </div>
         </div>
-
-
       </div>
     )
   }
