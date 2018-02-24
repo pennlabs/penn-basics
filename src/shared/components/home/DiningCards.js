@@ -1,3 +1,6 @@
+// DiningCards: card subcomponents that go into the homepage dining section.
+// each card displays the information about the dining hall/retail.
+
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import '../../styles/home.scss';
@@ -25,7 +28,7 @@ class DiningCards extends Component {
         <div className="spacer-20" />
         <div className="media-content">
           <div className="content" >
-            <p className="is-size-5">
+            <p className="is-size-6">
               <strong>{this.props.name}</strong>
               <br />
               <small>{this.props.hours}</small>

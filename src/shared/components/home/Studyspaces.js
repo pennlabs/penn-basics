@@ -5,12 +5,13 @@ import StudyCards from './StudyCards';
 class Studyspaces extends Component {
   render() {
     return (
-      <article className="tile is-child notification whiteCard">
-        <h1 className="title is-3">Studyspaces</h1>
-        <h3 className="subtitle is-5">How about studying at VP?</h3>
-        <StudyCards />
-        <StudyCards />
-      </article>
+      <div className="tile is-child box">
+        <h1 className="title is-4">Find a study space</h1>
+        <h2 className="subtitle is-6">Book a room quickly across campus: at VP,
+          Huntsman, Ed Commons, and more.</h2>
+          <StudyCards/>
+          <StudyCards/>
+      </div>
     );
   }
 }

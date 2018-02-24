@@ -6,9 +6,9 @@
 @import './sidebar';
 @import './filter';
 @import './dining';
+@import './home';
 
-// General styling for the whole application
- 
+//General styling for the whole application
 
 #app {
   background: $snow;
@@ -65,7 +65,7 @@
 }
 
 // Padding on different screen sizes
- 
+
 @media screen and (min-device-width: 1024px) and (min-width: 848px) {
   #app {
     padding: 2rem;
