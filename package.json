@@ -5,10 +5,10 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "babel-node src/server/index.js",
-    "test": "mocha --reporter spec",
+    "test": "eslint ./src/**/ && mocha --reporter spec",
     "webpack": "webpack --watch",
     "dev": "(yarn webpack &) && yarn start ",
-    "lint": "eslint **/*.js"
+    "lint": "eslint ./src/**/"
   },
   "repository": {
     "type": "git",
