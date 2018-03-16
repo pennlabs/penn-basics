@@ -11,6 +11,7 @@ import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
 import ErrorMessage from '../shared/ErrorMessage';
+import Loading from '../shared/Loading';
 
 /**
  * Render the view for a dining venue
@@ -110,7 +111,7 @@ class DiningVenue extends React.Component {
    * Find days
    */
   findDays() {
-    // Find the relevant meal
+    // Find the relevant meal if variables have been populated in the state and props
     if (this.props.diningData &&
         this.state.dateFormatted &&
         !this.props.diningData.pending &&
@@ -153,9 +154,7 @@ class DiningVenue extends React.Component {
     }
   }
 
-  /**
-   * Find meals
-   */
+  // Find meals
   findMeals() {
     // Find the relevant meal
     if (this.props.diningData &&
@@ -172,6 +171,7 @@ class DiningVenue extends React.Component {
         meal: meals[0],
       });
     } else {
+      // If the API is not giving us the data we want
       console.log("DINING DATA");
       console.log(this.props.diningData);
       console.log("DATE FORMATTED");
@@ -195,7 +195,6 @@ class DiningVenue extends React.Component {
 
   // Check for errors
   checkForErrors() {
-    // Check for errors
     let error = "";
 
     // If no mapping is found
@@ -228,9 +227,7 @@ class DiningVenue extends React.Component {
     if (this.props.pending) {
       // If data or an error is still pending
       return (
-        <div>
-          Loading...
-        </div>
+        <Loading />
       );
     } else if (this.props.error) {
       // If there was some other error

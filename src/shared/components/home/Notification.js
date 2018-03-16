@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../../styles/home.scss';
 import PropTypes from 'prop-types';
 
@@ -16,7 +15,7 @@ class Notification extends Component {
       <div className="notification is-info">
         <button className="delete" onClick={this.props.show} />
         <p style={{ textAlign: "center" }}>
-          { "⚡ It's currently" }
+          { "⚡ It's currently ~~lit o'clock~~ " }
           <strong>
             {this.props.text.join(", ")}
           </strong>⚡
