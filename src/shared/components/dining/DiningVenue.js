@@ -89,16 +89,21 @@ class DiningVenue extends Component {
      */
 
     // Refresh the meals state if necessary
-    if (!this.state.meal ||
-        (prevState.meal !== this.state.meal) ||
-        !this.state.meals.length) {
+    if (
+      !this.state.meal ||
+      (prevState.meal !== this.state.meal) ||
+      !this.state.meals.length ||
+      (prevState.dateFormatted !== this.state.dateFormatted)
+    ) {
       this.findMeals();
     }
 
     // Refresh the days state if necessary
-    if (!this.state.dateFormatted ||
-        (prevState.dateFormatted !== this.state.dateFormatted) ||
-        !this.state.days.length) {
+    if (
+      !this.state.dateFormatted ||
+      (prevState.dateFormatted !== this.state.dateFormatted) ||
+      !this.state.days.length
+    ) {
       this.findDays();
     }
   }
@@ -156,22 +161,21 @@ class DiningVenue extends Component {
     if (this.props.diningData &&
         this.state.dateFormatted &&
         this.props.diningData[this.state.dateFormatted] &&
-        !this.props.diningData.pending &&
-        !this.state.meal) {
+        !this.props.diningData.pending) {
       const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
 
       // Update the state
       // TODO don't always pick the first meal
       this.setState({
-        meals: meals,
+        meals,
         meal: meals[0],
       });
     } else {
       // If the API is not giving us the data we want
-      console.log("DINING DATA");
-      console.log(this.props.diningData);
-      console.log("DATE FORMATTED");
-      console.log(this.state.dateFormatted);
+      // console.log("DINING DATA");
+      // console.log(this.props.diningData);
+      // console.log("DATE FORMATTED");
+      // console.log(this.state.dateFormatted);
     }
   }
 

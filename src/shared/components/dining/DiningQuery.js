@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
  */
 const DiningQuery = ({ meals, days, meal, day, mealCallback, dayCallback }) => {
   // Ensure that all props are defined
-  if (!meals || !meals.length || !days || !days.length || !meal) {
+  if (!meals || !meals.length || !days || !days.length || !meal || !mealCallback || !dayCallback) {
     return null;
   }
 
