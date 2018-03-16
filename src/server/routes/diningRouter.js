@@ -15,7 +15,9 @@ export default function diningRouter(DB) {
     .then(meals => {
       res.json(meals);
     })
-    .catch(console.log)
+    .catch(err => {
+      res.sendStatus(500);
+    })
   });
   
   router.post('/daily_menu', (req,res) => {
@@ -29,6 +31,27 @@ export default function diningRouter(DB) {
       res.status(500).send("Serverside error")
     })
   });
+
+  router.post('/venue_hours', (req,res) => {
+    const venueId = Number(req.body.venueId);
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+    DB.venueHours(venueId, startDate, endDate)
+    .then(hours => {
+      res.json(hours.map(hour => {
+        return {
+          date: hour.date,
+          type: hour.type,
+          open: hour.open,
+          close: hour.close
+        }
+      }))
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+  })
 
   return router;
 }

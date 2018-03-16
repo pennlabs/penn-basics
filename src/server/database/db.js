@@ -36,6 +36,19 @@ function insertSpace(space) {
 
 // DINING API FUNCTIONS
 
+function venueHours(venueId, startDate, endDate){
+  return Venue.findOne({venueId})
+  .then(venue => {
+    return DateHours.find({
+      venueId: venue.id,
+      date: {
+        $gte: startDate,
+        $lte: endDate
+      }
+    })
+  })
+}
+
 function getVenueMenuForDate(venueId, date){
   return Venue.findOne({venueId})
   .then(venue => {
@@ -94,5 +107,6 @@ export default {
   findAllSpaces,
   //Dining functions
   getVenueMenuForDate,
-  dateRangeMenu
+  dateRangeMenu,
+  venueHours
 };
