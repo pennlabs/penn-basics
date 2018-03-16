@@ -16,7 +16,7 @@ import Loading from '../shared/Loading';
 /**
  * Render the view for a dining venue
  */
-class DiningVenue extends React.Component {
+class DiningVenue extends Component {
   /**
    * Constructor method
    */
@@ -50,6 +50,7 @@ class DiningVenue extends React.Component {
     this.findDays = this.findDays.bind(this);
     this.handleChangeMeal = this.handleChangeMeal.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.renderError = this.renderError.bind(this);
   }
 
   /**
@@ -218,18 +219,11 @@ class DiningVenue extends React.Component {
     return error;
   }
 
-  // Render the component
-  render() {
+  // Helper method to render any error
+  renderError() {
     // Check for errors
     const error = this.checkForErrors();
-
-    // Render based on state
-    if (this.props.pending) {
-      // If data or an error is still pending
-      return (
-        <Loading />
-      );
-    } else if (this.props.error) {
+    if (this.props.error) {
       // If there was some other error
       return (
         <ErrorMessage message={ this.props.error } />
@@ -245,6 +239,23 @@ class DiningVenue extends React.Component {
       );
     }
 
+    // If there is no error in any part of the component
+    return null;
+  }
+
+  // Render the component
+  render() {
+    // If the ID is not found
+    if (!mappings[this.props.match.params.id]) return (<NotFound />);
+
+    // Render based on state
+    if (this.props.pending) {
+      // If data or an error is still pending
+      return (
+        <Loading />
+      );
+    }
+
     return (
       // If there is no error and the data is not pending
       <div>
@@ -253,8 +264,10 @@ class DiningVenue extends React.Component {
           { mappings[this.props.match.params.id] }
         </h1>
 
+        {this.renderError()}
+
         {/* Render the overview card at the top of the dining view */}
-        <DiningOverview />
+        <DiningOverview id={this.props.match.params.id} />
 
         {/* Render dropdowns for selecting dates and meals */}
         <DiningQuery
@@ -267,10 +280,12 @@ class DiningVenue extends React.Component {
         />
 
         {
-          (this.props.diningData.pending || !this.state.meal) ? (
+          (this.props.diningData.pending) ? (
             "Loading..."
           ) : (
-            <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
+            !this.state.meal ? null : (
+              <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
+            )
           )
         }
       </div>
