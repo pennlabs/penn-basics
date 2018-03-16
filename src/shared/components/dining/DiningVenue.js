@@ -26,19 +26,14 @@ class DiningVenue extends Component {
     this.props.getDiningDataDispatch(venueId);
 
     // Format the current date
-    const date = new Date();
-    const momentDate = moment(date);
-    let dateFormatted = momentDate.format('MM/DD/YYYY');
-
-    // Remove a leading 0 if there is one
-    if (dateFormatted.startsWith("0")) {
-      dateFormatted = dateFormatted.substring(1);
-    }
+    let date = new Date();
+    date.setHours(0, 0, 0, 0);
+    date = date.toString();
 
     // Set up the state
     this.state = {
-      dateFormattedToday: dateFormatted,
-      dateFormatted: dateFormatted,
+      dateFormattedToday: date,
+      dateFormatted: date,
       meal: "",
       meals: [],
       days: [],

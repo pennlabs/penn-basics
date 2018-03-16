@@ -5,14 +5,20 @@ import {
 } from '../actions/action_types';
 import axios from 'axios';
 
-const BASE = 'https://dining-api-v2.herokuapp.com/api';
-
 export function getDiningData(venueId) {
   return dispatch => {
     dispatch({
       type: getDiningDataRequested
     });
-    axios.get(`${BASE}/weekly_menu/${venueId}`)
+    const startDate = new Date();
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date();
+    endDate.setHours(72, 0, 0, 0);
+    axios.post(`/api/dining/menu_date_range/`, {
+      venueId,
+      startDate,
+      endDate,
+    })
       .then(res => {
         const diningData = res.data;
         dispatch({

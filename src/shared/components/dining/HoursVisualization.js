@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class DiningOverview extends Component {
-  componentDidMount() {
-    console.log("TODO");
-  }
-
   render() {
     return(
       <div>

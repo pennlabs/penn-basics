@@ -25,7 +25,7 @@ const renderFormattedDescription = (description) => {
     // Comma separate each paragraph
     formattedDescription = descriptions.map((value, index) => {
       if (value && value.length > 0 && !value.startsWith("1")) {
-        if (index != descriptions.length - 1) {
+        if (index !== descriptions.length - 1) {
           return value + ", ";
         }
         return value;
@@ -33,18 +33,21 @@ const renderFormattedDescription = (description) => {
       return "";
     });
   }
-  return formattedDescription
-    ? <div className="description">
-      {formattedDescription}
-    </div>
-    : null
-}
+  return (
+    formattedDescription ? (
+      <div className="description">
+        {formattedDescription}
+      </div>
+    ) : null
+  );
+};
 
 const renderFormattedTags = (tags) => {
   // Format the tags
-  const formattedTags = tags.map(tag => {
+  return tags.map(oldTag => {
     let tagClass = "";
-    switch (tag) {
+    let tag = "";
+    switch (oldTag) {
       case "Made without Gluten- Containing Ingredients":
         tag = "Gluten Free*";
         tagClass = "gluten-free";
@@ -79,10 +82,10 @@ const renderFormattedTags = (tags) => {
         break;
     }
     return (
-      <span className={"tag " + tagClass} key={uuid()}>{tag}</span>
+      <span className={"tag " + tagClass} key={uuid()}>{tag ? tag : oldTag}</span>
     );
   });
-}
+};
 
 const MenuItem = ({ title, description, tags }) => {
   return (

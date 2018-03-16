@@ -88,7 +88,7 @@ const DiningMenu = ({ sectionsObj }) => {
 };
 
 DiningMenu.propTypes = {
-  sectionsObj: PropTypes.obj,
+  sectionsObj: PropTypes.object,
 };
 
 export default DiningMenu;
