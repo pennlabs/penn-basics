@@ -164,17 +164,19 @@ class DiningVenue extends Component {
       const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
 
       // Update the state
-      // TODO don't always pick the first meal
-      this.setState({
-        meals,
-        meal: meals[0],
-      });
+      if (meals.some(element => element === this.state.meal)) {
+        this.setState({
+          meals,
+        });
+      } else {
+        console.log("ELSE MY DOOD");
+        this.setState({
+          meals,
+          meal: meals[0],
+        });
+      }
     } else {
       // If the API is not giving us the data we want
-      // console.log("DINING DATA");
-      // console.log(this.props.diningData);
-      // console.log("DATE FORMATTED");
-      // console.log(this.state.dateFormatted);
     }
   }
 
