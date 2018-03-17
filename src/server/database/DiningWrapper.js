@@ -50,7 +50,7 @@ module.exports.getVenueWeeklyMenu = function(venueId){
     const day_menus = data.tblMenu;
     const menus = {};
     day_menus.forEach(day => {
-      meal_times = {};
+      const meal_times = {};
       if(day.tblDayPart){
         day.tblDayPart.forEach(meal_time => {
           const time = meal_time.txtDayPartDescription;

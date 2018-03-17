@@ -87,13 +87,13 @@ function loadMealsObjIntoDB (meals) {
 function loadMeals(){
   //populate meals object with all meals from Penn-provided API
   return new Promise((resolve,reject) => {
-    const venueIdMappings = require('../venue_id_mappings');
+    const venueIdMappings = require('./venue_id_mappings');
     const venueIds = Object.keys(venueIdMappings).map(k => venueIdMappings[k])
     const meals = {} 
     async.eachSeries(venueIds, function(id, callback) {
       getVenueWeeklyMenu(id)
       .then(json => {
-        console.log(id)
+        console.log('DINING SEED: ', id)
         meals[id] = json
         setTimeout(callback,50)
       })
@@ -114,6 +114,16 @@ function loadMeals(){
   })
 }
 
+function deleteDiningCollections(){
+  return Venue.find().remove()
+  .then(() => {
+    return DateHours.find().remove()
+  })
+  .then(() => {
+    return Meal.find().remove()
+  })
+}
+
 
 module.exports.venues_seed = loadVenues;
 
@@ -121,7 +131,10 @@ module.exports.meals_seed = loadMeals;
 
 module.exports.full_seed = function() {
   //getting venueid mappings may not be necessary on every call
-  loadVenues()  
+  deleteDiningCollections()
+  .then(() => {
+    return loadVenues()  
+  })
   .then(() => {
     return loadMeals()
   })

@@ -58,6 +58,24 @@ const diningReducer = (state = defaultState, action) => {
         pending: false,
         diningData: action.diningData,
       };
+
+    case getVenueHoursRequested:
+      return {
+        ...state,
+        pending: true,
+      };
+    case getVenueHoursRejected:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+    case getVenueHoursFulfilled:
+      return {
+        ...state,
+        pending: false,
+        venueHours: action.venueHours,
+      };
     default:
       return state;
   }
