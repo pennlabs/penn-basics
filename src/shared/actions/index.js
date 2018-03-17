@@ -22,20 +22,20 @@ export function getVenueHours(venueId) {
       startDate,
       endDate,
     })
-    .then(res => {
-      const venueHours = res.data;
-      dispatch({
-        type: getVenueHoursFulfilled,
-        venueHours,
+      .then(res => {
+        const venueHours = res.data;
+        dispatch({
+          type: getVenueHoursFulfilled,
+          venueHours,
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: getVenueHoursRejected,
+          error: error.message,
+        });
       });
-    })
-    .catch(error => {
-      dispatch({
-        type: getVenueHoursRejected,
-        error: error.message,
-      });
-    });
-  }
+  };
 }
 
 export function getDiningData(venueId) {
@@ -56,18 +56,18 @@ export function getDiningData(venueId) {
       startDate,
       endDate,
     })
-    .then(res => {
-      const diningData = res.data;
-      dispatch({
-        type: getDiningDataFulfilled,
-        diningData,
+      .then(res => {
+        const diningData = res.data;
+        dispatch({
+          type: getDiningDataFulfilled,
+          diningData,
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: getDiningDataRejected,
+          error: error.message,
+        });
       });
-    })
-    .catch(error => {
-      dispatch({
-        type: getDiningDataRejected,
-        error: error.message,
-      });
-    });
   };
 }
