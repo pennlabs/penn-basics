@@ -169,7 +169,6 @@ class DiningVenue extends Component {
           meals,
         });
       } else {
-        console.log("ELSE MY DOOD");
         this.setState({
           meals,
           meal: meals[0],
