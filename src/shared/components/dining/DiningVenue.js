@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { getDiningData } from '../../actions/index';
 import { connect } from 'react-redux';
 import NotFound from '../shared/NotFound';
 import { mappings } from './mappings';
 import PropTypes from 'prop-types';
+
+// Import actions
+import { getDiningData, getVenueHours } from '../../actions/index';
 
 // Import components
 import DiningQuery from './DiningQuery';
@@ -23,6 +25,7 @@ class DiningVenue extends Component {
     super(props);
     const venueId = this.props.match.params.id;
     this.props.getDiningDataDispatch(venueId);
+    this.props.getVenueHoursDispatch(venueId);
 
     // Format the current date
     let date = new Date();
@@ -67,6 +70,7 @@ class DiningVenue extends Component {
     const nextVenueId = props.match.params.id;
     if (currentVenueId !== nextVenueId) {
       this.props.getDiningDataDispatch(nextVenueId);
+      this.props.getVenueHoursDispatch(nextVenueId);
 
       // Clear some of the state
       this.setState({
@@ -83,9 +87,7 @@ class DiningVenue extends Component {
    * When the component updates
    */
   componentDidUpdate(prevProps, prevState) {
-    /**
-     * TODO this is being called too many times
-     */
+    console.log(this.props.venueHours);
 
     // Refresh the meals state if necessary
     if (
@@ -220,6 +222,8 @@ class DiningVenue extends Component {
 
   // Helper method to render any error
   renderError() {
+    if (this.props.pending) return null;
+
     // Check for errors
     const error = this.checkForErrors();
     if (this.props.error) {
@@ -279,13 +283,15 @@ class DiningVenue extends Component {
         />
 
         {
-          (this.props.diningData.pending) ? (
-            "Loading..."
-          ) : (
-            !this.state.meal ? null : (
-              <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
+          this.props.diningData ? (
+            (this.props.diningData.pending) ? (
+              "Loading..."
+            ) : (
+              !this.state.meal ? null : (
+                <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
+              )
             )
-          )
+          ) : null
         }
       </div>
     );
@@ -295,14 +301,17 @@ class DiningVenue extends Component {
 DiningVenue.propTypes = {
   match: PropTypes.object,
   getDiningDataDispatch: PropTypes.func,
+  getVenueHoursDispatch: PropTypes.func,
   pending: PropTypes.bool,
   error: PropTypes.string,
   diningData: PropTypes.object,
+  venueHours: PropTypes.array,
 };
 
 const mapStateToProps = (state) => {
   return {
     diningData: state.dining.diningData,
+    venueHours: state.dining.venueHours,
     error: state.dining.error,
     pending: state.dining.pending
   };
@@ -310,9 +319,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getDiningDataDispatch: (venueId) => {
+    getDiningDataDispatch: venueId => {
       dispatch(getDiningData(venueId));
-    }
+    },
+    getVenueHoursDispatch: venueId => {
+      dispatch(getVenueHours(venueId));
+    },
   };
 };
 

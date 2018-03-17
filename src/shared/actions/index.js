@@ -16,7 +16,8 @@ export function getVenueHours(venueId) {
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
     const endDate = new Date();
-    endDate.setHours(48, 0, 0, 0);
+    endDate.setHours(72, 0, 0, 0);
+    console.log(startDate,endDate)
     axios.post(`/api/dining/venue_hours/`, {
       venueId,
       startDate,
@@ -24,6 +25,7 @@ export function getVenueHours(venueId) {
     })
       .then(res => {
         const venueHours = res.data;
+        console.log("asdf",venueHours);
         dispatch({
           type: getVenueHoursFulfilled,
           venueHours,

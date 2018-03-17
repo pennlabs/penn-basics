@@ -1,7 +1,10 @@
 import {
   getDiningDataRequested,
   getDiningDataRejected,
-  getDiningDataFulfilled
+  getDiningDataFulfilled,
+  getVenueHoursRequested,
+  getVenueHoursRejected,
+  getVenueHoursFulfilled,
 } from '../actions/action_types';
 
 const defaultState = {
