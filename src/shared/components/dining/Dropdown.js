@@ -29,23 +29,30 @@ class Dropdown extends Component {
   // Handle a change to the dropdown state
   handleChangeState(event) {
     this.setState({
-      selected: event.target.value
+      selected: event.target.value,
     });
   }
 
   // Render the dropdown
   render() {
-    const content = this.props.options.map(option => {
-      if (option === this.state.selected) {
+    const content = this.props.values.map((value, index) => {
+      // Find the text for the dropdown option
+      // NOTE that this is different from the value
+      let text = "";
+      if (this.props.options && this.props.options.length > index) {
+        text = this.props.options[index];
+      } else text = value;
+
+      if (value === this.state.selected) {
         return (
-          <option key={ uuid() } value={ option } defaultValue>
-            { option }
+          <option key={ uuid() } value={ value } defaultValue>
+            { text }
           </option>
         );
       }
       return (
-        <option key={ uuid() } value={ option }>
-          { option }
+        <option key={ uuid() } value={ value }>
+          { text }
         </option>
       );
     });
@@ -62,6 +69,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   options: PropTypes.array,
+  values: PropTypes.array,
   selected: PropTypes.string,
   callback: PropTypes.func,
 };

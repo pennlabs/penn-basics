@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getDiningData } from '../../actions/index';
 import { connect } from 'react-redux';
 import NotFound from '../shared/NotFound';
-import moment from 'moment';
 import { mappings } from './mappings';
 import PropTypes from 'prop-types';
 
@@ -182,7 +181,7 @@ class DiningVenue extends Component {
   //  Handle change to selection of meal to render
   handleChangeMeal(meal) {
     this.setState({
-      meal: meal,
+      meal,
     });
   }
 

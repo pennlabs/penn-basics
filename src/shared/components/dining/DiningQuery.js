@@ -11,6 +11,15 @@ const DiningQuery = ({ meals, days, meal, day, mealCallback, dayCallback }) => {
     return null;
   }
 
+  // Find days as names
+  const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const daysFormatted = days.map(d => {
+    const date = new Date(d);
+    return week[date.getDay()];
+  });
+  daysFormatted[0] = "Today";
+  daysFormatted[1] = "Tomorrow";
+
   return(
     <div className="diningQuery">
       <p>
@@ -18,12 +27,13 @@ const DiningQuery = ({ meals, days, meal, day, mealCallback, dayCallback }) => {
       </p>
       <Dropdown
         selected={ meal }
-        options={ meals }
+        values={ meals }
         callback={ mealCallback }
       />
       <Dropdown
         selected={ day }
-        options={ days }
+        options={ daysFormatted }
+        values={ days }
         callback={ dayCallback }
       />
     </div>
