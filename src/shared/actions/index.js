@@ -41,12 +41,16 @@ export function getVenueHours(venueId) {
 export function getDiningData(venueId) {
   return dispatch => {
     dispatch({
-      type: getDiningDataRequested
+      type: getDiningDataRequested,
     });
+
+    // Format the dates for the request
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
     const endDate = new Date();
     endDate.setHours(72, 0, 0, 0);
+
+    // Send the request
     axios.post(`/api/dining/menu_date_range/`, {
       venueId,
       startDate,
