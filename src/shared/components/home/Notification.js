@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  */
 class Notification extends Component {
   static defaultProps = {
-    text: []
+    text: ""
   }
 
   render() {
@@ -16,9 +16,9 @@ class Notification extends Component {
       <div className="notification is-info">
         <button className="delete" onClick={this.props.show} />
         <p style={{ textAlign: "center" }}>
-          { "⚡ It's currently" }
+          { "⚡ It's currently " }
           <strong>
-            {this.props.text.join(", ")}
+            {this.props.text}
           </strong>⚡
         </p>
       </div>
@@ -29,7 +29,7 @@ class Notification extends Component {
 // Prop validations
 Notification.propTypes = {
   show: PropTypes.func,
-  text: PropTypes.array,
+  text: PropTypes.string,
 };
 
 export default Notification;

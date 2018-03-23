@@ -13,20 +13,22 @@ class Home extends Component {
     super(props);
     this.state = {
       show: false,
-      notification: [],
+      notification: "",
       dining: false,
     };
     this.close = this.close.bind(this);
   }
   componentDidMount() {
-    axios.post('/api/events' + Date.now())
+    axios.get('/api/events/' + Date.now())
       .then((resp) => {
         if (resp.data.events.length === 0) {
           this.setState({show: false});
+          console.log("No events");
         } else {
-          this.setState({show: true, notification: resp.data.events});
+          console.log("Got the events!" + resp.data.events);
+          this.setState({show: true, notification: resp.data.events[0].event});
         }
-        console.log("DATE RESP", resp.data.events);
+        console.log("DATE RESP", resp.data.events[0].event);
       })
       .catch(err => {
         console.log(err);
