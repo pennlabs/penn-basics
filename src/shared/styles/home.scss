@@ -34,6 +34,13 @@
   }
 }
 
+.book-button {
+  color: white !important;
+  background-color: $purple;
+  outline-style: none;
+}
+
+
 .link {
   text-decoration: none;
 }
@@ -51,4 +58,14 @@
 .tag-is-green {
   background-color: $green !important;
   color: $white;
+}
+
+.vertical-spacer-1 {
+  width: 100%;
+  height: 2em;
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
 }
