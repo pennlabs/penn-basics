@@ -26,11 +26,12 @@ function loadVenues() {
       .save()
       .then(venueObj => {
         return Promise.all(_.flatten(venue.dateHours.map((obj) => {
-          const date = obj.date
+          const dt = new Date(obj.date);
+          const date = new Date(dt.getTime() + 4*3600*1000);
           const meals = obj.meal
           return meals.map(meal => {
             new DateHours({
-              date: new Date(date),
+              date: date,
               type: meal.type, 
               open: meal.open,
               close: meal.close,
