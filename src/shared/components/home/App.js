@@ -10,29 +10,27 @@ import '../../styles/home.scss';
 
 class Home extends Component {
   constructor(props) {
-    super (props);
-      this.state = {
-        show: false,
-        notification: [],
-        dining: false,
-      }
-      this.close = this.close.bind(this);
+    super(props);
+    this.state = {
+      show: false,
+      notification: [],
+      dining: false,
+    };
+    this.close = this.close.bind(this);
   }
   componentDidMount() {
-    axios.post('/api/events', {
-                start: Date.now()
-              })
+    axios.post('/api/events' + Date.now())
       .then((resp) => {
         if (resp.data.events.length === 0) {
-          this.setState({show: false})
+          this.setState({show: false});
         } else {
-          this.setState({show: true, notification: resp.data.events})
+          this.setState({show: true, notification: resp.data.events});
         }
         console.log("DATE RESP", resp.data.events);
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
   close() {
     this.setState({show: false});
@@ -48,10 +46,10 @@ class Home extends Component {
         <div className="tile is-ancestor">
           <div className="tile is-parent is-vertical">
             <div className="tile is-child box">
-                <h1 className="title is-4">☀️ Good morning!</h1>
-                <p className="content is-medium">Insert some inspirational quote here from various people at
+              <h1 className="title is-4">☀️ Good morning!</h1>
+              <p className="content is-medium">Insert some inspirational quote here from various people at
                 Penn. It will make people happy and give everyone some life.
-                </p>
+              </p>
             </div>
             <Reserve/>
           </div>
@@ -61,7 +59,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 export default Home;
