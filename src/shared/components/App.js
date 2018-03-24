@@ -41,6 +41,5 @@ export default () => (
         </Switch>
       </div>
     </div>
-    <Footer />
   </div>
 );
