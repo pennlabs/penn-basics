@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getDiningData } from '../../actions/index';
+import { getDiningData } from '../../actions/dining_actions';
 import { connect } from 'react-redux';
 import NotFound from '../shared/NotFound';
 import moment from 'moment';
