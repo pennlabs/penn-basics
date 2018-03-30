@@ -10,9 +10,7 @@ import axios from 'axios';
 
 export function getVenueHours(venueId) {
   return dispatch => {
-    dispatch({
-      type: getVenueHoursRequested
-    });
+    dispatch({ type: getVenueHoursRequested });
 
     // Set the start date to today
     const startDate = new Date();

@@ -7,14 +7,23 @@ export default function diningRouter(DB) {
   // });
 
   router.post('/menu_date_range', (req, res) => {
-    const venueId = req.body.venueId;
-    const startDate = req.body.startDate;
-    const endDate = req.body.endDate;
+    const {
+      venueId,
+      startDate,
+      endDate,
+    } = req.body.endDate;
+    console.log("****MAKING REQUEST");
+    if (!venueId || !startDate || !endDate) {
+      res.status(400).send("You must pass in a valid venueId, startDate, and endDate");
+    }
     DB.dateRangeMenu(venueId, startDate, endDate)
       .then(meals => {
+        console.log("****MEALS");
+        console.log(meals);
         res.json(meals);
       })
       .catch(err => {
+        console.log("****ERROR");
         res.status(500).send({ error: err.message });
       });
   });

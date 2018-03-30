@@ -58,7 +58,7 @@ function getVenueMenuForDate(venueId, date) {
   return Venue.findOne({venueId})
     .then(venue => {
       if (!venue) {
-        return res.status(400).send('Venue does not exist')
+        return res.status(400).send('Venue does not exist');
       }
       return Meal.find({venue: venue.id, date: date})
     });
@@ -87,9 +87,11 @@ function formatMealsObject(meals) {
 function dateRangeMenu(venueId, startDate, endDate) {
   return Venue.findOne({venueId})
     .then(venue => {
-      const venueDbId = venue.id;
+      if (!venue) {
+        return null;
+      }
       return Meal.find({
-        venue: venueDbId,
+        venue: venue.id,
         date: {
           $gte: startDate,
           $lte: endDate,

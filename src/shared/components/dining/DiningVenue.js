@@ -23,9 +23,11 @@ class DiningVenue extends Component {
    */
   constructor(props) {
     super(props);
+
+    // Pull meal data and hours data for the venue
     const venueId = this.props.match.params.id;
     this.props.getDiningDataDispatch(venueId);
-    this.props.getVenueHoursDispatch(venueId);
+    // this.props.getVenueHoursDispatch(venueId);
 
     // Format the current date
     let date = new Date();
@@ -211,7 +213,7 @@ class DiningVenue extends Component {
         error = "";
       }
     } else if (!this.props.diningData) {
-      error = "Dining data is undefined";
+      error = "Failed to find meal data.";
     } else {
       error = "";
     }
