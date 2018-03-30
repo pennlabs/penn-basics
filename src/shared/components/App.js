@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Import components
 import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
-import Footer from './shared/footer/Footer';
 
 // Import page components
 import Home from './home/App';
@@ -41,6 +40,5 @@ export default () => (
         </Switch>
       </div>
     </div>
-    <Footer />
   </div>
 );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import SidebarSection from './SidebarSection';
 
@@ -9,10 +9,12 @@ import {
   sidebarLaundry,
   sidebarReservations,
   sidebarStudyspaces
-} from '../../../actions/action_types'
+} from '../../../actions/action_types';
 
 class Sidebar extends Component {
   static propTypes = {
+    // from redux
+    link: PropTypes.string,
     sections: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string,
@@ -28,12 +30,7 @@ class Sidebar extends Component {
   }
 
   renderSections() {
-    return this.props.sections.map(section =>
-      <SidebarSection
-        {...section}
-        key={uuid()}
-      />
-    );
+    return this.props.sections.map(section => <SidebarSection {...section} key={uuid()} />);
   }
 
   render() {
@@ -45,10 +42,10 @@ class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar }) => {
+const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar, link }) => {
   switch (sidebar) {
     case sidebarDining:
-      return { sections: diningSidebarInfo };
+      return { sections: diningSidebarInfo, link };
     default:
       throw Error('Sidebar does not yet handle info from non-dining sections');
   }
