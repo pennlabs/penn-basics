@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "babel-node src/server/index.js",
-    "test": "eslint ./src/**/ && mocha --reporter spec",
+    "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "dev": "(yarn webpack &) && yarn start ",
     "lint": "eslint ./src/**/"
