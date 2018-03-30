@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Link } from 'react-router-dom';
 
+import WrappedLink from '../WrappedLink';
+
 class LinkItem extends Component {
   static propTypes = {
     name: PropTypes.string,
@@ -11,9 +13,9 @@ class LinkItem extends Component {
   render() {
     return (
       <li>
-        <Link to={`${this.props.url}`} className="link">
+        <WrappedLink to={`${this.props.url}`} className="link">
           {this.props.name}
-        </Link>
+        </WrappedLink>
       </li>
     );
   }

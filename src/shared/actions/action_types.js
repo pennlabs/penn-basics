@@ -20,3 +20,6 @@ export const getSpacesDataFulfilled = uuid();
 export const getLaundryDataRequested = uuid();
 export const getLaundryDataRejected = uuid();
 export const getLaundryDataFulfilled = uuid();
+
+// misc actions
+export const updateLink = uuid();

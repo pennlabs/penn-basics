@@ -13,6 +13,8 @@ import {
 
 class Sidebar extends Component {
   static propTypes = {
+    // from redux
+    link: PropTypes.string,
     sections: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string,
@@ -40,10 +42,10 @@ class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar }) => {
+const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar, link }) => {
   switch (sidebar) {
     case sidebarDining:
-      return { sections: diningSidebarInfo };
+      return { sections: diningSidebarInfo, link };
     default:
       throw Error('Sidebar does not yet handle info from non-dining sections');
   }
