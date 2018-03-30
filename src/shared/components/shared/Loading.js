@@ -8,8 +8,7 @@ import '../../styles/spinner.scss';
 class Loading extends Component {
   // Set the default props
   static defaultProps = {
-    title: 'Hang on, loading your data.',
-    message: 'It seems like the content you are looking for was either moved or does not exist.',
+    title: 'Loading, please wait',
   }
 
   // Render the component
