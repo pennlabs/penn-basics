@@ -88,6 +88,7 @@ class DiningVenue extends Component {
    */
   componentDidUpdate(prevProps, prevState) {
     // Refresh the meals state if necessary
+    // This is if we have changed the date or meal selected
     if (
       !this.state.meal ||
       (prevState.meal !== this.state.meal) ||
@@ -98,6 +99,7 @@ class DiningVenue extends Component {
     }
 
     // Refresh the days state if necessary
+    // This is the case if we have changed the date selected
     if (
       !this.state.dateFormatted ||
       (prevState.dateFormatted !== this.state.dateFormatted) ||
@@ -265,6 +267,7 @@ class DiningVenue extends Component {
           { mappings[this.props.match.params.id] }
         </h1>
 
+        {/* Render an error if there is one */}
         {this.renderError()}
 
         {/* Render the overview card at the top of the dining view */}

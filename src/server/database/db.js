@@ -2,10 +2,10 @@ const moment = require('moment');
 import mongoose from './mongoose-connect';
 import Space from './models/space';
 
-//Dining Imports
-const Venue = require('./models/Venue')
-const Meal = require('./models/Meal')
-const DateHours = require('./models/DateHours')
+// Dining Imports
+const Venue = require('./models/Venue');
+const Meal = require('./models/Meal');
+const DateHours = require('./models/DateHours');
 const _ = require('lodash');
 
 // SPACES DATABASE FUNCTIONS
@@ -18,8 +18,13 @@ function findAllSpaces() {
 // params: filter object = (open: Boolean, outlets: Integer, noise: Integer, groups: Integer)
 function filterSpaces(open, outletLevel, quietLevel, groupLevel) {
   if (open) {
-    return Space.find({start: {$lte: hour}, end: {$gt: hour}, outlets: {$gte: outletLevel},
-      quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
+    return Space.find({
+      start: {$lte: hour},
+      end: {$gt: hour},
+      outlets: {$gte: outletLevel},
+      quiet: {$gte: quietLevel},
+      groups: {$gte: groupLevel}
+    });
   }
   return Space.find({outlets: {$gte: outletLevel}, quiet: {$gte: quietLevel}, groups: {$gte: groupLevel}});
 }
@@ -36,76 +41,76 @@ function insertSpace(space) {
 
 // DINING API FUNCTIONS
 
-function venueHours(venueId, startDate, endDate){
+function venueHours(venueId, startDate, endDate) {
   return Venue.findOne({venueId})
-  .then(venue => {
-    return DateHours.find({
-      venueId: venue.id,
-      date: {
-        $gte: startDate,
-        $lte: endDate
+    .then(venue => {
+      return DateHours.find({
+        venueId: venue.id,
+        date: {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      });
+    });
+}
+
+function getVenueMenuForDate(venueId, date) {
+  return Venue.findOne({venueId})
+    .then(venue => {
+      if (!venue) {
+        return res.status(400).send('Venue does not exist')
       }
-    })
-  })
+      return Meal.find({venue: venue.id, date: date})
+    });
 }
 
-function getVenueMenuForDate(venueId, date){
-  return Venue.findOne({venueId})
-  .then(venue => {
-    if (!venue) {
-      return res.status(400).send('Venue does not exist')
-    }
-    return Meal.find({venue: venue.id, date: date})
-  })
-}
-
-function formatMealsObject(meals){
+function formatMealsObject(meals) {
   const retObject = _.groupBy(meals, 'date');
   const dates = Object.keys(retObject);
   dates.forEach(date => {
-    retObject[date] = _.groupBy(retObject[date], 'type')
-    const types = Object.keys(retObject[date])
+    retObject[date] = _.groupBy(retObject[date], 'type');
+    const types = Object.keys(retObject[date]);
     types.forEach(type => {
-      retObject[date][type] = _.groupBy(retObject[date][type], 'category')
-      const categories = Object.keys(retObject[date][type])
+      retObject[date][type] = _.groupBy(retObject[date][type], 'category');
+      const categories = Object.keys(retObject[date][type]);
       categories.forEach(category => {
         retObject[date][type][category] = retObject[date][type][category][0];
         if (retObject[date][type][category]) {
-          retObject[date][type][category] = retObject[date][type][category]["meals"]
+          retObject[date][type][category] = retObject[date][type][category].meals;
         }
-      })
-    })
-  })
-  return retObject
+      });
+    });
+  });
+  return retObject;
 }
 
-function dateRangeMenu (venueId, startDate, endDate){
+function dateRangeMenu(venueId, startDate, endDate) {
   return Venue.findOne({venueId})
-  .then(venue => {
-    const venueDbId = venue.id;
-    return Meal.find({
-      venue: venueDbId,
-      date: {
-        $gte: startDate,
-        $lte: endDate
-      }
+    .then(venue => {
+      const venueDbId = venue.id;
+      return Meal.find({
+        venue: venueDbId,
+        date: {
+          $gte: startDate,
+          $lte: endDate,
+        }
+      })
+        .then(meals => {
+          // heirarchy: date -> mealtime -> category -> meals
+          return formatMealsObject(meals);
+        });
     })
-    .then(meals => {
-      //heirarchy: date -> mealtime -> category -> meals
-      return formatMealsObject(meals)
-    })
-  })
-  .catch(console.log)
+    .catch(console.log);
 }
 
 
 export default {
-  //Spaces functions
+  // Spaces functions
   filterSpaces,
   getSpace,
   insertSpace,
   findAllSpaces,
-  //Dining functions
+  // Dining functions
   getVenueMenuForDate,
   dateRangeMenu,
   venueHours

@@ -15,7 +15,7 @@ export default function diningRouter(DB) {
         res.json(meals);
       })
       .catch(err => {
-        res.status(500).send(err.message);
+        res.status(500).send({ error: err.message });
       });
   });
 
@@ -27,7 +27,7 @@ export default function diningRouter(DB) {
         res.json(meals);
       })
       .catch(err => {
-        res.status(500).send(err.message);
+        res.status(500).send({ error: err.message });
       });
   });
 
@@ -47,7 +47,7 @@ export default function diningRouter(DB) {
         }));
       })
       .catch(err => {
-        res.status(500).send(err.message);
+        res.status(500).send({ error: err.message });
       });
   });
 
