@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/spinner.scss';
 
 /**
  * Component to render while page is loading
@@ -18,7 +19,7 @@ class Loading extends Component {
         <h1 className="is-size-3 medium-gray-text marg-bot-2">
           {this.props.title}
         </h1>
-        <img src="https://i.imgur.com/a/NcHLb" width="300px" />
+        <img className="marg-top-2" id="loading" src="https://i.imgur.com/Iq7qUnH.png" width="300px" />
       </div>
     );
   }
