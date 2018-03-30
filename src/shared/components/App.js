@@ -17,6 +17,7 @@ import LaundryVenue from './laundry/LaundryVenue';
 import StudySpaces from './studyspaces/App';
 import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
+import Loading from './shared/Loading';
 
 export default () => (
   <div>
@@ -37,6 +38,7 @@ export default () => (
           <Route exact path="/studyspaces" component={StudySpaces} />
           <Route exact path="/studyspaces/:id" component={StudySpacesVenue} />
           <Route exact path="/reservations" component={Reservations} />
+          <Route exact path="/loading" component={Loading} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
