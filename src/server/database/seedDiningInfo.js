@@ -20,7 +20,7 @@ function loadVenues() {
         return new Venue({
           venueId: id,
           name: venue.name,
-          venueType: venue.venueType
+          venueType: venue.venueType,
         })
           .save()
           .then(venueObj => {

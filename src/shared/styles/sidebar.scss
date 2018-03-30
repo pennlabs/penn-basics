@@ -11,9 +11,10 @@
     background: $white;
     border-right: 1px solid $allbirds-gray;
     box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.0375);
-    width: 18vw;
+    width: 20vw;
 
     .sidebarSection {
+      margin-bottom: 1rem;
 
       .sidebarSectionTitle {
         cursor: pointer;
@@ -21,8 +22,6 @@
           background: $hover-gray;
         }
       }
-
-      margin-bottom: 1rem;
 
       a {
         color: $medium-gray;
@@ -78,6 +77,8 @@
   }
 }
 
+// Style the clickable shade that masks the rest of the app while
+// the sidebar is toggled
 #shade {
   z-index: 1029;
   background: rgba(0, 0, 0, 0.3);
@@ -102,9 +103,11 @@
 }
 
 // Responsive screen styling on large screen
+// Add more padding to the sidebar on larger screens
 @media screen and (min-device-width: 848px) and (min-width: 1024px) {
   #wrapper .sidebar {
-    max-width: 40vw;
+    min-width: 20vw;
+    max-width: 30vw;
 
     .sidebarSection {
       li {
@@ -118,7 +121,8 @@
   }
 }
 
-@media screen and (max-width: 720px) {
+// Have a slide-in effect for the sidebar on smaller screens
+@media screen and (max-width: 764px) {
   #wrapper{
     display: block;
 
@@ -128,7 +132,8 @@
       position: fixed;
       height: 100%;
       width: auto;
-      max-width: 95vw;
+      min-width: 40vw;
+      max-width: 90vw;
       top: 0;
       left: -95vw;
 
@@ -139,7 +144,9 @@
   }
 }
 
-@media screen and (max-device-width: 720px) {
+// Copy of the above code for devices that may have a high resolution
+// but have a low physical size (ex. phones)
+@media screen and (max-device-width: 764px) {
   #wrapper{
     display: block;
 
@@ -149,7 +156,8 @@
       position: fixed;
       height: 100%;
       width: auto;
-      max-width: 95vw;
+      min-width: 40vw;
+      max-width: 90vw;
       top: 0;
 
       &.active {

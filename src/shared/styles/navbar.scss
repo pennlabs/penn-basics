@@ -1,5 +1,4 @@
-// NAVBAR
- 
+// Styling for the navbar which appears at the top of every page
 
 .navbar {
   padding: 0rem 0.5rem;
@@ -77,18 +76,7 @@
   }
 }
 
-@media screen and (max-width: 720px) {
-  .navbar #sidebar-toggle {
-    display: block;
-  }
-}
-
-@media screen and (max-device-width: 720px) {
-  .navbar #sidebar-toggle {
-    display: block;
-  }
-}
-
+// Display the sidebar toggle only on smaller screens
 @media screen and (max-width: 764px) {
   .navbar {
     display: block;
@@ -106,7 +94,7 @@
 
     ul {
       width: 100%;
-      background: $snow;
+      background: $hover-gray;
       flex: none;
       width: 100%;
       text-align: left;
@@ -140,7 +128,7 @@
 
     ul {
       width: 100%;
-      background: $snow;
+      background: $hover-gray;
       flex: none;
       width: 100%;
       text-align: left;
