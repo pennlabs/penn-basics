@@ -9,7 +9,7 @@ class LinkItem extends Component {
           {this.props.name}
         </Link>
       </li>
-    )
+    );
   }
 }
 

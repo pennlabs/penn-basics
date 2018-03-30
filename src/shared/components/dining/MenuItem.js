@@ -6,7 +6,7 @@ const renderFormattedDescription = (description) => {
   // Descriptions starting with 1 should be excluded
   // Descriptions with line breaks need to be parsed
   const descriptions = description.split("<br />");
-  let formattedDescription = ""
+  let formattedDescription = "";
   if (descriptions.length <= 3) {
     // If the description is 3 paragraphs or less
     // Display each paragraph in its own p tag
@@ -73,7 +73,7 @@ const renderFormattedTags = (tags) => {
         break;
       case "Locally Crafted":
         tag = "Local";
-        tagClass = "local"
+        tagClass = "local";
         break;
       default:
         break;

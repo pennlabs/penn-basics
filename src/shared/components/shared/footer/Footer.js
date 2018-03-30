@@ -17,13 +17,16 @@ class Footer extends Component {
               A centralized source of information at Penn.
             </p>
             <p className="light-gray-text is-size-7">
-              Copyright &copy; 2017 <a href="http://pennlabs.org" target="_blank">PennLabs.</a>
+              Copyright &copy; 2017
+              <a href="http://pennlabs.org" target="_blank">
+                PennLabs.
+              </a>
             </p>
           </div>
           <Links />
         </div>
       </footer>
-    )
+    );
   }
 }
 

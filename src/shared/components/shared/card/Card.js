@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Render a card with a white background, slight dropshadow, and slightly rounded borders
+ */
 class Card extends Component {
   render() {
     const content = (

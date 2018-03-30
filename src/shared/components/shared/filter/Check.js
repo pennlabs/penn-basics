@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Check extends Component {
-
   state = {
     active: false
   }
 
-  handleClick = (e) => {
+  handleClick = () => {
     this.setState({ active: !this.state.active });
   }
 
@@ -16,7 +16,7 @@ class Check extends Component {
         className={this.state.active ? "checkWrapper active" : "checkWrapper"}
         onClick={this.handleClick}
       >
-        <span className="check"></span>
+        <span className="check" />
         <p>
           {this.props.description}
         </p>
@@ -24,5 +24,9 @@ class Check extends Component {
     );
   }
 }
+
+Check.propTypes = {
+  description: PropTypes.string,
+};
 
 export default Check;
