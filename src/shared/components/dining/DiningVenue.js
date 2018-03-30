@@ -87,8 +87,6 @@ class DiningVenue extends Component {
    * When the component updates
    */
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.venueHours);
-
     // Refresh the meals state if necessary
     if (
       !this.state.meal ||

@@ -13,11 +13,16 @@ export function getVenueHours(venueId) {
     dispatch({
       type: getVenueHoursRequested
     });
+
+    // Set the start date to today
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
+
+    // Set the end date to three days from now
     const endDate = new Date();
     endDate.setHours(72, 0, 0, 0);
-    console.log(startDate,endDate)
+
+    // Make a post request to pull the data
     axios.post(`/api/dining/venue_hours/`, {
       venueId,
       startDate,
@@ -25,7 +30,6 @@ export function getVenueHours(venueId) {
     })
       .then(res => {
         const venueHours = res.data;
-        console.log("asdf",venueHours);
         dispatch({
           type: getVenueHoursFulfilled,
           venueHours,
@@ -47,8 +51,11 @@ export function getDiningData(venueId) {
     });
 
     // Format the dates for the request
+    // The start date is today
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
+
+    // The end date is three days from today
     const endDate = new Date();
     endDate.setHours(72, 0, 0, 0);
 

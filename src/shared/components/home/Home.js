@@ -34,9 +34,9 @@ class Home extends Component {
             notification: resp.data.events
           });
         }
-        console.log("DATE RESP", resp.data.events);
       })
       .catch(err => {
+        // TODO handle this better
         console.log(err);
       });
   }
