@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 /**
- * Component to render when a page is not found
+ * Component to render while page is loading
  */
 class Loading extends Component {
   // Set the default props
@@ -15,12 +15,10 @@ class Loading extends Component {
   render() {
     return (
       <div>
-        <h1 className="is-size-3 medium-gray-text">
+        <h1 className="is-size-3 medium-gray-text marg-bot-2">
           {this.props.title}
         </h1>
-        <p>
-          {this.props.message}
-        </p>
+        <img src="https://i.imgur.com/a/NcHLb" width="300px" />
       </div>
     );
   }

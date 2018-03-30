@@ -18,6 +18,7 @@ import StudySpaces from './studyspaces/App';
 import StudySpacesVenue from './studyspaces/StudySpacesVenue';
 import Reservations from './reservations/App';
 import Loading from './shared/Loading';
+import ErrorMessage from './shared/ErrorMessage';
 
 export default () => (
   <div>
@@ -39,6 +40,7 @@ export default () => (
           <Route exact path="/studyspaces/:id" component={StudySpacesVenue} />
           <Route exact path="/reservations" component={Reservations} />
           <Route exact path="/loading" component={Loading} />
+          <Route exact path="/error" component={ErrorMessage} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
