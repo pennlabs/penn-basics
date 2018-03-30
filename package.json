@@ -8,7 +8,7 @@
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "dev": "(yarn webpack &) && yarn start ",
-    "lint": "eslint **/*.js"
+    "lint": "eslint ./src/**/"
   },
   "repository": {
     "type": "git",
