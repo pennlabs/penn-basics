@@ -18,10 +18,11 @@ class WrappedLink extends Component {
   }
 
   render() {
+    const {updateReduxWithPath, ...props} = this.props;
     return (
       <Link
-        onClick={() => { this.props.updateReduxWithPath(this.props.to); }}
-        {...this.props }
+        onClick={() => { updateReduxWithPath(this.props.to); }}
+        {...props}
       />
     );
   }
@@ -38,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(() => { }, mapDispatchToProps)(WrappedLink);
+export default connect(() => { return {}; }, mapDispatchToProps)(WrappedLink);
