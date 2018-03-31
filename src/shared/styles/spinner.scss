@@ -1,5 +1,13 @@
-//Animating the loading spinner
+//Center the div
+.center-div {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
 
+//Animating the loading spinner
 #loading {
 	-webkit-animation: rotation 7s infinite linear;
 }

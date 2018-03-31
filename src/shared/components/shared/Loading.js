@@ -14,11 +14,11 @@ class Loading extends Component {
   // Render the component
   render() {
     return (
-      <div>
+      <div className="center-div">
         <h1 className="is-size-3 medium-gray-text marg-bot-2">
           {this.props.title}
         </h1>
-        <img className="marg-top-1" id="loading" src="https://i.imgur.com/Iq7qUnH.png" width="300px" />
+        <img className="marg-top-2" id="loading" src="https://i.imgur.com/Iq7qUnH.png" width="300px" />
       </div>
     );
   }
