@@ -9,7 +9,7 @@ class NotFound extends Component {
   static defaultProps = {
     title: '404: Content not found',
     message: 'It seems like the content you are looking for was either moved or does not exist.',
-    urlTest: 'Back to home',
+    urlText: 'Back to home',
     url: '/'
   }
 
