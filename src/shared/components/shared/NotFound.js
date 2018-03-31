@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/spinner.scss';
 
 /**
  * Component to render when a page is not found
@@ -16,7 +17,8 @@ class NotFound extends Component {
   // Render the component
   render() {
     return (
-      <div>
+      <div className="center-div">
+        <img className="marg-bot-2" src="https://i.imgur.com/wn5w6Vz.png" width="400px" />
         <h1 className="is-size-3 medium-gray-text">
           {this.props.title}
         </h1>
