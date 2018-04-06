@@ -164,7 +164,7 @@ class DiningVenue extends Component {
     if (this.props.diningData &&
         this.state.dateFormatted &&
         this.props.diningData[this.state.dateFormatted] &&
-        !this.props.diningData.pending) {
+        !this.props.diningDataPending) {
       const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
 
       // Update the state
@@ -224,7 +224,7 @@ class DiningVenue extends Component {
 
   // Helper method to render any error
   renderError() {
-    if (this.props.pending) return null;
+    if (this.props.diningDataPending || this.props.venueHoursPending) return null;
 
     // Check for errors
     const error = this.checkForErrors();
@@ -254,7 +254,7 @@ class DiningVenue extends Component {
     if (!mappings[this.props.match.params.id]) return (<NotFound />);
 
     // Render based on state
-    if (this.props.pending) {
+    if (this.props.diningDataPending || this.props.venueHoursPending) {
       // If data or an error is still pending
       return (
         <Loading />
@@ -287,12 +287,8 @@ class DiningVenue extends Component {
 
         {
           this.props.diningData ? (
-            (this.props.diningData.pending) ? (
-              "Loading..."
-            ) : (
-              !this.state.meal ? null : (
-                <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
-              )
+            !this.state.meal ? null : (
+              <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
             )
           ) : null
         }
@@ -305,7 +301,8 @@ DiningVenue.propTypes = {
   match: PropTypes.object,
   getDiningDataDispatch: PropTypes.func,
   getVenueHoursDispatch: PropTypes.func,
-  pending: PropTypes.bool,
+  diningDataPending: PropTypes.bool,
+  venueHoursPending: PropTypes.bool,
   error: PropTypes.string,
   diningData: PropTypes.object,
   venueHours: PropTypes.array,
@@ -316,7 +313,8 @@ const mapStateToProps = (state) => {
     diningData: state.dining.diningData,
     venueHours: state.dining.venueHours,
     error: state.dining.error,
-    pending: state.dining.pending
+    diningDataPending: state.dining.diningDataPending,
+    venueHoursPending: state.dining.venueHoursPending,
   };
 };
 

@@ -8,7 +8,8 @@ import {
 } from '../actions/action_types';
 
 const defaultState = {
-  pending: true,
+  diningDataPending: true,
+  venueHoursPending: true,
   sidebarInfo: [{
     "title": "Open now",
     "links": [
@@ -47,36 +48,36 @@ const diningReducer = (state = defaultState, action) => {
     case getDiningDataRequested:
       return {
         ...state,
-        pending: true,
+        diningDataPending: true,
       };
     case getDiningDataRejected:
       return {
         ...state,
-        pending: false,
+        diningDataPending: false,
         error: action.error,
       };
     case getDiningDataFulfilled:
       return {
         ...state,
-        pending: false,
+        diningDataPending: false,
         diningData: action.diningData,
       };
 
     case getVenueHoursRequested:
       return {
         ...state,
-        pending: true,
+        venueHoursPending: true,
       };
     case getVenueHoursRejected:
       return {
         ...state,
-        pending: false,
+        venueHoursPending: false,
         error: action.error,
       };
     case getVenueHoursFulfilled:
       return {
         ...state,
-        pending: false,
+        venueHoursPending: false,
         venueHours: action.venueHours,
       };
     default:
