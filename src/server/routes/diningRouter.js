@@ -10,7 +10,7 @@ export default function diningRouter(DB) {
     if (!venueId || !startDate || !endDate) {
       console.log("INVALID FORMAT");
       console.log(req.body);
-      res.status(400).send("You must pass in a valid venueId, startDate, and endDate");
+      return res.status(400).send("You must pass in a valid venueId, startDate, and endDate");
     }
     DB.dateRangeMenu(venueId, startDate, endDate)
       .then(meals => {
