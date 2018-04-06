@@ -44,12 +44,13 @@ function loadVenues() {
 }
 
 function loadMealsObjIntoDB(meals) {
+
   const venueIds = Object.keys(meals);
   return Promise.all(_.flatten(venueIds.map(venueId => {
     // Get a single venue
     return Venue.findOne({venueId: Number(venueId)})
       .then(venue => {
-        if (!venue) return Promise.resolve();
+        if (!venue || !meals[venueId]) return Promise.resolve();
         // Get corresponding meals object for venue
         const mealsObj = meals[venueId];
         const dates = Object.keys(mealsObj);
