@@ -1,0 +1,138 @@
+{
+ "593": {
+  "lat": 39.951904,
+  "lng": -75.199497,
+  "image_src": "commons.jpg",
+  "description": "",
+  "address": "3800 Locust Walk Philadelphia PA, 19104",
+  "name": "1920 Commons"
+ },
+ "636": {
+  "lat": 39.953008,
+  "lng": -75.190677,
+  "image_src": "hillhouse.jpg",
+  "description": "",
+  "address": "3333 Walnut Street Philadelphia PA, 19104",
+  "name": "Hill House"
+ },
+ "637": {
+  "lat": 39.954083,
+  "lng": -75.194107,
+  "image_src": "kingscourt.jpeg",
+  "description": "",
+  "address": "3565 Sansom Street Philadelphia PA, 19104",
+  "name": "English House"
+ },
+ "638": {
+  "lat": 39.953098,
+  "lng": -75.199979,
+  "image_src": "hillel.jpg",
+  "description": "",
+  "address": "215 South 39th Street Philadelphia PA, 19104",
+  "name": "Falk Kosher Dining"
+ },
+ "639": {
+  "lat": 39.950914,
+  "lng": -75.193874,
+  "image_src": "houstonhall.jpg",
+  "description": "",
+  "address": "3417 Spruce Street Philadelphia PA, 19104",
+  "name": "Houston Market"
+ },
+ "640": {
+  "lat": 39.952724,
+  "lng": -75.194022,
+  "image_src": "markscafe.jpg",
+  "description": "",
+  "address": "3420 Walnut St, Philadelphia, PA 19104",
+  "name": "Mark's Café"
+ },
+ "641": {
+  "lat": 39.952724,
+  "lng": 75.194022,
+  "image_src": "accenture.png",
+  "description": "",
+  "address": "3330 Walnut St, Philadelphia, PA 19104",
+  "name": "Accenture Café"
+ },
+ "642": {
+  "lat": 39.951814,
+  "lng": -75.196182,
+  "image_src": "joescafe.jpg",
+  "description": "",
+  "address": "3620 Locust Walk Philadelphia, PA 19104",
+  "name": "Joe's Café"
+ },
+ "747": {
+  "lat": 39.950410,
+  "lng": -75.197673,
+  "image_src": "mcclelland.jpg",
+  "description": "",
+  "address": "3650 Spruce St Philadelphia, PA 19104",
+  "name": "McClelland Express"
+ },
+ "1057": {
+  "lat": 39.951904,
+  "lng": -75.199497,
+  "image_src": "gourmetgrocer.jpg",
+  "description": "",
+  "address": "3800 Locust Walk, Philadelphia, PA 19104",
+  "name": "1920 Gourmet Grocer"
+ },
+ "1058": {
+  "lat": 39.952249,
+  "lng": -75.195214,
+  "image_src": "frontera.jpg",
+  "description": "",
+  "address": "3601 Locust Walk, Philadelphia, PA 19104",
+  "name": "Tortas Frontera at the ARCH"
+ },
+ "1163": {
+  "lat": 39.951904,
+  "lng": -75.199497,
+  "image_src": "starbuckscommons.jpg",
+  "description": "",
+  "address": "3800 Locust Walk, Philadelphia, PA 19104",
+  "name": "1920 Starbucks"
+ },
+ "1441": {
+  "lat": 39.950914,
+  "lng": -75.193874,
+  "image_src": "beefsteak.jpg",
+  "description": "",
+  "address": "3417 Spruce St Philadelphia, PA 19104",
+  "name": "Beefsteak"
+ },
+ "1442": {
+  "lat": 39.953691,
+  "lng": -75.191299,
+  "image_src": "newcollegehouse.png",
+  "description": "",
+  "address": "3335 Woodland Walk, Philadelphia, PA 19104",
+  "name": "New College House"
+ },
+ "1731": {
+  "lat": 39.953691,
+  "lng": -75.191299,
+  "image_src": "",
+  "description": "",
+  "address": "3335 Woodland Walk, Philadelphia, PA 19104",
+  "name": "NCH Retail"
+ },
+ "1732": {
+  "lat": 39.952911,
+  "lng": -75.198267,
+  "image_src": "newcollegehouseretail.png",
+  "description": "",
+  "address": "3730 Walnut St Philadelphia, PA 19104",
+  "name": "Pret a Manger MBA"
+ },
+ "1733": {
+  "lat": 39.952911,
+  "lng": -75.198267,
+  "image_src": "",
+  "description": "",
+  "address": "3730 Walnut St Philadelphia, PA 19104",
+  "name": "Pret a Manger Locust Walk"
+ }
+}

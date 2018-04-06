@@ -14,6 +14,12 @@ const venueSchema = new Schema({
   venueType: {
     type: String,
     required: true
+  },
+  image_src: String,
+  description: String,
+  location: {
+    lat: Number,
+    lng: Number
   }
 });
 

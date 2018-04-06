@@ -5,6 +5,7 @@ const _ = require('lodash');
 // Import functions
 const getVenueWeeklyMenu = require('./diningWrapper').getVenueWeeklyMenu;
 const getAllVenues = require('./diningWrapper').getAllVenues;
+const venue_info = require('./venue_info');
 
 // Import database models
 const Venue = require('./models/Venue');
@@ -17,10 +18,17 @@ function loadVenues() {
       const ids = Object.keys(venues);
       return Promise.all(ids.map(id => {
         const venue = venues[id];
+        const info = venue_info[id]
         return new Venue({
           venueId: id,
           name: venue.name,
           venueType: venue.venueType,
+          image_src: info.image_src,
+          description: info.description,
+          location: {
+            lat: info.lat,
+            lng: info.lat
+          }
         })
           .save()
           .then(venueObj => {
