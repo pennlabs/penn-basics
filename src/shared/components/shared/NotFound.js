@@ -11,13 +11,14 @@ class NotFound extends Component {
     title: '404: Content not found',
     message: 'It seems like the content you are looking for was either moved or does not exist.',
     urlText: 'Back to home',
-    url: '/',
+    url: '/'
   }
 
   // Render the component
   render() {
     return (
-      <div>
+      <div className="center-div">
+        <img className="marg-bot-2" src="https://i.imgur.com/PMJ4fDJ.png" width="400px" />
         <h1 className="is-size-3 medium-gray-text">
           {this.props.title}
         </h1>
