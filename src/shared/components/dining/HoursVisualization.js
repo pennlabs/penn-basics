@@ -94,7 +94,7 @@ class DiningOverview extends Component {
     // Update the hours of the passed in date to the time passed in along with it
     // NOTE time is of the form "HH:MM:SS"
     const hours = time.substring(0, time.indexOf(":"));
-    const minutes = time.substring(time.indexOf(":" + 1), time.lastIndexOf(":"));
+    const minutes = time.substring(time.indexOf(":") + 1, time.lastIndexOf(":"));
     date.setHours(hours, minutes, 0, 0);
   }
 
@@ -104,12 +104,18 @@ class DiningOverview extends Component {
     // Return true if the meal is being served right now
     const currentTime = Date.now();
     const mealStart = new Date(meal.date);
-    this.updateHours(mealStart, meal.open);
     const mealEnd = new Date(meal.date);
+
+    // Format the hours to match EST
+    this.updateHours(mealStart, meal.open);
     this.updateHours(mealEnd, meal.close);
+
+    // Get the time in milliseconds=
     const start = mealStart.getTime();
     const end = mealEnd.getTime();
-    return (start < currentTime && end > currentTime);
+
+    // Return if the current time is between start and end
+    return (start <= currentTime && end >= currentTime);
   }
 
   getDay(date) {
@@ -125,6 +131,10 @@ class DiningOverview extends Component {
   }
 
   renderList() {
+    // Don't return anything if there are no hours
+    if (!this.props.venueHours || !this.props.venueHours.length) return null;
+
+    // Else, return the hours in a table
     return (
       <table className="table is-fullwidth marg-bot-0">
         <thead>
