@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/spinner.scss';
 
 /**
  * Component to render when a page is not found
@@ -9,14 +10,15 @@ class NotFound extends Component {
   static defaultProps = {
     title: '404: Content not found',
     message: 'It seems like the content you are looking for was either moved or does not exist.',
-    urlTest: 'Back to home',
+    urlText: 'Back to home',
     url: '/'
   }
 
   // Render the component
   render() {
     return (
-      <div>
+      <div className="center-div">
+        <img className="marg-bot-2" src="https://i.imgur.com/PMJ4fDJ.png" width="400px" />
         <h1 className="is-size-3 medium-gray-text">
           {this.props.title}
         </h1>

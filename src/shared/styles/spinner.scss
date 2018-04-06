@@ -1,4 +1,4 @@
-//Center the div
+// Center the div
 .center-div {
   margin-top: 1rem;
   display: flex;
@@ -7,7 +7,7 @@
   flex-direction: column;
 }
 
-//Animating the loading spinner
+// Animating the loading spinner
 #loading {
   -webkit-animation: rotation 7s infinite linear;
 }
