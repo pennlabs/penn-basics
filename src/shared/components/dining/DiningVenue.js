@@ -27,7 +27,7 @@ class DiningVenue extends Component {
     // Pull meal data and hours data for the venue
     const venueId = this.props.match.params.id;
     this.props.getDiningDataDispatch(venueId);
-    // this.props.getVenueHoursDispatch(venueId);
+    this.props.getVenueHoursDispatch(venueId);
 
     // Format the current date
     let date = new Date();
