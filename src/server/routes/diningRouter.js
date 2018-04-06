@@ -6,7 +6,7 @@ export default function diningRouter(DB) {
       venueId,
       startDate,
       endDate,
-    } = req.body.endDate;
+    } = req.body;
     if (!venueId || !startDate || !endDate) {
       console.log("INVALID FORMAT");
       console.log(req.body);
