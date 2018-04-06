@@ -3,6 +3,8 @@ const path = require('path');
 const router = require('express').Router();
 const EVENT_LIST = require('../resources/events');
 
+import diningApi from './diningRouter';
+
 export default function apiRouter(DB) {
   router.get('/', (req, res) => {
     res.status(200).json({
@@ -11,8 +13,7 @@ export default function apiRouter(DB) {
   });
 
   router.get('/events/:date', (req, res) => {
-    const date = parseInt(req.params.date);
-    console.log(date);
+    const date = parseInt(req.params.date, 10);
 
     const events = [];
     EVENT_LIST.forEach(event => {
@@ -25,6 +26,8 @@ export default function apiRouter(DB) {
       events
     });
   });
+
+  router.use('/dining', diningApi(DB));
 
   return router;
 }

@@ -5,6 +5,10 @@ export const getDiningDataRequested = uuid();
 export const getDiningDataRejected = uuid();
 export const getDiningDataFulfilled = uuid();
 
+export const getVenueHoursRequested = uuid();
+export const getVenueHoursRejected = uuid();
+export const getVenueHoursFulfilled = uuid();
+
 // sidebar actions
 export const sidebarDining = uuid();
 export const sidebarLaundry = uuid();

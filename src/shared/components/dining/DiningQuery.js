@@ -7,9 +7,18 @@ import PropTypes from 'prop-types';
  */
 const DiningQuery = ({ meals, days, meal, day, mealCallback, dayCallback }) => {
   // Ensure that all props are defined
-  if (!meals || !meals.length || !days || !days.length || !meal) {
+  if (!meals || !meals.length || !days || !days.length || !meal || !mealCallback || !dayCallback) {
     return null;
   }
+
+  // Find days as names
+  const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const daysFormatted = days.map(d => {
+    const date = new Date(d);
+    return week[date.getDay()];
+  });
+  daysFormatted[0] = "Today";
+  daysFormatted[1] = "Tomorrow";
 
   return(
     <div className="diningQuery">
@@ -18,12 +27,13 @@ const DiningQuery = ({ meals, days, meal, day, mealCallback, dayCallback }) => {
       </p>
       <Dropdown
         selected={ meal }
-        options={ meals }
+        values={ meals }
         callback={ mealCallback }
       />
       <Dropdown
         selected={ day }
-        options={ days }
+        options={ daysFormatted }
+        values={ days }
         callback={ dayCallback }
       />
     </div>

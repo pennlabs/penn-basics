@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import MenuItem from './MenuItem';
 import uuid from 'uuid/v4';
+import PropTypes from 'prop-types';
 
-const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
+const Section = ({ title, items, shouldBeList }) => {
   let sectionItems = "";
   if (title === "salad bar" || title === "grill") {
     // If only the first item should be displayed
@@ -41,7 +42,7 @@ const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
   } else {
     // Comma separate the items which should be in a list
     sectionItems = items.map((item, index) => {
-      if (index == items.length - 1) {
+      if (index === items.length - 1) {
         return item.title;
       }
       return item.title + ", ";
@@ -64,6 +65,12 @@ const Section = ({ title, items, shouldBeList, descriptionsOnly }) => {
       </div>
     </div>
   );
+};
+
+Section.propTypes = {
+  title: PropTypes.string,
+  items: PropTypes.array,
+  shouldBeList: PropTypes.bool,
 };
 
 export default Section;

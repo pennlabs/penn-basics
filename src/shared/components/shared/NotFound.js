@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  * Component to render when a page is not found
@@ -9,8 +10,8 @@ class NotFound extends Component {
   static defaultProps = {
     title: '404: Content not found',
     message: 'It seems like the content you are looking for was either moved or does not exist.',
-    urlTest: 'Back to home',
-    url: '/'
+    urlText: 'Back to home',
+    url: '/',
   }
 
   // Render the component
@@ -31,4 +32,11 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound
+NotFound.propTypes = {
+  title: PropTypes.string,
+  message: PropTypes.string,
+  url: PropTypes.string,
+  urlText: PropTypes.string,
+};
+
+export default NotFound;

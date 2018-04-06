@@ -1,14 +1,18 @@
 import React from 'react';
 import HoursVisualization from './HoursVisualization';
+import PropTypes from 'prop-types';
 
-const DiningOverview = () => (
+const DiningOverview = ({ id }) => (
   <div className="diningOverview overview">
-    <p>
-      Serving dinner for <strong>1 hr, 27 min</strong> until <strong>9pm</strong>
+    <p style={{marginBottom: "1rem"}}>
+      Put some text here about what this venue is and what they offer
     </p>
-
-    <HoursVisualization />
+    <HoursVisualization id={id} />
   </div>
 );
+
+DiningOverview.propTypes = {
+  id: PropTypes.string,
+};
 
 export default DiningOverview;

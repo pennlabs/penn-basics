@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
  */
 const ErrorMessage = ({ message }) => (
   <div className="notification is-danger">
-    <button className="delete" />
     { message ? message : "There was an error" }
   </div>
 );

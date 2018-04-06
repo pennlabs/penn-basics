@@ -16,7 +16,7 @@ class ListItem extends Component {
 }
 
 ListItem.propTypes = {
-  venueID: PropTypes.string,
+  venueID: PropTypes.number,
   isOpen: PropTypes.bool,
   name: PropTypes.string,
 };
