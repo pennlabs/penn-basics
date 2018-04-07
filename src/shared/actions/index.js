@@ -21,7 +21,7 @@ export function getVenueHours(venueId) {
     endDate.setHours(72, 0, 0, 0);
 
     // Make a post request to pull the data
-    axios.post(`/api/dining/venue_hours/`, {
+    axios.post(`/api/dining/venue_info/`, {
       venueId,
       startDate,
       endDate,

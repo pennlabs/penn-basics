@@ -33,7 +33,7 @@ export default function diningRouter(DB) {
       });
   });
 
-  router.post('/venue_hours', (req, res) => {
+  router.post('/venue_info', (req, res) => {
     const venueId = Number(req.body.venueId);
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
@@ -47,7 +47,7 @@ export default function diningRouter(DB) {
             close: hour.close,
           };
         }).sort((a,b) => {
-          return a.open - b.open;
+          return a.date.getTime() - b.date.getTime();
         })
         res.json(processedHours);
       })

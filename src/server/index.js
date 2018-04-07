@@ -34,7 +34,7 @@ app.use('/api', apiRouter(DB));
 app.use('/', frontendRouter(DB));
 
 // Seed Dining Data on Server Start
-require('./database/seedDiningInfo').full_seed();
+// require('./database/seedDiningInfo').full_seed();
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
