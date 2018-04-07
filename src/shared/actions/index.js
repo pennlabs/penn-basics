@@ -2,15 +2,15 @@ import {
   getDiningDataRequested,
   getDiningDataRejected,
   getDiningDataFulfilled,
-  getVenueHoursRequested,
-  getVenueHoursRejected,
-  getVenueHoursFulfilled
+  getVenueInfoRequested,
+  getVenueInfoRejected,
+  getVenueInfoFulfilled
 } from '../actions/action_types';
 import axios from 'axios';
 
-export function getVenueHours(venueId) {
+export function getVenueInfo(venueId) {
   return dispatch => {
-    dispatch({ type: getVenueHoursRequested });
+    dispatch({ type: getVenueInfoRequested });
 
     // Set the start date to today
     const startDate = new Date();
@@ -27,15 +27,16 @@ export function getVenueHours(venueId) {
       endDate,
     })
       .then(res => {
-        const venueHours = res.data;
+        const {hours,venue} = res.data;
         dispatch({
-          type: getVenueHoursFulfilled,
-          venueHours,
+          type: getVenueInfoFulfilled,
+          venueHours: hours,
+          venueInfo: venue
         });
       })
       .catch(error => {
         dispatch({
-          type: getVenueHoursRejected,
+          type: getVenueInfoRejected,
           error: error.message,
         });
       });

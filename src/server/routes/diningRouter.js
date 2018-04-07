@@ -37,8 +37,9 @@ export default function diningRouter(DB) {
     const venueId = Number(req.body.venueId);
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
-    DB.venueHours(venueId, startDate, endDate)
-      .then(hours => {
+    DB.venueInfo(venueId, startDate, endDate)
+      .then(venueInfo => {
+        const {venue, hours} = venueInfo;
         const processedHours = hours.map(hour => {
           return {
             date: hour.date,
@@ -49,7 +50,10 @@ export default function diningRouter(DB) {
         }).sort((a,b) => {
           return a.date.getTime() - b.date.getTime();
         })
-        res.json(processedHours);
+        res.json({
+          hours:processedHours,
+          venue
+        });
       })
       .catch(err => {
         res.status(500).send({ error: err.message });

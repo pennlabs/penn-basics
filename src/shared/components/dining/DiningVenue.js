@@ -5,7 +5,7 @@ import { mappings } from './mappings';
 import PropTypes from 'prop-types';
 
 // Import actions
-import { getDiningData, getVenueHours } from '../../actions/index';
+import { getDiningData, getVenueInfo } from '../../actions/index';
 
 // Import components
 import DiningQuery from './DiningQuery';
@@ -27,7 +27,7 @@ class DiningVenue extends Component {
     // Pull meal data and hours data for the venue
     const venueId = this.props.match.params.id;
     this.props.getDiningDataDispatch(venueId);
-    this.props.getVenueHoursDispatch(venueId);
+    this.props.getVenueInfoDispatch(venueId);
 
     // Format the current date
     let date = new Date();
@@ -72,7 +72,7 @@ class DiningVenue extends Component {
     const nextVenueId = props.match.params.id;
     if (currentVenueId !== nextVenueId) {
       this.props.getDiningDataDispatch(nextVenueId);
-      this.props.getVenueHoursDispatch(nextVenueId);
+      this.props.getVenueInfoDispatch(nextVenueId);
 
       // Clear some of the state
       this.setState({
@@ -300,7 +300,7 @@ class DiningVenue extends Component {
 DiningVenue.propTypes = {
   match: PropTypes.object,
   getDiningDataDispatch: PropTypes.func,
-  getVenueHoursDispatch: PropTypes.func,
+  getVenueInfoDispatch: PropTypes.func,
   diningDataPending: PropTypes.bool,
   venueHoursPending: PropTypes.bool,
   error: PropTypes.string,
@@ -312,6 +312,7 @@ const mapStateToProps = (state) => {
   return {
     diningData: state.dining.diningData,
     venueHours: state.dining.venueHours,
+    venueInfo: state.dining.venueInfo,
     error: state.dining.error,
     diningDataPending: state.dining.diningDataPending,
     venueHoursPending: state.dining.venueHoursPending,
@@ -323,8 +324,8 @@ const mapDispatchToProps = (dispatch) => {
     getDiningDataDispatch: venueId => {
       dispatch(getDiningData(venueId));
     },
-    getVenueHoursDispatch: venueId => {
-      dispatch(getVenueHours(venueId));
+    getVenueInfoDispatch: venueId => {
+      dispatch(getVenueInfo(venueId));
     },
   };
 };

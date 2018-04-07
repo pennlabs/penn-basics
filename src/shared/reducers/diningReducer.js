@@ -2,9 +2,9 @@ import {
   getDiningDataRequested,
   getDiningDataRejected,
   getDiningDataFulfilled,
-  getVenueHoursRequested,
-  getVenueHoursRejected,
-  getVenueHoursFulfilled,
+  getVenueInfoRequested,
+  getVenueInfoRejected,
+  getVenueInfoFulfilled,
 } from '../actions/action_types';
 
 const defaultState = {
@@ -63,22 +63,23 @@ const diningReducer = (state = defaultState, action) => {
         diningData: action.diningData,
       };
 
-    case getVenueHoursRequested:
+    case getVenueInfoRequested:
       return {
         ...state,
         venueHoursPending: true,
       };
-    case getVenueHoursRejected:
+    case getVenueInfoRejected:
       return {
         ...state,
         venueHoursPending: false,
         error: action.error,
       };
-    case getVenueHoursFulfilled:
+    case getVenueInfoFulfilled:
       return {
         ...state,
         venueHoursPending: false,
         venueHours: action.venueHours,
+        venueInfo: action.venueInfo
       };
     default:
       return state;
