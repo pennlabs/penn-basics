@@ -1,8 +1,9 @@
 const moment = require('moment');
 import mongoose from './mongoose-connect';
-import Space from './models/space';
 
 // Dining Imports
+const Space = require('./models/Space');
+const Event = require('./models/Event');
 const Venue = require('./models/Venue');
 const Meal = require('./models/Meal');
 const DateHours = require('./models/DateHours');
@@ -111,6 +112,19 @@ function dateRangeMenu(venueId, startDate, endDate) {
     .catch(console.log);
 }
 
+// Events Functions
+
+function getEvents(date){
+  return Event.find({
+    start: {
+      $lte: date
+    },
+    end: {
+      $gte: date
+    }
+  })
+}
+
 
 export default {
   // Spaces functions
@@ -121,5 +135,7 @@ export default {
   // Dining functions
   getVenueMenuForDate,
   dateRangeMenu,
-  venueInfo
+  venueInfo,
+  //Event Functions
+  getEvents
 };
