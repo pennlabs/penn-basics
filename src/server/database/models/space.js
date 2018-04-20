@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from '../mongoose-connect';
+const Schema = mongoose.Schema;
 
-const SpaceSchema = new mongoose.Schema({
+const SpaceSchema = new Schema({
   name: String,
   address: String,
   description: String,
