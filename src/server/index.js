@@ -4,8 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
 import frontendRouter from './routes/frontend';
-import apiRouter from './routes/api';
+import eventsRouter from './routes/events';
 import spacesRouter from './routes/spaces';
+import diningRouter from './routes/dining';
 import DB from './database/db';
 require('dotenv').config();
 
@@ -30,7 +31,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/api/spaces', spacesRouter(DB));
-app.use('/api', apiRouter(DB));
+app.use('/api/events', eventsRouter(DB));
+app.use('/api/dining', diningRouter(DB));
 app.use('/', frontendRouter(DB));
 
 // Seed Dining Data on Server Start
