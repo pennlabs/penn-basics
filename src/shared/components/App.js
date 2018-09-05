@@ -1,12 +1,9 @@
-// Import frameworks
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// Import components
 import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
 
-// Import page components
 import Home from './home/App';
 import NotFound from './shared/NotFound';
 import Dining from './dining/App';
