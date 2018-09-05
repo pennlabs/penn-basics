@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Section from './Section';
 
 import tagDescriptions from './content/tagDescriptions';
+import listOnlyTitles from './content/listOnlyTitles';
+import descriptionsOnlyTitles from './content/descriptionsOnlyTitles';
 
 class DiningMenu extends Component {
   constructor(props) {
@@ -20,20 +22,9 @@ class DiningMenu extends Component {
     return sectionTitles.map((title) => {
       // Check if this section should be a list or not
       // This is dependent on the format of data
-      const shouldBeList = [
-        'breakfast kettles',
-        'Coffee',
-        'beverages',
-        'cereal',
-        'fruit plus',
-        'toast bar',
-        'condiments and toppings',
-      ].includes(title);
+      const shouldBeList = Boolean(listOnlyTitles[title]);
 
-      const descriptionsOnly = [
-        'commons deli',
-        'pizza',
-      ].includes(title);
+      const descriptionsOnly = Boolean(descriptionsOnlyTitles[title]);
 
       // Return the section formatted
       return (

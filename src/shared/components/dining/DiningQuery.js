@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 
-/**
- * Render selection fields for filtering by days
- */
 const DiningQuery = ({
   meals, days, meal, day, mealCallback, dayCallback,
 }) => {
@@ -25,7 +22,7 @@ const DiningQuery = ({
   return (
     <div className="diningQuery">
       <p>
-        What's for
+        {'What\'s for'}
       </p>
       <Dropdown
         selected={meal}
@@ -42,11 +39,20 @@ const DiningQuery = ({
   );
 };
 
+DiningQuery.defaultProps = {
+  meal: null,
+  meals: null,
+  day: null,
+  days: null,
+  mealCallback: null,
+  dayCallback: null,
+};
+
 DiningQuery.propTypes = {
   meal: PropTypes.string,
-  meals: PropTypes.array,
+  meals: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   day: PropTypes.string,
-  days: PropTypes.array,
+  days: PropTypes.array, // eslint-disable-line react/forbid-prop-types
   mealCallback: PropTypes.func,
   dayCallback: PropTypes.func,
 };
