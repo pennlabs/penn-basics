@@ -1,5 +1,5 @@
 import {
-  updateLink
+  updateLink,
 } from '../actions/action_types';
 
 const defaultState = null;

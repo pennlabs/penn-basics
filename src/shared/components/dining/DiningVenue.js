@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import NotFound from '../shared/NotFound';
 import { mappings } from './mappings';
-import PropTypes from 'prop-types';
 
 // Import actions
 import { getDiningData, getVenueInfo } from '../../actions/index';
@@ -38,7 +38,7 @@ class DiningVenue extends Component {
     this.state = {
       dateFormattedToday: date,
       dateFormatted: date,
-      meal: "",
+      meal: '',
       meals: [],
       days: [],
     };
@@ -76,11 +76,11 @@ class DiningVenue extends Component {
 
       // Clear some of the state
       this.setState({
-        meal: "",
+        meal: '',
         meals: [],
         dateFormatted: this.state.dateFormattedToday,
         dates: [],
-        error: "",
+        error: '',
       });
     }
   }
@@ -92,10 +92,10 @@ class DiningVenue extends Component {
     // Refresh the meals state if necessary
     // This is if we have changed the date or meal selected
     if (
-      !this.state.meal ||
-      (prevState.meal !== this.state.meal) ||
-      !this.state.meals.length ||
-      (prevState.dateFormatted !== this.state.dateFormatted)
+      !this.state.meal
+      || (prevState.meal !== this.state.meal)
+      || !this.state.meals.length
+      || (prevState.dateFormatted !== this.state.dateFormatted)
     ) {
       this.findMeals();
     }
@@ -103,9 +103,9 @@ class DiningVenue extends Component {
     // Refresh the days state if necessary
     // This is the case if we have changed the date selected
     if (
-      !this.state.dateFormatted ||
-      (prevState.dateFormatted !== this.state.dateFormatted) ||
-      !this.state.days.length
+      !this.state.dateFormatted
+      || (prevState.dateFormatted !== this.state.dateFormatted)
+      || !this.state.days.length
     ) {
       this.findDays();
     }
@@ -116,10 +116,10 @@ class DiningVenue extends Component {
    */
   findDays() {
     // Find the relevant meal if variables have been populated in the state and props
-    if (this.props.diningData &&
-        this.state.dateFormatted &&
-        !this.props.diningData.pending &&
-        !this.state.meal) {
+    if (this.props.diningData
+        && this.state.dateFormatted
+        && !this.props.diningData.pending
+        && !this.state.meal) {
       // Get all days passed to us from the API
       // These are of the form MM/DD/YYYY EXCEPT in the case that the month
       // begins with a "0", in which case the format is M/DD/YYYY
@@ -136,7 +136,7 @@ class DiningVenue extends Component {
       let count = 2;
 
       // Iterate
-      days.forEach(day => {
+      days.forEach((day) => {
         // Check for a match if we have not yet found one
         if (!matched) {
           if (day === this.state.dateFormattedToday) {
@@ -161,10 +161,10 @@ class DiningVenue extends Component {
   // Find meals
   findMeals() {
     // Find the relevant meal
-    if (this.props.diningData &&
-        this.state.dateFormatted &&
-        this.props.diningData[this.state.dateFormatted] &&
-        !this.props.diningDataPending) {
+    if (this.props.diningData
+        && this.state.dateFormatted
+        && this.props.diningData[this.state.dateFormatted]
+        && !this.props.diningDataPending) {
       const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
 
       // Update the state
@@ -199,23 +199,23 @@ class DiningVenue extends Component {
 
   // Check for errors
   checkForErrors() {
-    let error = "";
+    let error = '';
 
     // If no mapping is found
     if (!mappings[this.props.match.params.id]) {
-      error = "Dining with passed in ID not found";
+      error = 'Dining with passed in ID not found';
     } else if (this.props.diningData && this.state.dateFormatted) {
       if (!this.props.diningData[this.state.dateFormatted]) {
         error = "Dining data not found for today's date";
       } else if (this.state.meal && !this.props.diningData[this.state.dateFormatted][this.state.meal]) {
-        error = `Dining data not found for meal: "${ this.state.meal }"`;
+        error = `Dining data not found for meal: "${this.state.meal}"`;
       } else {
-        error = "";
+        error = '';
       }
     } else if (!this.props.diningData) {
-      error = "Failed to find meal data.";
+      error = 'Failed to find meal data.';
     } else {
-      error = "";
+      error = '';
     }
 
     // Return the error
@@ -231,16 +231,16 @@ class DiningVenue extends Component {
     if (this.props.error) {
       // If there was some other error
       return (
-        <ErrorMessage message={ this.props.error } />
+        <ErrorMessage message={this.props.error} />
       );
-    } else if (this.state.error) {
+    } if (this.state.error) {
       // If there is a state error
       return (
-        <ErrorMessage message={ this.state.error } />
+        <ErrorMessage message={this.state.error} />
       );
-    } else if (error) {
+    } if (error) {
       return (
-        <ErrorMessage message={ error } />
+        <ErrorMessage message={error} />
       );
     }
 
@@ -277,12 +277,12 @@ class DiningVenue extends Component {
 
         {/* Render dropdowns for selecting dates and meals */}
         <DiningQuery
-          meal={ this.state.meal }
-          meals={ this.state.meals }
-          mealCallback={ this.handleChangeMeal }
-          dayCallback={ this.handleChangeDate }
-          days={ this.state.days }
-          day={ this.state.dateFormatted }
+          meal={this.state.meal}
+          meals={this.state.meals}
+          mealCallback={this.handleChangeMeal}
+          dayCallback={this.handleChangeDate}
+          days={this.state.days}
+          day={this.state.dateFormatted}
         />
 
         {
@@ -308,27 +308,23 @@ DiningVenue.propTypes = {
   venueHours: PropTypes.array,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    diningData: state.dining.diningData,
-    venueHours: state.dining.venueHours,
-    venueInfo: state.dining.venueInfo,
-    error: state.dining.error,
-    diningDataPending: state.dining.diningDataPending,
-    venueHoursPending: state.dining.venueHoursPending,
-  };
-};
+const mapStateToProps = state => ({
+  diningData: state.dining.diningData,
+  venueHours: state.dining.venueHours,
+  venueInfo: state.dining.venueInfo,
+  error: state.dining.error,
+  diningDataPending: state.dining.diningDataPending,
+  venueHoursPending: state.dining.venueHoursPending,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getDiningDataDispatch: venueId => {
-      dispatch(getDiningData(venueId));
-    },
-    getVenueInfoDispatch: venueId => {
-      dispatch(getVenueInfo(venueId));
-    },
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  getDiningDataDispatch: (venueId) => {
+    dispatch(getDiningData(venueId));
+  },
+  getVenueInfoDispatch: (venueId) => {
+    dispatch(getVenueInfo(venueId));
+  },
+});
 
 // Redux config
 DiningVenue = connect(

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class StudySpacesVenue extends Component {
   render() {
-    return(
+    return (
       <div className="columns">
         <div className="column">
           First column

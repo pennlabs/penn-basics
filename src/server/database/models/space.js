@@ -1,5 +1,6 @@
 import mongoose from '../mongoose-connect';
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const SpaceSchema = new Schema({
   name: String,
@@ -9,7 +10,7 @@ const SpaceSchema = new Schema({
   end: [Number],
   outlets: Number,
   groups: Number,
-  quiet: Number
+  quiet: Number,
 });
 
 module.exports = mongoose.model('Space', SpaceSchema);

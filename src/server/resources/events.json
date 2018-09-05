@@ -1,367 +1,367 @@
 [
- {
-   "start": "8/23/17 0:00",
-   "end": "8/23/17 0:00",
-   "event": "Move-in for First-year & Transfer Students"
- },
- {
-   "start": "8/23/17 0:00",
-   "end": "8/28/17 0:00",
-   "event": "New Student Orientation"
- },
- {
-   "start": "8/28/17 0:00",
-   "end": "8/28/17 0:00",
-   "event": "Opening Exercises and Freshman Convocation"
- },
- {
-   "start": "8/29/17 0:00",
-   "end": "8/29/17 0:00",
-   "event": "First Day of Classes"
- },
- {
-   "start": "9/4/17 0:00",
-   "end": "9/4/17 0:00",
-   "event": "Labor Day (no classes)"
- },
- {
-   "start": "9/18/17 0:00",
-   "end": "9/18/17 0:00",
-   "event": "Course Selection Period ends"
- },
- {
-   "start": "10/5/17 0:00",
-   "end": "10/8/17 0:00",
-   "event": "Fall Term Break"
- },
- {
-   "start": "10/9/17 0:00",
-   "end": "10/9/17 0:00",
-   "event": "Drop Period ends"
- },
- {
-   "start": "10/9/17 0:00",
-   "end": "10/9/17 0:00",
-   "event": "Classes Resume"
- },
- {
-   "start": "10/27/17 0:00",
-   "end": "10/29/17 0:00",
-   "event": "Family Weekend"
- },
- {
-   "start": "10/30/17 0:00",
-   "end": "11/12/17 0:00",
-   "event": "Advance Registration for Spring Term"
- },
- {
-   "start": "11/10/17 0:00",
-   "end": "11/10/17 0:00",
-   "event": "Last Day to withdraw from a course"
- },
- {
-   "start": "11/4/17 0:00",
-   "end": "11/4/17 0:00",
-   "event": "Homecoming"
- },
- {
-   "start": "11/21/17 0:00",
-   "end": "11/22/17 0:00",
-   "event": "Thur-Fri class schedule on Tue-Wed"
- },
- {
-   "start": "11/23/17 0:00",
-   "end": "11/26/17 0:00",
-   "event": "Thanksgiving Break"
- },
- {
-   "start": "11/27/17 0:00",
-   "end": "11/27/17 0:00",
-   "event": "Classes Resume"
- },
- {
-   "start": "12/11/17 0:00",
-   "end": "12/11/17 0:00",
-   "event": "Last Day of Classes"
- },
- {
-   "start": "12/12/17 0:00",
-   "end": "12/13/17 0:00",
-   "event": "Reading Days"
- },
- {
-   "start": "12/14/17 0:00",
-   "end": "12/21/17 0:00",
-   "event": "Final Examinations"
- },
- {
-   "start": "12/21/17 0:00",
-   "end": "12/21/17 0:00",
-   "event": "Fall Term ends"
- },
- {
-   "start": "1/10/18 0:00",
-   "end": "1/10/18 0:00",
-   "event": "First Day of Classes (Monday class schedule on Wednesday)"
- },
- {
-   "start": "1/15/18 0:00",
-   "end": "1/15/18 0:00",
-   "event": "Martin Luther King, Jr. Day Observed (no classes)"
- },
- {
-   "start": "1/29/18 0:00",
-   "end": "1/29/18 0:00",
-   "event": "Course Selection Period ends"
- },
- {
-   "start": "2/16/18 0:00",
-   "end": "2/16/18 0:00",
-   "event": "Drop Period ends"
- },
- {
-   "start": "3/3/18 0:00",
-   "end": "3/11/18 0:00",
-   "event": "Spring Term Break"
- },
- {
-   "start": "3/12/18 0:00",
-   "end": "3/12/18 0:00",
-   "event": "Classes Resume"
- },
- {
-   "start": "3/19/18 0:00",
-   "end": "4/1/18 0:00",
-   "event": "Advance Registration for Fall Term and Summer Sessions"
- },
- {
-   "start": "3/30/18 0:00",
-   "end": "3/30/18 0:00",
-   "event": "Last Day to withdraw from a course"
- },
- {
-   "start": "4/25/18 0:00",
-   "end": "4/25/18 0:00",
-   "event": "Last Day of Classes"
- },
- {
-   "start": "4/26/18 0:00",
-   "end": "4/27/18 0:00",
-   "event": "Reading Days"
- },
- {
-   "start": "4/30/18 0:00",
-   "end": "5/8/18 0:00",
-   "event": "Final Examinations"
- },
- {
-   "start": "5/8/18 0:00",
-   "end": "5/8/18 0:00",
-   "event": "Spring Term ends"
- },
- {
-   "start": "5/12/18 0:00",
-   "end": "5/12/18 0:00",
-   "event": "Alumni Day"
- },
- {
-   "start": "5/13/18 0:00",
-   "end": "5/13/18 0:00",
-   "event": "Baccalaureate"
- },
- {
-   "start": "5/14/18 0:00",
-   "end": "5/14/18 0:00",
-   "event": "Commencement"
- },
- {
-   "start": "5/21/18 0:00",
-   "end": "5/21/18 0:00",
-   "event": "11-Week Session Classes begin"
- },
- {
-   "start": "5/21/18 0:00",
-   "end": "5/21/18 0:00",
-   "event": "Session I Classes begin"
- },
- {
-   "start": "5/28/18 0:00",
-   "end": "5/28/18 0:00",
-   "event": "Memorial Day Observed (no classes)"
- },
- {
-   "start": "6/27/18 0:00",
-   "end": "6/27/18 0:00",
-   "event": "Session I Classes end"
- },
- {
-   "start": "6/28/18 0:00",
-   "end": "6/28/18 0:00",
-   "event": "Session II Classes begin"
- },
- {
-   "start": "7/4/18 0:00",
-   "end": "7/4/18 0:00",
-   "event": "Independence Day Observed (no classes)"
- },
- {
-   "start": "8/3/18 0:00",
-   "end": "8/3/18 0:00",
-   "event": "Session II & 11-Week Session Classes end"
- },
- {
-   "start": "8/22/18 0:00",
-   "end": "8/22/18 0:00",
-   "event": "Move-in for First-year & Transfer Students"
- },
- {
-   "start": "8/22/18 0:00",
-   "end": "8/27/18 0:00",
-   "event": "New Student Orientation"
- },
- {
-   "start": "8/27/18 0:00",
-   "end": "8/27/18 0:00",
-   "event": "Opening Exercises and Freshman Convocation"
- },
- {
-   "start": "8/28/18 0:00",
-   "end": "8/28/18 0:00",
-   "event": "First Day of Classes "
- },
- {
-   "start": "9/3/18 0:00",
-   "end": "9/3/18 0:00",
-   "event": "Labor Day (no classes)"
- },
- {
-   "start": "9/17/18 0:00",
-   "end": "9/17/18 0:00",
-   "event": "Course Selection Period ends"
- },
- {
-   "start": "10/4/18 0:00",
-   "end": "10/7/18 0:00",
-   "event": "Fall Term Break"
- },
- {
-   "start": "10/8/18 0:00",
-   "end": "10/8/18 0:00",
-   "event": "Drop Period Ends & Classes Resume"
- },
- {
-   "start": "10/19/18 0:00",
-   "end": "10/21/18 0:00",
-   "event": "Family Weekend"
- },
- {
-   "start": "10/29/18 0:00",
-   "end": "11/11/18 0:00",
-   "event": "Advance Registration for Spring Term "
- },
- {
-   "start": "11/9/18 0:00",
-   "end": "11/9/18 0:00",
-   "event": "Last day to withdraw from a course"
- },
- {
-   "start": "11/10/18 0:00",
-   "end": "11/10/18 0:00",
-   "event": "Homecoming"
- },
- {
-   "start": "11/20/18 0:00",
-   "end": "11/21/18 0:00",
-   "event": "Thursday-Friday Class Schedule on Tuesday-Wednesday"
- },
- {
-   "start": "11/22/18 0:00",
-   "end": "11/25/18 0:00",
-   "event": "Thanksgiving Break"
- },
- {
-   "start": "11/26/18 0:00",
-   "end": "11/26/18 0:00",
-   "event": "Classes Resume "
- },
- {
-   "start": "12/10/18 0:00",
-   "end": "12/10/18 0:00",
-   "event": "Last day of Classes"
- },
- {
-   "start": "12/11/18 0:00",
-   "end": "12/12/18 0:00",
-   "event": "Reading Days"
- },
- {
-   "start": "12/13/18 0:00",
-   "end": "12/20/18 0:00",
-   "event": "Final Examinations"
- },
- {
-   "start": "12/20/18 0:00",
-   "end": "12/20/18 0:00",
-   "event": "Fall Term Ends"
- },
- {
-   "start": "1/16/19 0:00",
-   "end": "1/16/19 0:00",
-   "event": "First Day of Classes"
- },
- {
-   "start": "1/21/19 0:00",
-   "end": "1/21/19 0:00",
-   "event": "Martin Luther King, Jr. Day Observed (no classes)"
- },
- {
-   "start": "2/4/19 0:00",
-   "end": "2/4/19 0:00",
-   "event": "Course Selection Period ends"
- },
- {
-   "start": "2/22/19 0:00",
-   "end": "2/22/19 0:00",
-   "event": "Drop Period ends"
- },
- {
-   "start": "3/2/19 0:00",
-   "end": "3/10/19 0:00",
-   "event": "Spring Term Break"
- },
- {
-   "start": "3/11/19 0:00",
-   "end": "3/11/19 0:00",
-   "event": "Classes Resume"
- },
- {
-   "start": "3/18/19 0:00",
-   "end": "3/31/18 0:00",
-   "event": "Advance Registration for Fall Term and Summer Sessions"
- },
- {
-   "start": "4/5/19 0:00",
-   "end": "4/5/19 0:00",
-   "event": "Last Day to withdraw from a course"
- },
- {
-   "start": "5/1/19 0:00",
-   "end": "5/1/19 0:00",
-   "event": "Last day of Classes"
- },
- {
-   "start": "5/2/19 0:00",
-   "end": "5/3/19 0:00",
-   "event": "Reading Days"
- },
- {
-   "start": "5/6/19 0:00",
-   "end": "5/14/19 0:00",
-   "event": "Final Examinations"
- },
- {
-   "start": "5/14/19 0:01",
-   "end": "5/14/19 0:01",
-   "event": "Spring Term Ends"
- }
+  {
+    "start": "8/23/17 0:00",
+    "end": "8/23/17 0:00",
+    "event": "Move-in for First-year & Transfer Students"
+  },
+  {
+    "start": "8/23/17 0:00",
+    "end": "8/28/17 0:00",
+    "event": "New Student Orientation"
+  },
+  {
+    "start": "8/28/17 0:00",
+    "end": "8/28/17 0:00",
+    "event": "Opening Exercises and Freshman Convocation"
+  },
+  {
+    "start": "8/29/17 0:00",
+    "end": "8/29/17 0:00",
+    "event": "First Day of Classes"
+  },
+  {
+    "start": "9/4/17 0:00",
+    "end": "9/4/17 0:00",
+    "event": "Labor Day (no classes)"
+  },
+  {
+    "start": "9/18/17 0:00",
+    "end": "9/18/17 0:00",
+    "event": "Course Selection Period ends"
+  },
+  {
+    "start": "10/5/17 0:00",
+    "end": "10/8/17 0:00",
+    "event": "Fall Term Break"
+  },
+  {
+    "start": "10/9/17 0:00",
+    "end": "10/9/17 0:00",
+    "event": "Drop Period ends"
+  },
+  {
+    "start": "10/9/17 0:00",
+    "end": "10/9/17 0:00",
+    "event": "Classes Resume"
+  },
+  {
+    "start": "10/27/17 0:00",
+    "end": "10/29/17 0:00",
+    "event": "Family Weekend"
+  },
+  {
+    "start": "10/30/17 0:00",
+    "end": "11/12/17 0:00",
+    "event": "Advance Registration for Spring Term"
+  },
+  {
+    "start": "11/10/17 0:00",
+    "end": "11/10/17 0:00",
+    "event": "Last Day to withdraw from a course"
+  },
+  {
+    "start": "11/4/17 0:00",
+    "end": "11/4/17 0:00",
+    "event": "Homecoming"
+  },
+  {
+    "start": "11/21/17 0:00",
+    "end": "11/22/17 0:00",
+    "event": "Thur-Fri class schedule on Tue-Wed"
+  },
+  {
+    "start": "11/23/17 0:00",
+    "end": "11/26/17 0:00",
+    "event": "Thanksgiving Break"
+  },
+  {
+    "start": "11/27/17 0:00",
+    "end": "11/27/17 0:00",
+    "event": "Classes Resume"
+  },
+  {
+    "start": "12/11/17 0:00",
+    "end": "12/11/17 0:00",
+    "event": "Last Day of Classes"
+  },
+  {
+    "start": "12/12/17 0:00",
+    "end": "12/13/17 0:00",
+    "event": "Reading Days"
+  },
+  {
+    "start": "12/14/17 0:00",
+    "end": "12/21/17 0:00",
+    "event": "Final Examinations"
+  },
+  {
+    "start": "12/21/17 0:00",
+    "end": "12/21/17 0:00",
+    "event": "Fall Term ends"
+  },
+  {
+    "start": "1/10/18 0:00",
+    "end": "1/10/18 0:00",
+    "event": "First Day of Classes (Monday class schedule on Wednesday)"
+  },
+  {
+    "start": "1/15/18 0:00",
+    "end": "1/15/18 0:00",
+    "event": "Martin Luther King, Jr. Day Observed (no classes)"
+  },
+  {
+    "start": "1/29/18 0:00",
+    "end": "1/29/18 0:00",
+    "event": "Course Selection Period ends"
+  },
+  {
+    "start": "2/16/18 0:00",
+    "end": "2/16/18 0:00",
+    "event": "Drop Period ends"
+  },
+  {
+    "start": "3/3/18 0:00",
+    "end": "3/11/18 0:00",
+    "event": "Spring Term Break"
+  },
+  {
+    "start": "3/12/18 0:00",
+    "end": "3/12/18 0:00",
+    "event": "Classes Resume"
+  },
+  {
+    "start": "3/19/18 0:00",
+    "end": "4/1/18 0:00",
+    "event": "Advance Registration for Fall Term and Summer Sessions"
+  },
+  {
+    "start": "3/30/18 0:00",
+    "end": "3/30/18 0:00",
+    "event": "Last Day to withdraw from a course"
+  },
+  {
+    "start": "4/25/18 0:00",
+    "end": "4/25/18 0:00",
+    "event": "Last Day of Classes"
+  },
+  {
+    "start": "4/26/18 0:00",
+    "end": "4/27/18 0:00",
+    "event": "Reading Days"
+  },
+  {
+    "start": "4/30/18 0:00",
+    "end": "5/8/18 0:00",
+    "event": "Final Examinations"
+  },
+  {
+    "start": "5/8/18 0:00",
+    "end": "5/8/18 0:00",
+    "event": "Spring Term ends"
+  },
+  {
+    "start": "5/12/18 0:00",
+    "end": "5/12/18 0:00",
+    "event": "Alumni Day"
+  },
+  {
+    "start": "5/13/18 0:00",
+    "end": "5/13/18 0:00",
+    "event": "Baccalaureate"
+  },
+  {
+    "start": "5/14/18 0:00",
+    "end": "5/14/18 0:00",
+    "event": "Commencement"
+  },
+  {
+    "start": "5/21/18 0:00",
+    "end": "5/21/18 0:00",
+    "event": "11-Week Session Classes begin"
+  },
+  {
+    "start": "5/21/18 0:00",
+    "end": "5/21/18 0:00",
+    "event": "Session I Classes begin"
+  },
+  {
+    "start": "5/28/18 0:00",
+    "end": "5/28/18 0:00",
+    "event": "Memorial Day Observed (no classes)"
+  },
+  {
+    "start": "6/27/18 0:00",
+    "end": "6/27/18 0:00",
+    "event": "Session I Classes end"
+  },
+  {
+    "start": "6/28/18 0:00",
+    "end": "6/28/18 0:00",
+    "event": "Session II Classes begin"
+  },
+  {
+    "start": "7/4/18 0:00",
+    "end": "7/4/18 0:00",
+    "event": "Independence Day Observed (no classes)"
+  },
+  {
+    "start": "8/3/18 0:00",
+    "end": "8/3/18 0:00",
+    "event": "Session II & 11-Week Session Classes end"
+  },
+  {
+    "start": "8/22/18 0:00",
+    "end": "8/22/18 0:00",
+    "event": "Move-in for First-year & Transfer Students"
+  },
+  {
+    "start": "8/22/18 0:00",
+    "end": "8/27/18 0:00",
+    "event": "New Student Orientation"
+  },
+  {
+    "start": "8/27/18 0:00",
+    "end": "8/27/18 0:00",
+    "event": "Opening Exercises and Freshman Convocation"
+  },
+  {
+    "start": "8/28/18 0:00",
+    "end": "8/28/18 0:00",
+    "event": "First Day of Classes "
+  },
+  {
+    "start": "9/3/18 0:00",
+    "end": "9/3/18 0:00",
+    "event": "Labor Day (no classes)"
+  },
+  {
+    "start": "9/17/18 0:00",
+    "end": "9/17/18 0:00",
+    "event": "Course Selection Period ends"
+  },
+  {
+    "start": "10/4/18 0:00",
+    "end": "10/7/18 0:00",
+    "event": "Fall Term Break"
+  },
+  {
+    "start": "10/8/18 0:00",
+    "end": "10/8/18 0:00",
+    "event": "Drop Period Ends & Classes Resume"
+  },
+  {
+    "start": "10/19/18 0:00",
+    "end": "10/21/18 0:00",
+    "event": "Family Weekend"
+  },
+  {
+    "start": "10/29/18 0:00",
+    "end": "11/11/18 0:00",
+    "event": "Advance Registration for Spring Term "
+  },
+  {
+    "start": "11/9/18 0:00",
+    "end": "11/9/18 0:00",
+    "event": "Last day to withdraw from a course"
+  },
+  {
+    "start": "11/10/18 0:00",
+    "end": "11/10/18 0:00",
+    "event": "Homecoming"
+  },
+  {
+    "start": "11/20/18 0:00",
+    "end": "11/21/18 0:00",
+    "event": "Thursday-Friday Class Schedule on Tuesday-Wednesday"
+  },
+  {
+    "start": "11/22/18 0:00",
+    "end": "11/25/18 0:00",
+    "event": "Thanksgiving Break"
+  },
+  {
+    "start": "11/26/18 0:00",
+    "end": "11/26/18 0:00",
+    "event": "Classes Resume "
+  },
+  {
+    "start": "12/10/18 0:00",
+    "end": "12/10/18 0:00",
+    "event": "Last day of Classes"
+  },
+  {
+    "start": "12/11/18 0:00",
+    "end": "12/12/18 0:00",
+    "event": "Reading Days"
+  },
+  {
+    "start": "12/13/18 0:00",
+    "end": "12/20/18 0:00",
+    "event": "Final Examinations"
+  },
+  {
+    "start": "12/20/18 0:00",
+    "end": "12/20/18 0:00",
+    "event": "Fall Term Ends"
+  },
+  {
+    "start": "1/16/19 0:00",
+    "end": "1/16/19 0:00",
+    "event": "First Day of Classes"
+  },
+  {
+    "start": "1/21/19 0:00",
+    "end": "1/21/19 0:00",
+    "event": "Martin Luther King, Jr. Day Observed (no classes)"
+  },
+  {
+    "start": "2/4/19 0:00",
+    "end": "2/4/19 0:00",
+    "event": "Course Selection Period ends"
+  },
+  {
+    "start": "2/22/19 0:00",
+    "end": "2/22/19 0:00",
+    "event": "Drop Period ends"
+  },
+  {
+    "start": "3/2/19 0:00",
+    "end": "3/10/19 0:00",
+    "event": "Spring Term Break"
+  },
+  {
+    "start": "3/11/19 0:00",
+    "end": "3/11/19 0:00",
+    "event": "Classes Resume"
+  },
+  {
+    "start": "3/18/19 0:00",
+    "end": "3/31/18 0:00",
+    "event": "Advance Registration for Fall Term and Summer Sessions"
+  },
+  {
+    "start": "4/5/19 0:00",
+    "end": "4/5/19 0:00",
+    "event": "Last Day to withdraw from a course"
+  },
+  {
+    "start": "5/1/19 0:00",
+    "end": "5/1/19 0:00",
+    "event": "Last day of Classes"
+  },
+  {
+    "start": "5/2/19 0:00",
+    "end": "5/3/19 0:00",
+    "event": "Reading Days"
+  },
+  {
+    "start": "5/6/19 0:00",
+    "end": "5/14/19 0:00",
+    "event": "Final Examinations"
+  },
+  {
+    "start": "5/14/19 0:01",
+    "end": "5/14/19 0:01",
+    "event": "Spring Term Ends"
+  }
 ]

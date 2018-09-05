@@ -14,9 +14,11 @@ class Card extends Component {
           </p>
           {
             this.props.subtitle
-              ? <p className="subtitle medium-gray-text">
-                {this.props.subtitle}
-              </p>
+              ? (
+                <p className="subtitle medium-gray-text">
+                  {this.props.subtitle}
+                </p>
+              )
               : ''
           }
         </div>

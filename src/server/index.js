@@ -1,13 +1,16 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
-const PORT = process.env.PORT;
 import frontendRouter from './routes/frontend';
 import eventsRouter from './routes/events';
 import spacesRouter from './routes/spaces';
 import diningRouter from './routes/dining';
 import DB from './database/db';
+
+const express = require('express');
+
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+
+const { PORT } = process.env;
 require('dotenv').config();
 
 global.__basedir = path.join(__dirname, '..', '..');
@@ -23,11 +26,11 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler));
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: config.output.publicPathdist
+    publicPath: config.output.publicPathdist,
   }));
 }
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api/spaces', spacesRouter(DB));
@@ -39,5 +42,5 @@ app.use('/', frontendRouter(DB));
 // require('./database/seedDiningInfo').full_seed();
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
+  console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console
 });

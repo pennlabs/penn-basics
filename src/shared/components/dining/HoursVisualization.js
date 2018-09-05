@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import ErrorMessage from '../shared/ErrorMessage';
 
@@ -82,19 +82,19 @@ class DiningOverview extends Component {
 
   cleanTime(time) {
     // Return the passed in time as AM / PM without seconds
-    const formattedTime = time.substring(0, time.lastIndexOf(":"));
-    const hours = parseInt(formattedTime.substring(0, formattedTime.indexOf(":")), 10);
+    const formattedTime = time.substring(0, time.lastIndexOf(':'));
+    const hours = parseInt(formattedTime.substring(0, formattedTime.indexOf(':')), 10);
     if (hours > 12) {
-      return (hours - 12) + formattedTime.substring(formattedTime.indexOf(":")) + " PM";
+      return `${(hours - 12) + formattedTime.substring(formattedTime.indexOf(':'))} PM`;
     }
-    return formattedTime + " AM";
+    return `${formattedTime} AM`;
   }
 
   updateHours(date, time) {
     // Update the hours of the passed in date to the time passed in along with it
     // NOTE time is of the form "HH:MM:SS"
-    const hours = time.substring(0, time.indexOf(":"));
-    const minutes = time.substring(time.indexOf(":") + 1, time.lastIndexOf(":"));
+    const hours = time.substring(0, time.indexOf(':'));
+    const minutes = time.substring(time.indexOf(':') + 1, time.lastIndexOf(':'));
     date.setHours(hours, minutes, 0, 0);
   }
 
@@ -125,8 +125,8 @@ class DiningOverview extends Component {
     const obj = new Date(date);
     const dayNum = obj.getDay();
     const today = new Date().getDay();
-    if (today === dayNum) return "Today";
-    else if (dayNum === (today + 1) % 7) return "Tomorrow";
+    if (today === dayNum) return 'Today';
+    if (dayNum === (today + 1) % 7) return 'Tomorrow';
     return week[obj.getDay()];
   }
 
@@ -147,16 +147,14 @@ class DiningOverview extends Component {
         </thead>
         <tbody>
           {
-            this.props.venueHours.map(meal => {
-              return (
-                <tr key={uuid()} className={this.isRightNow(meal) ? "is-selected" : ""}>
-                  <td>{this.getDay(meal.date)}</td>
-                  <td>{meal.type}</td>
-                  <td>{this.cleanTime(meal.open)}</td>
-                  <td>{this.cleanTime(meal.close)}</td>
-                </tr>
-              );
-            })
+            this.props.venueHours.map(meal => (
+              <tr key={uuid()} className={this.isRightNow(meal) ? 'is-selected' : ''}>
+                <td>{this.getDay(meal.date)}</td>
+                <td>{meal.type}</td>
+                <td>{this.cleanTime(meal.open)}</td>
+                <td>{this.cleanTime(meal.close)}</td>
+              </tr>
+            ))
           }
         </tbody>
       </table>
@@ -178,11 +176,9 @@ DiningOverview.propTypes = {
   venueHours: PropTypes.array,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    venueHours: state.dining.venueHours,
-  };
-};
+const mapStateToProps = state => ({
+  venueHours: state.dining.venueHours,
+});
 
 // Redux config
 DiningOverview = connect(

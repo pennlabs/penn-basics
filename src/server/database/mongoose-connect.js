@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGO_URI, {
-  useMongoClient: true
+  useMongoClient: true,
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Successfully connected to database')
-})
+  console.log('Successfully connected to database');
+});
 
 mongoose.Promise = global.Promise;
 

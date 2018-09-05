@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 class ListItem extends Component {
   render() {
     return (
-      <Link to={"/dining/" + this.props.venueID}>
+      <Link to={`/dining/${this.props.venueID}`}>
         <li>
-          <span className={this.props.isOpen ? "open" : "closed"} />
+          <span className={this.props.isOpen ? 'open' : 'closed'} />
           {this.props.name}
         </li>
       </Link>

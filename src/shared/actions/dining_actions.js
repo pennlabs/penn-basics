@@ -3,15 +3,15 @@ import axios from 'axios';
 import {
   getDiningDataRequested,
   getDiningDataRejected,
-  getDiningDataFulfilled
+  getDiningDataFulfilled,
 } from './action_types';
 
 const BASE = 'https://dining-api-v2.herokuapp.com/api';
 
 export function getDiningData(venueId) {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: getDiningDataRequested
+      type: getDiningDataRequested,
     });
     try {
       const { data: diningData } = await axios.get(`${BASE}/weekly_menu/${venueId}`);

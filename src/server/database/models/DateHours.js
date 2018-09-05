@@ -1,27 +1,28 @@
 import mongoose from '../mongoose-connect';
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const datehoursSchema = new Schema({
   type: {
     type: String,
-    required: true
+    required: true,
   },
   open: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    required: true
+    required: true,
   },
   close: {
     type: String,
-    required: true
+    required: true,
   },
   venueId: {
     type: Schema.ObjectId,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('DateHours', datehoursSchema);

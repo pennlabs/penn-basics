@@ -6,5 +6,5 @@ import linkReducer from './linkReducer';
 export default combineReducers({
   dining: diningReducer,
   sidebar: sidebarReducer,
-  link: linkReducer
+  link: linkReducer,
 });

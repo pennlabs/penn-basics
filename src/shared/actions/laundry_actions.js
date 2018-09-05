@@ -3,26 +3,27 @@ import axios from 'axios';
 import {
   getLaundryDataRequested,
   getLaundryDataRejected,
-  getLaundryDataFulfilled
+  getLaundryDataFulfilled,
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
 
-// TODO: implement me.  Transform API data into format suitable for redux
+// TODO: implement me.
+// Transform API data into format suitable for redux
 function combineData(hallData, idData) {
 
 }
 
 // make two requests to two different endpoints, and combine the data
 export function getAllLaundryData() {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: getLaundryDataRequested
+      type: getLaundryDataRequested,
     });
     try {
       const [hallData, idData] = await Promise.all([
         axios.get(`${BASE}/laundry/halls`),
-        axios.get(`${BASE}/laundry/halls/ids`)
+        axios.get(`${BASE}/laundry/halls/ids`),
       ]);
       const laundryData = combineData(hallData, idData);
       dispatch({

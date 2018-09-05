@@ -38,20 +38,20 @@ class Dropdown extends Component {
     const content = this.props.values.map((value, index) => {
       // Find the text for the dropdown option
       // NOTE that this is different from the value
-      let text = "";
+      let text = '';
       if (this.props.options && this.props.options.length > index) {
         text = this.props.options[index];
       } else text = value;
 
       if (value === this.state.selected) {
         return (
-          <option key={ uuid() } value={ value } defaultValue>
+          <option key={uuid()} value={value} defaultValue>
             { text }
           </option>
         );
       }
       return (
-        <option key={ uuid() } value={ value }>
+        <option key={uuid()} value={value}>
           { text }
         </option>
       );
@@ -59,7 +59,7 @@ class Dropdown extends Component {
 
     return (
       <div className="select">
-        <select className="dropdown" id="meal" onChange={ this.handleChangeState } value={ this.state.selected }>
+        <select className="dropdown" id="meal" onChange={this.handleChangeState} value={this.state.selected}>
           { content }
         </select>
       </div>

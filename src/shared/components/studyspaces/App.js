@@ -9,16 +9,16 @@ class App extends Component {
     super(props);
 
     this.state = {
-      modalSpace: {}
+      modalSpace: {},
     };
 
     axios.get('/api/spaces/all')
-      .then(res => {
+      .then((res) => {
         const spaces = {};
         const today = new Date();
         const day = today.getDay();
         const time = today.getHours() + (today.getMinutes() / 60);
-        res.data.spaces.forEach(space => {
+        res.data.spaces.forEach((space) => {
           space.open = this.openOrNot(space, time, day);
           spaces[space._id] = space;
         });
@@ -39,14 +39,14 @@ class App extends Component {
     const space = this.state.spaces[id];
     this.setState({
       modalSpace: {
-        space
-      }
+        space,
+      },
     });
   }
 
   closeModal() {
     this.setState({
-      modalSpace: {}
+      modalSpace: {},
     });
   }
 
@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <div>
         {
-          this.state.spaces && Object.keys(this.state.spaces).map(spaceId => {
+          this.state.spaces && Object.keys(this.state.spaces).map((spaceId) => {
             const space = this.state.spaces[spaceId];
             return (
               <SpaceCard {...space} key={uuid()} renderSpaceModal={() => this.renderSpaceModal(spaceId)} />

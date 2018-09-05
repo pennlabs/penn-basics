@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Links from './Links';
 import Menu from './Menu';
-import { Link } from 'react-router-dom';
 
 /**
  * Component to render the navbar and the menu for toggling the sidebar
@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 class Nav extends Component {
   // Render the component
   render() {
-    return(
+    return (
       <nav className="navbar" id="navbar">
         <Menu />
         <Link to="/" className="logo">
-          <img src="https://i.imgur.com/JhifMZc.png"/>
+          <img src="https://i.imgur.com/JhifMZc.png" />
           <h1>
             PennBasics
           </h1>

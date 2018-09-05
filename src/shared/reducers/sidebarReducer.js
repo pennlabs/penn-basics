@@ -2,7 +2,7 @@ import {
   sidebarDining,
   sidebarLaundry,
   sidebarReservations,
-  sidebarStudyspaces
+  sidebarStudyspaces,
 } from '../actions/action_types';
 
 const defaultState = sidebarDining;

@@ -3,42 +3,42 @@
 import {
   getLaundryDataRequested,
   getLaundryDataRejected,
-  getLaundryDataFulfilled
+  getLaundryDataFulfilled,
 } from '../actions/action_types';
 
 const defaultState = {
   pending: true,
   sidebarInfo: [{
-    "title": "Open now",
-    "links": [
+    title: 'Open now',
+    links: [
       {
-        "name": "1920 Commons",
-        "isOpen": true,
-        "venueID": 593,
+        name: '1920 Commons',
+        isOpen: true,
+        venueID: 593,
       },
       {
-        "name": "Hill",
-        "isOpen": true,
-        "venueID": 636,
+        name: 'Hill',
+        isOpen: true,
+        venueID: 636,
       },
     ],
   }, {
-    "title": "Closed",
-    "links": [
+    title: 'Closed',
+    links: [
       {
-        "name": "Kings Court",
-        "isOpen": false,
+        name: 'Kings Court',
+        isOpen: false,
       },
       {
-        "name": "New College House",
-        "isOpen": false,
+        name: 'New College House',
+        isOpen: false,
       },
       {
-        "name": "Bridge",
-        "isOpen": false,
+        name: 'Bridge',
+        isOpen: false,
       },
     ],
-  }]
+  }],
 };
 
 const laundryReducer = (state = defaultState, action) => {
