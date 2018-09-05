@@ -1,4 +1,4 @@
-export const mappings = {
+export default {
   593: '1920 Commons',
   636: 'Hill House',
   637: 'English House',

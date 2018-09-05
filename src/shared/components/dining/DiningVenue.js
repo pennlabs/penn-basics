@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NotFound from '../shared/NotFound';
-import { mappings } from './mappings';
+import mappings from './content/mappings';
 
 // Import actions
 import { getDiningData, getVenueInfo } from '../../actions/index';
@@ -12,15 +11,11 @@ import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
 import ErrorMessage from '../shared/ErrorMessage';
+import NotFound from '../shared/NotFound';
 import Loading from '../shared/Loading';
 
-/**
- * Render the view for a dining venue
- */
+// Render the view for a dining venue
 class DiningVenue extends Component {
-  /**
-   * Constructor method
-   */
   constructor(props) {
     super(props);
 

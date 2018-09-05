@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * Component to render while page is loading
- */
-class Loading extends Component {
-  // Set the default props
-  static defaultProps = {
-    title: 'Loading, please wait',
-  };
+const Loading = ({
+  title = 'Loading, please wait',
+}) => (
+  <div className="center-div">
+    {
+      title ? (
+        <h1 className="is-size-3 medium-gray-text marg-bot-2">
+          {title}
+        </h1>
+      ) : null
+    }
+    <img
+      className="marg-top-2"
+      alt="loading"
+      id="loading"
+      src="https://i.imgur.com/Iq7qUnH.png"
+      width="300px"
+    />
+  </div>
+);
 
-  // Render the component
-  render() {
-    return (
-      <div className="center-div">
-        {
-          this.props.title ? (
-            <h1 className="is-size-3 medium-gray-text marg-bot-2">
-              {this.props.title}
-            </h1>
-          ) : null
-        }
-        <img className="marg-top-2" id="loading" src="https://i.imgur.com/Iq7qUnH.png" width="300px" />
-      </div>
-    );
-  }
-}
+Loading.defaultProps = {
+  title: 'Loading, please wait',
+};
 
 Loading.propTypes = {
   title: PropTypes.string,
