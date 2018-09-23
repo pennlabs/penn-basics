@@ -2,7 +2,7 @@ import {
   updateLink,
 } from '../actions/action_types';
 
-const defaultState = null;
+const defaultState = '';
 
 const linkReducer = (state = defaultState, action) => {
   switch (action.type) {

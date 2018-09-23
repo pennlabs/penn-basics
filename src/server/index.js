@@ -10,7 +10,7 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
-const { PORT } = process.env;
+const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
 global.__basedir = path.join(__dirname, '..', '..');
@@ -39,7 +39,7 @@ app.use('/api/dining', diningRouter(DB));
 app.use('/', frontendRouter(DB));
 
 // Seed Dining Data on Server Start
-require('./database/seedDiningInfo').full_seed();
+// require('./database/seedDiningInfo').full_seed();
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console
