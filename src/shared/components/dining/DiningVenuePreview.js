@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const DiningVenuePreview = ({ name, id, image }) => (
@@ -13,5 +14,11 @@ const DiningVenuePreview = ({ name, id, image }) => (
     </div>
   </Link>
 );
+
+DiningVenuePreview.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};
 
 export default DiningVenuePreview;

@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 import MenuItem from './MenuItem';
 
-const Section = ({ title, items, shouldBeList }) => {
+const Section = ({ title, items, shouldBeList = false }) => {
   let sectionItems = '';
+
   if (title === 'salad bar' || title === 'grill') {
     // If only the first item should be displayed
     sectionItems = (
@@ -70,9 +71,17 @@ const Section = ({ title, items, shouldBeList }) => {
   );
 };
 
+Section.defaultProps = {
+  shouldBeList: false,
+};
+
 Section.propTypes = {
-  title: PropTypes.string,
-  items: PropTypes.array,
+  title: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+    }),
+  ).isRequired,
   shouldBeList: PropTypes.bool,
 };
 
