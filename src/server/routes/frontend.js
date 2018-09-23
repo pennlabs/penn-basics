@@ -8,4 +8,4 @@ module.exports = function frontendRouter(DB) {
   });
 
   return router;
-}
+};

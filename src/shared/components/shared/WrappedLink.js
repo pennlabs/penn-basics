@@ -20,6 +20,7 @@ class WrappedLink extends Component { // eslint-disable-line
     return (
       <Link
         onClick={() => { updateReduxWithPath(to); }}
+        to={to}
         {...props}
       />
     );
