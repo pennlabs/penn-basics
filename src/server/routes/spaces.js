@@ -69,4 +69,4 @@ module.exports = function spacesRouter(DB) {
   });
 
   return router;
-}
+};

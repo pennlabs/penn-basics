@@ -1,5 +1,4 @@
-const mongoose = require('./mongoose-connect');
-const moment = require('moment');
+require('./mongoose-connect');
 
 // Dining Imports
 const _ = require('lodash');
@@ -16,8 +15,10 @@ function findAllSpaces() {
   return Space.find();
 }
 
-// params: filter object = (open: Boolean, outlets: Integer, noise: Integer, groups: Integer)
-function filterSpaces(open, outletLevel, quietLevel, groupLevel) {
+// params: filter =
+// (open: Boolean, outlets: Integer, noise: Integer, groups: Integer, hour: integer)
+
+function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
   if (open) {
     return Space.find({
       start: { $lte: hour },
@@ -66,7 +67,7 @@ function getVenueMenuForDate(venueId, date) {
   return Venue.findOne({ venueId })
     .then((venue) => {
       if (!venue) {
-        return res.status(400).send('Venue does not exist');
+        throw Error('Venue not found');
       }
 
       return Meal.find({ venue: venue.id, date });
@@ -83,7 +84,8 @@ function formatMealsObject(meals) {
       retObject[date][type] = _.groupBy(retObject[date][type], 'category');
       const categories = Object.keys(retObject[date][type]);
       categories.forEach((category) => {
-        retObject[date][type][category] = retObject[date][type][category][0];
+        const [first] = retObject[date][type][category];
+        retObject[date][type][category] = first;
 
         if (retObject[date][type][category]) {
           retObject[date][type][category] = retObject[date][type][category].meals;
@@ -110,7 +112,7 @@ function dateRangeMenu(venueId, startDate, endDate) {
       })
         .then(meals => formatMealsObject(meals));
     })
-    .catch(console.log);
+    .catch(console.log); //eslint-disable-line
 }
 
 // Events Functions
