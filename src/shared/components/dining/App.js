@@ -1,6 +1,7 @@
 // Import frameworks
 import React, { Component } from 'react';
-import uuid from 'uuid/v4';
+import uuid from 'uuid';
+
 import Filter from '../shared/filter/Filter';
 import DiningVenuePreview from './DiningVenuePreview';
 

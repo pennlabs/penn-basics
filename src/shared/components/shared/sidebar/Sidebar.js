@@ -27,7 +27,11 @@ class Sidebar extends Component {
   }
 }
 
-const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar, link }) => {
+const mapStateToProps = ({
+  dining: { sidebarInfo: diningSidebarInfo },
+  sidebar,
+  link,
+}) => {
   switch (sidebar) {
     case sidebarDining:
       return { sections: diningSidebarInfo, link };
