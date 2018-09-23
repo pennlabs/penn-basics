@@ -5,6 +5,12 @@ import SpaceCard from './SpaceCard';
 import SpaceModal from './SpaceModal';
 
 class App extends Component {
+  static openOrNot(space, time, day) {
+    const start = space.start[day];
+    const end = space.end[day];
+    return (time > start && time < end);
+  }
+
   constructor(props) {
     super(props);
 
@@ -12,15 +18,22 @@ class App extends Component {
       modalSpace: {},
     };
 
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  componentDidMount() {
     axios.get('/api/spaces/all')
       .then((res) => {
         const spaces = {};
         const today = new Date();
         const day = today.getDay();
         const time = today.getHours() + (today.getMinutes() / 60);
+
         res.data.spaces.forEach((space) => {
-          space.open = this.openOrNot(space, time, day);
-          spaces[space._id] = space;
+          const spaceObj = Object.assign({}, space);
+
+          spaceObj.open = App.openOrNot(space, time, day);
+          spaces[spaceObj._id] = space; // eslint-disable-line no-underscore-dangle
         });
 
         this.setState({
@@ -29,14 +42,16 @@ class App extends Component {
       });
   }
 
-  openOrNot(space, time, day) {
-    const start = space.start[day];
-    const end = space.end[day];
-    return (time > start && time < end);
+  closeModal() {
+    this.setState({
+      modalSpace: {},
+    });
   }
 
   renderSpaceModal(id) {
-    const space = this.state.spaces[id];
+    const { spaces } = this.state;
+    const space = spaces[id];
+
     this.setState({
       modalSpace: {
         space,
@@ -44,24 +59,27 @@ class App extends Component {
     });
   }
 
-  closeModal() {
-    this.setState({
-      modalSpace: {},
-    });
-  }
-
   render() {
+    const { spaces, modalSpace } = this.state;
     return (
       <div>
         {
-          this.state.spaces && Object.keys(this.state.spaces).map((spaceId) => {
-            const space = this.state.spaces[spaceId];
+          spaces && Object.keys(spaces).map((spaceId) => {
+            const space = spaces[spaceId];
             return (
-              <SpaceCard {...space} key={uuid()} renderSpaceModal={() => this.renderSpaceModal(spaceId)} />
+              <SpaceCard
+                {...space}
+                key={uuid()}
+                renderSpaceModal={() => this.renderSpaceModal(spaceId)}
+              />
             );
           })
         }
-        <SpaceModal {...this.state.modalSpace} closeModal={this.closeModal.bind(this)} />
+
+        <SpaceModal
+          {...modalSpace}
+          closeModal={this.closeModal}
+        />
       </div>
     );
   }

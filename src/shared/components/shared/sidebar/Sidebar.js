@@ -2,35 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
+
 import SidebarSection from './SidebarSection';
 
 import {
   sidebarDining,
-  sidebarLaundry,
-  sidebarReservations,
-  sidebarStudyspaces
 } from '../../../actions/action_types';
 
 class Sidebar extends Component {
-  static propTypes = {
-    // from redux
-    link: PropTypes.string,
-    sections: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string,
-        links: PropTypes.arrayOf(
-          PropTypes.shape({
-            name: PropTypes.string,
-            isOpen: PropTypes.bool,
-            venueID: PropTypes.number
-          })
-        )
-      })
-    )
-  }
-
   renderSections() {
-    return this.props.sections.map(section => <SidebarSection {...section} key={uuid()} />);
+    const { sections } = this.props;
+
+    return sections.map(section => (
+      <SidebarSection {...section} key={uuid()} />
+    ));
   }
 
   render() {
@@ -49,6 +34,22 @@ const mapStateToProps = ({ dining: { sidebarInfo: diningSidebarInfo }, sidebar, 
     default:
       throw Error('Sidebar does not yet handle info from non-dining sections');
   }
+};
+
+Sidebar.propTypes = {
+  link: PropTypes.string.isRequired,
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      links: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          isOpen: PropTypes.bool,
+          venueID: PropTypes.number,
+        }),
+      ),
+    }),
+  ).isRequired,
 };
 
 export default connect(mapStateToProps)(Sidebar);

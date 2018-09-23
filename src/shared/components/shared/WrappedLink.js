@@ -9,34 +9,35 @@ import { Link } from 'react-router-dom';
 
 import { updateLink } from '../../actions/action_types';
 
-class WrappedLink extends Component {
-  // WrappedLink takes the same props as Link does
-  static propTypes = {
-    to: PropTypes.any,
-    // from redux
-    updateReduxWithPath: PropTypes.func
-  }
-
+class WrappedLink extends Component { // eslint-disable-line
   render() {
-    const {updateReduxWithPath, ...props} = this.props;
+    const {
+      updateReduxWithPath,
+      to,
+      ...props
+    } = this.props;
+
     return (
       <Link
-        onClick={() => { updateReduxWithPath(this.props.to); }}
+        onClick={() => { updateReduxWithPath(to); }}
         {...props}
       />
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateReduxWithPath: (to) => {
-      dispatch({
-        type: updateLink,
-        payload: to
-      });
-    }
-  };
+const mapDispatchToProps = dispatch => ({
+  updateReduxWithPath: (to) => {
+    dispatch({
+      type: updateLink,
+      payload: to,
+    });
+  },
+});
+
+WrappedLink.propTypes = {
+  to: PropTypes.any, // eslint-disable-line
+  updateReduxWithPath: PropTypes.func.isRequired,
 };
 
-export default connect(() => { return {}; }, mapDispatchToProps)(WrappedLink);
+export default connect(() => ({}), mapDispatchToProps)(WrappedLink);

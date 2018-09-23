@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+// TODO remove imgur jawn
+
 const NotFound = ({
   message = 'It seems like the content you are looking for was either moved or does not exist.',
   title = '404: Content not found',

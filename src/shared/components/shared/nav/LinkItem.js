@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, Link } from 'react-router-dom';
 
 import WrappedLink from '../WrappedLink';
 
-class LinkItem extends Component {
-  static propTypes = {
-    name: PropTypes.string,
-    url: PropTypes.string,
-  }
+const LinkItem = ({ name, url }) => (
+  <li>
+    <WrappedLink to={`${url}`} className="link">
+      {name}
+    </WrappedLink>
+  </li>
+);
 
-  render() {
-    return (
-      <li>
-        <WrappedLink to={`${this.props.url}`} className="link">
-          {this.props.name}
-        </WrappedLink>
-      </li>
-    );
-  }
-}
+LinkItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
 
 export default LinkItem;

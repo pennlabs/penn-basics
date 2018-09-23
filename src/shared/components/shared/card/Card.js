@@ -1,45 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-/**
- * Render a card with a white background, slight dropshadow, and slightly rounded borders
- */
-class Card extends Component {
-  render() {
-    const content = (
-      <div className="card">
-        <div className="card-content">
-          <p className="title">
-            {this.props.title}
-          </p>
-          {
-            this.props.subtitle
-              ? (
-                <p className="subtitle medium-gray-text">
-                  {this.props.subtitle}
-                </p>
-              )
-              : ''
-          }
-        </div>
+// Render a card with a white background, slight dropshadow, and slightly rounded borders
+const Card = ({
+  title,
+  subtitle = '',
+  url,
+}) => {
+  const content = (
+    <div className="card">
+      <div className="card-content">
+        <p className="title">
+          {title}
+        </p>
+        {
+          subtitle ? (
+            <p className="subtitle medium-gray-text">
+              {subtitle}
+            </p>
+          ) : null
+        }
       </div>
-    );
+    </div>
+  );
 
-    if (this.props.url) {
-      return (
-        <div className="column is-half-desktop">
-          <Link to={this.props.url}>
+  return (
+    <div className="column is-half-desktop">
+      {
+        url ? (
+          <Link to={url}>
             {content}
           </Link>
-        </div>
-      );
-    }
-    return (
-      <div className="column is-half-desktop">
-        {content}
-      </div>
-    );
-  }
-}
+        ) : (
+          content
+        )
+      }
+    </div>
+  );
+};
+
+Card.defaultProps = {
+  subtitle: '',
+};
+
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  url: PropTypes.string.isRequired,
+};
 
 export default Card;
