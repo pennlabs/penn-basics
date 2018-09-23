@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Successfully connected to database');
+  console.log('Successfully connected to database'); //eslint-disable-line
 });
 
 mongoose.Promise = global.Promise;
