@@ -10,12 +10,12 @@ const BASE = 'http://api.pennlabs.org';
 
 // TODO: implement me.
 // Transform API data into format suitable for redux
-function combineData(hallData, idData) {
+// function combineData(hallData, idData) {
 
-}
+// }
 
 // make two requests to two different endpoints, and combine the data
-export function getAllLaundryData() {
+export function getAllLaundryData() { // eslint-disable-line
   return async (dispatch) => {
     dispatch({
       type: getLaundryDataRequested,

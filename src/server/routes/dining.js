@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-export default function diningRouter(DB) {
+module.exports = function diningRouter(DB) {
   router.post('/menu_date_range', (req, res) => {
     const {
       venueId,

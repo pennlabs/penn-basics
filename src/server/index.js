@@ -1,8 +1,8 @@
-import frontendRouter from './routes/frontend';
-import eventsRouter from './routes/events';
-import spacesRouter from './routes/spaces';
-import diningRouter from './routes/dining';
-import DB from './database/db';
+const frontendRouter=require('./routes/frontend');
+const eventsRouter=require('./routes/events');
+const spacesRouter=require('./routes/spaces');
+const diningRouter=require('./routes/dining');
+const DB = require('./database/db');
 
 const express = require('express');
 
@@ -39,7 +39,7 @@ app.use('/api/dining', diningRouter(DB));
 app.use('/', frontendRouter(DB));
 
 // Seed Dining Data on Server Start
-// require('./database/seedDiningInfo').full_seed();
+require('./database/seedDiningInfo').full_seed();
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console

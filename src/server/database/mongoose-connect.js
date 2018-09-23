@@ -11,4 +11,4 @@ mongoose.connection.on('connected', () => {
 
 mongoose.Promise = global.Promise;
 
-export default mongoose;
+module.exports = mongoose;

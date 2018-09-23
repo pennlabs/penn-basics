@@ -54,6 +54,7 @@ module.exports.getVenueWeeklyMenu = venueId => axios.get(`https://api.pennlabs.o
       if (day.tblDayPart) {
         day.tblDayPart.forEach((mealTime) => {
           const time = mealTime.txtDayPartDescription;
+          console.log(mealTime.tblStation)
           mealTimes[time] = processStation(mealTime.tblStation);
         });
       }
@@ -69,7 +70,7 @@ function getAllVenues() {
       const venues = res.data.document.venue;
       return refactorVenues(venues);
     })
-    .catch(() => null);
+    .catch(console.log);
 }
 
 module.exports.getAllVenues = getAllVenues;
@@ -82,6 +83,7 @@ module.exports.getVenueIdMappings = () => axios.get('https://api.pennlabs.org/di
   .then((res) => {
     const venuesData = res.data.document.venue;
     const venues = {};
+    // Create mapping from venue name to id
     venuesData.forEach((venue) => {
       venues[venue.name] = venue.id;
     });

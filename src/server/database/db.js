@@ -1,4 +1,4 @@
-import mongoose from './mongoose-connect';
+const mongoose = require('./mongoose-connect');
 const moment = require('moment');
 
 // Dining Imports
@@ -127,7 +127,7 @@ function getEvents(date) {
 }
 
 
-export default {
+module.exports = {
   // Spaces functions
   filterSpaces,
   getSpace,

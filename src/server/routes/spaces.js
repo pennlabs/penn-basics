@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-export default function spacesRouter(DB) {
+module.exports = function spacesRouter(DB) {
   router.get('/all', (req, res) => {
     DB.findAllSpaces().then((spaces) => {
       res.status(200).json({

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-export default function eventsRouter(DB) {
+module.exports = function eventsRouter(DB) {
   router.get('/', (req, res) => {
     res.status(200).json({
       message: 'Welcome to the API!',

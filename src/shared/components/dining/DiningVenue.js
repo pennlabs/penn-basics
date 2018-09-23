@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import mappings from './content/mappings';
+import venueIdToName from './content/mappings';
 
 import { getDiningData, getVenueInfo } from '../../actions/index';
 
@@ -230,7 +230,7 @@ class DiningVenue extends Component {
     const { dateFormatted, meal } = this.state;
 
     // If no mapping is found
-    if (!mappings[match.params.id]) {
+    if (!venueIdToName[match.params.id]) {
       error = 'Dining with passed in ID not found';
     } else if (diningData && dateFormatted) {
       if (!diningData[dateFormatted]) {
@@ -248,18 +248,6 @@ class DiningVenue extends Component {
 
     // Return the error
     return error;
-  }
-
-  renderMenu() {
-    const { diningData } = this.props;
-    const { meal, dateFormatted } = this.state;
-
-    if (!diningData) return null;
-    if (!meal) return null;
-
-    return (
-      <DiningMenu sectionsObj={diningData[dateFormatted][meal]} />
-    );
   }
 
   // Helper method to render any error
@@ -281,10 +269,14 @@ class DiningVenue extends Component {
 
   // Render the component
   render() {
-    const { match, diningDataPending, venueHoursPending } = this.props;
+    const {
+      match,
+      diningDataPending,
+      venueHoursPending,
+    } = this.props;
 
     // If the ID is not found
-    if (!mappings[match.params.id]) return (<NotFound />);
+    if (!venueIdToName[match.params.id]) return (<NotFound />);
 
     // Render based on state
     if (diningDataPending || venueHoursPending) {
@@ -293,6 +285,7 @@ class DiningVenue extends Component {
         <Loading />
       );
     }
+    const { diningData } = this.props;
 
     const {
       meal,
@@ -306,7 +299,7 @@ class DiningVenue extends Component {
       <div>
         {/* Render the title of the dining page */}
         <h1 className="title">
-          { mappings[match.params.id] }
+          { venueIdToName[match.params.id] }
         </h1>
 
         {/* Render an error if there is one */}
@@ -325,7 +318,7 @@ class DiningVenue extends Component {
           day={dateFormatted}
         />
 
-        { this.renderMenu() }
+        { diningData && meal && <DiningMenu sectionsObj={diningData[dateFormatted][meal]} /> }
       </div>
     );
   }

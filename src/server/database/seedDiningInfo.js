@@ -14,7 +14,7 @@ const Meal = require('./models/Meal');
 
 function loadVenues() {
   return getAllVenues()
-    .then((venues) => {
+    .then(venues => {
       const ids = Object.keys(venues);
       return Promise.all(ids.map((id) => {
         const venue = venues[id];
@@ -30,21 +30,21 @@ function loadVenues() {
             lng: info.lat,
           },
         })
-          .save()
-          .then(venueObj => Promise.all(_.flatten(venue.dateHours.map((obj) => {
-            const dt = new Date(obj.date);
-            const date = new Date(dt.getTime() + (4 * 3600 * 1000));
-            const meals = obj.meal;
-            return meals.map((meal) => {
-              new DateHours({
-                date,
-                type: meal.type,
-                open: meal.open,
-                close: meal.close,
-                venueId: venueObj.id,
-              }).save();
-            });
-          }))));
+        .save()
+        .then(venueObj => Promise.all(_.flatten(venue.dateHours.map((obj) => {
+          const dt = new Date(obj.date);
+          const date = new Date(dt.getTime() + (4 * 3600 * 1000));
+          const meals = obj.meal;
+          return meals.map((meal) => {
+            new DateHours({
+              date,
+              type: meal.type,
+              open: meal.open,
+              close: meal.close,
+              venueId: venueObj.id,
+            }).save();
+          });
+        }))));
       }));
     });
 }
@@ -107,7 +107,7 @@ function loadMeals() {
       return resolve(meals);
     });
   })
-    .then(meals => loadMealsObjIntoDB(meals));
+  .then(meals => loadMealsObjIntoDB(meals));
 }
 
 function deleteDiningCollections() {
@@ -116,9 +116,7 @@ function deleteDiningCollections() {
     .then(() => Meal.find().remove());
 }
 
-module.exports.venues_seed = loadVenues;
-module.exports.meals_seed = loadMeals;
-module.exports.full_seed = () => {
+const full_seed = () => {
   // Getting venueid mappings may not be necessary on every call
   deleteDiningCollections()
     .then(() => loadVenues())
@@ -126,3 +124,7 @@ module.exports.full_seed = () => {
     .then(() => console.log('COMPLETED'))
     .catch(console.log);
 };
+
+module.exports.venues_seed = loadVenues;
+module.exports.meals_seed = loadMeals;
+module.exports.full_seed = full_seed;
