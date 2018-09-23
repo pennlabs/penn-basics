@@ -2,8 +2,8 @@ const async = require('async');
 const _ = require('lodash');
 
 // Import functions
-const { getVenueWeeklyMenu } = require('./diningWrapper');
-const { getAllVenues } = require('./diningWrapper');
+const { getVenueWeeklyMenu } = require('./DiningWrapper');
+const { getAllVenues } = require('./DiningWrapper');
 const venueInfo = require('./venue_info');
 
 // Import database models

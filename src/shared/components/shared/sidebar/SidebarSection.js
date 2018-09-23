@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import List from './List';
@@ -53,7 +53,7 @@ class SidebarSection extends Component {
         {isExpanded && (<List links={links} />)}
       </div>
     );
-  };
+  }
 }
 
 SidebarSection.defaultProps = {
