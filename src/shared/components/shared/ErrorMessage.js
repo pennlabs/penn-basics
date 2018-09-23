@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Display an error to the user
 const ErrorMessage = ({ message = '' }) => {
   if (!message) return null;
 
@@ -14,14 +13,12 @@ const ErrorMessage = ({ message = '' }) => {
   );
 };
 
-ErrorMessage.defautProps = {
+ErrorMessage.defaultProps = {
   message: '',
 };
 
-// Validate props
 ErrorMessage.propTypes = {
   message: PropTypes.string,
 };
 
-// Export this component
 export default ErrorMessage;

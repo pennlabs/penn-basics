@@ -1,31 +1,53 @@
-import React, { Component } from 'react';
-import List from './List';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class SidebarSection extends Component {
-  state = {
-    isExpanded: false
-  }
+import List from './List';
 
-  onClick = (e) => {
+const SidebarSection = ({ title, links, tabIndex = -1 }) => {
+  const state = {
+    isExpanded: false,
+  };
+
+  const handleKeyPress = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    this.setState({ isExpanded: !this.state.isExpanded });
-  }
 
-  render() {
-    return (
-      <div className="sidebarSection" onClick={this.onClick}>
-        <h2 className="sidebarSectionTitle">{this.props.title}</h2>
-        {this.state.isExpanded && <List links={this.props.links} />}
-      </div>
-    );
-  }
-}
+    if (e.keyCode === 32) {
+      state.isExpanded = !state.isExpanded;
+    }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    state.isExpanded = !state.isExpanded;
+  };
+
+  return (
+    <div
+      className="sidebarSection"
+      onClick={handleClick}
+      onKeyPress={handleKeyPress}
+      role="button"
+      tabIndex={tabIndex}
+    >
+      <h2 className="sidebarSectionTitle">
+        {title}
+      </h2>
+      {state.isExpanded && (<List links={links} />)}
+    </div>
+  );
+};
+
+SidebarSection.defaultProps = {
+  tabIndex: -1,
+};
 
 SidebarSection.propTypes = {
-  title: PropTypes.string,
-  links: PropTypes.array,
+  tabIndex: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  links: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default SidebarSection;

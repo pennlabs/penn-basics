@@ -1,20 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
 
-class List extends Component {
-  render() {
-    const list = this.props.links.map((link, index) => <ListItem name={link.name} isOpen={link.isOpen} venueID={link.venueID} key={index} />);
-    return (
-      <ul>
-        {list}
-      </ul>
-    );
-  }
-}
+const List = ({ links = [] }) => {
+  const list = links.map(({
+    name,
+    isOpen,
+    venueID,
+  }) => (
+    <ListItem
+      name={name}
+      isOpen={isOpen}
+      venueID={venueID}
+      key={venueID}
+    />
+  ));
+
+  return (
+    <ul>
+      {list}
+    </ul>
+  );
+};
 
 List.propTypes = {
-  links: PropTypes.array,
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      isOpen: PropTypes.bool,
+      venueID: PropTypes.number,
+    }),
+  ).isRequired,
 };
 
 export default List;

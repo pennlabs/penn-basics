@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
+// Shared components
 import Nav from './shared/nav/Nav';
 import Sidebar from './shared/sidebar/Sidebar';
 
+// Page components
 import Home from './home/App';
 import NotFound from './shared/NotFound';
 import Dining from './dining/App';
@@ -23,6 +25,7 @@ export default () => (
         <Route exact path="/:anything_but_home" component={Sidebar} />
         <Route exact path="/:anything_but_home/*" component={Sidebar} />
       </Switch>
+
       <div id="app">
         <Switch>
           <Route exact path="/" component={Home} />
