@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import Links from './Links';
 import Menu from './Menu';
 
-// TODO replace imgur jawn
+// TODO replace imgur jawn with local jawn
 
 const Nav = () => (
   <nav className="navbar" id="navbar">

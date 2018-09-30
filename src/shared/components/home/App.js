@@ -10,11 +10,13 @@ import '../../styles/home.scss'; // TODO is this necessary?
 class Home extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       show: false,
       notification: '',
       dining: false,
     };
+
     this.close = this.close.bind(this);
   }
 
@@ -55,7 +57,7 @@ class Home extends Component {
 
         <div className="tile is-ancestor">
           <div className="tile is-parent is-vertical">
-            <div className="card box">
+            <div className="card pad marg">
               <h1 className="title is-4">
                 <span role="img" aria-label="sun">☀️</span>
                 Good morning!

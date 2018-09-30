@@ -6,7 +6,7 @@ import '../../styles/home.scss'; // TODO Is this necessary?
 // TODO why two study cards?
 
 const Studyspaces = () => (
-  <div className="tile is-child box">
+  <div className="card pad marg">
     <h1 className="title is-4">
       Find a study space
     </h1>

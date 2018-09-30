@@ -2,7 +2,7 @@ import React from 'react';
 import '../../styles/home.scss';
 
 const Reserve = () => (
-  <div className="tile is-child box">
+  <div className="card pad marg">
     <h1 className="title is-4">
       Book a GSR
     </h1>
