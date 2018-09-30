@@ -1,19 +1,20 @@
-const frontendRouter=require('./routes/frontend');
-const eventsRouter=require('./routes/events');
-const spacesRouter=require('./routes/spaces');
-const diningRouter=require('./routes/dining');
-const DB = require('./database/db');
-
 const express = require('express');
-
-const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+
+const frontendRouter = require('./routes/frontend');
+const eventsRouter = require('./routes/events');
+const spacesRouter = require('./routes/spaces');
+const diningRouter = require('./routes/dining');
+
+const DB = require('./database/db');
+
+const app = express();
 
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
-global.__basedir = path.join(__dirname, '..', '..');
+global.__basedir = path.join(__dirname, '..', '..'); // eslint-disable-line
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 if (process.env.NODE_ENV !== 'production') {
