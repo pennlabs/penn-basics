@@ -1,6 +1,4 @@
-//Styling for home components
 @import '/palette.scss';
-
 
 .home {
   .spacer {
@@ -9,7 +7,7 @@
   }
 
   .white-card {
-    background-color: white;
+    background: $white;
     text-align: center;
     padding: 30px;
   }
@@ -36,7 +34,7 @@
 
 .book-button {
   color: white !important;
-  background-color: $purple;
+  background: $purple;
   outline-style: none;
 }
 
@@ -46,17 +44,17 @@
 }
 
 .tag-is-blue {
-  background-color: $purple;
+  background: $purple;
   color: $white !important;
 }
 
 .tag-is-yellow {
-  background-color: #FFBA40 !important;
+  background: $gold !important;
   color: $white;
 }
 
 .tag-is-green {
-  background-color: $green !important;
+  background: $green !important;
   color: $white;
 }
 

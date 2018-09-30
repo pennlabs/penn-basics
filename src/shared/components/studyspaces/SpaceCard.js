@@ -24,6 +24,7 @@ const SpaceCard = ({
       </p>
 
       <button
+        className="button is-info"
         type="button"
         onClick={() => renderSpaceModal()}
         onKeyPress={handleKeyPress}

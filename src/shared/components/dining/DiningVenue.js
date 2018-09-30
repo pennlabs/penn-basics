@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import venueIdToName from './content/mappings';
+import venueData from './content/venueData';
 
 import { getDiningData, getVenueInfo } from '../../actions/index';
 
@@ -50,7 +50,6 @@ class DiningVenue extends Component {
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.renderError = this.renderError.bind(this);
     this.refreshState = this.refreshState.bind(this);
-    this.renderMenu = this.renderMenu.bind(this);
   }
 
   componentDidMount() {
@@ -126,12 +125,8 @@ class DiningVenue extends Component {
     });
   }
 
-  /**
-   * Find days
-   */
   findDays() {
     const { diningData } = this.props;
-
     const { dateFormatted, meal, dateFormattedToday } = this.state;
 
     // Find the relevant meal if variables have been populated in the state and props
@@ -205,7 +200,7 @@ class DiningVenue extends Component {
     }
   }
 
-  //  Handle change to selection of meal to render
+  // Handle change to selection of meal to render
   handleChangeMeal(meal) {
     this.setState({
       meal,
@@ -228,10 +223,10 @@ class DiningVenue extends Component {
       diningData,
     } = this.props;
     const { dateFormatted, meal } = this.state;
+    const { id } = match.params;
 
-    // If no mapping is found
-    if (!venueIdToName[match.params.id]) {
-      error = 'Dining with passed in ID not found';
+    if (!venueData[id]) { // If no mapping is found
+      error = 'Dining venue not found';
     } else if (diningData && dateFormatted) {
       if (!diningData[dateFormatted]) {
         error = "Dining data not found for today's date";
@@ -274,9 +269,10 @@ class DiningVenue extends Component {
       diningDataPending,
       venueHoursPending,
     } = this.props;
+    const { id } = match.params;
 
     // If the ID is not found
-    if (!venueIdToName[match.params.id]) return (<NotFound />);
+    if (!venueData[id]) return (<NotFound />);
 
     // Render based on state
     if (diningDataPending || venueHoursPending) {
@@ -294,19 +290,21 @@ class DiningVenue extends Component {
       dateFormatted,
     } = this.state;
 
+    const { name } = venueData[id];
+
     return (
       // If there is no error and the data is not pending
       <div>
         {/* Render the title of the dining page */}
         <h1 className="title">
-          { venueIdToName[match.params.id] }
+          { name }
         </h1>
 
         {/* Render an error if there is one */}
         {this.renderError()}
 
         {/* Render the overview card at the top of the dining view */}
-        <DiningOverview id={match.params.id} />
+        <DiningOverview id={id} />
 
         {/* Render dropdowns for selecting dates and meals */}
         <DiningQuery
@@ -318,7 +316,11 @@ class DiningVenue extends Component {
           day={dateFormatted}
         />
 
-        { diningData && meal && <DiningMenu sectionsObj={diningData[dateFormatted][meal]} /> }
+        {
+          (diningData && meal) && (
+            <DiningMenu sectionsObj={diningData[dateFormatted][meal]} />
+          )
+        }
       </div>
     );
   }

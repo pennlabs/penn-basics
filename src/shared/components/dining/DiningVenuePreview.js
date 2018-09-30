@@ -17,7 +17,7 @@ const DiningVenuePreview = ({ name, id, image }) => (
 
 DiningVenuePreview.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
 };
 

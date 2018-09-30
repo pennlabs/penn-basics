@@ -73,7 +73,7 @@ function loadMealsObjIntoDB(meals) {
               date,
               type,
               category,
-              venue: venue._id, //eslint-disable-line
+              venue: venue._id, // eslint-disable-line
               meals: mealItems,
             }).save();
           });
@@ -85,7 +85,7 @@ function loadMealsObjIntoDB(meals) {
 function loadMeals() {
   // Populate meals object with all meals from Penn-provided API
   return new Promise((resolve, reject) => {
-    const venueIdMappings = require('./venue_id_mappings'); //eslint-disable-line
+    const venueIdMappings = require('./venue_id_mappings'); // eslint-disable-line
     const venueIds = Object.keys(venueIdMappings).map(k => venueIdMappings[k]);
     const meals = {};
     async.eachSeries(venueIds, (id, callback) => {

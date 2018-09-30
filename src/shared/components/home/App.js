@@ -34,6 +34,7 @@ class Home extends Component {
       })
       .catch((err) => {
         console.log(err); // eslint-disable-line
+
         // TODO better error handling
       });
   }
@@ -43,6 +44,7 @@ class Home extends Component {
   }
 
   render() {
+    // TODO less bulma madness
     const { dining, show, notification } = this.state;
 
     return (
@@ -53,7 +55,7 @@ class Home extends Component {
 
         <div className="tile is-ancestor">
           <div className="tile is-parent is-vertical">
-            <div className="tile is-child box">
+            <div className="card box">
               <h1 className="title is-4">
                 <span role="img" aria-label="sun">☀️</span>
                 Good morning!
@@ -64,6 +66,7 @@ class Home extends Component {
                 It will make people happy and give everyone some life.
               </p>
             </div>
+
             <Reserve />
           </div>
           <div className="tile is-5 is-vertical is-parent">
