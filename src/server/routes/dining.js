@@ -9,8 +9,7 @@ module.exports = function diningRouter(DB) {
     } = req.body;
 
     if (!venueId || !startDate || !endDate) {
-      console.log('INVALID FORMAT');
-      console.log(req.body);
+      console.log('INVALID FORMAT'); //eslint-disable-line
 
       res.status(400).send('You must pass in a valid venueId, startDate, and endDate');
 
@@ -59,4 +58,4 @@ module.exports = function diningRouter(DB) {
   });
 
   return router;
-}
+};

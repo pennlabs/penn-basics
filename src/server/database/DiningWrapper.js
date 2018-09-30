@@ -82,7 +82,7 @@ function getAllVenues() {
       const venues = res.data.document.venue;
       return refactorVenues(venues);
     })
-    .catch(console.log); // eslint-disable-line
+    .catch(console.log); //eslint-disable-line
 }
 
 module.exports.getAllVenues = getAllVenues;

@@ -8,7 +8,7 @@ import {
 
 const BASE = 'https://dining-api-v2.herokuapp.com/api';
 
-export function getDiningData(venueId) {
+export function getDiningData(venueId) { //eslint-disable-line
   return async (dispatch) => {
     dispatch({
       type: getDiningDataRequested,
