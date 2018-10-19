@@ -1,45 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
   Card,
   Title,
   Text,
+  Modal,
 } from '../shared';
 
 // TODO render other info
-const SpaceCard = ({
-  name,
-  open,
-  renderSpaceModal,
-}) => {
-  const handleKeyPress = (event) => {
+class SpaceCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+    };
+
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  toggleModal() {
+    const { showModal } = this.state;
+    this.setState({
+      showModal: !showModal,
+    });
+  }
+
+  handleKeyPress(event) {
     if (event.keyCode === 32) {
-      renderSpaceModal();
+      this.toggleModal();
     }
-  };
+  }
 
-  return (
-    <Card>
-      <Title>
-        {name}
-      </Title>
+  render() {
+    const { name, open } = this.props;
+    const { showModal } = this.state;
 
-      <Text>
-        {open ? 'Open Af' : 'Closed Af'}
-      </Text>
+    return (
+      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress}>
+        <Title>
+          {name}
+        </Title>
 
-      <button
-        className="button is-info"
-        type="button"
-        onClick={() => renderSpaceModal()}
-        onKeyPress={handleKeyPress}
-      >
-        Render Space Info Modal
-      </button>
-    </Card>
-  );
-};
+        <Text marginBottom="0">
+          {open ? 'Open Af' : 'Closed Af'}
+        </Text>
+
+        <Modal show={showModal} toggle={this.toggleModal}>
+          <Title>{name}</Title>
+        </Modal>
+      </Card>
+    );
+  }
+}
 
 SpaceCard.defaultProps = {
   open: false,
@@ -48,7 +63,6 @@ SpaceCard.defaultProps = {
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
-  renderSpaceModal: PropTypes.func.isRequired,
 };
 
 export default SpaceCard;
