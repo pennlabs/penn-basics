@@ -47,9 +47,14 @@ const SpaceModal = ({ space, closeModal }) => {
 
 // TODO give shape to the object
 
+SpaceModal.defaultProps = {
+  space: null,
+  closeModal: () => {},
+};
+
 SpaceModal.propTypes = {
-  space: PropTypes.object.isRequired, // eslint-disable-line
-  closeModal: PropTypes.func.isRequired,
+  space: PropTypes.object, // eslint-disable-line
+  closeModal: PropTypes.func,
 };
 
 export default SpaceModal;

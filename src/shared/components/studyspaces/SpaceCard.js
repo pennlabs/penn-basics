@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// TODO render other info?
+import {
+  Card,
+  Title,
+  Text,
+} from '../shared';
 
+// TODO render other info
 const SpaceCard = ({
   name,
   open,
@@ -15,13 +20,14 @@ const SpaceCard = ({
   };
 
   return (
-    <div>
-      <h1>
+    <Card>
+      <Title>
         {name}
-      </h1>
-      <p>
+      </Title>
+
+      <Text>
         {open ? 'Open Af' : 'Closed Af'}
-      </p>
+      </Text>
 
       <button
         className="button is-info"
@@ -31,13 +37,17 @@ const SpaceCard = ({
       >
         Render Space Info Modal
       </button>
-    </div>
+    </Card>
   );
+};
+
+SpaceCard.defaultProps = {
+  open: false,
 };
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
-  open: PropTypes.bool.isRequired,
+  open: PropTypes.bool,
   renderSpaceModal: PropTypes.func.isRequired,
 };
 
