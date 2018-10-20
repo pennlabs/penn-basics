@@ -11,6 +11,11 @@ const SpaceSchema = new Schema({
   outlets: Number,
   groups: Number,
   quiet: Number,
+  image: String,
+  location: {
+    lat: Number,
+    lng: Number,
+  },
 });
 
 module.exports = mongoose.model('Space', SpaceSchema);

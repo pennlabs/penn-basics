@@ -35,7 +35,7 @@ class SpaceCard extends Component {
   }
 
   render() {
-    const { name, open } = this.props;
+    const { name, open, description } = this.props;
     const { showModal } = this.state;
 
     return (
@@ -50,6 +50,7 @@ class SpaceCard extends Component {
 
         <Modal show={showModal} toggle={this.toggleModal}>
           <Title>{name}</Title>
+          {description && (<Text>{description}</Text>)}
         </Modal>
       </Card>
     );
@@ -58,11 +59,13 @@ class SpaceCard extends Component {
 
 SpaceCard.defaultProps = {
   open: false,
+  description: '',
 };
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
+  description: PropTypes.string,
 };
 
 export default SpaceCard;
