@@ -18,10 +18,17 @@ const SpaceModal = ({
 }) => (
   <Modal show={show} toggle={toggle}>
     <ModalContainer>
-      <Title marginBottom="2rem">{name}</Title>
+      <Title marginBottom="2.5vh">{name}</Title>
     </ModalContainer>
 
-    {image && (<Image src={image} alt={name} />)}
+    {image && (
+      <Image
+        src={image}
+        alt={name}
+        marginBottom="2.5vh"
+      />
+    )}
+
     {description && (
       <ModalContainer>
         <Text>{description}</Text>
