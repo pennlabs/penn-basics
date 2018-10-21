@@ -63,6 +63,7 @@
   },
   {
     "name": "Huntsman Computer Lab F75",
+    "image": "https://p4.zdassets.com/hc/theme_assets/708153/200120919/CPU_LAB_2-399x266.jpg",
     "description": "",
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 2,
@@ -103,6 +104,7 @@
   },
   {
     "name": "Huntsman Forum",
+    "image": "https://c1.staticflickr.com/8/7121/7748619482_1df73847ba_b.jpg",
     "description": "",
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
@@ -163,6 +165,7 @@
   },
   {
     "name": "United by Blue",
+    "image": "http://cdn.shopify.com/s/files/1/0287/3670/files/header-slider-image-walnut2.jpg?10285525781100010835",
     "description": "",
     "address": "3421 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,

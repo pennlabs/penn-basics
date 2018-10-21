@@ -54,6 +54,26 @@ const slideOut = keyframes`
   }
 `;
 
+const slideInMobile = keyframes`
+  0% {
+    margin-left: 100%;
+  }
+
+  100% {
+    margin-left: 25%;
+  }
+`;
+
+const slideOutMobile = keyframes`
+  0% {
+    margin-left: 25%;
+  }
+
+  100% {
+    margin-right: 100%;
+  }
+`;
+
 const ModalWrapper = styled.div`
   position: fixed;
   width: 100vw;
@@ -90,6 +110,12 @@ const ModalContent = styled.div`
   animation-duration: ${ANIMATION_DURATION};
   box-sizing: border-box;
   padding: 10.41vh 0;
+
+  @media screen and (max-width: 900px) {
+    width: 75%;
+    margin-left: ${({ show }) => (show ? '25%' : '100%')};
+    animation-name: ${({ show }) => (show ? slideInMobile : slideOutMobile)};
+  }
 `;
 
 const ModalClose = styled.p`

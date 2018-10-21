@@ -6,6 +6,8 @@ import {
   Card,
   Title,
   Text,
+  Row,
+  Col,
 } from '../shared';
 
 // TODO render other info
@@ -44,22 +46,29 @@ class SpaceCard extends Component {
     const { showModal } = this.state;
 
     return (
-      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress}>
-        <Title>
-          {name}
-        </Title>
+      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0">
+        <Row>
+          {image && (
+            <Col backgroundImage={image} width="30%" />
+          )}
+          <Col padding="1rem">
+            <Title>
+              {name}
+            </Title>
 
-        <Text marginBottom="0">
-          {open ? 'Open Af' : 'Closed Af'}
-        </Text>
+            <Text marginBottom="0">
+              {open ? 'Open Af' : 'Closed Af'}
+            </Text>
 
-        <SpaceModal
-          show={showModal}
-          toggle={this.toggleModal}
-          name={name}
-          image={image}
-          description={description}
-        />
+            <SpaceModal
+              show={showModal}
+              toggle={this.toggleModal}
+              name={name}
+              image={image}
+              description={description}
+            />
+          </Col>
+        </Row>
       </Card>
     );
   }

@@ -51,7 +51,6 @@ class App extends Component {
       <div>
         {Object.keys(spaces).map((spaceId) => {
           const space = spaces[spaceId];
-          console.log(space);
           return (
             <SpaceCard
               {...space}
