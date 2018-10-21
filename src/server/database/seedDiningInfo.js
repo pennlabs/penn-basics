@@ -56,12 +56,15 @@ function loadMealsObjIntoDB(meals) {
       // Get corresponding meals object for venue
       const mealsObj = meals[venueId];
       const dates = Object.keys(mealsObj);
+
       return (dates.map((date) => {
         const dateMealsObj = mealsObj[date];
         const types = Object.keys(dateMealsObj);
+
         return types.map((type) => { // Type - breakfast lunch or dinner
           const mealObjects = dateMealsObj[type];
           const categories = Object.keys(mealObjects);
+
           return categories.map((category) => {
             const items = mealObjects[category];
             const mealItems = items.map(item => ({
@@ -69,6 +72,7 @@ function loadMealsObjIntoDB(meals) {
               description: item.description ? item.description : '',
               tags: item.tags ? item.tags : [],
             }));
+
             return new Meal({
               date,
               type,
