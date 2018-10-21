@@ -92,10 +92,6 @@ const ModalContent = styled.div`
   padding: 10.41vh 0;
 `;
 
-const Container = styled.div`
-  padding: 0 8.33vw;
-`;
-
 const ModalClose = styled.p`
   float: right;
   margin-top: -4.16vh;
@@ -152,9 +148,7 @@ export class Modal extends Component {
             &times;
           </ModalClose>
 
-          <Container>
-            { children }
-          </Container>
+          { children }
         </ModalContent>
       </ModalWrapper>
     );
@@ -166,3 +160,7 @@ Modal.propTypes = {
   toggle: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired, // eslint-disable-line
 };
+
+export const ModalContainer = styled.div`
+  padding: 0 8.33vw;
+`;

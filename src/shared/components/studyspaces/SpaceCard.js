@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import SpaceModal from './SpaceModal';
 import {
   Card,
   Title,
   Text,
-  Modal,
 } from '../shared';
 
 // TODO render other info
@@ -35,7 +35,12 @@ class SpaceCard extends Component {
   }
 
   render() {
-    const { name, open, description } = this.props;
+    const {
+      name,
+      open,
+      description,
+      image,
+    } = this.props;
     const { showModal } = this.state;
 
     return (
@@ -48,10 +53,13 @@ class SpaceCard extends Component {
           {open ? 'Open Af' : 'Closed Af'}
         </Text>
 
-        <Modal show={showModal} toggle={this.toggleModal}>
-          <Title>{name}</Title>
-          {description && (<Text>{description}</Text>)}
-        </Modal>
+        <SpaceModal
+          show={showModal}
+          toggle={this.toggleModal}
+          name={name}
+          image={image}
+          description={description}
+        />
       </Card>
     );
   }
@@ -60,12 +68,14 @@ class SpaceCard extends Component {
 SpaceCard.defaultProps = {
   open: false,
   description: '',
+  image: '',
 };
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
   description: PropTypes.string,
+  image: PropTypes.string,
 };
 
 export default SpaceCard;

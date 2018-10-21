@@ -1,8 +1,9 @@
 [
   {
     "name": "Van Pelt Moelis Reading Room",
-    "description": "",
+    "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
     "address": "3420 Walnut St, Philadelphia",
+    "image": "https://www.architecturalrecord.com/ext/resources/Issues/2017/November/lighting/1711-Lighting-Holistic-Strategies-Moelis-Family-Grand-Reading-Room-01.jpg",
     "outlets": 2,
     "quiet": 2,
     "groups": 2,
@@ -30,13 +31,14 @@
   },
   {
     "name": "Huntsman QSR 1st Floor",
-    "description": "",
+    "image": "https://snworksceo.imgix.net/dpn-utb/ce5ee52f-cf96-4e1f-9c6e-f95d7ae441e5.sized-1000x1000.jpg",
+    "description": "With 324,000 square feet, 48 classrooms, 57 group study rooms, lecture halls, auditoriums and conference rooms &mdash,Jon M. Huntsman Hall is one of the most sophisticated large-scale instructional centers of any educational institution in the world. With its warm natural finishes of wood, brick and stone, reflecting the historic significance of surrounding buildings on the University campus, it connects Wharton to the world.",
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
     "groups": 2,
-    "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2]
   },
   {
     "name": "Huntsman QSR 2nd Floor",
@@ -45,11 +47,12 @@
     "outlets": 0,
     "quiet": 2,
     "groups": 2,
-    "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2]
   },
   {
     "name": "Starbucks 1920 Commons",
+    "image": "http://cms.business-services.upenn.edu/dining/templates/dine_default/images/sub/locations/1920-commons-retail.jpg",
     "description": "",
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "outlets": 1,
@@ -269,18 +272,8 @@
     "end": []
   },
   {
-    "name": "HubBub",
-    "description": "",
-    "address": "3736 Spruce St, Philadelphia, PA 19104",
-    "outlets": 0,
-    "quiet": 0,
-    "groups": 1,
-    "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [5, 6, 6, 6, 6, 6, 5]
-  },
-  {
     "name": "Pret a Manger",
-    "description": "",
+    "description": "Quick, convenient, busy cafe and study space within Huntsman Hall.",
     "address": "3725 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
