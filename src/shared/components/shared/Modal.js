@@ -189,4 +189,7 @@ Modal.propTypes = {
 
 export const ModalContainer = styled.div`
   padding: 0 8.33vw;
+  background: ${({ background }) => background || WHITE};
+  padding-top: ${({ paddingTop }) => paddingTop || 0};
+  padding-bottom: ${({ paddingBottom }) => paddingBottom || 0};
 `;

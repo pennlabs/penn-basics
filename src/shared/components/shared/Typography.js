@@ -1,9 +1,21 @@
 import styled from 'styled-components';
 
+import { MEDIUM_GRAY } from '../../styles/colors';
+
 export const Text = styled.p`
-  line-height: 1.25;
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
   line-height: 1.5;
+  width: auto;
+  display: inline-block;
+`;
+
+export const Subtext = styled.p`
+  margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
+  line-height: 1.5;
+  width: auto;
+  display: inline-block;
+  font-size: 80%;
+  color: ${MEDIUM_GRAY};
 `;
 
 export const Title = styled.h1`

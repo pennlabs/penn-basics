@@ -7,7 +7,9 @@ import {
   Modal,
   ModalContainer,
   Image,
+  Map,
 } from '../shared';
+import { SNOW } from '../../styles/colors';
 
 const SpaceModal = ({
   show,
@@ -15,6 +17,8 @@ const SpaceModal = ({
   name,
   image,
   description,
+  address,
+  location,
 }) => (
   <Modal show={show} toggle={toggle}>
     <ModalContainer>
@@ -29,17 +33,32 @@ const SpaceModal = ({
       />
     )}
 
-    {description && (
-      <ModalContainer>
-        <Text>{description}</Text>
-      </ModalContainer>
-    )}
+    <ModalContainer>
+      <Text>{description}</Text>
+    </ModalContainer>
+
+    <ModalContainer background={SNOW} paddingTop="1rem" paddingBottom="0.5rem">
+      <Text>
+        <strong>Address:</strong>
+        <br />
+        {address}
+      </Text>
+    </ModalContainer>
+    {location && location.lat && location.lng ? (
+      <Map
+        mapId={name}
+        location={location}
+        height="50%"
+      />
+    ) : null}
   </Modal>
 );
 
 SpaceModal.defaultProps = {
   description: '',
   image: '',
+  address: '',
+  location: null,
 };
 
 SpaceModal.propTypes = {
@@ -48,6 +67,11 @@ SpaceModal.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string,
   image: PropTypes.string,
+  address: PropTypes.string,
+  location: PropTypes.shape({
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+  }),
 };
 
 export default SpaceModal;

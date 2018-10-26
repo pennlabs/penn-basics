@@ -5,12 +5,14 @@ import SpaceModal from './SpaceModal';
 import {
   Card,
   Subtitle,
-  Text,
+  Subtext,
   Row,
   Col,
 } from '../shared';
+import { getNoiseLevel, getOutletsLevel } from './mapper';
 
-// TODO render other info
+// TODO hours for the day?
+
 class SpaceCard extends Component {
   constructor(props) {
     super(props);
@@ -40,32 +42,35 @@ class SpaceCard extends Component {
     const {
       name,
       open,
-      description,
       image,
+      quiet,
+      outlets,
     } = this.props;
     const { showModal } = this.state;
+    const noiseLevel = getNoiseLevel(quiet);
+    const outletsLevel = getOutletsLevel(outlets);
 
     return (
       <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0.5rem 0">
         <Row>
           {image && (
-            <Col backgroundImage={image} width="30%" />
+            <Col backgroundImage={image} width="30%" borderRadius="4px" />
           )}
-          <Col padding={image ? '0 0 0 1rem' : '0'}>
-            <Subtitle>
+          <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
+            <Subtitle marginBottom="0">
               {name}
             </Subtitle>
 
-            <Text marginBottom="0">
-              {open ? 'Open Af' : 'Closed Af'}
-            </Text>
+            <Subtext marginBottom="0">
+              {open ? 'Open' : 'Closed'}
+              {outletsLevel ? ` • ${outletsLevel}` : ''}
+              {noiseLevel ? ` • ${noiseLevel}` : ''}
+            </Subtext>
 
             <SpaceModal
               show={showModal}
               toggle={this.toggleModal}
-              name={name}
-              image={image}
-              description={description}
+              {...this.props}
             />
           </Col>
         </Row>
@@ -78,6 +83,8 @@ SpaceCard.defaultProps = {
   open: false,
   description: '',
   image: '',
+  outlets: 0,
+  quiet: -1,
 };
 
 SpaceCard.propTypes = {
@@ -85,6 +92,8 @@ SpaceCard.propTypes = {
   open: PropTypes.bool,
   description: PropTypes.string,
   image: PropTypes.string,
+  outlets: PropTypes.number,
+  quiet: PropTypes.number,
 };
 
 export default SpaceCard;

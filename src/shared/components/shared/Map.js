@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const MapWrapper = styled.div`
   width: 100%;
   flex: 1;
-  height: 100%;
+  height: ${({ height }) => height || '100%'};
 `;
 
 export class Map extends Component {
@@ -54,8 +54,8 @@ export class Map extends Component {
   }
 
   initMap() {
-    const { location } = this.props;
-    const map = new google.maps.Map(document.getElementById('map'), {
+    const { location, mapId } = this.props;
+    const map = new google.maps.Map(document.getElementById(mapId), {
       center: location,
       zoom: 16,
     });
@@ -80,10 +80,10 @@ export class Map extends Component {
   }
 
   render() {
+    const { height, mapId } = this.props;
+
     return (
-      <MapWrapper id="map">
-        This is the map
-      </MapWrapper>
+      <MapWrapper height={height} id={mapId} />
     );
   }
 }
@@ -93,6 +93,7 @@ Map.defaultProps = {
     lat: 39.9522,
     lng: -75.1932,
   },
+  height: undefined,
 };
 
 Map.propTypes = {
@@ -100,4 +101,6 @@ Map.propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
+  height: PropTypes.string,
+  mapId: PropTypes.string.isRequired,
 };

@@ -75,7 +75,7 @@ class App extends Component {
           })}
         </Col>
         <Col>
-          <Map />
+          <Map mapId="map" />
         </Col>
       </Row>
     );
