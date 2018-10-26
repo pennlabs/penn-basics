@@ -57,7 +57,7 @@ export class Map extends Component {
     const { location } = this.props;
     const map = new google.maps.Map(document.getElementById('map'), {
       center: location,
-      zoom: 8,
+      zoom: 16,
     });
 
     const geocoder = new google.maps.Geocoder();
