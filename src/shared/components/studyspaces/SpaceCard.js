@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import SpaceModal from './SpaceModal';
 import {
   Card,
-  Title,
+  Subtitle,
   Text,
   Row,
   Col,
@@ -46,15 +46,15 @@ class SpaceCard extends Component {
     const { showModal } = this.state;
 
     return (
-      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0">
+      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0.5rem 0">
         <Row>
           {image && (
             <Col backgroundImage={image} width="30%" />
           )}
-          <Col padding="1rem">
-            <Title>
+          <Col padding={image ? '0 0 0 1rem' : '0'}>
+            <Subtitle>
               {name}
-            </Title>
+            </Subtitle>
 
             <Text marginBottom="0">
               {open ? 'Open Af' : 'Closed Af'}

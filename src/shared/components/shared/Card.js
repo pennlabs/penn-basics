@@ -4,7 +4,7 @@ import { WHITE, SHADOW } from '../../styles/colors';
 export const Card = styled.div`
   background: ${WHITE};
   padding: ${({ padding }) => padding || '1rem'};
-  box-shadow: 0 0 14px 0 ${SHADOW};
+  box-shadow: ${({ shade }) => (shade ? `0 0 14px 0 ${SHADOW}` : 'none')};
   opacity: 1;
-  margin-bottom: ${({ marginBottom }) => marginBottom || '1.5rem'};
+  margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
 `;

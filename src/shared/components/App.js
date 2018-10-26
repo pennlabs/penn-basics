@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 // Shared components
 import Nav from './shared/nav/Nav';
-import Sidebar from './shared/sidebar/Sidebar';
+// import Sidebar from './shared/sidebar/Sidebar'; /* TODO */
 
 // Page components
 import Home from './home/App';
@@ -20,7 +20,6 @@ export default () => (
   <div>
     <Nav />
     <div id="wrapper">
-      <Sidebar />
 
       <div id="app">
         <Switch>

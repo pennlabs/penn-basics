@@ -3,6 +3,8 @@ import styled from 'styled-components';
 export const Row = styled.div`
   width: 100%;
   display: flex;
+  max-height: ${({ maxHeight }) => maxHeight || 'none'};
+  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
 `;
 
 export const Col = styled.div`
@@ -13,4 +15,8 @@ export const Col = styled.div`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background: ${({ background }) => background || ''};
+  max-height: ${({ maxHeight }) => maxHeight || 'none'};
+  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+  box-sizing: border-box;
 `;

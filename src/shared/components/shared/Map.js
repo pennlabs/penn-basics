@@ -1,0 +1,103 @@
+/* global google, document */
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+const MapWrapper = styled.div`
+  width: 100%;
+  flex: 1;
+  height: 100%;
+`;
+
+export class Map extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      map: null,
+      geocoder: null,
+    };
+
+    this.waitForGoogle = this.waitForGoogle.bind(this);
+    this.setMarker = this.setMarker.bind(this);
+    this.createMarker = this.createMarker.bind(this);
+  }
+
+  componentDidMount() {
+    this.waitForGoogle();
+  }
+
+  setMarker() {
+    const existingMarker = this.state.marker; // eslint-disable-line
+
+    // Remove an existing marker if there is one
+    if (existingMarker) {
+      existingMarker.setMap(null);
+    }
+
+    const { location } = this.props;
+    const newMarker = this.createMarker({ location });
+
+    this.setState({
+      marker: newMarker,
+    });
+  }
+
+  createMarker({ location, icon }) {
+    const { map } = this.state;
+
+    return new google.maps.Marker({
+      position: location,
+      icon,
+      map,
+    });
+  }
+
+  initMap() {
+    const { location } = this.props;
+    const map = new google.maps.Map(document.getElementById('map'), {
+      center: location,
+      zoom: 8,
+    });
+
+    const geocoder = new google.maps.Geocoder();
+
+    this.setState({
+      map,
+      geocoder,
+    }, () => {
+      this.setMarker();
+    });
+  }
+
+  waitForGoogle() {
+    if (typeof google !== 'undefined') {
+      this.initMap();
+    } else {
+      // Check again if google is defined
+      setTimeout(this.waitForGoogle, 125);
+    }
+  }
+
+  render() {
+    return (
+      <MapWrapper id="map">
+        This is the map
+      </MapWrapper>
+    );
+  }
+}
+
+Map.defaultProps = {
+  location: {
+    lat: 39.9522,
+    lng: -75.1932,
+  },
+};
+
+Map.propTypes = {
+  location: PropTypes.shape({
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+  }),
+};
