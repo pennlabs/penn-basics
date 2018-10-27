@@ -2,7 +2,7 @@
   {
     "name": "Van Pelt Moelis Reading Room",
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
-    "address": "3420 Walnut St, Philadelphia",
+    "address": "3420 Walnut St, Philadelphia, PA 19104",
     "image": "https://www.architecturalrecord.com/ext/resources/Issues/2017/November/lighting/1711-Lighting-Holistic-Strategies-Moelis-Family-Grand-Reading-Room-01.jpg",
     "outlets": 2,
     "quiet": 2,
@@ -38,7 +38,11 @@
     "quiet": 2,
     "groups": 2,
     "start": [7, 7, 7, 7, 7, 7, 7],
-    "end": [2, 2, 2, 2, 2, 2, 2]
+    "end": [2, 2, 2, 2, 2, 2, 2],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Huntsman QSR 2nd Floor",
@@ -48,7 +52,11 @@
     "quiet": 2,
     "groups": 2,
     "start": [7, 7, 7, 7, 7, 7, 7],
-    "end": [2, 2, 2, 2, 2, 2, 2]
+    "end": [2, 2, 2, 2, 2, 2, 2],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Starbucks 1920 Commons",
@@ -59,7 +67,11 @@
     "quiet": 0,
     "groups": 0,
     "start": [11, 7.5, 7.5, 7.5, 7.5, 7.5, 11],
-    "end": [0, 0, 0, 0, 0, 21, 18.5]
+    "end": [0, 0, 0, 0, 0, 21, 18.5],
+    "location": {
+      "lat": 39.952490,
+      "lng": -75.198960
+    }
   },
   {
     "name": "Huntsman Computer Lab F75",
@@ -70,7 +82,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Huntsman Computer Lab F80",
@@ -80,7 +96,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Huntsman Computer Lab 380",
@@ -90,7 +110,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Huntsman Computer Lab 375",
@@ -100,7 +124,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Huntsman Forum",
@@ -111,7 +139,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "MBA Cafe",
@@ -121,7 +153,11 @@
     "quiet": 1,
     "groups": 0,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Hill Study Lounge",
@@ -131,17 +167,25 @@
     "quiet": 0,
     "groups": 0,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
-    "name": "McClelland Hall",
+    "name": "McClelland Express",
     "description": "",
-    "address": "3700 Walnut St, Philadelphia, PA 19104",
+    "address": "3400 Spruce St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
     "groups": 0,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.57,
+      "lng": -75.11
+    }
   },
   {
     "name": "Levin Hall",
@@ -243,7 +287,11 @@
     "quiet": 1,
     "groups": 1,
     "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
-    "end": [20, 21.5, 21.5, 21.5, 21.5, 21.5, 21.5]
+    "end": [20, 21.5, 21.5, 21.5, 21.5, 21.5, 21.5],
+    "location": {
+      "lat": 39.953600,
+      "lng": -75.195820
+    }
   },
   {
     "name": "Biddle Law Library",

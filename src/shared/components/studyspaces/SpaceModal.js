@@ -34,13 +34,21 @@ const SpaceModal = ({
     )}
 
     <ModalContainer>
-      <Text>{description}</Text>
+      <Text>
+        <strong>Description:</strong>
+      </Text>
+      <br />
+      <Text>
+        {description}
+      </Text>
     </ModalContainer>
 
     <ModalContainer background={SNOW} paddingTop="1rem" paddingBottom="0.5rem">
       <Text>
         <strong>Address:</strong>
-        <br />
+      </Text>
+      <br />
+      <Text>
         {address}
       </Text>
     </ModalContainer>
