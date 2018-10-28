@@ -5,7 +5,7 @@ import { MEDIUM_GRAY } from '../../styles/colors';
 export const Text = styled.p`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
   line-height: 1.5;
-  width: auto;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   display: inline-block;
 `;
 

@@ -10,6 +10,7 @@ import {
   Map,
 } from '../shared';
 import { SNOW } from '../../styles/colors';
+import Hours from './Hours';
 
 const SpaceModal = ({
   show,
@@ -19,6 +20,8 @@ const SpaceModal = ({
   description,
   address,
   location,
+  start,
+  end,
 }) => (
   <Modal show={show} toggle={toggle}>
     <ModalContainer>
@@ -33,7 +36,7 @@ const SpaceModal = ({
       />
     )}
 
-    <ModalContainer>
+    <ModalContainer paddingTop="0.5rem">
       <Text>
         <strong>Description:</strong>
       </Text>
@@ -43,7 +46,7 @@ const SpaceModal = ({
       </Text>
     </ModalContainer>
 
-    <ModalContainer background={SNOW} paddingTop="1rem" paddingBottom="0.5rem">
+    <ModalContainer background={SNOW} paddingTop="1.5rem" paddingBottom="1rem">
       <Text>
         <strong>Address:</strong>
       </Text>
@@ -52,6 +55,7 @@ const SpaceModal = ({
         {address}
       </Text>
     </ModalContainer>
+
     {location && location.lat && location.lng ? (
       <Map
         mapId={name}
@@ -60,6 +64,10 @@ const SpaceModal = ({
         height="50%"
       />
     ) : null}
+
+    <ModalContainer paddingTop="1.5rem">
+      <Hours start={start} end={end} />
+    </ModalContainer>
   </Modal>
 );
 
@@ -81,6 +89,8 @@ SpaceModal.propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
+  start: PropTypes.arrayOf(PropTypes.number).isRequired,
+  end: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default SpaceModal;

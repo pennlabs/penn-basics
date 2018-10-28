@@ -56,7 +56,7 @@ export function getHours({ start, end }, day) {
   const startTime = start[day];
   const endTime = end[day];
 
-  if (startTime < 0 || endTime < 0) return '';
+  if (startTime < 0 || endTime < 0) return 'Closed';
 
   return `
     ${getTime(startTime)}
