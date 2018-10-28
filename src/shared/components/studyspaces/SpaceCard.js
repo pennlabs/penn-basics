@@ -45,6 +45,7 @@ class SpaceCard extends Component {
       image,
       quiet,
       outlets,
+      hours,
     } = this.props;
     const { showModal } = this.state;
     const noiseLevel = getNoiseLevel(quiet);
@@ -62,7 +63,7 @@ class SpaceCard extends Component {
             </Subtitle>
 
             <Subtext marginBottom="0">
-              {open ? 'Open' : 'Closed'}
+              {open ? `Open: ${hours}` : 'Closed'}
               {outletsLevel ? ` • ${outletsLevel}` : ''}
               {noiseLevel ? ` • ${noiseLevel}` : ''}
             </Subtext>

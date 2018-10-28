@@ -12,18 +12,11 @@ import {
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
+import { isOpen, getHours } from './mapper';
 
 // TODO ghost loaders
 
 class App extends Component {
-  static openOrNot(space, time, day) {
-    const { start, end } = space;
-    const startTime = start[day];
-    const endTime = end[day] || 24;
-
-    return (time > startTime && time < endTime);
-  }
-
   constructor(props) {
     super(props);
 
@@ -45,7 +38,10 @@ class App extends Component {
 
         spaces.forEach((space) => {
           const spaceObj = Object.assign({}, space);
-          spaceObj.open = App.openOrNot(space, time, day);
+
+          spaceObj.open = isOpen(space, time, day);
+          spaceObj.hours = getHours(space, day);
+
           formattedSpaces[spaceObj._id] = spaceObj; // eslint-disable-line no-underscore-dangle
         });
 
