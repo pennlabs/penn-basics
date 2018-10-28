@@ -7,9 +7,13 @@ import {
   Row,
   Col,
   Line,
+  Subtext,
 } from '../shared';
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
+import ErrorMessage from '../shared/ErrorMessage';
+
+// TODO ghost loaders
 
 class App extends Component {
   static openOrNot(space, time, day) {
@@ -25,6 +29,7 @@ class App extends Component {
 
     this.state = {
       spaces: {},
+      error: '',
     };
   }
 
@@ -47,11 +52,17 @@ class App extends Component {
         this.setState({
           spaces: formattedSpaces,
         });
+      })
+      .catch(() => {
+        this.setState({
+          spaces: [],
+          error: 'There was a problem loading the list of study spaces. Try refreshing the page.',
+        });
       });
   }
 
   render() {
-    const { spaces } = this.state;
+    const { spaces, error } = this.state;
 
     if (!spaces || !Object.keys(spaces).length) return null;
 
@@ -62,6 +73,8 @@ class App extends Component {
           background={WHITE}
           overflowY="scroll"
         >
+          <ErrorMessage message={error} />
+
           {Object.keys(spaces).map((spaceId) => {
             const space = spaces[spaceId];
             return (
@@ -73,6 +86,13 @@ class App extends Component {
               </div>
             );
           })}
+
+          <Subtext paddingTop="0.5rem" marginBottom="0">
+            Made with &hearts; by&nbsp;
+            <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
+              Penn Labs.
+            </a>
+          </Subtext>
         </Col>
         <Col>
           <Map mapId="map" />

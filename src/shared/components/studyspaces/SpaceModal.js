@@ -56,6 +56,7 @@ const SpaceModal = ({
       <Map
         mapId={name}
         location={location}
+        gestureHandling="cooperative"
         height="50%"
       />
     ) : null}

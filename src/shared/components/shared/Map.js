@@ -54,10 +54,11 @@ export class Map extends Component {
   }
 
   initMap() {
-    const { location, mapId } = this.props;
+    const { location, mapId, gestureHandling = '' } = this.props;
     const map = new google.maps.Map(document.getElementById(mapId), {
       center: location,
       zoom: 16,
+      gestureHandling,
     });
 
     const geocoder = new google.maps.Geocoder();
@@ -94,6 +95,7 @@ Map.defaultProps = {
     lng: -75.1932,
   },
   height: undefined,
+  gestureHandling: '',
 };
 
 Map.propTypes = {
@@ -103,4 +105,5 @@ Map.propTypes = {
   }),
   height: PropTypes.string,
   mapId: PropTypes.string.isRequired,
+  gestureHandling: PropTypes.string,
 };

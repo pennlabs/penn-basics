@@ -11,6 +11,7 @@ export const Text = styled.p`
 
 export const Subtext = styled.p`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
+  padding-top: ${({ paddingTop }) => paddingTop || '0'};
   line-height: 1.5;
   width: auto;
   display: inline-block;
