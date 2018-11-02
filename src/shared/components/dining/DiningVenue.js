@@ -343,14 +343,25 @@ DiningVenue.propTypes = {
   venueHours: PropTypes.array, // eslint-disable-line
 };
 
-const mapStateToProps = state => ({
-  diningData: state.dining.diningData,
-  venueHours: state.dining.venueHours,
-  venueInfo: state.dining.venueInfo,
-  error: state.dining.error,
-  diningDataPending: state.dining.diningDataPending,
-  venueHoursPending: state.dining.venueHoursPending,
-});
+const mapStateToProps = (state) => {
+  const {
+    diningData,
+    venueHours,
+    venueInfo,
+    error,
+    diningDataPending,
+    venueHoursPending,
+  } = state.dining;
+
+  return ({
+    diningData,
+    venueHours,
+    venueInfo,
+    error,
+    diningDataPending,
+    venueHoursPending,
+  });
+};
 
 const mapDispatchToProps = dispatch => ({
   getDiningDataDispatch: (venueId) => {

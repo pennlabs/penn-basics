@@ -1,14 +1,14 @@
-const webpack = require('webpack');
+const webpack = require('webpack'); // eslint-disable-line
 const path = require('path');
 
 const BUILD_DIR = path.join(__dirname, 'public', 'js');
 const APP_DIR = path.join(__dirname, 'src', 'shared');
 
 const config = {
-  entry: APP_DIR + '/index.js',
+  entry: `${APP_DIR}/index.js`,
   output: {
     path: BUILD_DIR,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -18,22 +18,22 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['react', 'env', 'stage-2']
-          }
-        }
+            presets: ['react', 'env', 'stage-2'],
+          },
+        },
       },
       {
         test: /\.scss$/,
         use: [{
-          loader: "style-loader" // creates style nodes from JS strings
+          loader: 'style-loader',
         }, {
-          loader: "css-loader" // translates CSS into CommonJS
+          loader: 'css-loader',
         }, {
-          loader: "sass-loader" // compiles Sass to CSS
-        }]
-      }
-    ]
-  }
+          loader: 'sass-loader',
+        }],
+      },
+    ],
+  },
 };
 
 module.exports = config;

@@ -60,7 +60,7 @@ class Home extends Component {
             <div className="card pad marg">
               <h1 className="title is-4">
                 <span role="img" aria-label="sun">☀️</span>
-                Good morning!
+                Gooob morning!
               </h1>
 
               <p className="content is-medium">

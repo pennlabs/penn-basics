@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import SpaceCard from './SpaceCard';
 import {
@@ -13,6 +14,7 @@ import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { isOpen, getHours } from './mapper';
+import { getAllSpacesData } from '../../actions/spaces_actions';
 
 // TODO ghost loaders
 
@@ -27,6 +29,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    getAllSpacesData();
+
     const today = new Date();
     const day = today.getDay();
     const time = today.getHours() + (today.getMinutes() / 60);
@@ -68,6 +72,7 @@ class App extends Component {
           padding="0 1rem 0.5rem 1rem"
           background={WHITE}
           overflowY="scroll"
+          width="40%"
         >
           <ErrorMessage message={error} />
 
