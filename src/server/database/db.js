@@ -75,25 +75,33 @@ function getVenueMenuForDate(venueId, date) {
 }
 
 function formatMealsObject(meals) {
-  const retObject = _.groupBy(meals, 'date');
-  const dates = Object.keys(retObject);
+  const tempObject = _.groupBy(meals, 'date');
+  const dates = Object.keys(tempObject);
   dates.forEach((date) => {
-    retObject[date] = _.groupBy(retObject[date], 'type');
-    const types = Object.keys(retObject[date]);
+    tempObject[date] = _.groupBy(tempObject[date], 'type');
+    const types = Object.keys(tempObject[date]);
     types.forEach((type) => {
-      retObject[date][type] = _.groupBy(retObject[date][type], 'category');
-      const categories = Object.keys(retObject[date][type]);
+      tempObject[date][type] = _.groupBy(tempObject[date][type], 'category');
+      const categories = Object.keys(tempObject[date][type]);
       categories.forEach((category) => {
-        const [first] = retObject[date][type][category];
-        retObject[date][type][category] = first;
+        const [first] = tempObject[date][type][category];
+        tempObject[date][type][category] = first;
 
-        if (retObject[date][type][category]) {
-          retObject[date][type][category] = retObject[date][type][category].meals;
+        if (tempObject[date][type][category]) {
+          tempObject[date][type][category] = tempObject[date][type][category].meals;
         }
       });
     });
   });
 
+  // Turn dates from  "Fri Nov 02 2018 00:00:00 GMT-0400 (Eastern Daylight Time)" into "Nov 02"
+  const retObject = {};
+  const dateStamps = Object.keys(tempObject);
+  for (let i = 0; i < dateStamps.length; i += 1) {
+    const dateStamp = dateStamps[i];
+    const dateStampTrunc = dateStamp.substring(4, 10);
+    retObject[dateStampTrunc] = tempObject[dateStamp];
+  }
   return retObject;
 }
 

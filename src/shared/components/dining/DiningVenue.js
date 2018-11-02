@@ -31,7 +31,7 @@ class DiningVenue extends Component {
     // Format the current date
     let date = new Date();
     date.setHours(0, 0, 0, 0);
-    date = date.toString();
+    date = date.toString().substring(4, 10);
 
     // Set up the state
     this.state = {
