@@ -5,7 +5,7 @@ const BUILD_DIR = path.join(__dirname, 'public', 'js');
 const APP_DIR = path.join(__dirname, 'src', 'shared');
 
 const config = {
-  entry: `${APP_DIR}/index.js`,
+  entry: ['babel-polyfill', `${APP_DIR}/index.js`],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',

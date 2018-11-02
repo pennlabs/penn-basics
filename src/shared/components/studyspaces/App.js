@@ -29,7 +29,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getAllSpacesData();
+    const { getAllSpacesDataDispatch } = this.props;
+    getAllSpacesDataDispatch();
 
     const today = new Date();
     const day = today.getDay();
@@ -103,5 +104,14 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => state.spaces;
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),
+});
+
+// Redux config
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
