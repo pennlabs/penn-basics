@@ -62,6 +62,10 @@ class App extends Component {
       });
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
+
   render() {
     const { spaces, error } = this.state;
 
@@ -70,7 +74,7 @@ class App extends Component {
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Col
-          padding="0 1rem 0.5rem 1rem"
+          padding="0 1rem .5rem 1rem"
           background={WHITE}
           overflowY="scroll"
           width="40%"

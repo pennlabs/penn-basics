@@ -21,7 +21,7 @@ const spacesReducer = (state = { pending: true }, action) => {
     case getSpacesDataFulfilled:
       return {
         pending: false,
-        spacesData: action.spacesData.spaces,
+        spacesData: action.spaces,
       };
 
     default:
