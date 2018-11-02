@@ -18,7 +18,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['react', 'env', 'stage-2'],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
