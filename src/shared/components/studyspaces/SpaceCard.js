@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import SpaceModal from './SpaceModal';
 import {
@@ -9,6 +10,7 @@ import {
   Row,
   Col,
 } from '../shared';
+import { setHoveredSpace } from '../../actions/spaces_actions';
 import { getNoiseLevel, getOutletsLevel } from './mapper';
 
 // TODO hours for the day?
@@ -23,6 +25,7 @@ class SpaceCard extends Component {
 
     this.toggleModal = this.toggleModal.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
   toggleModal() {
@@ -36,6 +39,17 @@ class SpaceCard extends Component {
     if (event.keyCode === 32) {
       this.toggleModal();
     }
+  }
+
+  handleMouseEnter() {
+    const { hoveredSpace } = this.props;
+    const { spaceId } = this.props;
+
+    // If there is no change to be made
+    if (hoveredSpace === spaceId) return;
+
+    const { setHoveredSpaceDispatch } = this.props;
+    setHoveredSpaceDispatch(spaceId);
   }
 
   render() {
@@ -52,12 +66,15 @@ class SpaceCard extends Component {
     const outletsLevel = getOutletsLevel(outlets);
 
     return (
-      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0.5rem 0">
+      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0.5rem 1rem" hoverable>
         <Row>
           {image && (
             <Col backgroundImage={image} width="30%" borderRadius="4px" />
           )}
-          <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
+          <Col
+            padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
+            onMouseEnter={this.handleMouseEnter}
+          >
             <Subtitle marginBottom="0">
               {name}
             </Subtitle>
@@ -97,4 +114,16 @@ SpaceCard.propTypes = {
   quiet: PropTypes.number,
 };
 
-export default SpaceCard;
+const mapStateToProps = ({ spaces }) => {
+  const { hoveredSpace } = spaces;
+  return { hoveredSpace };
+};
+
+const mapDispatchToProps = dispatch => ({
+  setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SpaceCard);

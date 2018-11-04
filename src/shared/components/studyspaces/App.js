@@ -30,7 +30,7 @@ class App extends Component {
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Col
-          padding="0 1rem .5rem 1rem"
+          padding="0 0 .5rem 0"
           background={WHITE}
           overflowY="scroll"
           width="40%"
@@ -42,6 +42,7 @@ class App extends Component {
             return (
               <div key={spaceId}>
                 <SpaceCard
+                  spaceId={spaceId}
                   {...space}
                 />
                 <Line />
@@ -57,14 +58,18 @@ class App extends Component {
           </Subtext>
         </Col>
         <Col>
-          <Map mapId="map" height={`calc(100vh - ${NAV_HEIGHT})`} />
+          <Map
+            mapId="map"
+            height={`calc(100vh - ${NAV_HEIGHT})`}
+            markers={spacesData}
+          />
         </Col>
       </Row>
     );
   }
 }
 
-const mapStateToProps = state => state.spaces;
+const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
   getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),

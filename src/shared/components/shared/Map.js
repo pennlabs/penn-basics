@@ -15,11 +15,10 @@ export class Map extends Component {
 
     this.state = {
       map: null,
-      geocoder: null,
+      markers: {},
     };
 
     this.waitForGoogle = this.waitForGoogle.bind(this);
-    this.setMarker = this.setMarker.bind(this);
     this.createMarker = this.createMarker.bind(this);
   }
 
@@ -27,47 +26,45 @@ export class Map extends Component {
     this.waitForGoogle();
   }
 
-  setMarker() {
-    const existingMarker = this.state.marker; // eslint-disable-line
+  createMarker(key, { location, icon = '' }) {
+    if (!location) return;
 
-    // Remove an existing marker if there is one
-    if (existingMarker) {
-      existingMarker.setMap(null);
-    }
+    const { lat, lng } = location;
 
-    const { location } = this.props;
-    const newMarker = this.createMarker({ location });
+    if (typeof lat === 'undefined' || typeof lng === 'undefined') return;
 
-    this.setState({
-      marker: newMarker,
-    });
-  }
-
-  createMarker({ location, icon }) {
     const { map } = this.state;
 
-    return new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: location,
       icon,
       map,
     });
+
+    const { markers } = this.state;
+    markers[key] = marker;
+
+    this.setState({ markers });
   }
 
   initMap() {
-    const { location, mapId, gestureHandling = '' } = this.props;
+    const {
+      location,
+      mapId = 'map',
+      gestureHandling = '',
+      markers = {},
+    } = this.props;
+
     const map = new google.maps.Map(document.getElementById(mapId), {
       center: location,
-      zoom: 16,
+      zoom: 14,
       gestureHandling,
     });
 
-    const geocoder = new google.maps.Geocoder();
-
     this.setState({
       map,
-      geocoder,
     }, () => {
-      this.setMarker();
+      Object.keys(markers).forEach(key => this.createMarker(key, markers[key]));
     });
   }
 
@@ -96,6 +93,7 @@ Map.defaultProps = {
   },
   height: undefined,
   gestureHandling: '',
+  markers: {},
 };
 
 Map.propTypes = {
@@ -106,4 +104,5 @@ Map.propTypes = {
   height: PropTypes.string,
   mapId: PropTypes.string.isRequired,
   gestureHandling: PropTypes.string,
+  markers: PropTypes.object, // eslint-disable-line
 };

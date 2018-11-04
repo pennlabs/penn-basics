@@ -4,6 +4,7 @@ import {
   getSpacesDataRequested,
   getSpacesDataRejected,
   getSpacesDataFulfilled,
+  setHoveredSpaceFulfilled,
 } from './action_types';
 
 // TODO unit tests!!
@@ -116,5 +117,14 @@ export function getAllSpacesData() { // eslint-disable-line
         error: error.message || 'There was an error pulling studyspaces data',
       });
     }
+  };
+}
+
+export function setHoveredSpace(spaceId) {
+  return (dispatch) => {
+    dispatch({
+      type: setHoveredSpaceFulfilled,
+      spaceId,
+    });
   };
 }
