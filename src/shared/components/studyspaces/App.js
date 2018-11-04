@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 import SpaceCard from './SpaceCard';
@@ -13,63 +12,20 @@ import {
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
-import { isOpen, getHours } from './mapper';
 import { getAllSpacesData } from '../../actions/spaces_actions';
 
 // TODO ghost loaders
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      spaces: {},
-      error: '',
-    };
-  }
-
   componentDidMount() {
     const { getAllSpacesDataDispatch } = this.props;
     getAllSpacesDataDispatch();
-
-    const today = new Date();
-    const day = today.getDay();
-    const time = today.getHours() + (today.getMinutes() / 60);
-
-    axios.get('/api/spaces/all')
-      .then((res) => {
-        const formattedSpaces = {};
-        const { spaces } = res.data;
-
-        spaces.forEach((space) => {
-          const spaceObj = Object.assign({}, space);
-
-          spaceObj.open = isOpen(space, time, day);
-          spaceObj.hours = getHours(space, day);
-
-          formattedSpaces[spaceObj._id] = spaceObj; // eslint-disable-line no-underscore-dangle
-        });
-
-        this.setState({
-          spaces: formattedSpaces,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          spaces: [],
-          error: 'There was a problem loading the list of study spaces. Try refreshing the page.',
-        });
-      });
-  }
-
-  componentDidUpdate() {
-    console.log(this.props);
   }
 
   render() {
-    const { spaces, error } = this.state;
+    const { spacesData, error, pending } = this.props;
 
-    if (!spaces || !Object.keys(spaces).length) return null;
+    if (pending || !spacesData || !Object.keys(spacesData).length) return null;
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -81,8 +37,8 @@ class App extends Component {
         >
           <ErrorMessage message={error} />
 
-          {Object.keys(spaces).map((spaceId) => {
-            const space = spaces[spaceId];
+          {Object.keys(spacesData).map((spaceId) => {
+            const space = spacesData[spaceId];
             return (
               <div key={spaceId}>
                 <SpaceCard
