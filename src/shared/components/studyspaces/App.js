@@ -57,7 +57,7 @@ class App extends Component {
           </Subtext>
         </Col>
         <Col>
-          <Map mapId="map" />
+          <Map mapId="map" height={`calc(100vh - ${NAV_HEIGHT})`} />
         </Col>
       </Row>
     );
