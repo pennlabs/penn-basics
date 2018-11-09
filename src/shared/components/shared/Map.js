@@ -53,6 +53,7 @@ export class Map extends Component {
       mapId = 'map',
       gestureHandling = '',
       markers = {},
+      showMarker = false,
     } = this.props;
 
     const map = new google.maps.Map(document.getElementById(mapId), {
@@ -64,6 +65,10 @@ export class Map extends Component {
     this.setState({
       map,
     }, () => {
+      if (showMarker) {
+        this.createMarker(-1, { location });
+      }
+
       Object.keys(markers).forEach(key => this.createMarker(key, markers[key]));
     });
   }
@@ -94,6 +99,7 @@ Map.defaultProps = {
   height: undefined,
   gestureHandling: '',
   markers: {},
+  showMarker: false,
 };
 
 Map.propTypes = {
@@ -105,4 +111,5 @@ Map.propTypes = {
   mapId: PropTypes.string.isRequired,
   gestureHandling: PropTypes.string,
   markers: PropTypes.object, // eslint-disable-line
+  showMarker: PropTypes.bool,
 };

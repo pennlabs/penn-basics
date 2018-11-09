@@ -60,6 +60,7 @@ const SpaceModal = ({
       <Map
         mapId={name}
         location={location}
+        showMarker
         gestureHandling="cooperative"
         height="50%"
       />
