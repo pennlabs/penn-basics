@@ -188,14 +188,18 @@
     }
   },
   {
-    "name": "Levin Hall",
+    "name": "Levin Building",
     "description": "",
     "address": "425 S University Ave, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
     "groups": 0,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.949009,
+      "lng": -75.199228
+    }
   },
   {
     "name": "Annenberg School for Communication Library",
@@ -205,7 +209,11 @@
     "quiet": 2,
     "groups": 2,
     "start": [12, 9, 9, 9, 9, 9, 12],
-    "end": [17, 21, 21, 21, 21, 21, 17]
+    "end": [17, 21, 21, 21, 21, 21, 17],
+    "location": {
+      "lat": 39.952852,
+      "lng": -75.195786
+    }
   },
   {
     "name": "United by Blue",
@@ -216,27 +224,67 @@
     "quiet": 0,
     "groups": 2,
     "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [19, 19, 19, 19, 19, 19, 19]
+    "end": [19, 19, 19, 19, 19, 19, 19],
+    "location": {
+      "lat": 39.953068,
+      "lng": -75.193205
+    }
   },
   {
-    "name": "Fisher Fine Arts",
+    "name": "Fisher Fine Arts Library",
     "description": "",
     "address": "220 S 34th St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
     "groups": 2,
     "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
-    "end": [0, 0, 0, 0, 0, 20, 20]
+    "end": [0, 0, 0, 0, 0, 20, 20],
+    "location": {
+      "lat": 39.952653,
+      "lng": -75.192238
+    }
   },
   {
-    "name": "Highrise Rooftop Lounges",
+    "name": "Harnwell Rooftop Lounge",
     "description": "",
-    "address": "Various",
+    "address": "3820 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
     "groups": 1,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.952371,
+      "lng": -75.200242
+    }
+  },
+  {
+    "name": "Rodin Rooftop Lounge",
+    "description": "",
+    "address": "3901 Locust Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.953049,
+      "lng": -75.201755
+    }
+  },
+  {
+    "name": "Harrison Rooftop Lounge",
+    "description": "",
+    "address": "3910 Irving St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.951937,
+      "lng": -75.201120
+    }
   },
   {
     "name": "Saxbys",
@@ -246,7 +294,11 @@
     "quiet": 0,
     "groups": 0,
     "start": [6.5, 6.5, 6.5, 6.5, 6.5, 7, 7],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.952450,
+      "lng": -75.203610
+    }
   },
   {
     "name": "Starbucks 39th and Walnut St.",
@@ -256,7 +308,11 @@
     "quiet": 0,
     "groups": 1,
     "start": [6.5, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
-    "end": [22, 0, 0, 0, 0, 0, 0]
+    "end": [22, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.954080,
+      "lng": -75.200370
+    }
   },
   {
     "name": "Education Commons",
@@ -266,7 +322,11 @@
     "quiet": 1,
     "groups": 0,
     "start": [9, 9, 9, 9, 9, 9, 9, 9],
-    "end": [23, 23, 23, 23, 23, 18, 23]
+    "end": [23, 23, 23, 23, 23, 18, 23],
+    "location": {
+      "lat": 39.951640,
+      "lng": -75.192010
+    }
   },
   {
     "name": "Singh Center for Nanotechnology",
@@ -276,7 +336,11 @@
     "quiet": 1,
     "groups": 0,
     "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Penn Bookstore",
@@ -301,7 +365,11 @@
     "quiet": 2,
     "groups": 0,
     "start": [-1, 8, 8, 8, 8, 8, -1],
-    "end": [-1, 20, 20, 20, 20, 20, -1]
+    "end": [-1, 20, 20, 20, 20, 20, -1],
+    "location": {
+      "lat": 39.953740,
+      "lng": -75.193730
+    }
   },
   {
     "name": "Biomedical Library",
@@ -311,7 +379,11 @@
     "quiet": 2,
     "groups": 2,
     "start": [10, 8, 8, 8, 8, 8, 10],
-    "end": [0, 0, 0, 0, 0, 22, 18]
+    "end": [0, 0, 0, 0, 0, 22, 18],
+    "location": {
+      "lat": 39.949770,
+      "lng": -75.196000
+    }
   },
   {
     "name": "Provost Tower Library",
@@ -321,7 +393,11 @@
     "quiet": 2,
     "groups": 2,
     "start": [],
-    "end": []
+    "end": [],
+    "location": {
+      "lat": 39.950480,
+      "lng": -75.193180
+    }
   },
   {
     "name": "Pret a Manger",
@@ -331,7 +407,25 @@
     "quiet": 0,
     "groups": 1,
     "start": [8, 7.5, 7.5, 7.5, 7.5, 8, 8],
-    "end": [21, 21, 21, 21, 16, 16, 16]
+    "end": [21, 21, 21, 21, 16, 16, 16],
+    "location": {
+      "lat": 39.952510,
+      "lng": -75.198327
+    }
+  },
+  {
+    "name": "Metropolitan Bakery & Cafe",
+    "description": "",
+    "address": "4013 Walnut St, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 0,
+    "groups": 1,
+    "start": [8, 7.5, 7.5, 7.5, 7.5, 7.5, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
   },
   {
     "name": "Green Line 40th St.",
@@ -341,7 +435,11 @@
     "quiet": 2,
     "groups": 1,
     "start": [9, 7, 7, 7, 7, 7, 8],
-    "end": [15, 19, 19, 19, 19, 19, 16]
+    "end": [15, 19, 19, 19, 19, 19, 16],
+    "location": {
+      "lat": 39.956268,
+      "lng": -75.202246
+    }
   },
   {
     "name": "Green Line 43rd St.",
@@ -351,7 +449,11 @@
     "quiet": 2,
     "groups": 1,
     "start": [8, 7, 7, 7, 7, 8, 7],
-    "end": [19, 21, 21, 21, 21, 20, 21]
+    "end": [19, 21, 21, 21, 21, 20, 21],
+    "location": {
+      "lat": 39.953960,
+      "lng": -75.211693
+    }
   },
   {
     "name": "Starbucks 34th and Walnut St.",
@@ -361,7 +463,11 @@
     "quiet": 2,
     "groups": 1,
     "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
-    "end": [0, 0, 0, 0, 0, 0, 0, 0]
+    "end": [0, 0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.953342,
+      "lng": -75.193493
+    }
   },
   {
     "name": "Starbucks 34th and Chestnut St.",
@@ -371,6 +477,10 @@
     "quiet": 2,
     "groups": 1,
     "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
-    "end": [22, 23, 23, 23, 23, 23, 22]
+    "end": [22, 23, 23, 23, 23, 23, 22],
+    "location": {
+      "lat": 39.954462,
+      "lng": -75.192158
+    }
   }
 ]

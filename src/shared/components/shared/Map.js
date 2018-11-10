@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+
 const MapWrapper = styled.div`
   width: 100%;
   flex: 1;
@@ -26,7 +29,26 @@ export class Map extends Component {
     this.waitForGoogle();
   }
 
-  createMarker(key, { location, icon = '' }) {
+  componentDidUpdate(prevProps) {
+    const { activeMarker } = this.props;
+    const oldActiveMarker = prevProps.activeMarker;
+
+    if (activeMarker !== oldActiveMarker) {
+      this.updateMarker(oldActiveMarker, { icon: RED });
+      this.updateMarker(activeMarker, { icon: BLUE });
+    }
+  }
+
+  updateMarker(key, { icon = RED }) {
+    const { markers } = this.state;
+    const marker = markers[key];
+
+    if (!marker) return;
+
+    marker.setIcon(icon); // TODO this might not work
+  }
+
+  createMarker(key, { location, icon = RED }) {
     if (!location) return;
 
     const { lat, lng } = location;
@@ -58,7 +80,7 @@ export class Map extends Component {
 
     const map = new google.maps.Map(document.getElementById(mapId), {
       center: location,
-      zoom: 14,
+      zoom: 15,
       gestureHandling,
     });
 
@@ -100,6 +122,7 @@ Map.defaultProps = {
   gestureHandling: '',
   markers: {},
   showMarker: false,
+  activeMarker: null,
 };
 
 Map.propTypes = {
@@ -112,4 +135,5 @@ Map.propTypes = {
   gestureHandling: PropTypes.string,
   markers: PropTypes.object, // eslint-disable-line
   showMarker: PropTypes.bool,
+  activeMarker: PropTypes.string,
 };

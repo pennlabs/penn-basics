@@ -42,13 +42,15 @@ class SpaceCard extends Component {
   }
 
   handleMouseEnter() {
-    const { hoveredSpace } = this.props;
-    const { spaceId } = this.props;
+    const {
+      hoveredSpace,
+      spaceId,
+      setHoveredSpaceDispatch,
+    } = this.props;
 
     // If there is no change to be made
     if (hoveredSpace === spaceId) return;
 
-    const { setHoveredSpaceDispatch } = this.props;
     setHoveredSpaceDispatch(spaceId);
   }
 

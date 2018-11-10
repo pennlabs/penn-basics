@@ -23,7 +23,12 @@ class App extends Component {
   }
 
   render() {
-    const { spacesData, error, pending } = this.props;
+    const {
+      spacesData,
+      error,
+      pending,
+      hoveredSpace,
+    } = this.props;
 
     if (pending || !spacesData || !Object.keys(spacesData).length) return null;
 
@@ -64,6 +69,7 @@ class App extends Component {
             mapId="map"
             height={`calc(100vh - ${NAV_HEIGHT})`}
             markers={spacesData}
+            activeMarker={hoveredSpace}
           />
         </Col>
       </Row>
