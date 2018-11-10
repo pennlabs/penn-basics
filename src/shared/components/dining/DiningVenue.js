@@ -28,36 +28,11 @@ class DiningVenue extends Component {
     getDiningDataDispatch(venueId);
     getVenueInfoDispatch(venueId);
 
-    // Format the current date
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-    date = date.toString().substring(4, 10);
-
     // Set up the state
-    this.state = {
-      dateFormattedToday: date,
-      dateFormatted: date,
-      meal: '',
-      meals: [],
-      days: [],
-    };
 
     // Bind this to helper method
     this.checkForErrors = this.checkForErrors.bind(this);
-    this.findMeals = this.findMeals.bind(this);
-    this.findDays = this.findDays.bind(this);
-    this.handleChangeMeal = this.handleChangeMeal.bind(this);
-    this.handleChangeDate = this.handleChangeDate.bind(this);
     this.renderError = this.renderError.bind(this);
-    this.refreshState = this.refreshState.bind(this);
-  }
-
-  componentDidMount() {
-    // Find meals
-    this.findMeals();
-
-    // Find dates
-    this.findDays();
   }
 
   /**
@@ -77,142 +52,9 @@ class DiningVenue extends Component {
     if (currentVenueId !== nextVenueId) {
       getDiningDataDispatch(nextVenueId);
       getVenueInfoDispatch(nextVenueId);
-
-      const { dateFormattedToday } = this.state;
-
-      this.refreshState(dateFormattedToday);
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const {
-      meal,
-      meals,
-      dateFormatted,
-      days,
-    } = this.state;
-
-    // Refresh the meals state if necessary
-    // This is if we have changed the date or meal selected
-    if (
-      !meal
-      || (prevState.meal !== meal)
-      || !meals.length
-      || (prevState.dateFormatted !== dateFormatted)
-    ) {
-      this.findMeals();
-    }
-
-    // Refresh the days state if necessary
-    // This is the case if we have changed the date selected
-    if (
-      !dateFormatted
-      || (prevState.dateFormatted !== dateFormatted)
-      || !days.length
-    ) {
-      this.findDays();
-    }
-  }
-
-  refreshState(dateFormatted) {
-    // Clear some of the state
-    this.setState({
-      meal: '',
-      meals: [],
-      days: [],
-      dateFormatted,
-      error: '',
-    });
-  }
-
-  findDays() {
-    const { diningData } = this.props;
-    const { dateFormatted, meal, dateFormattedToday } = this.state;
-
-    // Find the relevant meal if variables have been populated in the state and props
-    if (diningData
-        && dateFormatted
-        && !diningData.pending
-        && !meal) {
-      // Get all days passed to us from the API
-      // These are of the form MM/DD/YYYY EXCEPT in the case that the month
-      // begins with a "0", in which case the format is M/DD/YYYY
-      const days = Object.keys(diningData);
-
-      // Iterate over the days until we find the current day
-      // This is stored in the state as this.state.dateFormattedToday
-      let matched = false;
-
-      // Construct an array of all days that the user will be able to select from
-      const daysToShow = [dateFormattedToday];
-
-      // Include at most 2 days in addition to today
-      let count = 2;
-
-      // Iterate
-      days.forEach((day) => {
-        // Check for a match if we have not yet found one
-        if (!matched) {
-          if (day === dateFormattedToday) {
-            matched = true;
-          }
-        } else if (count > 0) {
-          // Add the day to the list
-          daysToShow.push(day);
-
-          // Decrement the count
-          count -= 1;
-        }
-      });
-
-      // Update the state
-      this.setState({
-        days: daysToShow,
-      });
-    }
-  }
-
-  // Find meals
-  findMeals() {
-    const { diningData, diningDataPending } = this.props;
-    const { dateFormatted, meal } = this.state;
-
-    // Find the relevant meal
-    if (diningData
-        && dateFormatted
-        && diningData[dateFormatted]
-        && !diningDataPending) {
-      const meals = Object.keys(diningData[dateFormatted]);
-
-      // Update the state
-      if (meals.some(element => element === meal)) {
-        this.setState({
-          meals,
-        });
-      } else {
-        this.setState({
-          meals,
-          meal: meals[0],
-        });
-      }
-    } else {
-      // If the API is not giving us the data we want
-    }
-  }
-
-  // Handle change to selection of meal to render
-  handleChangeMeal(meal) {
-    this.setState({
-      meal,
-    });
-  }
-
-  // Handle the change of day to render
-  handleChangeDate(day) {
-    this.setState({
-      dateFormatted: day,
-    });
-  }
 
   // Check for errors
   checkForErrors() {
@@ -221,8 +63,9 @@ class DiningVenue extends Component {
     const {
       match,
       diningData,
+      dateFormatted,
+      meal,
     } = this.props;
-    const { dateFormatted, meal } = this.state;
     const { id } = match.params;
 
     if (!venueData[id]) { // If no mapping is found
@@ -255,7 +98,7 @@ class DiningVenue extends Component {
     if (diningDataPending || venueHoursPending) return null;
 
     // Check for errors
-    const error = this.props.error || this.state.error || this.checkForErrors(); // eslint-disable-line
+    const error = this.props.error || this.checkForErrors(); // eslint-disable-line
 
     return ( // NOTE this returns null if there is no error
       <ErrorMessage message={error} />
@@ -281,15 +124,6 @@ class DiningVenue extends Component {
         <Loading />
       );
     }
-    const { diningData } = this.props;
-
-    const {
-      meal,
-      meals,
-      days,
-      dateFormatted,
-    } = this.state;
-
     const { name } = venueData[id];
 
     return (
@@ -297,7 +131,7 @@ class DiningVenue extends Component {
       <div>
         {/* Render the title of the dining page */}
         <h1 className="title">
-          { name }
+          {name}
         </h1>
 
         {/* Render an error if there is one */}
@@ -307,20 +141,10 @@ class DiningVenue extends Component {
         <DiningOverview id={id} />
 
         {/* Render dropdowns for selecting dates and meals */}
-        <DiningQuery
-          meal={meal}
-          meals={meals}
-          mealCallback={this.handleChangeMeal}
-          dayCallback={this.handleChangeDate}
-          days={days}
-          day={dateFormatted}
-        />
+        <DiningQuery />
 
-        {
-          (diningData && meal) && (
-            <DiningMenu sectionsObj={diningData[dateFormatted][meal]} />
-          )
-        }
+        {/* Render dining menu for the selected date and meal */}
+        <DiningMenu />
       </div>
     );
   }
@@ -329,7 +153,9 @@ class DiningVenue extends Component {
 DiningVenue.defaultProps = {
   error: '',
   diningData: null,
+  meal: '',
   venueHours: null,
+  dateFormatted: null,
 };
 
 DiningVenue.propTypes = {
@@ -341,9 +167,14 @@ DiningVenue.propTypes = {
   error: PropTypes.string,
   diningData: PropTypes.object, // eslint-disable-line
   venueHours: PropTypes.array, // eslint-disable-line
+  dateFormatted: PropTypes.string,
+  meal: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
+  dateFormatted: state.dining.dateFormatted,
+  meal: state.dining.meal,
+  meals: state.dining.meals,
   diningData: state.dining.diningData,
   venueHours: state.dining.venueHours,
   venueInfo: state.dining.venueInfo,

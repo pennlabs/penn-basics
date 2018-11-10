@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 import Section from './Section';
@@ -73,4 +74,19 @@ DiningMenu.propTypes = {
   }),
 };
 
-export default DiningMenu;
+const mapStateToProps = (state) => {
+  const {
+    diningData,
+    dateFormatted,
+    meal,
+  } = state.dining;
+  let sectionsObj = null;
+  if (diningData && dateFormatted && meal) {
+    sectionsObj = diningData[dateFormatted][meal];
+  }
+  return {
+    sectionsObj,
+  };
+};
+
+export default connect(mapStateToProps)(DiningMenu);

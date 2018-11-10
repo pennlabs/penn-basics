@@ -6,6 +6,7 @@ import {
   getVenueInfoRequested,
   getVenueInfoRejected,
   getVenueInfoFulfilled,
+  setMealsFulfilled,
 } from './action_types';
 
 export function getVenueInfo(venueId) {
@@ -77,5 +78,15 @@ export function getDiningData(venueId) {
           error: error.message,
         });
       });
+  };
+}
+
+
+export function setMeals(dateFormatted) {
+  return (dispatch) => {
+    dispatch({
+      type: setMealsFulfilled,
+      dateFormatted,
+    });
   };
 }

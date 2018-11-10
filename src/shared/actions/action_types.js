@@ -9,6 +9,9 @@ export const getDiningDataFulfilled = 'GET_DINING_DATA_FULFILLED';
 export const getVenueInfoRequested = 'GET_VENUE_INFO_REQUESTED';
 export const getVenueInfoRejected = 'GET_VENUE_INFO_REJECTED';
 export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED';
+export const dateFormattedChange = 'DATE_FORMATTED_CHANGE';
+export const selectedMealChangeFulfilled = 'SELECTED_MEAL_CHANGE_FULFILLED';
+export const setMealsFulfilled = 'SET_MEALS_FULFILLED';
 
 // sidebar actions
 export const sidebarDining = 'SIDEBAR_DINING';

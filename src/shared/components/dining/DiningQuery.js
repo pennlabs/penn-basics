@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
+import { dateFormattedChange, selectedMealChangeFulfilled } from '../../actions/action_types';
 
 const DiningQuery = ({
   meals, days, meal, day, mealCallback, dayCallback,
 }) => {
   // Ensure that all props are defined
-  if (!meals || !meals.length || !days || !days.length || !meal || !mealCallback || !dayCallback) {
+  if (!meals || !meals.length || !days || !days.length) {
     return null;
   }
 
@@ -57,4 +59,37 @@ DiningQuery.propTypes = {
   dayCallback: PropTypes.func,
 };
 
-export default DiningQuery;
+
+const mapStateToProps = (state) => {
+  const {
+    meals,
+    meal,
+    dateFormatted,
+    days,
+  } = state.dining;
+  return {
+    meal,
+    meals,
+    dateFormatted,
+    days,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => { //eslint-disable-line
+  return {
+    dayCallback: (newDate) => {
+      dispatch({
+        type: dateFormattedChange,
+        newDate,
+      });
+    },
+    mealCallback: (newMeal) => {
+      dispatch({
+        type: selectedMealChangeFulfilled,
+        newMeal,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiningQuery);
