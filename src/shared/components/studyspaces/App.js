@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import SpaceCard from './SpaceCard';
 import {
@@ -12,70 +12,42 @@ import {
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
-import { isOpen, getHours } from './mapper';
+import { getAllSpacesData } from '../../actions/spaces_actions';
 
 // TODO ghost loaders
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      spaces: {},
-      error: '',
-    };
-  }
-
   componentDidMount() {
-    const today = new Date();
-    const day = today.getDay();
-    const time = today.getHours() + (today.getMinutes() / 60);
-
-    axios.get('/api/spaces/all')
-      .then((res) => {
-        const formattedSpaces = {};
-        const { spaces } = res.data;
-
-        spaces.forEach((space) => {
-          const spaceObj = Object.assign({}, space);
-
-          spaceObj.open = isOpen(space, time, day);
-          spaceObj.hours = getHours(space, day);
-
-          formattedSpaces[spaceObj._id] = spaceObj; // eslint-disable-line no-underscore-dangle
-        });
-
-        this.setState({
-          spaces: formattedSpaces,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          spaces: [],
-          error: 'There was a problem loading the list of study spaces. Try refreshing the page.',
-        });
-      });
+    const { getAllSpacesDataDispatch } = this.props;
+    getAllSpacesDataDispatch();
   }
 
   render() {
-    const { spaces, error } = this.state;
+    const {
+      spacesData,
+      error,
+      pending,
+      hoveredSpace,
+    } = this.props;
 
-    if (!spaces || !Object.keys(spaces).length) return null;
+    if (pending || !spacesData || !Object.keys(spacesData).length) return null;
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Col
-          padding="0 1rem 0.5rem 1rem"
+          padding="0 0 .5rem 0"
           background={WHITE}
           overflowY="scroll"
+          width="40%"
         >
           <ErrorMessage message={error} />
 
-          {Object.keys(spaces).map((spaceId) => {
-            const space = spaces[spaceId];
+          {Object.keys(spacesData).map((spaceId) => {
+            const space = spacesData[spaceId];
             return (
               <div key={spaceId}>
                 <SpaceCard
+                  spaceId={spaceId}
                   {...space}
                 />
                 <Line />
@@ -83,20 +55,36 @@ class App extends Component {
             );
           })}
 
-          <Subtext paddingTop="0.5rem" marginBottom="0">
-            Made with &hearts; by&nbsp;
-            <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
-              Penn Labs.
-            </a>
-          </Subtext>
+          <Col padding="0 1rem">
+            <Subtext paddingTop="0.5rem" marginBottom="0">
+              Made with &hearts; by&nbsp;
+              <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
+                Penn Labs.
+              </a>
+            </Subtext>
+          </Col>
         </Col>
         <Col>
-          <Map mapId="map" />
+          <Map
+            mapId="map"
+            height={`calc(100vh - ${NAV_HEIGHT})`}
+            markers={spacesData}
+            activeMarker={hoveredSpace}
+          />
         </Col>
       </Row>
     );
   }
 }
 
+const mapStateToProps = ({ spaces }) => spaces;
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),
+});
+
+// Redux config
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

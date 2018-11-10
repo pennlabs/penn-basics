@@ -2,6 +2,7 @@ import {
   getSpacesDataRequested,
   getSpacesDataRejected,
   getSpacesDataFulfilled,
+  setHoveredSpaceFulfilled,
 } from '../actions/action_types';
 
 const spacesReducer = (state = { pending: true }, action) => {
@@ -21,8 +22,12 @@ const spacesReducer = (state = { pending: true }, action) => {
     case getSpacesDataFulfilled:
       return {
         pending: false,
-        spacesData: action.spacesData.spaces,
+        spacesData: action.spaces,
       };
+
+    case setHoveredSpaceFulfilled:
+      newState.hoveredSpace = action.spaceId;
+      return newState;
 
     default:
       return {

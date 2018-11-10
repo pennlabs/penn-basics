@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
+
 const MapWrapper = styled.div`
   width: 100%;
   flex: 1;
@@ -15,11 +18,10 @@ export class Map extends Component {
 
     this.state = {
       map: null,
-      geocoder: null,
+      markers: {},
     };
 
     this.waitForGoogle = this.waitForGoogle.bind(this);
-    this.setMarker = this.setMarker.bind(this);
     this.createMarker = this.createMarker.bind(this);
   }
 
@@ -27,47 +29,69 @@ export class Map extends Component {
     this.waitForGoogle();
   }
 
-  setMarker() {
-    const existingMarker = this.state.marker; // eslint-disable-line
+  componentDidUpdate(prevProps) {
+    const { activeMarker } = this.props;
+    const oldActiveMarker = prevProps.activeMarker;
 
-    // Remove an existing marker if there is one
-    if (existingMarker) {
-      existingMarker.setMap(null);
+    if (activeMarker !== oldActiveMarker) {
+      this.updateMarker(oldActiveMarker, { icon: RED });
+      this.updateMarker(activeMarker, { icon: BLUE });
     }
-
-    const { location } = this.props;
-    const newMarker = this.createMarker({ location });
-
-    this.setState({
-      marker: newMarker,
-    });
   }
 
-  createMarker({ location, icon }) {
+  updateMarker(key, { icon = RED }) {
+    const { markers } = this.state;
+    const marker = markers[key];
+
+    if (!marker) return;
+
+    marker.setIcon(icon); // TODO this might not work
+  }
+
+  createMarker(key, { location, icon = RED }) {
+    if (!location) return;
+
+    const { lat, lng } = location;
+
+    if (typeof lat === 'undefined' || typeof lng === 'undefined') return;
+
     const { map } = this.state;
 
-    return new google.maps.Marker({
+    const marker = new google.maps.Marker({
       position: location,
       icon,
       map,
     });
+
+    const { markers } = this.state;
+    markers[key] = marker;
+
+    this.setState({ markers });
   }
 
   initMap() {
-    const { location, mapId, gestureHandling = '' } = this.props;
+    const {
+      location,
+      mapId = 'map',
+      gestureHandling = '',
+      markers = {},
+      showMarker = false,
+    } = this.props;
+
     const map = new google.maps.Map(document.getElementById(mapId), {
       center: location,
-      zoom: 16,
+      zoom: 15,
       gestureHandling,
     });
 
-    const geocoder = new google.maps.Geocoder();
-
     this.setState({
       map,
-      geocoder,
     }, () => {
-      this.setMarker();
+      if (showMarker) {
+        this.createMarker(-1, { location });
+      }
+
+      Object.keys(markers).forEach(key => this.createMarker(key, markers[key]));
     });
   }
 
@@ -96,6 +120,9 @@ Map.defaultProps = {
   },
   height: undefined,
   gestureHandling: '',
+  markers: {},
+  showMarker: false,
+  activeMarker: null,
 };
 
 Map.propTypes = {
@@ -106,4 +133,7 @@ Map.propTypes = {
   height: PropTypes.string,
   mapId: PropTypes.string.isRequired,
   gestureHandling: PropTypes.string,
+  markers: PropTypes.object, // eslint-disable-line
+  showMarker: PropTypes.bool,
+  activeMarker: PropTypes.string,
 };

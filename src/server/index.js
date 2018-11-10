@@ -27,7 +27,7 @@ app.use('/', frontendRouter(DB));
 
 // Seed Dining Data on Server Start
 // require('./database/seedDiningInfo').fullSeed();
-// require('./database/seedSpacesInfo');
+require('./database/seedSpacesInfo');
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console

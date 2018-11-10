@@ -7,4 +7,5 @@ export const Line = styled.div`
   display: block;
   height: 1px;
   background: ${ALLBIRDS_GRAY};
+  opacity: 0.5;
 `;

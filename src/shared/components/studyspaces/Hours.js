@@ -30,7 +30,7 @@ const Hours = ({ start, end }) => {
       <table className="table is-bordered is-fullwidth">
         <tbody>
           {hoursArr.map((str, idx) => (
-            <tr key={days[idx]} fullWidth>
+            <tr key={days[idx]}>
               <td>
                 {days[idx]}
               </td>
