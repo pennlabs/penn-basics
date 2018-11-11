@@ -1,38 +1,54 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 import {
-  getLaundryDataRequested,
-  getLaundryDataRejected,
-  getLaundryDataFulfilled,
+  getLaundryHallsDataRequested,
+  getLaundryHallsDataRejected,
+  getLaundryHallsDataFulfilled,
+  getLaundryHallInfoRequested,
+  getLaundryHallInfoRejected,
+  getLaundryHallInfoFulfilled,
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
 
-// TODO: implement me.
-// Transform API data into format suitable for redux
-function combineData(hallData, idData) { // eslint-disable-line
-
-}
-
-// make two requests to two different endpoints, and combine the data
-export function getAllLaundryData() { // eslint-disable-line
+export function getLaundryHalls() { // eslint-disable-line
   return async (dispatch) => {
     dispatch({
-      type: getLaundryDataRequested,
+      type: getLaundryHallsDataRequested,
     });
     try {
-      const [hallData, idData] = await Promise.all([
-        axios.get(`${BASE}/laundry/halls`),
-        axios.get(`${BASE}/laundry/halls/ids`),
-      ]);
-      const laundryData = combineData(hallData, idData);
+      const idData = await axios.get(`${BASE}/laundry/halls/ids`);
+      const laundryHalls = _.groupBy(idData.halls, obj => obj.location);
+
       dispatch({
-        type: getLaundryDataFulfilled,
-        laundryData,
+        type: getLaundryHallsDataFulfilled,
+        laundryHalls,
       });
     } catch (error) {
       dispatch({
-        type: getLaundryDataRejected,
+        type: getLaundryHallsDataRejected,
+        error: error.message,
+      });
+    }
+  };
+}
+
+export function getLaundryHall(laundryHallId) { // eslint-disable-line
+  return async (dispatch) => {
+    dispatch({
+      type: getLaundryHallInfoRequested,
+    });
+    try {
+      const laundryHallInfo = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
+
+      dispatch({
+        type: getLaundryHallInfoFulfilled,
+        laundryHallInfo,
+      });
+    } catch (error) {
+      dispatch({
+        type: getLaundryHallInfoRejected,
         error: error.message,
       });
     }

@@ -26,9 +26,13 @@ export const getSpacesDataFulfilled = 'GET_SPACES_DATA_FULFILLED';
 export const setHoveredSpaceFulfilled = 'SET_HOVERED_SPACE_FULFILLED';
 
 // laundry actions
-export const getLaundryDataRequested = 'GET_LAUNDRY_DATA_REQUESTED';
-export const getLaundryDataRejected = 'GET_LAUNDRY_DATA_REJECTED';
-export const getLaundryDataFulfilled = 'GET_LAUNDRY_DATA_FULFILLED';
+export const getLaundryHallsDataRequested = 'GET_LAUNDRY_HALLS_DATA_REQUESTED';
+export const getLaundryHallsDataRejected = 'GET_LAUNDRY_HALLS_DATA_REJECTED';
+export const getLaundryHallsDataFulfilled = 'GET_LAUNDRY_HALLS_DATA_FULFILLED';
+export const getLaundryHallInfoRequested = 'GET_LAUNDRY_HALL_INFO_REQUESTED';
+export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED';
+export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED';
+
 
 // misc actions
 export const updateLink = 'UPDATE_LINK';
