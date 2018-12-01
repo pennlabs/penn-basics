@@ -11,7 +11,7 @@ import {
 } from '../shared';
 import Filter from './Filter';
 import { WHITE } from '../../styles/colors';
-import { NAV_HEIGHT } from '../../styles/sizes';
+import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { getAllSpacesData } from '../../actions/spaces_actions';
 
@@ -31,13 +31,16 @@ class App extends Component {
       hoveredSpace,
     } = this.props;
 
-    if (pending || !spacesData || !Object.keys(spacesData).length) return null;
+    if (pending || !spacesData || !Object.keys(spacesData).length) {
+      // return null; // TODO
+      return (<Filter />);
+    }
 
     return (
       <div>
         <Filter />
 
-        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
           <Col
             padding="0 0 .5rem 0"
             background={WHITE}
@@ -71,7 +74,7 @@ class App extends Component {
           <Col>
             <Map
               mapId="map"
-              height={`calc(100vh - ${NAV_HEIGHT})`}
+              height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
               markers={spacesData}
               activeMarker={hoveredSpace}
             />
