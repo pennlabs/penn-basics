@@ -12,6 +12,16 @@ import {
 
 const BASE = 'http://api.pennlabs.org';
 
+function processLaundryHallsData(idData) {
+  const groupByLocation = _.groupBy(idData.halls, obj => obj.location);
+  return Object.keys(groupByLocation).map((locationName) => { //eslint-disable-line
+    return {
+      location: locationName,
+      halls: groupByLocation[locationName],
+    };
+  });
+}
+
 export function getLaundryHalls() { // eslint-disable-line
   return async (dispatch) => {
     dispatch({
@@ -19,7 +29,7 @@ export function getLaundryHalls() { // eslint-disable-line
     });
     try {
       const idData = await axios.get(`${BASE}/laundry/halls/ids`);
-      const laundryHalls = _.groupBy(idData.halls, obj => obj.location);
+      const laundryHalls = processLaundryHallsData(idData.data);
 
       dispatch({
         type: getLaundryHallsDataFulfilled,
@@ -40,11 +50,11 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
       type: getLaundryHallInfoRequested,
     });
     try {
-      const laundryHallInfo = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
-
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
+      const { data } = axiosResponse;
       dispatch({
         type: getLaundryHallInfoFulfilled,
-        laundryHallInfo,
+        laundryHallInfo: data,
       });
     } catch (error) {
       dispatch({
