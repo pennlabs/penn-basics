@@ -24,6 +24,10 @@ export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED';
 export const getSpacesDataRejected = 'GET_SPACES_DATA_REJECTED';
 export const getSpacesDataFulfilled = 'GET_SPACES_DATA_FULFILLED';
 export const setHoveredSpaceFulfilled = 'SET_HOVERED_SPACE_FULFILLED';
+export const filterSpacesOpenRequested = 'FILTER_SPACERS_OPEN_REQUESTED';
+export const filterSpacesOutletsRequested = 'FILTER_SPACERS_OUTLETS_REQUESTED';
+export const filterSpacesNoiseRequested = 'FILTER_SPACERS_NOISE_REQUESTED';
+export const filterSpacesGroupsRequested = 'FILTER_SPACERS_GROUPS_REQUESTED';
 
 // laundry actions
 export const getLaundryDataRequested = 'GET_LAUNDRY_DATA_REQUESTED';

@@ -25,13 +25,13 @@ class App extends Component {
 
   render() {
     const {
-      spacesData,
+      filteredSpacesData,
       error,
       pending,
       hoveredSpace,
     } = this.props;
 
-    if (pending || !spacesData || !Object.keys(spacesData).length) {
+    if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
       // return null; // TODO
       return (<Filter />);
     }
@@ -49,8 +49,8 @@ class App extends Component {
           >
             <ErrorMessage message={error} />
 
-            {Object.keys(spacesData).map((spaceId) => {
-              const space = spacesData[spaceId];
+            {Object.keys(filteredSpacesData).map((spaceId) => {
+              const space = filteredSpacesData[spaceId];
               return (
                 <div key={spaceId}>
                   <SpaceCard
@@ -75,7 +75,7 @@ class App extends Component {
             <Map
               mapId="map"
               height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-              markers={spacesData}
+              markers={filteredSpacesData}
               activeMarker={hoveredSpace}
             />
           </Col>

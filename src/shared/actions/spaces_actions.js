@@ -5,6 +5,10 @@ import {
   getSpacesDataRejected,
   getSpacesDataFulfilled,
   setHoveredSpaceFulfilled,
+  filterSpacesOpenRequested,
+  filterSpacesOutletsRequested,
+  filterSpacesNoiseRequested,
+  filterSpacesGroupsRequested,
 } from './action_types';
 
 // TODO unit tests!!
@@ -125,6 +129,46 @@ export function setHoveredSpace(spaceId) {
     dispatch({
       type: setHoveredSpaceFulfilled,
       spaceId,
+    });
+  };
+}
+
+// TODO DOCS / ERROR CHECKING
+export function filterSpacesOpen(filters) {
+  return (dispatch) => {
+    dispatch({
+      type: filterSpacesOpenRequested,
+      filters,
+    });
+  };
+}
+
+// TODO DOCS / ERROR CHECKING
+export function filterSpacesOutlets(filters) {
+  return (dispatch) => {
+    dispatch({
+      type: filterSpacesOutletsRequested,
+      filters,
+    });
+  };
+}
+
+// TODO DOCS / ERROR CHECKING
+export function filterSpacesNoise(filters) {
+  return (dispatch) => {
+    dispatch({
+      type: filterSpacesNoiseRequested,
+      filters,
+    });
+  };
+}
+
+// TODO DOCS / ERROR CHECKING
+export function filterSpacesGroups(filters) {
+  return (dispatch) => {
+    dispatch({
+      type: filterSpacesGroupsRequested,
+      filters,
     });
   };
 }

@@ -57,6 +57,11 @@ const FirstFilterBtnSpan = s.span`
     `) : (`
       background: ${BLUE} !important;
       color: white;
+
+      :hover,
+      :focus {
+        background: ${DARK_BLUE} !important;
+      }
     `)
   )}
 `;
@@ -68,6 +73,11 @@ const FilterBtnSpan = s.span`
     background: ${BLUE} !important;
     border-color: rgba(0, 0, 0, 0.1);
     color: white;
+
+    :hover,
+    :focus {
+      background: ${DARK_BLUE} !important;
+    }
   `)}
 `;
 
@@ -124,7 +134,7 @@ class FilterBtn extends Component {
   }
 
   render() {
-    const { text, options } = this.props;
+    const { text, options, onClick } = this.props;
     const { active, activeOptions } = this.state;
     const areOptions = options && options.length;
 
@@ -134,7 +144,10 @@ class FilterBtn extends Component {
         options={areOptions}
       >
         <FirstFilterBtnSpan
-          onClick={this.handleClick}
+          onClick={() => {
+            this.handleClick();
+            onClick();
+          }}
           active={active}
           options={areOptions}
         >
@@ -159,11 +172,13 @@ class FilterBtn extends Component {
 
 FilterBtn.defaultProps = {
   options: null,
+  onClick: () => {},
 };
 
 FilterBtn.propTypes = {
   text: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func,
 };
 
 export default FilterBtn;

@@ -18,6 +18,16 @@ export function getOutletsLevel(outlets) {
   return map[outlets];
 }
 
+export function getGroupLevel(groups) {
+  const map = {
+    0: 'Bad for groups',
+    1: 'Fine for groups',
+    2: 'Good for groups',
+  };
+
+  return map[groups];
+}
+
 function getMinutes(time) {
   // If there is a decimal
   let minutes = '';
