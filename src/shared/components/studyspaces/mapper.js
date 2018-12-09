@@ -20,9 +20,9 @@ export function getOutletsLevel(outlets) {
 
 export function getGroupLevel(groups) {
   const map = {
-    0: 'Bad for groups',
-    1: 'Fine for groups',
-    2: 'Good for groups',
+    0: 'No groups',
+    1: 'Small groups',
+    2: 'Large groups',
   };
 
   return map[groups];

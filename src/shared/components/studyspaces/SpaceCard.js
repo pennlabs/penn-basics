@@ -87,11 +87,11 @@ class SpaceCard extends Component {
               {noiseLevel ? ` • ${noiseLevel}` : ''}
             </Subtext>
 
-            <SpaceModal
+            {/* TODO ONLY ONE MODAL <SpaceModal
               show={showModal}
               toggle={this.toggleModal}
               {...this.props}
-            />
+            /> */}
           </Col>
         </Row>
       </Card>

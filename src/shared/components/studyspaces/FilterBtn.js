@@ -95,7 +95,6 @@ class FilterBtn extends Component {
     }
 
     this.state = {
-      active: false,
       activeOptions,
     };
 
@@ -104,24 +103,11 @@ class FilterBtn extends Component {
   }
 
   handleClick() {
+    // NOTE this hopefully won't be needed down the line
     const { active } = this.state;
 
     this.setState({
       active: !active,
-    }, () => {
-      // active = this.state.active; // eslint-disable-line
-      // if (!active) return;
-      //
-      // const { options } = this.props;
-      // if (!options || !options.length) return;
-
-      // if (this.state.active) { // eslint-disable-line
-      //
-      //
-      //   if (!options) return;
-      //
-      //
-      // }
     });
   }
 
@@ -134,13 +120,20 @@ class FilterBtn extends Component {
   }
 
   render() {
-    const { text, options, onClick } = this.props;
-    const { active, activeOptions } = this.state;
+    const {
+      text,
+      options,
+      onClick,
+      onClickOption,
+      active,
+    } = this.props;
+    const { activeOptions } = this.state;
     const areOptions = options && options.length;
+    const isActive = active || this.state.active; /* eslint-disable-line */
 
     return (
       <FilterBtnWrapper
-        active={active}
+        active={isActive}
         options={areOptions}
       >
         <FirstFilterBtnSpan
@@ -148,16 +141,19 @@ class FilterBtn extends Component {
             this.handleClick();
             onClick();
           }}
-          active={active}
+          active={isActive}
           options={areOptions}
         >
           {text}
         </FirstFilterBtnSpan>
 
-        {active && options && options.length && (
-          options.map(option => (
+        {isActive && options && options.length && (
+          options.map((option, idx) => (
             <FilterBtnSpan
-              onClick={() => this.handleClickOption(option)}
+              onClick={() => {
+                this.handleClickOption(option);
+                onClickOption(idx);
+              }}
               key={option}
               active={activeOptions[option]}
             >
@@ -173,12 +169,16 @@ class FilterBtn extends Component {
 FilterBtn.defaultProps = {
   options: null,
   onClick: () => {},
+  onClickOption: () => {},
+  active: false,
 };
 
 FilterBtn.propTypes = {
   text: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string),
   onClick: PropTypes.func,
+  onClickOption: PropTypes.func,
+  active: PropTypes.bool,
 };
 
 export default FilterBtn;

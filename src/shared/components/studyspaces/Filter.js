@@ -5,7 +5,12 @@ import { connect } from 'react-redux';
 
 import FilterBtn from './FilterBtn';
 import { WHITE, ALLBIRDS_GRAY } from '../../styles/colors';
-import { filterSpacesOpen } from '../../actions/spaces_actions';
+import {
+  filterSpacesOpen,
+  filterSpacesOutlets,
+  filterSpacesNoise,
+  filterSpacesGroups,
+} from '../../actions/spaces_actions';
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -24,29 +29,78 @@ class Filter extends Component {
   handleClickOpen() {
     // TODO CONDITION ON STATE
     const { filterSpacesOpenDispatch } = this.props;
-    filterSpacesOpenDispatch(true);
+    const { filterOpen } = this.props;
+
+    filterSpacesOpenDispatch(!filterOpen);
+  }
+
+  handleClickOutlets(num) {
+    const { filterSpacesOutletsDispatch } = this.props;
+    filterSpacesOutletsDispatch(num);
+  }
+
+  handleClickNoiseLevel(num) {
+    const { filterSpacesNoiseDispatch } = this.props;
+    filterSpacesNoiseDispatch(num);
+  }
+
+  handleClickGroups(num) {
+    const { filterSpacesGroupsDispatch } = this.props;
+    filterSpacesGroupsDispatch(num);
   }
 
   render() {
+    const { filterOpen } = this.props;
+
     return (
       <FilterWrapper>
-        <FilterBtn text="Open" onClick={this.handleClickOpen} />
-        <FilterBtn text="Outlets" options={['None', 'Few', 'Many']} />
-        <FilterBtn text="Noise level" options={['todo1', 'todo2']} />
-        <FilterBtn text="Groups" options={['todo1', 'todo2']} />
+        <FilterBtn
+          text="Open"
+          onClick={this.handleClickOpen}
+          active={filterOpen}
+        />
+
+        <FilterBtn
+          text="Outlets"
+          onClickOption={this.handleClickOutlets}
+          options={['None', 'Few', 'Many']}
+        />
+
+        <FilterBtn
+          text="Noise level"
+          onClickOption={this.handleClickNoiseLevel}
+          options={['Talkative', 'Quiet', 'Silent']}
+        />
+
+        <FilterBtn
+          text="Groups"
+          onClickOption={this.handleClickGroups}
+          options={['None', 'Small', 'Large']}
+        />
       </FilterWrapper>
     );
   }
 }
 
-Filter.propTypes = {
-  filterSpacesOpenDispatch: PropTypes.func.isRequired,
+Filter.defaultProps = {
+  filterOpen: false,
 };
 
-const mapStateToProps = state => state;
+Filter.propTypes = {
+  filterSpacesOpenDispatch: PropTypes.func.isRequired,
+  filterSpacesOutletsDispatch: PropTypes.func.isRequired,
+  filterSpacesNoiseDispatch: PropTypes.func.isRequired,
+  filterSpacesGroupsDispatch: PropTypes.func.isRequired,
+  filterOpen: PropTypes.bool,
+};
+
+const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
-  filterSpacesOpenDispatch: venueId => dispatch(filterSpacesOpen(venueId)),
+  filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
+  filterSpacesOutletsDispatch: filters => dispatch(filterSpacesOutlets(filters)),
+  filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
+  filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
 });
 
 // Redux config

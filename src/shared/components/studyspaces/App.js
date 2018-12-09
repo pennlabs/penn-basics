@@ -32,7 +32,6 @@ class App extends Component {
     } = this.props;
 
     if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
-      // return null; // TODO
       return (<Filter />);
     }
 

@@ -10,35 +10,37 @@ import {
 } from '../actions/action_types';
 
 const filter = (state) => {
-  if (!state.filters) return state;
-
   const {
-    open,
-    outlets,
-    noise,
-    groups,
-  } = state.filters;
+    filterOpen,
+    filterOutlets,
+    filterNoise,
+    filterGroups,
+  } = state;
 
-  // If there is nothing to filter on
-  if (!open && !outlets && !noise && !groups) return state;
+  // If there is nothing to filter on, remove all filters and reset the data
+  if (!filterOpen && !filterOutlets && !filterNoise && !filterGroups) {
+    const newState = Object.assign(state, {});
+    newState.filteredSpacesData = state.spacesData;
+    return newState;
+  }
 
   const filteredSpacesData = {};
   const { spacesData } = state;
   let filteredSpaceIDs = Object.keys(spacesData);
 
-  if (open) {
+  if (filterOpen) {
     filteredSpaceIDs = filteredSpaceIDs.filter(id => spacesData[id].open);
   }
 
-  if (outlets) {
+  if (filterOutlets) {
     // TODO
   }
 
-  if (noise) {
+  if (filterNoise) {
     // TODO
   }
 
-  if (groups) {
+  if (filterGroups) {
     // TODO
   }
 
@@ -46,7 +48,8 @@ const filter = (state) => {
     filteredSpacesData[id] = spacesData[id];
   });
 
-  const newState = Object.assign({}, state);
+  const newState = Object.assign(state, {});
+
   newState.filteredSpacesData = filteredSpacesData;
 
   return newState;
@@ -65,7 +68,10 @@ const spacesReducer = (state = { pending: true }, action) => {
       return {
         pending: false,
         error: action.error,
-        filters: {},
+        filterOpen: undefined,
+        filterOutlets: undefined,
+        filterNoise: undefined,
+        filterGroups: undefined,
       };
 
     case getSpacesDataFulfilled:
@@ -73,7 +79,10 @@ const spacesReducer = (state = { pending: true }, action) => {
         pending: false,
         spacesData: spaces,
         filteredSpacesData: spaces,
-        filters: {},
+        filterOpen: undefined,
+        filterOutlets: undefined,
+        filterNoise: undefined,
+        filterGroups: undefined,
       };
 
     case setHoveredSpaceFulfilled:
@@ -81,19 +90,19 @@ const spacesReducer = (state = { pending: true }, action) => {
       return newState;
 
     case filterSpacesOpenRequested: /* TODO FILTERING */
-      newState.filters.open = filters;
+      newState.filterOpen = filters;
       return filter(newState);
 
     case filterSpacesOutletsRequested: /* TODO FILTERING */
-      newState.filters.outlets = filters;
+      newState.filterOutlets = filters;
       return filter(newState);
 
     case filterSpacesNoiseRequested: /* TODO FILTERING */
-      newState.filters.noise = filters;
+      newState.filterNoise = filters;
       return filter(newState);
 
     case filterSpacesGroupsRequested: /* TODO FILTERING */
-      newState.filters.groups = filters;
+      newState.filterGroups = filters;
       return filter(newState);
 
     default:
@@ -101,7 +110,10 @@ const spacesReducer = (state = { pending: true }, action) => {
         pending: true,
         spacesData: undefined,
         filteredSpacesData: undefined,
-        filters: {},
+        filterOpen: undefined,
+        filterOutlets: undefined,
+        filterNoise: undefined,
+        filterGroups: undefined,
       };
   }
 };
