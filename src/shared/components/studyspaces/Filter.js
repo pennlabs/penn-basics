@@ -24,26 +24,48 @@ class Filter extends Component {
     super(props);
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClickOutlets = this.handleClickOutlets.bind(this);
+    this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this);
+    this.handleClickGroups = this.handleClickGroups.bind(this);
   }
 
+  /**
+   * Handle when the user clicks to filter by if a study space is open or not
+   * NOTE there is no parameter as this is a binary filter: either show all
+   * studyspaces or only show spaces which are open
+   */
   handleClickOpen() {
-    // TODO CONDITION ON STATE
     const { filterSpacesOpenDispatch } = this.props;
     const { filterOpen } = this.props;
 
     filterSpacesOpenDispatch(!filterOpen);
   }
 
+  /**
+   * Handle when the user clicks to filter by outlets level
+   *
+   * @param num: index in the array of options
+   */
   handleClickOutlets(num) {
     const { filterSpacesOutletsDispatch } = this.props;
     filterSpacesOutletsDispatch(num);
   }
 
+  /**
+   * Handle when the user clicks to filter by noise level
+   *
+   * @param num: index in the array of options
+   */
   handleClickNoiseLevel(num) {
     const { filterSpacesNoiseDispatch } = this.props;
     filterSpacesNoiseDispatch(num);
   }
 
+  /**
+   * Handle when the user clicks to filter by group size
+   *
+   * @param num: index in the array of options
+   */
   handleClickGroups(num) {
     const { filterSpacesGroupsDispatch } = this.props;
     filterSpacesGroupsDispatch(num);
@@ -51,6 +73,8 @@ class Filter extends Component {
 
   render() {
     const { filterOpen } = this.props;
+
+    // TODO OTHER ACTIVE PROPS?
 
     return (
       <FilterWrapper>
@@ -103,7 +127,6 @@ const mapDispatchToProps = dispatch => ({
   filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
 });
 
-// Redux config
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
