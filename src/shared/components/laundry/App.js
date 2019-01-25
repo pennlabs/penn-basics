@@ -39,6 +39,7 @@ class App extends Component {
         </Col>
         <Col
           width="70%"  
+          overflowY="scroll"
         >
           <LaundryVenue/>
         </Col>
