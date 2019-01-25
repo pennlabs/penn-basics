@@ -12,7 +12,7 @@ const Nav = () => (
     <Link to="/" className="logo">
       <img src="https://i.imgur.com/JhifMZc.png" alt="logo" />
       <h1>
-        PennBasics
+        Penn Basics
       </h1>
     </Link>
     <Links />

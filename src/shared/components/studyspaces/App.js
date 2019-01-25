@@ -14,6 +14,7 @@ import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { getAllSpacesData } from '../../actions/spaces_actions';
+import SpaceModal from './SpaceModal';
 
 // TODO ghost loaders
 
@@ -37,6 +38,8 @@ class App extends Component {
 
     return (
       <div>
+        <SpaceModal />
+
         <Filter />
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>

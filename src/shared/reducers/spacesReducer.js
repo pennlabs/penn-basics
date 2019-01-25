@@ -7,6 +7,8 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  setActiveSpaceFulfilled,
+  clearActiveSpaceFulfilled,
 } from '../actions/action_types';
 
 const filter = (state) => {
@@ -89,6 +91,14 @@ const spacesReducer = (state = { pending: true }, action) => {
       newState.hoveredSpace = action.spaceId;
       return newState;
 
+    case setActiveSpaceFulfilled:
+      newState.activeSpace = action.spaceId;
+      return newState;
+
+    case clearActiveSpaceFulfilled:
+      newState.activeSpace = null;
+      return newState;
+
     case filterSpacesOpenRequested: /* TODO FILTERING */
       newState.filterOpen = filters;
       return filter(newState);
@@ -114,6 +124,8 @@ const spacesReducer = (state = { pending: true }, action) => {
         filterOutlets: undefined,
         filterNoise: undefined,
         filterGroups: undefined,
+        hoveredSpace: undefined,
+        activeSpace: undefined,
       };
   }
 };

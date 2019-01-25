@@ -9,6 +9,8 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  setActiveSpaceFulfilled,
+  clearActiveSpaceFulfilled,
 } from './action_types';
 
 // TODO unit tests!!
@@ -131,6 +133,19 @@ export function setHoveredSpace(spaceId) {
       spaceId,
     });
   };
+}
+
+export function setActiveSpace(spaceId) {
+  return (dispatch) => {
+    dispatch({
+      type: setActiveSpaceFulfilled,
+      spaceId,
+    });
+  };
+}
+
+export function clearActiveSpace() {
+  return dispatch => dispatch({ type: clearActiveSpaceFulfilled });
 }
 
 // TODO DOCS / ERROR CHECKING
