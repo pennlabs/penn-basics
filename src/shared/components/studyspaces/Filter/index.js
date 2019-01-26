@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import FilterBtn from './FilterBtn';
-import { WHITE, ALLBIRDS_GRAY } from '../../styles/colors';
+import { WHITE, ALLBIRDS_GRAY } from '../../../styles/colors';
 import {
   filterSpacesOpen,
   filterSpacesOutlets,
   filterSpacesNoise,
   filterSpacesGroups,
-} from '../../actions/spaces_actions';
+} from '../../../actions/spaces_actions';
 
 const FilterWrapper = s.div`
   width: 100%;

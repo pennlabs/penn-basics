@@ -7,7 +7,7 @@ import {
   ALLBIRDS_GRAY,
   BLUE,
   DARK_BLUE,
-} from '../../styles/colors';
+} from '../../../styles/colors';
 
 /* background: ${({ active }) => (active ? BLUE : WHITE)}; */
 
