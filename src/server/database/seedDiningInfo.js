@@ -121,7 +121,7 @@ function deleteDiningCollections() {
 
 const fullSeed = () => {
   // Getting venueid mappings may not be necessary on every call
-  deleteDiningCollections()
+  return deleteDiningCollections()
     .then(() => loadVenues())
     .then(() => loadMeals())
     .then(() => console.log('COMPLETED')) //eslint-disable-line

@@ -20,14 +20,25 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//
+let lastSeededTimestamp;
+app.use('/', function(req, res, next) {
+  const now = new Date();
+  if (!lastSeededTimestamp || lastSeededTimestamp.getDate() != now.getDate()) {
+    require('./database/seedDiningInfo').fullSeed();
+    lastSeededTimestamp = now;
+  }
+  next();
+});
+
 app.use('/api/spaces', spacesRouter(DB));
 app.use('/api/events', eventsRouter(DB));
 app.use('/api/dining', diningRouter(DB));
 app.use('/', frontendRouter(DB));
 
-// Seed Dining Data on Server Start
-// require('./database/seedDiningInfo').fullSeed();
-// require('./database/seedSpacesInfo');
+// Seed data on server start
+// TODO have other scripts to do this
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console
