@@ -5,9 +5,10 @@ import styled, { keyframes } from 'styled-components';
 import { WHITE, LIGHT_GRAY, SNOW_ALPHA } from '../../styles/colors';
 
 const Z_INDEX = 1200;
-const ANIMATION_DURATION = '0.3s';
+const ANIMATION_DURATION = '0.4s';
 
 // TODO mobile responsiveness
+// TODO use refactored modal code
 
 const fadeIn = keyframes`
   0% {
@@ -131,6 +132,8 @@ const ModalClose = styled.p`
   }
 `;
 
+// Do not propagate events on the modal content to the modal background
+// This would otherwise cause the modal to close on any click
 const noop = event => event.stopPropagation();
 
 export class Modal extends Component {
@@ -152,10 +155,12 @@ export class Modal extends Component {
     const { show } = this.props;
     const { isNewlyMounted } = this.state;
 
+    // If this is the first time the modal is mounting, engage the animation
     if (isNewlyMounted && prevProps.show !== show) {
       this.makeNotNewlyMounted();
     }
 
+    // If we are showing the modal, focus on it
     if (show && !prevProps.show) {
       this.focusRef.current.focus();
     }
@@ -167,6 +172,7 @@ export class Modal extends Component {
     });
   }
 
+  // Close the modal when the user presses the escape key
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27;
     const { show } = this.props;
