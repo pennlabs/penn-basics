@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
-import { WHITE, LIGHT_GRAY } from '../../styles/colors';
+import { WHITE, LIGHT_GRAY, SNOW_ALPHA } from '../../styles/colors';
 
 const Z_INDEX = 1200;
-const WRAPPER_SHADE = 'rgba(0, 0, 0, 0.5)';
 const ANIMATION_DURATION = '0.3s';
 
 // TODO mobile responsiveness
@@ -84,7 +83,7 @@ const ModalWrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  background: ${WRAPPER_SHADE};
+  background: ${SNOW_ALPHA};
   z-index: ${Z_INDEX};
   animation-name: ${({ isNewlyMounted, show }) => {
     if (isNewlyMounted) {

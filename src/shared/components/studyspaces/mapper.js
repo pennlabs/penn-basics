@@ -18,6 +18,16 @@ export function getOutletsLevel(outlets) {
   return map[outlets];
 }
 
+export function getGroupLevel(groups) {
+  const map = {
+    0: 'No groups',
+    1: 'Small groups',
+    2: 'Large groups',
+  };
+
+  return map[groups];
+}
+
 function getMinutes(time) {
   // If there is a decimal
   let minutes = '';

@@ -14,6 +14,7 @@ import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { getAllSpacesData } from '../../actions/spaces_actions';
+import SpaceModal from './SpaceModal';
 
 // TODO ghost loaders
 
@@ -25,19 +26,20 @@ class App extends Component {
 
   render() {
     const {
-      spacesData,
+      filteredSpacesData,
       error,
       pending,
       hoveredSpace,
     } = this.props;
 
-    if (pending || !spacesData || !Object.keys(spacesData).length) {
-      // return null; // TODO
+    if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
       return (<Filter />);
     }
 
     return (
       <div>
+        <SpaceModal />
+
         <Filter />
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
@@ -49,8 +51,8 @@ class App extends Component {
           >
             <ErrorMessage message={error} />
 
-            {Object.keys(spacesData).map((spaceId) => {
-              const space = spacesData[spaceId];
+            {Object.keys(filteredSpacesData).map((spaceId) => {
+              const space = filteredSpacesData[spaceId];
               return (
                 <div key={spaceId}>
                   <SpaceCard
@@ -75,7 +77,7 @@ class App extends Component {
             <Map
               mapId="map"
               height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-              markers={spacesData}
+              markers={filteredSpacesData}
               activeMarker={hoveredSpace}
             />
           </Col>

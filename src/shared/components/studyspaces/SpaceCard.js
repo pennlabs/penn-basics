@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import SpaceModal from './SpaceModal';
+// import SpaceModal from './SpaceModal';
 import {
   Card,
   Subtitle,
@@ -10,7 +10,7 @@ import {
   Row,
   Col,
 } from '../shared';
-import { setHoveredSpace } from '../../actions/spaces_actions';
+import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions';
 import { getNoiseLevel, getOutletsLevel } from './mapper';
 
 // TODO hours for the day?
@@ -19,25 +19,14 @@ class SpaceCard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      showModal: false,
-    };
-
-    this.toggleModal = this.toggleModal.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
   }
 
-  toggleModal() {
-    const { showModal } = this.state;
-    this.setState({
-      showModal: !showModal,
-    });
-  }
-
   handleKeyPress(event) {
     if (event.keyCode === 32) {
-      this.toggleModal();
+      this.handleClick();
     }
   }
 
@@ -54,6 +43,11 @@ class SpaceCard extends Component {
     setHoveredSpaceDispatch(spaceId);
   }
 
+  handleClick() {
+    const { setActiveSpaceDispatch, spaceId } = this.props;
+    setActiveSpaceDispatch(spaceId);
+  }
+
   render() {
     const {
       name,
@@ -63,12 +57,16 @@ class SpaceCard extends Component {
       outlets,
       hours,
     } = this.props;
-    const { showModal } = this.state;
     const noiseLevel = getNoiseLevel(quiet);
     const outletsLevel = getOutletsLevel(outlets);
 
     return (
-      <Card onClick={this.toggleModal} onKeyPress={this.handleKeyPress} padding="0.5rem 1rem" hoverable>
+      <Card
+        onClick={this.handleClick}
+        onKeyPress={this.handleKeyPress}
+        padding="0.5rem 1rem"
+        hoverable
+      >
         <Row>
           {image && (
             <Col backgroundImage={image} width="30%" borderRadius="4px" />
@@ -86,12 +84,6 @@ class SpaceCard extends Component {
               {outletsLevel ? ` • ${outletsLevel}` : ''}
               {noiseLevel ? ` • ${noiseLevel}` : ''}
             </Subtext>
-
-            <SpaceModal
-              show={showModal}
-              toggle={this.toggleModal}
-              {...this.props}
-            />
           </Col>
         </Row>
       </Card>
@@ -101,19 +93,23 @@ class SpaceCard extends Component {
 
 SpaceCard.defaultProps = {
   open: false,
-  description: '',
   image: '',
   outlets: 0,
   quiet: -1,
+  hoveredSpace: null,
 };
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
-  description: PropTypes.string,
   image: PropTypes.string,
   outlets: PropTypes.number,
   quiet: PropTypes.number,
+  hours: PropTypes.string.isRequired,
+  hoveredSpace: PropTypes.string,
+  spaceId: PropTypes.string.isRequired,
+  setHoveredSpaceDispatch: PropTypes.func.isRequired,
+  setActiveSpaceDispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ spaces }) => {
@@ -123,6 +119,7 @@ const mapStateToProps = ({ spaces }) => {
 
 const mapDispatchToProps = dispatch => ({
   setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
+  setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
 });
 
 export default connect(

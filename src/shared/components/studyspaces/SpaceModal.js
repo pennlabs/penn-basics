@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { clearActiveSpace } from '../../actions/spaces_actions';
 
 import {
   Title,
@@ -12,86 +14,117 @@ import {
 import { SNOW } from '../../styles/colors';
 import Hours from './Hours';
 
-const SpaceModal = ({
-  show,
-  toggle,
-  name,
-  image,
-  description,
-  address,
-  location,
-  start,
-  end,
-}) => (
-  <Modal show={show} toggle={toggle}>
-    <ModalContainer>
-      <Title marginBottom="2.5vh">{name}</Title>
-    </ModalContainer>
+class SpaceModal extends Component {
+  constructor(props) {
+    super(props);
 
-    {image && (
-      <Image
-        src={image}
-        alt={name}
-        marginBottom="2.5vh"
-      />
-    )}
+    this.toggle = this.toggle.bind(this);
+  }
 
-    <ModalContainer paddingTop="0.5rem">
-      <Text>
-        <strong>Description:</strong>
-      </Text>
-      <br />
-      <Text>
-        {description}
-      </Text>
-    </ModalContainer>
+  toggle() {
+    const { clearActiveSpaceDispatch } = this.props;
+    clearActiveSpaceDispatch();
+  }
 
-    <ModalContainer background={SNOW} paddingTop="1.5rem" paddingBottom="1rem">
-      <Text>
-        <strong>Address:</strong>
-      </Text>
-      <br />
-      <Text>
-        {address}
-      </Text>
-    </ModalContainer>
+  render() {
+    const { activeSpace, spacesData } = this.props;
+    const space = spacesData[activeSpace];
+    const show = Boolean(activeSpace && space);
 
-    {location && location.lat && location.lng ? (
-      <Map
-        mapId={name}
-        location={location}
-        showMarker
-        gestureHandling="cooperative"
-        height="50%"
-      />
-    ) : null}
+    const {
+      name,
+      image,
+      description,
+      address,
+      location,
+      start,
+      end,
+    } = space || {};
 
-    <ModalContainer paddingTop="1.5rem">
-      <Hours start={start} end={end} />
-    </ModalContainer>
-  </Modal>
-);
+    return (
+      <Modal show={show} toggle={this.toggle}>
+        {
+          space ? (
+            <>
+              <ModalContainer>
+                <Title marginBottom="2.5vh">{name}</Title>
+              </ModalContainer>
+
+              {image && (
+                <Image
+                  src={image}
+                  alt={name}
+                  marginBottom="2.5vh"
+                />
+              )}
+
+              <ModalContainer paddingTop="0.5rem">
+                <Text>
+                  <strong>Description:</strong>
+                </Text>
+                <br />
+                <Text>
+                  {description}
+                </Text>
+              </ModalContainer>
+
+              <ModalContainer background={SNOW} paddingTop="1.5rem" paddingBottom="1rem">
+                <Text>
+                  <strong>Address:</strong>
+                </Text>
+                <br />
+                <Text>
+                  {address}
+                </Text>
+              </ModalContainer>
+
+              {location && location.lat && location.lng ? (
+                <Map
+                  mapId={name}
+                  location={location}
+                  showMarker
+                  gestureHandling="cooperative"
+                  height="50%"
+                />
+              ) : null}
+
+              <ModalContainer paddingTop="1.5rem">
+                <Hours start={start} end={end} />
+              </ModalContainer>
+            </>
+          ) : <div />
+        }
+      </Modal>
+    );
+  }
+}
 
 SpaceModal.defaultProps = {
-  description: '',
-  image: '',
-  address: '',
   location: null,
+  activeSpace: null,
+  spacesData: {},
 };
 
 SpaceModal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  image: PropTypes.string,
-  address: PropTypes.string,
+  activeSpace: PropTypes.string,
+  clearActiveSpaceDispatch: PropTypes.func.isRequired,
+  spacesData: PropTypes.object, // eslint-disable-line
   location: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
-  start: PropTypes.arrayOf(PropTypes.number).isRequired,
-  end: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
-export default SpaceModal;
+const mapStateToProps = ({ spaces }) => {
+  const { spacesData, activeSpace } = spaces;
+  return {
+    spacesData,
+    activeSpace,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  clearActiveSpaceDispatch: () => dispatch(clearActiveSpace()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SpaceModal);
