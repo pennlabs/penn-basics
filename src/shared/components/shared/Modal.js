@@ -131,9 +131,7 @@ const ModalClose = styled.p`
   }
 `;
 
-function noop(event) {
-  event.stopPropagation();
-}
+const noop = event => event.stopPropagation();
 
 export class Modal extends Component {
   constructor(props) {
@@ -143,7 +141,10 @@ export class Modal extends Component {
       isNewlyMounted: true,
     };
 
+    this.focusRef = React.createRef();
+
     this.makeNotNewlyMounted = this.makeNotNewlyMounted.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   // Avoid animations showing on load
@@ -154,6 +155,10 @@ export class Modal extends Component {
     if (isNewlyMounted && prevProps.show !== show) {
       this.makeNotNewlyMounted();
     }
+
+    if (show && !prevProps.show) {
+      this.focusRef.current.focus();
+    }
   }
 
   makeNotNewlyMounted() {
@@ -162,12 +167,31 @@ export class Modal extends Component {
     });
   }
 
+  handleKeyPress(event) {
+    const ESCAPE_KEY_CODE = 27;
+    const { show } = this.props;
+
+    if (event.keyCode === ESCAPE_KEY_CODE && show) {
+      const { toggle } = this.props;
+
+      toggle();
+    }
+  }
+
   render() {
     const { show, toggle, children } = this.props;
     const { isNewlyMounted } = this.state;
 
     return (
-      <ModalWrapper show={show} onClick={toggle} isNewlyMounted={isNewlyMounted}>
+      <ModalWrapper
+        show={show}
+        ref={this.focusRef}
+        tabIndex={show ? 0 : -1}
+        onClick={toggle}
+        isNewlyMounted={isNewlyMounted}
+        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyPress}
+      >
         <ModalContent onClick={noop} show={show}>
           <ModalClose onClick={toggle}>
             &times;
