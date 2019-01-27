@@ -13,7 +13,7 @@ const renderMachineAvailabilities = (machineData) => {
   const busyMachines = busyMachinesList.map(time => (
     <div className="column is-2" style={{position: 'relative'}}>
       <img width="100%" src="/img/washer_busy.png" />
-      <p style={{position: 'absolute', top: '25px', left: '30px'}}>{time}</p>
+      <p className="subtitle" style={{position: 'absolute', top: '30%', left: '33%', fontSize:'13px'}}>{time}</p>
     </div>
   ));
 
