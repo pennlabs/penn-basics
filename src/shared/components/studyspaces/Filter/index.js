@@ -3,6 +3,8 @@ import s from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+// TODO decouple index of option and value in database
+
 import FilterBtn from './FilterBtn';
 import { WHITE, ALLBIRDS_GRAY } from '../../../styles/colors';
 import {
@@ -87,7 +89,7 @@ class Filter extends Component {
         <FilterBtn
           text="Outlets"
           onClickOption={this.handleClickOutlets}
-          options={['None', 'Few', 'Many']}
+          options={['No outlets', 'Few outlets', 'Many outlets']}
         />
 
         <FilterBtn
@@ -99,7 +101,7 @@ class Filter extends Component {
         <FilterBtn
           text="Groups"
           onClickOption={this.handleClickGroups}
-          options={['None', 'Small', 'Large']}
+          options={['No groups', 'Good for small groups', 'Good for large groups']}
         />
       </FilterWrapper>
     );
