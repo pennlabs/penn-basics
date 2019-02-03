@@ -19,7 +19,7 @@
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
     "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
     "address": "3420 Walnut St, Philadelphia, PA 19104",
-    "outlets": 0,
+    "outlets": 1,
     "quiet": 2,
     "groups": 2,
     "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
@@ -161,7 +161,7 @@
   },
   {
     "name": "Hill Study Lounge",
-    "description": "",
+    "description": "Lofty, well-lit study space in the historic residential building Hill College House",
     "address": "3333 Walnut St, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 0,
@@ -218,7 +218,7 @@
   {
     "name": "United by Blue",
     "image": "http://cdn.shopify.com/s/files/1/0287/3670/files/header-slider-image-walnut2.jpg?10285525781100010835",
-    "description": "",
+    "description": "Chic, bustling, upscale cafe and purveyor of outdoorsy goods with in-demand space for studying, talking, and meeting.",
     "address": "3421 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -292,7 +292,7 @@
     "address": "4000 Locust St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
-    "groups": 0,
+    "groups": 1,
     "start": [6.5, 6.5, 6.5, 6.5, 6.5, 7, 7],
     "end": [0, 0, 0, 0, 0, 0, 0],
     "location": {

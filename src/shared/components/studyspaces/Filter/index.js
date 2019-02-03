@@ -6,12 +6,18 @@ import { connect } from 'react-redux';
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn';
-import { WHITE, ALLBIRDS_GRAY } from '../../../styles/colors';
+import {
+  WHITE,
+  ALLBIRDS_GRAY,
+  MEDIUM_GRAY,
+  DARK_GRAY,
+} from '../../../styles/colors';
 import {
   filterSpacesOpen,
   filterSpacesOutlets,
   filterSpacesNoise,
   filterSpacesGroups,
+  clearSpacesFilters,
 } from '../../../actions/spaces_actions';
 
 const FilterWrapper = s.div`
@@ -19,6 +25,19 @@ const FilterWrapper = s.div`
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
   padding: 0.5rem 1rem;
+`;
+
+const ClearText = s.p`
+  display: inline-block;
+  color: ${MEDIUM_GRAY};
+  cursor: hand;
+  opacity: 0.8;
+
+  :hover,
+  :active,
+  :focus {
+    color: ${DARK_GRAY};
+  }
 `;
 
 class Filter extends Component {
@@ -74,7 +93,7 @@ class Filter extends Component {
   }
 
   render() {
-    const { filterOpen } = this.props;
+    const { filterOpen, clearSpacesFiltersDispatch } = this.props;
 
     // TODO OTHER ACTIVE PROPS?
 
@@ -103,6 +122,10 @@ class Filter extends Component {
           onClickOption={this.handleClickGroups}
           options={['No groups', 'Good for small groups', 'Good for large groups']}
         />
+
+        <ClearText onClick={clearSpacesFiltersDispatch}>
+          Clear filters
+        </ClearText>
       </FilterWrapper>
     );
   }
@@ -117,12 +140,14 @@ Filter.propTypes = {
   filterSpacesOutletsDispatch: PropTypes.func.isRequired,
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
+  clearSpacesFiltersDispatch: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 };
 
 const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
+  clearSpacesFiltersDispatch: () => dispatch(clearSpacesFilters()),
   filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
   filterSpacesOutletsDispatch: filters => dispatch(filterSpacesOutlets(filters)),
   filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),

@@ -28,6 +28,7 @@ export const filterSpacesOpenRequested = 'FILTER_SPACERS_OPEN_REQUESTED';
 export const filterSpacesOutletsRequested = 'FILTER_SPACERS_OUTLETS_REQUESTED';
 export const filterSpacesNoiseRequested = 'FILTER_SPACERS_NOISE_REQUESTED';
 export const filterSpacesGroupsRequested = 'FILTER_SPACERS_GROUPS_REQUESTED';
+export const clearFilterSpacesRequested = 'CLEAR_FILTER_SPACES_REQUESTED';
 export const setActiveSpaceFulfilled = 'SET_ACTIVE_SPACE_FULFILLED';
 export const clearActiveSpaceFulfilled = 'CLEAR_ACTIVE_SPACE_FULFILLED';
 

@@ -11,6 +11,7 @@ import {
   filterSpacesGroupsRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
+  clearFilterSpacesRequested,
 } from './action_types';
 
 // TODO unit tests!!
@@ -185,5 +186,11 @@ export function filterSpacesGroups(filters) {
       type: filterSpacesGroupsRequested,
       filters,
     });
+  };
+}
+
+export function clearSpacesFilters() {
+  return (dispatch) => {
+    dispatch({ type: clearFilterSpacesRequested });
   };
 }

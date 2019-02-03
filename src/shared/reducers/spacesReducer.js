@@ -9,6 +9,7 @@ import {
   filterSpacesGroupsRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
+  clearFilterSpacesRequested,
 } from '../actions/action_types';
 
 const filter = (state) => {
@@ -113,6 +114,13 @@ const spacesReducer = (state = { pending: true }, action) => {
 
     case filterSpacesGroupsRequested: /* TODO FILTERING */
       newState.filterGroups = filters;
+      return filter(newState);
+
+    case clearFilterSpacesRequested:
+      newState.filterOpen = undefined;
+      newState.filterOutlets = undefined;
+      newState.filterNoise = undefined;
+      newState.filterGroups = undefined;
       return filter(newState);
 
     default:

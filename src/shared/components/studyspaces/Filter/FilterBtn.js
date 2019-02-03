@@ -95,6 +95,7 @@ const OptionsModalWrapper = s.div`
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
+  box-shadow: 0 0 8px ${BORDER};
 
   div {
     margin-bottom: 0.5rem;
@@ -103,7 +104,8 @@ const OptionsModalWrapper = s.div`
     color: ${MEDIUM_GRAY};
 
     :active,
-    :focus {
+    :focus,
+    :hover {
       color: ${DARK_GRAY};
     }
 
@@ -154,10 +156,21 @@ class FilterBtn extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClickOption = this.handleClickOption.bind(this);
+    this.areOptions = this.areOptions.bind(this);
+  }
+
+  areOptions() {
+    const { options } = this.props;
+    return Boolean(options && options.length);
   }
 
   handleClick() {
+    if (!this.areOptions()) {
+      return;
+    }
+
     // NOTE this hopefully won't be needed down the line
+
     const { active } = this.state;
 
     this.setState({
@@ -173,6 +186,8 @@ class FilterBtn extends Component {
     this.setState({ activeOptions });
   }
 
+  // TODO ACTIVE SHOULD BE IN PROPS ONLY
+
   render() {
     const {
       text,
@@ -184,18 +199,36 @@ class FilterBtn extends Component {
     const { activeOptions } = this.state;
     const areOptions = options && options.length;
     const isActive = active || this.state.active; /* eslint-disable-line */
+    let areActiveOptions = false;
+
+    let btnText = text;
+
+    if (areOptions) {
+      const activeOptionsArr = options.filter(o => activeOptions[o]);
+
+      if (activeOptionsArr && activeOptionsArr.length) {
+        areActiveOptions = true;
+        btnText = '';
+
+        activeOptionsArr.forEach((o) => {
+          btnText += `${o}, `;
+        });
+
+        btnText = btnText.substring(0, btnText.length - 2);
+      }
+    }
 
     return (
       <>
         <FilterBtnWrapper
-          active={isActive}
+          active={active || areActiveOptions}
           options={areOptions}
           onClick={() => {
             this.handleClick();
             onClick();
           }}
         >
-          {text}
+          {btnText}
           {(areOptions && isActive) && (
             <>
               <OptionsModalBacking />
@@ -208,12 +241,12 @@ class FilterBtn extends Component {
                       key={o}
                       onClick={() => { /* eslint-disable-line */
                         this.handleClickOption(o);
-                        this.onClickOption(o);
+                        onClickOption(o);
                       }}
                       role="option"
                       tabIndex={-1}
                       aria-selected={isActiveOption}
-                      onKeypress={() => /* todo */ {}}
+                      onKeyPress={() => /* todo */ {}}
                     >
                       <Circle active={isActiveOption} />
                       <OptionText active={isActiveOption}>{o}</OptionText>
