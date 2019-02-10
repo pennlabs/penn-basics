@@ -140,22 +140,21 @@ class FilterBtn extends Component {
   constructor(props) {
     super(props);
 
-    const { options } = this.props;
-    let activeOptions = null;
+    // const { options } = this.props;
+    // let activeOptions = null;
+    //
+    // if (options && options.length) {
+    //   activeOptions = {};
+    //   options.forEach(option => { // eslint-disable-line
+    //     activeOptions[option] = false;
+    //   });
+    // }
+    //
+    // this.state = {
+    //   activeOptions,
+    // };
 
-    if (options && options.length) {
-      activeOptions = {};
-      options.forEach(option => { // eslint-disable-line
-        activeOptions[option] = false;
-      });
-    }
-
-    this.state = {
-      activeOptions,
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClickOption = this.handleClickOption.bind(this);
+    // this.handleClickOption = this.handleClickOption.bind(this);
     this.areOptions = this.areOptions.bind(this);
   }
 
@@ -164,27 +163,13 @@ class FilterBtn extends Component {
     return Boolean(options && options.length);
   }
 
-  handleClick() {
-    if (!this.areOptions()) {
-      return;
-    }
-
-    // NOTE this hopefully won't be needed down the line
-
-    const { active } = this.state;
-
-    this.setState({
-      active: !active,
-    });
-  }
-
-  handleClickOption(option) {
-    if (!option) return;
-
-    const { activeOptions } = this.state;
-    activeOptions[option] = !activeOptions[option];
-    this.setState({ activeOptions });
-  }
+  // handleClickOption(option) {
+  //   if (!option) return;
+  //
+  //   const { activeOptions } = this.state;
+  //   activeOptions[option] = !activeOptions[option];
+  //   this.setState({ activeOptions });
+  // }
 
   // TODO ACTIVE SHOULD BE IN PROPS ONLY
 
@@ -195,16 +180,17 @@ class FilterBtn extends Component {
       onClick,
       onClickOption,
       active,
+      activeOptions = [],
     } = this.props;
-    const { activeOptions } = this.state;
+    // const { activeOptions } = this.state;
     const areOptions = options && options.length;
-    const isActive = active || this.state.active; /* eslint-disable-line */
-    let areActiveOptions = false;
+    // let areActiveOptions = false;
+    let areActiveOptions = activeOptions && activeOptions.length;
 
     let btnText = text;
 
-    if (areOptions) {
-      const activeOptionsArr = options.filter(o => activeOptions[o]);
+    if (areOptions && activeOptions && activeOptions.length) {
+      const activeOptionsArr = options.filter((o, idx) => activeOptions.includes(idx));
 
       if (activeOptionsArr && activeOptionsArr.length) {
         areActiveOptions = true;
@@ -224,24 +210,23 @@ class FilterBtn extends Component {
           active={active || areActiveOptions}
           options={areOptions}
           onClick={() => {
-            this.handleClick();
             onClick();
           }}
         >
           {btnText}
-          {(areOptions && isActive) && (
+          {(areOptions && active) && (
             <>
               <OptionsModalBacking />
               <OptionsModalWrapper onClick={noop}>
-                {options.map((o) => {
-                  const isActiveOption = activeOptions[o];
+                {options.map((o, idx) => {
+                  const isActiveOption = Boolean(activeOptions && activeOptions.includes(idx));
 
                   return (
                     <div
                       key={o}
                       onClick={() => { /* eslint-disable-line */
-                        this.handleClickOption(o);
-                        onClickOption(o);
+                        // this.handleClickOption(o);
+                        onClickOption(idx);
                       }}
                       role="option"
                       tabIndex={-1}
@@ -293,6 +278,7 @@ FilterBtn.defaultProps = {
   onClick: () => {},
   onClickOption: () => {},
   active: false,
+  activeOptions: [],
 };
 
 FilterBtn.propTypes = {
@@ -301,6 +287,7 @@ FilterBtn.propTypes = {
   onClick: PropTypes.func,
   onClickOption: PropTypes.func,
   active: PropTypes.bool,
+  activeOptions: PropTypes.arrayOf(PropTypes.number),
 };
 
 export default FilterBtn;

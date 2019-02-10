@@ -18,6 +18,11 @@ import {
   filterSpacesNoise,
   filterSpacesGroups,
   clearSpacesFilters,
+
+  toggleSpacesOpen,
+  toggleSpacesOutlets,
+  toggleSpacesNoise,
+  toggleSpacesGroups,
 } from '../../../actions/spaces_actions';
 
 const FilterWrapper = s.div`
@@ -56,9 +61,13 @@ class Filter extends Component {
    * studyspaces or only show spaces which are open
    */
   handleClickOpen() {
-    const { filterSpacesOpenDispatch } = this.props;
-    const { filterOpen } = this.props;
+    const {
+      filterSpacesOpenDispatch,
+      filterOpen,
+      toggleSpacesOpenDispatch,
+    } = this.props;
 
+    toggleSpacesOpenDispatch();
     filterSpacesOpenDispatch(!filterOpen);
   }
 
@@ -83,7 +92,7 @@ class Filter extends Component {
   }
 
   /**
-   * Handle when the user clicks to filter by group size
+   * Handle when the user clicks to filter by group` size
    *
    * @param num: index in the array of options
    */
@@ -93,7 +102,21 @@ class Filter extends Component {
   }
 
   render() {
-    const { filterOpen, clearSpacesFiltersDispatch } = this.props;
+    const {
+      clearSpacesFiltersDispatch,
+      toggleSpacesOutletsDispatch,
+      toggleSpacesNoiseDispatch,
+      toggleSpacesGroupsDispatch,
+
+      filterOpenActive,
+      filterOutletsActive,
+      filterNoiseActive,
+      filterGroupsActive,
+
+      filterOutlets,
+      filterNoise,
+      filterGroups,
+    } = this.props;
 
     // TODO OTHER ACTIVE PROPS?
 
@@ -102,25 +125,34 @@ class Filter extends Component {
         <FilterBtn
           text="Open"
           onClick={this.handleClickOpen}
-          active={filterOpen}
+          active={filterOpenActive}
         />
 
         <FilterBtn
           text="Outlets"
+          onClick={toggleSpacesOutletsDispatch}
           onClickOption={this.handleClickOutlets}
           options={['No outlets', 'Few outlets', 'Many outlets']}
+          activeOptions={filterOutlets}
+          active={filterOutletsActive}
         />
 
         <FilterBtn
           text="Noise level"
+          onClick={toggleSpacesNoiseDispatch}
           onClickOption={this.handleClickNoiseLevel}
           options={['Talkative', 'Quiet', 'Silent']}
+          activeOptions={filterNoise}
+          active={filterNoiseActive}
         />
 
         <FilterBtn
           text="Groups"
+          onClick={toggleSpacesGroupsDispatch}
           onClickOption={this.handleClickGroups}
           options={['No groups', 'Good for small groups', 'Good for large groups']}
+          activeOptions={filterGroups}
+          active={filterGroupsActive}
         />
 
         <ClearText onClick={clearSpacesFiltersDispatch}>
@@ -133,6 +165,9 @@ class Filter extends Component {
 
 Filter.defaultProps = {
   filterOpen: false,
+  filterOutlets: [],
+  filterNoise: [],
+  filterGroups: [],
 };
 
 Filter.propTypes = {
@@ -142,16 +177,36 @@ Filter.propTypes = {
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
   clearSpacesFiltersDispatch: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
+
+  toggleSpacesOpenDispatch: PropTypes.func.isRequired,
+  toggleSpacesOutletsDispatch: PropTypes.func.isRequired,
+  toggleSpacesNoiseDispatch: PropTypes.func.isRequired,
+  toggleSpacesGroupsDispatch: PropTypes.func.isRequired,
+
+  filterOpenActive: PropTypes.bool.isRequired,
+  filterOutletsActive: PropTypes.bool.isRequired,
+  filterNoiseActive: PropTypes.bool.isRequired,
+  filterGroupsActive: PropTypes.bool.isRequired,
+
+  filterOutlets: PropTypes.arrayOf(PropTypes.number),
+  filterNoise: PropTypes.arrayOf(PropTypes.number),
+  filterGroups: PropTypes.arrayOf(PropTypes.number),
 };
 
 const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
   clearSpacesFiltersDispatch: () => dispatch(clearSpacesFilters()),
+
   filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
   filterSpacesOutletsDispatch: filters => dispatch(filterSpacesOutlets(filters)),
   filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
   filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
+
+  toggleSpacesOpenDispatch: () => dispatch(toggleSpacesOpen()),
+  toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),
+  toggleSpacesNoiseDispatch: () => dispatch(toggleSpacesNoise()),
+  toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
 });
 
 export default connect(
