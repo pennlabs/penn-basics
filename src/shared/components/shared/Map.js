@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+const SHOW_MARKER_KEY = -1; // Marker keys which we shouldn't delete
 const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
 const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
 
@@ -23,6 +24,7 @@ export class Map extends Component {
 
     this.waitForGoogle = this.waitForGoogle.bind(this);
     this.createMarker = this.createMarker.bind(this);
+    this.updateMarkers = this.updateMarkers.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,7 @@ export class Map extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // Check if the active marker changes
     const { activeMarker } = this.props;
     const oldActiveMarker = prevProps.activeMarker;
 
@@ -37,6 +40,47 @@ export class Map extends Component {
       this.updateMarker(oldActiveMarker, { icon: RED });
       this.updateMarker(activeMarker, { icon: BLUE });
     }
+
+    // Check if the data changed and update markers
+    const { markers } = this.props;
+
+    if (markers !== prevProps.markers) {
+      this.updateMarkers();
+    }
+  }
+
+  updateMarkers() {
+    return new Promise((resolve) => {
+      const { markers: dataMarkers = {} } = this.props;
+      const { markers: mapMarkers = {} } = this.state;
+
+      const dataKeys = Object.keys(dataMarkers);
+      const mapKeys = Object.keys(mapMarkers);
+
+      mapKeys.forEach((key) => {
+        if (!dataKeys[key] && key !== SHOW_MARKER_KEY) {
+          // Delete the marker on the map and remove it from the object
+          const marker = mapMarkers[key];
+          marker.setMap(null);
+          delete mapMarkers[key];
+        }
+      });
+
+      dataKeys.forEach((key) => {
+        if (!mapKeys[key]) {
+          // Create a marker new marker and add it to the state
+          const marker = this.createMarker(key, dataMarkers[key]);
+          mapMarkers[key] = marker;
+        }
+      });
+
+      // Update the state
+      this.setState({
+        markers: mapMarkers,
+      }, () => {
+        resolve(true);
+      });
+    });
   }
 
   updateMarker(key, { icon = RED }) {
@@ -49,13 +93,27 @@ export class Map extends Component {
   }
 
   createMarker(key, { location, icon = RED }) {
-    if (!location) return;
+    if (!location) {
+      console.log('Location is undefined'); // eslint-disable-line no-console
+
+      return null;
+    }
 
     const { lat, lng } = location;
 
-    if (typeof lat === 'undefined' || typeof lng === 'undefined') return;
+    if (typeof lat === 'undefined' || typeof lng === 'undefined') {
+      console.log('Lat or lng is undefined'); // eslint-disable-line no-console
+
+      return null;
+    }
 
     const { map } = this.state;
+
+    if (!map) {
+      console.log('Map is undefined'); // eslint-disable-line no-console
+
+      return null;
+    }
 
     const marker = new google.maps.Marker({
       position: location,
@@ -63,10 +121,7 @@ export class Map extends Component {
       map,
     });
 
-    const { markers } = this.state;
-    markers[key] = marker;
-
-    this.setState({ markers });
+    return marker;
   }
 
   initMap() {
@@ -74,7 +129,6 @@ export class Map extends Component {
       location,
       mapId = 'map',
       gestureHandling = '',
-      markers = {},
       showMarker = false,
     } = this.props;
 
@@ -87,11 +141,22 @@ export class Map extends Component {
     this.setState({
       map,
     }, () => {
-      if (showMarker) {
-        this.createMarker(-1, { location });
-      }
+      this.updateMarkers()
+        .then(() => {
+          if (showMarker) {
+            const marker = this.createMarker(SHOW_MARKER_KEY, { location });
 
-      Object.keys(markers).forEach(key => this.createMarker(key, markers[key]));
+            const { markers } = this.state;
+            const newMarkers = Object.assign({}, markers, {
+              SHOW_MARKER_KEY: marker,
+            });
+            markers[SHOW_MARKER_KEY] = marker;
+
+            this.setState({ markers: newMarkers }, () => {
+              console.log(this.state.markers); // eslint-disable-line
+            });
+          }
+        });
     });
   }
 
