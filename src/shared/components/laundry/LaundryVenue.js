@@ -1,92 +1,132 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import s from 'styled-components';
+import _ from 'lodash';
+import { Loading } from '../shared/Loading';
 
-const renderMachineAvailabilities = (machineData) => {
-  const availableMachineCount = machineData.open;
-  const busyMachinesList = machineData.time_remaining;
-  const unavailableMachineCount = machineData.offline + machineData.out_of_order;
-  const availableMachines = Array.from(Array(availableMachineCount)).map(() => (
-    <div className="column is-2">
-      <img width="100%" src="/img/washer_open.png" />
-    </div>
-  ));
-  const busyMachines = busyMachinesList.map(time => (
-    <div className="column is-2" style={{position: 'relative'}}>
-      <img width="100%" src="/img/washer_busy.png" />
-      <p className="subtitle" style={{position: 'absolute', top: '30%', left: '33%', fontSize:'13px'}}>{time}</p>
-    </div>
-  ));
+const Wrapper = s.div`
+  padding: 1rem;
+`;
 
-  const unavailableMachines = Array.from(Array(unavailableMachineCount)).map(() => (
-    <div className="column is-2">
-      <img width="100%" src="/img/washer_busy.png" />
+const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
+  const tableMachines = allMachines.filter(machine => machine.type === machineType);
+  const { open, running, out_of_order: outOfOrder } = machineData;
+  return (
+    <div>
+      <div className="columns">
+        <div className="column is-4">
+          <h1 className="title is-5"># Available: {open}</h1>
+        </div>
+        <div className="column is-3">
+          <h1 className="title is-5"># Busy: {running}</h1>
+        </div>
+        <div className="column is-5">
+          <h1 className="title is-5"># Out of order: {outOfOrder}</h1>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column is-12">
+          <table className="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Status</th>
+                <th>Time Remaining (min)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                tableMachines.map((machine) => {
+                  const { status, time_remaining: timeRemaining, id } = machine;
+                  return (
+                    <tr>
+                      <td>{id}</td>
+                      <td>{status}</td>
+                      <td className="has-text-centered">{timeRemaining}</td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    ));
-  const containerDiv = (
-    <div className="columns is-multiline">
-      <div className="column is-12">
-        <p className="subtitle">Available</p>
-        <div className="columns is-multiline">
-          {availableMachines.length ? availableMachines : <div className="column is-2"><p className="subtitle">None</p></div>}
-        </div>
-      </div>
-      <div className="column is-12">
-        <p className="subtitle">Busy</p>
-        <div className="columns is-multiline">
-        {busyMachines.length ? busyMachines : <div className="column is-2"><p className="subtitle">None</p></div>}
-        </div>
-      </div>
-      <div className="column is-12">
-        <p className="subtitle">Out of order</p>
-        <div className="columns is-multiline">
-        {unavailableMachines.length ? unavailableMachines : <div className="column is-2"><p className="subtitle">None</p></div>}
-        </div>
-      </div>
-    </div>
-  )
-  return containerDiv
-  return availableMachines.concat(claimedMachines).concat(unavailableMachines);
+  );
 };
 
-const LaundryVenue = ({ laundryHallInfo }) => {
+const addFavoriteToLocalStorage = (laundryHallId, laundryHalls) => {
+  const halls = _.flatten(laundryHalls.map(hall => hall.halls));
+  console.log(halls);
+}
+
+const LaundryVenue = ({ laundryHallInfo, pending, laundryHallId, laundryHalls }) => {
   if (laundryHallInfo) {
-    const { hall_name } = laundryHallInfo;
-    const machineStatuses = laundryHallInfo.machines.details;
-    const { washers, dryers } = laundryHallInfo.machines;
-    console.log(washers);
-
+    const { hall_name: hallName } = laundryHallInfo;
+    const { washers, dryers, details: machines } = laundryHallInfo.machines;
+    if (pending) {
+      return <div>Pending</div>;
+    }
     return (
-      <div className="laundryOverview overview">
-        <h1 className="title">
-          {hall_name}
-        </h1>
+      <Wrapper>
         <div className="columns">
-          <div className="column is-6">
-            <p className="title is-4">Washers</p>
-            {/* Rendering the green and red dots displaying machine availability */}
-            {renderMachineAvailabilities(washers)}
-
+          <div className="column is-12">
+            <h1 className="title">{hallName}</h1>
+            <a className="button is-warning" onClick={() => addFavoriteToLocalStorage(laundryHallId, laundryHalls)}>Favorite</a>
           </div>
         </div>
         <div className="columns">
           <div className="column is-6">
-            <p className="title is-4">Dryers</p>
-            {/* Rendering the green and red dots displaying machine availability */}
-            {renderMachineAvailabilities(dryers)}
-
+            <div className="overview">
+              <div className="columns">
+                <div className="column is-12">
+                  <p className="title is-4">Washers</p>
+                  {renderMachineAvailabilities(washers, 'washer', machines)}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+
+          <div className="column is-6">
+            <div className="overview">
+              <div className="columns">
+                <div className="column is-12">
+                  <p className="title is-4">Dryers</p>
+                  {renderMachineAvailabilities(dryers, 'dryer', machines)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </Wrapper>
     );
   }
 
   return null;
 };
 
+LaundryVenue.defaultProps = {
+  laundryHallInfo: null,
+  pending: true,
+};
+
+LaundryVenue.propTypes = {
+  laundryHallInfo: PropTypes.shape({
+    hall_name: PropTypes.string,
+    location: PropTypes.string,
+    machines: PropTypes.object,
+  }),
+  pending: PropTypes.bool,
+};
+
 const mapStateToProps = ({ laundry }) => {
-  const { laundryHallInfo } = laundry;
+  const { laundryHallInfo, pending, laundryHallId, laundryHalls } = laundry;
   return {
     laundryHallInfo,
+    pending,
+    laundryHallId,
+    laundryHalls,
   };
 };
 

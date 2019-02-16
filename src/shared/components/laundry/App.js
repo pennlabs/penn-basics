@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 import { getLaundryHalls } from '../../actions/laundry_actions';
 
 import {
@@ -10,20 +11,19 @@ import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import LaundryCard from './LaundryCard';
 import LaundryVenue from './LaundryVenue';
+import Favorites from './Favorites';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    const {
-      getLaundryHalls,
-    } = this.props;
+    const { getLaundryHalls } = this.props;
 
     getLaundryHalls();
   }
 
   render() {
     const {
-      laundryHalls,
+      laundryHalls, //eslint-disable-line
     } = this.props;
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -31,17 +31,18 @@ class App extends Component {
           padding="0 0 .5rem 0"
           background={WHITE}
           overflowY="scroll"
-          width="30%"
+          width="20%"
         >
           {
-            laundryHalls && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} />)
+            laundryHalls
+            && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)
           }
         </Col>
         <Col
-          width="70%"  
+          width="80%"
           overflowY="scroll"
         >
-          <LaundryVenue/>
+          <LaundryVenue />
         </Col>
       </Row>
     );
@@ -58,7 +59,6 @@ const mapStateToProps = ({ laundry }) => {
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
     getLaundryHalls: () => dispatch(getLaundryHalls()),
-    getLaundryHallInfo: laundryHallId => dispatch(getLaundryHall(laundryHallId)),
   };
 };
 

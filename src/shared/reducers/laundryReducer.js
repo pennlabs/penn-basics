@@ -51,6 +51,7 @@ const laundryReducer = (state = defaultState, action) => {
         ...state,
         pending: false,
         laundryHallInfo: action.laundryHallInfo,
+        laundryHallId: action.laundryHallId,
       };
     default:
       return state;

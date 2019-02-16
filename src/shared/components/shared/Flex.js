@@ -18,6 +18,7 @@ export const Col = styled.div`
   background: ${({ background }) => background || ''};
   max-height: ${({ maxHeight }) => maxHeight || 'none'};
   overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+  overflow-x: hidden;
   box-sizing: border-box;
   border-radius: ${({ borderRadius }) => borderRadius || 0};
 `;

@@ -55,6 +55,7 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
       dispatch({
         type: getLaundryHallInfoFulfilled,
         laundryHallInfo: data,
+        laundryHallId,
       });
     } catch (error) {
       dispatch({

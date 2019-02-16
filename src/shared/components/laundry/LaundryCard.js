@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 import { getLaundryHall } from '../../actions/laundry_actions';
 
 import {
@@ -14,18 +15,11 @@ import {
 // TODO hours for the day?
 
 class LaundryCard extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
     };
-  }
-
-  handleKeyPress(event) {
-    if (event.keyCode === 32) {
-      this.toggleModal();
-    }
   }
 
   onLaundryLocationClick() {
@@ -37,6 +31,12 @@ class LaundryCard extends Component {
   onLaundryHallClick(hallId) {
     const { getLaundryHall } = this.props;
     getLaundryHall(hallId);
+  }
+
+  handleKeyPress(event) {
+    if (event.keyCode === 32) {
+      this.toggleModal();
+    }
   }
 
   render() {
@@ -61,11 +61,11 @@ class LaundryCard extends Component {
           </Row>
         </Card>
         {
-          expanded && halls && halls.map(({hall_name, id}) => (//eslint-disable-line
-            <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)}>
+          expanded && halls && halls.map(({hall_name: hallName, id}) => (//eslint-disable-line
+            <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)} key={uuid()}>
               <Row>
                 <Col padding="0">
-                  <Subtext>{hall_name}</Subtext>
+                  <Subtext>{hallName}</Subtext>
                 </Col>
               </Row>
             </Card>
