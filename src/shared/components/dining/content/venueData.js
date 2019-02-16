@@ -32,9 +32,6 @@ export default {
   747: {
     name: 'McClelland Express',
   },
-  1441: {
-    name: 'Beefsteak',
-  },
   1057: {
     name: '1920 Gourmet Grocer',
   },

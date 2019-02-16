@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/home.scss';
 
 const Laundry = () => (
   <article className="tile is-child notification whiteCard">

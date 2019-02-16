@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { WHITE, SHADOW, FOCUS_GRAY } from '../../styles/colors';
+import {
+  WHITE,
+  SHADOW,
+  FOCUS_GRAY,
+  BORDER,
+} from '../../styles/colors';
 
 export const Card = styled.div`
   background: ${WHITE};
@@ -13,4 +18,11 @@ export const Card = styled.div`
       background: ${FOCUS_GRAY};
     }
   `)}
+`;
+
+export const BorderedCard = styled(Card)`
+  border: 1px solid ${BORDER};
+  border-radius: 4px;
+  box-shadow: 0 0 14px 0 ${SHADOW};
+  margin-bottom: 1rem;
 `;

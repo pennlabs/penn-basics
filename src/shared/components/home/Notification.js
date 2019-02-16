@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/home.scss';
 import PropTypes from 'prop-types';
 
 // Render the notification component for the home page

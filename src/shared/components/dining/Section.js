@@ -1,7 +1,38 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
+import s from 'styled-components';
+
 import MenuItem from './MenuItem';
+import { BorderedCard } from '../shared';
+
+const StyledBorderedCard = s(BorderedCard)`
+  margin: 0 0.5rem;
+
+  h3.title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: $light-gray;
+  }
+
+  .menuItem {
+    margin-bottom: 1rem;
+
+    .title {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      margin-right: 0.3rem;
+      width: auto;
+      display: inline-block;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+`;
 
 const Section = ({ title, items, shouldBeList = false }) => {
   let sectionItems = '';
@@ -53,7 +84,7 @@ const Section = ({ title, items, shouldBeList = false }) => {
 
   return (
     <div className="menuSectionWrapper">
-      <div className="menuSection card">
+      <StyledBorderedCard>
         <h3 className="title">
           {title}
         </h3>
@@ -66,7 +97,7 @@ const Section = ({ title, items, shouldBeList = false }) => {
             )
             : sectionItems
         }
-      </div>
+      </StyledBorderedCard>
     </div>
   );
 };

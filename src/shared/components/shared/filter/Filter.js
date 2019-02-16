@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO kill this
+
 import Check from './Check';
 
 const Filter = ({ tabIndex = -1 }) => {
