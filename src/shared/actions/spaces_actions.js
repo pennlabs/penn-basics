@@ -11,10 +11,20 @@ import {
   filterSpacesGroupsRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
+  clearFilterSpacesRequested,
+
+  TOGGLE_FILTER_SPACES_OPEN,
+  TOGGLE_FILTER_SPACES_OUTLETS,
+  TOGGLE_FILTER_SPACES_NOISE,
+  TOGGLE_FILTER_SPACES_GROUPS,
 } from './action_types';
 
 // TODO unit tests!!
 
+/**
+ * @param time in MS
+ * @returns minutes (between 0 and 59)
+ */
 function getMinutes(time) {
   // If there is a decimal
   let minutes = '';
@@ -25,6 +35,10 @@ function getMinutes(time) {
   return minutes;
 }
 
+/**
+ * @param time in MS
+ * @returns the passed in time as a string
+ */
 function getTime(time) {
   // Edge case
   if (time < 0) return '';
@@ -149,41 +163,63 @@ export function clearActiveSpace() {
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesOpen(filters) {
+export function filterSpacesOpen(filter) {
   return (dispatch) => {
     dispatch({
       type: filterSpacesOpenRequested,
-      filters,
+      filter,
     });
   };
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesOutlets(filters) {
+export function filterSpacesOutlets(filter) {
   return (dispatch) => {
     dispatch({
       type: filterSpacesOutletsRequested,
-      filters,
+      filter,
     });
   };
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesNoise(filters) {
+export function filterSpacesNoise(filter) {
   return (dispatch) => {
     dispatch({
       type: filterSpacesNoiseRequested,
-      filters,
+      filter,
     });
   };
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesGroups(filters) {
+export function filterSpacesGroups(filter) {
   return (dispatch) => {
     dispatch({
       type: filterSpacesGroupsRequested,
-      filters,
+      filter,
     });
   };
 }
+
+export function clearSpacesFilters() {
+  return (dispatch) => {
+    dispatch({ type: clearFilterSpacesRequested });
+  };
+}
+
+export const toggleSpacesOpen = () => (
+  dispatch => dispatch({ type: TOGGLE_FILTER_SPACES_OPEN })
+);
+
+export const toggleSpacesOutlets = () => (
+  dispatch => dispatch({ type: TOGGLE_FILTER_SPACES_OUTLETS })
+);
+
+export const toggleSpacesNoise = () => (
+  dispatch => dispatch({ type: TOGGLE_FILTER_SPACES_NOISE })
+);
+
+export const toggleSpacesGroups = () => (
+  dispatch => dispatch({ type: TOGGLE_FILTER_SPACES_GROUPS })
+);

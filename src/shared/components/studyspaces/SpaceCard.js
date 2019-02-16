@@ -15,6 +15,8 @@ import { getNoiseLevel, getOutletsLevel } from './mapper';
 
 // TODO hours for the day?
 
+// TODO update the map when markers update
+
 class SpaceCard extends Component {
   constructor(props) {
     super(props);

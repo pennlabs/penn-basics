@@ -19,7 +19,7 @@
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
     "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
     "address": "3420 Walnut St, Philadelphia, PA 19104",
-    "outlets": 0,
+    "outlets": 1,
     "quiet": 2,
     "groups": 2,
     "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
@@ -161,7 +161,8 @@
   },
   {
     "name": "Hill Study Lounge",
-    "description": "",
+    "description": "Lofty, well-lit study space in the historic residential building Hill College House",
+    "image": "https://hill.house.upenn.edu/sites/hill.house.upenn.edu/files/styles/banner-big/public/banners/renovated-atrium.jpg",
     "address": "3333 Walnut St, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 0,
@@ -190,6 +191,7 @@
   {
     "name": "Levin Building",
     "description": "",
+    "image": "https://www.pennconnects.upenn.edu/all_project_images/the_levin_building_images/the_levin_building_large_2.jpg",
     "address": "425 S University Ave, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -204,6 +206,7 @@
   {
     "name": "Annenberg School for Communication Library",
     "description": "",
+    "image": "http://www.library.upenn.edu/sites/default/files/2017-10/pan1192.jpg",
     "address": "3620 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -218,7 +221,7 @@
   {
     "name": "United by Blue",
     "image": "http://cdn.shopify.com/s/files/1/0287/3670/files/header-slider-image-walnut2.jpg?10285525781100010835",
-    "description": "",
+    "description": "Chic, bustling, upscale cafe and purveyor of outdoorsy goods with in-demand space for studying, talking, and meeting.",
     "address": "3421 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -261,6 +264,7 @@
   {
     "name": "Rodin Rooftop Lounge",
     "description": "",
+    "image": "https://pbs.twimg.com/media/C6RVVIyWUAA056Y.jpg",
     "address": "3901 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -289,10 +293,11 @@
   {
     "name": "Saxbys",
     "description": "",
+    "image": "http://eimer-design.com/wp-content/uploads/2018/05/Eimer_Saxbys_Coffee_UPenn_01.jpg",
     "address": "4000 Locust St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
-    "groups": 0,
+    "groups": 1,
     "start": [6.5, 6.5, 6.5, 6.5, 6.5, 7, 7],
     "end": [0, 0, 0, 0, 0, 0, 0],
     "location": {
@@ -303,6 +308,7 @@
   {
     "name": "Starbucks 39th and Walnut St.",
     "description": "",
+    "image": "https://snworksceo.imgix.net/dpn-34s/7d127a3c-cc83-42d9-89d0-bce6ba2cb2a4.sized-1000x1000.jpg",
     "address": "3901 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -316,13 +322,14 @@
   },
   {
     "name": "Education Commons",
-    "description": "",
+    "description": "State-of-the-art study and information space that supports teaching and collaborative learning. Located on the mezzanine of the George A. Weiss Pavilion in Franklin Field, the Education Commons comprises 6,400 square feet and 168 seats and includes a 22-seat seminar room and 6 group study rooms, all reservable online. The space is open to all current Penn students, faculty, and staff with a PennCard.",
+    "image": "http://joelsandersarchitect.com/wp-content/uploads/2015/05/04-UPenn-Education-Commons-1334x712.jpg",
     "address": "Smith Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
     "groups": 0,
     "start": [9, 9, 9, 9, 9, 9, 9, 9],
-    "end": [23, 23, 23, 23, 23, 18, 23],
+    "end": [23, 23, 23, 23, 23, 18, 18],
     "location": {
       "lat": 39.951640,
       "lng": -75.192010
@@ -330,13 +337,14 @@
   },
   {
     "name": "Singh Center for Nanotechnology",
-    "description": "",
+    "description": "Futuristic, open building offering unique chairs, booths, and tables. PennCard access is limited to engineers and those granted access, though you can try to enter via the LRSM Lab next door.",
+    "image": "https://www.nano.upenn.edu/wp-content/uploads/2014/09/singh_banner_2.jpg",
     "address": "3205 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
     "groups": 0,
-    "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0],
+    "start": [-1, 8, 8, 8, 8, 8, -1],
+    "end": [-1, 19, 19, 19, 19, 19, -1],
     "location": {
       "lat": 39.955030,
       "lng": -75.210080
@@ -415,8 +423,9 @@
   },
   {
     "name": "Metropolitan Bakery & Cafe",
-    "description": "",
+    "description": "Bustling, modest space with a wide array of food and beverage options.",
     "address": "4013 Walnut St, Philadelphia, PA 19104",
+    "image": "https://cdn.shopify.com/s/files/1/0018/2317/8819/files/metro_location_wphilly_web_1080x.jpg",
     "outlets": 1,
     "quiet": 0,
     "groups": 1,
@@ -429,8 +438,9 @@
   },
   {
     "name": "Green Line 40th St.",
-    "description": "",
+    "description": "Comfy coffee shop with seating ranging from couches to tables to barstools.",
     "address": "28 S 40th St, Philadelphia, PA 19104",
+    "image": "https://s3-media1.fl.yelpcdn.com/bphoto/ik9KXxzcXyyIvK005FeFmA/o.jpg",
     "outlets": 0,
     "quiet": 2,
     "groups": 1,
@@ -443,7 +453,8 @@
   },
   {
     "name": "Green Line 43rd St.",
-    "description": "",
+    "image": "https://s3-media1.fl.yelpcdn.com/bphoto/AeRwiV3bRkqZweu21c7SJg/o.jpg",
+    "description": "Cafe with a local flavor. Cute outdoor seating nestled into the West Philly community.",
     "address": "4426 Locust St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -467,20 +478,6 @@
     "location": {
       "lat": 39.953342,
       "lng": -75.193493
-    }
-  },
-  {
-    "name": "Starbucks 34th and Chestnut St.",
-    "description": "",
-    "address": "3421 Chestnut St, Philadelphia, PA 19104",
-    "outlets": 0,
-    "quiet": 2,
-    "groups": 1,
-    "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
-    "end": [22, 23, 23, 23, 23, 23, 22],
-    "location": {
-      "lat": 39.954462,
-      "lng": -75.192158
     }
   }
 ]

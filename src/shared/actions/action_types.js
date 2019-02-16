@@ -28,8 +28,14 @@ export const filterSpacesOpenRequested = 'FILTER_SPACERS_OPEN_REQUESTED';
 export const filterSpacesOutletsRequested = 'FILTER_SPACERS_OUTLETS_REQUESTED';
 export const filterSpacesNoiseRequested = 'FILTER_SPACERS_NOISE_REQUESTED';
 export const filterSpacesGroupsRequested = 'FILTER_SPACERS_GROUPS_REQUESTED';
+export const clearFilterSpacesRequested = 'CLEAR_FILTER_SPACES_REQUESTED';
 export const setActiveSpaceFulfilled = 'SET_ACTIVE_SPACE_FULFILLED';
 export const clearActiveSpaceFulfilled = 'CLEAR_ACTIVE_SPACE_FULFILLED';
+
+export const TOGGLE_FILTER_SPACES_OPEN = 'TOGGLE_FILTER_SPACES_OPEN';
+export const TOGGLE_FILTER_SPACES_OUTLETS = 'TOGGLE_FILTER_SPACES_OUTLETS';
+export const TOGGLE_FILTER_SPACES_NOISE = 'TOGGLE_FILTER_SPACES_NOISE';
+export const TOGGLE_FILTER_SPACES_GROUPS = 'TOGGLE_FILTER_SPACES_GROUPS';
 
 // laundry actions
 export const getLaundryHallsDataRequested = 'GET_LAUNDRY_HALLS_DATA_REQUESTED';
