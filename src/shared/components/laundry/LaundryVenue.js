@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import s from 'styled-components';
 import _ from 'lodash';
+
 import { Loading } from '../shared/Loading';
+import { BorderedCard } from '../shared';
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -16,13 +18,22 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
     <div>
       <div className="columns">
         <div className="column is-4">
-          <h1 className="title is-5"># Available: {open}</h1>
+          <h1 className="title is-5">
+            # Available:&nbsp;
+            {open}
+          </h1>
         </div>
         <div className="column is-3">
-          <h1 className="title is-5"># Busy: {running}</h1>
+          <h1 className="title is-5">
+            # Busy:&nbsp;
+            {running}
+          </h1>
         </div>
         <div className="column is-5">
-          <h1 className="title is-5"># Out of order: {outOfOrder}</h1>
+          <h1 className="title is-5">
+            # Out of order:&nbsp;
+            {outOfOrder}
+          </h1>
         </div>
       </div>
       <div className="columns">
@@ -61,7 +72,12 @@ const addFavoriteToLocalStorage = (laundryHallId, laundryHalls) => {
   console.log(halls);
 }
 
-const LaundryVenue = ({ laundryHallInfo, pending, laundryHallId, laundryHalls }) => {
+const LaundryVenue = ({
+  laundryHallInfo,
+  pending,
+  laundryHallId,
+  laundryHalls,
+}) => {
   if (laundryHallInfo) {
     const { hall_name: hallName } = laundryHallInfo;
     const { washers, dryers, details: machines } = laundryHallInfo.machines;
@@ -78,27 +94,19 @@ const LaundryVenue = ({ laundryHallInfo, pending, laundryHallId, laundryHalls })
         </div>
         <div className="columns">
           <div className="column is-6">
-            <div className="overview">
-              <div className="columns">
-                <div className="column is-12">
-                  <p className="title is-4">Washers</p>
-                  {renderMachineAvailabilities(washers, 'washer', machines)}
-                </div>
-              </div>
-            </div>
+            <BorderedCard>
+              <p className="title is-4">Washers</p>
+              {renderMachineAvailabilities(washers, 'washer', machines)}
+            </BorderedCard>
           </div>
 
           <div className="column is-6">
-            <div className="overview">
-              <div className="columns">
-                <div className="column is-12">
-                  <p className="title is-4">Dryers</p>
-                  {renderMachineAvailabilities(dryers, 'dryer', machines)}
-                </div>
-              </div>
-            </div>
+            <BorderedCard>
+              <p className="title is-4">Dryers</p>
+              {renderMachineAvailabilities(dryers, 'dryer', machines)}
+            </BorderedCard>
           </div>
-        </div>  
+        </div>
       </Wrapper>
     );
   }
