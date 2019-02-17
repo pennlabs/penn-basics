@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import s from 'styled-components';
+
 import Dining from './Dining';
 import Studyspaces from './Studyspaces';
 import Reserve from './Reserve';
 import Notification from './Notification';
+import { BorderedCard } from '../shared';
 
-import '../../styles/home.scss'; // TODO is this necessary?
+const Wrapper = s.div`
+  padding: 1rem;
+`;
 
 class Home extends Component {
   constructor(props) {
@@ -21,6 +26,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    // TODO reduxify this
+
     axios.get(`/api/events/${Date.now()}`)
       .then((resp) => {
         if (resp.data.events.length === 0) {
@@ -50,34 +57,28 @@ class Home extends Component {
     const { dining, show, notification } = this.state;
 
     return (
-      <div>
+      <Wrapper>
         {show && (
           <Notification show={this.close} text={notification} />
         )}
+        <BorderedCard>
+          <h1 className="title is-4">
+            <span role="img" aria-label="sun">☀️</span>
+            Gooob morning!
+          </h1>
 
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-vertical">
-            <div className="card pad marg">
-              <h1 className="title is-4">
-                <span role="img" aria-label="sun">☀️</span>
-                Gooob morning!
-              </h1>
+          <p className="content is-medium">
+            Insert some inspirational quote here from various people at Penn.
+            It will make people happy and give everyone some life.
+          </p>
+        </BorderedCard>
 
-              <p className="content is-medium">
-                Insert some inspirational quote here from various people at Penn.
-                It will make people happy and give everyone some life.
-              </p>
-            </div>
+        <Reserve />
 
-            <Reserve />
-          </div>
-          <div className="tile is-5 is-vertical is-parent">
-            <Dining show={dining} />
+        <Dining show={dining} />
 
-            <Studyspaces />
-          </div>
-        </div>
-      </div>
+        <Studyspaces />
+      </Wrapper>
     );
   }
 }

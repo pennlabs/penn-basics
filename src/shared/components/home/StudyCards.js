@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import '../../styles/home.scss'; // TODO is this necessary
-
 class StudyCards extends Component {
   constructor(props) {
     super(props);

@@ -9,9 +9,40 @@ import {
   filterSpacesGroupsRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
+  clearFilterSpacesRequested,
+
+  TOGGLE_FILTER_SPACES_OPEN,
+  TOGGLE_FILTER_SPACES_OUTLETS,
+  TOGGLE_FILTER_SPACES_NOISE,
+  TOGGLE_FILTER_SPACES_GROUPS,
 } from '../actions/action_types';
 
-const filter = (state) => {
+// Default state where all filters are cleared and none are active
+const clearFilterState = {
+  filterOpen: null,
+  filterOutlets: null,
+  filterNoise: null,
+  filterGroups: null,
+  filterOpenActive: false,
+  filterOutletsActive: false,
+  filterNoiseActive: false,
+  filterGroupsActive: false,
+};
+
+const updateFilters = (arr, num) => {
+  if (!arr || !arr.length) {
+    return [num];
+  }
+
+  if (arr.includes(num)) {
+    return arr.filter(item => item !== num);
+  }
+
+  arr.push(num);
+  return arr;
+};
+
+const filterSpaces = (state) => {
   const {
     filterOpen,
     filterOutlets,
@@ -34,16 +65,22 @@ const filter = (state) => {
     filteredSpaceIDs = filteredSpaceIDs.filter(id => spacesData[id].open);
   }
 
-  if (filterOutlets) {
-    // TODO
+  if (filterOutlets && filterOutlets.length) {
+    filteredSpaceIDs = filteredSpaceIDs.filter(id => (
+      filterOutlets.includes(spacesData[id].outlets)
+    ));
   }
 
-  if (filterNoise) {
-    // TODO
+  if (filterNoise && filterNoise.length) {
+    filteredSpaceIDs = filteredSpaceIDs.filter(id => (
+      filterNoise.includes(spacesData[id].quiet)
+    ));
   }
 
-  if (filterGroups) {
-    // TODO
+  if (filterGroups && filterGroups.length) {
+    filteredSpaceIDs = filteredSpaceIDs.filter(id => (
+      filterGroups.includes(spacesData[id].groups)
+    ));
   }
 
   filteredSpaceIDs.forEach(id => { // eslint-disable-line
@@ -59,7 +96,17 @@ const filter = (state) => {
 
 const spacesReducer = (state = { pending: true }, action) => {
   const newState = Object.assign({}, state);
-  const { filters, spaces, type } = action;
+  const {
+    filterOutlets,
+    filterNoise,
+    filterGroups,
+
+    filterOpenActive,
+    filterOutletsActive,
+    filterNoiseActive,
+    filterGroupsActive,
+  } = newState;
+  const { filter, spaces, type } = action;
 
   switch (type) {
     case getSpacesDataRequested:
@@ -70,10 +117,7 @@ const spacesReducer = (state = { pending: true }, action) => {
       return {
         pending: false,
         error: action.error,
-        filterOpen: undefined,
-        filterOutlets: undefined,
-        filterNoise: undefined,
-        filterGroups: undefined,
+        ...clearFilterState,
       };
 
     case getSpacesDataFulfilled:
@@ -81,10 +125,7 @@ const spacesReducer = (state = { pending: true }, action) => {
         pending: false,
         spacesData: spaces,
         filteredSpacesData: spaces,
-        filterOpen: undefined,
-        filterOutlets: undefined,
-        filterNoise: undefined,
-        filterGroups: undefined,
+        ...clearFilterState,
       };
 
     case setHoveredSpaceFulfilled:
@@ -100,32 +141,44 @@ const spacesReducer = (state = { pending: true }, action) => {
       return newState;
 
     case filterSpacesOpenRequested: /* TODO FILTERING */
-      newState.filterOpen = filters;
-      return filter(newState);
+      newState.filterOpen = filter;
+      return filterSpaces(newState);
 
     case filterSpacesOutletsRequested: /* TODO FILTERING */
-      newState.filterOutlets = filters;
-      return filter(newState);
+      newState.filterOutlets = updateFilters(filterOutlets, filter);
+      return filterSpaces(newState);
 
     case filterSpacesNoiseRequested: /* TODO FILTERING */
-      newState.filterNoise = filters;
-      return filter(newState);
+      newState.filterNoise = updateFilters(filterNoise, filter);
+      return filterSpaces(newState);
 
     case filterSpacesGroupsRequested: /* TODO FILTERING */
-      newState.filterGroups = filters;
-      return filter(newState);
+      newState.filterGroups = updateFilters(filterGroups, filter);
+      return filterSpaces(newState);
+
+    case clearFilterSpacesRequested:
+      return filterSpaces(Object.assign(newState, clearFilterState));
+
+    case TOGGLE_FILTER_SPACES_OPEN:
+      return Object.assign(newState, { filterOpenActive: !filterOpenActive });
+
+    case TOGGLE_FILTER_SPACES_OUTLETS:
+      return Object.assign(newState, { filterOutletsActive: !filterOutletsActive });
+
+    case TOGGLE_FILTER_SPACES_NOISE:
+      return Object.assign(newState, { filterNoiseActive: !filterNoiseActive });
+
+    case TOGGLE_FILTER_SPACES_GROUPS:
+      return Object.assign(newState, { filterGroupsActive: !filterGroupsActive });
 
     default:
       return {
         pending: true,
-        spacesData: undefined,
-        filteredSpacesData: undefined,
-        filterOpen: undefined,
-        filterOutlets: undefined,
-        filterNoise: undefined,
-        filterGroups: undefined,
-        hoveredSpace: undefined,
-        activeSpace: undefined,
+        spacesData: null,
+        filteredSpacesData: null,
+        hoveredSpace: null,
+        activeSpace: null,
+        ...clearFilterState,
       };
   }
 };

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { BORDER } from '../../styles/colors';
+
 export const Row = styled.div`
   width: 100%;
   display: flex;
@@ -21,4 +23,5 @@ export const Col = styled.div`
   overflow-x: hidden;
   box-sizing: border-box;
   border-radius: ${({ borderRadius }) => borderRadius || 0};
+  border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};
 `;

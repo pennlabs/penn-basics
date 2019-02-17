@@ -8,6 +8,7 @@ const spacesRouter = require('./routes/spaces');
 const diningRouter = require('./routes/dining');
 
 const DB = require('./database/db');
+const seedDining = require('./database/seedDiningInfo');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,12 +21,12 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//
+// If it is a new day since the previous request, seed new dining data
 let lastSeededTimestamp;
-app.use('/', function(req, res, next) {
+app.use('/', (req, res, next) => {
   const now = new Date();
-  if (!lastSeededTimestamp || lastSeededTimestamp.getDate() != now.getDate()) {
-    require('./database/seedDiningInfo').fullSeed();
+  if (!lastSeededTimestamp || lastSeededTimestamp.getDate() !== now.getDate()) {
+    seedDining.fullSeed();
     lastSeededTimestamp = now;
   }
   next();
@@ -38,7 +39,6 @@ app.use('/', frontendRouter(DB));
 
 // Seed data on server start
 // TODO have other scripts to do this
-
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console

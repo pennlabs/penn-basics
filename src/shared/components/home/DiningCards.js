@@ -2,7 +2,6 @@
 // each card displays the information about the dining hall/retail.
 
 import React from 'react';
-import '../../styles/home.scss';
 import PropTypes from 'prop-types';
 
 // TODO remove imgur jawns

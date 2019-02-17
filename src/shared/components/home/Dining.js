@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { BorderedCard } from '../shared';
 import DiningCards from './DiningCards';
-import '../../styles/home.scss';
 
 class Dining extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Dining extends Component {
     const { object } = this.state;
 
     return (
-      <div className="card pad marg">
+      <BorderedCard>
         <Link to="/dining" className="link">
           <h1 className="title is-4">
             Dining
@@ -44,7 +44,7 @@ class Dining extends Component {
               </div>
             )
         }
-      </div>
+      </BorderedCard>
     );
   }
 }

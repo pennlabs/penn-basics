@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import venueData from './content/venueData';
+import s from 'styled-components';
 
+import venueData from './content/venueData';
 import { getDiningData, getVenueInfo } from '../../actions/index';
 
+import Nav from './Nav';
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
 import ErrorMessage from '../shared/ErrorMessage';
 import NotFound from '../shared/NotFound';
 import Loading from '../shared/Loading';
+
+const Wrapper = s.div`
+  padding: 1rem;
+`;
 
 // Render the view for a dining venue
 class DiningVenue extends Component {
@@ -115,37 +121,51 @@ class DiningVenue extends Component {
     const { id } = match.params;
 
     // If the ID is not found
-    if (!venueData[id]) return (<NotFound />);
-
-    // Render based on state
-    if (diningDataPending || venueHoursPending) {
-      // If data or an error is still pending
+    if (!venueData[id]) {
       return (
-        <Loading />
+        <Nav>
+          <Wrapper>
+            <NotFound />
+          </Wrapper>
+        </Nav>
       );
     }
+
+    // If content is still loading
+    if (diningDataPending || venueHoursPending) {
+      return (
+        <Nav>
+          <Wrapper>
+            <Loading />
+          </Wrapper>
+        </Nav>
+      );
+    }
+
     const { name } = venueData[id];
 
     return (
       // If there is no error and the data is not pending
-      <div>
-        {/* Render the title of the dining page */}
-        <h1 className="title">
-          {name}
-        </h1>
+      <Nav>
+        <Wrapper>
+          {/* Render the title of the dining page */}
+          <h1 className="title">
+            {name}
+          </h1>
 
-        {/* Render an error if there is one */}
-        {this.renderError()}
+          {/* Render an error if there is one */}
+          {this.renderError()}
 
-        {/* Render the overview card at the top of the dining view */}
-        <DiningOverview id={id} />
+          {/* Render the overview card at the top of the dining view */}
+          <DiningOverview id={id} />
 
-        {/* Render dropdowns for selecting dates and meals */}
-        <DiningQuery />
+          {/* Render dropdowns for selecting dates and meals */}
+          <DiningQuery />
 
-        {/* Render dining menu for the selected date and meal */}
-        <DiningMenu />
-      </div>
+          {/* Render dining menu for the selected date and meal */}
+          <DiningMenu />
+        </Wrapper>
+      </Nav>
     );
   }
 }

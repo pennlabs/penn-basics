@@ -1,12 +1,11 @@
 import React from 'react';
 import StudyCards from './StudyCards';
-
-import '../../styles/home.scss'; // TODO Is this necessary?
+import { BorderedCard } from '../shared';
 
 // TODO why two study cards?
 
 const Studyspaces = () => (
-  <div className="card pad marg">
+  <BorderedCard>
     <h1 className="title is-4">
       Find a study space
     </h1>
@@ -17,7 +16,7 @@ const Studyspaces = () => (
 
     <StudyCards />
     <StudyCards />
-  </div>
+  </BorderedCard>
 );
 
 export default Studyspaces;

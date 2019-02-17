@@ -55,6 +55,11 @@ class MenuItem extends Component {
       let tag = '';
 
       switch (oldTag) {
+        case 'Made without Gluten-Containing Ingredients':
+          tag = 'Gluten Free*';
+          tagClass = 'gluten-free';
+          break;
+
         case 'Made without Gluten- Containing Ingredients':
           tag = 'Gluten Free*';
           tagClass = 'gluten-free';
