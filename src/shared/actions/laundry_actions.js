@@ -8,6 +8,7 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
+  pullLaundryFavorites,
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
@@ -65,3 +66,25 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
     }
   };
 }
+
+
+export function getFavorites() {
+  return (dispatch) => {
+    let favorites = localStorage.getItem('laundry_favorites');
+    console.log(favorites)
+    if (favorites == null) {
+      localStorage.setItem('laundry_favorites', []);
+      favorites = [];
+    }
+    dispatch({
+      type: pullLaundryFavorites,
+      favorites,
+    });
+  };
+}
+
+// export function addFavorite(hallInfo) {
+//   return (dispatch) => {
+//     const favorites = 
+//   }
+// }

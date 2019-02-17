@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-import { getLaundryHalls } from '../../actions/laundry_actions';
+import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions';
 
 import {
   Row,
@@ -16,9 +16,10 @@ import Favorites from './Favorites';
 class App extends Component {
   constructor(props) {
     super(props);
-    const { getLaundryHalls } = this.props;
+    const { getLaundryHalls, getFavorites } = this.props;
 
     getLaundryHalls();
+    getFavorites();
   }
 
   render() {
@@ -59,6 +60,7 @@ const mapStateToProps = ({ laundry }) => {
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
     getLaundryHalls: () => dispatch(getLaundryHalls()),
+    getFavorites: () => dispatch(getFavorites()),
   };
 };
 

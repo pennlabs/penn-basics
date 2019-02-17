@@ -121,12 +121,19 @@ LaundryVenue.propTypes = {
 };
 
 const mapStateToProps = ({ laundry }) => {
-  const { laundryHallInfo, pending, laundryHallId, laundryHalls } = laundry;
+  const {
+    laundryHallInfo,
+    pending,
+    laundryHallId,
+    laundryHalls,
+    favorites,
+  } = laundry;
   return {
     laundryHallInfo,
     pending,
     laundryHallId,
     laundryHalls,
+    favorites,
   };
 };
 
