@@ -1,7 +1,6 @@
 import mongoose from '../mongoose-connect';
 const Schema = mongoose.Schema;
 
-
 const venueSchema = new Schema({
   name: {
     type: String,
