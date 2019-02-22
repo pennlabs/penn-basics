@@ -9,12 +9,14 @@ import {
   Col,
   Card,
   Subtitle,
+  Subtext,
   Line,
 } from '../shared';
 import { WHITE, DARK_GRAY } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 
-import venueData from './content/venueData';
+// import venueData from './content/venueData';
+import venueData from '../../../server/database/venue_info.json';
 
 const StyledLink = s(Link)`
   h2 {
@@ -28,18 +30,34 @@ const Nav = ({ children }) => (
       padding="0 0 .5rem 0"
       background={WHITE}
       overflowY="scroll"
-      width="25%"
+      width="30%"
       borderRight
     >
       {Object.keys(venueData).map((key) => {
-        const { name } = venueData[key];
+        const { name, image } = venueData[key];
+
+        const img = `/img/venue_images/${image}`;
 
         return (
           <StyledLink to={`/dining/${key}`} key={key}>
             <Card padding="0.5rem 1rem" hoverable>
-              <Subtitle marginBottom="0">
-                {name}
-              </Subtitle>
+              <Row>
+                {image && (
+                  <Col backgroundImage={img} width="30%" borderRadius="4px" />
+                )}
+                <Col
+                  padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
+                  onMouseEnter={this.handleMouseEnter}
+                >
+                  <Subtitle marginBottom="0">
+                    {name}
+                  </Subtitle>
+
+                  <Subtext marginBottom="0">
+                    This is some subtext
+                  </Subtext>
+                </Col>
+              </Row>
             </Card>
 
             <Line />
@@ -48,7 +66,7 @@ const Nav = ({ children }) => (
       })}
     </Col>
     <Col
-      width="75%"
+      width="70%"
       overflowY="scroll"
     >
       {children}
