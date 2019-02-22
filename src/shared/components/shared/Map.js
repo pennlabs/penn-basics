@@ -136,6 +136,9 @@ export class Map extends Component {
       center: location,
       zoom: 15,
       gestureHandling,
+      mapTypeControlOptions: {
+        mapTypeIds: [],
+      },
     });
 
     this.setState({
