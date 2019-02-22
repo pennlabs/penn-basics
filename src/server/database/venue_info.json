@@ -3,7 +3,7 @@
     "lat": 39.951904,
     "lng": -75.199497,
     "image": "commons.jpg",
-    "description": "",
+    "description": "1920 Commons, the largest café on campus, is located on Locust Walk, right across the 38th Street Bridge. Serving lunch, lite lunch, and dinner during the week and brunch and dinner on weekends. Enjoy a bountiful, seasonal salad bar; made-to-order deli; fresh, hot pizzas; comfort cuisine; savory soups; chicken, veggie burgers and beef burgers grilled to perfection; an ever-changing action station; or delectable desserts. It’s all here!",
     "address": "3800 Locust Walk Philadelphia PA, 19104",
     "name": "1920 Commons"
   },
@@ -11,7 +11,7 @@
     "lat": 39.953008,
     "lng": -75.190677,
     "image": "hillhouse.jpg",
-    "description": "",
+    "description": "Hill House Café is on the lower level of the Hill College House at the corner of 34th and Walnut Streets. A popular dining spot for the Penn community, Hill serves breakfast, lunch and dinner during the week; \"light breakfast\" and \"light lunch\" during the slower times in between meals; and brunch and dinner on the weekends.",
     "address": "3333 Walnut Street Philadelphia PA, 19104",
     "name": "Hill House"
   },
@@ -19,7 +19,7 @@
     "lat": 39.954083,
     "lng": -75.194107,
     "image": "kingscourt.jpeg",
-    "description": "",
+    "description": "English House Café is located in the English House at 36th and Sansom Streets, although the café has followers from every corner of campus. During breakfast, guests can start their morning with an assortment of fruit, yogurt, granola and cereal; as well as a range of favorites from pancakes to eggs benedict.\nThroughout lunch and dinner hours, visitors of the café will find a fresh salad bar with homemade dressings and aromatic soups; a popular dip bar with house baked pita chips; a made-to-order deli; “Carla’s Creative Pizzas” (including a scrumptious vegan pizza!); a lively expo station; comfort cooking; and vegan-friendly desserts. English House is open for breakfast, lunch and dinner during the week.",
     "address": "3565 Sansom Street Philadelphia PA, 19104",
     "name": "English House"
   },
@@ -27,7 +27,7 @@
     "lat": 39.953098,
     "lng": -75.199979,
     "image": "hillel.jpg",
-    "description": "",
+    "description": "Falk Dining Cafe is the kosher café, located on the first floor of the Hillel building on 39th and Locust Walk. All food is prepared Glatt kosher and under the supervision of the Community Kashrus of Greater Philadelphia. We welcome Penn students as well as members of the surrounding community to enjoy the amazing cuisine and sense of community that you will experience when you dine at Falk Dining Cafe.",
     "address": "215 South 39th Street Philadelphia PA, 19104",
     "name": "Falk Kosher Dining"
   },
@@ -35,7 +35,7 @@
     "lat": 39.950914,
     "lng": -75.193874,
     "image": "houstonhall.jpg",
-    "description": "",
+    "description": "Houston Market is home to a wide vareity of food vendors in the basement floor of Penn's historic Houston Hall. Check out this newly-renovated, brightly-lit space for sushi, salad, burgers, and coffee alike.",
     "address": "3417 Spruce Street Philadelphia PA, 19104",
     "name": "Houston Market"
   },
@@ -43,7 +43,7 @@
     "lat": 39.952724,
     "lng": -75.194022,
     "image": "markscafe.jpg",
-    "description": "",
+    "description": "Mark’s Café is stationed on the lower level of the Van Pelt Library. Relax during a study break with sushi, sandwiches or soups; or recharge with a cup of locally-roasted Rival Brothers Coffee. You can even try the flavor brewed just for Penn: Bernie’s Blend, named after the café’s donor.",
     "address": "3420 Walnut St, Philadelphia, PA 19104",
     "name": "Mark's Café"
   },
@@ -51,7 +51,7 @@
     "lat": 39.952724,
     "lng": 75.194022,
     "image": "accenture.png",
-    "description": "",
+    "description": "Accenture Café is small café located in the Towne Building in the School of Engineering and Applied Science between 33rd and 34th Streets and Walnut and Spruce Streets. In the café, you will find a wide selection of Rival Bros. brewed beverages, fresh sandwiches, salads, soups, muffins, scones and other pastries, as well as a new variety of hot and made to order items.",
     "address": "3330 Walnut St, Philadelphia, PA 19104",
     "name": "Accenture Café"
   },
@@ -59,7 +59,7 @@
     "lat": 39.951814,
     "lng": -75.196182,
     "image": "joescafe.jpg",
-    "description": "",
+    "description": "Joe’s Café is on the ground floor of Wharton’s Steinberg-Dietrich Hall. Stop by in the morning and enjoy a fresh breakfast sandwich and cup of locally roasted One Village coffee (be sure to taste the specially roasted Wharton blend!); or visit at lunch and enjoy a \"Joe’s Plate\" as our daily special – always $6 every day! During the warmer months, stop by at lunch for the weekly Wednesday outdoor barbeques.",
     "address": "3620 Locust Walk Philadelphia, PA 19104",
     "name": "Joe's Café"
   },
@@ -67,7 +67,7 @@
     "lat": 39.950410,
     "lng": -75.197673,
     "image": "mcclelland.jpg",
-    "description": "",
+    "description": "McClelland Express is positioned in the center of the Quad. Open from 8am – 10pm, the café offers options for breakfast, lunch and dinner, as well as retail items such as toiletries and groceries. Students have the ability to use their “meal equivalency” here – generally an entrée, sides and a drink – for one \"visit\" (meal swipe) or they can purchase items separately using their Dining Dollar$.",
     "address": "3650 Spruce St Philadelphia, PA 19104",
     "name": "McClelland Express"
   },
@@ -75,7 +75,7 @@
     "lat": 39.951904,
     "lng": -75.199497,
     "image": "gourmetgrocer.jpg",
-    "description": "",
+    "description": "Gourmet Grocer is the on-campus market and a favorite of the Penn community. The market features a variety of items from both local artisans and well-known brands, as well as large organic, kosher and gluten-free sections. Gourmet Grocer also provides student necessities and toiletries.",
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "name": "1920 Gourmet Grocer"
   },
@@ -83,7 +83,7 @@
     "lat": 39.952249,
     "lng": -75.195214,
     "image": "frontera.jpg",
-    "description": "",
+    "description": "Tortas Frontera by Chef Rick Bayless combines high-quality ingredients from top local providers with recipes based on the diverse fare found in Mexico. We are excited to offer hand-crafted Mexican delicacies including tortas, fresh guacamole, molletes (warm Mexican flatbread), soups and cazuelas (Mexican meals in a bowl), salads, special seasonal dishes. Read Full Menu.",
     "address": "3601 Locust Walk, Philadelphia, PA 19104",
     "name": "Tortas Frontera at the ARCH"
   },
@@ -91,7 +91,7 @@
     "lat": 39.951904,
     "lng": -75.199497,
     "image": "starbuckscommons.jpg",
-    "description": "",
+    "description": "Starbucks is located on the lower level of 1920 Commons and features an expanded food and drink menu, extended hours until 2 am most nights, and a large study and gathering space.",
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "name": "1920 Starbucks"
   },
@@ -107,7 +107,7 @@
     "lat": 39.953691,
     "lng": -75.191299,
     "image": "newcollegehouseretail.png",
-    "description": "",
+    "description": "The first signature residential building on Penn's campus specifically designed and built to maximize the College House experience. The dining program in the New College House will be a hybrid of an ‘à la carte menu' on the retail side and an All-You-Care-To-Eat café for breakfast, lunch, and dinner with an option for family style dining.",
     "address": "3335 Woodland Walk, Philadelphia, PA 19104",
     "name": "NCH Retail"
   },
@@ -115,7 +115,7 @@
     "lat": 39.952911,
     "lng": -75.198267,
     "image": "",
-    "description": "",
+    "description": "Cafe with limited hours located on the second floor of John M. Huntsman Hall near Walnut Street.",
     "address": "3730 Walnut St Philadelphia, PA 19104",
     "name": "Pret a Manger, MBA Cafe"
   },
@@ -123,7 +123,7 @@
     "lat": 39.952911,
     "lng": -75.198267,
     "image": "pret.jpg",
-    "description": "",
+    "description": "Bustling cafe located adjacent to the entry to Huntsman Hall on Locust. Drop in for grab-and-go soup, sandwich, omlete, and baked goods to go along with your coffee or tea.",
     "address": "3730 Walnut St Philadelphia, PA 19104",
     "name": "Pret a Manger, Locust Walk"
   }

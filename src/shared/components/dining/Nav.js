@@ -15,7 +15,6 @@ import {
 import { WHITE, DARK_GRAY } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 
-// import venueData from './content/venueData';
 import venueData from '../../../server/database/venue_info.json';
 
 const StyledLink = s(Link)`

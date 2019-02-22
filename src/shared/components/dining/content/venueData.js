@@ -7,6 +7,7 @@ export default {
   },
   636: {
     name: 'Hill House',
+    description: 'Hill House Café is on the lower level of the Hill College House at the corner of 34th and Walnut Streets. A popular dining spot for the Penn community, Hill serves breakfast, lunch and dinner during the week; "light breakfast" and "light lunch" during the slower times in between meals; and brunch and dinner on the weekends.',
     image: 'https://www.thelightingpractice.com/wp-content/uploads/2016/08/Hill-2-AW-4337-2600x1734.jpg',
   },
   637: {
