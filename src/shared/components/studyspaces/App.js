@@ -6,6 +6,7 @@ import {
   Map,
   Row,
   Col,
+  Scrollbar,
   Line,
   Subtext,
 } from '../shared';
@@ -43,7 +44,7 @@ class App extends Component {
         <Filter />
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
-          <Col
+          <Scrollbar
             padding="0 0 .5rem 0"
             background={WHITE}
             overflowY="scroll"
@@ -72,7 +73,7 @@ class App extends Component {
                 </a>
               </Subtext>
             </Col>
-          </Col>
+          </Scrollbar>
           <Col>
             <Map
               mapId="map"
