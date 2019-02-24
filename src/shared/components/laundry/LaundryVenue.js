@@ -69,7 +69,9 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
 
 const addFavoriteToLocalStorage = (laundryHallId, laundryHalls) => {
   const halls = _.flatten(laundryHalls.map(hall => hall.halls));
-  console.log(halls);
+  console.log(laundryHallId);
+  // console.log(laundryHalls);
+  // console.log(halls);
 }
 
 const LaundryVenue = ({
