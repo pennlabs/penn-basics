@@ -67,11 +67,21 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   );
 };
 
-const addFavoriteToLocalStorage = (laundryHallId, laundryHalls) => {
+const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHalls) => {
   const halls = _.flatten(laundryHalls.map(hall => hall.halls));
-  console.log(laundryHallId);
-  // console.log(laundryHalls);
-  // console.log(halls);
+  const favoritesString = localStorage.getItem("favorites");
+  let favoritesArray = [];
+  const favoriteLocation = `${location}: ${hallName}`;
+  if (!favoritesString) {
+    favoritesArray = [favoriteLocation];
+  } else {
+    favoritesArray = JSON.parse(favoritesString);
+    if (!favoritesArray.includes(favoriteLocation)){
+      favoritesArray.push(favoriteLocation);
+    }
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favoritesArray));
 }
 
 const LaundryVenue = ({
@@ -81,7 +91,7 @@ const LaundryVenue = ({
   laundryHalls,
 }) => {
   if (laundryHallInfo) {
-    const { hall_name: hallName } = laundryHallInfo;
+    const { hall_name: hallName, location } = laundryHallInfo;
     const { washers, dryers, details: machines } = laundryHallInfo.machines;
     if (pending) {
       return <div>Pending</div>;
@@ -91,7 +101,7 @@ const LaundryVenue = ({
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
-            <a className="button is-warning" onClick={() => addFavoriteToLocalStorage(laundryHallId, laundryHalls)}>Favorite</a>
+            <a className="button is-warning" onClick={() => addFavoriteToLocalStorage(laundryHallId, location, hallName, laundryHalls)}>Favorite</a>
           </div>
         </div>
         <div className="columns">
