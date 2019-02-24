@@ -9,7 +9,7 @@ class Favorites extends Component {
     super(props);
     const favorites = localStorage.getItem('favorites');
     this.state = {
-      favorites,
+      favorites: JSON.parse(favorites),
     };
   }
 

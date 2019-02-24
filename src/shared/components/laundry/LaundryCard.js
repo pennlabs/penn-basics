@@ -47,8 +47,25 @@ class LaundryCard extends Component {
       halls,
       location,
     } = locationObject;
-
     const { expanded } = this.state;
+
+    // check if the hall has only one location object
+    if (halls.length == 1){
+      return (
+        <div>
+        <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(halls[0].id)} key={uuid()}>
+          <Row>
+            <Col padding="0">
+              <Subtitle marginBottom="0">
+                {location}
+              </Subtitle>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+      )
+    }
+
     return (
       <div>
         <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryLocationClick()}>
@@ -60,8 +77,9 @@ class LaundryCard extends Component {
             </Col>
           </Row>
         </Card>
+
         {
-          expanded && halls && halls.map(({hall_name: hallName, id}) => (//eslint-disable-line
+          expanded && halls.length >= 2 && halls.map(({hall_name: hallName, id}) => (//eslint-disable-line
             <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)} key={uuid()}>
               <Row>
                 <Col padding="0">
