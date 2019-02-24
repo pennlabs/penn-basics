@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { BorderedCard } from '../shared';
 import HoursVisualization from './HoursVisualization';
-import venueData from './content/venueData';
+import venueData from '../../../server/database/venue_info.json';
 
 const DiningOverview = ({ id }) => {
   const { description } = venueData[id];
@@ -15,6 +15,7 @@ const DiningOverview = ({ id }) => {
           { description }
         </p>
       )}
+
       <HoursVisualization id={id} />
     </BorderedCard>
   );
