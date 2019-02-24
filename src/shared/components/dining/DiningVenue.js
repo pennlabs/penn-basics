@@ -34,8 +34,6 @@ class DiningVenue extends Component {
     getDiningDataDispatch(venueId);
     getVenueInfoDispatch(venueId);
 
-    // Set up the state
-
     // Bind this to helper method
     this.checkForErrors = this.checkForErrors.bind(this);
     this.renderError = this.renderError.bind(this);

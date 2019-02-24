@@ -102,6 +102,7 @@ class MenuItem extends Component {
         default:
           break;
       }
+
       return (
         <span
           className={`tag ${tagClass}`}
