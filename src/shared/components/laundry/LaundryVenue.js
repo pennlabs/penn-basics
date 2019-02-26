@@ -69,14 +69,22 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
 
 const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHalls) => {
   const halls = _.flatten(laundryHalls.map(hall => hall.halls));
+  // favoritesString is the raw data taken from localStorage
+  // therefore is in string format
   const favoritesString = localStorage.getItem("favorites");
+
   let favoritesArray = [];
-  const favoriteLocation = `${location}: ${hallName}`;
+  let favoriteLocation = {};
+  favoriteLocation.locationName = `${location}: ${hallName}`;
+  favoriteLocation.hallId = laundryHallId;
   if (!favoritesString) {
     favoritesArray = [favoriteLocation];
   } else {
     favoritesArray = JSON.parse(favoritesString);
-    if (!favoritesArray.includes(favoriteLocation)){
+    console.log(typeof favoritesArray);
+    console.log(favoriteLocation);
+    console.log(favoritesArray.includes(favoriteLocation));
+    if (!favoritesArray.includes(favoriteLocation)) {
       favoritesArray.push(favoriteLocation);
     }
   }

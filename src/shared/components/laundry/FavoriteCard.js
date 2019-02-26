@@ -29,17 +29,15 @@ class FavoriteCard extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Card padding="0.5rem 1rem" hoverable onClick={() => this.onClick()}>
           <Row>
             <Col padding="0">
-              <Subtitle marginBottom="0">
-                Favorite
-              </Subtitle>
+              <Subtext> {this.props.locationName} </Subtext>
             </Col>
           </Row>
         </Card>
-      </div>
+      </>
     );
   }
 }
