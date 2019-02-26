@@ -81,15 +81,14 @@ const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHal
     favoritesArray = [favoriteLocation];
   } else {
     favoritesArray = JSON.parse(favoritesString);
-    console.log(typeof favoritesArray);
-    console.log(favoriteLocation);
-    console.log(favoritesArray.includes(favoriteLocation));
     if (!favoritesArray.includes(favoriteLocation)) {
       favoritesArray.push(favoriteLocation);
     }
   }
 
   localStorage.setItem("favorites", JSON.stringify(favoritesArray));
+
+  // TODO: change the button to unfavorite clicking on it
 }
 
 const LaundryVenue = ({

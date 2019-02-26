@@ -23,10 +23,11 @@ class Favorites extends Component {
 
   render() {
     const { favorites } = this.state;
+    
     if (favorites && favorites.length > 0) {
       return (
         <div>
-          <Card padding="0.5rem 1rem" hoverable>
+          <Card padding="0.5rem 1rem">
           <Row>
             <Col padding="0">
               <Subtitle marginBottom="0"> Favorites </Subtitle>
