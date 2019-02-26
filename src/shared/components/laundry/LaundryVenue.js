@@ -67,6 +67,17 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   );
 };
 
+// helper function to check if the favoritesArray contains the new favorite laundry hall
+const includes = (array, id) => {
+  for (let i = 0; i < array.length; i++){
+    if (array[i].hallId === id){
+      return true;
+    }
+  }
+
+  return false;
+}
+
 const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHalls) => {
   const halls = _.flatten(laundryHalls.map(hall => hall.halls));
   // favoritesString is the raw data taken from localStorage
@@ -81,7 +92,7 @@ const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHal
     favoritesArray = [favoriteLocation];
   } else {
     favoritesArray = JSON.parse(favoritesString);
-    if (!favoritesArray.includes(favoriteLocation)) {
+    if (!includes(favoritesArray, favoriteLocation.hallId)) {
       favoritesArray.push(favoriteLocation);
     }
   }
