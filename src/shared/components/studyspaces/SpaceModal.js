@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { clearActiveSpace } from '../../actions/spaces_actions';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { clearActiveSpace } from '../../actions/spaces_actions'
 
 import {
   Title,
@@ -9,6 +9,7 @@ import {
   Modal,
   ModalContainer,
   Image,
+  Tag,
   Map,
 } from '../shared';
 import { SNOW } from '../../styles/colors';
@@ -39,6 +40,7 @@ class SpaceModal extends Component {
       location,
       start,
       end,
+      tags,
     } = space || {};
 
     return (
@@ -63,6 +65,12 @@ class SpaceModal extends Component {
                   <Text>
                     {description}
                   </Text>
+                </ModalContainer>
+              )}
+
+              {tags && (
+                <ModalContainer paddingBottom="0.5rem">
+                  {tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
                 </ModalContainer>
               )}
 

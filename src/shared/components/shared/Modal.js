@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 
-import { WHITE, LIGHT_GRAY, SNOW_ALPHA } from '../../styles/colors';
+import {
+  WHITE,
+  LIGHT_GRAY,
+  SNOW_ALPHA,
+  SHADOW,
+} from '../../styles/colors';
 
 const Z_INDEX = 1200;
 const ANIMATION_DURATION = '0.4s';
@@ -118,19 +123,33 @@ const ModalContent = styled.div`
   }
 `;
 
-const ModalClose = styled.p`
-  float: right;
-  margin-top: -4.16vh;
-  margin-right: 4.16vw;
-  transition: opacity 0.2s ease;
-  font-size: 200%;
-  color: ${LIGHT_GRAY};
+const ModalClose = styled.div`
+  position: fixed;
+  top: 4.16vw;
+  right: 4.16vw;
+  background: ${WHITE};
+  border-radius: 50%;
+  box-shadow: 0 1px 4px ${SHADOW};
   cursor: hand;
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 1300;
+  transition: opacity 0.2s ease;
+
+  span {
+    color: ${LIGHT_GRAY};
+    height: 2rem;
+    line-height: 1.8rem;
+    font-size: 1.8rem;
+  }
 
   :hover {
-    opacity: 0.5;
+    opacity: 0.75;
   }
-`;
+`
 
 // Do not propagate events on the modal content to the modal background
 // This would otherwise cause the modal to close on any click
@@ -200,7 +219,7 @@ export class Modal extends Component {
       >
         <ModalContent onClick={noop} show={show}>
           <ModalClose onClick={toggle}>
-            &times;
+            <span>&times;</span>
           </ModalClose>
 
           { children }

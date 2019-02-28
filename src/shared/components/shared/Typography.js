@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { MEDIUM_GRAY } from '../../styles/colors';
+import { MEDIUM_GRAY, LIGHTER_BLUE } from '../../styles/colors'
 
 export const Text = styled.p`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
@@ -8,6 +8,17 @@ export const Text = styled.p`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   display: inline-block;
 `;
+
+export const Tag = styled.p`
+  background: ${LIGHTER_BLUE};
+  color: ${MEDIUM_GRAY};
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  font-size: 80%;
+`
 
 export const Subtext = styled.p`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
