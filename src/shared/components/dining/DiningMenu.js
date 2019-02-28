@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
     meal,
   } = state.dining;
   let sectionsObj = null;
-  if (diningData && dateFormatted && meal) {
+  if (diningData && dateFormatted && meal && diningData[dateFormatted]) {
     sectionsObj = diningData[dateFormatted][meal];
   }
   return {
