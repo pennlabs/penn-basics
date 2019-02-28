@@ -50,7 +50,7 @@ function getTime(time) {
     hours = hours || 12; // Change 0 to 12
     prefix = 'am';
   } else {
-    hours -= 12;
+    hours = (hours === 12) ? hours : hours - 12;
     prefix = 'pm';
   }
 
