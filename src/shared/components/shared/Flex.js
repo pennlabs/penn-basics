@@ -20,7 +20,7 @@ export const Col = styled.div`
   background: ${({ background }) => background || ''};
   max-height: ${({ maxHeight }) => maxHeight || 'none'};
   overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
-  overflow-x: hidden;
+  overflow-x: ${({ overflowX }) => overflowX || 'visible'};
   box-sizing: border-box;
   border-radius: ${({ borderRadius }) => borderRadius || 0};
   border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};

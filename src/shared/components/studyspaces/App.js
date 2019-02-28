@@ -8,13 +8,13 @@ import {
   Col,
   Scrollbar,
   Line,
-  Subtext,
 } from '../shared';
 import Filter from './Filter';
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { getAllSpacesData } from '../../actions/spaces_actions';
 import SpaceModal from './SpaceModal';
+import PennLabsCredit from './PennLabsCredit'
 
 // TODO ghost loaders
 
@@ -63,14 +63,7 @@ class App extends Component {
               );
             })}
 
-            <Col padding="0 1rem">
-              <Subtext paddingTop="0.5rem" marginBottom="0">
-                Made with &hearts; by&nbsp;
-                <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
-                  Penn Labs.
-                </a>
-              </Subtext>
-            </Col>
+            <PennLabsCredit />
           </Scrollbar>
           <Col>
             <Map
