@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import { Loading } from '../shared/Loading';
 import { BorderedCard } from '../shared';
+import { addFavorite } from '../../actions/laundry_actions';
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -67,47 +68,15 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   );
 };
 
-// helper function to check if the favoritesArray contains the new favorite laundry hall
-const includes = (array, id) => {
-  for (let i = 0; i < array.length; i++){
-    if (array[i].hallId === id){
-      return true;
-    }
-  }
-
-  return false;
-}
-
-const addFavoriteToLocalStorage = (laundryHallId, location, hallName, laundryHalls) => {
-  const halls = _.flatten(laundryHalls.map(hall => hall.halls));
-  // favoritesString is the raw data taken from localStorage
-  // therefore is in string format
-  const favoritesString = localStorage.getItem("favorites");
-
-  let favoritesArray = [];
-  let favoriteLocation = {};
-  favoriteLocation.locationName = `${location}: ${hallName}`;
-  favoriteLocation.hallId = laundryHallId;
-  if (!favoritesString) {
-    favoritesArray = [favoriteLocation];
-  } else {
-    favoritesArray = JSON.parse(favoritesString);
-    if (!includes(favoritesArray, favoriteLocation.hallId)) {
-      favoritesArray.push(favoriteLocation);
-    }
-  }
-
-  localStorage.setItem("favorites", JSON.stringify(favoritesArray));
-
-  // TODO: change the button to unfavorite clicking on it
-}
-
 const LaundryVenue = ({
   laundryHallInfo,
   pending,
   laundryHallId,
   laundryHalls,
+  addFavorite,
+  favorites,
 }) => {
+  const isFavorited = favorites.some(favorite => favorite.hallId === laundryHallId);
   if (laundryHallInfo) {
     const { hall_name: hallName, location } = laundryHallInfo;
     const { washers, dryers, details: machines } = laundryHallInfo.machines;
@@ -119,7 +88,9 @@ const LaundryVenue = ({
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
-            <a className="button is-warning" onClick={() => addFavoriteToLocalStorage(laundryHallId, location, hallName, laundryHalls)}>Favorite</a>
+            <a className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+              {isFavorited ? 'Unfavorite' : 'Favorite'}
+            </a>
           </div>
         </div>
         <div className="columns">
@@ -175,4 +146,10 @@ const mapStateToProps = ({ laundry }) => {
   };
 };
 
-export default connect(mapStateToProps)(LaundryVenue);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue);

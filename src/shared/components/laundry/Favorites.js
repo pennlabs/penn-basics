@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 import FavoriteCard from './FavoriteCard';
+import {getFavorites} from '../../actions/laundry_actions';
 
 import {
   Card,
@@ -15,25 +17,23 @@ import {
 class Favorites extends Component {
   constructor(props) {
     super(props);
-    const favorites = localStorage.getItem('favorites');
-    this.state = {
-      favorites: JSON.parse(favorites),
-    };
+    const { getFavorites } = this.props;
+    getFavorites();
   }
 
   render() {
-    const { favorites } = this.state;
+    const { favorites } = this.props;
     
     if (favorites && favorites.length > 0) {
       return (
         <div>
           <Card padding="0.5rem 1rem">
-          <Row>
-            <Col padding="0">
-              <Subtitle marginBottom="0"> Favorites </Subtitle>
-            </Col>
-          </Row>
-        </Card>
+            <Row>
+              <Col padding="0">
+                <Subtitle marginBottom="0"> Favorites </Subtitle>
+              </Col>
+            </Row>
+          </Card>
 
           {
             favorites.map(favorite => <FavoriteCard hallId={favorite.hallId} locationName={favorite.locationName}/>)
@@ -45,4 +45,17 @@ class Favorites extends Component {
   }
 }
 
-export default Favorites;
+const mapStateToProps = state => {
+  const { laundry } = state;
+  return {
+    favorites: laundry.favorites
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getFavorites: () => dispatch(getFavorites())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Favorites);

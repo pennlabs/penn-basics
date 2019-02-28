@@ -7,7 +7,7 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
-  pullLaundryFavorites,
+  updateFavorites,
 } from '../actions/action_types';
 
 const defaultState = {
@@ -55,7 +55,7 @@ const laundryReducer = (state = defaultState, action) => {
         laundryHallInfo: action.laundryHallInfo,
         laundryHallId: action.laundryHallId,
       };
-    case pullLaundryFavorites:
+    case updateFavorites:
       return {
         ...state,
         favorites: action.favorites,

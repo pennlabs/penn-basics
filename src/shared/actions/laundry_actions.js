@@ -8,7 +8,7 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
-  pullLaundryFavorites,
+  updateFavorites,
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
@@ -71,20 +71,44 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
 export function getFavorites() {
   return (dispatch) => {
     let favorites = localStorage.getItem('laundry_favorites');
-    console.log(favorites)
-    if (favorites == null) {
-      localStorage.setItem('laundry_favorites', []);
+    if (favorites) {
+      favorites = JSON.parse(favorites);
+    } else {
+      localStorage.setItem('laundry_favorites', JSON.stringify([]));
       favorites = [];
     }
     dispatch({
-      type: pullLaundryFavorites,
+      type: updateFavorites,
       favorites,
     });
   };
 }
 
-// export function addFavorite(hallInfo) {
-//   return (dispatch) => {
-//     const favorites = 
-//   }
-// }
+export function addFavorite(laundryHallId, location, hallName) {
+  return (dispatch) => {
+    // favoritesString is the raw data taken from localStorage
+    // therefore is in string format
+    const favoritesString = localStorage.getItem("laundry_favorites");
+
+    let favoritesArray = [];
+    const favoriteLocation = {};
+    favoriteLocation.locationName = `${location}: ${hallName}`;
+    favoriteLocation.hallId = laundryHallId;
+    if (!favoritesString) {
+      favoritesArray = [favoriteLocation];
+    } else {
+      favoritesArray = JSON.parse(favoritesString);
+      if (!favoritesArray.some(favorite => favorite.hallId === favoriteLocation.hallId)) {
+        favoritesArray.push(favoriteLocation);
+      }
+    }
+
+    localStorage.setItem("laundry_favorites", JSON.stringify(favoritesArray));
+
+    dispatch({
+      type: updateFavorites,
+      favorites: favoritesArray,
+    });
+    // TODO: change the button to unfavorite clicking on it
+  };
+}
