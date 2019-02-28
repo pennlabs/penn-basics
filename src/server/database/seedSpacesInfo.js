@@ -13,4 +13,13 @@ function loadSpacesIntoDB() {
   )))
 }
 
-deleteSpacesInDB().then(loadSpacesIntoDB).then(() => process.exit(0))
+const { MONGO_URI } = process.env
+
+if (!MONGO_URI) {
+  console.log('Missing MONGO_URI') // eslint-disable-line
+  process.exit(1)
+}
+
+deleteSpacesInDB()
+  .then(loadSpacesIntoDB)
+  .then(() => process.exit(0))

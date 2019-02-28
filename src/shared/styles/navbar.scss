@@ -1,32 +1,4 @@
 .navbar {
-  padding: 0 0.5rem;
-  border-bottom: 1px solid $allbirds-gray;
-  display: flex;
-
-  .logo {
-    img {
-      display: inline-block;
-      height: 3.4rem;
-      padding: 0.4rem 0 0.4rem 0.5rem;
-      width: auto;
-      position: absolute;
-      top: 0;
-    }
-
-    h1 {
-      font-weight: bold;
-      font-size: 1.4rem;
-      padding: 0.7rem 0.5rem 0.7rem 3.2rem;
-      color: $dark-gray;
-
-      &:active,
-      &:focus,
-      &:hover {
-        color: $black;
-      }
-    }
-  }
-
   ul {
     flex: 1;
     text-align: right;
