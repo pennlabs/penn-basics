@@ -12,8 +12,8 @@ import {
   Col,
 } from '../shared';
 import { GREEN, BORDER } from '../../styles/colors'
-import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions';
-import { getNoiseLevel, getOutletsLevel } from './mapper';
+import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
+import { getNoiseLevel, getOutletsLevel } from './mapper'
 
 const Circle = s.div`
   width: 0.5rem;
@@ -39,16 +39,16 @@ const Content = s.div`
 
 class SpaceCard extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.handleClick = this.handleClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleClick = this.handleClick.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
 
   handleKeyPress(event) {
     if (event.keyCode === 32) {
-      this.handleClick();
+      this.handleClick()
     }
   }
 
@@ -57,17 +57,17 @@ class SpaceCard extends Component {
       hoveredSpace,
       spaceId,
       setHoveredSpaceDispatch,
-    } = this.props;
+    } = this.props
 
     // If there is no change to be made
-    if (hoveredSpace === spaceId) return;
+    if (hoveredSpace === spaceId) return
 
-    setHoveredSpaceDispatch(spaceId);
+    setHoveredSpaceDispatch(spaceId)
   }
 
   handleClick() {
-    const { setActiveSpaceDispatch, spaceId } = this.props;
-    setActiveSpaceDispatch(spaceId);
+    const { setActiveSpaceDispatch, spaceId } = this.props
+    setActiveSpaceDispatch(spaceId)
   }
 
   render() {
@@ -78,9 +78,9 @@ class SpaceCard extends Component {
       quiet,
       outlets,
       hours,
-    } = this.props;
-    const noiseLevel = getNoiseLevel(quiet);
-    const outletsLevel = getOutletsLevel(outlets);
+    } = this.props
+    const noiseLevel = getNoiseLevel(quiet)
+    const outletsLevel = getOutletsLevel(outlets)
 
     return (
       <Card
@@ -123,7 +123,7 @@ SpaceCard.defaultProps = {
   outlets: 0,
   quiet: -1,
   hoveredSpace: null,
-};
+}
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
@@ -136,19 +136,19 @@ SpaceCard.propTypes = {
   spaceId: PropTypes.string.isRequired,
   setHoveredSpaceDispatch: PropTypes.func.isRequired,
   setActiveSpaceDispatch: PropTypes.func.isRequired,
-};
+}
 
 const mapStateToProps = ({ spaces }) => {
-  const { hoveredSpace } = spaces;
-  return { hoveredSpace };
-};
+  const { hoveredSpace } = spaces
+  return { hoveredSpace }
+}
 
 const mapDispatchToProps = dispatch => ({
   setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
   setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
-});
+})
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SpaceCard);
+)(SpaceCard)

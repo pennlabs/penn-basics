@@ -1,8 +1,8 @@
 // Import frameworks
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import s from 'styled-components';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import s from 'styled-components'
 
 import {
   Row,
@@ -12,17 +12,18 @@ import {
   Subtitle,
   Subtext,
   Line,
-} from '../shared';
-import { WHITE, DARK_GRAY } from '../../styles/colors';
-import { NAV_HEIGHT } from '../../styles/sizes';
+} from '../shared'
+import PennLabsCredit from '../shared/PennLabsCredit'
+import { WHITE, DARK_GRAY } from '../../styles/colors'
+import { NAV_HEIGHT } from '../../styles/sizes'
 
-import venueData from '../../../server/database/venue_info.json';
+import venueData from '../../../server/database/venue_info.json'
 
 const StyledLink = s(Link)`
   h2 {
     color: ${DARK_GRAY} !important;
   }
-`;
+`
 
 const Nav = ({ children }) => (
   <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -64,6 +65,8 @@ const Nav = ({ children }) => (
           </StyledLink>
         );
       })}
+
+      <PennLabsCredit />
     </Scrollbar>
     <Col
       width="70%"

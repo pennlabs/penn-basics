@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import SpaceCard from './SpaceCard';
+import SpaceCard from './SpaceCard'
 import {
   Map,
   Row,
   Col,
   Scrollbar,
   Line,
-} from '../shared';
-import Filter from './Filter';
-import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
-import ErrorMessage from '../shared/ErrorMessage';
-import { getAllSpacesData } from '../../actions/spaces_actions';
-import SpaceModal from './SpaceModal';
-import PennLabsCredit from './PennLabsCredit'
+} from '../shared'
+import ErrorMessage from '../shared/ErrorMessage'
+import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
+import { getAllSpacesData } from '../../actions/spaces_actions'
+
+import Filter from './Filter'
+import SpaceModal from './SpaceModal'
+import PennLabsCredit from '../shared/PennLabsCredit'
 
 // TODO ghost loaders
 

@@ -141,8 +141,8 @@ const ModalClose = styled.div`
 
   span {
     color: ${LIGHT_GRAY};
-    height: 2rem;
-    line-height: 1.8rem;
+    height: 100%;
+    line-height: 1;
     font-size: 1.8rem;
   }
 

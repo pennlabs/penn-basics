@@ -7,9 +7,9 @@ const Loading = ({
   <div className="center-div">
     {
       title ? (
-        <h1 className="is-size-3 medium-gray-text marg-bot-2">
+        <h4 className="is-size-4 medium-gray-text marg-bot-2">
           {title}
-        </h1>
+        </h4>
       ) : null
     }
     <img
