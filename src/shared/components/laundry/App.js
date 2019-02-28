@@ -34,7 +34,7 @@ class App extends Component {
           overflowY="scroll"
           width="20%"
         >
-          Favorites
+          <Favorites/>
           {
             laundryHalls
             && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)

@@ -11,5 +11,7 @@ export const FOCUS_GRAY = '#F0F0F0';
 export const HOVER_GRAY = '#F8F8F8';
 export const BORDER = 'rgba(0, 0, 0, 0.1)';
 
+export const LIGHTER_BLUE = '#d9eafc';
+export const LIGHT_BLUE = '#84add5';
 export const BLUE = '#2980B9';
 export const DARK_BLUE = '#246793';

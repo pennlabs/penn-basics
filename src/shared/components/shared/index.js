@@ -5,3 +5,4 @@ export * from './Image';
 export * from './Flex';
 export * from './Map';
 export * from './Line';
+export * from './Scrollbar';

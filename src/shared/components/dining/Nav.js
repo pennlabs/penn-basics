@@ -8,6 +8,7 @@ import {
   Row,
   Col,
   Card,
+  Scrollbar,
   Subtitle,
   Subtext,
   Line,
@@ -25,7 +26,7 @@ const StyledLink = s(Link)`
 
 const Nav = ({ children }) => (
   <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
-    <Col
+    <Scrollbar
       padding="0 0 .5rem 0"
       background={WHITE}
       overflowY="scroll"
@@ -63,7 +64,7 @@ const Nav = ({ children }) => (
           </StyledLink>
         );
       })}
-    </Col>
+    </Scrollbar>
     <Col
       width="70%"
       overflowY="scroll"

@@ -47,8 +47,6 @@ class LaundryCard extends Component {
       halls,
       location,
     } = locationObject;
-    console.log("this.props");
-    console.log(this.props);
     const { expanded } = this.state;
 
     // check if the hall has only one location object

@@ -15,6 +15,25 @@
     }
   },
   {
+    "name": "Van Pelt Moelis Reading Terrace (6th Floor)",
+    "description": "Though the building's exterior has remained largely unchanged since its inauguration, a 2013 renovation of the sixth floor brought the Moelis Reading Terrace, a modern space with leather couches and large windows overlooking College Green.",
+    "address": "3420 Walnut St, Philadelphia, PA 19104",
+    "image": "https://snworksceo.imgix.net/dpn/0c717143-23f3-423e-af62-799cfab65087.original.jpg",
+    "imageCredit": {
+      "name": "Pauline Colas",
+      "link": "https://www.thedp.com/staff/pauline-colas"
+    },
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 0,
+    "start": [-1, 10, 10, 10, 10, 10, 10],
+    "end": [-1, 24, 24, 24, 24, 21, 21],
+    "location": {
+      "lat": 39.952615,
+      "lng": -75.193933
+    }
+  },
+  {
     "name": "Van Pelt Basement",
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
     "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
@@ -235,6 +254,11 @@
   },
   {
     "name": "Fisher Fine Arts Library",
+    "image": "https://snworksceo.imgix.net/dpn/c558d9b0-9256-4e05-afe5-528a62426047.original.jpg",
+    "imageCredit": {
+      "name": "Annie Luo",
+      "link": "https://www.thedp.com/staff/annie-luo"
+    },
     "description": "",
     "address": "220 S 34th St, Philadelphia, PA 19104",
     "outlets": 0,
@@ -249,6 +273,11 @@
   },
   {
     "name": "Harnwell Rooftop Lounge",
+    "image": "https://snworksceo.imgix.net/dpn/a306b0de-7503-4a89-ad48-120070322374.original.jpg",
+    "imageCredit": {
+      "name": "Sharon Lee",
+      "link": "https://www.thedp.com/staff/sharon-lee"
+    },
     "description": "",
     "address": "3820 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
@@ -367,6 +396,11 @@
   },
   {
     "name": "Biddle Law Library",
+    "image": "https://snworksceo.imgix.net/dpn/b3647e70-49db-49bd-8c2b-9ebd2211128d.original.jpg",
+    "imageCredit": {
+      "name": "Alexa Cotler",
+      "link": "https://www.thedp.com/staff/alexa-cotler"
+    },
     "description": "",
     "address": "3501 Sansom St, Philadelphia, PA 19104",
     "outlets": 0,
@@ -391,6 +425,24 @@
     "location": {
       "lat": 39.949770,
       "lng": -75.196000
+    }
+  },
+  {
+    "name": "New College House, 7th Floor",
+    "image": "https://snworksceo.imgix.net/dpn/4363451a-2f31-449a-b109-f76a09b62670.original.jpg",
+    "imageCredit": {
+      "name": "Alec Druggan",
+      "link": "https://www.thedp.com/staff/alec-druggan"
+    },
+    "description": "",
+    "address": "3335 Woodland Walk, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 2,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.9536909,
+      "lng": -75.1934874
     }
   },
   {
