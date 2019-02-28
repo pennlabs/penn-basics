@@ -1,8 +1,8 @@
-const spaces = require('../resources/spaces.json');
-const Space = require('./models/space');
+const spaces = require('../resources/spaces.json')
+const Space = require('./models/Space')
 
 function deleteSpacesInDB() {
-  return Space.find().remove();
+  return Space.find().remove()
 }
 
 function loadSpacesIntoDB() {
@@ -10,7 +10,7 @@ function loadSpacesIntoDB() {
     new Space(space)
       .save()
       .then(console.log) // eslint-disable-line
-  )));
+  )))
 }
 
-deleteSpacesInDB().then(loadSpacesIntoDB).then(() => process.exit(0));
+deleteSpacesInDB().then(loadSpacesIntoDB).then(() => process.exit(0))
