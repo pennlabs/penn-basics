@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "node src/server/index.js",
+    "seedSpaces": "node src/server/database/seedSpacesInfo.js",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "dev": "source env.sh && (yarn webpack &) && yarn start",
