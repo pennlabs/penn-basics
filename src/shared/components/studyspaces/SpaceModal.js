@@ -58,19 +58,17 @@ class SpaceModal extends Component {
                 />
               )}
 
-              <ModalContainer paddingTop="0.5rem">
-                <Text>
-                  <strong>Description:</strong>
-                </Text>
-                <br />
-                <Text>
-                  {description}
-                </Text>
-              </ModalContainer>
+              {description && (
+                <ModalContainer paddingTop="0.5rem">
+                  <Text>
+                    {description}
+                  </Text>
+                </ModalContainer>
+              )}
 
               <ModalContainer background={SNOW} paddingTop="1.5rem" paddingBottom="1rem">
                 <Text>
-                  <strong>Address:</strong>
+                  <strong>Address</strong>
                 </Text>
                 <br />
                 <Text>

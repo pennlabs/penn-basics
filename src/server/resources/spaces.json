@@ -2,6 +2,10 @@
   {
     "name": "Van Pelt Moelis Reading Room",
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
     "address": "3420 Walnut St, Philadelphia, PA 19104",
     "image": "https://www.architecturalrecord.com/ext/resources/Issues/2017/November/lighting/1711-Lighting-Holistic-Strategies-Moelis-Family-Grand-Reading-Room-01.jpg",
     "outlets": 2,
@@ -17,6 +21,10 @@
   {
     "name": "Van Pelt Moelis Reading Terrace (6th Floor)",
     "description": "Though the building's exterior has remained largely unchanged since its inauguration, a 2013 renovation of the sixth floor brought the Moelis Reading Terrace, a modern space with leather couches and large windows overlooking College Green.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
     "address": "3420 Walnut St, Philadelphia, PA 19104",
     "image": "https://snworksceo.imgix.net/dpn/0c717143-23f3-423e-af62-799cfab65087.original.jpg",
     "imageCredit": {
@@ -36,6 +44,10 @@
   {
     "name": "Van Pelt Basement",
     "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
     "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
     "address": "3420 Walnut St, Philadelphia, PA 19104",
     "outlets": 1,
@@ -50,6 +62,10 @@
   },
   {
     "name": "Huntsman QSR 1st Floor",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "image": "https://snworksceo.imgix.net/dpn-utb/ce5ee52f-cf96-4e1f-9c6e-f95d7ae441e5.sized-1000x1000.jpg",
     "description": "With 324,000 square feet, 48 classrooms, 57 group study rooms, lecture halls, auditoriums and conference rooms &mdash,Jon M. Huntsman Hall is one of the most sophisticated large-scale instructional centers of any educational institution in the world. With its warm natural finishes of wood, brick and stone, reflecting the historic significance of surrounding buildings on the University campus, it connects Wharton to the world.",
     "address": "3730 Walnut St, Philadelphia, PA 19104",
@@ -65,7 +81,11 @@
   },
   {
     "name": "Huntsman QSR 2nd Floor",
-    "description": "",
+    "description": "With 324,000 square feet, 48 classrooms, 57 group study rooms, lecture halls, auditoriums and conference rooms &mdash,Jon M. Huntsman Hall is one of the most sophisticated large-scale instructional centers of any educational institution in the world. With its warm natural finishes of wood, brick and stone, reflecting the historic significance of surrounding buildings on the University campus, it connects Wharton to the world.",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -81,6 +101,10 @@
     "name": "Starbucks 1920 Commons",
     "image": "http://cms.business-services.upenn.edu/dining/templates/dine_default/images/sub/locations/1920-commons-retail.jpg",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Coffee Shop"
+    ],
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 0,
@@ -96,6 +120,10 @@
     "name": "Huntsman Computer Lab F75",
     "image": "https://p4.zdassets.com/hc/theme_assets/708153/200120919/CPU_LAB_2-399x266.jpg",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 2,
     "quiet": 1,
@@ -110,6 +138,10 @@
   {
     "name": "Huntsman Computer Lab F80",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 2,
     "quiet": 1,
@@ -124,6 +156,10 @@
   {
     "name": "Huntsman Computer Lab 380",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 2,
     "quiet": 1,
@@ -138,6 +174,10 @@
   {
     "name": "Huntsman Computer Lab 375",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 2,
     "quiet": 1,
@@ -153,6 +193,10 @@
     "name": "Huntsman Forum",
     "image": "https://c1.staticflickr.com/8/7121/7748619482_1df73847ba_b.jpg",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
@@ -166,13 +210,17 @@
   },
   {
     "name": "MBA Cafe",
-    "description": "",
+    "description": "The MBA Café is located on the second floor adjoining the Koo Family Plaza, a patio and garden space that also hosts Wharton gatherings and events. It's also home to the second Pret A Manger in Huntsman Hall which has more limited options and hours.",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
     "address": "3730 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
     "groups": 0,
-    "start": [0, 0, 0, 0, 0, 0, 0],
-    "end": [0, 0, 0, 0, 0, 0, 0],
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2],
     "location": {
       "lat": 39.955030,
       "lng": -75.210080
@@ -182,6 +230,10 @@
     "name": "Hill Study Lounge",
     "description": "Lofty, well-lit study space in the historic residential building Hill College House",
     "image": "https://hill.house.upenn.edu/sites/hill.house.upenn.edu/files/styles/banner-big/public/banners/renovated-atrium.jpg",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3333 Walnut St, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 0,
@@ -196,6 +248,10 @@
   {
     "name": "McClelland Express",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3400 Spruce St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -209,7 +265,11 @@
   },
   {
     "name": "Levin Building",
-    "description": "",
+    "description": "An expansion of the Lynch Laboratories, this building provides for the collaboration, exchange, and integration of knowledge that characterizes the study of Biology and Psychology at Penn. The Levin Building is attached to the south end of the Leidy Labs Building and houses research laboratories, teaching facilities, and spaces designed for cross-disciplinary work.",
+    "tags": [
+      "On Campus",
+      "SAS"
+    ],
     "image": "https://www.pennconnects.upenn.edu/all_project_images/the_levin_building_images/the_levin_building_large_2.jpg",
     "address": "425 S University Ave, Philadelphia, PA 19104",
     "outlets": 0,
@@ -225,6 +285,11 @@
   {
     "name": "Annenberg School for Communication Library",
     "description": "",
+    "tags": [
+      "On Campus",
+      "SAS",
+      "Library"
+    ],
     "image": "http://www.library.upenn.edu/sites/default/files/2017-10/pan1192.jpg",
     "address": "3620 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
@@ -239,6 +304,10 @@
   },
   {
     "name": "United by Blue",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "image": "http://cdn.shopify.com/s/files/1/0287/3670/files/header-slider-image-walnut2.jpg?10285525781100010835",
     "description": "Chic, bustling, upscale cafe and purveyor of outdoorsy goods with in-demand space for studying, talking, and meeting.",
     "address": "3421 Walnut St, Philadelphia, PA 19104",
@@ -260,6 +329,10 @@
       "link": "https://www.thedp.com/staff/annie-luo"
     },
     "description": "",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
     "address": "220 S 34th St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -279,6 +352,10 @@
       "link": "https://www.thedp.com/staff/sharon-lee"
     },
     "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3820 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -294,6 +371,10 @@
     "name": "Rodin Rooftop Lounge",
     "description": "",
     "image": "https://pbs.twimg.com/media/C6RVVIyWUAA056Y.jpg",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3901 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -308,6 +389,10 @@
   {
     "name": "Harrison Rooftop Lounge",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3910 Irving St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -323,6 +408,10 @@
     "name": "Saxbys",
     "description": "",
     "image": "http://eimer-design.com/wp-content/uploads/2018/05/Eimer_Saxbys_Coffee_UPenn_01.jpg",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "4000 Locust St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -338,6 +427,10 @@
     "name": "Starbucks 39th and Walnut St.",
     "description": "",
     "image": "https://snworksceo.imgix.net/dpn-34s/7d127a3c-cc83-42d9-89d0-bce6ba2cb2a4.sized-1000x1000.jpg",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "3901 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -353,6 +446,9 @@
     "name": "Education Commons",
     "description": "State-of-the-art study and information space that supports teaching and collaborative learning. Located on the mezzanine of the George A. Weiss Pavilion in Franklin Field, the Education Commons comprises 6,400 square feet and 168 seats and includes a 22-seat seminar room and 6 group study rooms, all reservable online. The space is open to all current Penn students, faculty, and staff with a PennCard.",
     "image": "http://joelsandersarchitect.com/wp-content/uploads/2015/05/04-UPenn-Education-Commons-1334x712.jpg",
+    "tags": [
+      "On Campus"
+    ],
     "address": "Smith Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
@@ -367,6 +463,10 @@
   {
     "name": "Singh Center for Nanotechnology",
     "description": "Futuristic, open building offering unique chairs, booths, and tables. PennCard access is limited to engineers and those granted access, though you can try to enter via the LRSM Lab next door.",
+    "tags": [
+      "On Campus",
+      "SEAS"
+    ],
     "image": "https://www.nano.upenn.edu/wp-content/uploads/2014/09/singh_banner_2.jpg",
     "address": "3205 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
@@ -382,7 +482,12 @@
   {
     "name": "Penn Bookstore",
     "image": "https://snworksceo.imgix.net/dpn/c5f4f01c-7503-4dca-8a1e-8682a625241c.sized-1000x1000.jpg",
-    "description": "",
+    "description": "The University of Pennsylvania’s official bookstore sells textbooks, general books, school supplies, music, and more. Its second-floor café offers a quiet study room and expansive views of campus.",
+    "tags": [
+      "On Campus",
+      "Bookstore",
+      "Coffee Shop"
+    ],
     "address": "3601 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 1,
@@ -402,6 +507,11 @@
       "link": "https://www.thedp.com/staff/alexa-cotler"
     },
     "description": "",
+    "tags": [
+      "On Campus",
+      "Penn Law",
+      "Library"
+    ],
     "address": "3501 Sansom St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -416,6 +526,10 @@
   {
     "name": "Biomedical Library",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
     "address": "3610 Hamilton Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -435,6 +549,10 @@
       "link": "https://www.thedp.com/staff/alec-druggan"
     },
     "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
     "address": "3335 Woodland Walk, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 2,
@@ -448,6 +566,11 @@
   {
     "name": "Provost Tower Library",
     "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall",
+      "Library"
+    ],
     "address": "3417 Spruce St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -462,6 +585,10 @@
   {
     "name": "Pret a Manger",
     "description": "Quick, convenient, busy cafe and study space within Huntsman Hall.",
+    "tags": [
+      "On Campus",
+      "Coffee Shop"
+    ],
     "address": "3725 Locust Walk, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 0,
@@ -476,6 +603,10 @@
   {
     "name": "Metropolitan Bakery & Cafe",
     "description": "Bustling, modest space with a wide array of food and beverage options.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "4013 Walnut St, Philadelphia, PA 19104",
     "image": "https://cdn.shopify.com/s/files/1/0018/2317/8819/files/metro_location_wphilly_web_1080x.jpg",
     "outlets": 1,
@@ -491,6 +622,10 @@
   {
     "name": "Green Line 40th St.",
     "description": "Comfy coffee shop with seating ranging from couches to tables to barstools.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "28 S 40th St, Philadelphia, PA 19104",
     "image": "https://s3-media1.fl.yelpcdn.com/bphoto/ik9KXxzcXyyIvK005FeFmA/o.jpg",
     "outlets": 0,
@@ -507,6 +642,10 @@
     "name": "Green Line 43rd St.",
     "image": "https://s3-media1.fl.yelpcdn.com/bphoto/AeRwiV3bRkqZweu21c7SJg/o.jpg",
     "description": "Cafe with a local flavor. Cute outdoor seating nestled into the West Philly community.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "4426 Locust St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,
@@ -521,6 +660,10 @@
   {
     "name": "Starbucks 34th and Walnut St.",
     "description": "",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "address": "3401 Walnut St, Philadelphia, PA 19104",
     "outlets": 0,
     "quiet": 2,

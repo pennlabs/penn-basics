@@ -25,7 +25,7 @@ const Hours = ({ start, end }) => {
   return (
     <div>
       <Text fullWidth>
-        <strong>Hours:</strong>
+        <strong>Hours</strong>
       </Text>
       <table className="table is-bordered is-fullwidth">
         <tbody>

@@ -12,6 +12,11 @@ const SpaceSchema = new Schema({
   groups: Number,
   quiet: Number,
   image: String,
+  tags: [String],
+  imageCredit: {
+    name: String,
+    link: String,
+  },
   location: {
     lat: Number,
     lng: Number,
