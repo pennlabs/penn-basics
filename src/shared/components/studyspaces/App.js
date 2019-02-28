@@ -11,7 +11,6 @@ import {
   Subtext,
 } from '../shared';
 import Filter from './Filter';
-import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes';
 import ErrorMessage from '../shared/ErrorMessage';
 import { getAllSpacesData } from '../../actions/spaces_actions';
@@ -46,7 +45,6 @@ class App extends Component {
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
           <Scrollbar
             padding="0 0 .5rem 0"
-            background={WHITE}
             overflowY="scroll"
             width="40%"
           >
