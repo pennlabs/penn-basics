@@ -72,7 +72,6 @@ const LaundryVenue = ({
   laundryHallInfo,
   pending,
   laundryHallId,
-  laundryHalls,
   addFavorite,
   favorites,
 }) => {
