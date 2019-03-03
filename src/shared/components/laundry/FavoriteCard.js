@@ -48,7 +48,4 @@ const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(FavoriteCard);
+export default connect(null, mapDispatchToProps)(FavoriteCard);

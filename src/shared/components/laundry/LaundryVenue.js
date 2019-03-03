@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import { Loading } from '../shared/Loading';
 import { BorderedCard } from '../shared';
-import { addFavorite } from '../../actions/laundry_actions';
+import { addFavorite, removeFavorite } from '../../actions/laundry_actions';
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -73,6 +73,7 @@ const LaundryVenue = ({
   pending,
   laundryHallId,
   addFavorite,
+  removeFavorite,
   favorites,
 }) => {
   const isFavorited = favorites.some(favorite => favorite.hallId === laundryHallId);
@@ -87,9 +88,18 @@ const LaundryVenue = ({
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
-            <a className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
-              {isFavorited ? 'Unfavorite' : 'Favorite'}
-            </a>
+            {
+              isFavorited && <a className="button is-warning" onClick={() => removeFavorite(laundryHallId)}>
+                Unfavorite
+              </a>
+            }
+
+            {
+              !isFavorited && <a className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+                Favorite
+              </a>
+            }
+
           </div>
         </div>
         <div className="columns">
@@ -147,7 +157,8 @@ const mapStateToProps = ({ laundry }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName))
+    addFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName)),
+    removeFavorite: (laundryHallId) => dispatch(removeFavorite(laundryHallId))
   };
 };
 
