@@ -89,7 +89,7 @@ const LaundryVenue = ({
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
             {
-              isFavorited && <a className="button is-warning" onClick={() => removeFavorite(laundryHallId)}>
+              isFavorited && <a className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
                 Unfavorite
               </a>
             }
