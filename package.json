@@ -8,6 +8,7 @@
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
+    "webpack-prod": "webpack -p",
     "dev": "source env.sh && (yarn webpack &) && yarn start",
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
