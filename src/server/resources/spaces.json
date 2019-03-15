@@ -461,7 +461,7 @@
     }
   },
   {
-    "name": "Singh Center for Nanotechnology",
+    "name": "Singh Center for Nanotech",
     "description": "Futuristic, open building offering unique chairs, booths, and tables. PennCard access is limited to engineers and those granted access, though you can try to enter via the LRSM Lab next door.",
     "tags": [
       "On Campus",
@@ -674,5 +674,370 @@
       "lat": 39.953342,
       "lng": -75.193493
     }
+  },
+  {
+    "name": "Elixr Coffee",
+    "address": "207 S Sydenham St, Philadelphia, PA 19102",
+    "location": {
+      "lat": 39.9493377,
+      "lng": -75.1688823
+    },
+    "start": [8, 7, 7, 7, 7, 7, 7],
+    "end": [19, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Elixr Coffee",
+    "address": "315 N 12th St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9587518,
+      "lng": -75.1659256
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Function Coffee Labs",
+    "address": "1001 S 10th St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9378421,
+      "lng": -75.1616697
+    },
+    "start": [7, 8, 8, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Ox Coffee",
+    "address": "616 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9409337,
+      "lng": -75.1500099
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Pilgrim Coffee Roasters (Manayunk)",
+    "address": "4120 Main St, Philadelphia, PA 19127",
+    "location": {
+      "lat": 40.0221684,
+      "lng": -75.2231281
+    },
+    "start": [8, 6, 6, 6, 6, 6, 7],
+    "end": [17, 17, 17, 17, 17, 17, 18]
+  },
+  {
+    "name": "Rival Bros Coffee",
+    "address": "1528 Spruce St, Philadelphia, PA 19102",
+    "location": {
+      "lat": 39.9484558,
+      "lng": -75.1813293
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Rival Bros Coffee (Filter Square)",
+    "address": "2400 Lombard St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9472491,
+      "lng": -75.1860834
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Reanimator (Walnut Hill)",
+    "address": "4705 Pine St, Philadelphia, PA 19143",
+    "location": {
+      "lat": 39.9500454,
+      "lng": -75.2190887
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Reanimator (Olde Kensington)",
+    "address": "310 Master St, Philadelphia, PA 19122",
+    "location": {
+      "lat": 39.9732785,
+      "lng": -75.1412881
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Reanimator (Kensington)",
+    "address": "1523 E Susquehanna Ave, Philadelphia, PA 19125",
+    "location": {
+      "lat": 39.9776519,
+      "lng": -75.1535251
+    },
+    "start": [8, 6.5, 6.5, 6.5, 6.5, 6.5, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "La Colombe (Fishtown)",
+    "address": "1335 Frankford Ave, Philadelphia, PA 19125",
+    "location": {
+      "lat": 39.9712438,
+      "lng": -75.1362081
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [19, 19, 19, 19, 19, 21, 21]
+  },
+  {
+    "name": "Two Persons Coffee",
+    "address": "821 Dudley St, Philadelphia, PA 19148",
+    "location": {
+      "lat": 39.9248009,
+      "lng": -75.1619207
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [15, 17, 17, 17, 17, 17, 15]
+  },
+  {
+    "name": "Square One Coffee (Logan Square)",
+    "address": "1811 John F Kennedy Blvd, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9543943,
+      "lng": -75.1749437
+    },
+    "start": [-1, 7, 7, 7, 7, 7, -1],
+    "end": [-1, 16, 16, 16, 16, 16, -1]
+  },
+  {
+    "name": "Square One Coffee (Center City)",
+    "address": "249 S 13th St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9544259,
+      "lng": -75.1749437
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (Rittenhouse)",
+    "address": "238 S 20th St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9493329,
+      "lng": -75.1763768
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (Graduate Hospital)",
+    "address": "2149 Catharine St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9443818,
+      "lng": -75.1850906
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (South Philly)",
+    "address": "1900 S 15th St, Philadelphia, PA 19145",
+    "location": {
+      "lat": 39.9290917,
+      "lng": -75.1766803
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "La. Va Coffee",
+    "address": "2100 South St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.945016,
+      "lng": -75.1792982
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Good Karma Cafe (Walnut)",
+    "address": "2319 Walnut St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9487875,
+      "lng": -75.1796833
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Good Karma Cafe (22nd St)",
+    "address": "331 S 22nd St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9483151,
+      "lng": -75.1790474
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Good Karma Cafe",
+    "address": "Wilma Theatre, 265 S Broad St #5659, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9447563,
+      "lng": -75.1653656
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Old City Coffee (Old City)",
+    "address": "221 Church St, Philadelphia, PA 19106",
+    "location": {
+      "lat": 39.9506936,
+      "lng": -75.1499536
+    },
+    "start": [7, 6.5, 6.5, 6.5, 6.5, 6.5, 7],
+    "end": [18, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Old City Coffee (Center City)",
+    "address": "1200 Filbert St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9531604,
+      "lng": -75.1615849
+    },
+    "start": [8, 8, 8, 8, 8, 8, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Milk & Honey Market",
+    "address": "4435 Baltimore Ave, Philadelphia, PA 19104",
+    "location": {
+      "lat": 39.9488237,
+      "lng": -75.2154202
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20.25, 20, 20]
+  },
+  {
+    "name": "One Shot Cafe",
+    "address": "217 W George St, Philadelphia, PA 19123",
+    "location": {
+      "lat": 39.9677114,
+      "lng": -75.1428425
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Ultimo Coffee (Rittenhouse)",
+    "address": "238 S 20th St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9495412,
+      "lng": -75.1769415
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+
+
+
+  {
+    "name": "Ultimo Coffee (Graduate Hospital)",
+    "address": "2149 Catharine St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9420839,
+      "lng": -75.1816787
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+
+
+  {
+    "name": "Ultimo Coffee (South Philly)",
+    "address": "1900 S 15th St, Philadelphia, PA 19145",
+    "location": {
+      "lat": 39.9267851,
+      "lng": -75.1834617
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Herman’s Coffee",
+    "address": "1313 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.931404,
+      "lng": -75.1518777
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Menagerie",
+    "address": "18 S 3rd St, Philadelphia, PA 19106",
+    "location": {
+      "lat": 39.9554574,
+      "lng": -75.1591245
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Greenstreet Coffee Co.",
+    "address": "1101 Spruce St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9464657,
+      "lng": -75.1617559
+    },
+    "start": [8, 6, 6, 6, 6, 6, 7],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Ox Coffee",
+    "address": "616 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9409337,
+      "lng": -75.1500099
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Bluestone Lane (Rittenhouse)",
+    "address": "1701 Locust St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9489892,
+      "lng": -75.1717296
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Bluestone Lane (Center City)",
+    "address": "1 S Penn Square, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9512066,
+      "lng": -75.1656637
+    },
+    "start": [9, 6.5, 6.5, 6.5, 6.5, 6.5, 9],
+    "end": [16, 17, 17, 17, 17, 17, 16]
+  },
+  {
+    "name": "Joe Coffee (University City)",
+    "address": "3200 Chestnut St, Philadelphia, PA 19104",
+    "location": {
+      "lat": 39.9536108,
+      "lng": -75.1906788
+    },
+    "start": [9, 7, 7, 7, 7, 7, 9],
+    "end": [15, 19, 19, 19, 19, 19, 18]
+  },
+  {
+    "name": "Joe Coffee (Rittenhouse)",
+    "address": "1845 Walnut St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9536465,
+      "lng": -75.2059997
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [20, 20, 20, 20, 20, 20, 20]
   }
 ]
