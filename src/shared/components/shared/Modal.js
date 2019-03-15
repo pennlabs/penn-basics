@@ -139,16 +139,17 @@ const ModalClose = styled.div`
   z-index: 1300;
   transition: opacity 0.2s ease;
 
-  span {
-    color: ${LIGHT_GRAY};
-    height: 100%;
-    line-height: 1;
-    font-size: 1.8rem;
-  }
-
   :hover {
     opacity: 0.75;
   }
+`
+
+const Times = styled.span`
+  color: ${LIGHT_GRAY};
+  font-size: 32px;
+  margin-top: -3px;
+  display: inline-block;
+  width: 32px;
 `
 
 // Do not propagate events on the modal content to the modal background
@@ -219,7 +220,7 @@ export class Modal extends Component {
       >
         <ModalContent onClick={noop} show={show}>
           <ModalClose onClick={toggle}>
-            <span>&times;</span>
+            <Times>&times;</Times>
           </ModalClose>
 
           { children }
