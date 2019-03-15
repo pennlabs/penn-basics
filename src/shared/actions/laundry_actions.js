@@ -109,6 +109,28 @@ export function addFavorite(laundryHallId, location, hallName) {
       type: updateFavorites,
       favorites: favoritesArray,
     });
-    // TODO: change the button to unfavorite clicking on it
+  };
+}
+
+export function removeFavorite(laundryHallId) {
+  return (dispatch) => {
+    // favoritesString is the raw data taken from localStorage
+    // therefore is in string format
+    
+    const favoritesString = localStorage.getItem("laundry_favorites");
+
+    let favoritesArray = JSON.parse(favoritesString);
+
+    favoritesArray.forEach((favorite, index) => {
+      if (favorite.hallId === laundryHallId) {
+        favoritesArray.splice(index, 1);
+      }
+    })
+
+    localStorage.setItem("laundry_favorites", JSON.stringify(favoritesArray));
+    dispatch({
+      type: updateFavorites,
+      favorites: favoritesArray,
+    });
   };
 }

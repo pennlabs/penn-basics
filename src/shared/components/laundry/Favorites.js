@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import FavoriteCard from './FavoriteCard';
-import {getFavorites} from '../../actions/laundry_actions';
+import { getFavorites } from '../../actions/laundry_actions';
 
 import {
   Card,
@@ -23,7 +23,7 @@ class Favorites extends Component {
 
   render() {
     const { favorites } = this.props;
-    
+
     if (favorites && favorites.length > 0) {
       return (
         <div>
@@ -36,7 +36,7 @@ class Favorites extends Component {
           </Card>
 
           {
-            favorites.map(favorite => <FavoriteCard hallId={favorite.hallId} locationName={favorite.locationName}/>)
+            favorites.map(favorite => <FavoriteCard hallId={favorite.hallId} locationName={favorite.locationName} />)
           }
         </div>
       );
@@ -58,4 +58,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

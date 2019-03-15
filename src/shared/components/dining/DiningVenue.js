@@ -13,6 +13,7 @@ import DiningMenu from './DiningMenu';
 import ErrorMessage from '../shared/ErrorMessage';
 import NotFound from '../shared/NotFound';
 import Loading from '../shared/Loading';
+import { retailLocations } from './constants';
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -141,6 +142,23 @@ class DiningVenue extends Component {
     }
 
     const { name } = venueData[id];
+
+    if (retailLocations.includes(name)) {
+      return (
+        // If there is no error and the data is not pending
+        <Nav>
+          <Wrapper>
+            {/* Render the title of the dining page */}
+            <h1 className="title">
+              {name}
+            </h1>
+
+            {/* Render the overview card at the top of the dining view */}
+            <DiningOverview id={id} />
+          </Wrapper>
+        </Nav>
+      )
+    }
 
     return (
       // If there is no error and the data is not pending
