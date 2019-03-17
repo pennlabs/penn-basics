@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import SpaceCard from './SpaceCard'
 import {
@@ -78,6 +79,21 @@ class App extends Component {
       </div>
     );
   }
+}
+
+App.defaultProps = {
+  error: null,
+  hoveredSpace: null,
+  pending: false,
+  filteredSpacesData: null,
+}
+
+App.propTypes = {
+  getAllSpacesDataDispatch: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  hoveredSpace: PropTypes.string,
+  pending: PropTypes.bool,
+  filteredSpacesData: PropTypes.object, // eslint-disable-line
 }
 
 const mapStateToProps = ({ spaces }) => spaces;

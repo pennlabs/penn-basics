@@ -659,7 +659,6 @@
   },
   {
     "name": "Starbucks 34th and Walnut St.",
-    "description": "",
     "tags": [
       "Off Campus",
       "Coffee Shop"
@@ -676,12 +675,17 @@
     }
   },
   {
-    "name": "Elixr Coffee",
+    "name": "Elixr Coffee (Center City)",
     "address": "207 S Sydenham St, Philadelphia, PA 19102",
     "location": {
-      "lat": 39.9493377,
-      "lng": -75.1688823
+      "lat": 39.949660,
+      "lng": -75.166740
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Center City"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 7],
     "end": [19, 20, 20, 20, 20, 20, 20]
   },
@@ -689,9 +693,13 @@
     "name": "Elixr Coffee",
     "address": "315 N 12th St, Philadelphia, PA 19107",
     "location": {
-      "lat": 39.9587518,
-      "lng": -75.1659256
+      "lat": 39.958170,
+      "lng": -75.158070
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [18, 18, 18, 18, 18, 18, 18]
   },
@@ -702,6 +710,10 @@
       "lat": 39.9378421,
       "lng": -75.1616697
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 8, 8, 7, 7, 7, 7],
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
@@ -712,6 +724,10 @@
       "lat": 39.9409337,
       "lng": -75.1500099
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
@@ -722,6 +738,10 @@
       "lat": 40.0221684,
       "lng": -75.2231281
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 6, 6, 6, 6, 6, 7],
     "end": [17, 17, 17, 17, 17, 17, 18]
   },
@@ -732,6 +752,10 @@
       "lat": 39.9484558,
       "lng": -75.1813293
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 6, 6, 6, 6, 6, 7],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -742,6 +766,10 @@
       "lat": 39.9472491,
       "lng": -75.1860834
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 6, 6, 6, 6, 6, 7],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -752,6 +780,10 @@
       "lat": 39.9500454,
       "lng": -75.2190887
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [18, 18, 18, 18, 18, 18, 18]
   },
@@ -762,6 +794,10 @@
       "lat": 39.9732785,
       "lng": -75.1412881
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [18, 18, 18, 18, 18, 18, 18]
   },
@@ -772,6 +808,11 @@
       "lat": 39.9776519,
       "lng": -75.1535251
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Kensington"
+    ],
     "start": [8, 6.5, 6.5, 6.5, 6.5, 6.5, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -782,6 +823,11 @@
       "lat": 39.9712438,
       "lng": -75.1362081
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Fishtown"
+    ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [19, 19, 19, 19, 19, 21, 21]
   },
@@ -792,6 +838,10 @@
       "lat": 39.9248009,
       "lng": -75.1619207
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [15, 17, 17, 17, 17, 17, 15]
   },
@@ -802,6 +852,11 @@
       "lat": 39.9543943,
       "lng": -75.1749437
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Logan Square"
+    ],
     "start": [-1, 7, 7, 7, 7, 7, -1],
     "end": [-1, 16, 16, 16, 16, 16, -1]
   },
@@ -812,6 +867,11 @@
       "lat": 39.9544259,
       "lng": -75.1749437
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Center City"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -822,6 +882,11 @@
       "lat": 39.9493329,
       "lng": -75.1763768
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Rittenhouse"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -832,6 +897,11 @@
       "lat": 39.9443818,
       "lng": -75.1850906
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Graduate Hospital"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -842,6 +912,11 @@
       "lat": 39.9290917,
       "lng": -75.1766803
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "South Philly"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [20, 20, 20, 20, 20, 20, 20]
   },
@@ -852,6 +927,10 @@
       "lat": 39.945016,
       "lng": -75.1792982
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [20, 20, 20, 20, 20, 20, 20]
   },
@@ -862,6 +941,10 @@
       "lat": 39.9487875,
       "lng": -75.1796833
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [6, 6, 6, 6, 6, 6, 6],
     "end": [21, 21, 21, 21, 21, 21, 21]
   },
@@ -872,6 +955,10 @@
       "lat": 39.9483151,
       "lng": -75.1790474
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [6, 6, 6, 6, 6, 6, 6],
     "end": [21, 21, 21, 21, 21, 21, 21]
   },
@@ -882,6 +969,10 @@
       "lat": 39.9447563,
       "lng": -75.1653656
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [6, 6, 6, 6, 6, 6, 6],
     "end": [21, 21, 21, 21, 21, 21, 21]
   },
@@ -892,6 +983,11 @@
       "lat": 39.9506936,
       "lng": -75.1499536
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Old City"
+    ],
     "start": [7, 6.5, 6.5, 6.5, 6.5, 6.5, 7],
     "end": [18, 19, 19, 19, 19, 19, 19]
   },
@@ -902,6 +998,11 @@
       "lat": 39.9531604,
       "lng": -75.1615849
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Center City"
+    ],
     "start": [8, 8, 8, 8, 8, 8, 8],
     "end": [18, 18, 18, 18, 18, 18, 18]
   },
@@ -912,6 +1013,10 @@
       "lat": 39.9488237,
       "lng": -75.2154202
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [20, 20, 20, 20, 20.25, 20, 20]
   },
@@ -922,6 +1027,10 @@
       "lat": 39.9677114,
       "lng": -75.1428425
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
@@ -932,12 +1041,14 @@
       "lat": 39.9495412,
       "lng": -75.1769415
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Rittenhouse"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
-
-
-
   {
     "name": "Ultimo Coffee (Graduate Hospital)",
     "address": "2149 Catharine St, Philadelphia, PA 19146",
@@ -945,11 +1056,14 @@
       "lat": 39.9420839,
       "lng": -75.1816787
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Graduate Hospital"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
-
-
   {
     "name": "Ultimo Coffee (South Philly)",
     "address": "1900 S 15th St, Philadelphia, PA 19145",
@@ -957,6 +1071,11 @@
       "lat": 39.9267851,
       "lng": -75.1834617
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "South Philly"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [20, 20, 20, 20, 20, 20, 20]
   },
@@ -967,6 +1086,10 @@
       "lat": 39.931404,
       "lng": -75.1518777
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 6, 6, 6, 6, 6, 7],
     "end": [18, 18, 18, 18, 18, 18, 18]
   },
@@ -977,6 +1100,10 @@
       "lat": 39.9554574,
       "lng": -75.1591245
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
@@ -987,6 +1114,10 @@
       "lat": 39.9464657,
       "lng": -75.1617559
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 6, 6, 6, 6, 6, 7],
     "end": [20, 20, 20, 20, 20, 20, 20]
   },
@@ -997,6 +1128,10 @@
       "lat": 39.9409337,
       "lng": -75.1500099
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
@@ -1004,9 +1139,13 @@
     "name": "Bluestone Lane (Rittenhouse)",
     "address": "1701 Locust St, Philadelphia, PA 19103",
     "location": {
-      "lat": 39.9489892,
-      "lng": -75.1717296
+      "lat": 39.949120,
+      "lng": -75.169660
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
@@ -1017,6 +1156,11 @@
       "lat": 39.9512066,
       "lng": -75.1656637
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "Center City"
+    ],
     "start": [9, 6.5, 6.5, 6.5, 6.5, 6.5, 9],
     "end": [16, 17, 17, 17, 17, 17, 16]
   },
@@ -1027,6 +1171,11 @@
       "lat": 39.9536108,
       "lng": -75.1906788
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop",
+      "University City"
+    ],
     "start": [9, 7, 7, 7, 7, 7, 9],
     "end": [15, 19, 19, 19, 19, 19, 18]
   },
@@ -1037,6 +1186,10 @@
       "lat": 39.9536465,
       "lng": -75.2059997
     },
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [20, 20, 20, 20, 20, 20, 20]
   }
