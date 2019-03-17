@@ -1,5 +1,4 @@
 const mongoose = require('../mongoose-connect');
-
 const { Schema } = mongoose;
 
 const venueSchema = new Schema({
