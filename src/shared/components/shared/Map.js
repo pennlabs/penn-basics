@@ -93,6 +93,8 @@ export class Map extends Component {
   }
 
   createMarker(key, { location, icon = RED }) {
+    const { handleClickMarker } = this.props;
+
     if (!location) {
       console.log('Location is undefined'); // eslint-disable-line no-console
 
@@ -121,6 +123,10 @@ export class Map extends Component {
       map,
     });
 
+    if (handleClickMarker) {
+      marker.addListener('click', () => handleClickMarker(key))
+    }
+
     return marker;
   }
 
@@ -147,17 +153,15 @@ export class Map extends Component {
       this.updateMarkers()
         .then(() => {
           if (showMarker) {
-            const marker = this.createMarker(SHOW_MARKER_KEY, { location });
+            const marker = this.createMarker(SHOW_MARKER_KEY, { location })
 
-            const { markers } = this.state;
+            const { markers } = this.state
             const newMarkers = Object.assign({}, markers, {
               SHOW_MARKER_KEY: marker,
             });
-            markers[SHOW_MARKER_KEY] = marker;
+            markers[SHOW_MARKER_KEY] = marker
 
-            this.setState({ markers: newMarkers }, () => {
-              console.log(this.state.markers); // eslint-disable-line
-            });
+            this.setState({ markers: newMarkers })
           }
         });
     });
@@ -191,6 +195,7 @@ Map.defaultProps = {
   markers: {},
   showMarker: false,
   activeMarker: null,
+  handleClickMarker: null,
 };
 
 Map.propTypes = {
@@ -198,6 +203,7 @@ Map.propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
+  handleClickMarker: PropTypes.func,
   height: PropTypes.string,
   mapId: PropTypes.string.isRequired,
   gestureHandling: PropTypes.string,

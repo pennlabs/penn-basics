@@ -749,8 +749,8 @@
     "name": "Rival Bros Coffee",
     "address": "1528 Spruce St, Philadelphia, PA 19102",
     "location": {
-      "lat": 39.9484558,
-      "lng": -75.1813293
+      "lat": 39.947210,
+      "lng": -75.166490
     },
     "tags": [
       "Off Campus",
@@ -763,8 +763,8 @@
     "name": "Rival Bros Coffee (Filter Square)",
     "address": "2400 Lombard St, Philadelphia, PA 19146",
     "location": {
-      "lat": 39.9472491,
-      "lng": -75.1860834
+      "lat": 39.947000,
+      "lng": -75.183890
     },
     "tags": [
       "Off Campus",
@@ -1097,8 +1097,8 @@
     "name": "Menagerie",
     "address": "18 S 3rd St, Philadelphia, PA 19106",
     "location": {
-      "lat": 39.9554574,
-      "lng": -75.1591245
+      "lat": 39.949660,
+      "lng": -75.146010
     },
     "tags": [
       "Off Campus",

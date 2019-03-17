@@ -12,7 +12,7 @@ import {
 } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
-import { getAllSpacesData } from '../../actions/spaces_actions'
+import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
 import Filter from './Filter'
 import SpaceModal from './SpaceModal'
@@ -32,6 +32,7 @@ class App extends Component {
       error,
       pending,
       hoveredSpace,
+      setActiveSpaceDispatch,
     } = this.props;
 
     if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
@@ -72,6 +73,7 @@ class App extends Component {
               mapId="map"
               height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
               markers={filteredSpacesData}
+              handleClickMarker={setActiveSpaceDispatch}
               activeMarker={hoveredSpace}
             />
           </Col>
@@ -90,6 +92,7 @@ App.defaultProps = {
 
 App.propTypes = {
   getAllSpacesDataDispatch: PropTypes.func.isRequired,
+  setActiveSpaceDispatch: PropTypes.func.isRequired,
   error: PropTypes.string,
   hoveredSpace: PropTypes.string,
   pending: PropTypes.bool,
@@ -99,7 +102,8 @@ App.propTypes = {
 const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
-  getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),
+  getAllSpacesDataDispatch: id => dispatch(getAllSpacesData(id)),
+  setActiveSpaceDispatch: id => dispatch(setActiveSpace(id)),
 });
 
 // Redux config
