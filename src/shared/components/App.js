@@ -5,7 +5,7 @@ import s from 'styled-components'
 import { BLUE, DARK_BLUE } from '../styles/colors'
 
 // Shared components
-import Nav from './shared/Nav'
+import Nav from './shared/Nav/index.js'
 // import Sidebar from './shared/sidebar/Sidebar'; /* TODO */
 
 // Page components
