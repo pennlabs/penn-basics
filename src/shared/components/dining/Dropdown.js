@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
-/**
- * Show a dropdown item
- */
 class Dropdown extends Component {
   // Constructor
   constructor(props) {
     super(props);
+
+    const { selected } = this.props;
+
     this.state = {
-      selected: this.props.selected,
+      selected,
     };
 
     // Bind this to helper functions
@@ -19,10 +19,11 @@ class Dropdown extends Component {
 
   // When the component updates
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.selected !== this.state.selected) {
-      if (this.props.callback) {
-        this.props.callback(this.state.selected);
-      }
+    const { selected } = this.state;
+    const { callback } = this.props;
+
+    if (prevState.selected !== selected && callback) {
+      callback(selected);
     }
   }
 
@@ -35,23 +36,27 @@ class Dropdown extends Component {
 
   // Render the dropdown
   render() {
-    const content = this.props.values.map((value, index) => {
+    const { values, options } = this.props;
+    const { selected } = this.state;
+
+    const content = values.map((value, index) => {
       // Find the text for the dropdown option
       // NOTE that this is different from the value
-      let text = "";
-      if (this.props.options && this.props.options.length > index) {
-        text = this.props.options[index];
+      let text = '';
+
+      if (options && options.length > index) {
+        text = options[index];
       } else text = value;
 
-      if (value === this.state.selected) {
+      if (value === selected) {
         return (
-          <option key={ uuid() } value={ value } defaultValue>
+          <option key={uuid()} value={value} defaultValue>
             { text }
           </option>
         );
       }
       return (
-        <option key={ uuid() } value={ value }>
+        <option key={uuid()} value={value}>
           { text }
         </option>
       );
@@ -59,7 +64,12 @@ class Dropdown extends Component {
 
     return (
       <div className="select">
-        <select className="dropdown" id="meal" onChange={ this.handleChangeState } value={ this.state.selected }>
+        <select
+          className="dropdown"
+          id="meal"
+          onChange={this.handleChangeState}
+          value={selected}
+        >
           { content }
         </select>
       </div>
@@ -67,10 +77,14 @@ class Dropdown extends Component {
   }
 }
 
+Dropdown.defaultProps = {
+  callback: () => {},
+};
+
 Dropdown.propTypes = {
-  options: PropTypes.array,
-  values: PropTypes.array,
-  selected: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  values: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.string.isRequired,
   callback: PropTypes.func,
 };
 

@@ -1,64 +1,64 @@
 // TODO: this file is currently the same as dining
 
 import {
-  getLaundryDataRequested,
-  getLaundryDataRejected,
-  getLaundryDataFulfilled
+  getLaundryHallsDataRequested,
+  getLaundryHallsDataRejected,
+  getLaundryHallsDataFulfilled,
+  getLaundryHallInfoRequested,
+  getLaundryHallInfoRejected,
+  getLaundryHallInfoFulfilled,
+  updateFavorites,
 } from '../actions/action_types';
 
 const defaultState = {
   pending: true,
-  sidebarInfo: [{
-    "title": "Open now",
-    "links": [
-      {
-        "name": "1920 Commons",
-        "isOpen": true,
-        "venueID": 593,
-      },
-      {
-        "name": "Hill",
-        "isOpen": true,
-        "venueID": 636,
-      },
-    ],
-  }, {
-    "title": "Closed",
-    "links": [
-      {
-        "name": "Kings Court",
-        "isOpen": false,
-      },
-      {
-        "name": "New College House",
-        "isOpen": false,
-      },
-      {
-        "name": "Bridge",
-        "isOpen": false,
-      },
-    ],
-  }]
+  error: false,
+  laundryHalls: null,
+  laundryHallInfo: null,
+  favorites: [],
 };
 
 const laundryReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case getLaundryDataRequested:
+    case getLaundryHallsDataRequested:
       return {
         ...state,
         pending: true,
       };
-    case getLaundryDataRejected:
+    case getLaundryHallsDataRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
       };
-    case getLaundryDataFulfilled:
+    case getLaundryHallsDataFulfilled:
       return {
         ...state,
         pending: false,
-        diningData: action.diningData,
+        laundryHalls: action.laundryHalls,
+      };
+    case getLaundryHallInfoRequested:
+      return {
+        ...state,
+        pending: true,
+      };
+    case getLaundryHallInfoRejected:
+      return {
+        ...state,
+        pending: false,
+        error: action.error,
+      };
+    case getLaundryHallInfoFulfilled:
+      return {
+        ...state,
+        pending: false,
+        laundryHallInfo: action.laundryHallInfo,
+        laundryHallId: action.laundryHallId,
+      };
+    case updateFavorites:
+      return {
+        ...state,
+        favorites: action.favorites,
       };
     default:
       return state;

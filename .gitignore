@@ -5,6 +5,8 @@ env.sh
 # Labs can't do global .gitignore
 .DS_Store
 
+.Rhistory
+
 ### Node ###
 # Logs
 logs

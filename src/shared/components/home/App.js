@@ -1,66 +1,84 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import s from 'styled-components';
+
 import Dining from './Dining';
-import Laundry from './Laundry';
 import Studyspaces from './Studyspaces';
 import Reserve from './Reserve';
 import Notification from './Notification';
-import axios from 'axios';
-import '../../styles/home.scss';
+import { BorderedCard } from '../shared';
+
+const Wrapper = s.div`
+  padding: 1rem;
+`;
 
 class Home extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       show: false,
-      notification: "",
+      notification: '',
       dining: false,
     };
+
     this.close = this.close.bind(this);
   }
+
   componentDidMount() {
-    axios.get('/api/events/' + Date.now())
+    // TODO reduxify this
+
+    axios.get(`/api/events/${Date.now()}`)
       .then((resp) => {
         if (resp.data.events.length === 0) {
-          this.setState({show: false});
-          console.log("No events");
+          this.setState({
+            show: false,
+          });
         } else {
-          console.log("Got the events!" + resp.data.events);
-          this.setState({show: true, notification: resp.data.events[0].event});
+          this.setState({
+            show: true,
+            notification: resp.data.events[0].event,
+          });
         }
-        console.log("DATE RESP", resp.data.events[0].event);
       })
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.log(err); // eslint-disable-line
+
+        // TODO better error handling
       });
   }
+
   close() {
-    this.setState({show: false});
+    this.setState({ show: false });
   }
+
   render() {
+    // TODO less bulma madness
+    const { dining, show, notification } = this.state;
+
     return (
-      <div>
-        {
-          this.state.show && (
-            <Notification show={this.close} text={this.state.notification} />
-          )
-        }
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-vertical">
-            <div className="tile is-child box">
-              <h1 className="title is-4">☀️ Good morning!</h1>
-              <p className="content is-medium">Insert some inspirational quote here from various people at
-                Penn. It will make people happy and give everyone some life.
-              </p>
-            </div>
-            <Reserve/>
-          </div>
-          <div className="tile is-5 is-vertical is-parent">
-            <Dining show={this.state.dining}/>
-            <Studyspaces />
-          </div>
-        </div>
-      </div>
+      <Wrapper>
+        {show && (
+          <Notification show={this.close} text={notification} />
+        )}
+        <BorderedCard>
+          <h1 className="title is-4">
+            <span role="img" aria-label="sun">☀️</span>
+            Gooob morning!
+          </h1>
+
+          <p className="content is-medium">
+            Insert some inspirational quote here from various people at Penn.
+            It will make people happy and give everyone some life.
+          </p>
+        </BorderedCard>
+
+        <Reserve />
+
+        <Dining show={dining} />
+
+        <Studyspaces />
+      </Wrapper>
     );
   }
 }

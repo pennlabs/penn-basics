@@ -1,71 +1,93 @@
-import React, { Component } from 'react';
-import uuid from 'uuid/v4';
-import axios from 'axios';
-import SpaceCard from './SpaceCard';
-import SpaceModal from './SpaceModal';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import SpaceCard from './SpaceCard'
+import {
+  Map,
+  Row,
+  Col,
+  Scrollbar,
+  Line,
+} from '../shared'
+import ErrorMessage from '../shared/ErrorMessage'
+import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
+import { getAllSpacesData } from '../../actions/spaces_actions'
+
+import Filter from './Filter'
+import SpaceModal from './SpaceModal'
+import PennLabsCredit from '../shared/PennLabsCredit'
+
+// TODO ghost loaders
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalSpace: {}
-    };
-
-    axios.get('/api/spaces/all')
-      .then(res => {
-        const spaces = {};
-        const today = new Date();
-        const day = today.getDay();
-        const time = today.getHours() + (today.getMinutes() / 60);
-        res.data.spaces.forEach(space => {
-          space.open = this.openOrNot(space, time, day);
-          spaces[space._id] = space;
-        });
-
-        this.setState({
-          spaces,
-        });
-      });
-  }
-
-  openOrNot(space, time, day) {
-    const start = space.start[day];
-    const end = space.end[day];
-    return (time > start && time < end);
-  }
-
-  renderSpaceModal(id) {
-    const space = this.state.spaces[id];
-    this.setState({
-      modalSpace: {
-        space
-      }
-    });
-  }
-
-  closeModal() {
-    this.setState({
-      modalSpace: {}
-    });
+  componentDidMount() {
+    const { getAllSpacesDataDispatch } = this.props;
+    getAllSpacesDataDispatch();
   }
 
   render() {
+    const {
+      filteredSpacesData,
+      error,
+      pending,
+      hoveredSpace,
+    } = this.props;
+
+    if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
+      return (<Filter />);
+    }
+
     return (
       <div>
-        {
-          this.state.spaces && Object.keys(this.state.spaces).map(spaceId => {
-            const space = this.state.spaces[spaceId];
-            return (
-              <SpaceCard {...space} key={uuid()} renderSpaceModal={() => this.renderSpaceModal(spaceId)} />
-            );
-          })
-        }
-        <SpaceModal {...this.state.modalSpace} closeModal={this.closeModal.bind(this)} />
+        <SpaceModal />
+
+        <Filter />
+
+        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
+          <Scrollbar
+            padding="0 0 .5rem 0"
+            overflowY="scroll"
+            width="40%"
+          >
+            <ErrorMessage message={error} />
+
+            {Object.keys(filteredSpacesData).map((spaceId) => {
+              const space = filteredSpacesData[spaceId];
+              return (
+                <div key={spaceId}>
+                  <SpaceCard
+                    spaceId={spaceId}
+                    {...space}
+                  />
+                  <Line />
+                </div>
+              );
+            })}
+
+            <PennLabsCredit />
+          </Scrollbar>
+          <Col>
+            <Map
+              mapId="map"
+              height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+              markers={filteredSpacesData}
+              activeMarker={hoveredSpace}
+            />
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ spaces }) => spaces;
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),
+});
+
+// Redux config
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

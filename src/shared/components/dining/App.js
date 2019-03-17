@@ -1,47 +1,13 @@
 // Import frameworks
-import React, { Component } from 'react';
-import Filter from '../shared/filter/Filter';
-import DiningVenuePreview from './DiningVenuePreview';
-import uuid from 'uuid/v4';
+import React from 'react';
+import Nav from './Nav';
 
-class App extends Component {
-  // TODO remove dummy state
-  state = {
-    venues: [
-      {
-        name: "1920 Commons",
-        id: 593,
-        image: "https://s3.amazonaws.com/media.34s.dpn/11308_commonsf.JPG",
-      },
-      {
-        name: "Hill",
-        id: 636,
-        image: "http://www.admissions.upenn.edu/images/uploads/hero/744x300_HillDiningHall.jpg",
-      },
-    ],
-  }
-
-  renderPreviews() {
-    return this.state.venues.map(venue => (
-      <DiningVenuePreview
-        name={venue.name}
-        id={venue.id}
-        image={venue.image}
-        key={uuid()}
-      />
-    ));
-  }
-
-  render() {
-    return (
-      <div>
-        <Filter />
-        <div className="dining-venue-previews columns">
-          {this.renderPreviews()}
-        </div>
+export default () => (
+  <Nav>
+    <div className="columns is-vcentered is-centered" style={{ height: '100%' }}>
+      <div className="column is-7">
+        <h1 className="title is-3" style={{color: '#aaaaaa'}}>Select a dining hall to see information</h1>
       </div>
-    );
-  }
-}
-
-export default App;
+    </div>
+  </Nav>
+);

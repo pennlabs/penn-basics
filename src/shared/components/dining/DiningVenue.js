@@ -1,221 +1,92 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NotFound from '../shared/NotFound';
-import { mappings } from './mappings';
 import PropTypes from 'prop-types';
+import s from 'styled-components';
 
-// Import actions
+import venueData from './content/venueData';
 import { getDiningData, getVenueInfo } from '../../actions/index';
 
-// Import components
+import Nav from './Nav';
 import DiningQuery from './DiningQuery';
 import DiningOverview from './DiningOverview';
 import DiningMenu from './DiningMenu';
 import ErrorMessage from '../shared/ErrorMessage';
+import NotFound from '../shared/NotFound';
 import Loading from '../shared/Loading';
+import { retailLocations } from './constants';
 
-/**
- * Render the view for a dining venue
- */
+const Wrapper = s.div`
+  padding: 1rem;
+`;
+
+// Render the view for a dining venue
 class DiningVenue extends Component {
-  /**
-   * Constructor method
-   */
   constructor(props) {
     super(props);
 
+    const {
+      match,
+      getDiningDataDispatch,
+      getVenueInfoDispatch,
+    } = this.props;
+
     // Pull meal data and hours data for the venue
-    const venueId = this.props.match.params.id;
-    this.props.getDiningDataDispatch(venueId);
-    this.props.getVenueInfoDispatch(venueId);
-
-    // Format the current date
-    let date = new Date();
-    date.setHours(0, 0, 0, 0);
-    date = date.toString();
-
-    // Set up the state
-    this.state = {
-      dateFormattedToday: date,
-      dateFormatted: date,
-      meal: "",
-      meals: [],
-      days: [],
-    };
+    const venueId = match.params.id;
+    getDiningDataDispatch(venueId);
+    getVenueInfoDispatch(venueId);
 
     // Bind this to helper method
     this.checkForErrors = this.checkForErrors.bind(this);
-    this.findMeals = this.findMeals.bind(this);
-    this.findDays = this.findDays.bind(this);
-    this.handleChangeMeal = this.handleChangeMeal.bind(this);
-    this.handleChangeDate = this.handleChangeDate.bind(this);
     this.renderError = this.renderError.bind(this);
-  }
-
-  /**
-   * When the component mounts
-   */
-  componentDidMount() {
-    // Find meals
-    this.findMeals();
-
-    // Find dates
-    this.findDays();
   }
 
   /**
    * When the component will update
    * Check if there is a new dining ID
    */
-  componentWillUpdate(props) {
-    const currentVenueId = this.props.match.params.id;
-    const nextVenueId = props.match.params.id;
+  componentWillUpdate(newProps) {
+    const {
+      match,
+      getDiningDataDispatch,
+      getVenueInfoDispatch,
+    } = this.props;
+
+    const currentVenueId = match.params.id;
+    const nextVenueId = newProps.match.params.id;
+
     if (currentVenueId !== nextVenueId) {
-      this.props.getDiningDataDispatch(nextVenueId);
-      this.props.getVenueInfoDispatch(nextVenueId);
-
-      // Clear some of the state
-      this.setState({
-        meal: "",
-        meals: [],
-        dateFormatted: this.state.dateFormattedToday,
-        dates: [],
-        error: "",
-      });
+      getDiningDataDispatch(nextVenueId);
+      getVenueInfoDispatch(nextVenueId);
     }
   }
 
-  /**
-   * When the component updates
-   */
-  componentDidUpdate(prevProps, prevState) {
-    // Refresh the meals state if necessary
-    // This is if we have changed the date or meal selected
-    if (
-      !this.state.meal ||
-      (prevState.meal !== this.state.meal) ||
-      !this.state.meals.length ||
-      (prevState.dateFormatted !== this.state.dateFormatted)
-    ) {
-      this.findMeals();
-    }
-
-    // Refresh the days state if necessary
-    // This is the case if we have changed the date selected
-    if (
-      !this.state.dateFormatted ||
-      (prevState.dateFormatted !== this.state.dateFormatted) ||
-      !this.state.days.length
-    ) {
-      this.findDays();
-    }
-  }
-
-  /**
-   * Find days
-   */
-  findDays() {
-    // Find the relevant meal if variables have been populated in the state and props
-    if (this.props.diningData &&
-        this.state.dateFormatted &&
-        !this.props.diningData.pending &&
-        !this.state.meal) {
-      // Get all days passed to us from the API
-      // These are of the form MM/DD/YYYY EXCEPT in the case that the month
-      // begins with a "0", in which case the format is M/DD/YYYY
-      const days = Object.keys(this.props.diningData);
-
-      // Iterate over the days until we find the current day
-      // This is stored in the state as this.state.dateFormattedToday
-      let matched = false;
-
-      // Construct an array of all days that the user will be able to select from
-      const daysToShow = [this.state.dateFormattedToday];
-
-      // Include at most 2 days in addition to today
-      let count = 2;
-
-      // Iterate
-      days.forEach(day => {
-        // Check for a match if we have not yet found one
-        if (!matched) {
-          if (day === this.state.dateFormattedToday) {
-            matched = true;
-          }
-        } else if (count > 0) {
-          // Add the day to the list
-          daysToShow.push(day);
-
-          // Decrement the count
-          count--;
-        }
-      });
-
-      // Update the state
-      this.setState({
-        days: daysToShow,
-      });
-    }
-  }
-
-  // Find meals
-  findMeals() {
-    // Find the relevant meal
-    if (this.props.diningData &&
-        this.state.dateFormatted &&
-        this.props.diningData[this.state.dateFormatted] &&
-        !this.props.diningDataPending) {
-      const meals = Object.keys(this.props.diningData[this.state.dateFormatted]);
-
-      // Update the state
-      if (meals.some(element => element === this.state.meal)) {
-        this.setState({
-          meals,
-        });
-      } else {
-        this.setState({
-          meals,
-          meal: meals[0],
-        });
-      }
-    } else {
-      // If the API is not giving us the data we want
-    }
-  }
-
-  //  Handle change to selection of meal to render
-  handleChangeMeal(meal) {
-    this.setState({
-      meal,
-    });
-  }
-
-  // Handle the change of day to render
-  handleChangeDate(day) {
-    this.setState({
-      dateFormatted: day,
-    });
-  }
 
   // Check for errors
   checkForErrors() {
-    let error = "";
+    let error = '';
 
-    // If no mapping is found
-    if (!mappings[this.props.match.params.id]) {
-      error = "Dining with passed in ID not found";
-    } else if (this.props.diningData && this.state.dateFormatted) {
-      if (!this.props.diningData[this.state.dateFormatted]) {
+    const {
+      match,
+      diningData,
+      dateFormatted,
+      meal,
+    } = this.props;
+    const { id } = match.params;
+
+    if (!venueData[id]) { // If no mapping is found
+      error = 'Dining venue not found';
+    } else if (diningData && dateFormatted) {
+      if (!diningData[dateFormatted]) {
         error = "Dining data not found for today's date";
-      } else if (this.state.meal && !this.props.diningData[this.state.dateFormatted][this.state.meal]) {
-        error = `Dining data not found for meal: "${ this.state.meal }"`;
+      } else if (meal && !diningData[dateFormatted][meal]) {
+        error = `Dining data not found for meal: "${meal}"`;
       } else {
-        error = "";
+        error = '';
       }
-    } else if (!this.props.diningData) {
-      error = "Failed to find meal data.";
+    } else if (!diningData) {
+      error = 'Failed to find meal data.';
     } else {
-      error = "";
+      error = '';
     }
 
     // Return the error
@@ -224,116 +95,141 @@ class DiningVenue extends Component {
 
   // Helper method to render any error
   renderError() {
-    if (this.props.diningDataPending || this.props.venueHoursPending) return null;
+    const {
+      diningDataPending,
+      venueHoursPending,
+    } = this.props;
+
+    if (diningDataPending || venueHoursPending) return null;
 
     // Check for errors
-    const error = this.checkForErrors();
-    if (this.props.error) {
-      // If there was some other error
-      return (
-        <ErrorMessage message={ this.props.error } />
-      );
-    } else if (this.state.error) {
-      // If there is a state error
-      return (
-        <ErrorMessage message={ this.state.error } />
-      );
-    } else if (error) {
-      return (
-        <ErrorMessage message={ error } />
-      );
-    }
+    const error = this.props.error || this.checkForErrors(); // eslint-disable-line
 
-    // If there is no error in any part of the component
-    return null;
+    return ( // NOTE this returns null if there is no error
+      <ErrorMessage message={error} />
+    );
   }
 
   // Render the component
   render() {
-    // If the ID is not found
-    if (!mappings[this.props.match.params.id]) return (<NotFound />);
+    const {
+      match,
+      diningDataPending,
+      venueHoursPending,
+    } = this.props;
+    const { id } = match.params;
 
-    // Render based on state
-    if (this.props.diningDataPending || this.props.venueHoursPending) {
-      // If data or an error is still pending
+    // If the ID is not found
+    if (!venueData[id]) {
       return (
-        <Loading />
+        <Nav>
+          <Wrapper>
+            <NotFound />
+          </Wrapper>
+        </Nav>
       );
+    }
+
+    // If content is still loading
+    if (diningDataPending || venueHoursPending) {
+      return (
+        <Nav>
+          <Wrapper>
+            <Loading />
+          </Wrapper>
+        </Nav>
+      );
+    }
+
+    const { name } = venueData[id];
+
+    if (retailLocations.includes(name)) {
+      return (
+        // If there is no error and the data is not pending
+        <Nav>
+          <Wrapper>
+            {/* Render the title of the dining page */}
+            <h1 className="title">
+              {name}
+            </h1>
+
+            {/* Render the overview card at the top of the dining view */}
+            <DiningOverview id={id} />
+          </Wrapper>
+        </Nav>
+      )
     }
 
     return (
       // If there is no error and the data is not pending
-      <div>
-        {/* Render the title of the dining page */}
-        <h1 className="title">
-          { mappings[this.props.match.params.id] }
-        </h1>
+      <Nav>
+        <Wrapper>
+          {/* Render the title of the dining page */}
+          <h1 className="title">
+            {name}
+          </h1>
 
-        {/* Render an error if there is one */}
-        {this.renderError()}
+          {/* Render an error if there is one */}
+          {this.renderError()}
 
-        {/* Render the overview card at the top of the dining view */}
-        <DiningOverview id={this.props.match.params.id} />
+          {/* Render the overview card at the top of the dining view */}
+          <DiningOverview id={id} />
 
-        {/* Render dropdowns for selecting dates and meals */}
-        <DiningQuery
-          meal={ this.state.meal }
-          meals={ this.state.meals }
-          mealCallback={ this.handleChangeMeal }
-          dayCallback={ this.handleChangeDate }
-          days={ this.state.days }
-          day={ this.state.dateFormatted }
-        />
+          {/* Render dropdowns for selecting dates and meals */}
+          <DiningQuery />
 
-        {
-          this.props.diningData ? (
-            !this.state.meal ? null : (
-              <DiningMenu sectionsObj={this.props.diningData[this.state.dateFormatted][this.state.meal]} />
-            )
-          ) : null
-        }
-      </div>
+          {/* Render dining menu for the selected date and meal */}
+          <DiningMenu />
+        </Wrapper>
+      </Nav>
     );
   }
 }
 
+DiningVenue.defaultProps = {
+  error: '',
+  diningData: null,
+  meal: '',
+  venueHours: null,
+  dateFormatted: null,
+};
+
 DiningVenue.propTypes = {
-  match: PropTypes.object,
-  getDiningDataDispatch: PropTypes.func,
-  getVenueInfoDispatch: PropTypes.func,
-  diningDataPending: PropTypes.bool,
-  venueHoursPending: PropTypes.bool,
+  match: PropTypes.object.isRequired, // eslint-disable-line
+  getDiningDataDispatch: PropTypes.func.isRequired,
+  getVenueInfoDispatch: PropTypes.func.isRequired,
+  diningDataPending: PropTypes.bool.isRequired,
+  venueHoursPending: PropTypes.bool.isRequired,
   error: PropTypes.string,
-  diningData: PropTypes.object,
-  venueHours: PropTypes.array,
+  diningData: PropTypes.object, // eslint-disable-line
+  venueHours: PropTypes.array, // eslint-disable-line
+  dateFormatted: PropTypes.string,
+  meal: PropTypes.string,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    diningData: state.dining.diningData,
-    venueHours: state.dining.venueHours,
-    venueInfo: state.dining.venueInfo,
-    error: state.dining.error,
-    diningDataPending: state.dining.diningDataPending,
-    venueHoursPending: state.dining.venueHoursPending,
-  };
-};
+const mapStateToProps = state => ({
+  dateFormatted: state.dining.dateFormatted,
+  meal: state.dining.meal,
+  meals: state.dining.meals,
+  diningData: state.dining.diningData,
+  venueHours: state.dining.venueHours,
+  venueInfo: state.dining.venueInfo,
+  error: state.dining.error,
+  diningDataPending: state.dining.diningDataPending,
+  venueHoursPending: state.dining.venueHoursPending,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getDiningDataDispatch: venueId => {
-      dispatch(getDiningData(venueId));
-    },
-    getVenueInfoDispatch: venueId => {
-      dispatch(getVenueInfo(venueId));
-    },
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  getDiningDataDispatch: (venueId) => {
+    dispatch(getDiningData(venueId));
+  },
+  getVenueInfoDispatch: (venueId) => {
+    dispatch(getVenueInfo(venueId));
+  },
+});
 
 // Redux config
-DiningVenue = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(DiningVenue);
-
-export default DiningVenue;

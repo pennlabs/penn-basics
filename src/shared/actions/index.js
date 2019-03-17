@@ -1,15 +1,16 @@
+import axios from 'axios';
 import {
   getDiningDataRequested,
   getDiningDataRejected,
   getDiningDataFulfilled,
   getVenueInfoRequested,
   getVenueInfoRejected,
-  getVenueInfoFulfilled
-} from '../actions/action_types';
-import axios from 'axios';
+  getVenueInfoFulfilled,
+  setMealsFulfilled,
+} from './action_types';
 
 export function getVenueInfo(venueId) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({ type: getVenueInfoRequested });
 
     // Set the start date to today
@@ -21,20 +22,20 @@ export function getVenueInfo(venueId) {
     endDate.setHours(72, 0, 0, 0);
 
     // Make a post request to pull the data
-    axios.post(`/api/dining/venue_info/`, {
+    axios.post('/api/dining/venue_info/', {
       venueId,
       startDate,
       endDate,
     })
-      .then(res => {
-        const {hours,venue} = res.data;
+      .then((res) => {
+        const { hours, venue } = res.data;
         dispatch({
           type: getVenueInfoFulfilled,
           venueHours: hours,
-          venueInfo: venue
+          venueInfo: venue,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({
           type: getVenueInfoRejected,
           error: error.message,
@@ -44,7 +45,7 @@ export function getVenueInfo(venueId) {
 }
 
 export function getDiningData(venueId) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: getDiningDataRequested,
     });
@@ -59,23 +60,33 @@ export function getDiningData(venueId) {
     endDate.setHours(72, 0, 0, 0);
 
     // Send the request
-    axios.post(`/api/dining/menu_date_range/`, {
+    axios.post('/api/dining/menu_date_range/', {
       venueId,
       startDate,
       endDate,
     })
-      .then(res => {
+      .then((res) => {
         const diningData = res.data;
         dispatch({
           type: getDiningDataFulfilled,
           diningData,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         dispatch({
           type: getDiningDataRejected,
           error: error.message,
         });
       });
+  };
+}
+
+
+export function setMeals(dateFormatted) {
+  return (dispatch) => {
+    dispatch({
+      type: setMealsFulfilled,
+      dateFormatted,
+    });
   };
 }

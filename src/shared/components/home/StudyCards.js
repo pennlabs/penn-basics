@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
-import '../../styles/home.scss';
 import PropTypes from 'prop-types';
 
 class StudyCards extends Component {
-  static defaultProps = {
-    name: 'Huntsman 380 Computer Lab',
-    hours: '24/7',
-    noise: 0,
-    groups: 2,
-    outlets: 1
+  constructor(props) {
+    super(props);
+
+    this.renderNoise = this.renderNoise.bind(this);
+    this.renderGroups = this.renderGroups.bind(this);
+    this.renderOutlets = this.renderOutlets.bind(this);
   }
 
   renderNoise() {
-    if (this.props.noise === 0) {
+    const { noise } = this.props;
+
+    if (noise === 0) {
       return (
         <span className="tag tag-is-blue">
           Silent
         </span>
       );
-    } else if (this.props.noise === 1) {
+    }
+
+    if (noise === 1) {
       return (
         <span className="tag tag-is-yellow">
           Moderate
@@ -27,44 +29,93 @@ class StudyCards extends Component {
       );
     }
 
-    return (<span className="tag tag-is-green">Loud</span>);
+    return (
+      <span className="tag tag-is-green">
+        Loud
+      </span>
+    );
   }
 
   renderGroups() {
-    if (this.props.groups === 0) {
-      return (<span className="tag is-info">No</span>);
-    } else if (this.props.groups === 1) {
-      return (<span className="tag tag-is-yellow">Okay</span>);
+    const { groups } = this.props;
+
+    if (groups === 0) {
+      return (
+        <span className="tag is-info">No</span>
+      );
     }
 
-    return (<span className="tag tag-is-green">Yes</span>);
+    if (groups === 1) {
+      return (
+        <span className="tag tag-is-yellow">Okay</span>
+      );
+    }
+
+    return (
+      <span className="tag tag-is-green">Yes</span>
+    );
   }
 
   renderOutlets() {
-    if (this.props.outlets === 0) {
-      return (<span className="tag is-info">None</span>);
-    } else if (this.props.outlets === 1) {
-      return (<span className="tag tag-is-yellow">Sparse</span>);
+    const { outlets } = this.props;
+
+    if (outlets === 0) {
+      return (
+        <span className="tag is-info">None</span>
+      );
     }
 
-    return (<span className="tag tag-is-green">Plenty</span>);
+    if (outlets === 1) {
+      return (
+        <span className="tag tag-is-yellow">Sparse</span>
+      );
+    }
+
+    return (
+      <span className="tag tag-is-green">Plenty</span>
+    );
   }
 
   render() {
+    const {
+      name,
+      hours,
+    } = this.props;
+
     return (
       <article className="media">
         <div className="media-content">
-          <div className="content" >
+          <div className="content">
             <p className="is-size-6">
-              <strong>{this.props.name}</strong>
+              <strong>{name}</strong>
+
               <br />
-              <small>Hours: {this.props.hours}</small>
+
+              <small>
+                Hours:
+                {hours}
+              </small>
+
               <br />
-              <small>Noise Level: {this.renderNoise()}
-              </small> <br />
-              <small>Good for groups: {this.renderGroups()}</small>
+
+              <small>
+                Noise Level:
+                {this.renderNoise()}
+              </small>
+
               <br />
-              <small>Outlets: {this.renderOutlets()}</small>
+
+              <small>
+                Good for groups:
+                {this.renderGroups()}
+              </small>
+
+              <br />
+
+              <small>
+                Outlets:
+                {this.renderOutlets()}
+              </small>
             </p>
           </div>
         </div>
@@ -72,6 +123,14 @@ class StudyCards extends Component {
     );
   }
 }
+
+StudyCards.defaultProps = {
+  name: 'Huntsman 380 Computer Lab',
+  hours: '24/7',
+  noise: 0,
+  groups: 2,
+  outlets: 1,
+};
 
 StudyCards.propTypes = {
   name: PropTypes.string,

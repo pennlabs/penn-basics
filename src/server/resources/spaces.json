@@ -1,130 +1,1043 @@
 [
-    {
-        "name": "Van Pelt Moelis Reading Room", "description": "", "address": "3420 Walnut St, Philadelphia",
-        "outlets": 2, "quiet": 2, "groups": 2, "start": [10, 8.5, 8.5, 8.5, 8.5, 10], "end": [0, 0, 0, 0, 21, 21, 2]
-    },
-    {
-        "name": "Van Pelt Basement", "description": "", "address": "3420 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10], "end": [0, 0, 0, 0, 0, 21, 21]
-    },
-    {
-    	"name": "Huntsman QSR 1st Floor", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]	
-    },
-    {
-    	"name": "Huntsman QSR 2nd Floor", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Starbucks 1920 Commons", "description": "", "address": "3800 Locust Walk, Philadelphia, PA 19104",
-        "outlets": 1, "quiet": 0, "groups": 0, "start": [11, 7.5, 7.5, 7.5, 7.5, 7.5, 11], "end": [0, 0, 0, 0, 0, 21, 18.5]
-    },
-    {
-    	"name": "Huntsman Computer Lab F75", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 2, "quiet": 1, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Huntsman Computer Lab F80", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 2, "quiet": 1, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Huntsman Computer Lab 380", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 2, "quiet": 1, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Huntsman Computer Lab 375", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 2, "quiet": 1, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Huntsman Forum", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 1, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "MBA Cafe", "description": "", "address": "3730 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 1, "groups": 0, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Hill Study Lounge", "description": "", "address": "3333 Walnut St, Philadelphia, PA 19104",
-        "outlets": 1, "quiet": 0, "groups": 0, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "McClelland Hall", "description": "", "address": "3700 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 0, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Levin Hall", "description": "", "address": "425 S University Ave, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 0, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-    	"name": "Annenberg School for Communication Library", "description": "", "address": "3620 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [12, 9, 9, 9, 9, 9, 12], "end": [17, 21, 21, 21, 21, 21, 17]
-    },
-    {
-    	"name": "United by Blue", "description": "", "address": "3421 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 2, "start": [8, 7, 7, 7, 7, 7, 8], "end": [19, 19, 19, 19, 19, 19, 19]
-    },
-    {
-    	"name": "Fisher Fine Arts", "description": "", "address": "220 S 34th St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10], "end": [0, 0, 0, 0, 0, 20, 20]
-    },
-    {
-    	"name": "Highrise Rooftop Lounges", "description": "", "address": "Various",
-        "outlets": 0, "quiet": 2, "groups": 1, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-        "name": "Saxbys", "description": "", "address": "4000 Locust St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 0, "start": [6.5, 6.5, 6.5, 6.5, 6.5, 7, 7], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-        "name": "Starbucks 39th and Walnut St.", "description": "", "address": "3901 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 1, "start": [6.5, 5.5, 5.5, 5.5, 5.5, 5.5, 6], "end": [22, 0, 0, 0, 0, 0, 0]
-    },
-    {
-        "name": "Education Commons", "description": "", "address": "Smith Walk, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 1, "groups": 0, "start": [9, 9, 9, 9, 9, 9, 9, 9], "end": [23, 23, 23, 23, 23, 18, 23]
-    },
-    {
-        "name": "Singh Center for Nanotechnology", "description": "", "address": "3205 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 1, "groups": 0, "start": [0, 0, 0, 0, 0, 0, 0], "end": [0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-        "name": "Penn Bookstore", "description": "", "address": "3601 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 1, "groups": 1, "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10], "end": [20, 21.5, 21.5, 21.5, 21.5, 21.5, 21.5]
-    },
-    {
-        "name": "Biddle Law Library", "description": "", "address": "3501 Sansom St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 0, "start": [-1, 8, 8, 8, 8, 8, -1], "end": [-1, 20, 20, 20, 20, 20, -1]
-    },
-    {
-        "name": "Biomedical Library", "description": "", "address": "3610 Hamilton Walk, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [10, 8, 8, 8, 8, 8, 10], "end": [0, 0, 0, 0, 0, 22, 18]
-    },
-    {
-        "name": "Provost Tower Library", "description": "", "address": "3417 Spruce St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 2, "start": [], "end": []
-    },
-    {
-        "name": "HubBub", "description": "", "address": "3736 Spruce St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 1, "start": [8, 7, 7, 7, 7, 7, 8], "end": [5, 6, 6, 6, 6, 6, 5]
-    },
-    {
-        "name": "Pret a Manger", "description": "", "address": "3725 Locust Walk, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 0, "groups": 1, "start": [8, 7.5, 7.5, 7.5, 7.5, 8, 8], "end": [21, 21, 21, 21, 16, 16, 16]
-    },
-    {
-        "name": "Green Line 40th St.", "description": "", "address": "28 S 40th St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 1, "start": [9, 7, 7, 7, 7, 7, 8], "end": [15, 19, 19, 19, 19, 19, 16]
-    },
-    {
-        "name": "Green Line 43rd St.", "description": "", "address": "4426 Locust St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 1, "start": [8, 7, 7, 7, 7, 8, 7], "end": [19, 21, 21, 21, 21, 20, 21]
-    },
-    {
-        "name": "Starbucks 34th and Walnut St.", "description": "", "address": "3401 Walnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 1, "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6], "end": [0, 0, 0, 0, 0, 0, 0, 0]
-    },
-    {
-        "name": "Starbucks 34th and Chestnut St.", "description": "", "address": "3421 Chestnut St, Philadelphia, PA 19104",
-        "outlets": 0, "quiet": 2, "groups": 1, "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6], "end": [22, 23, 23, 23, 23, 23, 22]
+  {
+    "name": "Van Pelt Moelis Reading Room",
+    "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
+    "address": "3420 Walnut St, Philadelphia, PA 19104",
+    "image": "https://www.architecturalrecord.com/ext/resources/Issues/2017/November/lighting/1711-Lighting-Holistic-Strategies-Moelis-Family-Grand-Reading-Room-01.jpg",
+    "outlets": 2,
+    "quiet": 2,
+    "groups": 2,
+    "start": [10, 8.5, 8.5, 8.5, 8.5, 10, 10],
+    "end": [0, 0, 0, 0, 21, 21, 2, 0],
+    "location": {
+      "lat": 39.952615,
+      "lng": -75.193933
     }
+  },
+  {
+    "name": "Van Pelt Moelis Reading Terrace (6th Floor)",
+    "description": "Though the building's exterior has remained largely unchanged since its inauguration, a 2013 renovation of the sixth floor brought the Moelis Reading Terrace, a modern space with leather couches and large windows overlooking College Green.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
+    "address": "3420 Walnut St, Philadelphia, PA 19104",
+    "image": "https://snworksceo.imgix.net/dpn/0c717143-23f3-423e-af62-799cfab65087.original.jpg",
+    "imageCredit": {
+      "name": "Pauline Colas",
+      "link": "https://www.thedp.com/staff/pauline-colas"
+    },
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 0,
+    "start": [-1, 10, 10, 10, 10, 10, 10],
+    "end": [-1, 24, 24, 24, 24, 21, 21],
+    "location": {
+      "lat": 39.952615,
+      "lng": -75.193933
+    }
+  },
+  {
+    "name": "Van Pelt Basement",
+    "description": "The Charles Patterson Van Pelt Library is the primary library at the University of Pennsylvania. The building was designed by architects Harbeson, Hough, Livingston & Larson, and built in 1962.",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
+    "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
+    "address": "3420 Walnut St, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 2,
+    "groups": 2,
+    "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
+    "end": [0, 0, 0, 0, 0, 21, 21],
+    "location": {
+      "lat": 39.952615,
+      "lng": -75.193933
+    }
+  },
+  {
+    "name": "Huntsman QSR 1st Floor",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "image": "https://snworksceo.imgix.net/dpn-utb/ce5ee52f-cf96-4e1f-9c6e-f95d7ae441e5.sized-1000x1000.jpg",
+    "description": "With 324,000 square feet, 48 classrooms, 57 group study rooms, lecture halls, auditoriums and conference rooms &mdash,Jon M. Huntsman Hall is one of the most sophisticated large-scale instructional centers of any educational institution in the world. With its warm natural finishes of wood, brick and stone, reflecting the historic significance of surrounding buildings on the University campus, it connects Wharton to the world.",
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Huntsman QSR 2nd Floor",
+    "description": "With 324,000 square feet, 48 classrooms, 57 group study rooms, lecture halls, auditoriums and conference rooms &mdash,Jon M. Huntsman Hall is one of the most sophisticated large-scale instructional centers of any educational institution in the world. With its warm natural finishes of wood, brick and stone, reflecting the historic significance of surrounding buildings on the University campus, it connects Wharton to the world.",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Starbucks 1920 Commons",
+    "image": "http://cms.business-services.upenn.edu/dining/templates/dine_default/images/sub/locations/1920-commons-retail.jpg",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Coffee Shop"
+    ],
+    "address": "3800 Locust Walk, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 0,
+    "groups": 0,
+    "start": [11, 7.5, 7.5, 7.5, 7.5, 7.5, 11],
+    "end": [0, 0, 0, 0, 0, 21, 18.5],
+    "location": {
+      "lat": 39.952490,
+      "lng": -75.198960
+    }
+  },
+  {
+    "name": "Huntsman Computer Lab F75",
+    "image": "https://p4.zdassets.com/hc/theme_assets/708153/200120919/CPU_LAB_2-399x266.jpg",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 2,
+    "quiet": 1,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Huntsman Computer Lab F80",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 2,
+    "quiet": 1,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Huntsman Computer Lab 380",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 2,
+    "quiet": 1,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Huntsman Computer Lab 375",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 2,
+    "quiet": 1,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Huntsman Forum",
+    "image": "https://c1.staticflickr.com/8/7121/7748619482_1df73847ba_b.jpg",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 1,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "MBA Cafe",
+    "description": "The MBA Café is located on the second floor adjoining the Koo Family Plaza, a patio and garden space that also hosts Wharton gatherings and events. It's also home to the second Pret A Manger in Huntsman Hall which has more limited options and hours.",
+    "tags": [
+      "On Campus",
+      "Wharton"
+    ],
+    "address": "3730 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 1,
+    "groups": 0,
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [2, 2, 2, 2, 2, 2, 2],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Hill Study Lounge",
+    "description": "Lofty, well-lit study space in the historic residential building Hill College House",
+    "image": "https://hill.house.upenn.edu/sites/hill.house.upenn.edu/files/styles/banner-big/public/banners/renovated-atrium.jpg",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3333 Walnut St, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 0,
+    "groups": 0,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "McClelland Express",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3400 Spruce St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 0,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.57,
+      "lng": -75.11
+    }
+  },
+  {
+    "name": "Levin Building",
+    "description": "An expansion of the Lynch Laboratories, this building provides for the collaboration, exchange, and integration of knowledge that characterizes the study of Biology and Psychology at Penn. The Levin Building is attached to the south end of the Leidy Labs Building and houses research laboratories, teaching facilities, and spaces designed for cross-disciplinary work.",
+    "tags": [
+      "On Campus",
+      "SAS"
+    ],
+    "image": "https://www.pennconnects.upenn.edu/all_project_images/the_levin_building_images/the_levin_building_large_2.jpg",
+    "address": "425 S University Ave, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 0,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.949009,
+      "lng": -75.199228
+    }
+  },
+  {
+    "name": "Annenberg School for Communication Library",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "SAS",
+      "Library"
+    ],
+    "image": "http://www.library.upenn.edu/sites/default/files/2017-10/pan1192.jpg",
+    "address": "3620 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [12, 9, 9, 9, 9, 9, 12],
+    "end": [17, 21, 21, 21, 21, 21, 17],
+    "location": {
+      "lat": 39.952852,
+      "lng": -75.195786
+    }
+  },
+  {
+    "name": "United by Blue",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "image": "http://cdn.shopify.com/s/files/1/0287/3670/files/header-slider-image-walnut2.jpg?10285525781100010835",
+    "description": "Chic, bustling, upscale cafe and purveyor of outdoorsy goods with in-demand space for studying, talking, and meeting.",
+    "address": "3421 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 2,
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19],
+    "location": {
+      "lat": 39.953068,
+      "lng": -75.193205
+    }
+  },
+  {
+    "name": "Fisher Fine Arts Library",
+    "image": "https://snworksceo.imgix.net/dpn/c558d9b0-9256-4e05-afe5-528a62426047.original.jpg",
+    "imageCredit": {
+      "name": "Annie Luo",
+      "link": "https://www.thedp.com/staff/annie-luo"
+    },
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
+    "address": "220 S 34th St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
+    "end": [0, 0, 0, 0, 0, 20, 20],
+    "location": {
+      "lat": 39.952653,
+      "lng": -75.192238
+    }
+  },
+  {
+    "name": "Harnwell Rooftop Lounge",
+    "image": "https://snworksceo.imgix.net/dpn/a306b0de-7503-4a89-ad48-120070322374.original.jpg",
+    "imageCredit": {
+      "name": "Sharon Lee",
+      "link": "https://www.thedp.com/staff/sharon-lee"
+    },
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3820 Locust Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.952371,
+      "lng": -75.200242
+    }
+  },
+  {
+    "name": "Rodin Rooftop Lounge",
+    "description": "",
+    "image": "https://pbs.twimg.com/media/C6RVVIyWUAA056Y.jpg",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3901 Locust Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.953049,
+      "lng": -75.201755
+    }
+  },
+  {
+    "name": "Harrison Rooftop Lounge",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3910 Irving St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.951937,
+      "lng": -75.201120
+    }
+  },
+  {
+    "name": "Saxbys",
+    "description": "",
+    "image": "http://eimer-design.com/wp-content/uploads/2018/05/Eimer_Saxbys_Coffee_UPenn_01.jpg",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "4000 Locust St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 1,
+    "start": [6.5, 6.5, 6.5, 6.5, 6.5, 7, 7],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.952450,
+      "lng": -75.203610
+    }
+  },
+  {
+    "name": "Starbucks 39th and Walnut St.",
+    "description": "",
+    "image": "https://snworksceo.imgix.net/dpn-34s/7d127a3c-cc83-42d9-89d0-bce6ba2cb2a4.sized-1000x1000.jpg",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "3901 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 1,
+    "start": [6.5, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
+    "end": [22, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.954080,
+      "lng": -75.200370
+    }
+  },
+  {
+    "name": "Education Commons",
+    "description": "State-of-the-art study and information space that supports teaching and collaborative learning. Located on the mezzanine of the George A. Weiss Pavilion in Franklin Field, the Education Commons comprises 6,400 square feet and 168 seats and includes a 22-seat seminar room and 6 group study rooms, all reservable online. The space is open to all current Penn students, faculty, and staff with a PennCard.",
+    "image": "http://joelsandersarchitect.com/wp-content/uploads/2015/05/04-UPenn-Education-Commons-1334x712.jpg",
+    "tags": [
+      "On Campus"
+    ],
+    "address": "Smith Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 1,
+    "groups": 0,
+    "start": [9, 9, 9, 9, 9, 9, 9, 9],
+    "end": [23, 23, 23, 23, 23, 18, 18],
+    "location": {
+      "lat": 39.951640,
+      "lng": -75.192010
+    }
+  },
+  {
+    "name": "Singh Center for Nanotech",
+    "description": "Futuristic, open building offering unique chairs, booths, and tables. PennCard access is limited to engineers and those granted access, though you can try to enter via the LRSM Lab next door.",
+    "tags": [
+      "On Campus",
+      "SEAS"
+    ],
+    "image": "https://www.nano.upenn.edu/wp-content/uploads/2014/09/singh_banner_2.jpg",
+    "address": "3205 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 1,
+    "groups": 0,
+    "start": [-1, 8, 8, 8, 8, 8, -1],
+    "end": [-1, 19, 19, 19, 19, 19, -1],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Penn Bookstore",
+    "image": "https://snworksceo.imgix.net/dpn/c5f4f01c-7503-4dca-8a1e-8682a625241c.sized-1000x1000.jpg",
+    "description": "The University of Pennsylvania’s official bookstore sells textbooks, general books, school supplies, music, and more. Its second-floor café offers a quiet study room and expansive views of campus.",
+    "tags": [
+      "On Campus",
+      "Bookstore",
+      "Coffee Shop"
+    ],
+    "address": "3601 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 1,
+    "groups": 1,
+    "start": [10, 8.5, 8.5, 8.5, 8.5, 8.5, 10],
+    "end": [20, 21.5, 21.5, 21.5, 21.5, 21.5, 21.5],
+    "location": {
+      "lat": 39.953600,
+      "lng": -75.195820
+    }
+  },
+  {
+    "name": "Biddle Law Library",
+    "image": "https://snworksceo.imgix.net/dpn/b3647e70-49db-49bd-8c2b-9ebd2211128d.original.jpg",
+    "imageCredit": {
+      "name": "Alexa Cotler",
+      "link": "https://www.thedp.com/staff/alexa-cotler"
+    },
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Penn Law",
+      "Library"
+    ],
+    "address": "3501 Sansom St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 0,
+    "start": [-1, 8, 8, 8, 8, 8, -1],
+    "end": [-1, 20, 20, 20, 20, 20, -1],
+    "location": {
+      "lat": 39.953740,
+      "lng": -75.193730
+    }
+  },
+  {
+    "name": "Biomedical Library",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Library"
+    ],
+    "address": "3610 Hamilton Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [10, 8, 8, 8, 8, 8, 10],
+    "end": [0, 0, 0, 0, 0, 22, 18],
+    "location": {
+      "lat": 39.949770,
+      "lng": -75.196000
+    }
+  },
+  {
+    "name": "New College House, 7th Floor",
+    "image": "https://snworksceo.imgix.net/dpn/4363451a-2f31-449a-b109-f76a09b62670.original.jpg",
+    "imageCredit": {
+      "name": "Alec Druggan",
+      "link": "https://www.thedp.com/staff/alec-druggan"
+    },
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall"
+    ],
+    "address": "3335 Woodland Walk, Philadelphia, PA 19104",
+    "outlets": 1,
+    "quiet": 2,
+    "start": [0, 0, 0, 0, 0, 0, 0],
+    "end": [0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.9536909,
+      "lng": -75.1934874
+    }
+  },
+  {
+    "name": "Provost Tower Library",
+    "description": "",
+    "tags": [
+      "On Campus",
+      "Residence Hall",
+      "Library"
+    ],
+    "address": "3417 Spruce St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 2,
+    "start": [],
+    "end": [],
+    "location": {
+      "lat": 39.950480,
+      "lng": -75.193180
+    }
+  },
+  {
+    "name": "Pret a Manger",
+    "description": "Quick, convenient, busy cafe and study space within Huntsman Hall.",
+    "tags": [
+      "On Campus",
+      "Coffee Shop"
+    ],
+    "address": "3725 Locust Walk, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 0,
+    "groups": 1,
+    "start": [8, 7.5, 7.5, 7.5, 7.5, 8, 8],
+    "end": [21, 21, 21, 21, 16, 16, 16],
+    "location": {
+      "lat": 39.952510,
+      "lng": -75.198327
+    }
+  },
+  {
+    "name": "Metropolitan Bakery & Cafe",
+    "description": "Bustling, modest space with a wide array of food and beverage options.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "4013 Walnut St, Philadelphia, PA 19104",
+    "image": "https://cdn.shopify.com/s/files/1/0018/2317/8819/files/metro_location_wphilly_web_1080x.jpg",
+    "outlets": 1,
+    "quiet": 0,
+    "groups": 1,
+    "start": [8, 7.5, 7.5, 7.5, 7.5, 7.5, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18],
+    "location": {
+      "lat": 39.955030,
+      "lng": -75.210080
+    }
+  },
+  {
+    "name": "Green Line 40th St.",
+    "description": "Comfy coffee shop with seating ranging from couches to tables to barstools.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "28 S 40th St, Philadelphia, PA 19104",
+    "image": "https://s3-media1.fl.yelpcdn.com/bphoto/ik9KXxzcXyyIvK005FeFmA/o.jpg",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [9, 7, 7, 7, 7, 7, 8],
+    "end": [15, 19, 19, 19, 19, 19, 16],
+    "location": {
+      "lat": 39.956268,
+      "lng": -75.202246
+    }
+  },
+  {
+    "name": "Green Line 43rd St.",
+    "image": "https://s3-media1.fl.yelpcdn.com/bphoto/AeRwiV3bRkqZweu21c7SJg/o.jpg",
+    "description": "Cafe with a local flavor. Cute outdoor seating nestled into the West Philly community.",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "4426 Locust St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [8, 7, 7, 7, 7, 8, 7],
+    "end": [19, 21, 21, 21, 21, 20, 21],
+    "location": {
+      "lat": 39.953960,
+      "lng": -75.211693
+    }
+  },
+  {
+    "name": "Starbucks 34th and Walnut St.",
+    "description": "",
+    "tags": [
+      "Off Campus",
+      "Coffee Shop"
+    ],
+    "address": "3401 Walnut St, Philadelphia, PA 19104",
+    "outlets": 0,
+    "quiet": 2,
+    "groups": 1,
+    "start": [6, 5.5, 5.5, 5.5, 5.5, 5.5, 6],
+    "end": [0, 0, 0, 0, 0, 0, 0, 0],
+    "location": {
+      "lat": 39.953342,
+      "lng": -75.193493
+    }
+  },
+  {
+    "name": "Elixr Coffee",
+    "address": "207 S Sydenham St, Philadelphia, PA 19102",
+    "location": {
+      "lat": 39.9493377,
+      "lng": -75.1688823
+    },
+    "start": [8, 7, 7, 7, 7, 7, 7],
+    "end": [19, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Elixr Coffee",
+    "address": "315 N 12th St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9587518,
+      "lng": -75.1659256
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Function Coffee Labs",
+    "address": "1001 S 10th St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9378421,
+      "lng": -75.1616697
+    },
+    "start": [7, 8, 8, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Ox Coffee",
+    "address": "616 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9409337,
+      "lng": -75.1500099
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Pilgrim Coffee Roasters (Manayunk)",
+    "address": "4120 Main St, Philadelphia, PA 19127",
+    "location": {
+      "lat": 40.0221684,
+      "lng": -75.2231281
+    },
+    "start": [8, 6, 6, 6, 6, 6, 7],
+    "end": [17, 17, 17, 17, 17, 17, 18]
+  },
+  {
+    "name": "Rival Bros Coffee",
+    "address": "1528 Spruce St, Philadelphia, PA 19102",
+    "location": {
+      "lat": 39.9484558,
+      "lng": -75.1813293
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Rival Bros Coffee (Filter Square)",
+    "address": "2400 Lombard St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9472491,
+      "lng": -75.1860834
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Reanimator (Walnut Hill)",
+    "address": "4705 Pine St, Philadelphia, PA 19143",
+    "location": {
+      "lat": 39.9500454,
+      "lng": -75.2190887
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Reanimator (Olde Kensington)",
+    "address": "310 Master St, Philadelphia, PA 19122",
+    "location": {
+      "lat": 39.9732785,
+      "lng": -75.1412881
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Reanimator (Kensington)",
+    "address": "1523 E Susquehanna Ave, Philadelphia, PA 19125",
+    "location": {
+      "lat": 39.9776519,
+      "lng": -75.1535251
+    },
+    "start": [8, 6.5, 6.5, 6.5, 6.5, 6.5, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "La Colombe (Fishtown)",
+    "address": "1335 Frankford Ave, Philadelphia, PA 19125",
+    "location": {
+      "lat": 39.9712438,
+      "lng": -75.1362081
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [19, 19, 19, 19, 19, 21, 21]
+  },
+  {
+    "name": "Two Persons Coffee",
+    "address": "821 Dudley St, Philadelphia, PA 19148",
+    "location": {
+      "lat": 39.9248009,
+      "lng": -75.1619207
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [15, 17, 17, 17, 17, 17, 15]
+  },
+  {
+    "name": "Square One Coffee (Logan Square)",
+    "address": "1811 John F Kennedy Blvd, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9543943,
+      "lng": -75.1749437
+    },
+    "start": [-1, 7, 7, 7, 7, 7, -1],
+    "end": [-1, 16, 16, 16, 16, 16, -1]
+  },
+  {
+    "name": "Square One Coffee (Center City)",
+    "address": "249 S 13th St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9544259,
+      "lng": -75.1749437
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (Rittenhouse)",
+    "address": "238 S 20th St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9493329,
+      "lng": -75.1763768
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (Graduate Hospital)",
+    "address": "2149 Catharine St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9443818,
+      "lng": -75.1850906
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Ultimo Coffee (South Philly)",
+    "address": "1900 S 15th St, Philadelphia, PA 19145",
+    "location": {
+      "lat": 39.9290917,
+      "lng": -75.1766803
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "La. Va Coffee",
+    "address": "2100 South St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.945016,
+      "lng": -75.1792982
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Good Karma Cafe (Walnut)",
+    "address": "2319 Walnut St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9487875,
+      "lng": -75.1796833
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Good Karma Cafe (22nd St)",
+    "address": "331 S 22nd St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9483151,
+      "lng": -75.1790474
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Good Karma Cafe",
+    "address": "Wilma Theatre, 265 S Broad St #5659, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9447563,
+      "lng": -75.1653656
+    },
+    "start": [6, 6, 6, 6, 6, 6, 6],
+    "end": [21, 21, 21, 21, 21, 21, 21]
+  },
+  {
+    "name": "Old City Coffee (Old City)",
+    "address": "221 Church St, Philadelphia, PA 19106",
+    "location": {
+      "lat": 39.9506936,
+      "lng": -75.1499536
+    },
+    "start": [7, 6.5, 6.5, 6.5, 6.5, 6.5, 7],
+    "end": [18, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Old City Coffee (Center City)",
+    "address": "1200 Filbert St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9531604,
+      "lng": -75.1615849
+    },
+    "start": [8, 8, 8, 8, 8, 8, 8],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Milk & Honey Market",
+    "address": "4435 Baltimore Ave, Philadelphia, PA 19104",
+    "location": {
+      "lat": 39.9488237,
+      "lng": -75.2154202
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20.25, 20, 20]
+  },
+  {
+    "name": "One Shot Cafe",
+    "address": "217 W George St, Philadelphia, PA 19123",
+    "location": {
+      "lat": 39.9677114,
+      "lng": -75.1428425
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Ultimo Coffee (Rittenhouse)",
+    "address": "238 S 20th St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9495412,
+      "lng": -75.1769415
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+
+
+
+  {
+    "name": "Ultimo Coffee (Graduate Hospital)",
+    "address": "2149 Catharine St, Philadelphia, PA 19146",
+    "location": {
+      "lat": 39.9420839,
+      "lng": -75.1816787
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+
+
+  {
+    "name": "Ultimo Coffee (South Philly)",
+    "address": "1900 S 15th St, Philadelphia, PA 19145",
+    "location": {
+      "lat": 39.9267851,
+      "lng": -75.1834617
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Herman’s Coffee",
+    "address": "1313 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.931404,
+      "lng": -75.1518777
+    },
+    "start": [7, 6, 6, 6, 6, 6, 7],
+    "end": [18, 18, 18, 18, 18, 18, 18]
+  },
+  {
+    "name": "Menagerie",
+    "address": "18 S 3rd St, Philadelphia, PA 19106",
+    "location": {
+      "lat": 39.9554574,
+      "lng": -75.1591245
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [19, 19, 19, 19, 19, 19, 19]
+  },
+  {
+    "name": "Greenstreet Coffee Co.",
+    "address": "1101 Spruce St, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9464657,
+      "lng": -75.1617559
+    },
+    "start": [8, 6, 6, 6, 6, 6, 7],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Ox Coffee",
+    "address": "616 S 3rd St, Philadelphia, PA 19147",
+    "location": {
+      "lat": 39.9409337,
+      "lng": -75.1500099
+    },
+    "start": [8, 7, 7, 7, 7, 7, 8],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Bluestone Lane (Rittenhouse)",
+    "address": "1701 Locust St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9489892,
+      "lng": -75.1717296
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [17, 17, 17, 17, 17, 17, 17]
+  },
+  {
+    "name": "Bluestone Lane (Center City)",
+    "address": "1 S Penn Square, Philadelphia, PA 19107",
+    "location": {
+      "lat": 39.9512066,
+      "lng": -75.1656637
+    },
+    "start": [9, 6.5, 6.5, 6.5, 6.5, 6.5, 9],
+    "end": [16, 17, 17, 17, 17, 17, 16]
+  },
+  {
+    "name": "Joe Coffee (University City)",
+    "address": "3200 Chestnut St, Philadelphia, PA 19104",
+    "location": {
+      "lat": 39.9536108,
+      "lng": -75.1906788
+    },
+    "start": [9, 7, 7, 7, 7, 7, 9],
+    "end": [15, 19, 19, 19, 19, 19, 18]
+  },
+  {
+    "name": "Joe Coffee (Rittenhouse)",
+    "address": "1845 Walnut St, Philadelphia, PA 19103",
+    "location": {
+      "lat": 39.9536465,
+      "lng": -75.2059997
+    },
+    "start": [7, 7, 7, 7, 7, 7, 7],
+    "end": [20, 20, 20, 20, 20, 20, 20]
+  }
 ]

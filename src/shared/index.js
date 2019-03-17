@@ -1,3 +1,4 @@
+/* global document */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
@@ -9,7 +10,8 @@ import rootReducer from './reducers/index';
 import App from './components/App';
 import './styles/app.scss';
 
-const store = createStore(rootReducer,
+const store = createStore(
+  rootReducer,
   applyMiddleware(thunk),
 );
 
@@ -19,5 +21,5 @@ ReactDOM.render(
       <App />
     </Router>
   </Provider>,
-  document.getElementById('react-app')
+  document.getElementById('react-app'),
 );

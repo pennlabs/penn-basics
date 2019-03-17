@@ -15,10 +15,10 @@
 
     &::after {
       border-top-style: initial;
-      border-top-width: 0px;
+      border-top-width: 0;
       border-right-color: initial;
       border-right-style: initial;
-      border-right-width: 0px;
+      border-right-width: 0;
       border-bottom-color: $light-gray;
       border-bottom-style: solid;
       border-bottom-width: 2px;
@@ -32,9 +32,9 @@
       border-image-repeat: initial;
     }
 
-    &:hover,
     &:active,
-    &:focus {
+    &:focus,
+    &:hover {
       &::after {
         border-bottom-color: $medium-gray;
         border-left-color: $medium-gray;
@@ -44,49 +44,39 @@
     select.dropdown {
       min-width: 20vw;
       display: inline-block;
-      background: white;
+      background: $white;
       border-radius: 0.4rem;
       border: 1px solid rgba(0, 0, 0, 0.075);
       font-weight: bold;
       cursor: hand;
       cursor: pointer;
-      box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.025);
+      box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.025);
       transition: all 0.2s ease;
 
       &:hover {
-        box-shadow: 0rem 0.15rem 0.2rem rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0.15rem 0.2rem rgba(0, 0, 0, 0.05);
       }
     }
   }
 }
 
-.overview {
-  width: 100%;
-  margin-bottom: 1rem;
-  box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.025);
-  background: #FFF;
-  border-radius: 0.4rem;
-  border: 1px solid $allbirds-gray;
-  padding: 1rem;
-}
-
 .menu {
   margin-top: 1.2rem;
-  margin-right: 0rem;
-  margin-left: 0rem;
+  margin-right: 0;
+  margin-left: 0;
   width: 100%;
 }
 
 @media screen and (min-device-width: 1024px) and (min-width: 548px) {
   .menu {
     -moz-column-count: 2;
-    -moz-column-gap: 0%;
+    -moz-column-gap: 0;
     -moz-column-width: 50%;
-    -webkit-column-count:2;
-    -webkit-column-gap: 0%;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 0;
     -webkit-column-width: 50%;
     column-count: 2;
-    column-gap: 0%;
+    column-gap: 0;
     column-width: 50%;
   }
 }
@@ -95,35 +85,9 @@
   padding-bottom: 1rem;
   display: inline-block;
   width: 100%;
+  margin: 0 -0.5rem;
 
-  .menuSection {
-    padding: 1rem 1rem 0.2rem 1rem;
-    width: 100%;
-
-    h3.title {
-      font-size: 1rem;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      color: $light-gray;
-    }
-
-    .menuItem {
-      margin-bottom: 1rem;
-
-      .title {
-        font-size: 1rem;
-        font-weight: bold;
-        margin-bottom: 0.4rem;
-        margin-right: 0.3rem;
-        width: auto;
-        display: inline-block;
-
-        &::first-letter {
-          text-transform: uppercase;
-        }
-      }
-    }
-  }
+  .menuSection {}
 }
 
 .description {
@@ -201,7 +165,7 @@
       margin-bottom: 0.4rem;
       opacity: 1;
     }
-    padding: 0rem 0rem 1.2rem 0rem;
+    padding: 0 0 1.2rem;
   }
 }
 
@@ -249,7 +213,7 @@
 
       .hoursCol {
         flex: 1;
-        border-width: 1px 0px 0px 1px;
+        border-width: 1px 0 0 1px;
         border-style: solid;
         border-color: $light-gray;
 
@@ -301,9 +265,9 @@
 .dining-venue-preview {
   color: white;
   border-radius: 0.4rem;
-  box-shadow: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
   font-weight: bold !important;
-  text-shadow: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.3);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -312,7 +276,7 @@
   background-position: center;
 
   .gradient {
-    padding: 8rem 1rem 1rem 1rem;
+    padding: 8rem 1rem 1rem;
     background: rgba(0, 0, 0, 0.5);
     background: -webkit-linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
     background: -o-linear-gradient(transparent 50%, rgba(0, 0, 0, 0.5));
