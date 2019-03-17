@@ -4,7 +4,7 @@
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node src/server/index.js",
+    "start": "webpack -p && node src/server/index.js",
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
