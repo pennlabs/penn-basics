@@ -120,7 +120,7 @@ class SpaceCard extends Component {
 SpaceCard.defaultProps = {
   open: false,
   image: '',
-  outlets: 0,
+  outlets: -1,
   quiet: -1,
   hoveredSpace: null,
 }
