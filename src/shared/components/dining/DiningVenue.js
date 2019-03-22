@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import s from 'styled-components';
 
+// TODO use the other venue data
 import venueData from './content/venueData';
 import { getDiningData, getVenueInfo } from '../../actions/index';
 
@@ -143,7 +144,7 @@ class DiningVenue extends Component {
 
     const { name } = venueData[id];
 
-    if (retailLocations.includes(name)) {
+    if (retailLocations.includes(id)) {
       return (
         // If there is no error and the data is not pending
         <Nav>
