@@ -7,6 +7,7 @@ export const Row = styled.div`
   display: flex;
   max-height: ${({ maxHeight }) => maxHeight || 'none'};
   overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+  ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
 `
 
 export const Col = styled.div`
