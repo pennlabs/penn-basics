@@ -26,7 +26,7 @@
       "Library"
     ],
     "address": "3420 Walnut St, Philadelphia, PA 19104",
-    "image": "https://snworksceo.imgix.net/dpn/0c717143-23f3-423e-af62-799cfab65087.original.jpg",
+    "image": "https://s3.amazonaws.com/pennbasics/vp-6th-floor.jpg",
     "imageCredit": {
       "name": "Pauline Colas",
       "link": "https://www.thedp.com/staff/pauline-colas"
@@ -48,7 +48,7 @@
       "On Campus",
       "Library"
     ],
-    "image": "https://snworksceo.imgix.net/dpn-34s/fbd6f553-193a-4478-994e-674feb60e198.sized-1000x1000.png",
+    "image": "https://s3.amazonaws.com/pennbasics/vp-basement.png",
     "address": "3420 Walnut St, Philadelphia, PA 19104",
     "outlets": 1,
     "quiet": 2,
@@ -346,7 +346,7 @@
   },
   {
     "name": "Harnwell Rooftop Lounge",
-    "image": "https://snworksceo.imgix.net/dpn/a306b0de-7503-4a89-ad48-120070322374.original.jpg",
+    "image": "https://s3.amazonaws.com/pennbasics/harnwell-rtl.jpg",
     "imageCredit": {
       "name": "Sharon Lee",
       "link": "https://www.thedp.com/staff/sharon-lee"
@@ -445,7 +445,7 @@
   {
     "name": "Education Commons",
     "description": "State-of-the-art study and information space that supports teaching and collaborative learning. Located on the mezzanine of the George A. Weiss Pavilion in Franklin Field, the Education Commons comprises 6,400 square feet and 168 seats and includes a 22-seat seminar room and 6 group study rooms, all reservable online. The space is open to all current Penn students, faculty, and staff with a PennCard.",
-    "image": "http://joelsandersarchitect.com/wp-content/uploads/2015/05/04-UPenn-Education-Commons-1334x712.jpg",
+    "image": "https://s3.amazonaws.com/pennbasics/edcommons.jpg",
     "tags": [
       "On Campus"
     ],
@@ -501,7 +501,7 @@
   },
   {
     "name": "Biddle Law Library",
-    "image": "https://snworksceo.imgix.net/dpn/b3647e70-49db-49bd-8c2b-9ebd2211128d.original.jpg",
+    "image": "https://s3.amazonaws.com/pennbasics/biddle-law.jpg",
     "imageCredit": {
       "name": "Alexa Cotler",
       "link": "https://www.thedp.com/staff/alexa-cotler"
@@ -543,7 +543,7 @@
   },
   {
     "name": "New College House, 7th Floor",
-    "image": "https://snworksceo.imgix.net/dpn/4363451a-2f31-449a-b109-f76a09b62670.original.jpg",
+    "image": "https://s3.amazonaws.com/pennbasics/7th-floor-nch.jpg",
     "imageCredit": {
       "name": "Alec Druggan",
       "link": "https://www.thedp.com/staff/alec-druggan"
