@@ -3,9 +3,9 @@ export function getNoiseLevel(quiet) {
     0: 'Talkative',
     1: 'Quiet',
     2: 'Silent',
-  };
+  }
 
-  return map[quiet];
+  return map[quiet]
 }
 
 export function getOutletsLevel(outlets) {
@@ -13,9 +13,9 @@ export function getOutletsLevel(outlets) {
     0: 'No outlets',
     1: 'Few outlets',
     2: 'Many outlets',
-  };
+  }
 
-  return map[outlets];
+  return map[outlets]
 }
 
 export function getGroupLevel(groups) {
@@ -23,9 +23,9 @@ export function getGroupLevel(groups) {
     0: 'No groups',
     1: 'Small groups',
     2: 'Large groups',
-  };
+  }
 
-  return map[groups];
+  return map[groups]
 }
 
 function getMinutes(time) {
