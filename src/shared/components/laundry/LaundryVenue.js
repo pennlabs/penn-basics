@@ -83,6 +83,7 @@ const LaundryVenue = ({
     if (pending) {
       return <div>Pending</div>;
     }
+    
     return (
       <Wrapper>
         <div className="columns">
