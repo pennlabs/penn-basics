@@ -1192,5 +1192,23 @@
     ],
     "start": [7, 7, 7, 7, 7, 7, 7],
     "end": [20, 20, 20, 20, 20, 20, 20]
+  },
+  {
+    "name": "Quorum Drop-In Lounge",
+    "description": "On the ground floor of 3675 Market is the Quorum Drop-In Lounge with an Elixr Coffee Bar. The lounge is a colorful, public workspace with wifi, whiteboards, and varied seating areas. Elixr serves up coffees, teas, and a small assortment of baked goods.",
+    "tags": [
+      "Off Campus", "Coffee Shop"
+    ],
+    "address": "3675 Chestnut St, Philadelphia, PA 19104",
+    "image": "NEED LINK HERE CAM",
+    "outlets": 1,
+    "quiet": 3,
+    "groups": 2,
+    "start": [-1, 8.5, 8.5, 8.5, 8.5, 10, -1],
+    "end": [-1, 18, 18, 18, 18, 18, 18, -1],
+    "location": {
+      "lat": 39.9566835,
+      "lng": -75.197413
+    }
   }
 ]
