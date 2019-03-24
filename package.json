@@ -4,7 +4,7 @@
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node src/server/index.js",
+    "start": "webpack -p && node src/server/index.js",
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
@@ -48,23 +48,23 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "styled-components": "^4.0.2",
-    "uuid": "^3.1.0"
-  },
-  "devDependencies": {
+    "uuid": "^3.1.0",
+    "style-loader": "^0.19.0",
+    "node-sass": "^4.9.4",
+    "sass-loader": "^6.0.6",
+    "webpack": "^3.6.0",
     "babel-plugin-styled-components": "^1.8.0",
     "babel-polyfill": "^6.26.0",
+    "css-loader": "^0.28.7"
+  },
+  "devDependencies": {
     "chai": "^4.1.2",
-    "css-loader": "^0.28.7",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "mocha": "^4.0.1",
-    "node-sass": "^4.9.4",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.19.0",
-    "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1"
   }

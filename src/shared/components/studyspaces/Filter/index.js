@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import s from 'styled-components';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import s from 'styled-components'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 // TODO decouple index of option and value in database
 
-import FilterBtn from './FilterBtn';
+import FilterBtn from './FilterBtn'
 import {
   WHITE,
   ALLBIRDS_GRAY,
   MEDIUM_GRAY,
   DARK_GRAY,
-} from '../../../styles/colors';
+} from '../../../styles/colors'
 import {
   filterSpacesOpen,
   filterSpacesOutlets,
@@ -23,14 +23,14 @@ import {
   toggleSpacesOutlets,
   toggleSpacesNoise,
   toggleSpacesGroups,
-} from '../../../actions/spaces_actions';
+} from '../../../actions/spaces_actions'
 
 const FilterWrapper = s.div`
   width: 100%;
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
   padding: 0.5rem 1rem;
-`;
+`
 
 const ClearText = s.p`
   display: inline-block;
@@ -43,16 +43,16 @@ const ClearText = s.p`
   :focus {
     color: ${DARK_GRAY};
   }
-`;
+`
 
 class Filter extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClickOutlets = this.handleClickOutlets.bind(this);
-    this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this);
-    this.handleClickGroups = this.handleClickGroups.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClickOutlets = this.handleClickOutlets.bind(this)
+    this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
+    this.handleClickGroups = this.handleClickGroups.bind(this)
   }
 
   /**
@@ -67,8 +67,8 @@ class Filter extends Component {
       toggleSpacesOpenDispatch,
     } = this.props;
 
-    toggleSpacesOpenDispatch();
-    filterSpacesOpenDispatch(!filterOpen);
+    toggleSpacesOpenDispatch()
+    filterSpacesOpenDispatch(!filterOpen)
   }
 
   /**
@@ -77,8 +77,8 @@ class Filter extends Component {
    * @param num: index in the array of options
    */
   handleClickOutlets(num) {
-    const { filterSpacesOutletsDispatch } = this.props;
-    filterSpacesOutletsDispatch(num);
+    const { filterSpacesOutletsDispatch } = this.props
+    filterSpacesOutletsDispatch(num)
   }
 
   /**
@@ -87,8 +87,8 @@ class Filter extends Component {
    * @param num: index in the array of options
    */
   handleClickNoiseLevel(num) {
-    const { filterSpacesNoiseDispatch } = this.props;
-    filterSpacesNoiseDispatch(num);
+    const { filterSpacesNoiseDispatch } = this.props
+    filterSpacesNoiseDispatch(num)
   }
 
   /**
@@ -97,8 +97,8 @@ class Filter extends Component {
    * @param num: index in the array of options
    */
   handleClickGroups(num) {
-    const { filterSpacesGroupsDispatch } = this.props;
-    filterSpacesGroupsDispatch(num);
+    const { filterSpacesGroupsDispatch } = this.props
+    filterSpacesGroupsDispatch(num)
   }
 
   render() {

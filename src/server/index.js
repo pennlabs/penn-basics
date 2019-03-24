@@ -11,7 +11,7 @@ const DB = require('./database/db');
 const seedDining = require('./database/seedDiningInfo');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 
 global.basedir = path.join(__dirname, '..', '..');
