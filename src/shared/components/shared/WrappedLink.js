@@ -19,7 +19,8 @@ class WrappedLink extends Component { // eslint-disable-line
 
     return (
       <Link
-        onClick={() => { updateReduxWithPath(to); }}
+        tabIndex={0}
+        onClick={() => updateReduxWithPath(to)}
         to={to}
         {...props}
       />

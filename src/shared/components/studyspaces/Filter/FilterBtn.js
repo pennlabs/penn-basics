@@ -16,7 +16,7 @@ import {
 } from '../../../styles/colors'
 
 
-const FilterBtnWrapper = s.div`
+const FilterBtnWrapper = s.a`
   margin-right: 1rem;
   cursor: pointer;
   box-sizing: border-box;
@@ -28,6 +28,7 @@ const FilterBtnWrapper = s.div`
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
+  color: ${MEDIUM_GRAY} !important;
 
   :hover {
     background: ${ALLBIRDS_GRAY};
@@ -35,7 +36,7 @@ const FilterBtnWrapper = s.div`
 
   ${({ active }) => active && (`
     background: ${BLUE} !important;
-    color: white;
+    color: ${WHITE} !important;
 
     :hover,
     :focus {
@@ -211,10 +212,10 @@ class FilterBtn extends Component {
 
     return (
       <FilterBtnWrapper
+        tabIndex={0}
         active={active || areActiveOptions}
         options={areOptions}
         onClick={onClick}
-        tabIndex={active ? 0 : -1}
         ref={this.focusRef}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}

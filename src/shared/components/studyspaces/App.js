@@ -40,9 +40,7 @@ class App extends Component {
     }
 
     return (
-      <div>
-        <SpaceModal />
-
+      <>
         <Filter />
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
@@ -78,7 +76,9 @@ class App extends Component {
             />
           </Col>
         </Row>
-      </div>
+
+        <SpaceModal />
+      </>
     );
   }
 }

@@ -1,8 +1,7 @@
 /* global document */
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Menu = ({ tabIndex }) => {
+const Menu = () => {
   const toggle = () => {
     const sidebar = document.getElementById('sidebar');
     const shaddow = document.getElementById('shade');
@@ -31,7 +30,7 @@ const Menu = ({ tabIndex }) => {
       onClick={handleClick}
       onKeyPress={handleKeyPress}
       role="button"
-      tabIndex={tabIndex}
+      tabIndex={0}
     >
       <div className="bar" />
       <div className="bar" />
@@ -39,14 +38,6 @@ const Menu = ({ tabIndex }) => {
       <div id="shade" />
     </div>
   );
-};
-
-Menu.defaultProps = {
-  tabIndex: -1,
-};
-
-Menu.propTypes = {
-  tabIndex: PropTypes.number,
 };
 
 export default Menu;
