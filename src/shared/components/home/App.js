@@ -3,6 +3,7 @@ import axios from 'axios';
 import s from 'styled-components';
 
 import Dining from './Dining';
+import Laundry from './Laundry';
 import Studyspaces from './Studyspaces';
 import Reserve from './Reserve';
 import Notification from './Notification';
@@ -76,6 +77,8 @@ class Home extends Component {
         <Reserve />
 
         <Dining show={dining} />
+
+        <Laundry/>
 
         <Studyspaces />
       </Wrapper>
