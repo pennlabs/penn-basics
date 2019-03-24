@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import SpaceCard from './SpaceCard'
 import {
@@ -11,7 +12,7 @@ import {
 } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
-import { getAllSpacesData } from '../../actions/spaces_actions'
+import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
 import Filter from './Filter'
 import SpaceModal from './SpaceModal'
@@ -31,6 +32,7 @@ class App extends Component {
       error,
       pending,
       hoveredSpace,
+      setActiveSpaceDispatch,
     } = this.props;
 
     if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
@@ -71,6 +73,7 @@ class App extends Component {
               mapId="map"
               height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
               markers={filteredSpacesData}
+              handleClickMarker={setActiveSpaceDispatch}
               activeMarker={hoveredSpace}
             />
           </Col>
@@ -80,10 +83,27 @@ class App extends Component {
   }
 }
 
+App.defaultProps = {
+  error: null,
+  hoveredSpace: null,
+  pending: false,
+  filteredSpacesData: null,
+}
+
+App.propTypes = {
+  getAllSpacesDataDispatch: PropTypes.func.isRequired,
+  setActiveSpaceDispatch: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  hoveredSpace: PropTypes.string,
+  pending: PropTypes.bool,
+  filteredSpacesData: PropTypes.object, // eslint-disable-line
+}
+
 const mapStateToProps = ({ spaces }) => spaces;
 
 const mapDispatchToProps = dispatch => ({
-  getAllSpacesDataDispatch: venueId => dispatch(getAllSpacesData(venueId)),
+  getAllSpacesDataDispatch: id => dispatch(getAllSpacesData(id)),
+  setActiveSpaceDispatch: id => dispatch(setActiveSpace(id)),
 });
 
 // Redux config

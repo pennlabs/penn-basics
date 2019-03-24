@@ -1,6 +1,6 @@
-const mongoose = require('../mongoose-connect');
+const mongoose = require('../mongoose-connect')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const SpaceSchema = new Schema({
   name: String,
@@ -21,6 +21,7 @@ const SpaceSchema = new Schema({
     lat: Number,
     lng: Number,
   },
-});
+})
 
-module.exports = mongoose.model('Space', SpaceSchema);
+
+module.exports = mongoose.model('Space', SpaceSchema)

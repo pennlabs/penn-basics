@@ -1,50 +1,75 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import s from 'styled-components';
-import _ from 'lodash';
+import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import s from 'styled-components'
 
-import { Loading } from '../shared/Loading';
-import { BorderedCard } from '../shared';
-import { addFavorite, removeFavorite } from '../../actions/laundry_actions';
+import { BorderedCard, Row, Col } from '../shared'
+import {
+  GREEN,
+  MUSTARD,
+  MEDIUM_GRAY,
+  FOCUS_GRAY,
+  LIGHT_GREEN,
+  LIGHT_YELLOW,
+} from '../../styles/colors'
+import { addFavorite, removeFavorite } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
-`;
+`
+
+const Overview = s(Col)`
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  padding: 0.5rem 0;
+
+  h1, p {
+    color: ${({ color }) => color};
+    text-align: center;
+  }
+
+  p {
+    font-weight: 500;
+  }
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 0.2rem;
+    line-height: 1;
+  }
+`
+
+const Table = s.table`
+  margin-bottom: 0;
+`
 
 const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType);
   const { open, running, out_of_order: outOfOrder } = machineData;
   return (
     <div>
-      <div className="columns">
-        <div className="column is-4">
-          <h1 className="title is-5">
-            # Available:&nbsp;
-            {open}
-          </h1>
-        </div>
-        <div className="column is-3">
-          <h1 className="title is-5">
-            # Busy:&nbsp;
-            {running}
-          </h1>
-        </div>
-        <div className="column is-5">
-          <h1 className="title is-5">
-            # Out of order:&nbsp;
-            {outOfOrder}
-          </h1>
-        </div>
-      </div>
+      <Row justifyContent="space-between">
+        {[
+          [open, 'Available', GREEN, LIGHT_GREEN],
+          [running, 'Busy', MUSTARD, LIGHT_YELLOW],
+          [outOfOrder, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
+        ].map(([number, title, color, background]) => (
+          <Overview width="30%" key={title} color={color} background={background}>
+            <h1>{number}</h1>
+            <p>{title}</p>
+          </Overview>
+        ))}
+      </Row>
+
       <div className="columns">
         <div className="column is-12">
-          <table className="table is-fullwidth">
+          <Table className="table is-fullwidth">
             <thead>
               <tr>
-                <th>Machine</th>
+                <th>#</th>
                 <th>Status</th>
-                <th>Time Remaining (min)</th>
+                <th>Time left (min)</th>
               </tr>
             </thead>
             <tbody>
@@ -55,13 +80,13 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
                     <tr>
                       <td>{id}</td>
                       <td>{status}</td>
-                      <td className="has-text-centered">{timeRemaining}</td>
+                      <td>{timeRemaining}</td>
                     </tr>
                   );
                 })
               }
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     </div>
@@ -83,22 +108,23 @@ const LaundryVenue = ({
     if (pending) {
       return <div>Pending</div>;
     }
+
     return (
       <Wrapper>
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
-            {
-              isFavorited && <a className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
+            {isFavorited && (
+              <span className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
                 Unfavorite
-              </a>
-            }
+              </span>
+            )}
 
-            {
-              !isFavorited && <a className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+            {!isFavorited && (
+              <span className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
                 Favorite
-              </a>
-            }
+              </span>
+            )}
 
           </div>
         </div>
@@ -146,6 +172,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
   } = laundry;
+
   return {
     laundryHallInfo,
     pending,
@@ -155,11 +182,11 @@ const mapStateToProps = ({ laundry }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName)),
-    removeFavorite: (laundryHallId) => dispatch(removeFavorite(laundryHallId))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addFavorite: (laundryHallId, location, hallName) => dispatch(
+    addFavorite(laundryHallId, location, hallName),
+  ),
+  removeFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue);
+export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

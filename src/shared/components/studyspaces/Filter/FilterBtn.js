@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import s from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import s from 'styled-components'
+import PropTypes from 'prop-types'
+
 
 import {
   WHITE,
@@ -11,9 +12,8 @@ import {
   BORDER,
   SNOW_ALPHA,
   MEDIUM_GRAY,
-} from '../../../styles/colors';
+} from '../../../styles/colors'
 
-/* background: ${({ active }) => (active ? BLUE : WHITE)}; */
 
 const FilterBtnWrapper = s.div`
   margin-right: 1rem;
@@ -41,40 +41,11 @@ const FilterBtnWrapper = s.div`
       background: ${DARK_BLUE} !important;
     }
   `)}
-`;
+`
 
-const noop = e => e.stopPropagation();
 
-// const FirstFilterBtnSpan = s.span`
-//   ${({ options }) => !options && (`
-//     border-radius: 4px !important;
-//   `)}
-//
-//   ${({ active, options }) => active && (
-//     options ? (`
-//       border-radius: 4px 0px 0px 4px !important;
-//     `) : (`
-//
-//     `)
-//   )}
-// `;
+const noop = e => e.stopPropagation()
 
-// const FilterBtnSpan = s.span`
-//   background: ${WHITE};
-//
-//   ${({ active }) => active && (`
-//     background: ${BLUE} !important;
-//     border-color: rgba(0, 0, 0, 0.1);
-//     color: white;
-//
-//     :hover,
-//     :focus {
-//       background: ${DARK_BLUE} !important;
-//     }
-//   `)}
-// `;
-
-// TODO animate this
 
 const OptionsModalBacking = s.div`
   position: fixed;
@@ -84,7 +55,8 @@ const OptionsModalBacking = s.div`
   height: 100vh;
   background: ${SNOW_ALPHA};
   z-index: 1299;
-`;
+`
+
 
 const OptionsModalWrapper = s.div`
   position: absolute;
@@ -113,7 +85,8 @@ const OptionsModalWrapper = s.div`
       margin-bottom: 0;
     }
   }
-`;
+`
+
 
 const Circle = s.span`
   height: 1rem;
@@ -128,50 +101,27 @@ const Circle = s.span`
     background: ${BLUE};
     border: 2px solid ${DARK_BLUE};
   `}
-`;
+`
+
 
 const OptionText = s.span`
   ${({ active }) => active && `
     color: ${DARK_GRAY};
   `}
-`;
+`
+
 
 class FilterBtn extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    // const { options } = this.props;
-    // let activeOptions = null;
-    //
-    // if (options && options.length) {
-    //   activeOptions = {};
-    //   options.forEach(option => { // eslint-disable-line
-    //     activeOptions[option] = false;
-    //   });
-    // }
-    //
-    // this.state = {
-    //   activeOptions,
-    // };
-
-    // this.handleClickOption = this.handleClickOption.bind(this);
-    this.areOptions = this.areOptions.bind(this);
+    this.areOptions = this.areOptions.bind(this)
   }
 
   areOptions() {
-    const { options } = this.props;
-    return Boolean(options && options.length);
+    const { options } = this.props
+    return Boolean(options && options.length)
   }
-
-  // handleClickOption(option) {
-  //   if (!option) return;
-  //
-  //   const { activeOptions } = this.state;
-  //   activeOptions[option] = !activeOptions[option];
-  //   this.setState({ activeOptions });
-  // }
-
-  // TODO ACTIVE SHOULD BE IN PROPS ONLY
 
   render() {
     const {
@@ -181,97 +131,68 @@ class FilterBtn extends Component {
       onClickOption,
       active,
       activeOptions = [],
-    } = this.props;
-    // const { activeOptions } = this.state;
-    const areOptions = options && options.length;
-    // let areActiveOptions = false;
-    let areActiveOptions = activeOptions && activeOptions.length;
+    } = this.props
 
-    let btnText = text;
+    const areOptions = options && options.length
+    let areActiveOptions = activeOptions && activeOptions.length
+    let btnText = text
 
+    // If the user is filtering by some attributes, set the text of the button
+    // to be the "active" attributes separated by commas
     if (areOptions && activeOptions && activeOptions.length) {
-      const activeOptionsArr = options.filter((o, idx) => activeOptions.includes(idx));
+      const activeOptionsArr = options.filter((o, idx) => activeOptions.includes(idx))
 
       if (activeOptionsArr && activeOptionsArr.length) {
-        areActiveOptions = true;
-        btnText = '';
+        areActiveOptions = true
+        btnText = ''
 
         activeOptionsArr.forEach((o) => {
-          btnText += `${o}, `;
+          btnText += `${o}, `
         });
 
-        btnText = btnText.substring(0, btnText.length - 2);
+        // Strip off the last comma
+        btnText = btnText.substring(0, btnText.length - 2)
       }
     }
 
     return (
-      <>
-        <FilterBtnWrapper
-          active={active || areActiveOptions}
-          options={areOptions}
-          onClick={() => {
-            onClick();
-          }}
-        >
-          {btnText}
-          {(areOptions && active) && (
-            <>
-              <OptionsModalBacking />
-              <OptionsModalWrapper onClick={noop}>
-                {options.map((o, idx) => {
-                  const isActiveOption = Boolean(activeOptions && activeOptions.includes(idx));
+      <FilterBtnWrapper
+        active={active || areActiveOptions}
+        options={areOptions}
+        onClick={onClick}
+      >
+        {btnText}
 
-                  return (
-                    <div
-                      key={o}
-                      onClick={() => { /* eslint-disable-line */
-                        // this.handleClickOption(o);
-                        onClickOption(idx);
-                      }}
-                      role="option"
-                      tabIndex={-1}
-                      aria-selected={isActiveOption}
-                      onKeyPress={() => /* todo */ {}}
-                    >
-                      <Circle active={isActiveOption} />
-                      <OptionText active={isActiveOption}>{o}</OptionText>
-                    </div>
-                  );
-                })}
-              </OptionsModalWrapper>
-            </>
-          )}
-        </FilterBtnWrapper>
-      </>
-    );
+        {(areOptions && active) && (
+          <>
+            <OptionsModalBacking />
+
+            <OptionsModalWrapper onClick={noop}>
+              {options.map((o, idx) => {
+                const isActiveOption = Boolean(activeOptions && activeOptions.includes(idx))
+
+                return (
+                  <div
+                    key={o}
+                    onClick={() => onClickOption(idx)}
+                    role="option"
+                    tabIndex={-1}
+                    aria-selected={isActiveOption}
+                    onKeyPress={() => /* TODO */ {}}
+                  >
+                    <Circle active={isActiveOption} />
+                    <OptionText active={isActiveOption}>{o}</OptionText>
+                  </div>
+                );
+              })}
+            </OptionsModalWrapper>
+          </>
+        )}
+      </FilterBtnWrapper>
+    )
   }
 }
 
-// <FirstFilterBtnSpan
-//   onClick={() => {
-//     this.handleClick();
-//     onClick();
-//   }}
-//   active={isActive}
-//   options={areOptions}
-// >
-//   {text}
-// </FirstFilterBtnSpan>
-
-// {isActive && options && options.length && (
-//   options.map((option, idx) => (
-//     <FilterBtnSpan
-//       onClick={() => {
-//         this.handleClickOption(option);
-//         onClickOption(idx);
-//       }}
-//       key={option}
-//       active={activeOptions[option]}
-//     >
-//       {option}
-//     </FilterBtnSpan>
-//   ))
-// )}
 
 FilterBtn.defaultProps = {
   options: null,
@@ -279,7 +200,8 @@ FilterBtn.defaultProps = {
   onClickOption: () => {},
   active: false,
   activeOptions: [],
-};
+}
+
 
 FilterBtn.propTypes = {
   text: PropTypes.string.isRequired,
@@ -288,6 +210,7 @@ FilterBtn.propTypes = {
   onClickOption: PropTypes.func,
   active: PropTypes.bool,
   activeOptions: PropTypes.arrayOf(PropTypes.number),
-};
+}
+
 
 export default FilterBtn;
