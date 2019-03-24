@@ -15,7 +15,7 @@ const defaultState = {
   error: false,
   laundryHalls: null,
   laundryHallInfo: null,
-  favorites: [],
+  favorites: JSON.parse(localStorage.getItem("laundry_favorites")),
 };
 
 const laundryReducer = (state = defaultState, action) => {

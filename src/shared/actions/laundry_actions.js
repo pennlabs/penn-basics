@@ -52,6 +52,7 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
     });
     try {
       const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
+
       const { data } = axiosResponse;
       dispatch({
         type: getLaundryHallInfoFulfilled,
@@ -85,15 +86,33 @@ export function getFavorites() {
 }
 
 export function addFavorite(laundryHallId, location, hallName) {
-  return (dispatch) => {
+  return async (dispatch) => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem("laundry_favorites");
 
     let favoritesArray = [];
     const favoriteLocation = {};
+
+    // update fields for favoritesArray
     favoriteLocation.locationName = `${location}: ${hallName}`;
     favoriteLocation.hallId = laundryHallId;
+
+    try {
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
+
+      const { data } = axiosResponse;
+
+      favoriteLocation.dryers = data.machines.dryers;
+      favoriteLocation.washers = data.machines.washers;
+
+    } catch (error) {
+      dispatch({
+        type: getLaundryHallInfoRejected,
+        error: error.message,
+      });
+    }
+
     if (!favoritesString) {
       favoritesArray = [favoriteLocation];
     } else {
