@@ -108,22 +108,23 @@ const LaundryVenue = ({
     if (pending) {
       return <div>Pending</div>;
     }
+
     return (
       <Wrapper>
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
-            {
-              isFavorited && <a className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
+            {isFavorited && (
+              <span className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
                 Unfavorite
-              </a>
-            }
+              </span>
+            )}
 
-            {
-              !isFavorited && <a className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+            {!isFavorited && (
+              <span className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
                 Favorite
-              </a>
-            }
+              </span>
+            )}
 
           </div>
         </div>
@@ -171,6 +172,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
   } = laundry;
+
   return {
     laundryHallInfo,
     pending,
@@ -180,11 +182,11 @@ const mapStateToProps = ({ laundry }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName)),
-    removeFavorite: (laundryHallId) => dispatch(removeFavorite(laundryHallId))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  addFavorite: (laundryHallId, location, hallName) => dispatch(
+    addFavorite(laundryHallId, location, hallName),
+  ),
+  removeFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue);
+export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)
