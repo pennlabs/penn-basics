@@ -5,6 +5,9 @@ import { BorderedCard } from '../shared';
 
 class Laundry extends Component {
   renderFavorites() {
+    if (!this.props.favortes) {
+      return null
+    }
     return (
       this.props.favorites.map((favorite, index, array) => {
         if (index >= 3) {
