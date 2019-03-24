@@ -13,13 +13,13 @@ const Hours = ({ start, end }) => {
     'Thursday',
     'Friday',
     'Saturday',
-  ];
+  ]
 
-  const hoursArr = [];
+  const hoursArr = []
 
-  let i;
+  let i
   for (i = 0; i < 7; i += 1) {
-    hoursArr.push(getHours({ start, end }, i));
+    hoursArr.push(getHours({ start, end }, i))
   }
 
   return (
@@ -27,6 +27,7 @@ const Hours = ({ start, end }) => {
       <Text fullWidth>
         <strong>Hours</strong>
       </Text>
+
       <table className="table is-bordered is-fullwidth">
         <tbody>
           {hoursArr.map((str, idx) => (

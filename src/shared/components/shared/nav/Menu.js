@@ -4,8 +4,8 @@ import React from 'react';
 const Menu = () => {
   const toggle = () => {
     const sidebar = document.getElementById('sidebar');
-    const shaddow = document.getElementById('shade');
-    shaddow.classList.toggle('fade-in');
+    const shadow = document.getElementById('shade');
+    shadow.classList.toggle('fade-in');
     sidebar.classList.toggle('active');
   };
 

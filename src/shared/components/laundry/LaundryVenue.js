@@ -178,7 +178,8 @@ LaundryVenue.propTypes = {
   pending: PropTypes.bool,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
-}
+  favorites: PropTypes.array, // eslint-disable-line
+} // TODO prop types for favorites
 
 
 const mapStateToProps = ({ laundry }) => {

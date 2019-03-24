@@ -272,4 +272,4 @@ FilterBtn.propTypes = {
 }
 
 
-export default FilterBtn;
+export default FilterBtn

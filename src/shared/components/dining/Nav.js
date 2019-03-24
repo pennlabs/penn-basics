@@ -1,4 +1,3 @@
-// Import frameworks
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -41,7 +40,7 @@ const NavSectionHeader = s.p`
 function diningCard(key, name, image) {
   // Images are served through the public folder
   // TODO subtext
-  const imgPath = `/img/venue_images/${image}`;
+  const imgPath = `/img/venue_images/${image}`
 
   return (
     <StyledLink to={`/dining/${key}`} key={key}>
@@ -119,4 +118,4 @@ Nav.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Nav;
+export default Nav
