@@ -115,13 +115,40 @@ class FilterBtn extends Component {
   constructor(props) {
     super(props)
 
+    this.focusRef = React.createRef()
+
     this.areOptions = this.areOptions.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
+
+
+  componentDidUpdate(prevProps) {
+    const { active } = this.props
+
+    // If we are showing the modal, focus on it
+    if (active && !prevProps.active) {
+      this.focusRef.current.focus()
+    }
+  }
+
+
+  handleKeyPress(event) {
+    const ESCAPE_KEY_CODE = 27
+    const { active } = this.props
+
+    if (event.keyCode === ESCAPE_KEY_CODE && active) {
+      const { onClick } = this.props
+
+      onClick()
+    }
+  }
+
 
   areOptions() {
     const { options } = this.props
     return Boolean(options && options.length)
   }
+
 
   render() {
     const {
@@ -160,6 +187,10 @@ class FilterBtn extends Component {
         active={active || areActiveOptions}
         options={areOptions}
         onClick={onClick}
+        tabIndex={active ? 0 : -1}
+        ref={this.focusRef}
+        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyPress}
       >
         {btnText}
 
