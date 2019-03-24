@@ -210,7 +210,10 @@ export class Modal extends Component {
     const ESCAPE_KEY_CODE = 27
     const { show } = this.props
 
-    if (event.keyCode === ESCAPE_KEY_CODE && show) {
+    if (
+      (event.keyCode === ESCAPE_KEY_CODE || event.key.toLowerCase() === 'escape')
+      && show
+    ) {
       const { toggle } = this.props
 
       toggle()
