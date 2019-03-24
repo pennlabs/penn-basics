@@ -7,7 +7,7 @@ import {
 } from '../../styles/colors';
 
 export const Card = styled.div`
-  background: ${WHITE};
+  background: ${({ background }) => background || WHITE};
   padding: ${({ padding }) => padding || '1rem'};
   box-shadow: ${({ shade }) => (shade ? `0 0 14px 0 ${SHADOW}` : 'none')};
   opacity: 1;
