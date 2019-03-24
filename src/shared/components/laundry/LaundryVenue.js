@@ -45,17 +45,17 @@ const Table = s.table`
 `
 
 const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
-  const tableMachines = allMachines.filter(machine => machine.type === machineType);
-  const { open, running, out_of_order: outOfOrder } = machineData;
+  const tableMachines = allMachines.filter(machine => machine.type === machineType)
+  const { open, running, out_of_order: outOfOrder } = machineData
   return (
-    <div>
+    <>
       <Row justifyContent="space-between">
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
-          <Overview width="30%" key={title} color={color} background={background}>
+          <Overview width="30%" key={`${machineType}-${title}`} color={color} background={background}>
             <h1>{number}</h1>
             <p>{title}</p>
           </Overview>
@@ -77,7 +77,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
                 tableMachines.map((machine) => {
                   const { status, time_remaining: timeRemaining, id } = machine;
                   return (
-                    <tr>
+                    <tr key={id}>
                       <td>{id}</td>
                       <td>{status}</td>
                       <td>{timeRemaining}</td>
@@ -89,7 +89,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
           </Table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -97,31 +97,41 @@ const LaundryVenue = ({
   laundryHallInfo,
   pending,
   laundryHallId,
-  addFavorite,
-  removeFavorite,
+  dispatchAddFavorite,
+  dispatchRemoveFavorite,
   favorites,
 }) => {
   const isFavorited = favorites.some(favorite => favorite.hallId === laundryHallId);
   if (laundryHallInfo) {
     const { hall_name: hallName, location } = laundryHallInfo;
     const { washers, dryers, details: machines } = laundryHallInfo.machines;
+
+    // TODO ghost loaders?
     if (pending) {
-      return <div>Pending</div>;
+      return <div>Loading...</div>
     }
-    
+
+    // TODO accessibility
+
     return (
       <Wrapper>
         <div className="columns">
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
             {isFavorited && (
-              <span className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
+              <span
+                className="button is-danger"
+                onClick={() => dispatchRemoveFavorite(laundryHallId)}
+              >
                 Unfavorite
               </span>
             )}
 
             {!isFavorited && (
-              <span className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+              <span
+                className="button is-warning"
+                onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
+              >
                 Favorite
               </span>
             )}
@@ -147,13 +157,16 @@ const LaundryVenue = ({
     );
   }
 
-  return null;
-};
+  return null
+}
+
 
 LaundryVenue.defaultProps = {
   laundryHallInfo: null,
   pending: true,
-};
+  laundryHallId: null,
+}
+
 
 LaundryVenue.propTypes = {
   laundryHallInfo: PropTypes.shape({
@@ -161,8 +174,12 @@ LaundryVenue.propTypes = {
     location: PropTypes.string,
     machines: PropTypes.object,
   }),
+  laundryHallId: PropTypes.number,
   pending: PropTypes.bool,
-};
+  dispatchAddFavorite: PropTypes.func.isRequired,
+  dispatchRemoveFavorite: PropTypes.func.isRequired,
+}
+
 
 const mapStateToProps = ({ laundry }) => {
   const {
@@ -171,7 +188,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-  } = laundry;
+  } = laundry
 
   return {
     laundryHallInfo,
@@ -179,14 +196,16 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-  };
-};
+  }
+}
+
 
 const mapDispatchToProps = dispatch => ({
-  addFavorite: (laundryHallId, location, hallName) => dispatch(
+  dispatchAddFavorite: (laundryHallId, location, hallName) => dispatch(
     addFavorite(laundryHallId, location, hallName),
   ),
-  removeFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
+  dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

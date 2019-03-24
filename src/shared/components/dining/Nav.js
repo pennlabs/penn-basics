@@ -40,14 +40,15 @@ const NavSectionHeader = s.p`
 
 function diningCard(key, name, image) {
   // Images are served through the public folder
-  const img = `/img/venue_images/${image}`;
+  // TODO subtext
+  const imgPath = `/img/venue_images/${image}`;
 
   return (
     <StyledLink to={`/dining/${key}`} key={key}>
       <Card padding="0.5rem 1rem" hoverable>
         <Row>
           {image && (
-            <Col backgroundImage={img} width="30%" borderRadius="4px" />
+            <Col backgroundImage={imgPath} width="30%" borderRadius="4px" />
           )}
           <Col
             padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
