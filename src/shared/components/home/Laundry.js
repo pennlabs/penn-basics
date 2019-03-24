@@ -11,25 +11,25 @@ class Laundry extends Component {
           return (null);
         }
 
-        if (index === array.length-1) {
+        if (index === array.length - 1) {
           return (
-              <div className="columns">
-                <div className="column">
-                  <h1 className="title is-6"> {`${index+1}. ${favorite.locationName}`} </h1>
-                </div>
-                <div className="column is-4">
-                  <h1 className="subtitle is-4"> Washers Availability </h1>
-                  <h1 className="subtitle is-6"> Available: {favorite.washers.open} </h1>
-                  <h1 className="subtitle is-6"> Busy: {favorite.washers.running} </h1>
-                  <h1 className="subtitle is-6"> Out of Order: {favorite.washers.out_of_order} </h1>
-                </div>
-                <div className="column is-5">
-                  <h1 className="subtitle is-4"> Dryers Availability </h1>
-                  <h1 className="subtitle is-6"> Available: {favorite.dryers.open} </h1>
-                  <h1 className="subtitle is-6"> Busy: {favorite.dryers.running} </h1>
-                  <h1 className="subtitle is-6"> Out of Order: {favorite.dryers.out_of_order} </h1>
-                </div>
+            <div className="columns">
+              <div className="column">
+                <h1 className="title is-6"> {`${index + 1}. ${favorite.locationName}`} </h1>
               </div>
+              <div className="column is-4">
+                <h1 className="subtitle is-4"> Washers Availability </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.washers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.washers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.washers.out_of_order} </h1>
+              </div>
+              <div className="column is-5">
+                <h1 className="subtitle is-4"> Dryers Availability </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.dryers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.dryers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.dryers.out_of_order} </h1>
+              </div>
+            </div>
           )
         }
 
@@ -37,7 +37,7 @@ class Laundry extends Component {
           <>
             <div className="columns">
               <div className="column">
-                <h1 className="title is-6"> {`${index+1}. ${favorite.locationName}`} </h1>
+                <h1 className="title is-6"> {`${index + 1}. ${favorite.locationName}`} </h1>
               </div>
               <div className="column is-4">
                 <h1 className="subtitle is-4"> Washers Availability </h1>
@@ -70,22 +70,18 @@ class Laundry extends Component {
           <h3 className="subtitle is-6">Click to find an open machine.</h3>
           <img
             src="https://i.imgur.com/JDX9ism.png"
-            style={{ width: '50%'}}
+            style={{ width: '50%' }}
             alt="Laundry"
           />
           <h1 className="title is-5"> Your Favorite Laundry Halls </h1>
           <h3 className="subtitle is-6">Only the first 3 favorites will be shown</h3>
-          <br/>
+          <br />
         </article>
         {this.renderFavorites()}
 
       </BorderedCard>
-
     )
-
-
   }
-
 }
 
 const mapStateToProps = ({ laundry }) => {

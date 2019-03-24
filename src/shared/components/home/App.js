@@ -21,6 +21,7 @@ class Home extends Component {
       show: false,
       notification: '',
       dining: false,
+      quotes: null
     };
 
     this.close = this.close.bind(this);
@@ -47,6 +48,14 @@ class Home extends Component {
 
         // TODO better error handling
       });
+
+    axios.get('/api/quotes')
+      .then(res => {
+        this.setState({ quotes: res.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   close() {
@@ -55,7 +64,12 @@ class Home extends Component {
 
   render() {
     // TODO less bulma madness
-    const { dining, show, notification } = this.state;
+    const { dining, show, notification, quotes } = this.state;
+    if (!quotes) {
+      return null;
+    }
+
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
     return (
       <Wrapper>
@@ -67,18 +81,21 @@ class Home extends Component {
             <span role="img" aria-label="sun">☀️</span>
             Gooob morning!
           </h1>
-
-          <p className="content is-medium">
-            Insert some inspirational quote here from various people at Penn.
-            It will make people happy and give everyone some life.
-          </p>
+          <div className="content is-medium">
+            <p className="has-text-centered">
+              "{quote.quote}"
+            <p className="has-text-right">
+              --- {quote.author}
+              </p>
+            </p>
+          </div>
         </BorderedCard>
 
         <Reserve />
 
         <Dining show={dining} />
 
-        <Laundry/>
+        <Laundry />
 
         <Studyspaces />
       </Wrapper>
