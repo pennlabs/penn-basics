@@ -2,11 +2,48 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BorderedCard } from '../shared';
+import {
+  getFavoritesHomePage1,
+  getFavoritesHomePage2,
+  getFavoritesHomePage3
+} from '../../actions/laundry_actions';
 
 class Laundry extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    
+  }
+
   renderFavorites() {
+    const { getFavoritesHomePage1, getFavoritesHomePage2, getFavoritesHomePage3 } = this.props;
+    const favoritesArray = JSON.parse(localStorage.getItem('laundry_favorites'));
+    if (!favoritesArray) {
+      return;
+    }
+    console.log(favoritesArray);
+    getFavoritesHomePage1(favoritesArray[0]);
+    getFavoritesHomePage2(favoritesArray[1]);
+    getFavoritesHomePage3(favoritesArray[2]);
+    
+    const { favoriteHome1, favoriteHome2, favoriteHome3 } = this.props;
+    const favoritesHome = [];
+    if (favoriteHome1.locationName) {
+      favoritesHome.push(favoriteHome1);
+    }
+
+    if (favoriteHome2.locationName) {
+      favoritesHome.push(favoriteHome2);
+    }
+
+    if (favoriteHome3.locationName) {
+      favoritesHome.push(favoriteHome3);
+    }
+
     return (
-      this.props.favorites.map((favorite, index, array) => {
+      favoritesHome.map((favorite, index, array) => {
         if (index >= 3) {
           return (null);
         }
@@ -85,10 +122,20 @@ class Laundry extends Component {
 }
 
 const mapStateToProps = ({ laundry }) => {
-  const { favorites } = laundry;
+  const { favoriteHome1, favoriteHome2, favoriteHome3 } = laundry;
   return {
-    favorites
+    favoriteHome1,
+    favoriteHome2,
+    favoriteHome3
   };
 };
 
-export default connect(mapStateToProps, null)(Laundry);
+const mapDispatchToProps = (dispatch) => { //eslint-disable-line
+  return {
+    getFavoritesHomePage1: (laundryHall) => dispatch(getFavoritesHomePage1(laundryHall)),
+    getFavoritesHomePage2: (laundryHall) => dispatch(getFavoritesHomePage2(laundryHall)),
+    getFavoritesHomePage3: (laundryHall) => dispatch(getFavoritesHomePage3(laundryHall))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Laundry);

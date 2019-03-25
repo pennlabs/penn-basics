@@ -9,6 +9,9 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
+  getFavoritesHome1,
+  getFavoritesHome2,
+  getFavoritesHome3
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
@@ -68,6 +71,107 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
   };
 }
 
+export function getFavoritesHomePage1(laundryHall) {
+  return async (dispatch) => {
+    dispatch({
+      type: getLaundryHallInfoRequested
+    });
+
+    try {
+      if (!laundryHall.hallId){
+        dispatch({
+          type: getFavoritesHome1,
+          favorite: {}
+        });
+      }
+      const { locationName, hallId } = laundryHall
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
+
+      const { data } = axiosResponse;
+      let favorite = {};
+      favorite.locationName = locationName;
+      favorite.dryers = data.machines.dryers;
+      favorite.washers = data.machines.washers;
+      dispatch({
+        type: getFavoritesHome1,
+        favorite
+      });
+    } catch (error) {
+      dispatch({
+        type: getLaundryHallInfoRejected,
+        error: error.message,
+      });
+    }
+  }
+}
+
+export function getFavoritesHomePage2(laundryHall) {
+  return async (dispatch) => {
+    dispatch({
+      type: getLaundryHallInfoRequested
+    });
+
+    try {
+      if (!laundryHall.hallId){
+        dispatch({
+          type: getFavoritesHome2,
+          favorite: {}
+        });
+      }
+      const { locationName, hallId } = laundryHall
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
+
+      const { data } = axiosResponse;
+      let favorite = {};
+      favorite.locationName = locationName;
+      favorite.dryers = data.machines.dryers;
+      favorite.washers = data.machines.washers;
+      dispatch({
+        type: getFavoritesHome2,
+        favorite
+      });
+    } catch (error) {
+      dispatch({
+        type: getLaundryHallInfoRejected,
+        error: error.message,
+      });
+    }
+  }
+}
+
+export function getFavoritesHomePage3(laundryHall) {
+  return async (dispatch) => {
+    dispatch({
+      type: getLaundryHallInfoRequested
+    });
+
+    try {
+      if (!laundryHall.hallId){
+        dispatch({
+          type: getFavoritesHome3,
+          favorite: {}
+        });
+      }
+      const { locationName, hallId } = laundryHall
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
+
+      const { data } = axiosResponse;
+      let favorite = {};
+      favorite.locationName = locationName;
+      favorite.dryers = data.machines.dryers;
+      favorite.washers = data.machines.washers;
+      dispatch({
+        type: getFavoritesHome3,
+        favorite
+      });
+    } catch (error) {
+      dispatch({
+        type: getLaundryHallInfoRejected,
+        error: error.message,
+      });
+    }
+  }
+}
 
 export function getFavorites() {
   return (dispatch) => {
@@ -98,21 +202,6 @@ export function addFavorite(laundryHallId, location, hallName) {
     favoriteLocation.locationName = `${location}: ${hallName}`;
     favoriteLocation.hallId = laundryHallId;
 
-    try {
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
-
-      const { data } = axiosResponse;
-
-      favoriteLocation.dryers = data.machines.dryers;
-      favoriteLocation.washers = data.machines.washers;
-
-    } catch (error) {
-      dispatch({
-        type: getLaundryHallInfoRejected,
-        error: error.message,
-      });
-    }
-
     if (!favoritesString) {
       favoritesArray = [favoriteLocation];
     } else {
@@ -135,7 +224,7 @@ export function removeFavorite(laundryHallId) {
   return (dispatch) => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
-    
+
     const favoritesString = localStorage.getItem("laundry_favorites");
 
     let favoritesArray = JSON.parse(favoritesString);
