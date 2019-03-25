@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import { BorderedCard, Row, Col } from '../shared'
+import { BorderedCard, Row, Col} from '../shared'
 import {
   GREEN,
   MUSTARD,
