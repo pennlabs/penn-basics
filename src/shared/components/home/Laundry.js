@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BorderedCard } from '../shared';
 import {
-  getFavoritesHomePage1,
-  getFavoritesHomePage2,
-  getFavoritesHomePage3
+  getFavoritesHomePage,
 } from '../../actions/laundry_actions';
 
 class Laundry extends Component {
@@ -14,33 +12,13 @@ class Laundry extends Component {
   }
 
   componentDidMount() {
-    
+    const { getFavoritesHomePage } = this.props;
+    getFavoritesHomePage(JSON.parse(localStorage.getItem('laundry_favorites')));
   }
 
   renderFavorites() {
-    const { getFavoritesHomePage1, getFavoritesHomePage2, getFavoritesHomePage3 } = this.props;
-    const favoritesArray = JSON.parse(localStorage.getItem('laundry_favorites'));
-    if (!favoritesArray) {
-      return;
-    }
-    console.log(favoritesArray);
-    getFavoritesHomePage1(favoritesArray[0]);
-    getFavoritesHomePage2(favoritesArray[1]);
-    getFavoritesHomePage3(favoritesArray[2]);
-    
-    const { favoriteHome1, favoriteHome2, favoriteHome3 } = this.props;
-    const favoritesHome = [];
-    if (favoriteHome1.locationName) {
-      favoritesHome.push(favoriteHome1);
-    }
-
-    if (favoriteHome2.locationName) {
-      favoritesHome.push(favoriteHome2);
-    }
-
-    if (favoriteHome3.locationName) {
-      favoritesHome.push(favoriteHome3);
-    }
+    console.log(this.props.favoritesHome);
+    const {favoritesHome} = this.props;
 
     return (
       favoritesHome.map((favorite, index, array) => {
@@ -52,19 +30,19 @@ class Laundry extends Component {
           return (
             <div className="columns">
               <div className="column">
-                <h1 className="title is-6"> {`${index + 1}. ${favorite.locationName}`} </h1>
+                <h1 className="title is-6"> {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`} </h1>
               </div>
               <div className="column is-4">
                 <h1 className="subtitle is-4"> Washers Availability </h1>
-                <h1 className="subtitle is-6"> Available: {favorite.washers.open} </h1>
-                <h1 className="subtitle is-6"> Busy: {favorite.washers.running} </h1>
-                <h1 className="subtitle is-6"> Out of Order: {favorite.washers.out_of_order} </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.machines.washers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.machines.washers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.machines.washers.out_of_order} </h1>
               </div>
               <div className="column is-5">
                 <h1 className="subtitle is-4"> Dryers Availability </h1>
-                <h1 className="subtitle is-6"> Available: {favorite.dryers.open} </h1>
-                <h1 className="subtitle is-6"> Busy: {favorite.dryers.running} </h1>
-                <h1 className="subtitle is-6"> Out of Order: {favorite.dryers.out_of_order} </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.machines.dryers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.machines.dryers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.machines.dryers.out_of_order} </h1>
               </div>
             </div>
           )
@@ -74,26 +52,25 @@ class Laundry extends Component {
           <>
             <div className="columns">
               <div className="column">
-                <h1 className="title is-6"> {`${index + 1}. ${favorite.locationName}`} </h1>
+                <h1 className="title is-6"> {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`} </h1>
               </div>
               <div className="column is-4">
                 <h1 className="subtitle is-4"> Washers Availability </h1>
-                <h1 className="subtitle is-6"> Available: {favorite.washers.open} </h1>
-                <h1 className="subtitle is-6"> Busy: {favorite.washers.running} </h1>
-                <h1 className="subtitle is-6"> Out of Order: {favorite.washers.out_of_order} </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.machines.washers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.machines.washers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.machines.washers.out_of_order} </h1>
               </div>
               <div className="column is-5">
                 <h1 className="subtitle is-4"> Dryers Availability </h1>
-                <h1 className="subtitle is-6"> Available: {favorite.dryers.open} </h1>
-                <h1 className="subtitle is-6"> Busy: {favorite.dryers.running} </h1>
-                <h1 className="subtitle is-6"> Out of Order: {favorite.dryers.out_of_order} </h1>
+                <h1 className="subtitle is-6"> Available: {favorite.machines.dryers.open} </h1>
+                <h1 className="subtitle is-6"> Busy: {favorite.machines.dryers.running} </h1>
+                <h1 className="subtitle is-6"> Out of Order: {favorite.machines.dryers.out_of_order} </h1>
               </div>
             </div>
             <hr />
           </>
         )
       })
-
     )
   }
 
@@ -122,19 +99,15 @@ class Laundry extends Component {
 }
 
 const mapStateToProps = ({ laundry }) => {
-  const { favoriteHome1, favoriteHome2, favoriteHome3 } = laundry;
+  const { favoritesHome } = laundry;
   return {
-    favoriteHome1,
-    favoriteHome2,
-    favoriteHome3
+    favoritesHome
   };
 };
 
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
-    getFavoritesHomePage1: (laundryHall) => dispatch(getFavoritesHomePage1(laundryHall)),
-    getFavoritesHomePage2: (laundryHall) => dispatch(getFavoritesHomePage2(laundryHall)),
-    getFavoritesHomePage3: (laundryHall) => dispatch(getFavoritesHomePage3(laundryHall))
+    getFavoritesHomePage: (laundryHalls) => dispatch(getFavoritesHomePage(laundryHalls)),
   };
 };
 

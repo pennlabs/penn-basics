@@ -45,9 +45,7 @@ export const getLaundryHallInfoRequested = 'GET_LAUNDRY_HALL_INFO_REQUESTED';
 export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED';
 export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED';
 export const updateFavorites = 'UPDATE_FAVORITES';
-export const getFavoritesHome1 = 'GET_FAVORITES_HOME_1';
-export const getFavoritesHome2 = 'GET_FAVORITES_HOME_2';
-export const getFavoritesHome3 = 'GET_FAVORITES_HOME_3';
+export const getFavoritesHome = 'GET_FAVORITES_HOME';
 
 // misc actions
 export const updateLink = 'UPDATE_LINK';

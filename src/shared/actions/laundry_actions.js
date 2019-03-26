@@ -9,9 +9,7 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
-  getFavoritesHome1,
-  getFavoritesHome2,
-  getFavoritesHome3
+  getFavoritesHome,
 } from './action_types';
 
 const BASE = 'http://api.pennlabs.org';
@@ -71,99 +69,48 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
   };
 }
 
-export function getFavoritesHomePage1(laundryHall) {
+export function getFavoritesHomePage(laundryHalls) {
   return async (dispatch) => {
     dispatch({
       type: getLaundryHallInfoRequested
     });
 
-    try {
-      if (!laundryHall.hallId){
-        dispatch({
-          type: getFavoritesHome1,
-          favorite: {}
-        });
-      }
-      const { locationName, hallId } = laundryHall
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
-
-      const { data } = axiosResponse;
-      let favorite = {};
-      favorite.locationName = locationName;
-      favorite.dryers = data.machines.dryers;
-      favorite.washers = data.machines.washers;
-      dispatch({
-        type: getFavoritesHome1,
-        favorite
-      });
-    } catch (error) {
-      dispatch({
-        type: getLaundryHallInfoRejected,
-        error: error.message,
-      });
-    }
-  }
-}
-
-export function getFavoritesHomePage2(laundryHall) {
-  return async (dispatch) => {
-    dispatch({
-      type: getLaundryHallInfoRequested
-    });
+    const IdArray = laundryHalls.map(hall => hall.hallId);
 
     try {
-      if (!laundryHall.hallId){
+      if (IdArray.length === 0) {
         dispatch({
-          type: getFavoritesHome2,
-          favorite: {}
+          type: getFavoritesHome,
+          favorites: []
+        });
+      } else if (IdArray.length === 1) {
+        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
+        const { data } = axiosResponse;
+        dispatch({
+          type: getFavoritesHome,
+          favorites: [data]
+        });
+      } else if (IdArray.length === 2) {
+        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
+        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`);
+        const data1 = axiosResponse1.data;
+        const data2 = axiosResponse2.data;
+        dispatch({
+          type: getFavoritesHome,
+          favorites: [data1, data2]
+        });
+      } else {
+        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
+        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`);
+        const axiosResponse3 = await axios.get(`${BASE}/laundry/hall/${IdArray[2]}`);
+        const data1 = axiosResponse1.data;
+        const data2 = axiosResponse2.data;
+        const data3 = axiosResponse3.data;
+        dispatch({
+          type: getFavoritesHome,
+          favorites: [data1, data2, data3]
         });
       }
-      const { locationName, hallId } = laundryHall
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
-
-      const { data } = axiosResponse;
-      let favorite = {};
-      favorite.locationName = locationName;
-      favorite.dryers = data.machines.dryers;
-      favorite.washers = data.machines.washers;
-      dispatch({
-        type: getFavoritesHome2,
-        favorite
-      });
-    } catch (error) {
-      dispatch({
-        type: getLaundryHallInfoRejected,
-        error: error.message,
-      });
-    }
-  }
-}
-
-export function getFavoritesHomePage3(laundryHall) {
-  return async (dispatch) => {
-    dispatch({
-      type: getLaundryHallInfoRequested
-    });
-
-    try {
-      if (!laundryHall.hallId){
-        dispatch({
-          type: getFavoritesHome3,
-          favorite: {}
-        });
-      }
-      const { locationName, hallId } = laundryHall
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallId}`);
-
-      const { data } = axiosResponse;
-      let favorite = {};
-      favorite.locationName = locationName;
-      favorite.dryers = data.machines.dryers;
-      favorite.washers = data.machines.washers;
-      dispatch({
-        type: getFavoritesHome3,
-        favorite
-      });
     } catch (error) {
       dispatch({
         type: getLaundryHallInfoRejected,
