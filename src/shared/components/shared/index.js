@@ -8,3 +8,4 @@ export * from './Line';
 export * from './Scrollbar';
 export * from './Circle';
 export * from './nav/SectionHeader';
+export * from './LaundryOverview';

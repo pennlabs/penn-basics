@@ -1,7 +1,7 @@
 import s from 'styled-components';
-import {Col} from '../shared';
+import { Col } from '../shared';
 
-export const Overview = s(Col)`
+export const LaundryOverview = s(Col)`
   margin-bottom: 1rem;
   border-radius: 4px;
   padding: 0.5rem 0;

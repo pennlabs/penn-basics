@@ -9,8 +9,6 @@ import {
   Col,
   Card,
   Scrollbar,
-  Subtitle,
-  Subtext,
   Line,
   NavSectionHeader
 } from '../shared'

@@ -4,7 +4,12 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import Loading from '../shared/Loading';
-import { BorderedCard, Row, Col } from '../shared'
+import {
+  BorderedCard,
+  Row,
+  Col,
+  LaundryOverview
+} from '../shared'
 import {
   GREEN,
   MUSTARD,
@@ -17,28 +22,6 @@ import { addFavorite, removeFavorite } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
-`
-
-const Overview = s(Col)`
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  padding: 0.5rem 0;
-
-  h1, p {
-    color: ${({ color }) => color};
-    text-align: center;
-  }
-
-  p {
-    font-weight: 500;
-  }
-
-  h1 {
-    font-weight: bold;
-    font-size: 2rem;
-    margin-bottom: 0.2rem;
-    line-height: 1;
-  }
 `
 
 const Table = s.table`
@@ -56,10 +39,10 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
-          <Overview width="30%" key={title} color={color} background={background}>
+          <LaundryOverview width="30%" key={title} color={color} background={background}>
             <h1>{number}</h1>
             <p>{title}</p>
-          </Overview>
+          </LaundryOverview>
         ))}
       </Row>
 
