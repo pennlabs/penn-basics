@@ -4,10 +4,16 @@ import uuid from 'uuid';
 import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions';
 
 import {
+  Card,
   Row,
   Col,
-  Scrollbar
+  Scrollbar,
+  NavSectionHeader,
+  Line
 } from '../shared';
+import {
+  BABY_BLUE,
+} from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
@@ -39,6 +45,11 @@ class App extends Component {
           borderRight
         >
           <Favorites />
+          <Card background={BABY_BLUE} padding="0">
+            <NavSectionHeader className="title is-5"> Laundry Halls </NavSectionHeader>
+            <Line />
+          </Card>
+
           {
             laundryHalls
             && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)

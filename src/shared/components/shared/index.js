@@ -7,3 +7,4 @@ export * from './Map';
 export * from './Line';
 export * from './Scrollbar';
 export * from './Circle';
+export * from './nav/SectionHeader';

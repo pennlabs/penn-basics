@@ -12,6 +12,7 @@ import {
   Subtitle,
   Subtext,
   Line,
+  NavSectionHeader
 } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard';
@@ -30,11 +31,6 @@ const StyledLink = s(Link)`
   h2 {
     color: ${DARK_GRAY} !important;
   }
-`
-
-const NavSectionHeader = s.p`
-  padding: 0.5rem 1rem;
-  margin-bottom: 0 !important;
 `
 
 const Nav = ({ children }) => {

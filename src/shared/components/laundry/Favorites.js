@@ -6,11 +6,13 @@ import { getFavorites } from '../../actions/laundry_actions';
 
 import {
   Card,
-  Subtitle,
-  Subtext,
-  Row,
-  Col,
+  Line,
+  NavSectionHeader
 } from '../shared';
+
+import {
+  BABY_BLUE,
+} from '../../styles/colors'
 
 // TODO hours for the day?
 
@@ -27,12 +29,9 @@ class Favorites extends Component {
     if (favorites && favorites.length > 0) {
       return (
         <div>
-          <Card padding="0.5rem 1rem">
-            <Row>
-              <Col padding="0">
-                <Subtitle marginBottom="0"> Favorites </Subtitle>
-              </Col>
-            </Row>
+          <Card background={BABY_BLUE} padding="0">
+            <NavSectionHeader className="title is-5"> Favorites </NavSectionHeader>
+            <Line />
           </Card>
 
           {

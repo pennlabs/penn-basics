@@ -10,6 +10,7 @@ import {
   Subtext,
   Row,
   Col,
+  Line
 } from '../shared';
 
 // TODO hours for the day?
@@ -29,15 +30,13 @@ class FavoriteCard extends Component {
 
   render() {
     return (
-      <>
-        <Card padding="0.5rem 1rem" hoverable onClick={() => this.onClick()}>
-          <Row>
-            <Col padding="0">
-              <Subtext> {this.props.locationName} </Subtext>
-            </Col>
-          </Row>
-        </Card>
-      </>
+      <Card padding="0.5rem 1rem" hoverable onClick={() => this.onClick()}>
+        <Row>
+          <Col padding="0">
+            <Subtext> {this.props.locationName} </Subtext>
+          </Col>
+        </Row>
+      </Card>
     );
   }
 }

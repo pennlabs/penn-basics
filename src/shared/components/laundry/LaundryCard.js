@@ -10,6 +10,7 @@ import {
   Subtext,
   Row,
   Col,
+  Line
 } from '../shared';
 
 // TODO hours for the day?
