@@ -6,7 +6,6 @@ import { Col } from './Flex';
 
 export const Scrollbar = s(Col)`
   background: ${WHITE};
-  height: 94%;
   overflowY: scroll;
   overflowX: hidden;
 
