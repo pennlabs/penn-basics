@@ -148,7 +148,4 @@ const mapDispatchToProps = dispatch => ({
   setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SpaceCard)
+export default connect(mapStateToProps, mapDispatchToProps)(SpaceCard);

@@ -14,6 +14,7 @@ import {
   Line,
 } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
+import DiningCard from './DiningCard';
 import {
   WHITE,
   DARK_GRAY,
@@ -36,38 +37,6 @@ const NavSectionHeader = s.p`
   margin-bottom: 0 !important;
 `
 
-// TODO make this a component
-
-function diningCard(key, name, image) {
-  // Images are served through the public folder
-  const img = `/img/venue_images/${image}`;
-
-  return (
-    <StyledLink to={`/dining/${key}`} key={key}>
-      <Card padding="0.5rem 1rem" hoverable>
-        <Row>
-          {image && (
-            <Col backgroundImage={img} width="30%" borderRadius="4px" />
-          )}
-          <Col
-            padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
-          >
-            <Subtitle marginBottom="0">
-              {name}
-            </Subtitle>
-
-            <Subtext marginBottom="0">
-              This is some subtext
-            </Subtext>
-          </Col>
-        </Row>
-      </Card>
-
-      <Line />
-    </StyledLink>
-  );
-}
-
 const Nav = ({ children }) => {
   const keys = Object.keys(venueData);
   const diningKeys = keys.filter(key => !retailLocations.includes(key))
@@ -89,7 +58,7 @@ const Nav = ({ children }) => {
 
         {diningKeys.map((key) => {
           const { name, image } = venueData[key]
-          return diningCard(key, name, image)
+          return <DiningCard venueId={key} name={name} image={image} />
         })}
 
         <Card background={BABY_BLUE} padding="0">
@@ -99,7 +68,7 @@ const Nav = ({ children }) => {
 
         {retailKeys.map((key) => {
           const { name, image } = venueData[key]
-          return diningCard(key, name, image)
+          return <DiningCard venueId={key} name={name} image={image} />
         })}
 
         <PennLabsCredit />

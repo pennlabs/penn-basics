@@ -9,7 +9,7 @@ import {
   setMealsFulfilled,
 } from './action_types';
 
-export function getVenueInfo(venueId) {
+export const getVenueInfo = venueId => {
   return (dispatch) => {
     dispatch({ type: getVenueInfoRequested });
 
@@ -44,7 +44,7 @@ export function getVenueInfo(venueId) {
   };
 }
 
-export function getDiningData(venueId) {
+export const getDiningData = venueId => {
   return (dispatch) => {
     dispatch({
       type: getDiningDataRequested,

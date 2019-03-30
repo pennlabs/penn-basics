@@ -230,7 +230,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 // Redux config
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(DiningVenue);
+export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue);

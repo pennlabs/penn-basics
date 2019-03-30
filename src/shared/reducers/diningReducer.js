@@ -107,7 +107,9 @@ const defaultState = {
   diningDataPending: true,
   meal: '',
   meals: [],
+  venueHoursCard: [],
   venueHoursPending: true,
+  venueHoursCardPending: true,
   dateFormatted: getCurrentDateFormatted(),
   dateFormattedToday: getCurrentDateFormatted(),
   sidebarInfo: [{

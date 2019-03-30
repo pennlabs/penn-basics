@@ -6,6 +6,7 @@ import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions';
 import {
   Row,
   Col,
+  Scrollbar
 } from '../shared';
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
@@ -29,18 +30,20 @@ class App extends Component {
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
-        <Col
+        <Scrollbar
           padding="0 0 .5rem 0"
           background={WHITE}
           overflowY="scroll"
-          width="20%"
+          width="30%"
+          borderRight
         >
           <Favorites />
           {
             laundryHalls
             && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)
           }
-        </Col>
+        </Scrollbar>
+
         <Col
           width="80%"
           overflowY="scroll"

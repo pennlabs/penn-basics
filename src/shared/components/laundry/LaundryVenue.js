@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
+import Loading from '../shared/Loading';
 import { BorderedCard, Row, Col } from '../shared'
 import {
   GREEN,
@@ -106,8 +107,13 @@ const LaundryVenue = ({
   if (laundryHallInfo) {
     const { hall_name: hallName, location } = laundryHallInfo;
     const { washers, dryers, details: machines } = laundryHallInfo.machines;
+
     if (pending) {
-      return <div>Pending</div>;
+      return (
+        <Wrapper>
+          <Loading />
+        </Wrapper>
+      );
     }
 
     return (
