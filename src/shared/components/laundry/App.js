@@ -26,6 +26,7 @@ class App extends Component {
     const {
       laundryHalls, //eslint-disable-line
     } = this.props;
+
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Col
@@ -34,7 +35,7 @@ class App extends Component {
           overflowY="scroll"
           width="20%"
         >
-          <Favorites/>
+          <Favorites />
           {
             laundryHalls
             && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)

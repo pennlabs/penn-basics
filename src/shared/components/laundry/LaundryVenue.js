@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import { BorderedCard, Row, Col} from '../shared'
+import { BorderedCard, Row, Col } from '../shared'
 import {
   GREEN,
   MUSTARD,
@@ -101,6 +101,7 @@ const LaundryVenue = ({
   removeFavorite,
   favorites,
 }) => {
+  console.log(laundryHallId)
   const isFavorited = favorites.some(favorite => favorite.hallId === laundryHallId);
   if (laundryHallInfo) {
     const { hall_name: hallName, location } = laundryHallInfo;
@@ -108,7 +109,7 @@ const LaundryVenue = ({
     if (pending) {
       return <div>Pending</div>;
     }
-    
+
     return (
       <Wrapper>
         <div className="columns">
@@ -147,7 +148,16 @@ const LaundryVenue = ({
     );
   }
 
-  return null;
+  return (
+    <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
+      <div className="column is-7">
+        <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
+        <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+          Select a laundry hall to see information
+        </p>
+      </div>
+    </div>
+  )
 };
 
 LaundryVenue.defaultProps = {

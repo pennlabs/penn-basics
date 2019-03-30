@@ -82,11 +82,7 @@ class Laundry extends Component {
             <h1 className="title is-4">Laundry</h1>
           </Link>
           <h3 className="subtitle is-6">Click to find an open machine.</h3>
-          <img
-            src="https://i.imgur.com/JDX9ism.png"
-            style={{ width: '50%' }}
-            alt="Laundry"
-          />
+          <br/>
           <h1 className="title is-5"> Your Favorite Laundry Halls </h1>
           <h3 className="subtitle is-6">Only the first 3 favorites will be shown</h3>
           <br />
