@@ -8,6 +8,7 @@ import {
   Col,
   Scrollbar
 } from '../shared';
+import PennLabsCredit from '../shared/PennLabsCredit'
 import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import LaundryCard from './LaundryCard';
@@ -34,7 +35,7 @@ class App extends Component {
           padding="0 0 .5rem 0"
           background={WHITE}
           overflowY="scroll"
-          width="30%"
+          width="20%"
           borderRight
         >
           <Favorites />
@@ -42,6 +43,7 @@ class App extends Component {
             laundryHalls
             && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)
           }
+          <PennLabsCredit />
         </Scrollbar>
 
         <Col

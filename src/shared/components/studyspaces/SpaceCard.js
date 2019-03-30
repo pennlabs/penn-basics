@@ -10,21 +10,10 @@ import {
   Subtext,
   Row,
   Col,
+  Circle
 } from '../shared';
-import { GREEN, BORDER } from '../../styles/colors'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
-
-const Circle = s.div`
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: ${({ open }) => (open ? GREEN : BORDER)};
-`
 
 const Content = s.div`
   width: 100%;
