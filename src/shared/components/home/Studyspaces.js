@@ -1,9 +1,9 @@
-import React from 'react';
-import StudyCards from './StudyCards';
-import { BorderedCard } from '../shared';
+import React from 'react'
+import StudyCards from './StudyCards'
+import { BorderedCard } from '../shared'
+
 
 // TODO why two study cards?
-
 const Studyspaces = () => (
   <BorderedCard>
     <h1 className="title is-4">
@@ -17,6 +17,7 @@ const Studyspaces = () => (
     <StudyCards />
     <StudyCards />
   </BorderedCard>
-);
+)
 
-export default Studyspaces;
+
+export default Studyspaces

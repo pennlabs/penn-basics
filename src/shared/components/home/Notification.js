@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-// Render the notification component for the home page
+
+// TODO wat
 const Notification = ({
   show,
   text,
@@ -14,15 +15,16 @@ const Notification = ({
       <strong>
         {text}
       </strong>
-      ⚡
+      {'⚡'}
     </p>
   </div>
-);
+)
 
-// Prop validations
+
 Notification.propTypes = {
   show: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-};
+}
+
 
 export default Notification;
