@@ -16,7 +16,6 @@ import NotFound from './shared/NotFound'
 import Dining from './dining/App'
 import DiningVenue from './dining/DiningVenue'
 import Laundry from './laundry/App'
-import LaundryVenue from './laundry/LaundryVenue'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
 import Mobile from './mobile/App'
@@ -54,7 +53,7 @@ export default () => (
             <Route exact path="/dining" component={Dining} />
             <Route exact path="/dining/:id" component={DiningVenue} />
             <Route exact path="/laundry" component={Laundry} />
-            <Route exact path="/laundry/:id" component={LaundryVenue} />
+            <Route exact path="/laundry/:id" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />
             <Route exact path="/reservations" component={Reservations} />
             <Route path="*" component={NotFound} />

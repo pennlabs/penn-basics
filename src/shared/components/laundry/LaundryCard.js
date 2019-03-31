@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import uuid from 'uuid';
 import { connect } from 'react-redux'
+import s from 'styled-components'
 import { getLaundryHall } from '../../actions/laundry_actions'
 import {
   Card,
@@ -12,6 +14,17 @@ import {
   Line
 } from '../shared';
 
+import {
+  WHITE,
+  DARK_GRAY,
+  BABY_BLUE,
+} from '../../styles/colors'
+
+const StyledLink = s(Link)`
+  h2 {
+    color: ${DARK_GRAY} !important;
+  }
+`
 
 class LaundryCard extends Component {
   constructor(props) {
@@ -79,13 +92,16 @@ class LaundryCard extends Component {
 
         {
           expanded && halls.length >= 2 && halls.map(({ hall_name: hallName, id }) => (//eslint-disable-line
-            <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)} key={uuid()}>
-              <Row>
-                <Col padding="0">
-                  <Subtext>{hallName}</Subtext>
-                </Col>
-              </Row>
-            </Card>
+            // <StyledLink to={`/laundry/${id}`} hallId={id}>
+            <StyledLink to={`/laundry/${id}`} hallId={id}>
+              <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)} key={uuid()}>
+                <Row>
+                  <Col padding="0">
+                    <Subtext>{hallName}</Subtext>
+                  </Col>
+                </Row>
+              </Card>
+            </StyledLink>
           ))
         }
       </div>

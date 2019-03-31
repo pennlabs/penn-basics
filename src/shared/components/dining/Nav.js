@@ -24,11 +24,6 @@ import venueData from '../../../server/database/venue_info.json'
 
 import { retailLocations } from './constants'
 
-const StyledLink = s(Link)`
-  h2 {
-    color: ${DARK_GRAY} !important;
-  }
-`
 
 const Nav = ({ children }) => {
   const keys = Object.keys(venueData);
