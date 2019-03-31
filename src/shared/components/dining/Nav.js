@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import s from 'styled-components'
 
 import {
   Row,
@@ -9,13 +7,12 @@ import {
   Card,
   Scrollbar,
   Line,
-  NavSectionHeader
+  NavSectionHeader,
 } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard';
 import {
   WHITE,
-  DARK_GRAY,
   BABY_BLUE,
 } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
@@ -23,12 +20,6 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 import venueData from '../../../server/database/venue_info.json'
 
 import { retailLocations } from './constants'
-
-const StyledLink = s(Link)`
-  h2 {
-    color: ${DARK_GRAY} !important;
-  }
-`
 
 const Nav = ({ children }) => {
   const keys = Object.keys(venueData);

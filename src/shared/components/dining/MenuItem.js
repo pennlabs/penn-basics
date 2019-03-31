@@ -3,13 +3,17 @@ import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 
 class MenuItem extends Component {
+  /**
+   * Fomat the description properly
+   * Descriptions starting with 1 should be excluded
+   * Descriptions with line breaks need to be parsed
+   *
+   * @param description
+   */
   static renderFormattedDescription(description) {
-    // Fomat the description properly
-    // Descriptions starting with 1 should be excluded
-    // Descriptions with line breaks need to be parsed
-    const descriptions = description.split('<br />');
+    const descriptions = description.split('<br />')
 
-    let formattedDescription = '';
+    let formattedDescription = ''
 
     if (descriptions.length <= 3) {
       // If the description is 3 paragraphs or less
@@ -20,87 +24,94 @@ class MenuItem extends Component {
             <p className="description" key={uuid()}>
               {value}
             </p>
-          );
+          )
         }
 
-        return '';
-      });
+        return ''
+      })
     } else {
       // If the description is longer than 3 paragraphs
       // Comma separate each paragraph
       formattedDescription = descriptions.map((value, index) => {
         if (value && value.length > 0 && !value.startsWith('1')) {
           if (index !== descriptions.length - 1) {
-            return `${value}, `;
+            return `${value}, `
           }
-          return value;
+
+          return value
         }
-        return '';
-      });
+
+        return ''
+      })
     }
 
+    if (!formattedDescription) return null;
+
     return (
-      formattedDescription ? (
-        <div className="description">
-          {formattedDescription}
-        </div>
-      ) : null
-    );
+      <div className="description">
+        {formattedDescription}
+      </div>
+    )
   }
 
+
+  /**
+   * Format the tags
+   *
+   * @param tags
+   */
   static renderFormattedTags(tags) {
-    // Format the tags
     return tags.map((oldTag) => {
-      let tagClass = '';
-      let tag = '';
+      let tagClass = ''
+      let tag = ''
 
       switch (oldTag) {
         case 'Made without Gluten-Containing Ingredients':
-          tag = 'Gluten Free*';
-          tagClass = 'gluten-free';
-          break;
+          tag = 'Gluten Free*'
+          tagClass = 'gluten-free'
+          break
 
         case 'Made without Gluten- Containing Ingredients':
-          tag = 'Gluten Free*';
-          tagClass = 'gluten-free';
-          break;
+          tag = 'Gluten Free*'
+          tagClass = 'gluten-free'
+          break
 
         case 'In Balance':
-          tag = 'Balanced';
-          tagClass = 'balanced';
-          break;
+          tag = 'Balanced'
+          tagClass = 'balanced'
+          break
 
         case 'Vegan':
-          tagClass = 'vegan';
-          break;
+          tagClass = 'vegan'
+          break
 
         case 'Vegetarian':
-          tagClass = 'vegetarian';
-          break;
+          tagClass = 'vegetarian'
+          break
 
         case 'Farm to Fork':
-          tagClass = 'farm-to-fork';
-          break;
+          tagClass = 'farm-to-fork'
+          break
 
         case 'Humane':
-          tagClass = 'humane';
-          break;
+          tagClass = 'humane'
+          break
 
         case 'Seafood Watch':
-          tagClass = 'seafood-watch';
-          break;
+          tagClass = 'seafood-watch'
+          break
 
         case 'Jain':
-          tagClass = 'jain';
-          break;
+          tagClass = 'jain'
+          break
 
         case 'Locally Crafted':
           tag = 'Local';
-          tagClass = 'local';
-          break;
+          tagClass = 'local'
+          break
 
         default:
-          break;
+          break
       }
 
       return (
@@ -110,8 +121,8 @@ class MenuItem extends Component {
         >
           {tag || oldTag}
         </span>
-      );
-    });
+      )
+    })
   }
 
   render() {
@@ -119,24 +130,27 @@ class MenuItem extends Component {
       title,
       tags,
       description,
-    } = this.props;
+    } = this.props
 
     return (
       <div className="menuItem">
         <p className="title">
           {title}
         </p>
+
         {MenuItem.renderFormattedTags(tags)}
         {MenuItem.renderFormattedDescription(description)}
       </div>
-    );
+    )
   }
 }
+
 
 MenuItem.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-};
+}
 
-export default MenuItem;
+
+export default MenuItem

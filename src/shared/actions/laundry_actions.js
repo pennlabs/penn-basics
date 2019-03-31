@@ -1,5 +1,6 @@
-import axios from 'axios';
-import _ from 'lodash';
+/* globals localStorage */
+import axios from 'axios'
+import _ from 'lodash'
 
 import {
   getLaundryHallsDataRequested,
@@ -71,51 +72,51 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
 
 export function getFavoritesHomePage(laundryHalls) {
   return async (dispatch) => {
-    dispatch({
-      type: getLaundryHallInfoRequested
-    });
+    dispatch({ type: getLaundryHallInfoRequested })
 
-    const IdArray = laundryHalls.map(hall => hall.hallId);
+    const IdArray = laundryHalls.map(hall => hall.hallId)
+
+    // TODO fix this peter lmaoooo
 
     try {
       if (IdArray.length === 0) {
         dispatch({
           type: getFavoritesHome,
-          favorites: []
-        });
+          favorites: [],
+        })
       } else if (IdArray.length === 1) {
-        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
+        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
         const { data } = axiosResponse;
         dispatch({
           type: getFavoritesHome,
-          favorites: [data]
-        });
+          favorites: [data],
+        })
       } else if (IdArray.length === 2) {
-        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
-        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`);
+        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
+        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`)
         const data1 = axiosResponse1.data;
         const data2 = axiosResponse2.data;
         dispatch({
           type: getFavoritesHome,
-          favorites: [data1, data2]
-        });
+          favorites: [data1, data2],
+        })
       } else {
-        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`);
-        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`);
-        const axiosResponse3 = await axios.get(`${BASE}/laundry/hall/${IdArray[2]}`);
+        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
+        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`)
+        const axiosResponse3 = await axios.get(`${BASE}/laundry/hall/${IdArray[2]}`)
         const data1 = axiosResponse1.data;
         const data2 = axiosResponse2.data;
         const data3 = axiosResponse3.data;
         dispatch({
           type: getFavoritesHome,
-          favorites: [data1, data2, data3]
-        });
+          favorites: [data1, data2, data3],
+        })
       }
     } catch (error) {
       dispatch({
         type: getLaundryHallInfoRejected,
         error: error.message,
-      });
+      })
     }
   }
 }
@@ -140,7 +141,7 @@ export function addFavorite(laundryHallId, location, hallName) {
   return async (dispatch) => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
-    const favoritesString = localStorage.getItem("laundry_favorites");
+    const favoritesString = localStorage.getItem('laundry_favorites');
 
     let favoritesArray = [];
     const favoriteLocation = {};
@@ -158,7 +159,7 @@ export function addFavorite(laundryHallId, location, hallName) {
       }
     }
 
-    localStorage.setItem("laundry_favorites", JSON.stringify(favoritesArray));
+    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray));
 
     dispatch({
       type: updateFavorites,
@@ -172,9 +173,8 @@ export function removeFavorite(laundryHallId) {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
 
-    const favoritesString = localStorage.getItem("laundry_favorites");
-
-    let favoritesArray = JSON.parse(favoritesString);
+    const favoritesString = localStorage.getItem('laundry_favorites');
+    const favoritesArray = JSON.parse(favoritesString)
 
     favoritesArray.forEach((favorite, index) => {
       if (favorite.hallId === laundryHallId) {
@@ -182,7 +182,7 @@ export function removeFavorite(laundryHallId) {
       }
     })
 
-    localStorage.setItem("laundry_favorites", JSON.stringify(favoritesArray));
+    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray));
     dispatch({
       type: updateFavorites,
       favorites: favoritesArray,
