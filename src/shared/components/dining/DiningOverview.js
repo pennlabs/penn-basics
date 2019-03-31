@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { BorderedCard } from '../shared';
-import HoursVisualization from './HoursVisualization';
-import venueData from '../../../server/database/venue_info.json';
+import { BorderedCard } from '../shared'
+import HoursVisualization from './HoursVisualization'
+import venueData from '../../../server/database/venue_info.json'
 
 const DiningOverview = ({ id }) => {
-  const { description } = venueData[id];
+  const { description } = venueData[id]
 
   return (
     <BorderedCard>

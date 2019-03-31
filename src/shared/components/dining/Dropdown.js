@@ -10,7 +10,7 @@ class Dropdown extends Component {
     this.state = { selected }
 
     // Bind this to helper functions
-    this.handleChangeState = this.handleChangeState.bind(this);
+    this.handleChangeState = this.handleChangeState.bind(this)
   }
 
 
@@ -27,7 +27,7 @@ class Dropdown extends Component {
   handleChangeState(event) {
     this.setState({
       selected: event.target.value,
-    });
+    })
   }
 
 

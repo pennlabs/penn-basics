@@ -1,10 +1,12 @@
-import React from 'react';
-import uuid from 'uuid/v4';
-import PropTypes from 'prop-types';
-import s from 'styled-components';
+import React from 'react'
+import uuid from 'uuid/v4'
+import PropTypes from 'prop-types'
+import s from 'styled-components'
 
-import MenuItem from './MenuItem';
-import { BorderedCard } from '../shared';
+
+import MenuItem from './MenuItem'
+import { BorderedCard } from '../shared'
+
 
 const StyledBorderedCard = s(BorderedCard)`
   margin: 0 0.5rem;
@@ -32,7 +34,7 @@ const StyledBorderedCard = s(BorderedCard)`
       }
     }
   }
-`;
+`
 
 const Section = ({ title, items, shouldBeList = false }) => {
   let sectionItems = '';
@@ -60,6 +62,7 @@ const Section = ({ title, items, shouldBeList = false }) => {
           />
         );
       }
+
       return '';
     });
   } else if (!shouldBeList) {
@@ -78,6 +81,7 @@ const Section = ({ title, items, shouldBeList = false }) => {
       if (index === items.length - 1) {
         return item.title;
       }
+
       return `${item.title}, `;
     });
   }
@@ -89,22 +93,22 @@ const Section = ({ title, items, shouldBeList = false }) => {
           {title}
         </h3>
         {
-          shouldBeList
-            ? (
-              <p className="description marg-bot-1">
-                {sectionItems}
-              </p>
-            )
-            : sectionItems
+          shouldBeList ? (
+            <p className="description marg-bot-1">
+              {sectionItems}
+            </p>
+          ) : (sectionItems)
         }
       </StyledBorderedCard>
     </div>
-  );
-};
+  )
+}
+
 
 Section.defaultProps = {
   shouldBeList: false,
-};
+}
+
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,
@@ -114,6 +118,7 @@ Section.propTypes = {
     }),
   ).isRequired,
   shouldBeList: PropTypes.bool,
-};
+}
+
 
 export default Section;
