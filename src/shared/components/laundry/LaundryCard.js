@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import uuid from 'uuid';
-import { getLaundryHall } from '../../actions/laundry_actions';
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { getLaundryHall } from '../../actions/laundry_actions'
 import {
   Card,
   Subtitle,
@@ -13,42 +11,41 @@ import {
   Line
 } from '../shared';
 
-// TODO hours for the day?
 
 class LaundryCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expanded: false,
-    };
+    }
   }
 
   onLaundryLocationClick() {
+    const { expanded } = this.state
     this.setState({
-      expanded: !this.state.expanded,
-    });
+      expanded: !expanded,
+    })
   }
 
   onLaundryHallClick(hallId) {
-    const { getLaundryHall } = this.props;
-    getLaundryHall(hallId);
+    const { dispatchGetLaundryHall } = this.props
+    dispatchGetLaundryHall(hallId)
   }
 
   handleKeyPress(event) {
     if (event.keyCode === 32) {
-      this.toggleModal();
+      this.toggleModal()
     }
   }
 
   render() {
     const {
-      locationObject,
-    } = this.props;
-    const {
-      halls,
-      location,
-    } = locationObject;
-    const { expanded } = this.state;
+      locationObject: {
+        halls,
+        location,
+      },
+    } = this.props
+    const { expanded } = this.state
 
     // check if the hall has only one location object
     if (halls.length == 1) {
@@ -91,20 +88,38 @@ class LaundryCard extends Component {
           ))
         }
       </div>
-    );
+    )
   }
 }
 
 
 const mapStateToProps = ({ laundry }) => {
-  const { laundryHalls, laundryHallInfo } = laundry;
-  return { laundryHalls, laundryHallInfo };
-};
+  const { laundryHalls, laundryHallInfo } = laundry
+  return { laundryHalls, laundryHallInfo }
+}
+
 
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
-    getLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  };
-};
+    dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+  }
+}
+
+
+// TODO why is this called locationObject???
+
+
+LaundryCard.propTypes = {
+  dispatchGetLaundryHall: PropTypes.func.isRequired,
+  locationObject: PropTypes.shape({
+    location: PropTypes.string,
+    halls: PropTypes.arrayOf(PropTypes.shape({
+      hall_name: PropTypes.string,
+      id: PropTypes.number,
+      location: PropTypes.string,
+    })),
+  }).isRequired,
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaundryCard);

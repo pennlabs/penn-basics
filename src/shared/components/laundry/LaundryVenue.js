@@ -29,10 +29,10 @@ const Table = s.table`
 `
 
 const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
-  const tableMachines = allMachines.filter(machine => machine.type === machineType);
-  const { open, running, out_of_order: outOfOrder } = machineData;
+  const tableMachines = allMachines.filter(machine => machine.type === machineType)
+  const { open, running, out_of_order: outOfOrder } = machineData
   return (
-    <div>
+    <>
       <Row justifyContent="space-between">
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
@@ -61,7 +61,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
                 tableMachines.map((machine) => {
                   const { status, time_remaining: timeRemaining, id } = machine;
                   return (
-                    <tr>
+                    <tr key={id}>
                       <td>{id}</td>
                       <td>{status}</td>
                       <td>{timeRemaining}</td>
@@ -73,7 +73,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
           </Table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -81,8 +81,8 @@ const LaundryVenue = ({
   laundryHallInfo,
   pending,
   laundryHallId,
-  addFavorite,
-  removeFavorite,
+  dispatchAddFavorite,
+  dispatchRemoveFavorite,
   favorites,
 }) => {
   console.log(laundryHallId)
@@ -105,13 +105,19 @@ const LaundryVenue = ({
           <div className="column is-12">
             <h1 className="title">{hallName}</h1>
             {isFavorited && (
-              <span className="button is-danger" onClick={() => removeFavorite(laundryHallId)}>
+              <span
+                className="button is-danger"
+                onClick={() => dispatchRemoveFavorite(laundryHallId)}
+              >
                 Unfavorite
               </span>
             )}
 
             {!isFavorited && (
-              <span className="button is-warning" onClick={() => addFavorite(laundryHallId, location, hallName)}>
+              <span
+                className="button is-warning"
+                onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
+              >
                 Favorite
               </span>
             )}
@@ -152,7 +158,9 @@ const LaundryVenue = ({
 LaundryVenue.defaultProps = {
   laundryHallInfo: null,
   pending: true,
-};
+  laundryHallId: null,
+}
+
 
 LaundryVenue.propTypes = {
   laundryHallInfo: PropTypes.shape({
@@ -160,8 +168,13 @@ LaundryVenue.propTypes = {
     location: PropTypes.string,
     machines: PropTypes.object,
   }),
+  laundryHallId: PropTypes.number,
   pending: PropTypes.bool,
-};
+  dispatchAddFavorite: PropTypes.func.isRequired,
+  dispatchRemoveFavorite: PropTypes.func.isRequired,
+  favorites: PropTypes.array, // eslint-disable-line
+} // TODO prop types for favorites
+
 
 const mapStateToProps = ({ laundry }) => {
   const {
@@ -170,7 +183,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-  } = laundry;
+  } = laundry
 
   return {
     laundryHallInfo,
@@ -178,14 +191,16 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-  };
-};
+  }
+}
+
 
 const mapDispatchToProps = dispatch => ({
-  addFavorite: (laundryHallId, location, hallName) => dispatch(
+  dispatchAddFavorite: (laundryHallId, location, hallName) => dispatch(
     addFavorite(laundryHallId, location, hallName),
   ),
-  removeFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
+  dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

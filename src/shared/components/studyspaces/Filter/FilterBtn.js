@@ -12,10 +12,11 @@ import {
   BORDER,
   SNOW_ALPHA,
   MEDIUM_GRAY,
+  BABY_BLUE,
 } from '../../../styles/colors'
 
 
-const FilterBtnWrapper = s.div`
+const FilterBtnWrapper = s.a`
   margin-right: 1rem;
   cursor: pointer;
   box-sizing: border-box;
@@ -27,6 +28,7 @@ const FilterBtnWrapper = s.div`
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
+  color: ${MEDIUM_GRAY} !important;
 
   :hover {
     background: ${ALLBIRDS_GRAY};
@@ -34,7 +36,7 @@ const FilterBtnWrapper = s.div`
 
   ${({ active }) => active && (`
     background: ${BLUE} !important;
-    color: white;
+    color: ${WHITE} !important;
 
     :hover,
     :focus {
@@ -70,8 +72,8 @@ const OptionsModalWrapper = s.div`
   box-shadow: 0 0 8px ${BORDER};
 
   div {
-    margin-bottom: 0.5rem;
-    outline: 0 !important;
+    margin-bottom: 0.2rem;
+    outline: 0 !important; // TODO
 
     color: ${MEDIUM_GRAY};
 
@@ -84,6 +86,20 @@ const OptionsModalWrapper = s.div`
     :last-child {
       margin-bottom: 0;
     }
+  }
+`
+
+
+const Option = s.div`
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  margin-left: -0.4rem;
+  margin-right: -0.4rem;
+
+  :active,
+  :hover,
+  :focus {
+    background: ${BABY_BLUE};
   }
 `
 
@@ -105,9 +121,7 @@ const Circle = s.span`
 
 
 const OptionText = s.span`
-  ${({ active }) => active && `
-    color: ${DARK_GRAY};
-  `}
+  color: ${DARK_GRAY};
 `
 
 
@@ -115,13 +129,54 @@ class FilterBtn extends Component {
   constructor(props) {
     super(props)
 
+    this.focusRef = React.createRef()
+
     this.areOptions = this.areOptions.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
   }
+
+
+  componentDidUpdate(prevProps) {
+    const { active } = this.props
+
+    // If we are showing the modal, focus on it
+    if (active && !prevProps.active) {
+      this.focusRef.current.focus()
+    }
+  }
+
+
+  handleKeyPress(event) {
+    const ESCAPE_KEY_CODE = 27
+    const { active } = this.props
+
+    if (
+      (event.keyCode === ESCAPE_KEY_CODE || event.key.toLowerCase() === 'escape')
+      && active
+    ) {
+      const { onClick } = this.props
+
+      onClick()
+    }
+  }
+
+
+  handleOptionKeyPress(event, idx) {
+    const SPACE_KEY_CODE = 32
+    const { onClickOption } = this.props
+
+    if (event.keyCode === SPACE_KEY_CODE || event.key === ' ') {
+      onClickOption(idx)
+    }
+  }
+
 
   areOptions() {
     const { options } = this.props
     return Boolean(options && options.length)
   }
+
 
   render() {
     const {
@@ -157,9 +212,13 @@ class FilterBtn extends Component {
 
     return (
       <FilterBtnWrapper
+        tabIndex={0}
         active={active || areActiveOptions}
         options={areOptions}
         onClick={onClick}
+        ref={this.focusRef}
+        onKeyPress={this.handleKeyPress}
+        onKeyDown={this.handleKeyPress}
       >
         {btnText}
 
@@ -172,17 +231,17 @@ class FilterBtn extends Component {
                 const isActiveOption = Boolean(activeOptions && activeOptions.includes(idx))
 
                 return (
-                  <div
+                  <Option
                     key={o}
                     onClick={() => onClickOption(idx)}
                     role="option"
-                    tabIndex={-1}
+                    tabIndex={0}
                     aria-selected={isActiveOption}
-                    onKeyPress={() => /* TODO */ {}}
+                    onKeyPress={e => this.handleOptionKeyPress(e, idx)}
                   >
                     <Circle active={isActiveOption} />
                     <OptionText active={isActiveOption}>{o}</OptionText>
-                  </div>
+                  </Option>
                 );
               })}
             </OptionsModalWrapper>
@@ -213,4 +272,4 @@ FilterBtn.propTypes = {
 }
 
 
-export default FilterBtn;
+export default FilterBtn

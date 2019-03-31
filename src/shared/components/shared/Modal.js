@@ -9,6 +9,7 @@ import {
   SHADOW,
 } from '../../styles/colors'
 
+
 const Z_INDEX = 1200
 const ANIMATION_DURATION = '0.4s'
 const LG_WIDTH = 50
@@ -209,7 +210,10 @@ export class Modal extends Component {
     const ESCAPE_KEY_CODE = 27
     const { show } = this.props
 
-    if (event.keyCode === ESCAPE_KEY_CODE && show) {
+    if (
+      (event.keyCode === ESCAPE_KEY_CODE || event.key.toLowerCase() === 'escape')
+      && show
+    ) {
       const { toggle } = this.props
 
       toggle()
@@ -218,8 +222,8 @@ export class Modal extends Component {
 
 
   render() {
-    const { show, toggle, children } = this.props;
-    const { isNewlyMounted } = this.state;
+    const { show, toggle, children } = this.props
+    const { isNewlyMounted } = this.state
 
     return (
       <ModalWrapper
@@ -239,7 +243,7 @@ export class Modal extends Component {
           { children }
         </ModalContent>
       </ModalWrapper>
-    );
+    )
   }
 }
 

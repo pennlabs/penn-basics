@@ -6,10 +6,10 @@ General documentation for the Penn Basics codebase is available in Notion [here]
 
 After a `env.sh` file containing `PORT` and `MONGO_URL` values is created:
 
-`$ git clone https://github.com/pennlabs/pennbasics.git`
-
-`$ cd pennbasics && yarn`
-
-`$ yarn dev`
+```
+$ git clone https://github.com/pennlabs/pennbasics.git
+$ cd pennbasics && yarn
+$ yarn dev
+```
 
 React application will be available at `localhost:3000` or `PORT`.

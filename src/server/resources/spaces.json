@@ -1200,7 +1200,7 @@
       "Off Campus", "Coffee Shop"
     ],
     "address": "3675 Chestnut St, Philadelphia, PA 19104",
-    "image": "NEED LINK HERE CAM",
+    "image": "https://s3.amazonaws.com/pennbasics/quorum.jpg",
     "outlets": 1,
     "quiet": 3,
     "groups": 2,

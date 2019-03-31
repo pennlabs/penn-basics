@@ -17,7 +17,7 @@ class Laundry extends Component {
   }
 
   renderFavorites() {
-    console.log(this.props.favoritesHome);
+    // console.log(this.props.favoritesHome);
     const { favoritesHome } = this.props;
 
     return (

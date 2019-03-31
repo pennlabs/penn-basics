@@ -1,4 +1,3 @@
-// Import frameworks
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -81,4 +80,4 @@ Nav.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Nav;
+export default Nav
