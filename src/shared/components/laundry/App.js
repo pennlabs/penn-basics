@@ -33,7 +33,10 @@ class App extends Component {
   render() {
     const {
       laundryHalls, //eslint-disable-line
+      match
     } = this.props;
+
+    console.log(match.params.id);
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>

@@ -13,6 +13,7 @@ class Laundry extends Component {
 
   componentDidMount() {
     const { getFavoritesHomePage } = this.props;
+    // TODO: get rid of the param thing
     getFavoritesHomePage(JSON.parse(localStorage.getItem('laundry_favorites')));
   }
 

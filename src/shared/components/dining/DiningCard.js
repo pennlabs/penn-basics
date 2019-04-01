@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 
-
 import {
   Row,
   Col,

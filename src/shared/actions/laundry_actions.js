@@ -76,7 +76,7 @@ export function getFavoritesHomePage(laundryHalls) {
 
     const IdArray = laundryHalls.map(hall => hall.hallId)
 
-    // TODO fix this peter lmaoooo
+    // TODO: fix this peter lmaoooo
 
     try {
       if (IdArray.length === 0) {
