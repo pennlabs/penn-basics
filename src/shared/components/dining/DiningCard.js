@@ -107,8 +107,13 @@ class DiningCard extends Component {
     return (
       <>
         <Subtext marginBottom="0">
-          {displayHours.map(hour => {
-            return `Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`
+          {displayHours.map((hour, index) => {
+            return (
+              <>
+                {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
+                {index === displayHours.length - 1 ? null : <br />}
+              </>
+            )
           })}
         </Subtext>
         <Circle open />
