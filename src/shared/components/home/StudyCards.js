@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 
 class StudyCards extends Component {
   constructor(props) {
@@ -10,8 +11,9 @@ class StudyCards extends Component {
     this.renderOutlets = this.renderOutlets.bind(this);
   }
 
+
   renderNoise() {
-    const { noise } = this.props;
+    const { noise } = this.props
 
     if (noise === 0) {
       return (
@@ -26,15 +28,16 @@ class StudyCards extends Component {
         <span className="tag tag-is-yellow">
           Moderate
         </span>
-      );
+      )
     }
 
     return (
       <span className="tag tag-is-green">
         Loud
       </span>
-    );
+    )
   }
+
 
   renderGroups() {
     const { groups } = this.props;
@@ -42,19 +45,20 @@ class StudyCards extends Component {
     if (groups === 0) {
       return (
         <span className="tag is-info">No</span>
-      );
+      )
     }
 
     if (groups === 1) {
       return (
         <span className="tag tag-is-yellow">Okay</span>
-      );
+      )
     }
 
     return (
       <span className="tag tag-is-green">Yes</span>
-    );
+    )
   }
+
 
   renderOutlets() {
     const { outlets } = this.props;
@@ -62,25 +66,26 @@ class StudyCards extends Component {
     if (outlets === 0) {
       return (
         <span className="tag is-info">None</span>
-      );
+      )
     }
 
     if (outlets === 1) {
       return (
         <span className="tag tag-is-yellow">Sparse</span>
-      );
+      )
     }
 
     return (
       <span className="tag tag-is-green">Plenty</span>
-    );
+    )
   }
+
 
   render() {
     const {
       name,
       hours,
-    } = this.props;
+    } = this.props
 
     return (
       <article className="media">
@@ -120,9 +125,10 @@ class StudyCards extends Component {
           </div>
         </div>
       </article>
-    );
+    )
   }
 }
+
 
 StudyCards.defaultProps = {
   name: 'Huntsman 380 Computer Lab',
@@ -130,7 +136,8 @@ StudyCards.defaultProps = {
   noise: 0,
   groups: 2,
   outlets: 1,
-};
+}
+
 
 StudyCards.propTypes = {
   name: PropTypes.string,
@@ -138,6 +145,7 @@ StudyCards.propTypes = {
   noise: PropTypes.number,
   groups: PropTypes.number,
   outlets: PropTypes.number,
-};
+}
 
-export default StudyCards;
+
+export default StudyCards
