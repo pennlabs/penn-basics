@@ -36,7 +36,7 @@ class App extends Component {
       match
     } = this.props;
 
-    console.log(match.params.id);
+    console.log(this.props);
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -55,7 +55,7 @@ class App extends Component {
 
           {
             laundryHalls
-            && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} />)
+            && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} hallId={match.params.id}/>)
           }
           <PennLabsCredit />
         </Scrollbar>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
@@ -18,7 +18,7 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite } from '../../actions/laundry_actions'
+import { addFavorite, removeFavorite, getLaundryHall } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -200,6 +200,7 @@ const mapDispatchToProps = dispatch => ({
     addFavorite(laundryHallId, location, hallName),
   ),
   dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
+  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
 })
 
 

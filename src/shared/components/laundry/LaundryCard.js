@@ -31,7 +31,25 @@ class LaundryCard extends Component {
     super(props);
     this.state = {
       expanded: false,
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.hallId) {
+      this.onLaundryHallClick(this.props.hallId);
     }
+    const {
+      locationObject: {
+        halls
+      },
+    } = this.props;
+
+    halls.map(hall => {
+      if (hall.id === Number(this.props.hallId)) {
+        this.setState({ expanded: true });
+      }
+    })
+
   }
 
   onLaundryLocationClick() {
@@ -65,15 +83,17 @@ class LaundryCard extends Component {
     if (halls.length == 1) {
       return (
         <div>
-          <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(halls[0].id)} key={uuid()}>
-            <Row>
-              <Col padding="0">
-                <Subtitle marginBottom="0">
-                  {location}
-                </Subtitle>
-              </Col>
-            </Row>
-          </Card>
+          <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
+            <Card padding="0.5rem 1rem" hoverable>
+              <Row>
+                <Col padding="0">
+                  <Subtitle marginBottom="0">
+                    {location}
+                  </Subtitle>
+                </Col>
+              </Row>
+            </Card>
+          </StyledLink>
         </div>
       )
     }
@@ -92,9 +112,8 @@ class LaundryCard extends Component {
 
         {
           expanded && halls.length >= 2 && halls.map(({ hall_name: hallName, id }) => (//eslint-disable-line
-            // <StyledLink to={`/laundry/${id}`} hallId={id}>
-            <StyledLink to={`/laundry/${id}`} hallId={id}>
-              <Card padding="0.5rem 1rem" hoverable onClick={() => this.onLaundryHallClick(id)} key={uuid()}>
+            <StyledLink to={`/laundry/${id}`} key={uuid()}>
+              <Card padding="0.5rem 1rem" hoverable>
                 <Row>
                   <Col padding="0">
                     <Subtext>{hallName}</Subtext>
