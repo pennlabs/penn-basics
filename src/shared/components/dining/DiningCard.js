@@ -96,14 +96,20 @@ class DiningCard extends Component {
       )
     }
 
-    // get the open and close time for the current meal
-    const openHour = currentHours[0].open.substring(0, currentHours[0].open.lastIndexOf(':'));
-    const closeHour = currentHours[0].close.substring(0, currentHours[0].close.lastIndexOf(':'));
+    const displayHours = [];
+    currentHours.forEach(hour => {
+      const openHour = hour.open.substring(0, hour.open.lastIndexOf(':'));
+      const closeHour = hour.close.substring(0, hour.close.lastIndexOf(':'));
+      const type = hour.type;
+      displayHours.push({ openHour, closeHour, type });
+    })
 
     return (
       <>
         <Subtext marginBottom="0">
-          {`Open: ${openHour} - ${closeHour} • ${currentHours[0].type}`}
+          {displayHours.map(hour => {
+            return `Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`
+          })}
         </Subtext>
         <Circle open />
       </>
