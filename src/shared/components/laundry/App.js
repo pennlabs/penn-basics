@@ -36,8 +36,6 @@ class App extends Component {
       match
     } = this.props;
 
-    console.log(this.props);
-
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Scrollbar
@@ -64,7 +62,7 @@ class App extends Component {
           width="80%"
           overflowY="scroll"
         >
-          <LaundryVenue />
+          <LaundryVenue hallId={match.params.id}/>
         </Col>
       </Row>
     );

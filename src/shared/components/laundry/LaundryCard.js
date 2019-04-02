@@ -35,9 +35,9 @@ class LaundryCard extends Component {
   }
 
   componentDidMount() {
-    if (this.props.hallId) {
-      this.onLaundryHallClick(this.props.hallId);
-    }
+    // if (this.props.hallId) {
+    //   this.onLaundryHallClick(this.props.hallId);
+    // }
     const {
       locationObject: {
         halls
@@ -49,7 +49,6 @@ class LaundryCard extends Component {
         this.setState({ expanded: true });
       }
     })
-
   }
 
   onLaundryLocationClick() {
