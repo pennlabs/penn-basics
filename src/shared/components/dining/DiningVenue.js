@@ -120,6 +120,21 @@ class DiningVenue extends Component {
     } = this.props;
     const { id } = match.params;
 
+    if (!id) {
+      return (
+        <Nav>
+          <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
+            <div className="column is-7">
+              <img src="/img/dining.png" alt="Dining plate" />
+              <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+                Select a dining hall to see information
+              </p>
+            </div>
+          </div>
+        </Nav>
+      )
+    }
+
     // If the ID is not found
     if (!venueData[id]) {
       return (

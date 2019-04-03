@@ -13,8 +13,7 @@ import Nav from './shared/Nav/index'
 
 import Home from './home/App'
 import NotFound from './shared/NotFound'
-import Dining from './dining/App'
-import DiningVenue from './dining/DiningVenue'
+import Dining from './dining/DiningVenue'
 import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
@@ -51,7 +50,7 @@ export default () => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
-            <Route exact path="/dining/:id" component={DiningVenue} />
+            <Route exact path="/dining/:id" component={Dining} />
             <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/laundry/:id" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />
