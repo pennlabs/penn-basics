@@ -70,56 +70,41 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
   };
 }
 
-export function getFavoritesHomePage() {
-  return async (dispatch) => {
-    dispatch({ type: getLaundryHallInfoRequested })
+export const getFavoritesHomePage = () => async (dispatch) => {
+  dispatch({ type: getLaundryHallInfoRequested })
 
-    const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'));
+  const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
 
-    const IdArray = laundryHalls.map(hall => hall.hallId)
-
-    // TODO: fix this peter lmaoooo
-
-    try {
-      if (IdArray.length === 0) {
-        dispatch({
-          type: getFavoritesHome,
-          favorites: [],
-        })
-      } else if (IdArray.length === 1) {
-        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
-        const { data } = axiosResponse;
-        dispatch({
-          type: getFavoritesHome,
-          favorites: [data],
-        })
-      } else if (IdArray.length === 2) {
-        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
-        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`)
-        const data1 = axiosResponse1.data;
-        const data2 = axiosResponse2.data;
-        dispatch({
-          type: getFavoritesHome,
-          favorites: [data1, data2],
-        })
-      } else {
-        const axiosResponse1 = await axios.get(`${BASE}/laundry/hall/${IdArray[0]}`)
-        const axiosResponse2 = await axios.get(`${BASE}/laundry/hall/${IdArray[1]}`)
-        const axiosResponse3 = await axios.get(`${BASE}/laundry/hall/${IdArray[2]}`)
-        const data1 = axiosResponse1.data;
-        const data2 = axiosResponse2.data;
-        const data3 = axiosResponse3.data;
-        dispatch({
-          type: getFavoritesHome,
-          favorites: [data1, data2, data3],
-        })
-      }
-    } catch (error) {
-      dispatch({
-        type: getLaundryHallInfoRejected,
-        error: error.message,
-      })
+  const IdArray = laundryHalls.map((hall, index) => {
+    if (index <= 2) {
+      return hall.hallId;
     }
+
+    return null;
+  });
+
+  const responsesSet = IdArray.map(id => axios.get(`${BASE}/laundry/hall/${id}`));
+
+  try {
+    Promise.all(responsesSet).then((values) => {
+      const dataSet = values.map((value) => {
+        if (!value.error) {
+          return value.data;
+        }
+
+        return null;
+      });
+
+      dispatch({
+        type: getFavoritesHome,
+        favorites: dataSet,
+      })
+    })
+  } catch (error) {
+    dispatch({
+      type: getLaundryHallInfoRejected,
+      error: error.message,
+    })
   }
 }
 
