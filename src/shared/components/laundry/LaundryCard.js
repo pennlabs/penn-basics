@@ -41,7 +41,7 @@ class LaundryCard extends Component {
     const { hallURLId } = this.props;
 
     halls.map(hall => { //eslint-disable-line
-      if (hall.id === Number(hallURLId)) {
+      if (hall.id === Number(hallURLId) && hallURLId) {
         this.setState({ expanded: true });
       }
     })
@@ -132,7 +132,7 @@ LaundryCard.defaultProps = {
 }
 
 LaundryCard.propTypes = {
-  hallURLId: PropTypes.number,
+  hallURLId: PropTypes.string,
   locationObject: PropTypes.shape({
     location: PropTypes.string,
     halls: PropTypes.arrayOf(PropTypes.shape({

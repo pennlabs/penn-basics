@@ -88,7 +88,7 @@ App.defaultProps = {
 }
 
 App.propTypes = {
-  laundryHalls: PropTypes.object, // eslint-disable-line
+  laundryHalls: PropTypes.array, // eslint-disable-line
   match: PropTypes.object.isRequired, // eslint-disable-line
   dispatchGetFavorites: PropTypes.func.isRequired,
   dispatchGetLaundryHalls: PropTypes.func.isRequired,
