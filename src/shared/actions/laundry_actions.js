@@ -73,18 +73,21 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
 export const getFavoritesHomePage = () => (dispatch) => {
   dispatch({ type: getLaundryHallInfoRequested })
 
+  // get the list of laundry halls from local storage
   const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
-
-  const IdArray = laundryHalls.map((hall, index) => {
+  // get the first 3 halls
+  let IdArray = laundryHalls.map((hall, index) => {
     if (index <= 2) {
       return hall.hallId;
     }
 
     return null;
   });
-
-  const responsesSet = IdArray.map(id => axios.get(`${BASE}/laundry/hall/${id}`));
-
+  // remove the null Id in the array
+  IdArray = IdArray.filter(id => id !== null)
+  // get the set of Promise set
+  const responsesSet = IdArray.map(id => axios.get(`${BASE}/laundry/hall/${id}`))
+  // dispatch information from the Promise set
   try {
     Promise.all(responsesSet).then((values) => {
       const dataSet = values.map((value) => {
