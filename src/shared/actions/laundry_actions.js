@@ -70,7 +70,7 @@ export function getLaundryHall(laundryHallId) { // eslint-disable-line
   };
 }
 
-export const getFavoritesHomePage = () => async (dispatch) => {
+export const getFavoritesHomePage = () => (dispatch) => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
