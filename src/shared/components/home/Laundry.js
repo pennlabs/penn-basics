@@ -1,4 +1,3 @@
-/* globals localStorage */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -17,6 +16,15 @@ class Laundry extends Component {
 
   renderFavorites() {
     const { favoritesHome } = this.props;
+
+    if (favoritesHome.length === 0) {
+      return (
+        <Link to="/laundry" className="link">
+          <h4> Select your favorite Laundry hall </h4>
+        </Link>
+      )
+    }
+
     return (
       favoritesHome.map((favorite, index) => {
         return (
@@ -32,13 +40,16 @@ class Laundry extends Component {
                   Washers Availability
                 </h1>
                 <h1 className="subtitle is-6">
-                  Available: {favorite.machines.washers.open}
+                  Available:
+                  {favorite.machines.washers.open}
                 </h1>
                 <h1 className="subtitle is-6">
-                  Busy: {favorite.machines.washers.running}
+                  Busy:
+                  {favorite.machines.washers.running}
                 </h1>
                 <h1 className="subtitle is-6">
-                  Out of Order: {favorite.machines.washers.out_of_order}
+                  Out of Order:
+                  {favorite.machines.washers.out_of_order}
                 </h1>
               </div>
               <div className="column is-5">
@@ -46,13 +57,16 @@ class Laundry extends Component {
                   Dryers Availability
                 </h1>
                 <h1 className="subtitle is-6">
-                  Available: {favorite.machines.dryers.open}
+                  Available:
+                  {favorite.machines.dryers.open}
                 </h1>
                 <h1 className="subtitle is-6">
-                  Busy: {favorite.machines.dryers.running}
+                  Busy:
+                  {favorite.machines.dryers.running}
                 </h1>
                 <h1 className="subtitle is-6">
-                  Out of Order: {favorite.machines.dryers.out_of_order}
+                  Out of Order:
+                  {favorite.machines.dryers.out_of_order}
                 </h1>
               </div>
             </div>
@@ -83,8 +97,12 @@ class Laundry extends Component {
   }
 }
 
+Laundry.defaultProps = {
+  favoritesHome: [],
+}
 
 Laundry.propTypes = {
+  favoritesHome: PropTypes.array, // eslint-disable-line
   dispatchGetFavoritesHomePage: PropTypes.func.isRequired,
 }
 
