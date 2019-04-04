@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import uuid from 'uuid';
+import PropTypes from 'prop-types';
 import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions';
 
 import {
@@ -9,13 +9,13 @@ import {
   Col,
   Scrollbar,
   NavSectionHeader,
-  Line
+  Line,
 } from '../shared';
 import {
   BABY_BLUE,
+  WHITE,
 } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import { WHITE } from '../../styles/colors';
 import { NAV_HEIGHT } from '../../styles/sizes';
 import LaundryCard from './LaundryCard';
 import LaundryVenue from './LaundryVenue';
@@ -24,16 +24,16 @@ import Favorites from './Favorites';
 class App extends Component {
   constructor(props) {
     super(props);
-    const { getLaundryHalls, getFavorites } = this.props;
+    const { dispatchGetLaundryHalls, dispatchGetFavorites } = this.props;
 
-    getLaundryHalls();
-    getFavorites();
+    dispatchGetLaundryHalls();
+    dispatchGetFavorites();
   }
 
   render() {
     const {
       laundryHalls, //eslint-disable-line
-      match
+      match,
     } = this.props;
 
     return (
@@ -53,7 +53,7 @@ class App extends Component {
 
           {
             laundryHalls
-            && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} key={uuid()} hallId={match.params.id}/>)
+            && laundryHalls.map(locationObject => <LaundryCard locationObject={locationObject} hallURLId={match.params.id} />) // eslint-disable-line
           }
           <PennLabsCredit />
         </Scrollbar>
@@ -62,7 +62,7 @@ class App extends Component {
           width="80%"
           overflowY="scroll"
         >
-          <LaundryVenue hallId={match.params.id}/>
+          <LaundryVenue hallURLId={match.params.id} />
         </Col>
       </Row>
     );
@@ -78,10 +78,20 @@ const mapStateToProps = ({ laundry }) => {
 
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
-    getLaundryHalls: () => dispatch(getLaundryHalls()),
-    getFavorites: () => dispatch(getFavorites()),
+    dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
+    dispatchGetFavorites: () => dispatch(getFavorites()),
   };
 };
 
+App.defaultProps = {
+  laundryHalls: null,
+}
+
+App.propTypes = {
+  laundryHalls: PropTypes.object, // eslint-disable-line
+  match: PropTypes.object.isRequired, // eslint-disable-line
+  dispatchGetFavorites: PropTypes.func.isRequired,
+  dispatchGetLaundryHalls: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -7,8 +7,7 @@ import Loading from '../shared/Loading';
 import {
   BorderedCard,
   Row,
-  Col,
-  LaundryOverview
+  LaundryOverview,
 } from '../shared'
 import {
   GREEN,
@@ -81,20 +80,17 @@ class LaundryVenue extends Component {
   constructor(props) {
     super(props);
 
-    const { dispatchGetLaundryHall } = this.props;
-
-    if (this.props.hallId) {
-      dispatchGetLaundryHall(this.props.hallId);
+    const { dispatchGetLaundryHall, hallURLId } = this.props;
+    if (hallURLId) {
+      dispatchGetLaundryHall(hallURLId);
     }
   }
 
   componentWillUpdate(newProps) {
-    const { dispatchGetLaundryHall, hallId } = this.props;
-
-    const newHallId = newProps.hallId;
-
-    if (hallId !== newHallId) {
-      dispatchGetLaundryHall(newHallId);
+    const { dispatchGetLaundryHall, hallURLId } = this.props;
+    const newHallURLId = newProps.hallURLId;
+    if (hallURLId !== newHallURLId) {
+      dispatchGetLaundryHall(newHallURLId);
     }
   }
 
@@ -128,21 +124,21 @@ class LaundryVenue extends Component {
             <div className="column is-12">
               <h1 className="title">{hallName}</h1>
               {isFavorited && (
-                <span
+                <span // eslint-disable-line
                   className="button is-danger"
                   onClick={() => dispatchRemoveFavorite(laundryHallId)}
                 >
                   Unfavorite
-              </span>
+                </span>
               )}
 
               {!isFavorited && (
-                <span
+                <span // eslint-disable-line
                   className="button is-warning"
                   onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
                 >
                   Favorite
-              </span>
+                </span>
               )}
 
             </div>
@@ -172,7 +168,7 @@ class LaundryVenue extends Component {
           <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
           <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
             Select a laundry hall to see information
-        </p>
+          </p>
         </div>
       </div>
     )
@@ -183,6 +179,7 @@ LaundryVenue.defaultProps = {
   laundryHallInfo: null,
   pending: true,
   laundryHallId: null,
+  hallURLId: null,
 }
 
 
@@ -193,11 +190,13 @@ LaundryVenue.propTypes = {
     machines: PropTypes.object,
   }),
   laundryHallId: PropTypes.number,
+  hallURLId: PropTypes.number,
   pending: PropTypes.bool,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
+  dispatchGetLaundryHall: PropTypes.func.isRequired,
   favorites: PropTypes.array, // eslint-disable-line
-} // TODO prop types for favorites
+}
 
 
 const mapStateToProps = ({ laundry }) => {

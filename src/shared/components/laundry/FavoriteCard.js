@@ -26,11 +26,6 @@ const StyledLink = s(Link)`
 `
 
 class FavoriteCard extends Component {
-  onClick() {
-    const { hallId, dispatchGetLaundryHall } = this.props;
-    dispatchGetLaundryHall(hallId);
-  }
-
   handleKeyPress(event) {
     if (event.keyCode === 32) {
       this.toggleModal();
@@ -41,7 +36,7 @@ class FavoriteCard extends Component {
     const { hallId, locationName } = this.props;
     return (
       <StyledLink to={`/laundry/${hallId}`} key={uuid()}>
-        <Card padding="0.5rem 1rem" hoverable onClick={() => this.onClick()}>
+        <Card padding="0.5rem 1rem" hoverable>
           <Row>
             <Col padding="0">
               <Subtext>
@@ -63,7 +58,6 @@ FavoriteCard.defaultProps = {
 FavoriteCard.propTypes = {
   hallId: PropTypes.number,
   locationName: PropTypes.string,
-  dispatchGetLaundryHall: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
