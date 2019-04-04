@@ -97,24 +97,22 @@ class DiningCard extends Component {
     }
 
     const displayHours = [];
-    currentHours.forEach(hour => {
+    currentHours.forEach((hour) => {
       const openHour = hour.open.substring(0, hour.open.lastIndexOf(':'));
       const closeHour = hour.close.substring(0, hour.close.lastIndexOf(':'));
-      const type = hour.type;
+      const { type } = hour;
       displayHours.push({ openHour, closeHour, type });
     })
 
     return (
       <>
         <Subtext marginBottom="0">
-          {displayHours.map((hour, index) => {
-            return (
+          {displayHours.map((hour, index) => (
               <>
                 {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
                 {index === displayHours.length - 1 ? null : <br />}
               </>
-            )
-          })}
+          ))}
         </Subtext>
         <Circle open />
       </>
