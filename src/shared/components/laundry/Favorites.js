@@ -7,7 +7,7 @@ import { getFavorites } from '../../actions/laundry_actions'
 import {
   Card,
   Line,
-  NavSectionHeader
+  NavSectionHeader,
 } from '../shared';
 
 import {
