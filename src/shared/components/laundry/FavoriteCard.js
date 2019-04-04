@@ -3,24 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import uuid from 'uuid';
-import { getLaundryHall } from '../../actions/laundry_actions';
 import s from 'styled-components'
+import { getLaundryHall } from '../../actions/laundry_actions';
 
 import {
   Card,
-  Subtitle,
   Subtext,
   Row,
   Col,
-  Line
 } from '../shared';
 
 // TODO hours for the day?
 
 import {
-  WHITE,
   DARK_GRAY,
-  BABY_BLUE,
 } from '../../styles/colors'
 
 const StyledLink = s(Link)`
@@ -30,10 +26,9 @@ const StyledLink = s(Link)`
 `
 
 class FavoriteCard extends Component {
-
   onClick() {
-    const { hallId, getLaundryHall } = this.props;
-    getLaundryHall(hallId);
+    const { hallId, dispatchGetLaundryHall } = this.props;
+    dispatchGetLaundryHall(hallId);
   }
 
   handleKeyPress(event) {
@@ -43,13 +38,15 @@ class FavoriteCard extends Component {
   }
 
   render() {
-    const { hallId } = this.props;
+    const { hallId, locationName } = this.props;
     return (
       <StyledLink to={`/laundry/${hallId}`} key={uuid()}>
         <Card padding="0.5rem 1rem" hoverable onClick={() => this.onClick()}>
           <Row>
             <Col padding="0">
-              <Subtext> {this.props.locationName} </Subtext>
+              <Subtext>
+                {locationName}
+              </Subtext>
             </Col>
           </Row>
         </Card>
@@ -58,9 +55,20 @@ class FavoriteCard extends Component {
   }
 }
 
+FavoriteCard.defaultProps = {
+  hallId: null,
+  locationName: null,
+}
+
+FavoriteCard.propTypes = {
+  hallId: PropTypes.number,
+  locationName: PropTypes.string,
+  dispatchGetLaundryHall: PropTypes.func.isRequired,
+}
+
 const mapDispatchToProps = (dispatch) => { //eslint-disable-line
   return {
-    getLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+    dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
   };
 };
 
