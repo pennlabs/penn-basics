@@ -28,6 +28,16 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
+const convertDate = time => {
+  const hour = time.substring(0, time.indexOf(':'));
+  const minute = time.substring(time.indexOf(':') + 1);
+
+  if (hour === "12") {
+    return `12:${minute}pm`;
+  }
+  return `${hour >= 13 ? hour - 12 + ":" + minute + "pm" : hour + ":" + minute + "am"}`;
+}
+
 class DiningCard extends Component {
   constructor(props) {
     super(props)
@@ -98,8 +108,8 @@ class DiningCard extends Component {
 
     const displayHours = [];
     currentHours.forEach((hour) => {
-      const openHour = hour.open.substring(0, hour.open.lastIndexOf(':'));
-      const closeHour = hour.close.substring(0, hour.close.lastIndexOf(':'));
+      const openHour = convertDate(hour.open.substring(0, hour.open.lastIndexOf(':')));
+      const closeHour = convertDate(hour.close.substring(0, hour.close.lastIndexOf(':')));
       const { type } = hour;
       displayHours.push({ openHour, closeHour, type });
     })

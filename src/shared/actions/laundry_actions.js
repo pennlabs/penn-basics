@@ -76,13 +76,18 @@ export const getFavoritesHomePage = () => (dispatch) => {
   // get the list of laundry halls from local storage
   const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
   // get the first 3 halls
-  let IdArray = laundryHalls.map((hall, index) => {
-    if (index <= 2) {
-      return hall.hallId;
-    }
+  let IdArray = []
+  // only update IdArray if laundryHalls exist
+  if (laundryHalls) {
+    IdArray = laundryHalls.map((hall, index) => {
+      if (index <= 2) {
+        return hall.hallId
+      }
 
-    return null;
-  });
+      return null
+    });
+  }
+
   // remove the null Id in the array
   IdArray = IdArray.filter(id => id !== null)
   // get the set of Promise set
