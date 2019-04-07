@@ -28,14 +28,17 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-const convertDate = time => {
+// TODO export this to helper methods
+const convertDate = (time) => {
   const hour = time.substring(0, time.indexOf(':'));
   const minute = time.substring(time.indexOf(':') + 1);
 
-  if (hour === "12") {
+  if (hour === '12') {
     return `12:${minute}pm`;
   }
-  return `${hour >= 13 ? hour - 12 + ":" + minute + "pm" : hour + ":" + minute + "am"}`;
+
+  if (hour >= 13) return `${hour - 12}:${minute}pm`
+  return `${hour}:${minute}am`
 }
 
 class DiningCard extends Component {
@@ -43,12 +46,12 @@ class DiningCard extends Component {
     super(props)
     const { venueId } = this.props
 
-    const startDate = new Date();
-    startDate.setHours(0, 0, 0, 0);
+    const startDate = new Date()
+    startDate.setHours(0, 0, 0, 0)
 
     // Set the end date to three days from now
-    const endDate = new Date();
-    endDate.setHours(72, 0, 0, 0);
+    const endDate = new Date()
+    endDate.setHours(72, 0, 0, 0)
 
     this.state = { hours: [] }
 
