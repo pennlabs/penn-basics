@@ -51,9 +51,8 @@ class DiningMenu extends Component {
 
         <div className="legend">
           <strong>Legend:</strong>
-
           {
-            tagDescriptions.forEach(tagDescription => (
+            tagDescriptions.map(tagDescription => (
               <div className="legend-item" key={tagDescription.className}>
                 <span className="tag {tagDescription.className}">{tagDescription.title}</span>
                 <br />

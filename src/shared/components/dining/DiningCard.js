@@ -30,12 +30,12 @@ const Content = s.div`
 
 const convertDate = time => {
   const hour = time.substring(0, time.indexOf(':'));
-  const minute = time.substring(time.indexOf(':')+1);
+  const minute = time.substring(time.indexOf(':') + 1);
 
-  if (hour === "12"){
+  if (hour === "12") {
     return `12:${minute}pm`;
   }
-  return `${hour >= 13 ? hour-12 + ":" + minute + "pm": hour + ":" + minute + "am"}`;
+  return `${hour >= 13 ? hour - 12 + ":" + minute + "pm" : hour + ":" + minute + "am"}`;
 }
 
 class DiningCard extends Component {
@@ -114,16 +114,14 @@ class DiningCard extends Component {
       displayHours.push({ openHour, closeHour, type });
     })
 
-    console.log(currentHours);
-
     return (
       <>
         <Subtext marginBottom="0">
           {displayHours.map((hour, index) => (
-              <>
-                {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
-                {index === displayHours.length - 1 ? null : <br />}
-              </>
+            <>
+              {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
+              {index === displayHours.length - 1 ? null : <br />}
+            </>
           ))}
         </Subtext>
         <Circle open />
