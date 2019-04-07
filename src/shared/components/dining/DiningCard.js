@@ -108,10 +108,10 @@ class DiningCard extends Component {
       <>
         <Subtext marginBottom="0">
           {displayHours.map((hour, index) => (
-              <>
-                {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
-                {index === displayHours.length - 1 ? null : <br />}
-              </>
+            <>
+              {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
+              {index === displayHours.length - 1 ? null : <br />}
+            </>
           ))}
         </Subtext>
         <Circle open />
@@ -157,7 +157,7 @@ DiningCard.defaultProps = {
 
 DiningCard.propTypes = {
   image: PropTypes.string,
-  venueId: PropTypes.number.isRequired,
+  venueId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 

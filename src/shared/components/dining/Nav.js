@@ -10,7 +10,7 @@ import {
   NavSectionHeader,
 } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import DiningCard from './DiningCard';
+import DiningCard from './DiningCard'
 import {
   WHITE,
   BABY_BLUE,
@@ -42,7 +42,7 @@ const Nav = ({ children }) => {
 
         {diningKeys.map((key) => {
           const { name, image } = venueData[key]
-          return <DiningCard venueId={key} name={name} image={image} />
+          return <DiningCard key={key} venueId={key} name={name} image={image} />
         })}
 
         <Card background={BABY_BLUE} padding="0">
@@ -52,7 +52,7 @@ const Nav = ({ children }) => {
 
         {retailKeys.map((key) => {
           const { name, image } = venueData[key]
-          return <DiningCard venueId={key} name={name} image={image} />
+          return <DiningCard key={key} venueId={key} name={name} image={image} />
         })}
 
         <PennLabsCredit />

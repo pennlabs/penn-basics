@@ -1,7 +1,34 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import ErrorMessage from '../shared/ErrorMessage';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import s from 'styled-components'
+
+import ErrorMessage from '../shared/ErrorMessage'
+import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
+
+const HeaderRow = s.tr`
+  background: transparent !important;
+  border-bottom: 3px solid ${BORDER};
+`
+
+const BodyRow = s.tr`
+  border-bottom: 0;
+
+  td {
+    border: 0;
+  }
+
+  &.selected {
+    background: ${LIGHTER_BLUE};
+    border-radius: 4px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: ${LIGHTER_BLUE};
+    }
+  }
+`
 
 class HoursVisualization extends Component {
   /**
@@ -11,13 +38,19 @@ class HoursVisualization extends Component {
    */
   static cleanTime(time) {
     const formattedTime = time.substring(0, time.lastIndexOf(':'))
-    const hours = parseInt(formattedTime.substring(0, formattedTime.indexOf(':')), 10)
+    const colonIdx = formattedTime.indexOf(':')
+    const hours = parseInt(formattedTime.substring(0, colonIdx), 10)
+    const mins = formattedTime.substring(colonIdx)
 
     if (hours > 12) {
-      return `${(hours - 12) + formattedTime.substring(formattedTime.indexOf(':'))} PM`
+      return `${(hours - 12)}${mins} pm`
     }
 
-    return `${formattedTime} AM`
+    if (hours === 12) {
+      return `${(hours)}${mins} pm`
+    }
+
+    return `${hours}${mins} am`
   }
 
 
@@ -28,10 +61,10 @@ class HoursVisualization extends Component {
    * @param date
    */
   static getDay(date) {
-    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const obj = new Date(date);
-    const dayNum = obj.getDay();
-    const today = new Date().getDay();
+    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const obj = new Date(date)
+    const dayNum = obj.getDay()
+    const today = new Date().getDay()
 
     if (today === dayNum) return 'Today';
     if (dayNum === (today + 1) % 7) return 'Tomorrow';
@@ -79,6 +112,31 @@ class HoursVisualization extends Component {
   }
 
 
+  static groupMealsByDay(meals) {
+    const daysToMeals = {}
+
+    const timeToInt = time => parseInt((time).split(':').join(''), 10)
+
+    meals.forEach((meal) => {
+      const { date } = meal
+      const day = HoursVisualization.getDay(date)
+      const dayMeals = daysToMeals[day]
+      if (dayMeals) {
+        dayMeals.push(meal)
+      } else {
+        daysToMeals[day] = [meal]
+      }
+    })
+
+    const days = Object.keys(daysToMeals)
+    days.forEach((day) => {
+      daysToMeals[day].sort((a, b) => timeToInt(a.open) - timeToInt(b.open))
+    })
+
+    return daysToMeals
+  }
+
+
   constructor(props) {
     super(props)
     this.renderList = this.renderList.bind(this)
@@ -91,36 +149,55 @@ class HoursVisualization extends Component {
     // Don't return anything if there are no hours
     if (!venueHours || !venueHours.length) return null
 
+    const mealsByDay = HoursVisualization.groupMealsByDay(venueHours)
+    const days = Object.keys(mealsByDay)
+
     // Else, return the hours in a table
     return (
       <table className="table is-fullwidth marg-bot-0">
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>Meal</th>
-            <th>From</th>
-            <th>To</th>
-          </tr>
-        </thead>
         <tbody>
-          {
-            venueHours.map(meal => (
-              <tr
-                key={`${meal.date}-${meal.type}`}
-                className={HoursVisualization.isRightNow(meal) ? 'is-selected' : ''}
-              >
-                <td>{HoursVisualization.getDay(meal.date)}</td>
-                <td>{meal.type}</td>
-                <td>{HoursVisualization.cleanTime(meal.open)}</td>
-                <td>{HoursVisualization.cleanTime(meal.close)}</td>
-              </tr>
-            ))
-          }
+          {days.map((day, idx) => {
+            const meals = mealsByDay[day]
+            return (
+              <>
+                <HeaderRow key={day}>
+                  <th style={{ width: '12rem' }}>{day}</th>
+                  <th>{idx === 0 && 'Meal'}</th>
+                  <th>{idx === 0 && 'From'}</th>
+                  <th>{idx === 0 && 'To'}</th>
+                </HeaderRow>
+                {meals.map(meal => (
+                  <BodyRow
+                    key={`${meal.date}-${meal.type}`}
+                    className={HoursVisualization.isRightNow(meal) && 'selected'}
+                  >
+                    <td style={{ width: '12rem' }} />
+                    <td>{meal.type}</td>
+                    <td>{HoursVisualization.cleanTime(meal.open)}</td>
+                    <td>{HoursVisualization.cleanTime(meal.close)}</td>
+                  </BodyRow>
+                ))}
+              </>
+            )
+          })}
         </tbody>
       </table>
     )
   }
 
+  // {
+  //   venueHours.map(meal => (
+  //     <tr
+  //       key={`${meal.date}-${meal.type}`}
+  //       className={HoursVisualization.isRightNow(meal) ? 'is-selected' : ''}
+  //     >
+  //       <td>{HoursVisualization.getDay(meal.date)}</td>
+  //       <td>{meal.type}</td>
+  //       <td>{HoursVisualization.cleanTime(meal.open)}</td>
+  //       <td>{HoursVisualization.cleanTime(meal.close)}</td>
+  //     </tr>
+  //   ))
+  // }
 
   render() {
     const { venueHours } = this.props

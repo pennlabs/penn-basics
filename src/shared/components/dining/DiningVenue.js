@@ -1,49 +1,52 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import s from 'styled-components';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import s from 'styled-components'
 
-// TODO use the other venue data
-import venueData from './content/venueData';
-import { getDiningData, getVenueInfo } from '../../actions/index';
+// TODO use the other venue data json
+import venueData from './content/venueData'
+import { getDiningData, getVenueInfo } from '../../actions/index'
 
-import Nav from './Nav';
-import DiningQuery from './DiningQuery';
-import DiningOverview from './DiningOverview';
-import DiningMenu from './DiningMenu';
-import ErrorMessage from '../shared/ErrorMessage';
-import NotFound from '../shared/NotFound';
-import Loading from '../shared/Loading';
-import { retailLocations } from './constants';
+import Nav from './Nav'
+import DiningQuery from './DiningQuery'
+import DiningOverview from './DiningOverview'
+import DiningMenu from './DiningMenu'
+import ErrorMessage from '../shared/ErrorMessage'
+import NotFound from '../shared/NotFound'
+import Loading from '../shared/Loading'
+import { retailLocations } from './constants'
+
+const NAV_HEIGHT = '57px'
 
 const Wrapper = s.div`
   padding: 1rem;
-`;
+`
 
 // Render the view for a dining venue
 class DiningVenue extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     const {
       match,
       getDiningDataDispatch,
       getVenueInfoDispatch,
-    } = this.props;
+    } = this.props
 
     // Pull meal data and hours data for the venue
-    const venueId = match.params.id;
-    getDiningDataDispatch(venueId);
-    getVenueInfoDispatch(venueId);
+    const venueId = match.params.id
+    getDiningDataDispatch(venueId)
+    getVenueInfoDispatch(venueId)
 
-    // Bind this to helper method
-    this.checkForErrors = this.checkForErrors.bind(this);
-    this.renderError = this.renderError.bind(this);
+    this.checkForErrors = this.checkForErrors.bind(this)
+    this.renderError = this.renderError.bind(this)
   }
 
   /**
    * When the component will update
    * Check if there is a new dining ID
+   *
+   * @param newProps
    */
   componentWillUpdate(newProps) {
     const {
@@ -62,36 +65,34 @@ class DiningVenue extends Component {
   }
 
 
-  // Check for errors
   checkForErrors() {
-    let error = '';
+    let error = ''
 
     const {
       match,
       diningData,
       dateFormatted,
       meal,
-    } = this.props;
-    const { id } = match.params;
+    } = this.props
+    const { id } = match.params
 
     if (!venueData[id]) { // If no mapping is found
-      error = 'Dining venue not found';
+      error = 'Dining venue not found'
     } else if (diningData && dateFormatted) {
       if (!diningData[dateFormatted]) {
-        error = "Dining data not found for today's date";
+        error = "Dining data not found for today's date"
       } else if (meal && !diningData[dateFormatted][meal]) {
-        error = `Dining data not found for meal: "${meal}"`;
+        error = `Dining data not found for meal: "${meal}"`
       } else {
-        error = '';
+        error = ''
       }
     } else if (!diningData) {
-      error = 'Failed to find meal data.';
+      error = 'Failed to find meal data.'
     } else {
-      error = '';
+      error = ''
     }
 
-    // Return the error
-    return error;
+    return error
   }
 
   // Helper method to render any error
@@ -99,31 +100,36 @@ class DiningVenue extends Component {
     const {
       diningDataPending,
       venueHoursPending,
-    } = this.props;
+    } = this.props
 
-    if (diningDataPending || venueHoursPending) return null;
+    if (diningDataPending || venueHoursPending) return null
 
     // Check for errors
-    const error = this.props.error || this.checkForErrors(); // eslint-disable-line
+    const { error: propsError } = this.props
+    const error = propsError || this.checkForErrors()
 
-    return ( // NOTE this returns null if there is no error
-      <ErrorMessage message={error} />
-    );
+    return (<ErrorMessage message={error} />)
   }
 
   // Render the component
   render() {
     const {
-      match,
+      match: {
+        params: {
+          id,
+        } = { id: undefined },
+      } = {},
       diningDataPending,
       venueHoursPending,
-    } = this.props;
-    const { id } = match.params;
+    } = this.props
 
     if (!id) {
       return (
         <Nav>
-          <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
+          <div
+            className="columns is-vcentered is-centered"
+            style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
+          >
             <div className="column is-7">
               <img src="/img/dining.png" alt="Dining plate" />
               <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
@@ -223,26 +229,33 @@ DiningVenue.propTypes = {
   meal: PropTypes.string,
 };
 
-const mapStateToProps = state => ({
-  dateFormatted: state.dining.dateFormatted,
-  meal: state.dining.meal,
-  meals: state.dining.meals,
-  diningData: state.dining.diningData,
-  venueHours: state.dining.venueHours,
-  venueInfo: state.dining.venueInfo,
-  error: state.dining.error,
-  diningDataPending: state.dining.diningDataPending,
-  venueHoursPending: state.dining.venueHoursPending,
-});
+const mapStateToProps = ({
+  dining: {
+    dateFormatted,
+    meal,
+    meals,
+    diningData,
+    venueHours,
+    venueInfo,
+    error,
+    diningDataPending,
+    venueHoursPending,
+  },
+}) => ({
+  dateFormatted,
+  meal,
+  meals,
+  diningData,
+  venueHours,
+  venueInfo,
+  error,
+  diningDataPending,
+  venueHoursPending,
+})
 
 const mapDispatchToProps = dispatch => ({
-  getDiningDataDispatch: (venueId) => {
-    dispatch(getDiningData(venueId));
-  },
-  getVenueInfoDispatch: (venueId) => {
-    dispatch(getVenueInfo(venueId));
-  },
-});
+  getDiningDataDispatch: venueId => dispatch(getDiningData(venueId)),
+  getVenueInfoDispatch: venueId => dispatch(getVenueInfo(venueId)),
+})
 
-// Redux config
-export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue);
+export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue)
