@@ -9,9 +9,8 @@ const Notification = ({
 }) => (
   <div className="notification is-info">
     <button type="button" className="delete" onClick={show} />
-
     <p style={{ textAlign: 'center' }}>
-      { "⚡ It's currently ~~lit o'clock~~ " }
+      {'⚡ It\'s currently ~~lit o\'clock~~ '}
       <strong>
         {text}
       </strong>

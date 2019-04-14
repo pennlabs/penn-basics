@@ -8,6 +8,7 @@ export function getNoiseLevel(quiet) {
   return map[quiet]
 }
 
+
 export function getOutletsLevel(outlets) {
   const map = {
     0: 'No outlets',
@@ -17,6 +18,7 @@ export function getOutletsLevel(outlets) {
 
   return map[outlets]
 }
+
 
 export function getGroupLevel(groups) {
   const map = {
@@ -28,6 +30,7 @@ export function getGroupLevel(groups) {
   return map[groups]
 }
 
+
 function getMinutes(time) {
   // If there is a decimal
   let minutes = '';
@@ -37,6 +40,7 @@ function getMinutes(time) {
 
   return minutes;
 }
+
 
 export function getTime(time) {
   // Edge case
@@ -62,6 +66,7 @@ export function getTime(time) {
   return timeStr;
 }
 
+
 export function getHours({ start, end }, day) {
   const startTime = start[day];
   const endTime = end[day];
@@ -75,7 +80,6 @@ export function getHours({ start, end }, day) {
   `;
 }
 
-// TODO unit tests!
 
 export function isOpen({ start, end }, time, day) {
   const startTime = start[day];

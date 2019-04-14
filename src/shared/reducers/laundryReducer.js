@@ -1,5 +1,3 @@
-// TODO: this file is currently the same as dining
-
 import {
   getLaundryHallsDataRequested,
   getLaundryHallsDataRejected,
@@ -8,7 +6,7 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
-  getFavoritesHome
+  getFavoritesHome,
 } from '../actions/action_types';
 
 const defaultState = {
@@ -71,4 +69,5 @@ const laundryReducer = (state = defaultState, action) => {
       return state;
   }
 };
+
 export default laundryReducer;

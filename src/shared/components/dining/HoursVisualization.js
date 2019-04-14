@@ -3,13 +3,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 
+
 import ErrorMessage from '../shared/ErrorMessage'
 import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
+
 
 const HeaderRow = s.tr`
   background: transparent !important;
   border-bottom: 3px solid ${BORDER};
 `
+
 
 const BodyRow = s.tr`
   border-bottom: 0;
@@ -29,6 +32,7 @@ const BodyRow = s.tr`
     }
   }
 `
+
 
 class HoursVisualization extends Component {
   /**
@@ -66,10 +70,10 @@ class HoursVisualization extends Component {
     const dayNum = obj.getDay()
     const today = new Date().getDay()
 
-    if (today === dayNum) return 'Today';
-    if (dayNum === (today + 1) % 7) return 'Tomorrow';
+    if (today === dayNum) return 'Today'
+    if (dayNum === (today + 1) % 7) return 'Tomorrow'
 
-    return week[obj.getDay()];
+    return week[obj.getDay()]
   }
 
 
@@ -81,10 +85,12 @@ class HoursVisualization extends Component {
    * @param time
    */
   static updateHours(date, time) {
-    const hours = time.substring(0, time.indexOf(':'));
-    const minutes = time.substring(time.indexOf(':') + 1, time.lastIndexOf(':'));
+    const firstIdxCol = time.indexOf(':')
+    const lastIdxCol = time.lastIndexOf(':')
+    const hours = time.substring(0, firstIdxCol)
+    const minutes = time.substring(firstIdxCol + 1, lastIdxCol)
 
-    date.setHours(hours, minutes, 0, 0);
+    date.setHours(hours, minutes, 0, 0)
   }
 
 
@@ -93,22 +99,23 @@ class HoursVisualization extends Component {
    * @return true if the meal is being served right now
    */
   static isRightNow(meal) {
-    if (!meal) return false;
+    if (!meal) return false
+    const { date, open, close } = meal
 
-    const currentTime = Date.now();
-    const mealStart = new Date(meal.date);
-    const mealEnd = new Date(meal.date);
+    const currentTime = Date.now()
+    const mealStart = new Date(date)
+    const mealEnd = new Date(date)
 
     // Format the hours to match EST
-    HoursVisualization.updateHours(mealStart, meal.open);
-    HoursVisualization.updateHours(mealEnd, meal.close);
+    HoursVisualization.updateHours(mealStart, open)
+    HoursVisualization.updateHours(mealEnd, close)
 
     // Get the time in milliseconds=
-    const start = mealStart.getTime();
-    const end = mealEnd.getTime();
+    const start = mealStart.getTime()
+    const end = mealEnd.getTime()
 
     // Return if the current time is between start and end
-    return (start <= currentTime && end >= currentTime);
+    return (start <= currentTime && end >= currentTime)
   }
 
 
@@ -185,19 +192,6 @@ class HoursVisualization extends Component {
     )
   }
 
-  // {
-  //   venueHours.map(meal => (
-  //     <tr
-  //       key={`${meal.date}-${meal.type}`}
-  //       className={HoursVisualization.isRightNow(meal) ? 'is-selected' : ''}
-  //     >
-  //       <td>{HoursVisualization.getDay(meal.date)}</td>
-  //       <td>{meal.type}</td>
-  //       <td>{HoursVisualization.cleanTime(meal.open)}</td>
-  //       <td>{HoursVisualization.cleanTime(meal.close)}</td>
-  //     </tr>
-  //   ))
-  // }
 
   render() {
     const { venueHours } = this.props

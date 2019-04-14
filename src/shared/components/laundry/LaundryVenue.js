@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import Loading from '../shared/Loading';
+import Loading from '../shared/Loading'
 import {
   BorderedCard,
   Row,
@@ -19,17 +19,21 @@ import {
 } from '../../styles/colors'
 import { addFavorite, removeFavorite, getLaundryHall } from '../../actions/laundry_actions'
 
+
 const Wrapper = s.div`
   padding: 1rem;
 `
+
 
 const Table = s.table`
   margin-bottom: 0;
 `
 
+
 const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const { open, running, out_of_order: outOfOrder } = machineData
+
   return (
     <>
       <Row justifyContent="space-between">
@@ -73,26 +77,30 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
+
 
 class LaundryVenue extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    const { dispatchGetLaundryHall, hallURLId } = this.props;
+    const { dispatchGetLaundryHall, hallURLId } = this.props
+
     if (hallURLId) {
-      dispatchGetLaundryHall(hallURLId);
+      dispatchGetLaundryHall(hallURLId)
     }
   }
 
   componentWillUpdate(newProps) {
-    const { dispatchGetLaundryHall, hallURLId } = this.props;
-    const newHallURLId = newProps.hallURLId;
+    const { dispatchGetLaundryHall, hallURLId } = this.props
+    const newHallURLId = newProps.hallURLId
+
     if (hallURLId !== newHallURLId) {
-      dispatchGetLaundryHall(newHallURLId);
+      dispatchGetLaundryHall(newHallURLId)
     }
   }
+
 
   render() {
     const {
@@ -102,78 +110,77 @@ class LaundryVenue extends Component {
       dispatchAddFavorite,
       dispatchRemoveFavorite,
       favorites,
-    } = this.props;
+    } = this.props
 
-    const isFavorited = favorites.some(favorite => favorite.hallId === laundryHallId);
+    const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
-    if (laundryHallInfo) {
-      const { hall_name: hallName, location } = laundryHallInfo;
-      const { washers, dryers, details: machines } = laundryHallInfo.machines;
+    if (!laundryHallInfo) {
+      return (
+        <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
+          <div className="column is-7">
+            <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
+            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+              Select a laundry hall to see information
+            </p>
+          </div>
+        </div>
+      )
+    }
 
-      if (pending) {
-        return (
-          <Wrapper>
-            <Loading />
-          </Wrapper>
-        );
-      }
+    const { hall_name: hallName, location } = laundryHallInfo
+    const { washers, dryers, details: machines } = laundryHallInfo.machines
 
+    if (pending) {
       return (
         <Wrapper>
-          <div className="columns">
-            <div className="column is-12">
-              <h1 className="title">{hallName}</h1>
-              {isFavorited && (
-                <span // eslint-disable-line
-                  className="button is-danger"
-                  onClick={() => dispatchRemoveFavorite(laundryHallId)}
-                >
-                  Unfavorite
-                </span>
-              )}
-
-              {!isFavorited && (
-                <span // eslint-disable-line
-                  className="button is-warning"
-                  onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
-                >
-                  Favorite
-                </span>
-              )}
-
-            </div>
-          </div>
-          <div className="columns">
-            <div className="column is-6">
-              <BorderedCard>
-                <p className="title is-4">Washers</p>
-                {renderMachineAvailabilities(washers, 'washer', machines)}
-              </BorderedCard>
-            </div>
-
-            <div className="column is-6">
-              <BorderedCard>
-                <p className="title is-4">Dryers</p>
-                {renderMachineAvailabilities(dryers, 'dryer', machines)}
-              </BorderedCard>
-            </div>
-          </div>
+          <Loading />
         </Wrapper>
-      );
+      )
     }
 
     return (
-      <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
-        <div className="column is-7">
-          <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
-          <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
-            Select a laundry hall to see information
-          </p>
+      <Wrapper>
+        <div className="columns">
+          <div className="column is-12">
+            <h1 className="title">{hallName}</h1>
+            {isFavorited ? (
+              <span // eslint-disable-line
+                className="button is-danger"
+                onClick={() => dispatchRemoveFavorite(laundryHallId)}
+              >
+                Unfavorite
+              </span>
+            ) : (
+              <span // eslint-disable-line
+                className="button is-warning"
+                onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
+              >
+                Favorite
+              </span>
+            )}
+          </div>
         </div>
-      </div>
+
+        <div className="columns">
+          <div className="column is-6">
+            <BorderedCard>
+              <p className="title is-4">Washers</p>
+              {renderMachineAvailabilities(washers, 'washer', machines)}
+            </BorderedCard>
+          </div>
+
+          <div className="column is-6">
+            <BorderedCard>
+              <p className="title is-4">Dryers</p>
+              {renderMachineAvailabilities(dryers, 'dryer', machines)}
+            </BorderedCard>
+          </div>
+        </div>
+      </Wrapper>
     )
   }
 }
+
 
 LaundryVenue.defaultProps = {
   laundryHallInfo: null,

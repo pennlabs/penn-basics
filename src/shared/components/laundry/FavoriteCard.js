@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import uuid from 'uuid';
+import uuid from 'uuid'
 import s from 'styled-components'
-import { getLaundryHall } from '../../actions/laundry_actions';
+import { getLaundryHall } from '../../actions/laundry_actions'
+
 
 import {
   Card,
   Subtext,
   Row,
   Col,
-} from '../shared';
+} from '../shared'
 
-// TODO hours for the day?
 
-import {
-  DARK_GRAY,
-} from '../../styles/colors'
+import { DARK_GRAY } from '../../styles/colors'
+
 
 const StyledLink = s(Link)`
   h2 {
@@ -25,15 +24,18 @@ const StyledLink = s(Link)`
   }
 `
 
+
 class FavoriteCard extends Component {
   handleKeyPress(event) {
     if (event.keyCode === 32) {
-      this.toggleModal();
+      this.toggleModal()
     }
   }
 
+
   render() {
-    const { hallId, locationName } = this.props;
+    const { hallId, locationName } = this.props
+
     return (
       <StyledLink to={`/laundry/${hallId}`} key={uuid()}>
         <Card padding="0.5rem 1rem" hoverable>
@@ -46,24 +48,26 @@ class FavoriteCard extends Component {
           </Row>
         </Card>
       </StyledLink>
-    );
+    )
   }
 }
+
 
 FavoriteCard.defaultProps = {
   hallId: null,
   locationName: null,
 }
 
+
 FavoriteCard.propTypes = {
   hallId: PropTypes.number,
   locationName: PropTypes.string,
 }
 
-const mapDispatchToProps = (dispatch) => { //eslint-disable-line
-  return {
-    dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  };
-};
 
-export default connect(null, mapDispatchToProps)(FavoriteCard);
+const mapDispatchToProps = dispatch => ({
+  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+})
+
+
+export default connect(null, mapDispatchToProps)(FavoriteCard)

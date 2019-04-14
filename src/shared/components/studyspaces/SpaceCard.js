@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import s from 'styled-components'
 
-// import SpaceModal from './SpaceModal';
+
 import {
   Card,
   Subtitle,
   Subtext,
   Row,
   Col,
-  Circle
+  Circle,
 } from '../shared';
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
+
 
 const Content = s.div`
   width: 100%;
@@ -22,9 +23,6 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-// TODO hours for the day?
-
-// TODO update the map when markers update
 
 class SpaceCard extends Component {
   constructor(props) {
@@ -35,11 +33,13 @@ class SpaceCard extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
 
+
   handleKeyPress(event) {
     if (event.keyCode === 32) {
       this.handleClick()
     }
   }
+
 
   handleMouseEnter() {
     const {
@@ -54,10 +54,12 @@ class SpaceCard extends Component {
     setHoveredSpaceDispatch(spaceId)
   }
 
+
   handleClick() {
     const { setActiveSpaceDispatch, spaceId } = this.props
     setActiveSpaceDispatch(spaceId)
   }
+
 
   render() {
     const {
@@ -68,6 +70,7 @@ class SpaceCard extends Component {
       outlets,
       hours,
     } = this.props
+
     const noiseLevel = getNoiseLevel(quiet)
     const outletsLevel = getOutletsLevel(outlets)
 
@@ -106,6 +109,7 @@ class SpaceCard extends Component {
   }
 }
 
+
 SpaceCard.defaultProps = {
   open: false,
   image: '',
@@ -113,6 +117,7 @@ SpaceCard.defaultProps = {
   quiet: -1,
   hoveredSpace: null,
 }
+
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
@@ -127,14 +132,17 @@ SpaceCard.propTypes = {
   setActiveSpaceDispatch: PropTypes.func.isRequired,
 }
 
+
 const mapStateToProps = ({ spaces }) => {
   const { hoveredSpace } = spaces
   return { hoveredSpace }
 }
 
+
 const mapDispatchToProps = dispatch => ({
   setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
   setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpaceCard);

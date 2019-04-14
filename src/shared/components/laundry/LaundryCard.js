@@ -11,11 +11,9 @@ import {
   Subtext,
   Row,
   Col,
-} from '../shared';
+} from '../shared'
+import { DARK_GRAY } from '../../styles/colors'
 
-import {
-  DARK_GRAY,
-} from '../../styles/colors'
 
 const StyledLink = s(Link)`
   h2 {
@@ -23,29 +21,30 @@ const StyledLink = s(Link)`
   }
 `
 
+
 class LaundryCard extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       expanded: false,
-    };
+    }
   }
+
 
   componentDidMount() {
     const {
-      locationObject: {
-        halls,
-      },
-    } = this.props;
+      locationObject: { halls },
+    } = this.props
 
-    const { hallURLId } = this.props;
+    const { hallURLId } = this.props
 
-    halls.map(hall => { //eslint-disable-line
-      if (hall.id === Number(hallURLId) && hallURLId) {
-        this.setState({ expanded: true });
+    halls.map(({ id }) => { //eslint-disable-line
+      if (hallURLId && id === Number(hallURLId)) {
+        this.setState({ expanded: true })
       }
     })
   }
+
 
   onLaundryLocationClick() {
     const { expanded } = this.state
@@ -54,11 +53,6 @@ class LaundryCard extends Component {
     })
   }
 
-  handleKeyPress(event) {
-    if (event.keyCode === 32) {
-      this.toggleModal()
-    }
-  }
 
   render() {
     const {
@@ -69,7 +63,7 @@ class LaundryCard extends Component {
     } = this.props
     const { expanded } = this.state
 
-    // check if the hall has only one location object
+    // Check if the hall has only one location object
     if (halls.length === 1) {
       return (
         <div>
@@ -100,19 +94,17 @@ class LaundryCard extends Component {
           </Row>
         </Card>
 
-        {
-          expanded && halls.length >= 2 && halls.map(({ hall_name: hallName, id }) => (//eslint-disable-line
-            <StyledLink to={`/laundry/${id}`} key={uuid()}>
-              <Card padding="0.5rem 1rem" hoverable>
-                <Row>
-                  <Col padding="0">
-                    <Subtext>{hallName}</Subtext>
-                  </Col>
-                </Row>
-              </Card>
-            </StyledLink>
-          ))
-        }
+        {expanded && halls.map(({ hall_name: hallName, id }) => (
+          <StyledLink to={`/laundry/${id}`} key={uuid()}>
+            <Card padding="0.5rem 1rem" hoverable>
+              <Row>
+                <Col padding="0">
+                  <Subtext>{hallName}</Subtext>
+                </Col>
+              </Row>
+            </Card>
+          </StyledLink>
+        ))}
       </div>
     )
   }
@@ -125,11 +117,10 @@ const mapStateToProps = ({ laundry }) => {
 }
 
 
-// TODO why is this called locationObject???
-
 LaundryCard.defaultProps = {
   hallURLId: null,
 }
+
 
 LaundryCard.propTypes = {
   hallURLId: PropTypes.string,
@@ -144,4 +135,4 @@ LaundryCard.propTypes = {
 }
 
 
-export default connect(mapStateToProps, null)(LaundryCard);
+export default connect(mapStateToProps, null)(LaundryCard)

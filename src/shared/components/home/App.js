@@ -26,7 +26,6 @@ class Home extends Component {
       quotes: null,
     }
 
-
     this.close = this.close.bind(this)
   }
 
@@ -82,9 +81,7 @@ class Home extends Component {
 
     return (
       <Wrapper>
-        {show && (
-          <Notification show={this.close} text={notification} />
-        )}
+        {show && (<Notification show={this.close} text={notification} />)}
 
         <BorderedCard>
           <h1 className="title is-4">
@@ -109,8 +106,9 @@ class Home extends Component {
 
         <Studyspaces />
       </Wrapper>
-    );
+    )
   }
 }
+
 
 export default Home
