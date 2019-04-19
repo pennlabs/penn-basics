@@ -11,6 +11,7 @@ import {
   Image,
   Tag,
   Map,
+  Subtext,
 } from '../shared';
 import { SNOW } from '../../styles/colors';
 import Hours from './Hours';
@@ -58,6 +59,12 @@ class SpaceModal extends Component {
                   alt={name}
                   marginBottom="2.5vh"
                 />
+              )}
+
+              {image && (
+                <Subtext>
+                  {image}
+                </Subtext>
               )}
 
               {description && (
