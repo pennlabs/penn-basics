@@ -39,6 +39,7 @@ class SpaceModal extends Component {
       description,
       address,
       location,
+      imageCredit,
       start,
       end,
       tags,
@@ -61,10 +62,10 @@ class SpaceModal extends Component {
                 />
               )}
 
-              {image && (
-                <Subtext>
-                  {image}
-                </Subtext>
+              {imageCredit && (
+                <a href={image}>
+                  {imageCredit.name}
+                </a>
               )}
 
               {description && (

@@ -718,20 +718,6 @@
     "end": [17, 17, 17, 17, 17, 17, 17]
   },
   {
-    "name": "Ox Coffee",
-    "address": "616 S 3rd St, Philadelphia, PA 19147",
-    "location": {
-      "lat": 39.9409337,
-      "lng": -75.1500099
-    },
-    "tags": [
-      "Off Campus",
-      "Coffee Shop"
-    ],
-    "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [17, 17, 17, 17, 17, 17, 17]
-  },
-  {
     "name": "Pilgrim Coffee Roasters (Manayunk)",
     "address": "4120 Main St, Philadelphia, PA 19127",
     "location": {
@@ -876,21 +862,6 @@
     "end": [19, 19, 19, 19, 19, 19, 19]
   },
   {
-    "name": "Ultimo Coffee (Rittenhouse)",
-    "address": "238 S 20th St, Philadelphia, PA 19103",
-    "location": {
-      "lat": 39.9493329,
-      "lng": -75.1763768
-    },
-    "tags": [
-      "Off Campus",
-      "Coffee Shop",
-      "Rittenhouse"
-    ],
-    "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [19, 19, 19, 19, 19, 19, 19]
-  },
-  {
     "name": "Ultimo Coffee (Graduate Hospital)",
     "address": "2149 Catharine St, Philadelphia, PA 19146",
     "location": {
@@ -904,21 +875,6 @@
     ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
-  },
-  {
-    "name": "Ultimo Coffee (South Philly)",
-    "address": "1900 S 15th St, Philadelphia, PA 19145",
-    "location": {
-      "lat": 39.9290917,
-      "lng": -75.1766803
-    },
-    "tags": [
-      "Off Campus",
-      "Coffee Shop",
-      "South Philly"
-    ],
-    "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [20, 20, 20, 20, 20, 20, 20]
   },
   {
     "name": "La. Va Coffee",
@@ -1045,21 +1001,6 @@
       "Off Campus",
       "Coffee Shop",
       "Rittenhouse"
-    ],
-    "start": [8, 7, 7, 7, 7, 7, 8],
-    "end": [19, 19, 19, 19, 19, 19, 19]
-  },
-  {
-    "name": "Ultimo Coffee (Graduate Hospital)",
-    "address": "2149 Catharine St, Philadelphia, PA 19146",
-    "location": {
-      "lat": 39.9420839,
-      "lng": -75.1816787
-    },
-    "tags": [
-      "Off Campus",
-      "Coffee Shop",
-      "Graduate Hospital"
     ],
     "start": [8, 7, 7, 7, 7, 7, 8],
     "end": [19, 19, 19, 19, 19, 19, 19]
