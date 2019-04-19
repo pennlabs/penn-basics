@@ -95,7 +95,7 @@ class SpaceCard extends Component {
               </Subtitle>
 
               <Subtext marginBottom="0">
-                {open ? `Open: ${hours}` : 'Closed'}
+                {open ? `Open: ${hours}` : `Closed • Opens at ${hours.substring(0, hours.indexOf("am"))}am`}
                 {outletsLevel ? ` • ${outletsLevel}` : ''}
                 {noiseLevel ? ` • ${noiseLevel}` : ''}
               </Subtext>
