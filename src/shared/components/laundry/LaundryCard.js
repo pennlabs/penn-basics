@@ -7,12 +7,13 @@ import s from 'styled-components'
 
 import {
   Card,
-  Subtitle,
-  Subtext,
+  Text,
   Row,
   Col,
+  Line,
 } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
+import LaundryCardHeader from './LaundryCardHeader'
 
 
 const StyledLink = s(Link)`
@@ -66,45 +67,32 @@ class LaundryCard extends Component {
     // Check if the hall has only one location object
     if (halls.length === 1) {
       return (
-        <div>
-          <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
-            <Card padding="0.5rem 1rem" hoverable>
-              <Row>
-                <Col padding="0">
-                  <Subtitle marginBottom="0">
-                    {location}
-                  </Subtitle>
-                </Col>
-              </Row>
-            </Card>
-          </StyledLink>
-        </div>
+        <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
+          <LaundryCardHeader title={location} />
+          <Line />
+        </StyledLink>
       )
     }
 
     return (
       <div>
-        <Card padding="0.5rem 1rem" hoverable key={uuid()} onClick={() => this.onLaundryLocationClick()}>
-          <Row>
-            <Col padding="0">
-              <Subtitle marginBottom="0">
-                {location}
-              </Subtitle>
-            </Col>
-          </Row>
-        </Card>
+        <div key={uuid()} onClick={() => this.onLaundryLocationClick()}> {/*eslint-disable-line*/}
+          <LaundryCardHeader title={location} />
+        </div>
 
         {expanded && halls.map(({ hall_name: hallName, id }) => (
           <StyledLink to={`/laundry/${id}`} key={uuid()}>
             <Card padding="0.5rem 1rem" hoverable>
               <Row>
-                <Col padding="0">
-                  <Subtext>{hallName}</Subtext>
+                <Col padding="0 0 0 1rem">
+                  <Text marginBottom="0">{hallName}</Text>
                 </Col>
               </Row>
             </Card>
           </StyledLink>
         ))}
+
+        <Line />
       </div>
     )
   }

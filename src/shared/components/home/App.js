@@ -6,9 +6,9 @@ import s from 'styled-components'
 import Dining from './Dining'
 import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
-import Reserve from './Reserve'
 import Notification from './Notification'
 import { BorderedCard } from '../shared'
+import Footer from '../footer'
 
 
 const Wrapper = s.div`
@@ -98,13 +98,13 @@ class Home extends Component {
           </div>
         </BorderedCard>
 
-        <Reserve />
-
         <Dining show={dining} />
 
         <Laundry />
 
         <Studyspaces />
+
+        <Footer />
       </Wrapper>
     )
   }

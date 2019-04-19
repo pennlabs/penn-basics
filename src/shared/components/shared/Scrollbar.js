@@ -21,4 +21,6 @@ export const Scrollbar = s(Col)`
   ::-webkit-scrollbar-thumb {
     background-color: ${BLUE};
   }
+
+  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
 `;

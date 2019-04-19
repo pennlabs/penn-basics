@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 
 const frontendRouter = require('./routes/frontend');
 const eventsRouter = require('./routes/events');
@@ -10,6 +9,8 @@ const diningRouter = require('./routes/dining');
 
 const DB = require('./database/db');
 const seedDining = require('./database/seedDiningInfo');
+
+const quotes = require('./database/homepage_quotes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -46,15 +47,10 @@ app.use('/api/spaces', spacesRouter(DB));
 app.use('/api/events', eventsRouter(DB));
 app.use('/api/dining', diningRouter(DB));
 app.use('/api/quotes', (req, res) => {
-  const quotes = require('./database/homepage_quotes');
   res.json(quotes);
 });
 app.use('/', frontendRouter(DB));
 
-
-
-// Seed data on server start
-// TODO have other scripts to do this
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`); // eslint-disable-line no-console

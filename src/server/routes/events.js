@@ -16,7 +16,7 @@ module.exports = function eventsRouter(DB) {
           events,
         });
       })
-      .catch(console.log); //eslint-disable-line
+      .catch(console.log); // eslint-disable-line
   });
 
   return router;

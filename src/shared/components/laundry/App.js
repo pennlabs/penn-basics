@@ -51,8 +51,10 @@ class App extends Component {
           overflowY="scroll"
           width="20%"
           borderRight
+          minHeight={`calc(100vh - ${NAV_HEIGHT})`}
         >
           <Favorites />
+
           <Card background={BABY_BLUE} padding="0">
             <NavSectionHeader className="title is-5">Laundry Halls</NavSectionHeader>
             <Line />

@@ -19,7 +19,6 @@ import {
   TOGGLE_FILTER_SPACES_GROUPS,
 } from './action_types';
 
-// TODO unit tests!!
 
 /**
  * @param time in MS
@@ -34,6 +33,7 @@ function getMinutes(time) {
 
   return minutes;
 }
+
 
 /**
  * @param time in MS
@@ -63,6 +63,7 @@ function getTime(time) {
   return timeStr;
 }
 
+
 function getHours({ start, end }, day) {
   const startTime = start[day];
   const endTime = end[day];
@@ -75,6 +76,7 @@ function getHours({ start, end }, day) {
     ${getTime(endTime)}
   `;
 }
+
 
 function isOpen({ start, end }, time, day) {
   const startTime = start[day];
@@ -101,29 +103,32 @@ function isOpen({ start, end }, time, day) {
   return (time >= startTime && time < endTime);
 }
 
+
 export function getAllSpacesData() { // eslint-disable-line
   return async (dispatch) => {
     dispatch({
       type: getSpacesDataRequested,
-    });
+    })
 
-    const today = new Date();
-    const day = today.getDay();
-    const time = today.getHours() + (today.getMinutes() / 60);
+    const today = new Date()
+    const day = today.getDay()
+    const time = today.getHours() + (today.getMinutes() / 60)
 
     try {
       axios.get('/api/spaces/all')
         .then((res) => {
-          const formattedSpaces = {};
-          const { spaces } = res.data;
+          const formattedSpaces = {}
+          const { spaces } = res.data
 
           spaces.forEach((space) => {
-            const spaceObj = Object.assign({}, space);
+            const spaceObj = Object.assign({}, space)
 
-            spaceObj.open = isOpen(space, time, day);
-            spaceObj.hours = getHours(space, day);
+            spaceObj.open = isOpen(space, time, day)
+            spaceObj.hours = getHours(space, day)
 
-            formattedSpaces[spaceObj._id] = spaceObj; // eslint-disable-line no-underscore-dangle
+            const { _id: spaceId } = spaceObj
+
+            formattedSpaces[spaceId] = spaceObj
           });
 
           dispatch({
@@ -135,9 +140,9 @@ export function getAllSpacesData() { // eslint-disable-line
       dispatch({
         type: getSpacesDataRejected,
         error: error.message || 'There was an error pulling studyspaces data',
-      });
+      })
     }
-  };
+  }
 }
 
 export function setHoveredSpace(spaceId) {
@@ -145,8 +150,8 @@ export function setHoveredSpace(spaceId) {
     dispatch({
       type: setHoveredSpaceFulfilled,
       spaceId,
-    });
-  };
+    })
+  }
 }
 
 export function setActiveSpace(spaceId) {
@@ -154,12 +159,12 @@ export function setActiveSpace(spaceId) {
     dispatch({
       type: setActiveSpaceFulfilled,
       spaceId,
-    });
-  };
+    })
+  }
 }
 
 export function clearActiveSpace() {
-  return dispatch => dispatch({ type: clearActiveSpaceFulfilled });
+  return dispatch => dispatch({ type: clearActiveSpaceFulfilled })
 }
 
 // TODO DOCS / ERROR CHECKING
@@ -168,8 +173,8 @@ export function filterSpacesOpen(filter) {
     dispatch({
       type: filterSpacesOpenRequested,
       filter,
-    });
-  };
+    })
+  }
 }
 
 // TODO DOCS / ERROR CHECKING
@@ -178,8 +183,8 @@ export function filterSpacesOutlets(filter) {
     dispatch({
       type: filterSpacesOutletsRequested,
       filter,
-    });
-  };
+    })
+  }
 }
 
 // TODO DOCS / ERROR CHECKING

@@ -3,19 +3,35 @@ const mongoose = require('../mongoose-connect')
 const { Schema } = mongoose
 
 const SpaceSchema = new Schema({
-  name: String,
-  address: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: false,
+  },
   description: String,
   start: [Number],
   end: [Number],
-  outlets: Number,
+  outlets: {
+    type: Number,
+    min: 0,
+    max: 10,
+  },
   groups: Number,
   quiet: Number,
   image: String,
   tags: [String],
   imageCredit: {
-    name: String,
-    link: String,
+    name: {
+      type: String,
+      required: false,
+    },
+    link: {
+      type: String,
+      required: false,
+    },
   },
   location: {
     lat: Number,
