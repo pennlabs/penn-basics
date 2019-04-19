@@ -20,9 +20,10 @@ export const Card = styled.div`
   `)}
 `;
 
+// box-shadow: 0 0 8px 0 ${SHADOW};
+
 export const BorderedCard = styled(Card)`
   border: 1px solid ${BORDER};
   border-radius: 4px;
-  box-shadow: 0 0 14px 0 ${SHADOW};
   margin-bottom: 1rem;
 `;

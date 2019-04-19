@@ -9,8 +9,9 @@ import { getLaundryHall } from '../../actions/laundry_actions'
 
 import {
   Card,
-  Subtext,
+  Text,
   Row,
+  Line,
   Col,
 } from '../shared'
 
@@ -41,12 +42,13 @@ class FavoriteCard extends Component {
         <Card padding="0.5rem 1rem" hoverable>
           <Row>
             <Col padding="0">
-              <Subtext>
+              <Text medium color={DARK_GRAY} marginBottom="0">
                 {locationName}
-              </Subtext>
+              </Text>
             </Col>
           </Row>
         </Card>
+        <Line />
       </StyledLink>
     )
   }
