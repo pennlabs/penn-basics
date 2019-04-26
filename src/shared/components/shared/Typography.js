@@ -7,6 +7,8 @@ export const Text = styled.p`
   line-height: 1.5;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
   display: inline-block;
+  ${({ color }) => color && `color: ${color} !important;`}
+  ${({ medium }) => medium && 'font-weight: 500;'}
 `
 
 export const Tag = styled.p`

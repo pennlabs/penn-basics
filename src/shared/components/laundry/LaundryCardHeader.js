@@ -5,16 +5,17 @@ import {
   Card,
   Row,
   Col,
-  Subtitle,
+  Text,
 } from '../shared'
+import { DARK_GRAY } from '../../styles/colors'
 
 const LaundryCardHeader = ({ title }) => (
   <Card padding="0.5rem 1rem" hoverable>
     <Row>
       <Col padding="0">
-        <Subtitle marginBottom="0">
+        <Text medium marginBottom="0" color={DARK_GRAY}>
           {title}
-        </Subtitle>
+        </Text>
       </Col>
     </Row>
   </Card>

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import Loading from '../shared/Loading'
+import StatusPill from './StatusPill'
 import {
   BorderedCard,
   Row,
@@ -32,7 +33,12 @@ const Table = s.table`
 
 const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
-  const { open, running, out_of_order: outOfOrder } = machineData
+  const {
+    open = 0,
+    running = 0,
+    out_of_order: outOfOrder = 0,
+    offline = 0,
+  } = machineData
 
   return (
     <>
@@ -40,7 +46,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
-          [outOfOrder, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
+          [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
           <LaundryOverview width="30%" key={title} color={color} background={background}>
             <h1>{number}</h1>
@@ -56,22 +62,17 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
               <tr>
                 <th>#</th>
                 <th>Status</th>
-                <th>Time left (min)</th>
+                <th>Minutes left</th>
               </tr>
             </thead>
             <tbody>
-              {
-                tableMachines.map((machine) => {
-                  const { status, time_remaining: timeRemaining, id } = machine;
-                  return (
-                    <tr key={id}>
-                      <td>{id}</td>
-                      <td>{status}</td>
-                      <td>{timeRemaining}</td>
-                    </tr>
-                  );
-                })
-              }
+              {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
+                <tr key={id}>
+                  <td>{id}</td>
+                  <td><StatusPill status={status} /></td>
+                  <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

@@ -1,3 +1,4 @@
+/* globals isNaN */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -39,7 +40,7 @@ class App extends Component {
       match: {
         params: {
           id,
-        } = { params: { id: '' } },
+        } = { params: { id: '-1' } },
       },
     } = this.props
 
@@ -63,14 +64,14 @@ class App extends Component {
           {laundryHalls && laundryHalls.map(locationObject => (
             <LaundryCard
               locationObject={locationObject}
-              hallURLId={id}
+              key={locationObject.location}
             />
           ))}
           <PennLabsCredit />
         </Scrollbar>
 
         <Col width="80%" overflowY="scroll">
-          <LaundryVenue hallURLId={id} />
+          <LaundryVenue hallURLId={Number.isNaN(id) ? null : id} />
         </Col>
       </Row>
     )
