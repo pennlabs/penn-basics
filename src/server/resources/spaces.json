@@ -899,6 +899,11 @@
   },
   {
     "name": "Good Karma Cafe (Walnut)",
+    "image":"https://static1.squarespace.com/static/555ab6e6e4b050c3b4188afb/558b145ee4b0691bf6f0e93b/55ecf74ae4b0852e6b062e4a/1441593164925/20150513_GoodKarma_3744+%281%29.jpg?format=1000w",
+    "imageCredit":{
+      "name":"Good Karma Cafe",
+      "link":"http://www.thegoodkarmacafe.com/locations"
+    },
     "address": "2319 Walnut St, Philadelphia, PA 19103",
     "location": {
       "lat": 39.9487875,
@@ -913,10 +918,15 @@
   },
   {
     "name": "Good Karma Cafe (22nd St)",
+    "image":"https://static1.squarespace.com/static/555ab6e6e4b050c3b4188afb/55603165e4b08f92bdb155e6/55ecf671e4b021694c039f7d/1441592946137/20150520_GoodKarma_5703+%281%29.jpg?format=1000w",
     "address": "331 S 22nd St, Philadelphia, PA 19103",
     "location": {
       "lat": 39.9483151,
       "lng": -75.1790474
+    },
+    "imageCredit":{
+      "name":"Good Karma Cafe",
+      "link":"http://www.thegoodkarmacafe.com/locations"
     },
     "tags": [
       "Off Campus",
@@ -927,6 +937,7 @@
   },
   {
     "name": "Good Karma Cafe",
+    "image":"https://static1.squarespace.com/static/555ab6e6e4b050c3b4188afb/5a961e3fe4966b58570494ae/5a961e408165f59f631da4aa/1519787880941/IMG_2863.JPG",
     "address": "Wilma Theatre, 265 S Broad St #5659, Philadelphia, PA 19107",
     "location": {
       "lat": 39.9447563,
@@ -941,6 +952,7 @@
   },
   {
     "name": "Old City Coffee (Old City)",
+    "image":"https://media-cdn.tripadvisor.com/media/photo-s/0e/8b/d2/7c/our-cafe-on-church-street.jpg",
     "address": "221 Church St, Philadelphia, PA 19106",
     "location": {
       "lat": 39.9506936,
@@ -956,6 +968,7 @@
   },
   {
     "name": "Old City Coffee (Center City)",
+    "image":"https://readingterminalmarket.org/wp-content/uploads/2017/09/6-OCC-storefront_web.jpg",
     "address": "1200 Filbert St, Philadelphia, PA 19107",
     "location": {
       "lat": 39.9531604,
@@ -971,6 +984,7 @@
   },
   {
     "name": "Milk & Honey Market",
+    "image":"http://www.rareopportunityfarm.com/wp-content/uploads/2013/04/milk-and-honey-643px.jpg",
     "address": "4435 Baltimore Ave, Philadelphia, PA 19104",
     "location": {
       "lat": 39.9488237,
@@ -985,6 +999,7 @@
   },
   {
     "name": "One Shot Cafe",
+    "image":"https://static1.squarespace.com/static/5693f2d21c12102a63e83399/5693f7f20e4c11c98e274297/5693f80a40667a914b3c3c89/1455306035479/oneshot-1016-2097626954-o.jpg?format=1500w",
     "address": "217 W George St, Philadelphia, PA 19123",
     "location": {
       "lat": 39.9677114,
@@ -999,6 +1014,7 @@
   },
   {
     "name": "Ultimo Coffee (Rittenhouse)",
+    "image":"https://static1.squarespace.com/static/55304e23e4b00e86adcbefef/t/578294663e00be71f46c1b44/1468178515174/Ultimo-Shop-0068+%282%29.jpg?format=1500w",
     "address": "238 S 20th St, Philadelphia, PA 19103",
     "location": {
       "lat": 39.9495412,
@@ -1014,10 +1030,15 @@
   },
   {
     "name": "Ultimo Coffee (South Philly)",
+    "image":"https://cdn.vox-cdn.com/thumbor/_qWf5PotLbeYkJN09FBh-Qa9UD0=/33x0:566x400/1820x1213/filters:focal(33x0:566x400):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/38976824/ultimolargepic.0.jpg",
     "address": "1900 S 15th St, Philadelphia, PA 19145",
     "location": {
       "lat": 39.9267851,
       "lng": -75.1834617
+    },
+    "imageCredit":{
+      "name":"Brooklydepia",
+      "link":"https://philly.eater.com/2013/4/4/6455999/ultimo-coffee-named-best-coffee-shop-in-the-u-s",
     },
     "tags": [
       "Off Campus",
@@ -1029,6 +1050,7 @@
   },
   {
     "name": "Herman’s Coffee",
+    "image":"https://cdn10.phillymag.com/wp-content/uploads/sites/3/2017/08/hermans-coffee-exterior-facebook-940.jpg",
     "address": "1313 S 3rd St, Philadelphia, PA 19147",
     "location": {
       "lat": 39.931404,
@@ -1043,6 +1065,7 @@
   },
   {
     "name": "Menagerie",
+    "image":"https://media.timeout.com/images/103892927/630/472/image.jpg",
     "address": "18 S 3rd St, Philadelphia, PA 19106",
     "location": {
       "lat": 39.949660,
@@ -1057,6 +1080,7 @@
   },
   {
     "name": "Greenstreet Coffee Co.",
+    "image":"https://media-cdn.tripadvisor.com/media/photo-s/08/99/a2/23/greenstreet-coffee-co.jpg",
     "address": "1101 Spruce St, Philadelphia, PA 19107",
     "location": {
       "lat": 39.9464657,
@@ -1086,6 +1110,7 @@
   },
   {
     "name": "Bluestone Lane (Rittenhouse)",
+    "image":"https://bluestonelane.com/wp-content/uploads/2015/11/BSL_philly_a-1024x801.jpg",
     "address": "1701 Locust St, Philadelphia, PA 19103",
     "location": {
       "lat": 39.949120,
@@ -1100,6 +1125,7 @@
   },
   {
     "name": "Bluestone Lane (Center City)",
+    "image":"https://bluestonelane.com/wp-content/uploads/2016/11/Ben_Hider_L1240689-1280x853.jpg",
     "address": "1 S Penn Square, Philadelphia, PA 19107",
     "location": {
       "lat": 39.9512066,
@@ -1115,6 +1141,7 @@
   },
   {
     "name": "Joe Coffee (University City)",
+    "image":"https://joecoffeecompany.com/wp-content/uploads/2018/08/Chestnut-Street-960x720.jpg",
     "address": "3200 Chestnut St, Philadelphia, PA 19104",
     "location": {
       "lat": 39.9536108,
@@ -1130,6 +1157,7 @@
   },
   {
     "name": "Joe Coffee (Rittenhouse)",
+    "image":"https://joecoffeecompany.com/wp-content/uploads/2018/08/Rittenhouse-960x720.jpg",
     "address": "1845 Walnut St, Philadelphia, PA 19103",
     "location": {
       "lat": 39.9536465,
