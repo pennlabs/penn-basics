@@ -40,7 +40,9 @@ class App extends Component {
       match: {
         params: {
           id,
-        } = { params: { id: '-1' } },
+        } = {
+          params: { id: '-1' },
+        },
       },
     } = this.props
 

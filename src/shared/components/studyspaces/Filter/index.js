@@ -24,6 +24,7 @@ import {
   toggleSpacesNoise,
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
+import ToggleNeighborhood from './ToggleNeighborhood'
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -158,8 +159,10 @@ class Filter extends Component {
         <ClearText onClick={clearSpacesFiltersDispatch}>
           Clear filters
         </ClearText>
+
+        <ToggleNeighborhood />
       </FilterWrapper>
-    );
+    )
   }
 }
 
@@ -168,7 +171,7 @@ Filter.defaultProps = {
   filterOutlets: [],
   filterNoise: [],
   filterGroups: [],
-};
+}
 
 Filter.propTypes = {
   filterSpacesOpenDispatch: PropTypes.func.isRequired,
@@ -191,7 +194,7 @@ Filter.propTypes = {
   filterOutlets: PropTypes.arrayOf(PropTypes.number),
   filterNoise: PropTypes.arrayOf(PropTypes.number),
   filterGroups: PropTypes.arrayOf(PropTypes.number),
-};
+}
 
 const mapStateToProps = ({ spaces }) => spaces;
 
@@ -207,9 +210,9 @@ const mapDispatchToProps = dispatch => ({
   toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),
   toggleSpacesNoiseDispatch: () => dispatch(toggleSpacesNoise()),
   toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
-});
+})
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Filter);
+)(Filter)
