@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
+import dateFormat from 'dateformat'
 
 
 import Dining from './Dining'
@@ -8,7 +9,6 @@ import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
 import Notification from './Notification'
 import Events from './Events'
-import Weather from './Weather'
 import { BorderedCard } from '../shared'
 import Footer from '../footer'
 
@@ -86,12 +86,9 @@ class Home extends Component {
         {show && (<Notification show={this.close} text={notification} />)}
 
         <BorderedCard>
-          <h1 className="title is-4">
-            <span role="img" aria-label="sun">☀️</span>
-            Gooob morning!
-          </h1>
-          <Weather/>
-          <div className="content is-medium">
+          <h1 className="title is-4">{dateFormat(new Date(), "dddd, mmmm dS")}</h1>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/39d95n75d17/philadelphia/?unit=us" data-label_1="PHILADELPHIA" data-days="3" data-theme="pure" >PHILADELPHIA WEATHER</a>
+          <div className="content is-medium" style={{ marginTop: "3%" }}>
             <p className="has-text-centered">
               {`"${quote}"`}
             </p>
@@ -101,11 +98,11 @@ class Home extends Component {
           </div>
         </BorderedCard>
 
-        <Dining show={dining} />
-
-        <Events/>
+        <Events />
 
         <Laundry />
+
+        <Dining show={dining} />
 
         <Studyspaces />
 

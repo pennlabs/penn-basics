@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { BorderedCard } from '../shared';
-import uuid from 'uuid';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { BorderedCard } from '../shared'
+import uuid from 'uuid'
+import dateFormat from 'dateformat'
 
 class Events extends Component {
     constructor(props) {
@@ -22,6 +23,10 @@ class Events extends Component {
     renderCalendarCards() {
         const { calendarArray } = this.state;
         return calendarArray.map(event => {
+            let startDate = event.start;
+            const index = startDate.lastIndexOf("-");
+            startDate = `${startDate.substring(0, index+1)}${parseInt(startDate.substring(index+1),10)+1}`
+            startDate = dateFormat(startDate, "dddd, mmmm dS");
             return (
                 <article className="media" key={uuid()}>
                     <div className="media-left">
@@ -35,7 +40,7 @@ class Events extends Component {
                             <p className="is-size-6">
                                 <strong>{event.name}</strong>
                                 <br />
-                                <small>{event.start}</small>
+                                <small>Starts from {startDate}</small>
                             </p>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import uuid from 'uuid'
 
 
 import { BorderedCard } from '../shared'
@@ -28,50 +29,48 @@ class Laundry extends Component {
     return (
       favoritesHome.map((favorite, index) => {
         return (
-          <>
-            <div className="columns">
-              <div className="column">
-                <h1 className="title is-6">
-                  {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`}
+          <div className="columns" key={uuid()}>
+            <div className="column">
+              <h1 className="title is-6">
+                {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`}
+              </h1>
+            </div>
+            <div className="column is-4">
+              <h1 className="subtitle is-4">
+                Washers Availability
                 </h1>
-              </div>
-              <div className="column is-4">
-                <h1 className="subtitle is-4">
-                  Washers Availability
-                </h1>
-                <h1 className="subtitle is-6">
-                  Available:
+              <h1 className="subtitle is-6">
+                Available:
                   {favorite.machines.washers.open}
-                </h1>
-                <h1 className="subtitle is-6">
-                  Busy:
+              </h1>
+              <h1 className="subtitle is-6">
+                Busy:
                   {favorite.machines.washers.running}
-                </h1>
-                <h1 className="subtitle is-6">
-                  Out of Order:
+              </h1>
+              <h1 className="subtitle is-6">
+                Out of Order:
                   {favorite.machines.washers.out_of_order}
+              </h1>
+            </div>
+            <div className="column is-5">
+              <h1 className="subtitle is-4">
+                Dryers Availability
                 </h1>
-              </div>
-              <div className="column is-5">
-                <h1 className="subtitle is-4">
-                  Dryers Availability
-                </h1>
-                <h1 className="subtitle is-6">
-                  Available:
+              <h1 className="subtitle is-6">
+                Available:
                   {favorite.machines.dryers.open}
-                </h1>
-                <h1 className="subtitle is-6">
-                  Busy:
+              </h1>
+              <h1 className="subtitle is-6">
+                Busy:
                   {favorite.machines.dryers.running}
-                </h1>
-                <h1 className="subtitle is-6">
-                  Out of Order:
+              </h1>
+              <h1 className="subtitle is-6">
+                Out of Order:
                   {favorite.machines.dryers.out_of_order}
-                </h1>
-              </div>
+              </h1>
             </div>
             {index === favoritesHome.length - 1 ? null : <hr />}
-          </>
+          </div>
         )
       })
     )
