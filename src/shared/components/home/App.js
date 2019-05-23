@@ -7,6 +7,8 @@ import Dining from './Dining'
 import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
 import Notification from './Notification'
+import Events from './Events'
+import Weather from './Weather'
 import { BorderedCard } from '../shared'
 import Footer from '../footer'
 
@@ -99,6 +101,10 @@ class Home extends Component {
         </BorderedCard>
 
         <Dining show={dining} />
+
+        <Weather/>
+
+        <Events/>
 
         <Laundry />
 

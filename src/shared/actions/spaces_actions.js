@@ -9,6 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
   clearFilterSpacesRequested,
@@ -205,6 +206,15 @@ export function filterSpacesGroups(filter) {
       filter,
     });
   };
+}
+
+export const filterOnCampus = (filter) => {
+  return (dispatch) => {
+    dispatch({
+      type: filterOnCampusRequested,
+      filter: filter,
+    })
+  }
 }
 
 export function clearSpacesFilters() {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import s from 'styled-components'
+import { connect } from 'react-redux'
 
 import {
   FOCUS_GRAY,
@@ -8,6 +9,9 @@ import {
   BLUE,
   MEDIUM_GRAY,
 } from '../../../styles/colors'
+import {
+  filterOnCampus
+} from '../../../actions/spaces_actions'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
@@ -70,9 +74,11 @@ class ToggleNeighborhood extends Component {
   }
 
   handleClick(e) {
-    e.stopPropagation()
+    const { filterOnCampusDispatch } = this.props
     const { active } = this.state
+    e.stopPropagation()
     this.setState({ active: !active })
+    filterOnCampusDispatch(active);
   }
 
   render() {
@@ -91,4 +97,10 @@ class ToggleNeighborhood extends Component {
   }
 }
 
-export default ToggleNeighborhood
+const mapStateToProps = ({ spaces }) => spaces;
+
+const mapDispatchToProps = dispatch => ({
+  filterOnCampusDispatch: (filter) => dispatch(filterOnCampus(filter)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)

@@ -19,12 +19,8 @@ class Dining extends Component {
     return (
       <BorderedCard>
         <Link to="/dining" className="link">
-          <h1 className="title is-4">
-            Dining
-          </h1>
-          <h2 className="subtitle is-6">
-            Dining description placeholder.
-          </h2>
+          <h1 className="title is-4">Dining</h1>
+          <h2 className="subtitle is-6">Dining description placeholder.</h2>
         </Link>
 
         <div className="space-1" />
@@ -35,11 +31,11 @@ class Dining extends Component {
             width="500px"
           />
         ) : (
-          <div>
-            <DiningCards name="Kings Court English House" type={0} />
-            <DiningCards name="Pret a Manger" type={1} />
-          </div>
-        )}
+            <div>
+              <DiningCards name="Kings Court English House" type={0} />
+              <DiningCards name="Pret a Manger" type={1} />
+            </div>
+          )}
       </BorderedCard>
     );
   }

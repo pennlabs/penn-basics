@@ -7,6 +7,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
   clearFilterSpacesRequested,
@@ -27,6 +28,7 @@ const clearFilterState = {
   filterOutletsActive: false,
   filterNoiseActive: false,
   filterGroupsActive: false,
+  filterOnCampus: false,
 };
 
 const updateFilters = (arr, num) => {
@@ -48,10 +50,11 @@ const filterSpaces = (state) => {
     filterOutlets,
     filterNoise,
     filterGroups,
+    filterOnCampus,
   } = state;
 
   // If there is nothing to filter on, remove all filters and reset the data
-  if (!filterOpen && !filterOutlets && !filterNoise && !filterGroups) {
+  if (!filterOpen && !filterOutlets && !filterNoise && !filterGroups && !filterOnCampus) {
     const newState = Object.assign(state, {});
     newState.filteredSpacesData = state.spacesData;
     return newState;
@@ -81,6 +84,10 @@ const filterSpaces = (state) => {
     filteredSpaceIDs = filteredSpaceIDs.filter(id => (
       filterGroups.includes(spacesData[id].groups)
     ));
+  }
+
+  if (filterOnCampus){
+    filteredSpaceIDs = filteredSpaceIDs.filter(id => spacesDate[id]);
   }
 
   filteredSpaceIDs.forEach(id => { // eslint-disable-line
@@ -151,6 +158,10 @@ const spacesReducer = (state = { pending: true }, action) => {
     case filterSpacesNoiseRequested: /* TODO FILTERING */
       newState.filterNoise = updateFilters(filterNoise, filter);
       return filterSpaces(newState);
+    
+    case filterOnCampusRequested:
+      newState.filterOnCampus = action.filter;
+      return newState;
 
     case filterSpacesGroupsRequested: /* TODO FILTERING */
       newState.filterGroups = updateFilters(filterGroups, filter);
