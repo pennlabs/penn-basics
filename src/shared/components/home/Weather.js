@@ -23,8 +23,6 @@ class Weather extends Component {
                         this.setState({ weatherData: data });
                     })
             })
-        } else {
-            console.log("geolocation is not supported");
         }
     }
 
