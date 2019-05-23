@@ -11,10 +11,10 @@ class Weather extends Component {
                 const appid = "bc3c40bd254aebc3c21cf92ebc307e91"; //openWeatherMap
 
                 axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${appid}&units=imperial`)
-                .then((res) => {
-                    const {data} = res;
-                    console.log(data);
-                })
+                    .then((res) => {
+                        const { data } = res;
+                        console.log(data);
+                    })
             })
         } else {
             console.log("geolocation is not supported");
