@@ -90,6 +90,7 @@ class Home extends Component {
             <span role="img" aria-label="sun">☀️</span>
             Gooob morning!
           </h1>
+          <Weather/>
           <div className="content is-medium">
             <p className="has-text-centered">
               {`"${quote}"`}
@@ -101,8 +102,6 @@ class Home extends Component {
         </BorderedCard>
 
         <Dining show={dining} />
-
-        <Weather/>
 
         <Events/>
 
