@@ -68,29 +68,24 @@ const Circle = s.div`
 class ToggleNeighborhood extends Component {
   constructor(props) {
     super(props)
-
-    this.state = { active: false }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(e) {
-    const { filterOnCampusDispatch } = this.props
-    const { active } = this.state
+    const { filterOnCampusDispatch, filterOnCampus } = this.props
     e.stopPropagation()
-    this.setState({ active: !active }, () => {
-      filterOnCampusDispatch(this.state.active);
-    })
+    filterOnCampusDispatch(!filterOnCampus);
   }
 
   render() {
-    const { active } = this.state
+    const { filterOnCampus } = this.props;
     return (
       <Wrapper>
         <ToggleWrapper>
-          <Circle onClick={this.handleClick} active={active} />
-          <Bar onClick={this.handleClick} active={active} />
+          <Circle onClick={this.handleClick} active={filterOnCampus} />
+          <Bar onClick={this.handleClick} active={filterOnCampus} />
         </ToggleWrapper>
-        <Label onClick={this.handleClick} active={active}>
+        <Label onClick={this.handleClick} active={filterOnCampus}>
           Univ. City only
         </Label>
       </Wrapper>
