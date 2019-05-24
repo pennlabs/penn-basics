@@ -48,7 +48,7 @@ export default () => (
       <div id="wrapper">
         <div id="app">
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Home}/>
             <Route exact path="/dining" component={Dining} />
             <Route exact path="/dining/:id" component={Dining} />
             <Route exact path="/laundry" component={Laundry} />

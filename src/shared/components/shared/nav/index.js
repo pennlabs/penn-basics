@@ -46,7 +46,7 @@ const Nav = () => (
     <Menu />
 
     <Link to="/" className="logo">
-      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo"/>
       <LogoText>
         Penn Basics
       </LogoText>
