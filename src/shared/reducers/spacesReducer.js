@@ -86,8 +86,8 @@ const filterSpaces = (state) => {
     ));
   }
 
-  if (filterOnCampus){
-    filteredSpaceIDs = filteredSpaceIDs.filter(id => spacesDate[id]);
+  if (filterOnCampus) {
+    filteredSpaceIDs = filteredSpaceIDs.filter(id => spacesData[id].tags.includes("On Campus"));
   }
 
   filteredSpaceIDs.forEach(id => { // eslint-disable-line
@@ -158,10 +158,10 @@ const spacesReducer = (state = { pending: true }, action) => {
     case filterSpacesNoiseRequested: /* TODO FILTERING */
       newState.filterNoise = updateFilters(filterNoise, filter);
       return filterSpaces(newState);
-    
+
     case filterOnCampusRequested:
       newState.filterOnCampus = action.filter;
-      return newState;
+      return filterSpaces(newState);
 
     case filterSpacesGroupsRequested: /* TODO FILTERING */
       newState.filterGroups = updateFilters(filterGroups, filter);

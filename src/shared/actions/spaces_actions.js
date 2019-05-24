@@ -9,7 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
-  filterOnCampusRequested,
+  filterOnCampusRequested, // filterOnCampus
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
   clearFilterSpacesRequested,
@@ -199,7 +199,7 @@ export function filterSpacesNoise(filter) {
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesGroups(filter) {
+export const filterSpacesGroups = (filter) => {
   return (dispatch) => {
     dispatch({
       type: filterSpacesGroupsRequested,
@@ -212,7 +212,7 @@ export const filterOnCampus = (filter) => {
   return (dispatch) => {
     dispatch({
       type: filterOnCampusRequested,
-      filter: filter,
+      filter,
     })
   }
 }

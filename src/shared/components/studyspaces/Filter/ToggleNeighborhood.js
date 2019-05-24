@@ -77,8 +77,9 @@ class ToggleNeighborhood extends Component {
     const { filterOnCampusDispatch } = this.props
     const { active } = this.state
     e.stopPropagation()
-    this.setState({ active: !active })
-    filterOnCampusDispatch(active);
+    this.setState({ active: !active }, () => {
+      filterOnCampusDispatch(this.state.active);
+    })
   }
 
   render() {
