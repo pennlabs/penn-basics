@@ -3,7 +3,7 @@ import axios from 'axios'
 import s from 'styled-components'
 import dateFormat from 'dateformat'
 
-
+import News from './News'
 import Dining from './Dining'
 import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
@@ -100,6 +100,8 @@ class Home extends Component {
         </BorderedCard>
 
         <Events />
+
+        <News/>
 
         <Laundry />
 
