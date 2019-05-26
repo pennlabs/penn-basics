@@ -101,7 +101,7 @@ class Home extends Component {
 
         <Events />
 
-        <News/>
+        <News />
 
         <Laundry />
 

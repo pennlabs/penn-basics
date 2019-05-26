@@ -1,8 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const request = require('request');
-const cheerio = require('cheerio');
 
 const frontendRouter = require('./routes/frontend');
 const eventsRouter = require('./routes/events');
@@ -52,28 +50,7 @@ app.use('/api/dining', diningRouter(DB));
 app.use('/api/quotes', (req, res) => {
   res.json(quotes);
 });
-app.use('/api/news', (req, response) => {
-  const { website, className } = req.body;
-  request(website, (err, res, html) => {
-    if (!err && res.statusCode == 200) {
-      const $ = cheerio.load(html);
-      let classname = className.replace(/ /g, ".");
-      const heading = $(`.${classname}`);
-      const picture = $(heading).find('.img.img-responsive').attr('src');
-      const link = $(heading).find('.frontpage-link.large-link').attr('href');
-      const title = $(heading).find('.frontpage-link.large-link').text();
-      const content = $(heading).find('p').text();
-      const time = $(heading).find('.timestamp').text().trim();
-      response.json({
-        picture,
-        link,
-        title,
-        content,
-        time
-      });
-    }
-  })
-});
+app.use('/api/news', newsRouter());
 app.use('/', frontendRouter(DB));
 
 

@@ -1,9 +1,29 @@
 const router = require('express').Router();
+const request = require('request');
+const cheerio = require('cheerio');
 
-module.exports = function newsRouter (){
-    router.post('/', (req, res) => {
-        console.log("!!!");
-        console.log(req.body);
+module.exports = function newsRouter() {
+    router.post('/', (req, response) => {
+        let { website, className } = req.body;
+        request(website, (err, res, html) => {
+            if (!err && res.statusCode == 200) {
+                const $ = cheerio.load(html);
+                className = className.replace(/ /g, ".");
+                const heading = $(`.${className}`);
+                const picture = $(heading).find('.img.img-responsive').attr('src');
+                const link = $(heading).find('.frontpage-link.large-link').attr('href');
+                const title = $(heading).find('.frontpage-link.large-link').text();
+                const content = $(heading).find('p').text();
+                const time = $(heading).find('.timestamp').text().trim();
+                response.json({
+                    picture,
+                    link,
+                    title,
+                    content,
+                    time
+                });
+            }
+        })
     })
 
     return router;
