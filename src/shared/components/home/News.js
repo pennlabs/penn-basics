@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 import { BorderedCard } from '../shared'
 
 class News extends Component {
@@ -39,8 +40,25 @@ class News extends Component {
         return (
             <BorderedCard>
                 <h1 className="title is-4">Latest News</h1>
-                <h2 className="subtitle is-6">The Daily Pennsylvanian</h2>
-                <img src={picture} />
+                <h2 className="subtitle is-6"> <a href="https://www.thedp.com/">The Daily Pennsylvanian</a></h2>
+                <article className="media">
+                    <div className="media-left">
+                    <a href={link}>
+                        <img src={picture} alt="First" width="500px" /></a>
+                    </div>
+                    <div className="media-content">
+                        <div className="content">
+                            <p className="is-size-6">
+                                <strong><a href={link}>{title}</a></strong>
+                                <br />
+                                <small>{content}</small>
+                                <br />
+                                <br />
+                                <small> {time} </small>
+                            </p>
+                        </div>
+                    </div>
+                </article>
             </BorderedCard>
         );
     }
