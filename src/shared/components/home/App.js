@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
-import dateFormat from 'dateformat'
 
+import Filter from './Filter';
+import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'
 import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
 import Notification from './Notification'
 import Events from './Events'
-import { BorderedCard } from '../shared'
 import Footer from '../footer'
 
 
@@ -25,7 +25,6 @@ class Home extends Component {
       show: false,
       notification: '',
       dining: false,
-      quotes: null,
     }
 
     this.close = this.close.bind(this)
@@ -50,16 +49,6 @@ class Home extends Component {
 
         console.log(err) // eslint-disable-line
       })
-
-    // TODO reduxify this
-    axios.get('/api/quotes')
-      .then((res) => {
-        this.setState({ quotes: res.data })
-      }).catch((err) => {
-        // TODO better error handling
-
-        console.log(err) // eslint-disable-line
-      })
   }
 
 
@@ -74,30 +63,16 @@ class Home extends Component {
       dining,
       show,
       notification,
-      quotes,
     } = this.state
 
-    if (!quotes) return null
-
-    const { quote, author } = quotes[Math.floor(Math.random() * quotes.length)]
 
     return (
       <Wrapper>
         {show && (<Notification show={this.close} text={notification} />)}
 
-        <BorderedCard>
-          <h1 className="title is-4">Hi There!</h1>
-          <h2 className="subtitle is-6">Weather Notification</h2>
-          <a className="weatherwidget-io" href="https://forecast7.com/en/39d95n75d17/philadelphia/" data-label_1="Philadelphia" data-label_2={dateFormat(new Date(), "dddd, mmmm dS")} data-days="3" data-accent="" data-theme="pure" data-highcolor="" data-lowcolor="" >PHILADELPHIA WEATHER</a>
-          <div className="content is-medium" style={{ marginTop: "3%" }}>
-            <p className="has-text-centered">
-              {`"${quote}"`}
-            </p>
-            <p className="has-text-right">
-              {`--- ${author}`}
-            </p>
-          </div>
-        </BorderedCard>
+        <Filter/>
+        
+        <Weather/>
 
         <Events />
 
@@ -114,6 +89,5 @@ class Home extends Component {
     )
   }
 }
-
 
 export default Home

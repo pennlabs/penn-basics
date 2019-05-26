@@ -3,6 +3,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 module.exports = function newsRouter() {
+    // can convert this to Labs API
     router.post('/', (req, response) => {
         let { website, className } = req.body;
         request(website, (err, res, html) => {

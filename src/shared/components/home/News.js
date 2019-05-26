@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
-import { BorderedCard } from '../shared'
+import { BorderedCard, ImageZoom } from '../shared'
 
 class News extends Component {
     constructor(props) {
@@ -39,11 +38,11 @@ class News extends Component {
         return (
             <BorderedCard>
                 <h1 className="title is-4">Latest News</h1>
-                <h2 className="subtitle is-6"> <a href="https://www.thedp.com/">The Daily Pennsylvanian</a></h2>
+                <h2 className="subtitle is-6"> More From <a href="https://www.thedp.com/">The Daily Pennsylvanian</a></h2>
                 <article className="media">
-                    <div className="media-left">
+                    <div className="media-left" style={{overflow:"hidden"}}>
                     <a href={link}>
-                        <img src={picture} alt="First" width="500px" /></a>
+                        <ImageZoom src={picture} alt="First" width="500px" /></a>
                     </div>
                     <div className="media-content">
                         <div className="content">

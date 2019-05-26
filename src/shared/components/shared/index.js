@@ -9,3 +9,4 @@ export * from './Scrollbar';
 export * from './Circle';
 export * from './nav/SectionHeader';
 export * from './LaundryOverview';
+export * from './ImageZoom';

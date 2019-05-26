@@ -58,8 +58,8 @@ class Events extends Component {
 
         return (
             <BorderedCard>
-                <h1 className="title is-4">University Events</h1>
-                <h2 className="subtitle is-6">Calendar in two weeks</h2>
+                <h1 className="title is-4">University Calendar</h1>
+                <h2 className="subtitle is-6">Events happening in next two weeks</h2>
                 {this.renderCalendarCards()}
             </BorderedCard>
         )
