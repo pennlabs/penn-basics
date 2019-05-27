@@ -46,7 +46,7 @@ class Home extends Component {
           })
         }
 
-        this.setState({ componentList: [<Weather/>, <Events/>, <News/>, <Laundry/>, <Dining show={this.state.dining} />, <Studyspaces/>] });
+        this.setState({ componentList: [<Weather />, <Events />, <News />, <Laundry />, <Dining show={this.state.dining} />, <Studyspaces />] });
 
       })
       .catch((err) => {
@@ -61,12 +61,13 @@ class Home extends Component {
     this.setState({ show: false })
   }
 
-  renderComponents(){
-    const {filterCustomize} = this.props;
-    const {componentList} = this.state;
-    filterCustomize.sort();
+  renderComponents() {
+    const filter = JSON.parse(localStorage.getItem("homeFilter"));
+    console.log(filter);
+    const { componentList } = this.state;
+
     return (
-      filterCustomize.map(index => componentList[index])
+      filter.map(index => componentList[index])
     )
   }
 

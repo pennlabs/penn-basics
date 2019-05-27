@@ -14,11 +14,11 @@ const updateFilters = (arr, num) => {
   }
 
   if (arr.includes(num)) {
-    return arr.filter(item => item !== num);
+    return arr.filter(item => item !== num).sort();
   }
 
   arr.push(num);
-  return arr;
+  return arr.sort();
 };
 
 const homeReducer = (state = defaultState, action) => {
@@ -26,6 +26,7 @@ const homeReducer = (state = defaultState, action) => {
 
   if (state.filterCustomize && Array.isArray(state.filterCustomize)) {
     newState.filterCustomize = state.filterCustomize.slice();
+    Object.assign(newState.filterCustomize, JSON.parse(localStorage.getItem("homeFilter")));
   }
 
   const {
@@ -37,6 +38,7 @@ const homeReducer = (state = defaultState, action) => {
   switch (type) {
     case filterHomeCustomizeRequested:
       newState.filterCustomize = updateFilters(filterCustomize, filter);
+      localStorage.setItem("homeFilter", JSON.stringify(newState.filterCustomize));
       return newState;
 
     case TOGGLE_FILTER_HOME_CUSTOMIZE:

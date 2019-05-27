@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FilterButton from './FilterBtn';
 import {
     filterHomeCustomize,
-    toggleHomeCustomize
+    toggleHomeCustomize,
 } from '../../../actions/home_actions'
 import { BorderedCard } from '../../shared'
 
@@ -28,7 +28,7 @@ class Filter extends Component {
                     onClick={toggleHomeCustomizeDispatch}
                     onClickOption={filterHomeCustomizeDispatch}
                     options={['Weather', 'Events', 'News', 'Laundry', 'Dining', 'Studyspaces']}
-                    activeOptions={filterCustomize}
+                    activeOptions={JSON.parse(localStorage.getItem("homeFilter"))}
                     active={filterCustomizeActive}
                 />
             </BorderedCard>
