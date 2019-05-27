@@ -13,7 +13,7 @@ import {
   SNOW_ALPHA,
   MEDIUM_GRAY,
   BABY_BLUE,
-} from '../../styles/colors'
+} from '../../../styles/colors'
 
 
 const FilterBtnWrapper = s.a`

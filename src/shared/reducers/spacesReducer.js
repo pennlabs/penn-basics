@@ -159,12 +159,12 @@ const spacesReducer = (state = { pending: true }, action) => {
       newState.filterNoise = updateFilters(filterNoise, filter);
       return filterSpaces(newState);
 
-    case filterOnCampusRequested:
-      newState.filterOnCampus = action.filter;
-      return filterSpaces(newState);
-
     case filterSpacesGroupsRequested: /* TODO FILTERING */
       newState.filterGroups = updateFilters(filterGroups, filter);
+      return filterSpaces(newState);
+
+    case filterOnCampusRequested:
+      newState.filterOnCampus = action.filter;
       return filterSpaces(newState);
 
     case clearFilterSpacesRequested:

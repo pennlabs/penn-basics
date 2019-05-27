@@ -1,5 +1,9 @@
 // NOTE setting actions to have string names makes debugging easier
 
+// home actions
+export const filterHomeCustomizeRequested = 'FILTER_HOME_CUSTOMIZE_REQUESTED';
+export const TOGGLE_FILTER_HOME_CUSTOMIZE = 'TOGGLE_FILTER_HOME_CUSTOMIZE';
+
 // dining actions
 export const getDiningDataRequested = 'GET_DINING_DATA_REQUESTED';
 export const getDiningDataRejected = 'GET_DINING_DATA_REJECTED';

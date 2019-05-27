@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
 
-import Filter from './Filter';
+import Filter from './Filter/Filter';
 import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'

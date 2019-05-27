@@ -9,7 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
-  filterOnCampusRequested, // filterOnCampus
+  filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
   clearFilterSpacesRequested,
@@ -25,7 +25,7 @@ import {
  * @param time in MS
  * @returns minutes (between 0 and 59)
  */
-function getMinutes(time) {
+const getMinutes = (time) => {
   // If there is a decimal
   let minutes = '';
   if (time % 1 !== 0) {
@@ -40,7 +40,7 @@ function getMinutes(time) {
  * @param time in MS
  * @returns the passed in time as a string
  */
-function getTime(time) {
+const getTime = (time) => {
   // Edge case
   if (time < 0) return '';
 
@@ -65,7 +65,7 @@ function getTime(time) {
 }
 
 
-function getHours({ start, end }, day) {
+const getHours = ({ start, end }, day) => {
   const startTime = start[day];
   const endTime = end[day];
 
@@ -79,7 +79,7 @@ function getHours({ start, end }, day) {
 }
 
 
-function isOpen({ start, end }, time, day) {
+const isOpen = ({ start, end }, time, day) => {
   const startTime = start[day];
   const endTime = end[day];
 
