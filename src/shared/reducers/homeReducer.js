@@ -23,20 +23,21 @@ const updateFilters = (arr, num) => {
 
 const homeReducer = (state = defaultState, action) => {
   const { filter, type } = action;
+  const { filterCustomize, filterCustomizeActive } = state;
 
   switch (type) {
     case filterHomeCustomizeRequested:
       return {
         ...state,
-        filterCustomize: updateFilters(state.filterCustomize, filter)
+        filterCustomize: updateFilters(filterCustomize, filter)
       };
-    
+
     case TOGGLE_FILTER_HOME_CUSTOMIZE:
       return {
         ...state,
-        filterCustomizeActive: !state.filterCustomizeActive
+        filterCustomizeActive: !filterCustomizeActive
       };
-      
+
     default:
       return state;
   }

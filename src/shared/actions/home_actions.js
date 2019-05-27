@@ -5,6 +5,8 @@ import {
 
 export const filterHomeCustomize = (filter) => {
     return (dispatch) => {
+        console.log("---filter action triggered---");
+        console.log(filter);
         dispatch({
             type: filterHomeCustomizeRequested,
             filter

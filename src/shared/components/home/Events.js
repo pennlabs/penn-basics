@@ -25,7 +25,7 @@ class Events extends Component {
         return calendarArray.map(event => {
             let startDate = event.start;
             const index = startDate.lastIndexOf("-");
-            startDate = `${startDate.substring(0, index+1)}${parseInt(startDate.substring(index+1),10)+1}`
+            startDate = `${startDate.substring(0, index + 1)}${parseInt(startDate.substring(index + 1), 10) + 1}`
             startDate = dateFormat(startDate, "dddd, mmmm dS");
             return (
                 <article className="media" key={uuid()}>
@@ -52,15 +52,11 @@ class Events extends Component {
     render() {
         const { calendarArray } = this.state;
 
-        if (!calendarArray) {
-            return null;
-        }
-
         return (
             <BorderedCard>
                 <h1 className="title is-4">University Calendar</h1>
                 <h2 className="subtitle is-6">Events happening in next two weeks</h2>
-                {this.renderCalendarCards()}
+                {calendarArray && this.renderCalendarCards()}
             </BorderedCard>
         )
     }

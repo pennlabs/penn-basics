@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
+import { connect } from 'react-redux'
 
 import Filter from './Filter/Filter';
 import Weather from './Weather'
@@ -49,13 +50,14 @@ class Home extends Component {
 
         console.log(err) // eslint-disable-line
       })
+
+
   }
 
 
   close() {
     this.setState({ show: false })
   }
-
 
   render() {
     // TODO less bulma madness
@@ -65,14 +67,18 @@ class Home extends Component {
       notification,
     } = this.state
 
+    const { filterCustomize } = this.props;
+
+    console.log("!!!");
+    console.log(filterCustomize);
 
     return (
       <Wrapper>
         {show && (<Notification show={this.close} text={notification} />)}
 
-        <Filter/>
-        
-        <Weather/>
+        <Filter />
+
+        <Weather />
 
         <Events />
 
@@ -90,4 +96,6 @@ class Home extends Component {
   }
 }
 
-export default Home
+const mapStateToProps = ({ home }) => home;
+
+export default connect(mapStateToProps, null)(Home)
