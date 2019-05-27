@@ -69,9 +69,6 @@ class Home extends Component {
 
     const { filterCustomize } = this.props;
 
-    console.log("!!!");
-    console.log(filterCustomize);
-
     return (
       <Wrapper>
         {show && (<Notification show={this.close} text={notification} />)}

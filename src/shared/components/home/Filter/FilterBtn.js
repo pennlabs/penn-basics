@@ -192,8 +192,6 @@ class FilterBtn extends Component {
     let areActiveOptions = activeOptions && activeOptions.length
     let btnText = text
 
-    console.log("!!!");
-
     return (
       <FilterBtnWrapper
         tabIndex={0}

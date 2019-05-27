@@ -4,7 +4,7 @@ import {
 } from '../actions/action_types';
 
 const defaultState = {
-  filterCustomize: null,
+  filterCustomize: [],
   filterCustomizeActive: false,
 };
 
@@ -22,21 +22,26 @@ const updateFilters = (arr, num) => {
 };
 
 const homeReducer = (state = defaultState, action) => {
+  const newState = Object.assign({}, state);
+
+  if (state.filterCustomize && Array.isArray(state.filterCustomize)) {
+    newState.filterCustomize = state.filterCustomize.slice();
+  }
+
+  const {
+    filterCustomize,
+    filterCustomizeActive,
+  } = newState;
   const { filter, type } = action;
-  const { filterCustomize, filterCustomizeActive } = state;
 
   switch (type) {
     case filterHomeCustomizeRequested:
-      return {
-        ...state,
-        filterCustomize: updateFilters(filterCustomize, filter)
-      };
+      newState.filterCustomize = updateFilters(filterCustomize, filter);
+      return newState;
 
     case TOGGLE_FILTER_HOME_CUSTOMIZE:
-      return {
-        ...state,
-        filterCustomizeActive: !filterCustomizeActive
-      };
+      newState.filterCustomizeActive = !filterCustomizeActive;
+      return newState;
 
     default:
       return state;

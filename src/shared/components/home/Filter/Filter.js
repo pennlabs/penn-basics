@@ -13,10 +13,6 @@ class Filter extends Component {
         super(props);
     }
 
-    componentWillUpdate(newProps, nextState){
-        console.log(newProps);
-    }
-
     render() {
         const {
             filterHomeCustomizeDispatch,
