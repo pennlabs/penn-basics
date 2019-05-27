@@ -6,7 +6,7 @@ import {
     filterHomeCustomize,
     toggleHomeCustomize
 } from '../../../actions/home_actions'
-import {BorderedCard} from '../../shared'
+import { BorderedCard } from '../../shared'
 
 class Filter extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class Filter extends Component {
                     text="Customize This Page"
                     onClick={toggleHomeCustomizeDispatch}
                     onClickOption={filterHomeCustomizeDispatch}
-                    options={['Weather', 'Events', 'News']}
+                    options={['Weather', 'Events', 'News', 'Laundry', 'Dining', 'Studyspaces']}
                     activeOptions={filterCustomize}
                     active={filterCustomizeActive}
                 />

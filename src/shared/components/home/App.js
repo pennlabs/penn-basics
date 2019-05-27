@@ -26,6 +26,7 @@ class Home extends Component {
       show: false,
       notification: '',
       dining: false,
+      componentList: [],
     }
 
     this.close = this.close.bind(this)
@@ -44,14 +45,15 @@ class Home extends Component {
             notification: resp.data.events[0].event,
           })
         }
+
+        this.setState({ componentList: [<Weather/>, <Events/>, <News/>, <Laundry/>, <Dining show={this.state.dining} />, <Studyspaces/>] });
+
       })
       .catch((err) => {
         // TODO better error handling
 
         console.log(err) // eslint-disable-line
       })
-
-
   }
 
 
@@ -59,15 +61,21 @@ class Home extends Component {
     this.setState({ show: false })
   }
 
+  renderComponents(){
+    const {filterCustomize} = this.props;
+    const {componentList} = this.state;
+    filterCustomize.sort();
+    return (
+      filterCustomize.map(index => componentList[index])
+    )
+  }
+
   render() {
     // TODO less bulma madness
     const {
-      dining,
       show,
       notification,
     } = this.state
-
-    const { filterCustomize } = this.props;
 
     return (
       <Wrapper>
@@ -75,17 +83,7 @@ class Home extends Component {
 
         <Filter />
 
-        <Weather />
-
-        <Events />
-
-        <News />
-
-        <Laundry />
-
-        <Dining show={dining} />
-
-        <Studyspaces />
+        {this.renderComponents()}
 
         <Footer />
       </Wrapper>

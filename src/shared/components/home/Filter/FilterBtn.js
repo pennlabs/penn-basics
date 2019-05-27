@@ -146,6 +146,13 @@ class FilterBtn extends Component {
     }
   }
 
+  componentDidMount() {
+    const { onClickOption, options } = this.props;
+    options.forEach((option, index) => {
+      onClickOption(index);
+    })
+  }
+
 
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27
@@ -189,8 +196,12 @@ class FilterBtn extends Component {
     } = this.props
 
     const areOptions = options && options.length
-    let areActiveOptions = activeOptions && activeOptions.length
+    let areActiveOptions = activeOptions && activeOptions.length < options.length
     let btnText = text
+
+    if (areOptions && activeOptions && activeOptions.length < options.length) {
+      btnText = "Customized"
+    }
 
     return (
       <FilterBtnWrapper

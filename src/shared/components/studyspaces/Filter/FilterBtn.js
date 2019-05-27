@@ -255,8 +255,8 @@ class FilterBtn extends Component {
 
 FilterBtn.defaultProps = {
   options: null,
-  onClick: () => {},
-  onClickOption: () => {},
+  onClick: () => { },
+  onClickOption: () => { },
   active: false,
   activeOptions: [],
 }
