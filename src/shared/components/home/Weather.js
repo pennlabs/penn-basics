@@ -11,13 +11,18 @@ class Weather extends Component {
             greetings: ["Hi There!", "How Are You Doing?", "Yo, What's Up?"],
             emojis: ["😀", "😛", "😗"],
             greeting: '',
+            quote: '',
+            author: '',
         }
     }
 
     componentDidMount() {
+        // TODO reduxify this
         axios.get('/api/quotes')
             .then((res) => {
-                this.setState({ quotes: res.data })
+                const quotes = res.data;
+                const { quote, author } = quotes[Math.floor(Math.random() * quotes.length)];
+                this.setState({quote, author})
             }).catch((err) => {
                 // TODO better error handling
 
@@ -33,13 +38,8 @@ class Weather extends Component {
     }
 
     render() {
-        // TODO reduxify this
-        const { quotes, greeting } = this.state;
-        if (!quotes) {
-            return null
-        }
+        const { quote, author, greeting } = this.state;
 
-        const { quote, author } = quotes[Math.floor(Math.random() * quotes.length)];
         return (
             <BorderedCard>
                 <h1 className="title is-4">{greeting}</h1>

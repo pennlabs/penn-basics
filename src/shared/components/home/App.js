@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
 import { connect } from 'react-redux'
+import uuid from 'uuid';
 
 import Filter from './Filter/Filter';
 import Weather from './Weather'
@@ -62,16 +63,21 @@ class Home extends Component {
   }
 
   renderComponents() {
-    if (!localStorage.getItem("homeFilter")){
+    if (!localStorage.getItem("homeFilter")) {
       return null;
     }
-    
+
     const filter = JSON.parse(localStorage.getItem("homeFilter"));
-    console.log(filter);
     const { componentList } = this.state;
 
     return (
-      filter.map(index => componentList[index])
+      filter.map(index => {
+        return (
+          <div key={uuid()}>
+            {componentList[index]}
+          </div>
+        )
+      })
     )
   }
 
