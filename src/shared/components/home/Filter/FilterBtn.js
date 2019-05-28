@@ -146,12 +146,14 @@ class FilterBtn extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   const { onClickOption, options } = this.props;
-  //   options.forEach((option, index) => {
-  //     onClickOption(index);
-  //   })
-  // }
+  componentDidMount() {
+    if (!localStorage.getItem("homeFilter")) {
+      const { onClickOption, options } = this.props;
+      options.forEach((option, index) => {
+        onClickOption(index);
+      })
+    }
+  }
 
 
   handleKeyPress(event) {
@@ -192,7 +194,7 @@ class FilterBtn extends Component {
       onClick,
       onClickOption,
       active,
-      activeOptions=[],
+      activeOptions = [],
     } = this.props
 
     const areOptions = options && options.length

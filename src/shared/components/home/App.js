@@ -62,6 +62,10 @@ class Home extends Component {
   }
 
   renderComponents() {
+    if (!localStorage.getItem("homeFilter")){
+      return null;
+    }
+    
     const filter = JSON.parse(localStorage.getItem("homeFilter"));
     console.log(filter);
     const { componentList } = this.state;
