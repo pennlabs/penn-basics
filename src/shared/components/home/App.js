@@ -71,13 +71,7 @@ class Home extends Component {
     const { componentList } = this.state;
 
     return (
-      filter.map(index => {
-        return (
-          <div key={uuid()}>
-            {componentList[index]}
-          </div>
-        )
-      })
+      filter.map(index => componentList[index])
     )
   }
 
