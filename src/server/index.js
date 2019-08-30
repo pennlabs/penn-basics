@@ -50,6 +50,7 @@ app.use('/api/dining', diningRouter(DB));
 app.use('/api/quotes', (req, res) => {
   res.json(quotes);
 });
+app.use('/api/laundry', laundryRouter(DB));
 app.use('/api/news', newsRouter());
 app.use('/', frontendRouter(DB));
 
