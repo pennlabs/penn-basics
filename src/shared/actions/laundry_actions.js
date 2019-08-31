@@ -14,7 +14,7 @@ import {
   updateReminder
 } from './action_types';
 
-const publicVapidKey = "BJVQhZ9UzolT01excKsF0DnBAzasAxs0VbmYxI208_sn-WHgqsDNsK8RCUVwwGQ34O8yvDqbZwoQ8xH2kznhz74";
+const publicVapidKey = "BGuvPMhJoXdHjV_Kx2OlC0DDLr2Ln5vdYurbvEehDskANaV8cWu-9X-xf9FX72QAvVB6yKRS0QXsm_HYnZwBqqg";
 const BASE = 'http://api.pennlabs.org';
 
 function processLaundryHallsData(idData) {
@@ -187,54 +187,6 @@ export function removeFavorite(laundryHallId) {
   };
 }
 
-export function handleReminder(machineID, hallID, register, reminded) {
-  console.log(register);
-  console.log(reminded);
-  return async (dispatch) => {
-    if (!reminded) {
-      console.log('reminder is set');
-      register = await navigator.serviceWorker.register('/laundry_worker.js', {
-        scope: '/'
-      });
-
-      const subscription = await register.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-      });
-
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
-      const { data } = axiosResponse;
-      const machine = data.machines.details.filter(detail => detail.id == machineID);
-      const time_remaining = machine[0].time_remaining;
-
-      dispatch({
-        type: updateReminder,
-        register,
-        reminded: true
-      })
-
-      await axios.post('/api/laundry/reminder', { subscription, time_remaining });
-
-      dispatch({
-        type: updateReminder,
-        register,
-        reminded: false
-      })
-    } else {
-      register.unregister().then((cancelled) => {
-        if (cancelled){
-          console.log('reminder is cancelled');
-          dispatch({
-            type: updateReminder,
-            register,
-            reminded: false
-          });
-        }
-      })
-    }
-  }
-}
-
 const urlBase64ToUint8Array = base64String => {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
@@ -248,4 +200,55 @@ const urlBase64ToUint8Array = base64String => {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
+}
+
+export function handleReminder(machineID, hallID, reminderArray) {
+  return async (dispatch) => {
+    let filteredArray = reminderArray.filter(reminder => reminder.machineID == machineID && reminder.hallID == hallID);
+
+    if (filteredArray.length == 0) {
+      console.log('reminder is set');
+      const register = await navigator.serviceWorker.register('/laundry_worker.js', {
+        scope: `/laundry/${hallID}/${machineID}`
+      });
+
+      const subscription = await register.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+      });
+
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
+      const { data } = axiosResponse;
+      const machine = data.machines.details.filter(detail => detail.id == machineID);
+      const time_remaining = machine[0].time_remaining;
+
+      reminderArray.push({machineID, hallID, register});
+
+      dispatch({
+        type: updateReminder,
+        reminderArray
+      })
+
+      await axios.post('/api/laundry/reminder', { subscription, time_remaining });
+
+      // remove this machine from the reminderArray
+      filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
+
+      dispatch({
+        type: updateReminder,
+        reminderArray: filteredArray
+      })
+    } else {
+      filteredArray[0].register.unregister().then((cancelled) => {
+        if (cancelled) {
+          console.log('reminder is cancelled');
+          filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
+          dispatch({
+            type: updateReminder,
+            reminderArray: filteredArray
+          });
+        }
+      })
+    }
+  }
 }

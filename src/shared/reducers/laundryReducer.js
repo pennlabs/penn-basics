@@ -17,8 +17,7 @@ const defaultState = {
   laundryHallInfo: null,
   favorites: [],
   favoritesHome: [],
-  register: null,
-  reminded: false
+  reminderArray: []
 };
 
 const laundryReducer = (state = defaultState, action) => {
@@ -71,8 +70,7 @@ const laundryReducer = (state = defaultState, action) => {
     case updateReminder:
       return {
         ...state,
-        reminded: action.reminded,
-        register: action.register
+        reminderArray: action.reminderArray
       }
     default:
       return state;

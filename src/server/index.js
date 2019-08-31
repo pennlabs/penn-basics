@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // web push relevant info
-const publicVapidKey = "BJVQhZ9UzolT01excKsF0DnBAzasAxs0VbmYxI208_sn-WHgqsDNsK8RCUVwwGQ34O8yvDqbZwoQ8xH2kznhz74";
-const privateVapidKey = "JlGCI-IvJ8Gse3nLWZL0HMailAp6N5Bjg8U01fosxPk";
+const publicVapidKey = "BGuvPMhJoXdHjV_Kx2OlC0DDLr2Ln5vdYurbvEehDskANaV8cWu-9X-xf9FX72QAvVB6yKRS0QXsm_HYnZwBqqg";
+const privateVapidKey = "9hqSNFt0IJEJjh1uQG-gEoyBrZCriJ1kcDprFdylGD8";
 webpush.setVapidDetails('mailto:cbaile@seas.upenn.edu', publicVapidKey, privateVapidKey);
 
 // specify the route for the service worker

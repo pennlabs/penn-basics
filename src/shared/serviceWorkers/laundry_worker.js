@@ -4,4 +4,5 @@ self.addEventListener('push', e => {
         icon: 'https://raw.githubusercontent.com/pennlabs/pennbasics/master/public/android-chrome-256x256.png'
         // icon: '../../../public/android-chrome-256x256.png'
     })
+    console.log('----service worker: notification sent-----');
 })

@@ -29,7 +29,7 @@ const Table = s.table`
   margin-bottom: 0;
 `
 
-const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, register, reminded, dispatchHandleReminder) => {
+const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, reminderArray, dispatchHandleReminder) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const {
     open = 0,
@@ -65,7 +65,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
             </thead>
             <tbody>
               {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
-                <tr key={id} onClick={() => dispatchHandleReminder(id, laundryHallId, register, reminded)}>
+                <tr key={id} onClick={() => dispatchHandleReminder(id, laundryHallId, reminderArray)}>
                   <td>{id}</td>
                   <td><StatusPill status={status} /></td>
                   <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
@@ -110,8 +110,7 @@ class LaundryVenue extends Component {
       dispatchRemoveFavorite,
       dispatchHandleReminder,
       favorites,
-      register,
-      reminded
+      reminderArray
     } = this.props
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
@@ -167,14 +166,14 @@ class LaundryVenue extends Component {
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, register, reminded, dispatchHandleReminder)}
+              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, reminderArray, dispatchHandleReminder)}
             </BorderedCard>
           </div>
 
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, register, reminded, dispatchHandleReminder)}
+              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, reminderArray, dispatchHandleReminder)}
             </BorderedCard>
           </div>
         </div>
@@ -215,8 +214,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-    register,
-    reminded
+    reminderArray
   } = laundry
 
   return {
@@ -225,8 +223,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-    register,
-    reminded
+    reminderArray
   }
 }
 
@@ -237,7 +234,7 @@ const mapDispatchToProps = dispatch => ({
   ),
   dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  dispatchHandleReminder: (machineID, hallID, register, reminded) => dispatch(handleReminder(machineID, hallID, register, reminded))
+  dispatchHandleReminder: (machineID, hallID, reminderArray) => dispatch(handleReminder(machineID, hallID, reminderArray))
 })
 
 
