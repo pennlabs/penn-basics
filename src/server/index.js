@@ -25,11 +25,12 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// web push relevant info
 const publicVapidKey = "BJVQhZ9UzolT01excKsF0DnBAzasAxs0VbmYxI208_sn-WHgqsDNsK8RCUVwwGQ34O8yvDqbZwoQ8xH2kznhz74";
 const privateVapidKey = "JlGCI-IvJ8Gse3nLWZL0HMailAp6N5Bjg8U01fosxPk";
-
 webpush.setVapidDetails('mailto:cbaile@seas.upenn.edu', publicVapidKey, privateVapidKey);
 
+// specify the route for the service worker
 app.get('/laundry_worker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', "shared", 'serviceWorkers', 'laundry_worker.js'));
 });

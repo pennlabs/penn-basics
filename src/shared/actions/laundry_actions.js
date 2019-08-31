@@ -202,8 +202,6 @@ const urlBase64ToUint8Array = base64String => {
 }
 
 export const setReminder = async (machineID, hallID) => {
-  console.log(machineID);
-  console.log(hallID);
   const register = await navigator.serviceWorker.register('/laundry_worker.js', {
     scope: '/'
   });
@@ -213,14 +211,10 @@ export const setReminder = async (machineID, hallID) => {
     applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
   });
 
-  // TODO: change this to axios
   const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
   const { data } = axiosResponse;
-  console.log(data);
   const tmp = data.machines.details.filter(detail => detail.id == machineID)
-  console.log(tmp);
   const time_remaining = tmp[0].time_remaining;
-  console.log(time_remaining);
 
   await axios.post('/api/laundry/reminder', {subscription, time_remaining});
 }
