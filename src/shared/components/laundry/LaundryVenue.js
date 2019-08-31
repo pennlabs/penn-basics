@@ -18,7 +18,7 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite, getLaundryHall, setReminder } from '../../actions/laundry_actions'
+import { addFavorite, removeFavorite, getLaundryHall, handleReminder } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -29,7 +29,7 @@ const Table = s.table`
   margin-bottom: 0;
 `
 
-const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId) => {
+const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, register, reminded, dispatchHandleReminder) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const {
     open = 0,
@@ -65,7 +65,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
             </thead>
             <tbody>
               {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
-                <tr key={id} onClick={() => setReminder(id, laundryHallId)}>
+                <tr key={id} onClick={() => dispatchHandleReminder(id, laundryHallId, register, reminded)}>
                   <td>{id}</td>
                   <td><StatusPill status={status} /></td>
                   <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
@@ -108,7 +108,10 @@ class LaundryVenue extends Component {
       laundryHallId,
       dispatchAddFavorite,
       dispatchRemoveFavorite,
+      dispatchHandleReminder,
       favorites,
+      register,
+      reminded
     } = this.props
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
@@ -164,14 +167,14 @@ class LaundryVenue extends Component {
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId)}
+              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, register, reminded, dispatchHandleReminder)}
             </BorderedCard>
           </div>
 
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId)}
+              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, register, reminded, dispatchHandleReminder)}
             </BorderedCard>
           </div>
         </div>
@@ -212,6 +215,8 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
+    register,
+    reminded
   } = laundry
 
   return {
@@ -220,6 +225,8 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
+    register,
+    reminded
   }
 }
 
@@ -230,6 +237,7 @@ const mapDispatchToProps = dispatch => ({
   ),
   dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+  dispatchHandleReminder: (machineID, hallID, register, reminded) => dispatch(handleReminder(machineID, hallID, register, reminded))
 })
 
 

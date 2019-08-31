@@ -7,6 +7,7 @@ import {
   getLaundryHallInfoFulfilled,
   updateFavorites,
   getFavoritesHome,
+  updateReminder
 } from '../actions/action_types';
 
 const defaultState = {
@@ -16,6 +17,8 @@ const defaultState = {
   laundryHallInfo: null,
   favorites: [],
   favoritesHome: [],
+  register: null,
+  reminded: false
 };
 
 const laundryReducer = (state = defaultState, action) => {
@@ -64,6 +67,12 @@ const laundryReducer = (state = defaultState, action) => {
       return {
         ...state,
         favoritesHome: action.favorites,
+      }
+    case updateReminder:
+      return {
+        ...state,
+        reminded: action.reminded,
+        register: action.register
       }
     default:
       return state;
