@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const webpush = require('web-push');
 
 const frontendRouter = require('./routes/frontend');
 const eventsRouter = require('./routes/events');
 const spacesRouter = require('./routes/spaces');
 const diningRouter = require('./routes/dining');
 const newsRouter = require('./routes/news');
+const laundryRouter = require('./routes/laundry');
 
 const DB = require('./database/db');
 const seedDining = require('./database/seedDiningInfo');
@@ -20,9 +22,17 @@ require('dotenv').config();
 global.basedir = path.join(__dirname, '..', '..');
 app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+const publicVapidKey = "BJVQhZ9UzolT01excKsF0DnBAzasAxs0VbmYxI208_sn-WHgqsDNsK8RCUVwwGQ34O8yvDqbZwoQ8xH2kznhz74";
+const privateVapidKey = "JlGCI-IvJ8Gse3nLWZL0HMailAp6N5Bjg8U01fosxPk";
+
+webpush.setVapidDetails('mailto:cbaile@seas.upenn.edu', publicVapidKey, privateVapidKey);
+
+app.get('/laundry_worker.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', "shared", 'serviceWorkers', 'laundry_worker.js'));
+});
 
 app.use((req, res, next) => {
   const ua = req.headers['user-agent'].toLowerCase();
@@ -50,7 +60,7 @@ app.use('/api/dining', diningRouter(DB));
 app.use('/api/quotes', (req, res) => {
   res.json(quotes);
 });
-app.use('/api/laundry', laundryRouter(DB));
+app.use('/api/laundry', laundryRouter());
 app.use('/api/news', newsRouter());
 app.use('/', frontendRouter(DB));
 

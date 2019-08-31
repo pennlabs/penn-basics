@@ -13,6 +13,7 @@ import {
   getFavoritesHome,
 } from './action_types';
 
+const publicVapidKey = "BJVQhZ9UzolT01excKsF0DnBAzasAxs0VbmYxI208_sn-WHgqsDNsK8RCUVwwGQ34O8yvDqbZwoQ8xH2kznhz74";
 const BASE = 'http://api.pennlabs.org';
 
 function processLaundryHallsData(idData) {
@@ -183,4 +184,43 @@ export function removeFavorite(laundryHallId) {
       favorites: favoritesArray,
     });
   };
+}
+
+const urlBase64ToUint8Array = base64String => {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+export const setReminder = async (machineID, hallID) => {
+  console.log(machineID);
+  console.log(hallID);
+  const register = await navigator.serviceWorker.register('/laundry_worker.js', {
+    scope: '/'
+  });
+
+  const subscription = await register.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+  });
+
+  // TODO: change this to axios
+  const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
+  const { data } = axiosResponse;
+  console.log(data);
+  const tmp = data.machines.details.filter(detail => detail.id == machineID)
+  console.log(tmp);
+  const time_remaining = tmp[0].time_remaining;
+  console.log(time_remaining);
+
+  await axios.post('/api/laundry/reminder', {subscription, time_remaining});
 }

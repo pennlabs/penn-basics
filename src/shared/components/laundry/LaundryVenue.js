@@ -18,8 +18,7 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite, getLaundryHall } from '../../actions/laundry_actions'
-
+import { addFavorite, removeFavorite, getLaundryHall, setReminder } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -30,8 +29,7 @@ const Table = s.table`
   margin-bottom: 0;
 `
 
-
-const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
+const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const {
     open = 0,
@@ -67,7 +65,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines) => {
             </thead>
             <tbody>
               {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
-                <tr key={id}>
+                <tr key={id} onClick={() => setReminder(id, laundryHallId)}>
                   <td>{id}</td>
                   <td><StatusPill status={status} /></td>
                   <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
@@ -152,13 +150,13 @@ class LaundryVenue extends Component {
                 Unfavorite
               </span>
             ) : (
-              <span // eslint-disable-line
-                className="button is-warning"
-                onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
-              >
-                Favorite
+                <span // eslint-disable-line
+                  className="button is-warning"
+                  onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
+                >
+                  Favorite
               </span>
-            )}
+              )}
           </div>
         </div>
 
@@ -166,14 +164,14 @@ class LaundryVenue extends Component {
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(washers, 'washer', machines)}
+              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId)}
             </BorderedCard>
           </div>
 
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(dryers, 'dryer', machines)}
+              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId)}
             </BorderedCard>
           </div>
         </div>
