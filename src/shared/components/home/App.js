@@ -4,6 +4,16 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 import uuid from 'uuid';
 
+import {
+  Card,
+  Row,
+  Col,
+  Scrollbar,
+  NavSectionHeader,
+  Line,
+} from '../shared'
+import { NAV_HEIGHT } from '../../styles/sizes'
+
 import Filter from './Filter/Filter';
 import Weather from './Weather'
 import News from './News'
@@ -11,6 +21,7 @@ import Dining from './Dining'
 import Laundry from './Laundry'
 import Studyspaces from './Studyspaces'
 import Notification from './Notification'
+import ExternalLinks from './ExternalLinks'
 import Events from './Events'
 import Footer from '../footer'
 
@@ -88,7 +99,17 @@ class Home extends Component {
 
         <Filter />
 
-        {this.renderComponents()}
+        
+
+        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+          <Col width="70%" overflowY="scroll">
+            {this.renderComponents()}
+          </Col>
+
+          <Col width="20%" overflowY="scroll">
+            <ExternalLinks />
+          </Col>
+        </Row>
 
         <Footer />
       </Wrapper>

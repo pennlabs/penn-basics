@@ -17,7 +17,6 @@ class Filter extends Component {
         const {
             filterHomeCustomizeDispatch,
             toggleHomeCustomizeDispatch,
-            filterCustomize,
             filterCustomizeActive
         } = this.props;
 
