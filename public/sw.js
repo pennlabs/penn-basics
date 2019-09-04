@@ -1,7 +1,3 @@
-self.addEventListener('activate', e => {
-    console.log('----Service Worker: Activiated-----');
-})
-
 self.addEventListener('push', e => {
     self.registration.showNotification('Penn Basics', {
         body: 'Your laundry is finished',

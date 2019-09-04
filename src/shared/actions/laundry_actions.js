@@ -265,17 +265,20 @@ export const setReminder = (machineID, hallID, reminderArray) => {
 }
 
 export const removeReminder = () => {
-  navigator.serviceWorker.ready.then(registration => {
-    return registration.pushManager.getSubscription();
-  }).then(subscription => {
-    return subscription.unsubscribe().then(successful => {
-      if (successful) {
-        filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
-        return dispatch({
-          type: updateReminder,
-          reminderArray: filteredArray
-        });
-      }
+  return (dispatch) => {
+    navigator.serviceWorker.ready.then(registration => {
+      return registration.pushManager.getSubscription();
+    }).then(subscription => {
+      return subscription.unsubscribe().then(successful => {
+        if (successful) {
+          console.log("----Service Worker: Unsubscription successful----");
+          // filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
+          // return dispatch({
+          //   type: updateReminder,
+          //   reminderArray: filteredArray
+          // });
+        }
+      })
     })
-  })
+  }
 }

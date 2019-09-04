@@ -4,9 +4,8 @@ const webpush = require('web-push');
 module.exports = function laundryRouter() {
     router.post('/reminder', (req, res) => {
         let { subscription, time_remaining } = req.body;
-        console.log(subscription);
 
-        time_remaining = 0
+        time_remaining = 10000
         // time_remaining = Number(time_remaining) * 60 * 1000
 
         setTimeout(() => {

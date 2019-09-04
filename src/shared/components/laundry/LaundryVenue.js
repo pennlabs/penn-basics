@@ -18,7 +18,7 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite, getLaundryHall, setReminder } from '../../actions/laundry_actions'
+import { addFavorite, removeFavorite, getLaundryHall, setReminder, removeReminder } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -109,6 +109,7 @@ class LaundryVenue extends Component {
       dispatchAddFavorite,
       dispatchRemoveFavorite,
       dispatchSetReminder,
+      dispatchRemoveReminder,
       favorites,
       reminderArray
     } = this.props
@@ -159,6 +160,12 @@ class LaundryVenue extends Component {
                   Favorite
               </span>
               )}
+            <span // eslint-disable-line
+                  className="button is-warning"
+                  onClick={() => dispatchRemoveReminder()}
+                >
+                  Remove Reminders
+            </span>
           </div>
         </div>
 
@@ -234,7 +241,8 @@ const mapDispatchToProps = dispatch => ({
   ),
   dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  dispatchSetReminder: (machineID, hallID, reminderArray) => dispatch(setReminder(machineID, hallID, reminderArray))
+  dispatchSetReminder: (machineID, hallID, reminderArray) => dispatch(setReminder(machineID, hallID, reminderArray)),
+  dispatchRemoveReminder: () => dispatch(removeReminder())
 })
 
 
