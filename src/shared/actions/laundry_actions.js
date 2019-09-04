@@ -14,7 +14,7 @@ import {
   updateReminder
 } from './action_types';
 
-const publicVapidKey = "BGuvPMhJoXdHjV_Kx2OlC0DDLr2Ln5vdYurbvEehDskANaV8cWu-9X-xf9FX72QAvVB6yKRS0QXsm_HYnZwBqqg";
+const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
 const BASE = 'http://api.pennlabs.org';
 
 function processLaundryHallsData(idData) {
@@ -202,53 +202,80 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray;
 }
 
-export function handleReminder(machineID, hallID, reminderArray) {
+export const setReminder = (machineID, hallID, reminderArray) => {
+  if (!('serviceWorker' in navigator)) {
+    throw new Error('No Service Worker support!')
+  }
+  if (!('PushManager' in window)) {
+    throw new Error('No Push API Support!')
+  }
+
+  Notification.requestPermission().then((permission) => {
+    if (permission !== 'granted') {
+      throw new Error('permission not granted for notification');
+    }
+  });
+
   return async (dispatch) => {
-    let filteredArray = reminderArray.filter(reminder => reminder.machineID == machineID && reminder.hallID == hallID);
+    try {
+      // register the service worker
+      navigator.serviceWorker.register('/sw.js');
 
-    if (filteredArray.length == 0) {
-      console.log('reminder is set');
-      const register = await navigator.serviceWorker.register('/laundry_worker.js', {
-        scope: `/laundry/${hallID}/${machineID}`
-      });
+      // perform actions after the service worker is activated
+      navigator.serviceWorker.ready.then(registration => {
+        console.log("----Service Worker: activated----");
 
-      const subscription = await register.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-      });
+        // const response = await fetch('/api/laundry/vapidPublicKey');
+        // const vapidPublicKey = await response.text();
 
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
-      const { data } = axiosResponse;
-      const machine = data.machines.details.filter(detail => detail.id == machineID);
-      const time_remaining = machine[0].time_remaining;
+        // perform subscription
+        return registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+        });
+      }).then(async subscription => {
+        reminderArray.push({ machineID, hallID, subscription });
 
-      reminderArray.push({machineID, hallID, register});
+        dispatch({
+          type: updateReminder,
+          reminderArray
+        });
 
-      dispatch({
-        type: updateReminder,
-        reminderArray
+        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
+        const { data } = axiosResponse;
+        const machine = data.machines.details.filter(detail => detail.id == machineID);
+        const time_remaining = machine[0].time_remaining;
+
+        // call the backend API to push notification
+        await axios.post('/api/laundry/reminder', { subscription, time_remaining });
+
+        // remove this machine from the reminderArray
+        filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
+
+        dispatch({
+          type: updateReminder,
+          reminderArray: filteredArray
+        })
       })
-
-      await axios.post('/api/laundry/reminder', { subscription, time_remaining });
-
-      // remove this machine from the reminderArray
-      filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
-
-      dispatch({
-        type: updateReminder,
-        reminderArray: filteredArray
-      })
-    } else {
-      filteredArray[0].register.unregister().then((cancelled) => {
-        if (cancelled) {
-          console.log('reminder is cancelled');
-          filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
-          dispatch({
-            type: updateReminder,
-            reminderArray: filteredArray
-          });
-        }
-      })
+    } catch (err) {
+      console.log(`Error: ${err}`)
     }
   }
+}
+
+export const removeReminder = () => {
+  navigator.serviceWorker.ready.then(registration => {
+    return registration.pushManager.getSubscription();
+  }).then(subscription => {
+    return subscription.unsubscribe().then(successful => {
+      if (successful) {
+        filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
+        return dispatch({
+          type: updateReminder,
+          reminderArray: filteredArray
+        });
+      }
+    })
+  })
 }

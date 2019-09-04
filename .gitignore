@@ -1,6 +1,6 @@
 # Project specific
 env.sh
-/public/js/bundle.js
+/public/js/
 
 # Labs can't do global .gitignore
 .DS_Store

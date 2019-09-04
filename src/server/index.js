@@ -26,14 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // web push relevant info
-const publicVapidKey = "BGuvPMhJoXdHjV_Kx2OlC0DDLr2Ln5vdYurbvEehDskANaV8cWu-9X-xf9FX72QAvVB6yKRS0QXsm_HYnZwBqqg";
-const privateVapidKey = "9hqSNFt0IJEJjh1uQG-gEoyBrZCriJ1kcDprFdylGD8";
+const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
+const privateVapidKey = "_jQNq46LkvTXlvPZVgnmXRFOSIluwGv2s9qXY4laBBw";
 webpush.setVapidDetails('mailto:cbaile@seas.upenn.edu', publicVapidKey, privateVapidKey);
-
-// specify the route for the service worker
-app.get('/laundry_worker.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', "shared", 'serviceWorkers', 'laundry_worker.js'));
-});
 
 app.use((req, res, next) => {
   const ua = req.headers['user-agent'].toLowerCase();

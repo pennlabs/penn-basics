@@ -1,5 +1,6 @@
 const webpack = require('webpack'); // eslint-disable-line
 const path = require('path');
+const workboxplugin = require('workbox-webpack-plugin');
 
 const BUILD_DIR = path.join(__dirname, 'public', 'js');
 const APP_DIR = path.join(__dirname, 'src', 'shared');
@@ -34,6 +35,12 @@ const config = {
       },
     ],
   },
+  plugins: [
+    // new swplugin({
+    //   entry: path.join(__dirname, 'public/sw.js'),
+    // }),
+    new workboxplugin.GenerateSW()
+  ]
 };
 
 module.exports = config;
