@@ -10,8 +10,7 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
-  getFavoritesHome,
-  updateReminders
+  getFavoritesHome
 } from './action_types';
 
 const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
@@ -202,23 +201,7 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray;
 }
 
-export const getReminders = () => {
-  return (dispatch) => {
-    let reminders = localStorage.getItem('laundry_reminders');
-    if (reminders) {
-      reminders = JSON.parse(reminders);
-    } else {
-      localStorage.setItem('laundry_reminders', JSON.stringify([]));
-      reminders = [];
-    }
-    dispatch({
-      type: updateReminders,
-      reminders,
-    });
-  };
-}
-
-export const addReminder = (machineID, hallID) => {
+export const addReminder = (machineID, hallID, hallName) => {
   if (!('serviceWorker' in navigator)) {
     throw new Error('No Service Worker support!')
   }
@@ -232,67 +215,39 @@ export const addReminder = (machineID, hallID) => {
     }
   });
 
-  return (dispatch) => {
-    try {
-      navigator.serviceWorker.register('/sw.js');
+  try {
+    navigator.serviceWorker.register('/sw.js');
 
-      navigator.serviceWorker.ready.then(registration => {
-        // const response = await fetch('/api/laundry/vapidPublicKey');
-        // const vapidPublicKey = await response.text();
+    navigator.serviceWorker.ready.then(registration => {
+      // const response = await fetch('/api/laundry/vapidPublicKey');
+      // const vapidPublicKey = await response.text();
 
-        return registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-        });
-      }).then(async subscription => {
-        let axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
-        let { data } = axiosResponse;
-        const machine = data.machines.details.filter(detail => detail.id == machineID)
-        const time_remaining = machine[0].time_remaining
+      return registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+      });
+    }).then(async subscription => {
+      let axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
+      let { data } = axiosResponse;
+      const machine = data.machines.details.filter(detail => detail.id == machineID)
+      const time_remaining = machine[0].time_remaining
 
-        let oldReminders = JSON.parse(localStorage.getItem('laundry_reminders'))
-        let newReminders = oldReminders.slice()
-
-        newReminders.push({ hallID, machineID })
-        console.log(`newReminders: ${newReminders}`)
-        localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
-
-        dispatch({
-          type: updateReminders,
-          reminders: newReminders
-        })
-
-        await axios.post('/api/laundry/addReminder', { subscription, time_remaining })
-
-        localStorage.setItem('laundry_reminders', JSON.stringify(oldReminders));
-        dispatch({
-          type: updateReminders,
-          reminders: oldReminders
-        })
-      })
-    } catch (err) {
-      console.log(`Error: ${err}`)
-    }
+      axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, time_remaining, hallName })
+    })
+  } catch (err) {
+    console.log(`Error: ${err}`)
   }
 }
 
 export const removeReminder = () => {
-  return (dispatch) => {
-    navigator.serviceWorker.ready.then(registration => {
-      return registration.pushManager.getSubscription();
-    }).then(subscription => {
-      subscription.unsubscribe().then(async successful => {
-        if (successful) {
-          console.log("----Service Worker: Unsubscription successful----");
-          await axios.post('/api/laundry/removeReminder', {})
-          localStorage.setItem('laundry_reminders', JSON.stringify([]));
-          dispatch({
-            type: updateReminders,
-            reminders: []
-          });
-        }
-      })
+  navigator.serviceWorker.ready.then(registration => {
+    return registration.pushManager.getSubscription();
+  }).then(subscription => {
+    subscription.unsubscribe().then(async successful => {
+      if (successful) {
+        console.log("----Service Worker: Unsubscription successful----");
+      }
     })
-  }
+  })
 }

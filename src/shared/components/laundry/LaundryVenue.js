@@ -18,7 +18,7 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite, getLaundryHall, addReminder, removeReminder, getReminders } from '../../actions/laundry_actions'
+import { addFavorite, removeFavorite, getLaundryHall, addReminder, removeReminder } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -29,7 +29,7 @@ const Table = s.table`
   margin-bottom: 0;
 `
 
-const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, dispatchAddReminder) => {
+const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, hallName) => {
   const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const {
     open = 0,
@@ -65,7 +65,7 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
             </thead>
             <tbody>
               {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
-                <tr key={id} onClick={() => dispatchAddReminder(id, laundryHallId)}>
+                <tr key={id} onClick={() => addReminder(id, laundryHallId, hallName)}>
                   <td>{id}</td>
                   <td><StatusPill status={status} /></td>
                   <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
@@ -84,9 +84,7 @@ class LaundryVenue extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatchGetLaundryHall, hallURLId, dispatchGetReminders } = this.props
-
-    dispatchGetReminders();
+    const { dispatchGetLaundryHall, hallURLId } = this.props
 
     if (hallURLId) {
       dispatchGetLaundryHall(hallURLId)
@@ -102,21 +100,16 @@ class LaundryVenue extends Component {
     }
   }
 
-
   render() {
     const {
       laundryHallInfo,
       pending,
       favorites,
       laundryHallId,
-      reminders,
       dispatchAddFavorite,
-      dispatchRemoveFavorite,
-      dispatchAddReminder,
-      dispatchRemoveReminder
+      dispatchRemoveFavorite
     } = this.props
 
-    console.log(`Reminders: ${reminders}`)
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
     if (!laundryHallInfo) {
@@ -163,16 +156,12 @@ class LaundryVenue extends Component {
                   Favorite
               </span>
               )}
-            {
-              reminders.length == 0 ? (<></>) : (
-                <span // eslint-disable-line
-                  className="button is-warning"
-                  onClick={() => dispatchRemoveReminder()}
-                >
-                  Remove Reminders
-              </span>)
-            }
-
+            <span // eslint-disable-line
+              className="button is-warning"
+              onClick={() => removeReminder()}
+            >
+              Remove Reminders
+            </span>
           </div>
         </div>
 
@@ -180,14 +169,14 @@ class LaundryVenue extends Component {
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, dispatchAddReminder)}
+              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, hallName)}
             </BorderedCard>
           </div>
 
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, dispatchAddReminder)}
+              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, hallName)}
             </BorderedCard>
           </div>
         </div>
@@ -217,9 +206,7 @@ LaundryVenue.propTypes = {
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
   dispatchGetLaundryHall: PropTypes.func.isRequired,
-  dispatchGetReminders: PropTypes.func.isRequired,
   favorites: PropTypes.array, // eslint-disable-line
-  reminders: PropTypes.array //eslint-disable-line
 }
 
 
@@ -229,8 +216,7 @@ const mapStateToProps = ({ laundry }) => {
     pending,
     laundryHallId,
     laundryHalls,
-    favorites,
-    reminders
+    favorites
   } = laundry
 
   return {
@@ -238,18 +224,14 @@ const mapStateToProps = ({ laundry }) => {
     pending,
     laundryHallId,
     laundryHalls,
-    favorites,
-    reminders
+    favorites
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   dispatchAddFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName)),
   dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
-  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  dispatchAddReminder: (machineID, hallID) => dispatch(addReminder(machineID, hallID)),
-  dispatchRemoveReminder: () => dispatch(removeReminder()),
-  dispatchGetReminders: () => dispatch(getReminders())
+  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

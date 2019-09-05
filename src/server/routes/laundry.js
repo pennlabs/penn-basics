@@ -1,31 +1,24 @@
 const router = require('express').Router();
 const webpush = require('web-push');
 
-const timeouts = [];
-
 module.exports = function laundryRouter() {
     router.post('/addReminder', (req, res) => {
-        let { subscription, time_remaining } = req.body;
+        let { subscription, time_remaining, hallName } = req.body;
 
         time_remaining = 5000
         // time_remaining = Number(time_remaining) * 60 * 1000
 
-        const timeout = setTimeout(() => {
-            webpush.sendNotification(subscription, null)
-                .catch(err => {
-                    console.error(err);
-                });
-            res.json({})
-            console.log("----Web Push: notification pushed----");
+        setTimeout(async () => {
+            try {
+                await webpush.sendNotification(subscription, JSON.stringify({hallName}));
+                res.status(200).json({})
+                console.log("----Web Push: notification pushed----");
+            } catch (err) {
+                console.error(err);
+                res.status(200).json({ error: err.message })
+            }
         }, time_remaining);
-
-        timeouts.push(timeout);
     });
-
-    router.post('/removeReminder', (req, res) => {
-        timeouts.forEach(timeout => clearTimeout(timeout));
-        res.json({});
-    })
 
     return router;
 };
