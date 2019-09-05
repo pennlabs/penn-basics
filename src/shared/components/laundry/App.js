@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions'
+import { getLaundryHalls, getFavorites, getReminders } from '../../actions/laundry_actions'
 
 
 import {
@@ -27,7 +27,10 @@ import Favorites from './Favorites'
 class App extends Component {
   constructor(props) {
     super(props)
-    const { dispatchGetLaundryHalls, dispatchGetFavorites } = this.props
+    const {
+      dispatchGetLaundryHalls,
+      dispatchGetFavorites,
+    } = this.props
 
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
@@ -89,7 +92,7 @@ const mapStateToProps = ({ laundry }) => {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
-  dispatchGetFavorites: () => dispatch(getFavorites()),
+  dispatchGetFavorites: () => dispatch(getFavorites())
 })
 
 
@@ -107,7 +110,7 @@ App.propTypes = {
     id: PropTypes.number,
   }).isRequired,
   dispatchGetFavorites: PropTypes.func.isRequired,
-  dispatchGetLaundryHalls: PropTypes.func.isRequired,
+  dispatchGetLaundryHalls: PropTypes.func.isRequired
 }
 
 

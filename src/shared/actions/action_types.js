@@ -51,7 +51,7 @@ export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED';
 export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED';
 export const updateFavorites = 'UPDATE_FAVORITES';
 export const getFavoritesHome = 'GET_FAVORITES_HOME';
-export const updateReminder = 'UPDATE_REMINDER';
+export const updateReminders = 'UPDATE_REMINDERS';
 
 // misc actions
 export const updateLink = 'UPDATE_LINK';

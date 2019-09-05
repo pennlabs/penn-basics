@@ -11,7 +11,7 @@ import {
   getLaundryHallInfoFulfilled,
   updateFavorites,
   getFavoritesHome,
-  updateReminder
+  updateReminders
 } from './action_types';
 
 const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
@@ -202,7 +202,23 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray;
 }
 
-export const setReminder = (machineID, hallID, reminderArray) => {
+export const getReminders = () => {
+  return (dispatch) => {
+    let reminders = localStorage.getItem('laundry_reminders');
+    if (reminders) {
+      reminders = JSON.parse(reminders);
+    } else {
+      localStorage.setItem('laundry_reminders', JSON.stringify([]));
+      reminders = [];
+    }
+    dispatch({
+      type: updateReminders,
+      reminders,
+    });
+  };
+}
+
+export const addReminder = (machineID, hallID) => {
   if (!('serviceWorker' in navigator)) {
     throw new Error('No Service Worker support!')
   }
@@ -216,46 +232,43 @@ export const setReminder = (machineID, hallID, reminderArray) => {
     }
   });
 
-  return async (dispatch) => {
+  return (dispatch) => {
     try {
-      // register the service worker
       navigator.serviceWorker.register('/sw.js');
 
-      // perform actions after the service worker is activated
       navigator.serviceWorker.ready.then(registration => {
-        console.log("----Service Worker: activated----");
-
         // const response = await fetch('/api/laundry/vapidPublicKey');
         // const vapidPublicKey = await response.text();
 
-        // perform subscription
         return registration.pushManager.subscribe({
           userVisibleOnly: true,
           // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
         });
       }).then(async subscription => {
-        reminderArray.push({ machineID, hallID, subscription });
+        let axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
+        let { data } = axiosResponse;
+        const machine = data.machines.details.filter(detail => detail.id == machineID)
+        const time_remaining = machine[0].time_remaining
+
+        let oldReminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+        let newReminders = oldReminders.slice()
+
+        newReminders.push({ hallID, machineID })
+        console.log(`newReminders: ${newReminders}`)
+        localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
 
         dispatch({
-          type: updateReminder,
-          reminderArray
-        });
+          type: updateReminders,
+          reminders: newReminders
+        })
 
-        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
-        const { data } = axiosResponse;
-        const machine = data.machines.details.filter(detail => detail.id == machineID);
-        const time_remaining = machine[0].time_remaining;
+        await axios.post('/api/laundry/addReminder', { subscription, time_remaining })
 
-        // call the backend API to push notification
-        await axios.post('/api/laundry/reminder', { subscription, time_remaining });
-
-        // remove this machine from the reminderArray
-        filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
-
+        localStorage.setItem('laundry_reminders', JSON.stringify(oldReminders));
         dispatch({
-          type: updateReminder,
-          reminderArray: filteredArray
+          type: updateReminders,
+          reminders: oldReminders
         })
       })
     } catch (err) {
@@ -269,14 +282,15 @@ export const removeReminder = () => {
     navigator.serviceWorker.ready.then(registration => {
       return registration.pushManager.getSubscription();
     }).then(subscription => {
-      return subscription.unsubscribe().then(successful => {
+      subscription.unsubscribe().then(async successful => {
         if (successful) {
           console.log("----Service Worker: Unsubscription successful----");
-          // filteredArray = reminderArray.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID);
-          // return dispatch({
-          //   type: updateReminder,
-          //   reminderArray: filteredArray
-          // });
+          await axios.post('/api/laundry/removeReminder', {})
+          localStorage.setItem('laundry_reminders', JSON.stringify([]));
+          dispatch({
+            type: updateReminders,
+            reminders: []
+          });
         }
       })
     })
