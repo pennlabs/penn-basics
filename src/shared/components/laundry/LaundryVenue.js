@@ -5,11 +5,7 @@ import s from 'styled-components'
 
 import Loading from '../shared/Loading'
 import StatusPill from './StatusPill'
-import {
-  BorderedCard,
-  Row,
-  LaundryOverview,
-} from '../shared'
+import { BorderedCard, Row, LaundryOverview } from '../shared'
 import {
   GREEN,
   MUSTARD,
@@ -18,19 +14,46 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { addFavorite, removeFavorite, getLaundryHall, addReminder, removeReminder } from '../../actions/laundry_actions'
+import {
+  addFavorite,
+  removeFavorite,
+  getLaundryHall,
+  addReminder,
+  removeReminder,
+} from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
   padding: 1rem;
 `
 
-
 const Table = s.table`
   margin-bottom: 0;
 `
 
-const renderMachineAvailabilities = (machineData, machineType, allMachines, laundryHallId, hallName) => {
-  const tableMachines = allMachines.filter(machine => machine.type === machineType)
+const Buttons = s.div`
+  float: right;
+`
+
+const BellIcon = s.span`
+  cursor: pointer;
+  opacity:  0.5;
+  &:hover {
+    opacity: 0.75;
+  }
+  position: absolute;
+  margin-top: -0.2rem;
+`
+
+const renderMachineAvailabilities = (
+  machineData,
+  machineType,
+  allMachines,
+  laundryHallId,
+  hallName
+) => {
+  const tableMachines = allMachines.filter(
+    machine => machine.type === machineType
+  )
   const {
     open = 0,
     running = 0,
@@ -46,7 +69,12 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
-          <LaundryOverview width="30%" key={title} color={color} background={background}>
+          <LaundryOverview
+            width="30%"
+            key={title}
+            color={color}
+            background={background}
+          >
             <h1>{number}</h1>
             <p>{title}</p>
           </LaundryOverview>
@@ -61,16 +89,29 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
                 <th>#</th>
                 <th>Status</th>
                 <th>Minutes left</th>
+                <th />
               </tr>
             </thead>
             <tbody>
-              {tableMachines.map(({ status, time_remaining: timeRemaining, id }) => (
-                <tr key={id} onClick={() => addReminder(id, laundryHallId, hallName)}>
-                  <td>{id}</td>
-                  <td><StatusPill status={status} /></td>
-                  <td>{(status === 'Not online') ? '-' : timeRemaining}</td>
-                </tr>
-              ))}
+              {tableMachines.map(
+                ({ status, time_remaining: timeRemaining, id }) => (
+                  <tr key={id}>
+                    <td>{id}</td>
+                    <td>
+                      <StatusPill status={status} />
+                    </td>
+                    <td>{status === 'Not online' ? '-' : timeRemaining}</td>
+                    <td>
+                      <BellIcon
+                        className="icon"
+                        onClick={() => addReminder(id, laundryHallId, hallName)}
+                      >
+                        <i className="far fa-bell" />
+                      </BellIcon>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </Table>
         </div>
@@ -78,7 +119,6 @@ const renderMachineAvailabilities = (machineData, machineType, allMachines, laun
     </>
   )
 }
-
 
 class LaundryVenue extends Component {
   constructor(props) {
@@ -107,14 +147,17 @@ class LaundryVenue extends Component {
       favorites,
       laundryHallId,
       dispatchAddFavorite,
-      dispatchRemoveFavorite
+      dispatchRemoveFavorite,
     } = this.props
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
     if (!laundryHallInfo) {
       return (
-        <div className="columns is-vcentered is-centered" style={{ height: 'calc(100% - 57px' }}>
+        <div
+          className="columns is-vcentered is-centered"
+          style={{ height: 'calc(100% - 57px' }}
+        >
           <div className="column is-7">
             <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
             <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
@@ -140,28 +183,35 @@ class LaundryVenue extends Component {
       <Wrapper>
         <div className="columns">
           <div className="column is-12">
-            <h1 className="title">{hallName}</h1>
-            {isFavorited ? (
-              <span // eslint-disable-line
-                className="button is-danger"
-                onClick={() => dispatchRemoveFavorite(laundryHallId)}
-              >
-                Unfavorite
-              </span>
-            ) : (
+            <Buttons>
+              {isFavorited ? (
                 <span // eslint-disable-line
-                  className="button is-warning"
-                  onClick={() => dispatchAddFavorite(laundryHallId, location, hallName)}
+                  className="button"
+                  style={{ marginRight: '0.5rem' }}
+                  onClick={() => dispatchRemoveFavorite(laundryHallId)}
+                >
+                  Favorited
+                </span>
+              ) : (
+                <span // eslint-disable-line
+                  className="button"
+                  style={{ marginRight: '0.5rem' }}
+                  onClick={() =>
+                    dispatchAddFavorite(laundryHallId, location, hallName)
+                  }
                 >
                   Favorite
-              </span>
+                </span>
               )}
-            <span // eslint-disable-line
-              className="button is-warning"
-              onClick={() => removeReminder()}
-            >
-              Remove Reminders
-            </span>
+              <span // eslint-disable-line
+                className="button"
+                onClick={() => removeReminder()}
+              >
+                Remove Reminders
+              </span>
+            </Buttons>
+
+            <h1 className="title">{hallName}</h1>
           </div>
         </div>
 
@@ -169,14 +219,26 @@ class LaundryVenue extends Component {
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(washers, 'washer', machines, laundryHallId, hallName)}
+              {renderMachineAvailabilities(
+                washers,
+                'washer',
+                machines,
+                laundryHallId,
+                hallName
+              )}
             </BorderedCard>
           </div>
 
           <div className="column is-6">
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(dryers, 'dryer', machines, laundryHallId, hallName)}
+              {renderMachineAvailabilities(
+                dryers,
+                'dryer',
+                machines,
+                laundryHallId,
+                hallName
+              )}
             </BorderedCard>
           </div>
         </div>
@@ -185,14 +247,12 @@ class LaundryVenue extends Component {
   }
 }
 
-
 LaundryVenue.defaultProps = {
   laundryHallInfo: null,
   pending: true,
   laundryHallId: null,
   hallURLId: null,
 }
-
 
 LaundryVenue.propTypes = {
   laundryHallInfo: PropTypes.shape({
@@ -209,29 +269,38 @@ LaundryVenue.propTypes = {
   favorites: PropTypes.array, // eslint-disable-line
 }
 
-
 const mapStateToProps = ({ laundry }) => {
   const {
     laundryHallInfo,
     pending,
     laundryHallId,
     laundryHalls,
-    favorites
+    favorites,
   } = laundry
+
+  const id =
+    typeof laundryHallId === 'string'
+      ? parseInt(laundryHallId, 10)
+      : laundryHallId
 
   return {
     laundryHallInfo,
     pending,
-    laundryHallId,
+    laundryHallId: id,
     laundryHalls,
-    favorites
+    favorites,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchAddFavorite: (laundryHallId, location, hallName) => dispatch(addFavorite(laundryHallId, location, hallName)),
-  dispatchRemoveFavorite: laundryHallId => dispatch(removeFavorite(laundryHallId)),
-  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId))
+  dispatchAddFavorite: (laundryHallId, location, hallName) =>
+    dispatch(addFavorite(laundryHallId, location, hallName)),
+  dispatchRemoveFavorite: laundryHallId =>
+    dispatch(removeFavorite(laundryHallId)),
+  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LaundryVenue)
