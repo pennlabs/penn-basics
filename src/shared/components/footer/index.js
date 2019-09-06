@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Col, Subtext } from '../shared'
 
 export default () => (

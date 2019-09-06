@@ -6,8 +6,8 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
-  getFavoritesHome
-} from '../actions/action_types';
+  getFavoritesHome,
+} from '../actions/action_types'
 
 const defaultState = {
   pending: true,
@@ -15,8 +15,8 @@ const defaultState = {
   laundryHalls: null,
   laundryHallInfo: null,
   favorites: [],
-  favoritesHome: []
-};
+  favoritesHome: [],
+}
 
 const laundryReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -24,50 +24,50 @@ const laundryReducer = (state = defaultState, action) => {
       return {
         ...state,
         pending: true,
-      };
+      }
     case getLaundryHallsDataRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
-      };
+      }
     case getLaundryHallsDataFulfilled:
       return {
         ...state,
         pending: false,
         laundryHalls: action.laundryHalls,
-      };
+      }
     case getLaundryHallInfoRequested:
       return {
         ...state,
         pending: true,
-      };
+      }
     case getLaundryHallInfoRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
-      };
+      }
     case getLaundryHallInfoFulfilled:
       return {
         ...state,
         pending: false,
         laundryHallInfo: action.laundryHallInfo,
         laundryHallId: action.laundryHallId,
-      };
+      }
     case updateFavorites:
       return {
         ...state,
         favorites: action.favorites,
-      };
+      }
     case getFavoritesHome:
       return {
         ...state,
         favoritesHome: action.favorites,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default laundryReducer;
+export default laundryReducer

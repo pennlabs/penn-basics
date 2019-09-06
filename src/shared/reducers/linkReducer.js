@@ -1,16 +1,14 @@
-import {
-  updateLink,
-} from '../actions/action_types';
+import { updateLink } from '../actions/action_types'
 
-const defaultState = '';
+const defaultState = ''
 
 const linkReducer = (state = defaultState, action) => {
   switch (action.type) {
     case updateLink:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default linkReducer;
+export default linkReducer

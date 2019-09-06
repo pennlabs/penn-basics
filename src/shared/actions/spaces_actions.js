@@ -20,8 +20,8 @@ import {
 } from './action_types'
 
 /**
- * @param time in MS
- * @returns minutes (between 0 and 59)
+ * @param {number} time in MS
+ * @returns {number} minutes (between 0 and 59)
  */
 const getMinutes = time => {
   // If there is a decimal
@@ -34,8 +34,8 @@ const getMinutes = time => {
 }
 
 /**
- * @param time in MS
- * @returns the passed in time as a string
+ * @param {number} time in MS
+ * @returns {string} the passed in time
  */
 const getTime = time => {
   // Edge case
