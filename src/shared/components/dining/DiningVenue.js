@@ -27,11 +27,7 @@ class DiningVenue extends Component {
   constructor(props) {
     super(props)
 
-    const {
-      match,
-      getDiningDataDispatch,
-      getVenueInfoDispatch,
-    } = this.props
+    const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
     // Pull meal data and hours data for the venue
     const venueId = match.params.id
@@ -48,35 +44,26 @@ class DiningVenue extends Component {
    *
    * @param newProps
    */
-  componentWillUpdate(newProps) {
-    const {
-      match,
-      getDiningDataDispatch,
-      getVenueInfoDispatch,
-    } = this.props;
+  componentDidUpdate(newProps) {
+    const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
-    const currentVenueId = match.params.id;
-    const nextVenueId = newProps.match.params.id;
+    const currentVenueId = match.params.id
+    const nextVenueId = newProps.match.params.id
 
     if (currentVenueId !== nextVenueId) {
-      getDiningDataDispatch(nextVenueId);
-      getVenueInfoDispatch(nextVenueId);
+      getDiningDataDispatch(nextVenueId)
+      getVenueInfoDispatch(nextVenueId)
     }
   }
-
 
   checkForErrors() {
     let error = ''
 
-    const {
-      match,
-      diningData,
-      dateFormatted,
-      meal,
-    } = this.props
+    const { match, diningData, dateFormatted, meal } = this.props
     const { id } = match.params
 
-    if (!venueData[id]) { // If no mapping is found
+    if (!venueData[id]) {
+      // If no mapping is found
       error = 'Dining venue not found'
     } else if (diningData && dateFormatted) {
       if (!diningData[dateFormatted]) {
@@ -97,10 +84,7 @@ class DiningVenue extends Component {
 
   // Helper method to render any error
   renderError() {
-    const {
-      diningDataPending,
-      venueHoursPending,
-    } = this.props
+    const { diningDataPending, venueHoursPending } = this.props
 
     if (diningDataPending || venueHoursPending) return null
 
@@ -108,17 +92,13 @@ class DiningVenue extends Component {
     const { error: propsError } = this.props
     const error = propsError || this.checkForErrors()
 
-    return (<ErrorMessage message={error} />)
+    return <ErrorMessage message={error} />
   }
 
   // Render the component
   render() {
     const {
-      match: {
-        params: {
-          id,
-        } = { id: undefined },
-      } = {},
+      match: { params: { id } = { id: undefined } } = {},
       diningDataPending,
       venueHoursPending,
     } = this.props
@@ -132,7 +112,9 @@ class DiningVenue extends Component {
           >
             <div className="column is-7">
               <img src="/img/dining.png" alt="Dining plate" />
-              <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+              <p
+                style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}
+              >
                 Select a dining hall to see information
               </p>
             </div>
@@ -149,7 +131,7 @@ class DiningVenue extends Component {
             <NotFound />
           </Wrapper>
         </Nav>
-      );
+      )
     }
 
     // If content is still loading
@@ -160,10 +142,10 @@ class DiningVenue extends Component {
             <Loading />
           </Wrapper>
         </Nav>
-      );
+      )
     }
 
-    const { name } = venueData[id];
+    const { name } = venueData[id]
 
     if (retailLocations.includes(id)) {
       return (
@@ -171,9 +153,7 @@ class DiningVenue extends Component {
         <Nav>
           <Wrapper>
             {/* Render the title of the dining page */}
-            <h1 className="title">
-              {name}
-            </h1>
+            <h1 className="title">{name}</h1>
 
             {/* Render the overview card at the top of the dining view */}
             <DiningOverview id={id} />
@@ -187,9 +167,7 @@ class DiningVenue extends Component {
       <Nav>
         <Wrapper>
           {/* Render the title of the dining page */}
-          <h1 className="title">
-            {name}
-          </h1>
+          <h1 className="title">{name}</h1>
 
           {/* Render an error if there is one */}
           {this.renderError()}
@@ -204,7 +182,7 @@ class DiningVenue extends Component {
           <DiningMenu />
         </Wrapper>
       </Nav>
-    );
+    )
   }
 }
 
@@ -214,7 +192,7 @@ DiningVenue.defaultProps = {
   meal: '',
   venueHours: null,
   dateFormatted: null,
-};
+}
 
 DiningVenue.propTypes = {
   match: PropTypes.object.isRequired, // eslint-disable-line
@@ -227,7 +205,7 @@ DiningVenue.propTypes = {
   venueHours: PropTypes.array, // eslint-disable-line
   dateFormatted: PropTypes.string,
   meal: PropTypes.string,
-};
+}
 
 const mapStateToProps = ({
   dining: {
@@ -258,4 +236,7 @@ const mapDispatchToProps = dispatch => ({
   getVenueInfoDispatch: venueId => dispatch(getVenueInfo(venueId)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DiningVenue)

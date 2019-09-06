@@ -1,45 +1,54 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-import FilterButton from './FilterBtn';
+import FilterButton from './FilterBtn'
 import {
-    filterHomeCustomize,
-    toggleHomeCustomize,
+  filterHomeCustomize,
+  toggleHomeCustomize,
 } from '../../../actions/home_actions'
 import { BorderedCard } from '../../shared'
 
 class Filter extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props)
+  }
 
-    render() {
-        const {
-            filterHomeCustomizeDispatch,
-            toggleHomeCustomizeDispatch,
-            filterCustomizeActive
-        } = this.props;
+  render() {
+    const {
+      filterHomeCustomizeDispatch,
+      toggleHomeCustomizeDispatch,
+      filterCustomizeActive,
+    } = this.props
 
-        return (
-            <BorderedCard>
-                <FilterButton
-                    text="Customize This Page"
-                    onClick={toggleHomeCustomizeDispatch}
-                    onClickOption={filterHomeCustomizeDispatch}
-                    options={['Weather', 'Events', 'News', 'Laundry', 'Dining', 'Studyspaces']}
-                    activeOptions={JSON.parse(localStorage.getItem("homeFilter"))}
-                    active={filterCustomizeActive}
-                />
-            </BorderedCard>
-        )
-    }
+    // TODO get these options from somewhere else
+    return (
+      <FilterButton
+        text="Customize This Page"
+        onClick={toggleHomeCustomizeDispatch}
+        onClickOption={filterHomeCustomizeDispatch}
+        options={[
+          'Weather',
+          'Events',
+          'News',
+          'Laundry',
+          'Dining',
+          'Studyspaces',
+        ]}
+        activeOptions={JSON.parse(localStorage.getItem('homeFilter'))}
+        active={filterCustomizeActive}
+      />
+    )
+  }
 }
 
-const mapStateToProps = ({ home }) => home;
+const mapStateToProps = ({ home }) => home
 
 const mapDispatchToProps = dispatch => ({
-    filterHomeCustomizeDispatch: filter => dispatch(filterHomeCustomize(filter)),
-    toggleHomeCustomizeDispatch: () => dispatch(toggleHomeCustomize()),
+  filterHomeCustomizeDispatch: filter => dispatch(filterHomeCustomize(filter)),
+  toggleHomeCustomizeDispatch: () => dispatch(toggleHomeCustomize()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Filter)

@@ -2,19 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
 import { connect } from 'react-redux'
-import uuid from 'uuid';
 
-import {
-  Card,
-  Row,
-  Col,
-  Scrollbar,
-  NavSectionHeader,
-  Line,
-} from '../shared'
-import { NAV_HEIGHT } from '../../styles/sizes'
+import { Row, Col, ColSpace } from '../shared'
 
-import Filter from './Filter/Filter';
+import Filter from './Filter/Filter'
 import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'
@@ -25,6 +16,7 @@ import ExternalLinks from './ExternalLinks'
 import Events from './Events'
 import Footer from '../footer'
 
+const HOME_FILTER = 'homeFilter'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -44,11 +36,11 @@ class Home extends Component {
     this.close = this.close.bind(this)
   }
 
-
   componentDidMount() {
     // TODO reduxify this
-    axios.get(`/api/events/${Date.now()}`)
-      .then((resp) => {
+    axios
+      .get(`/api/events/${Date.now()}`)
+      .then(resp => {
         if (resp.data.events.length === 0) {
           this.setState({ show: false })
         } else {
@@ -58,55 +50,53 @@ class Home extends Component {
           })
         }
 
-        this.setState({ componentList: [<Weather />, <Events />, <News />, <Laundry />, <Dining show={this.state.dining} />, <Studyspaces />] });
-
+        this.setState({
+          componentList: [
+            <Weather />,
+            <Events />,
+            <News />,
+            <Laundry />,
+            <Dining show={this.state.dining} />,
+            <Studyspaces />,
+          ],
+        })
       })
-      .catch((err) => {
+      .catch(err => {
         // TODO better error handling
 
         console.log(err) // eslint-disable-line
       })
   }
 
-
   close() {
     this.setState({ show: false })
   }
 
   renderComponents() {
-    if (!localStorage.getItem("homeFilter")) {
-      return null;
+    if (!localStorage.getItem(HOME_FILTER)) {
+      return null
     }
 
-    const filter = JSON.parse(localStorage.getItem("homeFilter"));
-    const { componentList } = this.state;
+    const filter = JSON.parse(localStorage.getItem(HOME_FILTER))
+    const { componentList } = this.state
 
-    return (
-      filter.map(index => componentList[index])
-    )
+    return filter.map(index => componentList[index])
   }
 
   render() {
     // TODO less bulma madness
-    const {
-      show,
-      notification,
-    } = this.state
+    const { show, notification } = this.state
 
     return (
       <Wrapper>
-        {show && (<Notification show={this.close} text={notification} />)}
+        {show && <Notification show={this.close} text={notification} />}
 
         <Filter />
 
-        
-
-        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
-          <Col width="70%" overflowY="scroll">
-            {this.renderComponents()}
-          </Col>
-
-          <Col width="20%" overflowY="scroll">
+        <Row>
+          <Col width="70%">{this.renderComponents()}</Col>
+          <ColSpace />
+          <Col>
             <ExternalLinks />
           </Col>
         </Row>
@@ -117,6 +107,9 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ home }) => home;
+const mapStateToProps = ({ home }) => home
 
-export default connect(mapStateToProps, null)(Home)
+export default connect(
+  mapStateToProps,
+  null
+)(Home)

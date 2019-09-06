@@ -131,7 +131,7 @@ class LaundryVenue extends Component {
     }
   }
 
-  componentWillUpdate(newProps) {
+  componentDidUpdate(newProps) {
     const { dispatchGetLaundryHall, hallURLId } = this.props
     const newHallURLId = newProps.hallURLId
 
