@@ -101,15 +101,15 @@
     "image": "newcollegehouse.png",
     "description": "",
     "address": "3335 Woodland Walk, Philadelphia, PA 19104",
-    "name": "New College House"
+    "name": "Lauder House"
   },
   "1731": {
     "lat": 39.953691,
     "lng": -75.191299,
     "image": "newcollegehouseretail.png",
-    "description": "The first signature residential building on Penn's campus specifically designed and built to maximize the College House experience. The dining program in the New College House will be a hybrid of an ‘à la carte menu' on the retail side and an All-You-Care-To-Eat café for breakfast, lunch, and dinner with an option for family style dining.",
+    "description": "The first signature residential building on Penn's campus specifically designed and built to maximize the College House experience. The dining program in the Lauder House will be a hybrid of an ‘à la carte menu' on the retail side and an All-You-Care-To-Eat café for breakfast, lunch, and dinner with an option for family style dining.",
     "address": "3335 Woodland Walk, Philadelphia, PA 19104",
-    "name": "NCH Retail"
+    "name": "Lauder House Retail"
   },
   "1732": {
     "lat": 39.952911,
