@@ -3,13 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import SpaceCard from './SpaceCard'
-import {
-  Map,
-  Row,
-  Col,
-  Scrollbar,
-  Line,
-} from '../shared'
+import { Map, Row, Col, Scrollbar, Line } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
@@ -22,8 +16,8 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 
 class App extends Component {
   componentDidMount() {
-    const { getAllSpacesDataDispatch } = this.props;
-    getAllSpacesDataDispatch();
+    const { getAllSpacesDataDispatch } = this.props
+    getAllSpacesDataDispatch()
   }
 
   render() {
@@ -33,10 +27,14 @@ class App extends Component {
       pending,
       hoveredSpace,
       setActiveSpaceDispatch,
-    } = this.props;
+    } = this.props
 
-    if (pending || !filteredSpacesData || !Object.keys(filteredSpacesData).length) {
-      return (<Filter />);
+    if (
+      pending ||
+      !filteredSpacesData ||
+      !Object.keys(filteredSpacesData).length
+    ) {
+      return <Filter />
     }
 
     return (
@@ -48,20 +46,18 @@ class App extends Component {
             padding="0 0 .5rem 0"
             overflowY="scroll"
             width="40%"
+            height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
           >
             <ErrorMessage message={error} />
 
-            {Object.keys(filteredSpacesData).map((spaceId) => {
-              const space = filteredSpacesData[spaceId];
+            {Object.keys(filteredSpacesData).map(spaceId => {
+              const space = filteredSpacesData[spaceId]
               return (
                 <div key={spaceId}>
-                  <SpaceCard
-                    spaceId={spaceId}
-                    {...space}
-                  />
+                  <SpaceCard spaceId={spaceId} {...space} />
                   <Line />
                 </div>
-              );
+              )
             })}
 
             <PennLabsCredit />
@@ -79,7 +75,7 @@ class App extends Component {
 
         <SpaceModal />
       </>
-    );
+    )
   }
 }
 
@@ -99,15 +95,15 @@ App.propTypes = {
   filteredSpacesData: PropTypes.object, // eslint-disable-line
 }
 
-const mapStateToProps = ({ spaces }) => spaces;
+const mapStateToProps = ({ spaces }) => spaces
 
 const mapDispatchToProps = dispatch => ({
   getAllSpacesDataDispatch: id => dispatch(getAllSpacesData(id)),
   setActiveSpaceDispatch: id => dispatch(setActiveSpace(id)),
-});
+})
 
 // Redux config
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
-)(App);
+  mapDispatchToProps
+)(App)

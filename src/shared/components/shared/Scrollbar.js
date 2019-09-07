@@ -1,13 +1,13 @@
-import s from 'styled-components';
+import s from 'styled-components'
 
-import { WHITE, LIGHTER_BLUE, BLUE } from '../../styles/colors';
+import { WHITE, LIGHTER_BLUE, BLUE } from '../../styles/colors'
 
-import { Col } from './Flex';
+import { Col } from './Flex'
 
 export const Scrollbar = s(Col)`
   background: ${WHITE};
-  overflowY: scroll;
-  overflowX: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   ::-webkit-scrollbar {
     width: 6px;
@@ -23,4 +23,4 @@ export const Scrollbar = s(Col)`
   }
 
   ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
-`;
+`

@@ -34,9 +34,13 @@ export const Row = s.div`
 const ColWrapper = s.div`
   flex: ${({ width }) => (width ? 'none' : 1)};
   width: ${({ width }) => width || 'auto'};
-
   padding: ${({ padding }) => padding || 0};
+  
+  ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
+  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
+  ${({ height }) => height && `height: ${height};`}
 
+  ${({ flex }) => flex && `display: flex;`}
   ${({ backgroundImage }) =>
     backgroundImage &&
     `
@@ -54,16 +58,14 @@ const ColWrapper = s.div`
   border-radius: ${({ borderRadius }) => borderRadius || 0};
   border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};
 
-  ${maxWidth(PHONE)} {
-    ${({ sm }) =>
-      sm &&
-      `
-      width: ${percent(sm)};
-      flex: none;
-    `}
+  ${({ sm }) =>
+    sm &&
+    `
+    width: ${percent(sm)};
+    flex: none;
+  `}
 
-    ${({ offsetSm }) => offsetSm && `margin-left: ${percent(offsetSm)};`}
-  }
+  ${({ offsetSm }) => offsetSm && `margin-left: ${percent(offsetSm)};`}
 
   ${minWidth(PHONE)} {
     ${({ md }) =>
@@ -90,8 +92,6 @@ const ColWrapper = s.div`
       margin-left: ${percent(offsetLg)};
     `}
   }
-
-  ${({ flex }) => flex && `display: flex;`}
 `
 
 const ColContainer = s.div`
@@ -105,7 +105,11 @@ const ColContainer = s.div`
 
 export const Col = ({ margin, children, ...other }) => (
   <ColWrapper {...other}>
-    <ColContainer margin={margin}>{children}</ColContainer>
+    {margin ? (
+      <ColContainer margin={margin}>{children}</ColContainer>
+    ) : (
+      children
+    )}
   </ColWrapper>
 )
 

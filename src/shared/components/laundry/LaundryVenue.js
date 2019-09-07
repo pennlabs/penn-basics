@@ -105,61 +105,54 @@ const renderMachineAvailabilities = (
         ))}
       </Row>
 
-      <Row>
-        <Col>
-          <Table className="table is-fullwidth">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Status</th>
-                <th>Minutes left</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {tableMachines.map(
-                ({ status, time_remaining: timeRemaining, id }) => {
-                  const reminded = reminders.some(
-                    reminder =>
-                      reminder.machineID == id &&
-                      reminder.hallID == laundryHallId
-                  )
-                  const showBell = !(timeRemaining == 0 || reminded)
-                  return (
-                    <tr key={id}>
-                      <td>{id}</td>
-                      <td>
-                        <StatusPill status={status} />
-                      </td>
-                      <td>{status === 'Not online' ? '-' : timeRemaining}</td>
-                      <td>
-                        {showBell ? (
-                          <BellIcon
-                            className="icon"
-                            onClick={() =>
-                              handleReminder(
-                                id,
-                                laundryHallId,
-                                hallName,
-                                dispatchAddReminder,
-                                reminded
-                              )
-                            }
-                          >
-                            <i className="far fa-bell" />
-                          </BellIcon>
-                        ) : (
-                          <></>
-                        )}
-                      </td>
-                    </tr>
-                  )
-                }
-              )}
-            </tbody>
-          </Table>
-        </Col>
-      </Row>
+      <Table className="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Status</th>
+            <th>Minutes left</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {tableMachines.map(
+            ({ status, time_remaining: timeRemaining, id }) => {
+              const reminded = reminders.some(
+                reminder =>
+                  reminder.machineID == id && reminder.hallID == laundryHallId
+              )
+              const showBell = !(timeRemaining == 0 || reminded)
+              return (
+                <tr key={id}>
+                  <td>{id}</td>
+                  <td>
+                    <StatusPill status={status} />
+                  </td>
+                  <td>{status === 'Not online' ? '-' : timeRemaining}</td>
+                  <td>
+                    {showBell ? (
+                      <BellIcon
+                        className="icon"
+                        onClick={() =>
+                          handleReminder(
+                            id,
+                            laundryHallId,
+                            hallName,
+                            dispatchAddReminder,
+                            reminded
+                          )
+                        }
+                      >
+                        <i className="far fa-bell" />
+                      </BellIcon>
+                    ) : null}
+                  </td>
+                </tr>
+              )
+            }
+          )}
+        </tbody>
+      </Table>
     </>
   )
 }
@@ -230,43 +223,41 @@ class LaundryVenue extends Component {
 
     return (
       <Wrapper>
-        <div className="columns">
-          <div className="column is-12">
-            <Buttons>
-              {isFavorited ? (
-                <span // eslint-disable-line
-                  className="button"
-                  onClick={() => dispatchRemoveFavorite(laundryHallId)}
-                >
-                  Favorited
-                </span>
-              ) : (
-                <span // eslint-disable-line
-                  className="button"
-                  onClick={() =>
-                    dispatchAddFavorite(laundryHallId, location, hallName)
-                  }
-                >
-                  Favorite
-                </span>
-              )}
-              {reminders.length == 0 ? null : (
-                <span // eslint-disable-line
-                  className="button"
-                  style={{ marginLeft: '0.5rem' }}
-                  onClick={() => dispatchRemoveReminder()}
-                >
-                  Remove Reminders
-                </span>
-              )}
-            </Buttons>
+        <div style={{ marginBottom: '1rem' }}>
+          <Buttons>
+            {isFavorited ? (
+              <span // eslint-disable-line
+                className="button"
+                onClick={() => dispatchRemoveFavorite(laundryHallId)}
+              >
+                Favorited
+              </span>
+            ) : (
+              <span // eslint-disable-line
+                className="button"
+                onClick={() =>
+                  dispatchAddFavorite(laundryHallId, location, hallName)
+                }
+              >
+                Favorite
+              </span>
+            )}
+            {reminders.length == 0 ? null : (
+              <span // eslint-disable-line
+                className="button"
+                style={{ marginLeft: '0.5rem' }}
+                onClick={() => dispatchRemoveReminder()}
+              >
+                Remove Reminders
+              </span>
+            )}
+          </Buttons>
 
-            <h1 className="title">{hallName}</h1>
-          </div>
+          <h1 className="title">{hallName}</h1>
         </div>
 
         <Row margin={MARGIN}>
-          <Col md={6} sm={12} margin={MARGIN}>
+          <Col lg={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Washers</p>
               {renderMachineAvailabilities(
@@ -281,7 +272,7 @@ class LaundryVenue extends Component {
             </BorderedCard>
           </Col>
 
-          <Col md={6} sm={12} margin={MARGIN}>
+          <Col lg={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Dryers</p>
               {renderMachineAvailabilities(
@@ -333,6 +324,7 @@ const mapStateToProps = ({ laundry }) => {
     reminders,
   } = laundry
 
+  // Make sure that the ID is a number
   let id
   if (typeof laundryHallId === 'string') {
     try {

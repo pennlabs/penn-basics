@@ -2,27 +2,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getLaundryHalls, getFavorites, getReminders } from '../../actions/laundry_actions'
-
-
 import {
-  Card,
-  Row,
-  Col,
-  Scrollbar,
-  NavSectionHeader,
-  Line,
-} from '../shared'
-import {
-  BABY_BLUE,
-  WHITE,
-} from '../../styles/colors'
+  getLaundryHalls,
+  getFavorites,
+  getReminders,
+} from '../../actions/laundry_actions'
+
+import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
+import { BABY_BLUE, WHITE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import Favorites from './Favorites'
-
+import { callbackify } from 'util'
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +23,7 @@ class App extends Component {
     const {
       dispatchGetLaundryHalls,
       dispatchGetFavorites,
-      dispatchGetReminders
+      dispatchGetReminders,
     } = this.props
 
     dispatchGetLaundryHalls()
@@ -42,9 +35,7 @@ class App extends Component {
     const {
       laundryHalls,
       match: {
-        params: {
-          id,
-        } = {
+        params: { id } = {
           params: { id: '-1' },
         },
       },
@@ -54,29 +45,35 @@ class App extends Component {
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Scrollbar
           padding="0 0 .5rem 0"
-          background={WHITE}
-          overflowY="scroll"
           width="20%"
           borderRight
-          minHeight={`calc(100vh - ${NAV_HEIGHT})`}
+          height={`calc(100vh - ${NAV_HEIGHT})`}
         >
           <Favorites />
 
           <Card background={BABY_BLUE} padding="0">
-            <NavSectionHeader className="title is-5">Laundry Halls</NavSectionHeader>
+            <NavSectionHeader className="title is-5">
+              Laundry Halls
+            </NavSectionHeader>
             <Line />
           </Card>
 
-          {laundryHalls && laundryHalls.map(locationObject => (
-            <LaundryCard
-              locationObject={locationObject}
-              key={locationObject.location}
-            />
-          ))}
+          {laundryHalls &&
+            laundryHalls.map(locationObject => (
+              <LaundryCard
+                locationObject={locationObject}
+                key={locationObject.location}
+              />
+            ))}
+
           <PennLabsCredit />
         </Scrollbar>
 
-        <Col width="80%" overflowY="scroll">
+        <Col
+          width="80%"
+          overflowY="auto"
+          maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+        >
           <LaundryVenue hallURLId={Number.isNaN(id) ? null : id} />
         </Col>
       </Row>
@@ -84,12 +81,10 @@ class App extends Component {
   }
 }
 
-
 const mapStateToProps = ({ laundry }) => {
   const { laundryHalls } = laundry
   return { laundryHalls }
 }
-
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
@@ -97,23 +92,25 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetReminders: () => dispatch(getReminders()),
 })
 
-
 App.defaultProps = {
   laundryHalls: null,
 }
 
-
 App.propTypes = {
-  laundryHalls: PropTypes.arrayOf(PropTypes.shape({
-    halls: PropTypes.array,
-    location: PropTypes.string,
-  })),
+  laundryHalls: PropTypes.arrayOf(
+    PropTypes.shape({
+      halls: PropTypes.array,
+      location: PropTypes.string,
+    })
+  ),
   match: PropTypes.shape({
     id: PropTypes.string,
   }).isRequired,
   dispatchGetFavorites: PropTypes.func.isRequired,
-  dispatchGetLaundryHalls: PropTypes.func.isRequired
+  dispatchGetLaundryHalls: PropTypes.func.isRequired,
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
