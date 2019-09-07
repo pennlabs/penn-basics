@@ -10,6 +10,7 @@ import {
 } from './action_types'
 
 export const getVenueInfo = venueId => {
+  console.log(`venueID: ${venueId}`)
   return dispatch => {
     dispatch({ type: getVenueInfoRequested })
 
@@ -46,6 +47,7 @@ export const getVenueInfo = venueId => {
 }
 
 export const getDiningData = venueId => {
+  console.log(venueId)
   return dispatch => {
     dispatch({
       type: getDiningDataRequested,

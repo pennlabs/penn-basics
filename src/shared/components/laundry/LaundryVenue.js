@@ -45,8 +45,7 @@ const BellIcon = s.span`
   margin-top: -0.2rem;
 `
 
-const handleReminder = (machineID, hallID, hallName, reminders, dispatchAddReminder) => {
-  const reminded = reminders.some(reminder => reminder.machineID == machineID && reminder.hallID == hallID)
+const handleReminder = (machineID, hallID, hallName, dispatchAddReminder, reminded) => {
   if (!reminded) {
     dispatchAddReminder(machineID, hallID, hallName)
   }
@@ -69,11 +68,11 @@ const renderMachineAvailabilities = (
     offline = 0,
   } = machineData
 
-  navigator.serviceWorker.ready.then(registration => {
-    registration.getNotifications().then(notifications => {
-      console.log(notifications)
-    })
-  })
+  // navigator.serviceWorker.ready.then(registration => {
+  //   registration.getNotifications().then(notifications => {
+  //     console.log(notifications)
+  //   })
+  // })
 
   return (
     <>
@@ -108,23 +107,33 @@ const renderMachineAvailabilities = (
             </thead>
             <tbody>
               {tableMachines.map(
-                ({ status, time_remaining: timeRemaining, id }) => (
-                  <tr key={id}>
-                    <td>{id}</td>
-                    <td>
-                      <StatusPill status={status} />
-                    </td>
-                    <td>{status === 'Not online' ? '-' : timeRemaining}</td>
-                    <td>
-                      <BellIcon
-                        className="icon"
-                        onClick={() => handleReminder(id, laundryHallId, hallName, reminders, dispatchAddReminder)}
-                      >
-                        <i className="far fa-bell" />
-                      </BellIcon>
-                    </td>
-                  </tr>
-                )
+                ({ status, time_remaining: timeRemaining, id }) => {
+                  const reminded = reminders.some(reminder => reminder.machineID == id && reminder.hallID == laundryHallId)
+                  const showBell = !(timeRemaining == 0 || reminded)
+                  return (
+                    <tr key={id}>
+                      <td>{id}</td>
+                      <td>
+                        <StatusPill status={status} />
+                      </td>
+                      <td>{status === 'Not online' ? '-' : timeRemaining}</td>
+                      <td>
+                        {
+                          showBell ?
+                            (
+                              <BellIcon
+                                className="icon"
+                                onClick={() => handleReminder(id, laundryHallId, hallName, dispatchAddReminder, reminded)}
+                              >
+                                <i className="far fa-bell" />
+                              </BellIcon>
+                            ) :
+                            (<></>)
+                        }
+                      </td>
+                    </tr>
+                  )
+                }
               )}
             </tbody>
           </Table>
@@ -138,21 +147,19 @@ class LaundryVenue extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatchGetLaundryHall, hallURLId, dispatchGetReminders } = this.props
+    const { dispatchGetLaundryHall, hallURLId } = this.props
 
     if (hallURLId) {
       dispatchGetLaundryHall(hallURLId)
     }
-
-    dispatchGetReminders()
   }
 
-  componentDidUpdate(newProps) {
+  componentDidUpdate(prevProps) {
     const { dispatchGetLaundryHall, hallURLId } = this.props
-    const newHallURLId = newProps.hallURLId
+    const prevHallURLId = prevProps.hallURLId
 
-    if (hallURLId !== newHallURLId) {
-      dispatchGetLaundryHall(newHallURLId)
+    if (prevHallURLId !== hallURLId) {
+      dispatchGetLaundryHall(hallURLId)
     }
   }
 
@@ -169,7 +176,7 @@ class LaundryVenue extends Component {
       dispatchRemoveReminder
     } = this.props
 
-    console.log(reminders)
+    // console.log(reminders)
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
@@ -290,8 +297,8 @@ LaundryVenue.propTypes = {
     location: PropTypes.string,
     machines: PropTypes.object,
   }),
-  laundryHallId: PropTypes.string,
-  hallURLId: PropTypes.string,
+  laundryHallId: PropTypes.number,
+  hallURLId: PropTypes.number,
   pending: PropTypes.bool,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
@@ -325,7 +332,6 @@ const mapDispatchToProps = dispatch => ({
   dispatchRemoveFavorite: laundryHallId =>
     dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  dispatchGetReminders: () => dispatch(getReminders()),
   dispatchAddReminder: (machineID, hallID, hallName) => dispatch(addReminder(machineID, hallID, hallName)),
   dispatchRemoveReminder: () => dispatch(removeReminder())
 })

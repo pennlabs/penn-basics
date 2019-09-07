@@ -31,28 +31,26 @@ class DiningVenue extends Component {
 
     // Pull meal data and hours data for the venue
     const venueId = match.params.id
-    getDiningDataDispatch(venueId)
-    getVenueInfoDispatch(venueId)
+    
+    if (venueId) {
+      getDiningDataDispatch(venueId)
+      getVenueInfoDispatch(venueId)
+    }
+
 
     this.checkForErrors = this.checkForErrors.bind(this)
     this.renderError = this.renderError.bind(this)
   }
 
-  /**
-   * When the component will update
-   * Check if there is a new dining ID
-   *
-   * @param newProps
-   */
-  componentDidUpdate(newProps) {
+  componentDidUpdate(prevProps) {
     const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
+    const previousVenueId = prevProps.match.params.id
     const currentVenueId = match.params.id
-    const nextVenueId = newProps.match.params.id
 
-    if (currentVenueId !== nextVenueId) {
-      getDiningDataDispatch(nextVenueId)
-      getVenueInfoDispatch(nextVenueId)
+    if (previousVenueId !== currentVenueId) {
+      getDiningDataDispatch(currentVenueId)
+      getVenueInfoDispatch(currentVenueId)
     }
   }
 

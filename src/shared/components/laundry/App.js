@@ -30,12 +30,13 @@ class App extends Component {
     const {
       dispatchGetLaundryHalls,
       dispatchGetFavorites,
+      dispatchGetReminders
     } = this.props
 
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
+    dispatchGetReminders()
   }
-
 
   render() {
     const {
@@ -92,7 +93,8 @@ const mapStateToProps = ({ laundry }) => {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
-  dispatchGetFavorites: () => dispatch(getFavorites())
+  dispatchGetFavorites: () => dispatch(getFavorites()),
+  dispatchGetReminders: () => dispatch(getReminders()),
 })
 
 
@@ -107,7 +109,7 @@ App.propTypes = {
     location: PropTypes.string,
   })),
   match: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
   }).isRequired,
   dispatchGetFavorites: PropTypes.func.isRequired,
   dispatchGetLaundryHalls: PropTypes.func.isRequired
