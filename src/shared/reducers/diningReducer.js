@@ -99,6 +99,8 @@ const defaultState = {
   venueHoursCard: [],
   venueHoursPending: true,
   venueHoursCardPending: true,
+  venueHours: null,
+  venueInfo: null,
   dateFormatted: getCurrentDateFormatted(),
   dateFormattedToday: getCurrentDateFormatted(),
   sidebarInfo: [

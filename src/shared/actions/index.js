@@ -31,6 +31,7 @@ export const getVenueInfo = venueId => {
       })
       .then(res => {
         const { hours, venue } = res.data
+        console.log(venue)
         dispatch({
           type: getVenueInfoFulfilled,
           venueHours: hours,

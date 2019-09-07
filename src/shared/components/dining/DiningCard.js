@@ -33,50 +33,48 @@ const convertDate = time => {
   return `${hour}:${minute}am`
 }
 
+const pad = (number) => {
+  return number < 10 ? `0${number}` : `${number}`
+}
+
 class DiningCard extends Component {
   constructor(props) {
     super(props)
     const { venueId } = this.props
 
-    const startDate = new Date()
-    startDate.setHours(0, 0, 0, 0)
+    this.state = { venueHours: [] }
 
-    // Set the end date to three days from now
-    const endDate = new Date()
-    endDate.setHours(72, 0, 0, 0)
+    if (venueId) {
+      axios.get(`https://api.pennlabs.org/dining/hours/${venueId}`)
+        .then(response => {
+          let venueHours = response.data.cafes[venueId].days
+          const dateObj = new Date()
+          const month = dateObj.getUTCMonth() + 1
+          const day = dateObj.getUTCDate()
+          const year = dateObj.getUTCFullYear();
+          const currDate = `${year}-${pad(month)}-${pad(day)}`
+          venueHours = venueHours.filter(hour => hour.date === currDate)
 
-    this.state = { hours: [] }
-
-    // TODO move this to redux
-    axios
-      .post('/api/dining/venue_info/', {
-        venueId,
-        startDate,
-        endDate,
-      })
-      .then(res => {
-        const { hours } = res.data
-        this.setState({ hours })
-      })
-      .catch(() => {
-        this.setState({ hours: [] })
-      })
+          if (venueHours) {
+            venueHours = venueHours[0].dayparts
+            this.setState({ venueHours })
+          }
+        })
+        .catch(() => {
+          this.setState({ hours: [] })
+        })
+    }
   }
 
   renderSubtext() {
-    const { hours: venueHours } = this.state
+    const { venueHours } = this.state;
 
     // get the array of hours that are opened today
-    const date = new Date()
-    const year = date.getFullYear()
-    const month =
-      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-    const openHours = venueHours.filter(
-      hour =>
-        hour.date.substring(0, hour.date.indexOf('T')) ===
-        `${year}-${month}-${day}`
-    )
+    const date = new Date();
+    const currTime = pad(date.getHours()) + ":" + pad(date.getMinutes())
+    const openHours = venueHours.filter(hour => {
+      return hour.starttime <= currTime && currTime <= hour.endtime
+    });
 
     if (openHours.length === 0) {
       return (
@@ -87,46 +85,14 @@ class DiningCard extends Component {
       )
     }
 
-    // get the array of hours that are opened right now
-    const currentHours = openHours.filter(hour => {
-      const open = new Date(
-        `${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.open}`
-      )
-      const close = new Date(
-        `${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.close}`
-      )
-      return date >= open && date <= close
-    })
-
-    if (currentHours.length === 0) {
-      return (
-        <>
-          <Subtext marginBottom="0">Closed</Subtext>
-          <Circle open={false} />
-        </>
-      )
-    }
-
-    const displayHours = []
-    currentHours.forEach(hour => {
-      const openHour = convertDate(
-        hour.open.substring(0, hour.open.lastIndexOf(':'))
-      )
-      const closeHour = convertDate(
-        hour.close.substring(0, hour.close.lastIndexOf(':'))
-      )
-      const { type } = hour
-      displayHours.push({ openHour, closeHour, type })
-    })
-
     return (
       <>
         <Subtext marginBottom="0">
-          {displayHours.map(({ openHour, closeHour, type }, index) => (
-            <span key={`${openHour}-${closeHour}-${type}-${index}`}>
-              {`Open: ${openHour} - ${closeHour} • ${type}`}
-              {index === displayHours.length - 1 ? null : <br />}
-            </span>
+          {openHours.map((hour, index) => (
+            <>
+              {`Open: ${hour.starttime} - ${hour.endtime} • ${hour.label}`}
+              {index === openHours.length - 1 ? null : <br />}
+            </>
           ))}
         </Subtext>
         <Circle open />
@@ -141,8 +107,8 @@ class DiningCard extends Component {
     const img = `/img/venue_images/${image}`
 
     return (
-      <StyledLink to={`/dining/${venueId}`}>
-        <Card padding="0.5rem 1rem" hoverable>
+      <StyledLink to={`/dining/${venueId}`} venueId={venueId}>
+        <Card padding="0.5rem 1rem" hoverable key={venueId}>
           <Row>
             {image && (
               <Col backgroundImage={img} width="30%" borderRadius="4px" />
