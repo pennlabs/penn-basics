@@ -6,11 +6,11 @@ function deleteSpacesInDB() {
 }
 
 function loadSpacesIntoDB() {
-  return Promise.all(spaces.map(space => (
-    new Space(space)
-      .save()
-      .then(console.log) // eslint-disable-line
-  )))
+  return Promise.all(
+    spaces.map(space =>
+      new Space(space).save().then(console.log) // eslint-disable-line
+    )
+  )
 }
 
 const { MONGO_URI } = process.env

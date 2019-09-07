@@ -15,65 +15,71 @@ import {
   updateReminders
 } from './action_types';
 
-const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
-const BASE = 'http://api.pennlabs.org';
+const publicVapidKey =
+  'BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8'
+const BASE = 'http://api.pennlabs.org'
 
 function processLaundryHallsData(idData) {
-  const groupByLocation = _.groupBy(idData.halls, obj => obj.location);
-  return Object.keys(groupByLocation).map((locationName) => { //eslint-disable-line
+  const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
+  return Object.keys(groupByLocation).map(locationName => {
+    //eslint-disable-line
     return {
       location: locationName,
       halls: groupByLocation[locationName],
-    };
-  });
+    }
+  })
 }
 
-export function getLaundryHalls() { // eslint-disable-line
-  return async (dispatch) => {
+export function getLaundryHalls() {
+  // eslint-disable-line
+  return async dispatch => {
     dispatch({
       type: getLaundryHallsDataRequested,
-    });
+    })
     try {
-      const idData = await axios.get(`${BASE}/laundry/halls/ids`);
-      const laundryHalls = processLaundryHallsData(idData.data);
+      const idData = await axios.get(`${BASE}/laundry/halls/ids`)
+      const laundryHalls = processLaundryHallsData(idData.data)
 
       dispatch({
         type: getLaundryHallsDataFulfilled,
         laundryHalls,
-      });
+      })
     } catch (error) {
       dispatch({
         type: getLaundryHallsDataRejected,
         error: error.message,
-      });
+      })
     }
-  };
+  }
 }
 
-export function getLaundryHall(laundryHallId) { // eslint-disable-line
-  return async (dispatch) => {
+export function getLaundryHall(laundryHallId) {
+  // eslint-disable-line
+  return async dispatch => {
     dispatch({
       type: getLaundryHallInfoRequested,
-    });
+    })
     try {
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`);
+      const axiosResponse = await axios.get(
+        `${BASE}/laundry/hall/${laundryHallId}`
+      )
 
-      const { data } = axiosResponse;
+      const { data } = axiosResponse
       dispatch({
         type: getLaundryHallInfoFulfilled,
         laundryHallInfo: data,
         laundryHallId,
-      });
+      })
     } catch (error) {
       dispatch({
         type: getLaundryHallInfoRejected,
         error: error.message,
-      });
+      })
     }
-  };
+  }
 }
 
-export const getFavoritesHomePage = () => (dispatch) => {
+export const getFavoritesHomePage = () => dispatch => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // get the list of laundry halls from local storage
@@ -88,23 +94,25 @@ export const getFavoritesHomePage = () => (dispatch) => {
       }
 
       return null
-    });
+    })
   }
 
   // remove the null Id in the array
   IdArray = IdArray.filter(id => id !== null)
   // get the set of Promise set
-  const responsesSet = IdArray.map(id => axios.get(`${BASE}/laundry/hall/${id}`))
+  const responsesSet = IdArray.map(id =>
+    axios.get(`${BASE}/laundry/hall/${id}`)
+  )
   // dispatch information from the Promise set
   try {
-    Promise.all(responsesSet).then((values) => {
-      const dataSet = values.map((value) => {
+    Promise.all(responsesSet).then(values => {
+      const dataSet = values.map(value => {
         if (!value.error) {
-          return value.data;
+          return value.data
         }
 
-        return null;
-      });
+        return null
+      })
 
       dispatch({
         type: getFavoritesHome,
@@ -120,87 +128,89 @@ export const getFavoritesHomePage = () => (dispatch) => {
 }
 
 export function getFavorites() {
-  return (dispatch) => {
-    let favorites = localStorage.getItem('laundry_favorites');
+  return dispatch => {
+    let favorites = localStorage.getItem('laundry_favorites')
     if (favorites) {
-      favorites = JSON.parse(favorites);
+      favorites = JSON.parse(favorites)
     } else {
-      localStorage.setItem('laundry_favorites', JSON.stringify([]));
-      favorites = [];
+      localStorage.setItem('laundry_favorites', JSON.stringify([]))
+      favorites = []
     }
     dispatch({
       type: updateFavorites,
       favorites,
-    });
-  };
+    })
+  }
 }
 
 export function addFavorite(laundryHallId, location, hallName) {
-  return async (dispatch) => {
+  return async dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
-    const favoritesString = localStorage.getItem('laundry_favorites');
+    const favoritesString = localStorage.getItem('laundry_favorites')
 
-    let favoritesArray = [];
-    const favoriteLocation = {};
+    let favoritesArray = []
+    const favoriteLocation = {}
 
     // update fields for favoritesArray
-    favoriteLocation.locationName = `${location}: ${hallName}`;
-    favoriteLocation.hallId = laundryHallId;
+    favoriteLocation.locationName = `${location}: ${hallName}`
+    favoriteLocation.hallId = laundryHallId
 
     if (!favoritesString) {
-      favoritesArray = [favoriteLocation];
+      favoritesArray = [favoriteLocation]
     } else {
-      favoritesArray = JSON.parse(favoritesString);
-      if (!favoritesArray.some(favorite => favorite.hallId === favoriteLocation.hallId)) {
-        favoritesArray.push(favoriteLocation);
+      favoritesArray = JSON.parse(favoritesString)
+      if (
+        !favoritesArray.some(
+          favorite => favorite.hallId === favoriteLocation.hallId
+        )
+      ) {
+        favoritesArray.push(favoriteLocation)
       }
     }
 
-    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray));
+    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
 
     dispatch({
       type: updateFavorites,
       favorites: favoritesArray,
-    });
-  };
+    })
+  }
 }
 
 export function removeFavorite(laundryHallId) {
-  return (dispatch) => {
+  return dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
 
-    const favoritesString = localStorage.getItem('laundry_favorites');
+    const favoritesString = localStorage.getItem('laundry_favorites')
     const favoritesArray = JSON.parse(favoritesString)
 
     favoritesArray.forEach((favorite, index) => {
       if (favorite.hallId === laundryHallId) {
-        favoritesArray.splice(index, 1);
+        favoritesArray.splice(index, 1)
       }
     })
 
-    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray));
+    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
     dispatch({
       type: updateFavorites,
       favorites: favoritesArray,
-    });
-  };
+    })
+  }
 }
 
 const urlBase64ToUint8Array = base64String => {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding)
-    .replace(/-/g, '+')
-    .replace(/_/g, '/');
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
 
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
+  const rawData = window.atob(base64)
+  const outputArray = new Uint8Array(rawData.length)
 
   for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
+    outputArray[i] = rawData.charCodeAt(i)
   }
-  return outputArray;
+  return outputArray
 }
 
 export const getReminders = () => {
@@ -211,9 +221,9 @@ export const getReminders = () => {
     throw new Error('No Push API Support!')
   }
 
-  Notification.requestPermission().then((permission) => {
+  Notification.requestPermission().then(permission => {
     if (permission !== 'granted') {
-      throw new Error('permission not granted for notification');
+      throw new Error('permission not granted for notification')
     }
   })
 
@@ -275,37 +285,40 @@ export const getReminders = () => {
 export const addReminder = (machineID, hallID, hallName) => {
   return (dispatch) => {
     try {
-      navigator.serviceWorker.ready.then(registration => {
-        // const response = await fetch('/api/laundry/vapidPublicKey');
-        // const vapidPublicKey = await response.text();
+      navigator.serviceWorker.register('/sw.js')
 
-        return registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-        });
-      }).then(async subscription => {
-        let reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
-        const reminderID = uuidv4()
-        reminders.push({ machineID, hallID, reminderID })
-        dispatch({
-          type: updateReminders,
-          reminders
-        })
-        localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+      navigator.serviceWorker.ready
+        .then(registration => {
+          // const response = await fetch('/api/laundry/vapidPublicKey');
+          // const vapidPublicKey = await response.text();
 
-        const axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, machineID, hallID, hallName, reminderID })
-
-        if (!axiosResponse.data.error) {
-          reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
-          reminders = reminders.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID)
+          return registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+          });
+        }).then(async subscription => {
+          let reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+          const reminderID = uuidv4()
+          reminders.push({ machineID, hallID, reminderID })
           dispatch({
             type: updateReminders,
             reminders
           })
           localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
-        }
-      })
+
+          const axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, machineID, hallID, hallName, reminderID })
+
+          if (!axiosResponse.data.error) {
+            reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+            reminders = reminders.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID)
+            dispatch({
+              type: updateReminders,
+              reminders
+            })
+            localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+          }
+        })
     } catch (err) {
       console.log(`Error: ${err}`)
     }

@@ -147,7 +147,7 @@ class LaundryVenue extends Component {
     dispatchGetReminders()
   }
 
-  componentWillUpdate(newProps) {
+  componentDidUpdate(newProps) {
     const { dispatchGetLaundryHall, hallURLId } = this.props
     const newHallURLId = newProps.hallURLId
 

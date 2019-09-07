@@ -27,5 +27,5 @@ module.exports = function laundryRouter() {
         }, time_remaining);
     });
 
-    return router;
-};
+  return router
+}

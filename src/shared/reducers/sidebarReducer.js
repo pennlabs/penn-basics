@@ -3,29 +3,29 @@ import {
   sidebarLaundry,
   sidebarReservations,
   sidebarStudyspaces,
-} from '../actions/action_types';
+} from '../actions/action_types'
 
 // TODO redo this
 
-const defaultState = sidebarDining;
+const defaultState = sidebarDining
 
 const sidebarReducer = (state = defaultState, action) => {
   switch (action.type) {
     case sidebarDining:
-      return action.type;
+      return action.type
 
     case sidebarLaundry:
-      return action.type;
+      return action.type
 
     case sidebarStudyspaces:
-      return action.type;
+      return action.type
 
     case sidebarReservations:
-      return action.type;
+      return action.type
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default sidebarReducer;
+export default sidebarReducer

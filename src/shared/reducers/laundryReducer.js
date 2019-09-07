@@ -26,42 +26,42 @@ const laundryReducer = (state = defaultState, action) => {
       return {
         ...state,
         pending: true,
-      };
+      }
     case getLaundryHallsDataRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
-      };
+      }
     case getLaundryHallsDataFulfilled:
       return {
         ...state,
         pending: false,
         laundryHalls: action.laundryHalls,
-      };
+      }
     case getLaundryHallInfoRequested:
       return {
         ...state,
         pending: true,
-      };
+      }
     case getLaundryHallInfoRejected:
       return {
         ...state,
         pending: false,
         error: action.error,
-      };
+      }
     case getLaundryHallInfoFulfilled:
       return {
         ...state,
         pending: false,
         laundryHallInfo: action.laundryHallInfo,
         laundryHallId: action.laundryHallId,
-      };
+      }
     case updateFavorites:
       return {
         ...state,
         favorites: action.favorites,
-      };
+      }
     case getFavoritesHome:
       return {
         ...state,
@@ -73,8 +73,8 @@ const laundryReducer = (state = defaultState, action) => {
         reminders: action.reminders
       };
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default laundryReducer;
+export default laundryReducer
