@@ -7,16 +7,6 @@
     li {
       display: inline-block;
       padding: 1rem 0 1rem 1rem;
-
-      a {
-        color: $light-gray;
-
-        &:active,
-        &:focus,
-        &:hover {
-          color: $medium-gray;
-        }
-      }
     }
   }
 

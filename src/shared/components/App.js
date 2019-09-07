@@ -1,16 +1,11 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import s from 'styled-components'
 import { MobileView, BrowserView } from 'react-device-detect'
 
-
 import { BLUE, DARK_BLUE } from '../styles/colors'
 
-
-// import Sidebar from './shared/sidebar/Sidebar'; /* TODO */
 import Nav from './shared/Nav/index'
-
-
 import Home from './home/App'
 import NotFound from './shared/NotFound'
 import Dining from './dining/DiningVenue'
@@ -18,7 +13,6 @@ import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
 import Mobile from './mobile/App'
-
 
 const App = s.div`
   a {
@@ -48,7 +42,7 @@ export default () => (
       <div id="wrapper">
         <div id="app">
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
             <Route exact path="/dining/:id" component={Dining} />
             <Route exact path="/laundry" component={Laundry} />
@@ -61,4 +55,4 @@ export default () => (
       </div>
     </BrowserView>
   </App>
-);
+)
