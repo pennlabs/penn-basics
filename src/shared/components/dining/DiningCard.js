@@ -5,15 +5,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 
-import {
-  Row,
-  Col,
-  Card,
-  Subtitle,
-  Subtext,
-  Line,
-  Circle,
-} from '../shared'
+import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
 const StyledLink = s(Link)`
@@ -29,12 +21,12 @@ const Content = s.div`
 `
 
 // TODO export this to helper methods
-const convertDate = (time) => {
-  const hour = time.substring(0, time.indexOf(':'));
-  const minute = time.substring(time.indexOf(':') + 1);
+const convertDate = time => {
+  const hour = time.substring(0, time.indexOf(':'))
+  const minute = time.substring(time.indexOf(':') + 1)
 
   if (hour === '12') {
-    return `12:${minute}pm`;
+    return `12:${minute}pm`
   }
 
   if (hour >= 13) return `${hour - 12}:${minute}pm`
@@ -87,9 +79,7 @@ class DiningCard extends Component {
     if (openHours.length === 0) {
       return (
         <>
-          <Subtext marginBottom="0">
-            Closed
-          </Subtext>
+          <Subtext marginBottom="0">Closed</Subtext>
           <Circle open={false} />
         </>
       )
@@ -111,10 +101,10 @@ class DiningCard extends Component {
   }
 
   render() {
-    const { venueId, name, image } = this.props;
+    const { venueId, name, image } = this.props
 
     // Images are served through the public folder
-    const img = `/img/venue_images/${image}`;
+    const img = `/img/venue_images/${image}`
 
     return (
       <StyledLink to={`/dining/${venueId}`} venueId={venueId}>
@@ -125,9 +115,7 @@ class DiningCard extends Component {
             )}
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
-                <Subtitle marginBottom="0">
-                  {name}
-                </Subtitle>
+                <Subtitle marginBottom="0">{name}</Subtitle>
 
                 {this.renderSubtext()}
               </Content>
@@ -136,15 +124,13 @@ class DiningCard extends Component {
         </Card>
         <Line />
       </StyledLink>
-    );
+    )
   }
 }
-
 
 DiningCard.defaultProps = {
   image: null,
 }
-
 
 DiningCard.propTypes = {
   image: PropTypes.string,
@@ -152,5 +138,4 @@ DiningCard.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-
-export default DiningCard;
+export default DiningCard

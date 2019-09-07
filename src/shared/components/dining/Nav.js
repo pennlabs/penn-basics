@@ -9,12 +9,18 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/database/venue_info.json'
 
-import { retailLocations } from './constants'
-
 const Nav = ({ children }) => {
   const keys = Object.keys(venueData)
-  const diningKeys = keys.filter(key => !retailLocations.includes(key))
-  const retailKeys = keys.filter(key => retailLocations.includes(key))
+  const diningKeys = []
+  const retailKeys = []
+  keys.forEach(key => {
+    const data = venueData[key]
+    if (data.isRetail) {
+      retailKeys.push(key)
+    } else {
+      diningKeys.push(key)
+    }
+  })
 
   return (
     <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -34,7 +40,12 @@ const Nav = ({ children }) => {
         {diningKeys.map(key => {
           const { name, image } = venueData[key]
           return (
-            <DiningCard key={key} venueId={key} name={name} image={image} />
+            <DiningCard
+              key={`${key}-${name}`}
+              venueId={key}
+              name={name}
+              image={image}
+            />
           )
         })}
 
