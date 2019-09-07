@@ -88,7 +88,8 @@
     "description": "Gourmet Grocer is the on-campus market and a favorite of the Penn community. The market features a variety of items from both local artisans and well-known brands, as well as large organic, kosher and gluten-free sections. Gourmet Grocer also provides student necessities and toiletries.",
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "name": "1920 Gourmet Grocer",
-    "pennDiningSlug": "1920-gourmet-grocer"
+    "pennDiningSlug": "1920-gourmet-grocer",
+    "isRetail": true
   },
   "1163": {
     "lat": 39.951904,

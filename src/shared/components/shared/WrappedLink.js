@@ -19,6 +19,11 @@ const StyledLink = s(Link)`
   &:hover {
     color: ${DARK_BLUE} !important;
   }
+
+  &:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 2px ${DARK_BLUE};
+  }
 `
 
 class WrappedLink extends Component {

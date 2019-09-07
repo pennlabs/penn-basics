@@ -22,6 +22,12 @@ const Nav = ({ children }) => {
     }
   })
 
+  diningKeys.sort((keyA, keyB) => {
+    const { name: nameA } = venueData[keyA]
+    const { name: nameB } = venueData[keyB]
+    return nameA.localeCompare(nameB)
+  })
+
   return (
     <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
       <Scrollbar
