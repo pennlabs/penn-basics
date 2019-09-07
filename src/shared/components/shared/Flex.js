@@ -1,26 +1,51 @@
+import React from 'react'
 import s from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
-import { maxWidth, PHONE } from '../../styles/sizes'
+import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
+
+const percent = numCols => (numCols / 12) * 100 + '%'
 
 export const Row = s.div`
-  width: 100%;
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
   max-height: ${({ maxHeight }) => maxHeight || 'none'};
   overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+
+  ${({ margin }) =>
+    margin &&
+    `
+    margin-left: -${margin};
+    margin-right: -${margin};
+    width: calc(100% + ${margin} + ${margin});
+  `}
+
   ${({ justifyContent }) =>
     justifyContent && `justify-content: ${justifyContent};`}
+
+  ${maxWidth(PHONE)} {
+    display: block;
+  }
 `
 
-export const Col = s.div`
-  padding: ${({ padding }) => padding || 0};
+const ColWrapper = s.div`
   flex: ${({ width }) => (width ? 'none' : 1)};
   width: ${({ width }) => width || 'auto'};
-  background-image: ${({ backgroundImage }) =>
-    `url(${backgroundImage})` || 'none'};
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+
+  padding: ${({ padding }) => padding || 0};
+
+  ${({ backgroundImage }) =>
+    backgroundImage &&
+    `
+    background-image: url(${backgroundImage});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  `}
+  
   background: ${({ background }) => background || ''};
   max-height: ${({ maxHeight }) => maxHeight || 'none'};
   overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
@@ -28,13 +53,61 @@ export const Col = s.div`
   box-sizing: border-box;
   border-radius: ${({ borderRadius }) => borderRadius || 0};
   border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};
+
+  ${maxWidth(PHONE)} {
+    ${({ sm }) =>
+      sm &&
+      `
+      width: ${percent(sm)};
+      flex: none;
+    `}
+
+    ${({ offsetSm }) => offsetSm && `margin-left: ${percent(offsetSm)};`}
+  }
+
+  ${minWidth(PHONE)} {
+    ${({ md }) =>
+      md &&
+      `
+      width: ${percent(md)}
+      flex: none;
+    `}
+
+    ${({ offsetMd }) => offsetMd && `margin-left: ${percent(offsetMd)};`}
+  }
+
+  ${minWidth(TABLET)} {
+    ${({ lg }) =>
+      lg &&
+      `
+      width: ${percent(lg)}
+      flex: none;
+    `}
+
+    ${({ offsetLg }) =>
+      offsetLg &&
+      `
+      margin-left: ${percent(offsetLg)};
+    `}
+  }
+
+  ${({ flex }) => flex && `display: flex;`}
 `
 
-export const Spacer = s.div`
-  display: block;
-  width: 100%;
-  height: 1rem;
+const ColContainer = s.div`
+  ${({ margin }) =>
+    margin &&
+    `
+    margin-left: ${margin};
+    margin-right: ${margin};
+  `}
 `
+
+export const Col = ({ margin, children, ...other }) => (
+  <ColWrapper {...other}>
+    <ColContainer margin={margin}>{children}</ColContainer>
+  </ColWrapper>
+)
 
 export const ColSpace = s(Col)`
   flex: none;
@@ -43,4 +116,10 @@ export const ColSpace = s(Col)`
   ${maxWidth(PHONE)} {
     display: none;
   }
+`
+
+export const Spacer = s.div`
+  display: block;
+  width: 100%;
+  height: 1rem;
 `

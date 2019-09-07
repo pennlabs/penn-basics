@@ -5,7 +5,7 @@ import s from 'styled-components'
 
 import Loading from '../shared/Loading'
 import StatusPill from './StatusPill'
-import { BorderedCard, Row, LaundryOverview } from '../shared'
+import { BorderedCard, Row, LaundryOverview, Col } from '../shared'
 import {
   GREEN,
   MUSTARD,
@@ -20,8 +20,10 @@ import {
   getLaundryHall,
   getReminders,
   addReminder,
-  removeReminder
+  removeReminder,
 } from '../../actions/laundry_actions'
+
+const MARGIN = '0.5rem'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -37,15 +39,22 @@ const Buttons = s.div`
 
 const BellIcon = s.span`
   cursor: pointer;
+  line-height: 1;
+  height: 1rem;
+
   opacity:  0.5;
   &:hover {
     opacity: 0.75;
   }
-  position: absolute;
-  margin-top: -0.2rem;
 `
 
-const handleReminder = (machineID, hallID, hallName, dispatchAddReminder, reminded) => {
+const handleReminder = (
+  machineID,
+  hallID,
+  hallName,
+  dispatchAddReminder,
+  reminded
+) => {
   if (!reminded) {
     dispatchAddReminder(machineID, hallID, hallName)
   }
@@ -60,7 +69,9 @@ const renderMachineAvailabilities = (
   reminders,
   dispatchAddReminder
 ) => {
-  const tableMachines = allMachines.filter(machine => machine.type === machineType)
+  const tableMachines = allMachines.filter(
+    machine => machine.type === machineType
+  )
   const {
     open = 0,
     running = 0,
@@ -94,8 +105,8 @@ const renderMachineAvailabilities = (
         ))}
       </Row>
 
-      <div className="columns">
-        <div className="column is-12">
+      <Row>
+        <Col>
           <Table className="table is-fullwidth">
             <thead>
               <tr>
@@ -108,7 +119,11 @@ const renderMachineAvailabilities = (
             <tbody>
               {tableMachines.map(
                 ({ status, time_remaining: timeRemaining, id }) => {
-                  const reminded = reminders.some(reminder => reminder.machineID == id && reminder.hallID == laundryHallId)
+                  const reminded = reminders.some(
+                    reminder =>
+                      reminder.machineID == id &&
+                      reminder.hallID == laundryHallId
+                  )
                   const showBell = !(timeRemaining == 0 || reminded)
                   return (
                     <tr key={id}>
@@ -118,18 +133,24 @@ const renderMachineAvailabilities = (
                       </td>
                       <td>{status === 'Not online' ? '-' : timeRemaining}</td>
                       <td>
-                        {
-                          showBell ?
-                            (
-                              <BellIcon
-                                className="icon"
-                                onClick={() => handleReminder(id, laundryHallId, hallName, dispatchAddReminder, reminded)}
-                              >
-                                <i className="far fa-bell" />
-                              </BellIcon>
-                            ) :
-                            (<></>)
-                        }
+                        {showBell ? (
+                          <BellIcon
+                            className="icon"
+                            onClick={() =>
+                              handleReminder(
+                                id,
+                                laundryHallId,
+                                hallName,
+                                dispatchAddReminder,
+                                reminded
+                              )
+                            }
+                          >
+                            <i className="far fa-bell" />
+                          </BellIcon>
+                        ) : (
+                          <></>
+                        )}
                       </td>
                     </tr>
                   )
@@ -137,8 +158,8 @@ const renderMachineAvailabilities = (
               )}
             </tbody>
           </Table>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </>
   )
 }
@@ -173,7 +194,7 @@ class LaundryVenue extends Component {
       dispatchAddFavorite,
       dispatchRemoveFavorite,
       dispatchAddReminder,
-      dispatchRemoveReminder
+      dispatchRemoveReminder,
     } = this.props
 
     // console.log(reminders)
@@ -215,41 +236,37 @@ class LaundryVenue extends Component {
               {isFavorited ? (
                 <span // eslint-disable-line
                   className="button"
-                  style={{ marginRight: '0.5rem' }}
                   onClick={() => dispatchRemoveFavorite(laundryHallId)}
                 >
                   Favorited
                 </span>
               ) : (
-                  <span // eslint-disable-line
-                    className="button"
-                    style={{ marginRight: '0.5rem' }}
-                    onClick={() =>
-                      dispatchAddFavorite(laundryHallId, location, hallName)
-                    }
-                  >
-                    Favorite
+                <span // eslint-disable-line
+                  className="button"
+                  onClick={() =>
+                    dispatchAddFavorite(laundryHallId, location, hallName)
+                  }
+                >
+                  Favorite
                 </span>
-                )}
-              {
-                reminders.length == 0 ? (<></>) :
-                  (
-                    <span // eslint-disable-line
-                      className="button"
-                      onClick={() => dispatchRemoveReminder()}
-                    >
-                      Remove Reminders
-                    </span>
-                  )
-              }
+              )}
+              {reminders.length == 0 ? null : (
+                <span // eslint-disable-line
+                  className="button"
+                  style={{ marginLeft: '0.5rem' }}
+                  onClick={() => dispatchRemoveReminder()}
+                >
+                  Remove Reminders
+                </span>
+              )}
             </Buttons>
 
             <h1 className="title">{hallName}</h1>
           </div>
         </div>
 
-        <div className="columns">
-          <div className="column is-6">
+        <Row margin={MARGIN}>
+          <Col md={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Washers</p>
               {renderMachineAvailabilities(
@@ -262,9 +279,9 @@ class LaundryVenue extends Component {
                 dispatchAddReminder
               )}
             </BorderedCard>
-          </div>
+          </Col>
 
-          <div className="column is-6">
+          <Col md={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Dryers</p>
               {renderMachineAvailabilities(
@@ -277,8 +294,8 @@ class LaundryVenue extends Component {
                 dispatchAddReminder
               )}
             </BorderedCard>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </Wrapper>
     )
   }
@@ -313,16 +330,27 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
-    reminders
+    reminders,
   } = laundry
+
+  let id
+  if (typeof laundryHallId === 'string') {
+    try {
+      id = parseInt(laundryHallId, 10)
+    } catch (e) {
+      id = null
+    }
+  } else {
+    id = laundryHallId
+  }
 
   return {
     laundryHallInfo,
     pending,
-    laundryHallId,
+    laundryHallId: id,
     laundryHalls,
     favorites,
-    reminders
+    reminders,
   }
 }
 
@@ -332,8 +360,9 @@ const mapDispatchToProps = dispatch => ({
   dispatchRemoveFavorite: laundryHallId =>
     dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
-  dispatchAddReminder: (machineID, hallID, hallName) => dispatch(addReminder(machineID, hallID, hallName)),
-  dispatchRemoveReminder: () => dispatch(removeReminder())
+  dispatchAddReminder: (machineID, hallID, hallName) =>
+    dispatch(addReminder(machineID, hallID, hallName)),
+  dispatchRemoveReminder: () => dispatch(removeReminder()),
 })
 
 export default connect(
