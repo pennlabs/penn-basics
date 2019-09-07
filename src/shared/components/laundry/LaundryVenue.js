@@ -18,8 +18,9 @@ import {
   addFavorite,
   removeFavorite,
   getLaundryHall,
+  getReminders,
   addReminder,
-  removeReminder,
+  removeReminder
 } from '../../actions/laundry_actions'
 
 const Wrapper = s.div`
@@ -44,22 +45,35 @@ const BellIcon = s.span`
   margin-top: -0.2rem;
 `
 
+const handleReminder = (machineID, hallID, hallName, reminders, dispatchAddReminder) => {
+  const reminded = reminders.some(reminder => reminder.machineID == machineID && reminder.hallID == hallID)
+  if (!reminded) {
+    dispatchAddReminder(machineID, hallID, hallName)
+  }
+}
+
 const renderMachineAvailabilities = (
   machineData,
   machineType,
   allMachines,
   laundryHallId,
-  hallName
+  hallName,
+  reminders,
+  dispatchAddReminder
 ) => {
-  const tableMachines = allMachines.filter(
-    machine => machine.type === machineType
-  )
+  const tableMachines = allMachines.filter(machine => machine.type === machineType)
   const {
     open = 0,
     running = 0,
     out_of_order: outOfOrder = 0,
     offline = 0,
   } = machineData
+
+  navigator.serviceWorker.ready.then(registration => {
+    registration.getNotifications().then(notifications => {
+      console.log(notifications)
+    })
+  })
 
   return (
     <>
@@ -104,7 +118,7 @@ const renderMachineAvailabilities = (
                     <td>
                       <BellIcon
                         className="icon"
-                        onClick={() => addReminder(id, laundryHallId, hallName)}
+                        onClick={() => handleReminder(id, laundryHallId, hallName, reminders, dispatchAddReminder)}
                       >
                         <i className="far fa-bell" />
                       </BellIcon>
@@ -124,11 +138,13 @@ class LaundryVenue extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatchGetLaundryHall, hallURLId } = this.props
+    const { dispatchGetLaundryHall, hallURLId, dispatchGetReminders } = this.props
 
     if (hallURLId) {
       dispatchGetLaundryHall(hallURLId)
     }
+
+    dispatchGetReminders()
   }
 
   componentWillUpdate(newProps) {
@@ -146,9 +162,14 @@ class LaundryVenue extends Component {
       pending,
       favorites,
       laundryHallId,
+      reminders,
       dispatchAddFavorite,
       dispatchRemoveFavorite,
+      dispatchAddReminder,
+      dispatchRemoveReminder
     } = this.props
+
+    console.log(reminders)
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
@@ -193,22 +214,27 @@ class LaundryVenue extends Component {
                   Favorited
                 </span>
               ) : (
-                <span // eslint-disable-line
-                  className="button"
-                  style={{ marginRight: '0.5rem' }}
-                  onClick={() =>
-                    dispatchAddFavorite(laundryHallId, location, hallName)
-                  }
-                >
-                  Favorite
+                  <span // eslint-disable-line
+                    className="button"
+                    style={{ marginRight: '0.5rem' }}
+                    onClick={() =>
+                      dispatchAddFavorite(laundryHallId, location, hallName)
+                    }
+                  >
+                    Favorite
                 </span>
-              )}
-              <span // eslint-disable-line
-                className="button"
-                onClick={() => removeReminder()}
-              >
-                Remove Reminders
-              </span>
+                )}
+              {
+                reminders.length == 0 ? (<></>) :
+                  (
+                    <span // eslint-disable-line
+                      className="button"
+                      onClick={() => dispatchRemoveReminder()}
+                    >
+                      Remove Reminders
+                    </span>
+                  )
+              }
             </Buttons>
 
             <h1 className="title">{hallName}</h1>
@@ -224,7 +250,9 @@ class LaundryVenue extends Component {
                 'washer',
                 machines,
                 laundryHallId,
-                hallName
+                hallName,
+                reminders,
+                dispatchAddReminder
               )}
             </BorderedCard>
           </div>
@@ -237,7 +265,9 @@ class LaundryVenue extends Component {
                 'dryer',
                 machines,
                 laundryHallId,
-                hallName
+                hallName,
+                reminders,
+                dispatchAddReminder
               )}
             </BorderedCard>
           </div>
@@ -260,8 +290,8 @@ LaundryVenue.propTypes = {
     location: PropTypes.string,
     machines: PropTypes.object,
   }),
-  laundryHallId: PropTypes.number,
-  hallURLId: PropTypes.number,
+  laundryHallId: PropTypes.string,
+  hallURLId: PropTypes.string,
   pending: PropTypes.bool,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
@@ -276,19 +306,16 @@ const mapStateToProps = ({ laundry }) => {
     laundryHallId,
     laundryHalls,
     favorites,
+    reminders
   } = laundry
-
-  const id =
-    typeof laundryHallId === 'string'
-      ? parseInt(laundryHallId, 10)
-      : laundryHallId
 
   return {
     laundryHallInfo,
     pending,
-    laundryHallId: id,
+    laundryHallId,
     laundryHalls,
     favorites,
+    reminders
   }
 }
 
@@ -298,6 +325,9 @@ const mapDispatchToProps = dispatch => ({
   dispatchRemoveFavorite: laundryHallId =>
     dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+  dispatchGetReminders: () => dispatch(getReminders()),
+  dispatchAddReminder: (machineID, hallID, hallName) => dispatch(addReminder(machineID, hallID, hallName)),
+  dispatchRemoveReminder: () => dispatch(removeReminder())
 })
 
 export default connect(

@@ -1,6 +1,7 @@
 /* globals localStorage */
 import axios from 'axios'
 import _ from 'lodash'
+import uuidv4 from 'uuid/v4'
 
 import {
   getLaundryHallsDataRequested,
@@ -10,7 +11,8 @@ import {
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
   updateFavorites,
-  getFavoritesHome
+  getFavoritesHome,
+  updateReminders
 } from './action_types';
 
 const publicVapidKey = "BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8";
@@ -201,7 +203,7 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray;
 }
 
-export const addReminder = (machineID, hallID, hallName) => {
+export const getReminders = () => {
   if (!('serviceWorker' in navigator)) {
     throw new Error('No Service Worker support!')
   }
@@ -213,41 +215,118 @@ export const addReminder = (machineID, hallID, hallName) => {
     if (permission !== 'granted') {
       throw new Error('permission not granted for notification');
     }
-  });
+  })
 
-  try {
-    navigator.serviceWorker.register('/sw.js');
+  // TODO: clear the notifications list once in a while
+  // navigator.serviceWorker.getRegistrations().then(registrations => {
+  //   registrations.forEach(registration => {
+  //     registration.unregister().then(successful => {
+  //       if (successful){
 
-    navigator.serviceWorker.ready.then(registration => {
-      // const response = await fetch('/api/laundry/vapidPublicKey');
-      // const vapidPublicKey = await response.text();
+  //       }
+  //     })
+  //   })
+  // })
 
-      return registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-        applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+  navigator.serviceWorker.register('/sw.js')
+
+  return (dispatch) => {
+    let reminders = localStorage.getItem('laundry_reminders')
+    if (reminders) {
+      reminders = JSON.parse(reminders)
+      console.log('----reminders----')
+      console.log(reminders)
+      let newReminders = []
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        console.log(registrations)
+      })
+      navigator.serviceWorker.ready.then(registration => {
+        registration.getNotifications().then(notifications => {
+          console.log("---notifications----")
+          console.log(notifications)
+          reminders.forEach(reminder => {
+            const notified = notifications.some(notification =>
+              notification.data.machineID == reminder.machineID &&
+              notification.data.hallID == reminder.hallID &&
+              notification.data.reminderID == reminder.reminderID
+            )
+            console.log(notified)
+            if (!notified) {
+              newReminders.push(reminder)
+            }
+          })
+          localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
+          dispatch({
+            type: updateReminders,
+            reminders: newReminders
+          })
+        })
+      })
+    } else {
+      localStorage.setItem('laundry_reminders', JSON.stringify([]))
+      dispatch({
+        type: updateReminders,
+        reminders: [],
       });
-    }).then(async subscription => {
-      let axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
-      let { data } = axiosResponse;
-      const machine = data.machines.details.filter(detail => detail.id == machineID)
-      const time_remaining = machine[0].time_remaining
+    }
+  }
+}
 
-      axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, time_remaining, hallName })
-    })
-  } catch (err) {
-    console.log(`Error: ${err}`)
+export const addReminder = (machineID, hallID, hallName) => {
+  return (dispatch) => {
+    try {
+      navigator.serviceWorker.ready.then(registration => {
+        // const response = await fetch('/api/laundry/vapidPublicKey');
+        // const vapidPublicKey = await response.text();
+
+        return registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+          applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+        });
+      }).then(async subscription => {
+        let reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+        const reminderID = uuidv4()
+        reminders.push({ machineID, hallID, reminderID })
+        dispatch({
+          type: updateReminders,
+          reminders
+        })
+        localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+
+        const axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, machineID, hallID, hallName, reminderID })
+
+        if (!axiosResponse.data.error) {
+          reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+          reminders = reminders.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID)
+          dispatch({
+            type: updateReminders,
+            reminders
+          })
+          localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+        }
+      })
+    } catch (err) {
+      console.log(`Error: ${err}`)
+    }
   }
 }
 
 export const removeReminder = () => {
-  navigator.serviceWorker.ready.then(registration => {
-    return registration.pushManager.getSubscription();
-  }).then(subscription => {
-    subscription.unsubscribe().then(async successful => {
-      if (successful) {
-        console.log("----Service Worker: Unsubscription successful----");
-      }
+  return (dispatch) => {
+    navigator.serviceWorker.ready.then(registration => {
+      return registration.pushManager.getSubscription()
+    }).then(subscription => {
+      subscription.unsubscribe().then(async successful => {
+        if (successful) {
+          dispatch({
+            type: updateReminders,
+            reminders: []
+          })
+          localStorage.setItem('laundry_reminders', JSON.stringify([]))
+          console.log("----Service Worker: Unsubscription successful----")
+        }
+      })
     })
-  })
+  }
 }

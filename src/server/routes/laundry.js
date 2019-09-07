@@ -1,16 +1,23 @@
 const router = require('express').Router();
 const webpush = require('web-push');
+const axios = require('axios');
 
 module.exports = function laundryRouter() {
-    router.post('/addReminder', (req, res) => {
-        let { subscription, time_remaining, hallName } = req.body;
+    router.post('/addReminder', async (req, res) => {
+        let { subscription, machineID, hallID, hallName, reminderID } = req.body;
 
-        time_remaining = 5000
-        // time_remaining = Number(time_remaining) * 60 * 1000
+        const BASE = 'http://api.pennlabs.org';
+        const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`);
+        const { data } = axiosResponse;
+        const machine = data.machines.details.filter(detail => detail.id == machineID);
+        let time_remaining = machine[0].time_remaining;
+
+        // time_remaining = 5000
+        time_remaining = time_remaining !== 0 ? Number(time_remaining) * 60 * 1000 : 20000;
 
         setTimeout(async () => {
             try {
-                await webpush.sendNotification(subscription, JSON.stringify({hallName}));
+                await webpush.sendNotification(subscription, JSON.stringify({ machineID, hallID, hallName, reminderID }));
                 res.status(200).json({})
                 console.log("----Web Push: notification pushed----");
             } catch (err) {
