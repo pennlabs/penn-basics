@@ -8,13 +8,10 @@ import venueData from './content/venueData'
 import { getDiningData, getVenueInfo } from '../../actions/index'
 
 import Nav from './Nav'
-import DiningQuery from './DiningQuery'
 import DiningOverview from './DiningOverview'
-import DiningMenu from './DiningMenu'
 import ErrorMessage from '../shared/ErrorMessage'
 import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
-import { retailLocations } from './constants'
 
 const NAV_HEIGHT = '57px'
 
@@ -30,13 +27,12 @@ class DiningVenue extends Component {
     const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
     // Pull meal data and hours data for the venue
-    const venueId = match.params.id
-    
+    const { id: venueId } = match.params
+
     if (venueId) {
       getDiningDataDispatch(venueId)
       getVenueInfoDispatch(venueId)
     }
-
 
     this.checkForErrors = this.checkForErrors.bind(this)
     this.renderError = this.renderError.bind(this)
@@ -45,8 +41,8 @@ class DiningVenue extends Component {
   componentDidUpdate(prevProps) {
     const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
-    const previousVenueId = prevProps.match.params.id
-    const currentVenueId = match.params.id
+    const { id: previousVenueId } = prevProps.match.params
+    const { id: currentVenueId } = match.params
 
     if (previousVenueId !== currentVenueId) {
       getDiningDataDispatch(currentVenueId)
@@ -145,21 +141,6 @@ class DiningVenue extends Component {
 
     const { name } = venueData[id]
 
-    if (retailLocations.includes(id)) {
-      return (
-        // If there is no error and the data is not pending
-        <Nav>
-          <Wrapper>
-            {/* Render the title of the dining page */}
-            <h1 className="title">{name}</h1>
-
-            {/* Render the overview card at the top of the dining view */}
-            <DiningOverview id={id} />
-          </Wrapper>
-        </Nav>
-      )
-    }
-
     return (
       // If there is no error and the data is not pending
       <Nav>
@@ -167,17 +148,10 @@ class DiningVenue extends Component {
           {/* Render the title of the dining page */}
           <h1 className="title">{name}</h1>
 
-          {/* Render an error if there is one */}
           {this.renderError()}
 
           {/* Render the overview card at the top of the dining view */}
           <DiningOverview id={id} />
-
-          {/* Render dropdowns for selecting dates and meals */}
-          <DiningQuery />
-
-          {/* Render dining menu for the selected date and meal */}
-          <DiningMenu />
         </Wrapper>
       </Nav>
     )

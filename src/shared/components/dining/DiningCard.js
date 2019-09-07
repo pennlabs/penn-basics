@@ -5,15 +5,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 
-import {
-  Row,
-  Col,
-  Card,
-  Subtitle,
-  Subtext,
-  Line,
-  Circle,
-} from '../shared'
+import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
 const StyledLink = s(Link)`
@@ -29,12 +21,12 @@ const Content = s.div`
 `
 
 // TODO export this to helper methods
-const convertDate = (time) => {
-  const hour = time.substring(0, time.indexOf(':'));
-  const minute = time.substring(time.indexOf(':') + 1);
+const convertDate = time => {
+  const hour = time.substring(0, time.indexOf(':'))
+  const minute = time.substring(time.indexOf(':') + 1)
 
   if (hour === '12') {
-    return `12:${minute}pm`;
+    return `12:${minute}pm`
   }
 
   if (hour >= 13) return `${hour - 12}:${minute}pm`
@@ -56,75 +48,85 @@ class DiningCard extends Component {
     this.state = { hours: [] }
 
     // TODO move this to redux
-    axios.post('/api/dining/venue_info/', {
-      venueId,
-      startDate,
-      endDate,
-    })
-      .then((res) => {
+    axios
+      .post('/api/dining/venue_info/', {
+        venueId,
+        startDate,
+        endDate,
+      })
+      .then(res => {
         const { hours } = res.data
         this.setState({ hours })
       })
       .catch(() => {
         this.setState({ hours: [] })
-      });
+      })
   }
 
   renderSubtext() {
-    const { hours: venueHours } = this.state;
+    const { hours: venueHours } = this.state
 
     // get the array of hours that are opened today
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
-    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
-    const openHours = venueHours.filter(hour => hour.date.substring(0, hour.date.indexOf('T')) === `${year}-${month}-${day}`);
+    const date = new Date()
+    const year = date.getFullYear()
+    const month =
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+    const openHours = venueHours.filter(
+      hour =>
+        hour.date.substring(0, hour.date.indexOf('T')) ===
+        `${year}-${month}-${day}`
+    )
 
     if (openHours.length === 0) {
       return (
         <>
-          <Subtext marginBottom="0">
-            Closed
-          </Subtext>
+          <Subtext marginBottom="0">Closed</Subtext>
           <Circle open={false} />
         </>
       )
     }
 
     // get the array of hours that are opened right now
-    const currentHours = openHours.filter((hour) => {
-      const open = new Date(`${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.open}`);
-      const close = new Date(`${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.close}`);
-      return date >= open && date <= close;
+    const currentHours = openHours.filter(hour => {
+      const open = new Date(
+        `${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.open}`
+      )
+      const close = new Date(
+        `${hour.date.substring(0, hour.date.indexOf('T'))}T${hour.close}`
+      )
+      return date >= open && date <= close
     })
 
     if (currentHours.length === 0) {
       return (
         <>
-          <Subtext marginBottom="0">
-            Closed
-          </Subtext>
+          <Subtext marginBottom="0">Closed</Subtext>
           <Circle open={false} />
         </>
       )
     }
 
-    const displayHours = [];
-    currentHours.forEach((hour) => {
-      const openHour = convertDate(hour.open.substring(0, hour.open.lastIndexOf(':')));
-      const closeHour = convertDate(hour.close.substring(0, hour.close.lastIndexOf(':')));
-      const { type } = hour;
-      displayHours.push({ openHour, closeHour, type });
+    const displayHours = []
+    currentHours.forEach(hour => {
+      const openHour = convertDate(
+        hour.open.substring(0, hour.open.lastIndexOf(':'))
+      )
+      const closeHour = convertDate(
+        hour.close.substring(0, hour.close.lastIndexOf(':'))
+      )
+      const { type } = hour
+      displayHours.push({ openHour, closeHour, type })
     })
 
     return (
       <>
         <Subtext marginBottom="0">
-          {displayHours.map((hour, index) => (
-            <>
-              {`Open: ${hour.openHour} - ${hour.closeHour} • ${hour.type}`}
+          {displayHours.map(({ openHour, closeHour, type }, index) => (
+            <span key={`${openHour}-${closeHour}-${type}-${index}`}>
+              {`Open: ${openHour} - ${closeHour} • ${type}`}
               {index === displayHours.length - 1 ? null : <br />}
-            </>
+            </span>
           ))}
         </Subtext>
         <Circle open />
@@ -133,13 +135,13 @@ class DiningCard extends Component {
   }
 
   render() {
-    const { venueId, name, image } = this.props;
+    const { venueId, name, image } = this.props
 
     // Images are served through the public folder
-    const img = `/img/venue_images/${image}`;
+    const img = `/img/venue_images/${image}`
 
     return (
-      <StyledLink to={`/dining/${venueId}`} venueId={venueId}>
+      <StyledLink to={`/dining/${venueId}`}>
         <Card padding="0.5rem 1rem" hoverable>
           <Row>
             {image && (
@@ -147,9 +149,7 @@ class DiningCard extends Component {
             )}
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
-                <Subtitle marginBottom="0">
-                  {name}
-                </Subtitle>
+                <Subtitle marginBottom="0">{name}</Subtitle>
 
                 {this.renderSubtext()}
               </Content>
@@ -158,15 +158,13 @@ class DiningCard extends Component {
         </Card>
         <Line />
       </StyledLink>
-    );
+    )
   }
 }
-
 
 DiningCard.defaultProps = {
   image: null,
 }
-
 
 DiningCard.propTypes = {
   image: PropTypes.string,
@@ -174,5 +172,4 @@ DiningCard.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-
-export default DiningCard;
+export default DiningCard

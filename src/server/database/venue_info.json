@@ -42,7 +42,8 @@
     "description": "Houston Market is home to a wide vareity of food vendors in the basement floor of Penn's historic Houston Hall. Check out this newly-renovated, brightly-lit space for sushi, salad, burgers, and coffee alike.",
     "address": "3417 Spruce Street Philadelphia PA, 19104",
     "name": "Houston Market",
-    "pennDiningSlug": "houston-market"
+    "pennDiningSlug": "houston-market",
+    "isRetail": true
   },
   "640": {
     "lat": 39.952724,
@@ -89,15 +90,6 @@
     "name": "1920 Gourmet Grocer",
     "pennDiningSlug": "1920-gourmet-grocer"
   },
-  "1058": {
-    "lat": 39.952249,
-    "lng": -75.195214,
-    "image": "frontera.jpg",
-    "description": "Tortas Frontera by Chef Rick Bayless combines high-quality ingredients from top local providers with recipes based on the diverse fare found in Mexico. We are excited to offer hand-crafted Mexican delicacies including tortas, fresh guacamole, molletes (warm Mexican flatbread), soups and cazuelas (Mexican meals in a bowl), salads, special seasonal dishes. Read Full Menu.",
-    "address": "3601 Locust Walk, Philadelphia, PA 19104",
-    "name": "Tortas Frontera at the ARCH",
-    "pennDiningSlug": ""
-  },
   "1163": {
     "lat": 39.951904,
     "lng": -75.199497,
@@ -105,7 +97,8 @@
     "description": "Starbucks is located on the lower level of 1920 Commons and features an expanded food and drink menu, extended hours until 2 am most nights, and a large study and gathering space.",
     "address": "3800 Locust Walk, Philadelphia, PA 19104",
     "name": "1920 Starbucks",
-    "pennDiningSlug": "1920-starbucks"
+    "pennDiningSlug": "1920-starbucks",
+    "isRetail": true
   },
   "1442": {
     "lat": 39.953691,
@@ -123,7 +116,8 @@
     "description": "The first signature residential building on Penn's campus specifically designed and built to maximize the College House experience. The dining program in the Lauder House will be a hybrid of an ‘à la carte menu' on the retail side and an All-You-Care-To-Eat café for breakfast, lunch, and dinner with an option for family style dining.",
     "address": "3335 Woodland Walk, Philadelphia, PA 19104",
     "name": "LCH Retail",
-    "pennDiningSlug": "lch-retail"
+    "pennDiningSlug": "lch-retail",
+    "isRetail": true
   },
   "1732": {
     "lat": 39.952911,
@@ -132,7 +126,8 @@
     "description": "Cafe with limited hours located on the second floor of John M. Huntsman Hall near Walnut Street.",
     "address": "3730 Walnut St Philadelphia, PA 19104",
     "name": "Pret a Manger, MBA Cafe",
-    "pennDiningSlug": "pret-a-manger-upper"
+    "pennDiningSlug": "pret-a-manger-upper",
+    "isRetail": true
   },
   "1733": {
     "lat": 39.952911,
@@ -141,6 +136,7 @@
     "description": "Bustling cafe located adjacent to the entry to Huntsman Hall on Locust. Drop in for grab-and-go soup, sandwich, omlete, and baked goods to go along with your coffee or tea.",
     "address": "3730 Walnut St Philadelphia, PA 19104",
     "name": "Pret a Manger, Locust Walk",
-    "pennDiningSlug": "pret-a-manger-lower"
+    "pennDiningSlug": "pret-a-manger-lower",
+    "isRetail": true
   }
 }
