@@ -71,7 +71,8 @@
     "description": "Joe’s Café is on the ground floor of Wharton’s Steinberg-Dietrich Hall. Stop by in the morning and enjoy a fresh breakfast sandwich and cup of locally roasted One Village coffee (be sure to taste the specially roasted Wharton blend!); or visit at lunch and enjoy a \"Joe’s Plate\" as our daily special – always $6 every day! During the warmer months, stop by at lunch for the weekly Wednesday outdoor barbeques.",
     "address": "3620 Locust Walk Philadelphia, PA 19104",
     "name": "Joe's Café",
-    "pennDiningSlug": "joes-cafe"
+    "pennDiningSlug": "joes-cafe",
+    "isRetail": true
   },
   "747": {
     "lat": 39.95041,

@@ -90,7 +90,7 @@ class DiningCard extends Component {
         <Subtext marginBottom="0">
           {openHours.map(({ starttime, endtime, label }, index) => (
             <span key={`${starttime}-${endtime}-${label}`}>
-              {`Open: ${convertDate(starttime)} - ${convertDate(endtime)}${
+              {`${convertDate(starttime)} - ${convertDate(endtime)}${
                 showMealLabels ? ` • ${label}` : ''
               }`}
               {index === openHours.length - 1 ? null : <br />}

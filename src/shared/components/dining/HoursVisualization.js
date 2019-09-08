@@ -39,11 +39,12 @@ const convertDate = time => {
     return minute == 0 ? '12pm' : `12:${minute}pm`
   }
 
-  if (hour >= 13) return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
+  if (hour >= 13)
+    return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
   return minute == 0 ? `${hour}am` : `${hour}:${minute}am`
 }
 
-const pad = (number) => {
+const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
 
@@ -110,7 +111,7 @@ class HoursVisualization extends Component {
         <tbody>
           {venueHours.map((venueHour, idx) => {
             let meals = venueHour.dayparts
-            meals.sort((a, b) => (a.starttime > b.starttime) ? 1 : -1)
+            meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
             return (
               <React.Fragment key={`${venueHour.date}-${idx}`}>
                 <HeaderRow>
@@ -119,19 +120,30 @@ class HoursVisualization extends Component {
                   <th>{idx === 0 && 'From'}</th>
                   <th>{idx === 0 && 'To'}</th>
                 </HeaderRow>
-                {meals.map(meal => (
-                  <BodyRow
-                    key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
-                    className={
-                      this.isRightNow(meal, venueHour.date) && 'selected'
-                    }
-                  >
+                {meals.length ? (
+                  meals.map(meal => (
+                    <BodyRow
+                      key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
+                      className={
+                        this.isRightNow(meal, venueHour.date) && 'selected'
+                      }
+                    >
+                      <td style={{ width: '12rem' }} />
+                      <td>{meal.label}</td>
+                      <td>{convertDate(meal.starttime)}</td>
+                      <td>{convertDate(meal.endtime)}</td>
+                    </BodyRow>
+                  ))
+                ) : (
+                  <BodyRow>
                     <td style={{ width: '12rem' }} />
-                    <td>{meal.label}</td>
-                    <td>{convertDate(meal.starttime)}</td>
-                    <td>{convertDate(meal.endtime)}</td>
+                    <td>
+                      <i>Closed</i>
+                    </td>
+                    <td />
+                    <td />
                   </BodyRow>
-                ))}
+                )}
               </React.Fragment>
             )
           })}
