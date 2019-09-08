@@ -13,19 +13,17 @@ import {
 } from '../../styles/colors'
 import { Row, LaundryOverview } from '../shared'
 
-
 import { BorderedCard } from '../shared'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
 
-
 class Laundry extends Component {
   componentDidMount() {
-    const { dispatchGetFavoritesHomePage } = this.props;
-    dispatchGetFavoritesHomePage();
+    const { dispatchGetFavoritesHomePage } = this.props
+    dispatchGetFavoritesHomePage()
   }
 
   renderFavorites() {
-    const { favoritesHome } = this.props;
+    const { favoritesHome } = this.props
 
     if (favoritesHome.length === 0) {
       return (
@@ -85,11 +83,10 @@ class Laundry extends Component {
           <Link to="/laundry" className="link">
             <h1 className="title is-4">Laundry</h1>
           </Link>
-          <h3 className="subtitle is-6">Displaying the first three favorites only</h3>
+          <h3 className="subtitle is-6">Status of favorite halls</h3>
           <br />
         </article>
         {this.renderFavorites()}
-
       </BorderedCard>
     )
   }
@@ -104,7 +101,6 @@ Laundry.propTypes = {
   dispatchGetFavoritesHomePage: PropTypes.func.isRequired,
 }
 
-
 const mapStateToProps = ({ laundry }) => {
   const { favoritesHome } = laundry
   return {
@@ -112,10 +108,11 @@ const mapStateToProps = ({ laundry }) => {
   }
 }
 
-
 const mapDispatchToProps = dispatch => ({
   dispatchGetFavoritesHomePage: () => dispatch(getFavoritesHomePage()),
 })
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Laundry);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Laundry)

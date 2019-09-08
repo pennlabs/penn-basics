@@ -91,13 +91,13 @@ class Home extends Component {
       <Wrapper>
         {show && <Notification show={this.close} text={notification} />}
 
-        <Filter />
-
         <Row>
           <Col width="70%">{this.renderComponents()}</Col>
           <ColSpace />
           <Col>
             <ExternalLinks />
+
+            <Filter />
           </Col>
         </Row>
 

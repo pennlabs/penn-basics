@@ -84,12 +84,6 @@ class HoursVisualization extends Component {
 
     const today = this.getDay(dateObj)
 
-    // console.log(today)
-    // console.log(date)
-    // console.log(starttime)
-    // console.log(currTime)
-    // console.log(endtime)
-
     return today == date && starttime <= currTime && currTime <= endtime
   }
 
