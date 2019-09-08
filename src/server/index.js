@@ -11,7 +11,6 @@ const newsRouter = require('./routes/news')
 const laundryRouter = require('./routes/laundry')
 
 const DB = require('./database/db')
-const seedDining = require('./database/seedDiningInfo')
 
 const quotes = require('./database/homepage_quotes')
 
@@ -49,17 +48,6 @@ app.use((req, res, next) => {
   } else {
     next()
   }
-})
-
-// If it is a new day since the previous request, seed new dining data
-let lastSeededTimestamp
-app.use('/', (req, res, next) => {
-  const now = new Date()
-  if (!lastSeededTimestamp || lastSeededTimestamp.getDate() !== now.getDate()) {
-    seedDining.fullSeed()
-    lastSeededTimestamp = now
-  }
-  next()
 })
 
 app.use('/api/spaces', spacesRouter(DB))

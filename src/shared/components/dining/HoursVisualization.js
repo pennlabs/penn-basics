@@ -33,6 +33,19 @@ const BodyRow = s.tr`
     }
   }
 `
+
+const convertDate = time => {
+  const hour = parseInt(time.substring(0, time.indexOf(':')))
+  const minute = parseInt(time.substring(time.indexOf(':') + 1))
+
+  if (hour == 12) {
+    return minute == 0 ? '12pm' : `12:${minute}pm`
+  }
+
+  if (hour >= 13) return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
+  return minute == 0 ? `${hour}am` : `${hour}:${minute}am`
+}
+
 const pad = (number) => {
   return number < 10 ? `0${number}` : `${number}`
 }
@@ -109,8 +122,8 @@ class HoursVisualization extends Component {
                   >
                     <td style={{ width: '12rem' }} />
                     <td>{meal.label}</td>
-                    <td>{meal.starttime}</td>
-                    <td>{meal.endtime}</td>
+                    <td>{convertDate(meal.starttime)}</td>
+                    <td>{convertDate(meal.endtime)}</td>
                   </BodyRow>
                 ))}
               </>
