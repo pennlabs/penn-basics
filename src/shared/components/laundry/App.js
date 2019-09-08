@@ -15,7 +15,6 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import Favorites from './Favorites'
-import { callbackify } from 'util'
 
 class App extends Component {
   constructor(props) {

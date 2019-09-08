@@ -48,6 +48,10 @@ const BellIcon = s.span`
   }
 `
 
+const FavoriteIcon = s.i`
+  opacity: 0.75;
+`
+
 const handleReminder = (
   machineID,
   hallID,
@@ -227,10 +231,10 @@ class LaundryVenue extends Component {
           <Buttons>
             {isFavorited ? (
               <span // eslint-disable-line
-                className="button"
+                className="button is-info"
                 onClick={() => dispatchRemoveFavorite(laundryHallId)}
               >
-                Favorited
+                <FavoriteIcon className="fa fa-heart" /> &nbsp; Favorited
               </span>
             ) : (
               <span // eslint-disable-line
@@ -239,7 +243,7 @@ class LaundryVenue extends Component {
                   dispatchAddFavorite(laundryHallId, location, hallName)
                 }
               >
-                Favorite
+                <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
               </span>
             )}
             {reminders.length == 0 ? null : (

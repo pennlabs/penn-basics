@@ -13,6 +13,7 @@ import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
 import Mobile from './mobile/App'
+import Feedback from './shared/Feedback'
 
 const App = s.div`
   a {
@@ -39,6 +40,7 @@ export default () => (
 
     <BrowserView>
       <Nav />
+      <Feedback />
       <div id="wrapper">
         <div id="app">
           <Switch>
