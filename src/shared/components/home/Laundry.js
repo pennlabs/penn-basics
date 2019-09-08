@@ -3,6 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
+import {
+  GREEN,
+  MUSTARD,
+  MEDIUM_GRAY,
+  FOCUS_GRAY,
+  LIGHT_GREEN,
+  LIGHT_YELLOW,
+} from '../../styles/colors'
+import { Row, LaundryOverview } from '../shared'
 
 
 import { BorderedCard } from '../shared'
@@ -28,49 +37,42 @@ class Laundry extends Component {
 
     return (
       favoritesHome.map((favorite, index) => {
+        const {
+          open = 0,
+          running = 0,
+          out_of_order: outOfOrder = 0,
+          offline = 0,
+        } = favorite.machines.washers
+
         return (
-          <div className="columns" key={uuid()}>
+          <>
             <div className="column">
               <h1 className="title is-6">
                 {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`}
               </h1>
             </div>
-            <div className="column is-4">
-              <h1 className="subtitle is-4">
-                Washers Availability
-                </h1>
-              <h1 className="subtitle is-6">
-                Available:
-                  {favorite.machines.washers.open}
-              </h1>
-              <h1 className="subtitle is-6">
-                Busy:
-                  {favorite.machines.washers.running}
-              </h1>
-              <h1 className="subtitle is-6">
-                Out of Order:
-                  {favorite.machines.washers.out_of_order}
-              </h1>
+            <div className="columns" key={uuid()}>
+              <Row justifyContent="space-between">
+                {[
+                  [open, 'Available', GREEN, LIGHT_GREEN],
+                  [running, 'Busy', MUSTARD, LIGHT_YELLOW],
+                  [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
+                ].map(([number, title, color, background]) => (
+                  <LaundryOverview
+                    width="30%"
+                    key={title}
+                    color={color}
+                    background={background}
+                  >
+                    <h1>{number}</h1>
+                    <p>{title}</p>
+                  </LaundryOverview>
+                ))}
+              </Row>
+
+              {index === favoritesHome.length - 1 ? null : <hr />}
             </div>
-            <div className="column is-5">
-              <h1 className="subtitle is-4">
-                Dryers Availability
-                </h1>
-              <h1 className="subtitle is-6">
-                Available:
-                  {favorite.machines.dryers.open}
-              </h1>
-              <h1 className="subtitle is-6">
-                Busy:
-                  {favorite.machines.dryers.running}
-              </h1>
-              <h1 className="subtitle is-6">
-                Out of Order:
-                  {favorite.machines.dryers.out_of_order}
-              </h1>
-            </div>
-            {index === favoritesHome.length - 1 ? null : <hr />}
-          </div>
+          </>
         )
       })
     )
