@@ -34,7 +34,7 @@ const convertDate = time => {
   return `${hour}:${minute}am`
 }
 
-const pad = (number) => {
+const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
 
@@ -46,7 +46,8 @@ class DiningCard extends Component {
     this.state = { venueHours: [] }
 
     if (venueId) {
-      axios.get(`https://api.pennlabs.org/dining/hours/${venueId}`)
+      axios
+        .get(`https://api.pennlabs.org/dining/hours/${venueId}`)
         .then(response => {
           let venueHours = response.data.cafes[venueId].days
           let currDate = moment().format()
@@ -65,11 +66,11 @@ class DiningCard extends Component {
   }
 
   renderSubtext() {
-    const { venueHours } = this.state;
+    const { venueHours } = this.state
 
     // get the array of hours that are opened today
-    const date = new Date();
-    const currTime = pad(date.getHours()) + ":" + pad(date.getMinutes())
+    const date = new Date()
+    const currTime = pad(date.getHours()) + ':' + pad(date.getMinutes())
     const openHours = venueHours.filter(hour => {
       return hour.starttime <= currTime && currTime <= hour.endtime
     })
@@ -86,11 +87,11 @@ class DiningCard extends Component {
     return (
       <>
         <Subtext marginBottom="0">
-          {openHours.map((hour, index) => (
-            <>
-              {`Open: ${hour.starttime} - ${hour.endtime} • ${hour.label}`}
+          {openHours.map(({ starttime, endtime, label }, index) => (
+            <span key={`${starttime}-${endtime}-${label}`}>
+              {`Open: ${starttime} - ${endtime} • ${label}`}
               {index === openHours.length - 1 ? null : <br />}
-            </>
+            </span>
           ))}
         </Subtext>
         <Circle open />
@@ -105,7 +106,7 @@ class DiningCard extends Component {
     const img = `/img/venue_images/${image}`
 
     return (
-      <StyledLink to={`/dining/${venueId}`} venueId={venueId}>
+      <StyledLink to={`/dining/${venueId}`}>
         <Card padding="0.5rem 1rem" hoverable key={venueId}>
           <Row>
             {image && (

@@ -2,18 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
-import uuid from 'uuid'
 import moment from 'moment'
 
 import ErrorMessage from '../shared/ErrorMessage'
 import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
 
-
 const HeaderRow = s.tr`
   background: transparent !important;
   border-bottom: 3px solid ${BORDER};
 `
-
 
 const BodyRow = s.tr`
   border-bottom: 0;
@@ -33,7 +30,7 @@ const BodyRow = s.tr`
     }
   }
 `
-const pad = (number) => {
+const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
 
@@ -43,7 +40,15 @@ class HoursVisualization extends Component {
   }
 
   getDay(date) {
-    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const week = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
     const obj = moment(date)
     const dayNum = obj.day()
     const today = moment().day()
@@ -54,15 +59,14 @@ class HoursVisualization extends Component {
     return week[dayNum]
   }
 
-
   isRightNow(meal, date) {
     if (!meal) {
       return false
     }
 
     const { starttime, endtime } = meal
-    const dateObj = new Date();
-    const currTime = pad(dateObj.getHours()) + ":" + pad(dateObj.getMinutes())
+    const dateObj = new Date()
+    const currTime = pad(dateObj.getHours()) + ':' + pad(dateObj.getMinutes())
 
     const today = this.getDay(dateObj)
 
@@ -74,7 +78,6 @@ class HoursVisualization extends Component {
 
     return today == date && starttime <= currTime && currTime <= endtime
   }
-
 
   renderList() {
     const { venueHours } = this.props
@@ -95,8 +98,8 @@ class HoursVisualization extends Component {
           {venueHours.map((venueHour, idx) => {
             const meals = venueHour.dayparts
             return (
-              <>
-                <HeaderRow key={uuid()}>
+              <React.Fragment key={`${venueHour.date}-${idx}`}>
+                <HeaderRow>
                   <th style={{ width: '12rem' }}>{venueHour.date}</th>
                   <th>{idx === 0 && 'Meal'}</th>
                   <th>{idx === 0 && 'From'}</th>
@@ -104,8 +107,10 @@ class HoursVisualization extends Component {
                 </HeaderRow>
                 {meals.map(meal => (
                   <BodyRow
-                    key={uuid()}
-                    className={this.isRightNow(meal, venueHour.date) && 'selected'}
+                    key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
+                    className={
+                      this.isRightNow(meal, venueHour.date) && 'selected'
+                    }
                   >
                     <td style={{ width: '12rem' }} />
                     <td>{meal.label}</td>
@@ -113,7 +118,7 @@ class HoursVisualization extends Component {
                     <td>{meal.endtime}</td>
                   </BodyRow>
                 ))}
-              </>
+              </React.Fragment>
             )
           })}
         </tbody>
@@ -121,20 +126,16 @@ class HoursVisualization extends Component {
     )
   }
 
-
   render() {
     const { venueHours } = this.props
 
     if (!venueHours) {
-      return (
-        <ErrorMessage message="Failed to load hours of operation." />
-      )
+      return <ErrorMessage message="Failed to load hours of operation." />
     }
 
-    return this.renderList();
+    return this.renderList()
   }
 }
-
 
 HoursVisualization.propTypes = {
   venueHours: PropTypes.arrayOf(
@@ -143,14 +144,15 @@ HoursVisualization.propTypes = {
       type: PropTypes.string,
       open: PropTypes.string,
       close: PropTypes.string,
-    }),
+    })
   ).isRequired,
 }
-
 
 const mapStateToProps = state => ({
   venueHours: state.dining.venueHours,
 })
 
-
-export default connect(mapStateToProps, null)(HoursVisualization)
+export default connect(
+  mapStateToProps,
+  null
+)(HoursVisualization)
