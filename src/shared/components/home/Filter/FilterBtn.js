@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 
+// TODO merge this with the other component
 
 import {
   WHITE,
@@ -14,7 +15,6 @@ import {
   MEDIUM_GRAY,
   BABY_BLUE,
 } from '../../../styles/colors'
-
 
 const FilterBtnWrapper = s.a`
   margin-right: 1rem;
@@ -33,8 +33,15 @@ const FilterBtnWrapper = s.a`
   :hover {
     background: ${ALLBIRDS_GRAY};
   }
+  
+  :focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 2px ${DARK_BLUE};
+  }
 
-  ${({ active }) => active && (`
+  ${({ active }) =>
+    active &&
+    `
     background: ${BLUE} !important;
     color: ${WHITE} !important;
 
@@ -42,12 +49,10 @@ const FilterBtnWrapper = s.a`
     :focus {
       background: ${DARK_BLUE} !important;
     }
-  `)}
+  `}
 `
 
-
 const noop = e => e.stopPropagation()
-
 
 const OptionsModalBacking = s.div`
   position: fixed;
@@ -58,7 +63,6 @@ const OptionsModalBacking = s.div`
   background: ${SNOW_ALPHA};
   z-index: 1299;
 `
-
 
 const OptionsModalWrapper = s.div`
   position: absolute;
@@ -89,7 +93,6 @@ const OptionsModalWrapper = s.div`
   }
 `
 
-
 const Option = s.div`
   border-radius: 4px;
   padding: 0.2rem 0.4rem;
@@ -103,7 +106,6 @@ const Option = s.div`
   }
 `
 
-
 const Circle = s.span`
   height: 1rem;
   width: 1rem;
@@ -113,17 +115,17 @@ const Circle = s.span`
   display: inline-block;
   margin-right: 0.5rem;
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
     background: ${BLUE};
     border: 2px solid ${DARK_BLUE};
   `}
 `
 
-
 const OptionText = s.span`
   color: ${DARK_GRAY};
 `
-
 
 class FilterBtn extends Component {
   constructor(props) {
@@ -136,7 +138,6 @@ class FilterBtn extends Component {
     this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
   }
 
-
   componentDidUpdate(prevProps) {
     const { active } = this.props
 
@@ -147,29 +148,28 @@ class FilterBtn extends Component {
   }
 
   componentDidMount() {
-    if (!localStorage.getItem("homeFilter")) {
-      const { onClickOption, options } = this.props;
+    if (!localStorage.getItem('homeFilter')) {
+      const { onClickOption, options } = this.props
       options.forEach((option, index) => {
-        onClickOption(index);
+        onClickOption(index)
       })
     }
   }
-
 
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27
     const { active } = this.props
 
     if (
-      (event.keyCode === ESCAPE_KEY_CODE || event.key.toLowerCase() === 'escape')
-      && active
+      (event.keyCode === ESCAPE_KEY_CODE ||
+        event.key.toLowerCase() === 'escape') &&
+      active
     ) {
       const { onClick } = this.props
 
       onClick()
     }
   }
-
 
   handleOptionKeyPress(event, idx) {
     const SPACE_KEY_CODE = 32
@@ -180,12 +180,10 @@ class FilterBtn extends Component {
     }
   }
 
-
   areOptions() {
     const { options } = this.props
     return Boolean(options && options.length)
   }
-
 
   render() {
     const {
@@ -198,11 +196,12 @@ class FilterBtn extends Component {
     } = this.props
 
     const areOptions = options && options.length
-    let areActiveOptions = activeOptions && activeOptions.length < options.length
+    let areActiveOptions =
+      activeOptions && activeOptions.length < options.length
     let btnText = text
 
     if (areOptions && activeOptions && activeOptions.length < options.length) {
-      btnText = "Customized"
+      btnText = 'Customized'
     }
 
     return (
@@ -217,13 +216,15 @@ class FilterBtn extends Component {
       >
         {btnText}
 
-        {(areOptions && active) && (
+        {areOptions && active && (
           <>
             <OptionsModalBacking />
 
             <OptionsModalWrapper onClick={noop}>
               {options.map((o, idx) => {
-                const isActiveOption = Boolean(activeOptions && activeOptions.includes(idx))
+                const isActiveOption = Boolean(
+                  activeOptions && activeOptions.includes(idx)
+                )
 
                 return (
                   <Option
@@ -237,7 +238,7 @@ class FilterBtn extends Component {
                     <Circle active={isActiveOption} />
                     <OptionText active={isActiveOption}>{o}</OptionText>
                   </Option>
-                );
+                )
               })}
             </OptionsModalWrapper>
           </>
@@ -247,15 +248,13 @@ class FilterBtn extends Component {
   }
 }
 
-
 FilterBtn.defaultProps = {
   options: null,
-  onClick: () => { },
-  onClickOption: () => { },
+  onClick: () => {},
+  onClickOption: () => {},
   active: false,
   activeOptions: [],
 }
-
 
 FilterBtn.propTypes = {
   text: PropTypes.string.isRequired,
@@ -265,6 +264,5 @@ FilterBtn.propTypes = {
   active: PropTypes.bool,
   activeOptions: PropTypes.arrayOf(PropTypes.number),
 }
-
 
 export default FilterBtn

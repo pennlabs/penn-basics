@@ -58,7 +58,7 @@ class Weather extends Component {
     return (
       <BorderedCard>
         <h1 className="title is-4">{greeting}</h1>
-        <h2 className="subtitle is-6">Weather Notification</h2>
+        <h6 className="subtitle is-6">Weather in Philly</h6>
         <a
           className="weatherwidget-io"
           href="https://forecast7.com/en/39d95n75d17/philadelphia/"
@@ -72,7 +72,7 @@ class Weather extends Component {
         >
           Weather in Philly
         </a>
-        <div className="content is-medium" style={{ marginTop: '3%' }}>
+        <div className="content is-medium" style={{ marginTop: '0.5rem' }}>
           <p className="has-text-centered">{`"${quote}"`}</p>
           <Author className="has-text-right">
             &#8212;

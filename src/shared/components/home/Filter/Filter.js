@@ -6,7 +6,6 @@ import {
   filterHomeCustomize,
   toggleHomeCustomize,
 } from '../../../actions/home_actions'
-import { BorderedCard } from '../../shared'
 
 class Filter extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class Filter extends Component {
     // TODO get these options from somewhere else
     return (
       <FilterButton
-        text="Customize This Page"
+        text="Customize this page"
         onClick={toggleHomeCustomizeDispatch}
         onClickOption={filterHomeCustomizeDispatch}
         options={[
