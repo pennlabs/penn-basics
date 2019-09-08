@@ -109,7 +109,8 @@ class HoursVisualization extends Component {
       <table className="table is-fullwidth marg-bot-0">
         <tbody>
           {venueHours.map((venueHour, idx) => {
-            const meals = venueHour.dayparts
+            let meals = venueHour.dayparts
+            meals.sort((a, b) => (a.starttime > b.starttime) ? 1 : -1)
             return (
               <React.Fragment key={`${venueHour.date}-${idx}`}>
                 <HeaderRow>
