@@ -9,41 +9,47 @@ import {
   setMealsFulfilled,
 } from './action_types'
 
+const pad = (number) => {
+  return number < 10 ? `0${number}` : `${number}`
+}
+
+const convertDate = dateObj => {
+  const month = dateObj.getUTCMonth() + 1
+  const day = dateObj.getUTCDate()
+  const year = dateObj.getUTCFullYear();
+  return `${year}-${pad(month)}-${pad(day)}`
+}
+
 export const getVenueInfo = venueId => {
-  console.log(`venueID: ${venueId}`)
-  return dispatch => {
+  return async dispatch => {
     dispatch({ type: getVenueInfoRequested })
 
     // Set the start date to today
-    const startDate = new Date()
-    startDate.setHours(0, 0, 0, 0)
-
-    // Set the end date to three days from now
-    const endDate = new Date()
-    endDate.setHours(72, 0, 0, 0)
 
     // Make a post request to pull the data
-    axios
-      .post('/api/dining/venue_info/', {
-        venueId,
-        startDate,
-        endDate,
+    try {
+      const response = await axios.post('/api/dining/venue_hours', { venueId })
+      let venueHours = response.data.venueHours
+      
+      let startDate = new Date()
+      startDate.setHours(0, 0, 0, 0)
+      startDate = convertDate(startDate)
+
+      // Set the end date to three days from now
+      let endDate = new Date()
+      endDate.setHours(72, 0, 0, 0)
+      endDate = convertDate(endDate)
+      venueHours = venueHours.filter(hour => startDate <= hour.date && hour.date <= endDate)
+      dispatch({
+        type: getVenueInfoFulfilled,
+        venueHours,
       })
-      .then(res => {
-        const { hours, venue } = res.data
-        console.log(venue)
-        dispatch({
-          type: getVenueInfoFulfilled,
-          venueHours: hours,
-          venueInfo: venue,
-        })
+    } catch (err) {
+      dispatch({
+        type: getVenueInfoRejected,
+        error: error.message,
       })
-      .catch(error => {
-        dispatch({
-          type: getVenueInfoRejected,
-          error: error.message,
-        })
-      })
+    }
   }
 }
 

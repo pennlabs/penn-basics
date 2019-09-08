@@ -34,8 +34,8 @@ class DiningVenue extends Component {
       getVenueInfoDispatch(venueId)
     }
 
-    this.checkForErrors = this.checkForErrors.bind(this)
-    this.renderError = this.renderError.bind(this)
+    // this.checkForErrors = this.checkForErrors.bind(this)
+    // this.renderError = this.renderError.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -50,44 +50,44 @@ class DiningVenue extends Component {
     }
   }
 
-  checkForErrors() {
-    let error = ''
+  // checkForErrors() {
+  //   let error = ''
 
-    const { match, diningData, dateFormatted, meal } = this.props
-    const { id } = match.params
+  //   const { match, diningData, dateFormatted, meal } = this.props
+  //   const { id } = match.params
 
-    if (!venueData[id]) {
-      // If no mapping is found
-      error = 'Dining venue not found'
-    } else if (diningData && dateFormatted) {
-      if (!diningData[dateFormatted]) {
-        error = "Dining data not found for today's date"
-      } else if (meal && !diningData[dateFormatted][meal]) {
-        error = `Dining data not found for meal: "${meal}"`
-      } else {
-        error = ''
-      }
-    } else if (!diningData) {
-      error = 'Failed to find meal data.'
-    } else {
-      error = ''
-    }
+  //   if (!venueData[id]) {
+  //     // If no mapping is found
+  //     error = 'Dining venue not found'
+  //   } else if (diningData && dateFormatted) {
+  //     if (!diningData[dateFormatted]) {
+  //       error = "Dining data not found for today's date"
+  //     } else if (meal && !diningData[dateFormatted][meal]) {
+  //       error = `Dining data not found for meal: "${meal}"`
+  //     } else {
+  //       error = ''
+  //     }
+  //   } else if (!diningData) {
+  //     error = 'Failed to find meal data.'
+  //   } else {
+  //     error = ''
+  //   }
 
-    return error
-  }
+  //   return error
+  // }
 
   // Helper method to render any error
-  renderError() {
-    const { diningDataPending, venueHoursPending } = this.props
+  // renderError() {
+  //   const { diningDataPending, venueHoursPending } = this.props
 
-    if (diningDataPending || venueHoursPending) return null
+  //   if (diningDataPending || venueHoursPending) return null
 
-    // Check for errors
-    const { error: propsError } = this.props
-    const error = propsError || this.checkForErrors()
+  //   // Check for errors
+  //   const { error: propsError } = this.props
+  //   const error = propsError || this.checkForErrors()
 
-    return <ErrorMessage message={error} />
-  }
+  //   return <ErrorMessage message={error} />
+  // }
 
   // Render the component
   render() {
@@ -148,7 +148,7 @@ class DiningVenue extends Component {
           {/* Render the title of the dining page */}
           <h1 className="title">{name}</h1>
 
-          {this.renderError()}
+          {/* {this.renderError()} */}
 
           {/* Render the overview card at the top of the dining view */}
           <DiningOverview id={id} />

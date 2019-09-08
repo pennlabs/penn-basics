@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
+import moment from 'moment'
 
 import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
@@ -48,11 +49,8 @@ class DiningCard extends Component {
       axios.get(`https://api.pennlabs.org/dining/hours/${venueId}`)
         .then(response => {
           let venueHours = response.data.cafes[venueId].days
-          const dateObj = new Date()
-          const month = dateObj.getUTCMonth() + 1
-          const day = dateObj.getUTCDate()
-          const year = dateObj.getUTCFullYear();
-          const currDate = `${year}-${pad(month)}-${pad(day)}`
+          let currDate = moment().format()
+          currDate = currDate.substring(0, currDate.indexOf('T'))
           venueHours = venueHours.filter(hour => hour.date === currDate)
 
           if (venueHours) {
@@ -74,7 +72,7 @@ class DiningCard extends Component {
     const currTime = pad(date.getHours()) + ":" + pad(date.getMinutes())
     const openHours = venueHours.filter(hour => {
       return hour.starttime <= currTime && currTime <= hour.endtime
-    });
+    })
 
     if (openHours.length === 0) {
       return (

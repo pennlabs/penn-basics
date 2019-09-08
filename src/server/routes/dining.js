@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const axios = require('axios')
 
 module.exports = function diningRouter(DB) {
   router.post('/menu_date_range', (req, res) => {
@@ -54,6 +55,18 @@ module.exports = function diningRouter(DB) {
       })
       .catch(err => {
         res.status(500).send({ error: err.message })
+      })
+  })
+
+  router.post('/venue_hours', (req, res) => {
+    console.log("!!!")
+    const { venueId } = req.body
+    axios.get(`https://api.pennlabs.org/dining/hours/${venueId}`)
+      .then(response => {
+        console.log(response.data.cafes[venueId].days)
+        res.json({
+          venueHours: response.data.cafes[venueId].days
+        })
       })
   })
 
