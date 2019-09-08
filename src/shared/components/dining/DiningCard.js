@@ -66,6 +66,7 @@ class DiningCard extends Component {
   }
 
   renderSubtext() {
+    const { showMealLabels } = this.props
     const { venueHours } = this.state
 
     // get the array of hours that are opened today
@@ -89,7 +90,9 @@ class DiningCard extends Component {
         <Subtext marginBottom="0">
           {openHours.map(({ starttime, endtime, label }, index) => (
             <span key={`${starttime}-${endtime}-${label}`}>
-              {`Open: ${starttime} - ${endtime} • ${label}`}
+              {`Open: ${starttime} - ${endtime}${
+                showMealLabels ? ` • ${label}` : ''
+              }`}
               {index === openHours.length - 1 ? null : <br />}
             </span>
           ))}
@@ -129,12 +132,14 @@ class DiningCard extends Component {
 
 DiningCard.defaultProps = {
   image: null,
+  showMealLabels: true,
 }
 
 DiningCard.propTypes = {
   image: PropTypes.string,
   venueId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  showMealLabels: PropTypes.bool,
 }
 
 export default DiningCard

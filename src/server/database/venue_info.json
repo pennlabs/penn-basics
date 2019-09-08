@@ -43,7 +43,8 @@
     "address": "3417 Spruce Street Philadelphia PA, 19104",
     "name": "Houston Market",
     "pennDiningSlug": "houston-market",
-    "isRetail": true
+    "isRetail": true,
+    "showMealLabels": true
   },
   "640": {
     "lat": 39.952724,

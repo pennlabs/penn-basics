@@ -51,6 +51,7 @@ const Nav = ({ children }) => {
               venueId={key}
               name={name}
               image={image}
+              showMealLabels
             />
           )
         })}
@@ -61,9 +62,15 @@ const Nav = ({ children }) => {
         </Card>
 
         {retailKeys.map(key => {
-          const { name, image } = venueData[key]
+          const { name, image, showMealLabels } = venueData[key]
           return (
-            <DiningCard key={key} venueId={key} name={name} image={image} />
+            <DiningCard
+              key={key}
+              venueId={key}
+              name={name}
+              image={image}
+              showMealLabels={showMealLabels || false}
+            />
           )
         })}
 
