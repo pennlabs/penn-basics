@@ -21,17 +21,17 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-// TODO export this to helper methods
 const convertDate = time => {
-  const hour = time.substring(0, time.indexOf(':'))
-  const minute = time.substring(time.indexOf(':') + 1)
+  const hour = parseInt(time.substring(0, time.indexOf(':')))
+  const minute = parseInt(time.substring(time.indexOf(':') + 1))
 
-  if (hour === '12') {
-    return `12:${minute}pm`
+  if (hour == 12) {
+    return minute == 0 ? '12pm' : `12:${minute}pm`
   }
 
-  if (hour >= 13) return `${hour - 12}:${minute}pm`
-  return `${hour}:${minute}am`
+  if (hour >= 13)
+    return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
+  return minute == 0 ? `${hour}am` : `${hour}:${minute}am`
 }
 
 const pad = number => {
@@ -90,7 +90,7 @@ class DiningCard extends Component {
         <Subtext marginBottom="0">
           {openHours.map(({ starttime, endtime, label }, index) => (
             <span key={`${starttime}-${endtime}-${label}`}>
-              {`Open: ${starttime} - ${endtime}${
+              {`Open: ${convertDate(starttime)} - ${convertDate(endtime)}${
                 showMealLabels ? ` • ${label}` : ''
               }`}
               {index === openHours.length - 1 ? null : <br />}
