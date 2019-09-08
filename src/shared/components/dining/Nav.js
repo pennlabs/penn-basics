@@ -69,7 +69,11 @@ const Nav = ({ children }) => {
 
         <PennLabsCredit />
       </Scrollbar>
-      <Col width="70%" overflowY="scroll">
+      <Col
+        width="70%"
+        overflowY="scroll"
+        maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+      >
         {children}
       </Col>
     </Row>
