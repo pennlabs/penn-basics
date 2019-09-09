@@ -12,8 +12,8 @@ module.exports = function laundryRouter() {
         const machine = data.machines.details.filter(detail => detail.id == machineID);
         let time_remaining = machine[0].time_remaining;
 
-        // time_remaining = 5000
         time_remaining = time_remaining !== 0 ? Number(time_remaining) * 60 * 1000 : 20000;
+        time_remaining = 10000
 
         setTimeout(async () => {
             try {

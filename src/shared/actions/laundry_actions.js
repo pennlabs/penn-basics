@@ -76,6 +76,9 @@ export function getLaundryHall(laundryHallId) {
         error: error.message,
       })
     }
+    // setInterval(async () => {
+
+    // }, 30 * 1000)
   }
 }
 
@@ -221,6 +224,10 @@ export const getReminders = () => {
     throw new Error('No Push API Support!')
   }
 
+  if (!window.indexedDB) {
+    throw new Error('No IndexedDB support')
+  }
+
   Notification.requestPermission().then(permission => {
     if (permission !== 'granted') {
       throw new Error('permission not granted for notification')
@@ -241,43 +248,72 @@ export const getReminders = () => {
   navigator.serviceWorker.register('/sw.js')
 
   return (dispatch) => {
-    let reminders = localStorage.getItem('laundry_reminders')
-    if (reminders) {
-      reminders = JSON.parse(reminders)
-      console.log('----reminders----')
-      console.log(reminders)
-      let newReminders = []
-      navigator.serviceWorker.getRegistrations().then(registrations => {
-        console.log(registrations)
-      })
-      navigator.serviceWorker.ready.then(registration => {
-        registration.getNotifications().then(notifications => {
-          console.log("---notifications----")
-          console.log(notifications)
-          reminders.forEach(reminder => {
-            const notified = notifications.some(notification =>
-              notification.data.machineID == reminder.machineID &&
-              notification.data.hallID == reminder.hallID &&
-              notification.data.reminderID == reminder.reminderID
-            )
-            console.log(notified)
-            if (!notified) {
-              newReminders.push(reminder)
-            }
-          })
+    const request = indexedDB.open('LocalDB', 1)
+
+    request.onerror = event => {
+      console.error("Database error: " + event.target.errorCode);
+    }
+
+    request.onupgradeneeded = event => {
+      console.log('---IndexedDB: upgrading strucutre----')
+      const db = event.target.result
+      db.createObjectStore("laundryReminders", { keyPath: "hallMachineID" })
+    }
+
+    request.onsuccess = event => {
+      console.log('----IndexedDB: loading is successful----')
+      const db = event.target.result
+      let reminders = localStorage.getItem('laundry_reminders')
+      if (reminders) {
+        reminders = JSON.parse(reminders)
+        console.log('----reminders----')
+        console.log(reminders)
+        let newReminders = []
+
+        const transaction = db.transaction(["laundryReminders"], "readonly")
+        
+        transaction.oncomplete = event => {
           localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
           dispatch({
             type: updateReminders,
             reminders: newReminders
           })
+          console.log('---complete updating reminders in localStorage----')
+        }
+
+        transaction.onerror = event => {
+          console.error("Database error: " + event.target.errorCode);
+        }
+
+        const objectStore = transaction.objectStore("laundryReminders")
+
+        const getAllRequest = objectStore.getAll()
+
+        getAllRequest.onsuccess = event => {
+          console.log(event.target.result)
+        }
+
+        reminders.forEach(reminder => {
+          const storeRequest = objectStore.get(`${reminder.hallID}-${reminder.machineID}`)
+          storeRequest.onsuccess = event => {
+            const result = event.target.result
+            console.log(result)
+            if (!result || (result && result.reminderID != reminder.reminderID)) {
+              newReminders.push(reminder)
+            }
+          }
+
+          storeRequest.onerror = event => {
+            console.error("Store error: " + event.target.errorCode);
+          }
         })
-      })
-    } else {
-      localStorage.setItem('laundry_reminders', JSON.stringify([]))
-      dispatch({
-        type: updateReminders,
-        reminders: [],
-      });
+      } else {
+        localStorage.setItem('laundry_reminders', JSON.stringify([]))
+        dispatch({
+          type: updateReminders,
+          reminders: [],
+        });
+      }
     }
   }
 }
