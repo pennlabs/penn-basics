@@ -165,19 +165,32 @@ class LaundryVenue extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatchGetLaundryHall, hallURLId } = this.props
+    const {
+      hallURLId,
+      intervalID,
+      dispatchGetLaundryHall,
+      dispatchGetReminders
+    } = this.props
 
     if (hallURLId) {
-      dispatchGetLaundryHall(hallURLId)
+      dispatchGetLaundryHall(hallURLId, intervalID)
     }
+
+    dispatchGetReminders()
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatchGetLaundryHall, hallURLId } = this.props
+    const {
+      dispatchGetLaundryHall,
+      hallURLId,
+      intervalID
+    } = this.props
+
     const prevHallURLId = prevProps.hallURLId
 
     if (prevHallURLId !== hallURLId) {
-      dispatchGetLaundryHall(hallURLId)
+      console.log(intervalID)
+      dispatchGetLaundryHall(hallURLId, intervalID)
     }
   }
 
@@ -217,14 +230,6 @@ class LaundryVenue extends Component {
     const { hall_name: hallName, location } = laundryHallInfo
     const { washers, dryers, details: machines } = laundryHallInfo.machines
 
-    if (pending) {
-      return (
-        <Wrapper>
-          <Loading />
-        </Wrapper>
-      )
-    }
-
     return (
       <Wrapper>
         <div style={{ marginBottom: '1rem' }}>
@@ -237,15 +242,15 @@ class LaundryVenue extends Component {
                 <FavoriteIcon className="fa fa-heart" /> &nbsp; Favorited
               </span>
             ) : (
-              <span // eslint-disable-line
-                className="button"
-                onClick={() =>
-                  dispatchAddFavorite(laundryHallId, location, hallName)
-                }
-              >
-                <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
+                <span // eslint-disable-line
+                  className="button"
+                  onClick={() =>
+                    dispatchAddFavorite(laundryHallId, location, hallName)
+                  }
+                >
+                  <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
               </span>
-            )}
+              )}
             {reminders.length == 0 ? null : (
               <span // eslint-disable-line
                 className="button"
@@ -326,6 +331,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
     reminders,
+    intervalID
   } = laundry
 
   // Make sure that the ID is a number
@@ -347,6 +353,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
     reminders,
+    intervalID
   }
 }
 
@@ -355,10 +362,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addFavorite(laundryHallId, location, hallName)),
   dispatchRemoveFavorite: laundryHallId =>
     dispatch(removeFavorite(laundryHallId)),
-  dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
+  dispatchGetLaundryHall: (hallId, intervalID) => dispatch(getLaundryHall(hallId, intervalID)),
   dispatchAddReminder: (machineID, hallID, hallName) =>
     dispatch(addReminder(machineID, hallID, hallName)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
+  dispatchGetReminders: () => dispatch(getReminders()),
 })
 
 export default connect(

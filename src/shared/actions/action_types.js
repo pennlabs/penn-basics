@@ -52,6 +52,7 @@ export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED';
 export const updateFavorites = 'UPDATE_FAVORITES';
 export const getFavoritesHome = 'GET_FAVORITES_HOME';
 export const updateReminders = 'UPDATE_REMINDERS';
+export const updateIntervalID = 'UPDATE_INTERVAL_ID';
 
 // misc actions
 export const updateLink = 'UPDATE_LINK'

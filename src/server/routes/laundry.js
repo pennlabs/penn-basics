@@ -13,7 +13,7 @@ module.exports = function laundryRouter() {
         let time_remaining = machine[0].time_remaining;
 
         time_remaining = time_remaining !== 0 ? Number(time_remaining) * 60 * 1000 : 20000;
-        time_remaining = 10000
+        // time_remaining = 10000
 
         setTimeout(async () => {
             try {

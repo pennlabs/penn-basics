@@ -12,7 +12,8 @@ import {
   getLaundryHallInfoFulfilled,
   updateFavorites,
   getFavoritesHome,
-  updateReminders
+  updateReminders,
+  updateIntervalID
 } from './action_types';
 
 const publicVapidKey =
@@ -53,16 +54,24 @@ export function getLaundryHalls() {
   }
 }
 
-export function getLaundryHall(laundryHallId) {
+export function getLaundryHall(laundryHallId, prevIntervalID) {
   // eslint-disable-line
+  // console.log(intervalID)
   return async dispatch => {
+    if (prevIntervalID) {
+      clearInterval(prevIntervalID)
+      dispatch({
+        type: updateIntervalID,
+        intervalID: null
+      })
+    }
+
     dispatch({
       type: getLaundryHallInfoRequested,
     })
+    
     try {
-      const axiosResponse = await axios.get(
-        `${BASE}/laundry/hall/${laundryHallId}`
-      )
+      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`)
 
       const { data } = axiosResponse
       dispatch({
@@ -76,9 +85,35 @@ export function getLaundryHall(laundryHallId) {
         error: error.message,
       })
     }
-    // setInterval(async () => {
 
-    // }, 30 * 1000)
+    const intervalID = setInterval(async () => {
+      dispatch({
+        type: getLaundryHallInfoRequested,
+      })
+      try {
+        const axiosResponse = await axios.get(
+          `${BASE}/laundry/hall/${laundryHallId}`
+        )
+
+        const { data } = axiosResponse
+        dispatch({
+          type: getLaundryHallInfoFulfilled,
+          laundryHallInfo: data,
+          laundryHallId,
+        })
+      } catch (error) {
+        dispatch({
+          type: getLaundryHallInfoRejected,
+          error: error.message,
+        })
+      }
+    }, 5 * 1000)
+
+    dispatch({
+      type: updateIntervalID,
+      intervalID
+    })
+
   }
 }
 
@@ -271,7 +306,7 @@ export const getReminders = () => {
         let newReminders = []
 
         const transaction = db.transaction(["laundryReminders"], "readonly")
-        
+
         transaction.oncomplete = event => {
           localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
           dispatch({

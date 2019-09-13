@@ -22,12 +22,10 @@ class App extends Component {
     const {
       dispatchGetLaundryHalls,
       dispatchGetFavorites,
-      dispatchGetReminders,
     } = this.props
 
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
-    dispatchGetReminders()
   }
 
   render() {
@@ -88,7 +86,6 @@ const mapStateToProps = ({ laundry }) => {
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
   dispatchGetFavorites: () => dispatch(getFavorites()),
-  dispatchGetReminders: () => dispatch(getReminders()),
 })
 
 App.defaultProps = {
