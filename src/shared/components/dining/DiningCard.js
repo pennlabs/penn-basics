@@ -20,6 +20,10 @@ const Content = s.div`
   overflow-x: visible;
   padding-right: 0.5rem;
 `
+const FavoriteIcon = s.i`
+  opacity: 0.75;
+  color: orange
+`
 
 const convertDate = time => {
   const hour = parseInt(time.substring(0, time.indexOf(':')))
@@ -92,7 +96,7 @@ class DiningCard extends Component {
             <span key={`${starttime}-${endtime}-${label}`}>
               {`${convertDate(starttime)} - ${convertDate(endtime)}${
                 showMealLabels ? ` • ${label}` : ''
-              }`}
+                }`}
               {index === openHours.length - 1 ? null : <br />}
             </span>
           ))}
@@ -103,7 +107,7 @@ class DiningCard extends Component {
   }
 
   render() {
-    const { venueId, name, image } = this.props
+    const { venueId, name, image, isFavorited } = this.props
 
     // Images are served through the public folder
     const img = `/img/venue_images/${image}`
@@ -117,7 +121,11 @@ class DiningCard extends Component {
             )}
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
-                <Subtitle marginBottom="0">{name}</Subtitle>
+                <Subtitle marginBottom="0">
+                  {isFavorited ? <FavoriteIcon className="fas fa-star"/> : null}
+                  &nbsp;
+                  {name}
+                </Subtitle>
 
                 {this.renderSubtext()}
               </Content>

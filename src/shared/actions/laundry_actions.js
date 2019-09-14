@@ -10,9 +10,8 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
-  updateFavorites,
   getFavoritesHome,
-  updateReminders,
+  updateLaundryFavorites,
   updateIntervalID
 } from './action_types';
 
@@ -175,7 +174,7 @@ export function getFavorites() {
       favorites = []
     }
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites,
     })
   }
@@ -210,7 +209,7 @@ export function addFavorite(laundryHallId, location, hallName) {
     localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
 
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites: favoritesArray,
     })
   }
@@ -232,7 +231,7 @@ export function removeFavorite(laundryHallId) {
 
     localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites: favoritesArray,
     })
   }

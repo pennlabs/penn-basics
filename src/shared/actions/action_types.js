@@ -16,6 +16,7 @@ export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED'
 export const dateFormattedChange = 'DATE_FORMATTED_CHANGE'
 export const selectedMealChangeFulfilled = 'SELECTED_MEAL_CHANGE_FULFILLED'
 export const setMealsFulfilled = 'SET_MEALS_FULFILLED'
+export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
 
 // sidebar actions
 export const sidebarDining = 'SIDEBAR_DINING'
@@ -43,16 +44,16 @@ export const TOGGLE_FILTER_SPACES_NOISE = 'TOGGLE_FILTER_SPACES_NOISE'
 export const TOGGLE_FILTER_SPACES_GROUPS = 'TOGGLE_FILTER_SPACES_GROUPS'
 
 // laundry actions
-export const getLaundryHallsDataRequested = 'GET_LAUNDRY_HALLS_DATA_REQUESTED';
-export const getLaundryHallsDataRejected = 'GET_LAUNDRY_HALLS_DATA_REJECTED';
-export const getLaundryHallsDataFulfilled = 'GET_LAUNDRY_HALLS_DATA_FULFILLED';
-export const getLaundryHallInfoRequested = 'GET_LAUNDRY_HALL_INFO_REQUESTED';
-export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED';
-export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED';
-export const updateFavorites = 'UPDATE_FAVORITES';
-export const getFavoritesHome = 'GET_FAVORITES_HOME';
-export const updateReminders = 'UPDATE_REMINDERS';
-export const updateIntervalID = 'UPDATE_INTERVAL_ID';
+export const getLaundryHallsDataRequested = 'GET_LAUNDRY_HALLS_DATA_REQUESTED'
+export const getLaundryHallsDataRejected = 'GET_LAUNDRY_HALLS_DATA_REJECTED'
+export const getLaundryHallsDataFulfilled = 'GET_LAUNDRY_HALLS_DATA_FULFILLED'
+export const getLaundryHallInfoRequested = 'GET_LAUNDRY_HALL_INFO_REQUESTED'
+export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED'
+export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED'
+export const updateLaundryFavorites = 'UPDATE_LAUNDRY_FAVORITES'
+export const getFavoritesHome = 'GET_FAVORITES_HOME'
+export const updateReminders = 'UPDATE_REMINDERS'
+export const updateIntervalID = 'UPDATE_INTERVAL_ID'
 
 // misc actions
 export const updateLink = 'UPDATE_LINK'

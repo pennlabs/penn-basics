@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-
 import { BorderedCard } from '../shared'
 import DiningCards from './DiningCards'
+import venueData from '../../../server/database/venue_info.json'
 
 
 class Dining extends Component {
@@ -20,7 +20,7 @@ class Dining extends Component {
       <BorderedCard>
         <Link to="/dining" className="link">
           <h1 className="title is-4">Dining</h1>
-          <h2 className="subtitle is-6">Dining description placeholder.</h2>
+          <h2 className="subtitle is-6">Status of Dining Halls</h2>
         </Link>
 
         <div className="space-1" />

@@ -5,7 +5,7 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
-  updateFavorites,
+  updateLaundryFavorites,
   getFavoritesHome,
   updateReminders,
   updateIntervalID
@@ -59,7 +59,7 @@ const laundryReducer = (state = defaultState, action) => {
         laundryHallInfo: action.laundryHallInfo,
         laundryHallId: action.laundryHallId,
       }
-    case updateFavorites:
+    case updateLaundryFavorites:
       return {
         ...state,
         favorites: action.favorites,

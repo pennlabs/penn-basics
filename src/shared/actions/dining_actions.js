@@ -7,6 +7,7 @@ import {
   getVenueInfoRejected,
   getVenueInfoFulfilled,
   setMealsFulfilled,
+  updateDiningFavorites
 } from './action_types'
 
 const pad = (number) => {
@@ -30,7 +31,7 @@ export const getVenueInfo = venueId => {
     try {
       const response = await axios.post('/api/dining/venue_hours', { venueId })
       let venueHours = response.data.venueHours
-      
+
       let startDate = new Date()
       startDate.setHours(0, 0, 0, 0)
       startDate = convertDate(startDate)
@@ -97,6 +98,58 @@ export function setMeals(dateFormatted) {
     dispatch({
       type: setMealsFulfilled,
       dateFormatted,
+    })
+  }
+}
+
+export const getFavorites = () => {
+  return dispatch => {
+    let favorites = localStorage.getItem('dining_favorites')
+    if (favorites) {
+      favorites = JSON.parse(favorites)
+    } else {
+      localStorage.setItem('dining_favorites', JSON.stringify([]))
+      favorites = []
+    }
+    dispatch({
+      type: updateDiningFavorites,
+      favorites,
+    })
+  }
+}
+
+export const addFavorite = venueID => {
+  return dispatch => {
+    let favorites = localStorage.getItem('dining_favorites')
+
+    if (!favorites) {
+      favorites = [venueID]
+    } else {
+      favorites = JSON.parse(favorites)
+      favorites.push(venueID)
+      if (!favorites.includes(venueID)) {
+        favorites.push(venueID)
+      }
+    }
+
+    localStorage.setItem('dining_favorites', JSON.stringify(favorites))
+
+    dispatch({
+      type: updateDiningFavorites,
+      favorites
+    })
+  }
+}
+
+export const removeFavorite = venueID => {
+  return dispatch => {
+    // favorites is an array of venueIDs
+    let favorites = JSON.parse(localStorage.getItem('dining_favorites'))
+    favorites = favorites.filter(favorite =>  favorite != venueID)
+    localStorage.setItem('dining_favorites', JSON.stringify(favorites))
+    dispatch({
+      type: updateDiningFavorites,
+      favorites
     })
   }
 }

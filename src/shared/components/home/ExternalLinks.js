@@ -73,8 +73,6 @@ class ExternalLinks extends Component {
   }
 
   render() {
-    const postid = '10158665909863776'
-    const link = `https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FUnivPennsylvania%2Fposts%2F${postid}&width=500&show_text=true&height=587&appId`
     return (
       <BorderedCard>
         <h1 className="title is-4">More in the Penn Ecosystem</h1>
