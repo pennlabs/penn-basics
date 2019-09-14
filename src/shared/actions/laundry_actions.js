@@ -164,7 +164,7 @@ export const getFavoritesHomePage = () => dispatch => {
   }
 }
 
-export function getFavorites() {
+export const getFavorites = () => {
   return dispatch => {
     let favorites = localStorage.getItem('laundry_favorites')
     if (favorites) {
@@ -180,7 +180,7 @@ export function getFavorites() {
   }
 }
 
-export function addFavorite(laundryHallId, location, hallName) {
+export const addFavorite = (laundryHallId, location, hallName) => {
   return async dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
