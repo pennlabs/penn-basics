@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { BorderedCard, ImageZoom } from '../shared'
+import { BorderedCard, ImageZoom, Col, ColSpace, Row } from '../shared'
 
 class News extends Component {
   constructor(props) {
@@ -26,27 +26,27 @@ class News extends Component {
   renderNews() {
     const { picture, link, title, content, time } = this.state.data
     return (
-      <article className="media">
-        <div className="media-left" style={{ overflow: 'hidden' }}>
+      <Row>
+        <Col width="70%">
           <a href={link}>
-            <ImageZoom src={picture} alt="First" width="500px" />
+            <ImageZoom src={picture} alt="First" />
           </a>
-        </div>
-        <div className="media-content">
-          <div className="content">
-            <p className="is-size-6">
-              <strong>
-                <a href={link}>{title}</a>
-              </strong>
-              <br />
-              <small>{content}</small>
-              <br />
-              <br />
-              <small> {time} </small>
-            </p>
-          </div>
-        </div>
-      </article>
+        </Col>
+        <ColSpace />
+        <Col>
+          <p className="is-size-6">
+            <strong>
+              <a href={link}>{title}</a>
+            </strong>
+            <br />
+            <br />
+            <small>{content}</small>
+            <br />
+            <br />
+            <small> {time} </small>
+          </p>
+        </Col>
+      </Row>
     )
   }
 

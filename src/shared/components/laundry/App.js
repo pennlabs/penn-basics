@@ -5,11 +5,10 @@ import PropTypes from 'prop-types'
 import {
   getLaundryHalls,
   getFavorites,
-  getReminders,
 } from '../../actions/laundry_actions'
 
 import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
-import { BABY_BLUE, WHITE } from '../../styles/colors'
+import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
