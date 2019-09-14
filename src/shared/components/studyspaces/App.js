@@ -16,8 +16,22 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 
 class App extends Component {
   componentDidMount() {
-    const { getAllSpacesDataDispatch } = this.props
-    getAllSpacesDataDispatch()
+    this.props.getAllSpacesDataDispatch()
+  }
+
+  componentDidUpdate(prevProps) {
+    /**
+     * Handle when the user re-navigates to this page, in which case the component updates
+     * and the props are wiped BUT the component does not re-mounts
+     *
+     * We solve this by checking if the new props lack necessary data, but the old props
+     * did have that data. If this is the case, we request the data again.
+     */
+    const { spacesData: currentSpacesData } = this.props
+    const { spacesData: prevSpacesData } = prevProps
+    if (!currentSpacesData && prevSpacesData) {
+      this.props.getAllSpacesDataDispatch()
+    }
   }
 
   render() {

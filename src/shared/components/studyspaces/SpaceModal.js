@@ -12,26 +12,26 @@ import {
   Tag,
   Map,
   Subtext,
-} from '../shared';
-import { SNOW } from '../../styles/colors';
-import Hours from './Hours';
+} from '../shared'
+import { SNOW } from '../../styles/colors'
+import Hours from './Hours'
 
 class SpaceModal extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this)
   }
 
   toggle() {
-    const { clearActiveSpaceDispatch } = this.props;
-    clearActiveSpaceDispatch();
+    const { clearActiveSpaceDispatch } = this.props
+    clearActiveSpaceDispatch()
   }
 
   render() {
-    const { activeSpace, spacesData } = this.props;
-    const space = spacesData[activeSpace];
-    const show = Boolean(activeSpace && space);
+    const { activeSpace, spacesData } = this.props
+    const space = spacesData[activeSpace]
+    const show = Boolean(activeSpace && space)
 
     const {
       name,
@@ -43,73 +43,65 @@ class SpaceModal extends Component {
       start,
       end,
       tags,
-    } = space || {};
+    } = space || {}
 
     return (
       <Modal show={show} toggle={this.toggle}>
-        {
-          space ? (
-            <>
-              <ModalContainer>
-                <Title marginBottom="2.5vh">{name}</Title>
+        {space ? (
+          <>
+            <ModalContainer>
+              <Title marginBottom="2.5vh">{name}</Title>
+            </ModalContainer>
+
+            {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
+
+            {imageCredit && <a href={image}>{imageCredit.name}</a>}
+
+            {description && (
+              <ModalContainer paddingTop="0.5rem">
+                <Text>{description}</Text>
               </ModalContainer>
+            )}
 
-              {image && (
-                <Image
-                  src={image}
-                  alt={name}
-                  marginBottom="2.5vh"
-                />
-              )}
-
-              {imageCredit && (
-                <a href={image}>
-                  {imageCredit.name}
-                </a>
-              )}
-
-              {description && (
-                <ModalContainer paddingTop="0.5rem">
-                  <Text>
-                    {description}
-                  </Text>
-                </ModalContainer>
-              )}
-
-              {tags && (
-                <ModalContainer paddingBottom="0.5rem">
-                  {tags.map(tag => <Tag key={tag}>{tag}</Tag>)}
-                </ModalContainer>
-              )}
-
-              <ModalContainer background={SNOW} paddingTop="1.5rem" paddingBottom="1rem">
-                <Text>
-                  <strong>Address</strong>
-                </Text>
-                <br />
-                <Text>
-                  {address}
-                </Text>
+            {tags && (
+              <ModalContainer paddingBottom="0.5rem">
+                {tags.map(tag => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
               </ModalContainer>
+            )}
 
-              {location && location.lat && location.lng ? (
-                <Map
-                  mapId={name}
-                  location={location}
-                  showMarker
-                  gestureHandling="cooperative"
-                  height="50%"
-                />
-              ) : null}
+            <ModalContainer
+              background={SNOW}
+              paddingTop="1.5rem"
+              paddingBottom="1rem"
+            >
+              <Text>
+                <strong>Address</strong>
+              </Text>
+              <br />
+              <Text>{address}</Text>
+            </ModalContainer>
 
-              <ModalContainer paddingTop="1.5rem">
-                <Hours start={start} end={end} />
-              </ModalContainer>
-            </>
-          ) : <div />
-        }
+            {location && location.lat && location.lng ? (
+              <Map
+                mapId={name}
+                location={location}
+                showMarker
+                gestureHandling="cooperative"
+                height="50%"
+              />
+            ) : null}
+
+            <ModalContainer paddingTop="1.5rem">
+              <Hours start={start} end={end} />
+            </ModalContainer>
+          </>
+        ) : (
+          <div />
+        )}
       </Modal>
-    );
+    )
   }
 }
 
@@ -117,7 +109,7 @@ SpaceModal.defaultProps = {
   location: null,
   activeSpace: null,
   spacesData: {},
-};
+}
 
 SpaceModal.propTypes = {
   activeSpace: PropTypes.string,
@@ -127,18 +119,21 @@ SpaceModal.propTypes = {
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
-};
+}
 
 const mapStateToProps = ({ spaces }) => {
-  const { spacesData, activeSpace } = spaces;
+  const { spacesData, activeSpace } = spaces
   return {
     spacesData,
     activeSpace,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   clearActiveSpaceDispatch: () => dispatch(clearActiveSpace()),
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpaceModal);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SpaceModal)

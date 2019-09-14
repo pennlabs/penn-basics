@@ -938,7 +938,7 @@
       "lat": 39.9536108,
       "lng": -75.1906788
     },
-    "tags": ["Off Campus", "Coffee Shop", "University City"],
+    "tags": ["On Campus", "Coffee Shop", "University City"],
     "start": [9, 7, 7, 7, 7, 7, 9],
     "end": [15, 19, 19, 19, 19, 19, 18]
   },
