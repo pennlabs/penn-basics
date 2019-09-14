@@ -44,13 +44,10 @@ class Laundry extends Component {
 
         return (
           <>
-            <div className="column">
-              <h1 className="title is-6">
-                {`${index + 1}. ${favorite.location}: ${favorite.hall_name}`}
-              </h1>
-            </div>
-            <div className="columns" key={uuid()}>
-              <Row justifyContent="space-between">
+            <h1 className="title is-6">
+              {`${favorite.location}: ${favorite.hall_name}`}
+            </h1>
+            <Row justifyContent="space-between">
                 {[
                   [open, 'Available', GREEN, LIGHT_GREEN],
                   [running, 'Busy', MUSTARD, LIGHT_YELLOW],
@@ -67,8 +64,8 @@ class Laundry extends Component {
                   </LaundryOverview>
                 ))}
               </Row>
-
               {index === favoritesHome.length - 1 ? null : <hr />}
+            <div className="columns" key={uuid()}>
             </div>
           </>
         )
@@ -83,9 +80,9 @@ class Laundry extends Component {
           <Link to="/laundry" className="link">
             <h1 className="title is-4">Laundry</h1>
           </Link>
-          <h3 className="subtitle is-6">Status of favorite halls</h3>
-          <br />
+          <h3 className="subtitle is-6">Status of your favorite halls</h3>
         </article>
+        <br/>
         {this.renderFavorites()}
       </BorderedCard>
     )

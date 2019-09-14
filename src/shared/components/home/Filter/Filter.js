@@ -26,12 +26,12 @@ class Filter extends Component {
         onClick={toggleHomeCustomizeDispatch}
         onClickOption={filterHomeCustomizeDispatch}
         options={[
+          'Quotes',
           'Weather',
           'Events',
           'News',
           'Laundry',
-          'Dining',
-          'Studyspaces',
+          'Dining'
         ]}
         activeOptions={JSON.parse(localStorage.getItem('homeFilter'))}
         active={filterCustomizeActive}

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import Loading from '../shared/Loading'
 import StatusPill from './StatusPill'
 import { BorderedCard, Row, LaundryOverview, Col } from '../shared'
 import {

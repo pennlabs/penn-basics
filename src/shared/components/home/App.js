@@ -4,22 +4,28 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 
 import { Row, Col, ColSpace } from '../shared'
+import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
 import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'
 import Laundry from './Laundry'
-import Studyspaces from './Studyspaces'
 import Notification from './Notification'
 import ExternalLinks from './ExternalLinks'
+import Quotes from './Quotes'
 import Events from './Events'
 import Footer from '../footer'
 
 const HOME_FILTER = 'homeFilter'
 
 const Wrapper = s.div`
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  ${maxWidth(PHONE)} {
+    padding: 1rem;
+  }
 `
 
 class Home extends Component {
@@ -52,12 +58,12 @@ class Home extends Component {
 
         this.setState({
           componentList: [
+            <Quotes/>,
             <Weather />,
             <Events />,
             <News />,
             <Laundry />,
             <Dining show={this.state.dining} />,
-            <Studyspaces />,
           ],
         })
       })
