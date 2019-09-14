@@ -19,11 +19,14 @@ const App = s.div`
   a {
     color: ${BLUE};
 
+    &:visited {
+      color: ${BLUE};
+    }
+
     &:hover,
     &:focus,
-    &:active,
-    &:visited {
-      color: ${DARK_BLUE};
+    &:active {
+      color: ${DARK_BLUE} !important;
     }
   }
 `
