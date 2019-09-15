@@ -1,5 +1,4 @@
 /* global localStorage */
-
 import axios from 'axios'
 import {
   getDiningDataRequested,

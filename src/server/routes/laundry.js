@@ -2,6 +2,9 @@ const router = require('express').Router()
 const webpush = require('web-push')
 const axios = require('axios')
 
+// TODO document what is going on here
+// TODO routes should not use uppercase letters, they should use dashes
+// This shoul probably be /reminders/new
 module.exports = function laundryRouter() {
   router.post('/addReminder', async (req, res) => {
     const { subscription, machineID, hallID, hallName, reminderID } = req.body
@@ -12,11 +15,10 @@ module.exports = function laundryRouter() {
     const machine = data.machines.details.filter(
       detail => detail.id === machineID
     )
-    let { time_remaining: timeRemaining } = machine[0]
-
-    timeRemaining =
+    const { time_remaining: timeRemaining } = machine[0]
+    const timeRemainingFormatted =
       timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
-    // timeRemaining = 10000
+    // time_remaining = 10000
 
     setTimeout(async () => {
       try {
@@ -28,7 +30,7 @@ module.exports = function laundryRouter() {
       } catch (err) {
         res.status(200).json({ error: err.message })
       }
-    }, timeRemaining)
+    }, timeRemainingFormatted)
   })
 
   return router

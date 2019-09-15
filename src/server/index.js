@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+// TODO Peter better docs--what is web push?
+// Should these be env variables?
 // web push relevant info
 const publicVapidKey =
   'BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8'
@@ -34,6 +36,10 @@ webpush.setVapidDetails(
   privateVapidKey
 )
 
+/**
+ * If the user is on a mobile device, send to page encouraging them to download
+ * Penn Mobile
+ */
 app.use((req, res, next) => {
   const ua = req.headers['user-agent'].toLowerCase()
   if (

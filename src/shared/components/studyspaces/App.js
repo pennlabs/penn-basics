@@ -98,7 +98,7 @@ class App extends Component {
 }
 
 const SpacesDataPropType = PropTypes.objectOf(
-  PropTypes.objectOf({
+  PropTypes.shape({
     address: PropTypes.string,
     description: PropTypes.string,
     end: PropTypes.arrayOf(PropTypes.number),
