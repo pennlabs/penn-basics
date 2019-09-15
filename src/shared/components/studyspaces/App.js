@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    
     /**
      * Handle when the user re-navigates to this page, in which case the component updates
      * and the props are wiped BUT the component does not re-mounts
@@ -30,6 +31,7 @@ class App extends Component {
     const { spacesData: currentSpacesData } = this.props
     const { spacesData: prevSpacesData } = prevProps
     if (!currentSpacesData && prevSpacesData) {
+      console.log("jaaa")
       this.props.getAllSpacesDataDispatch()
     }
   }

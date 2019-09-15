@@ -106,7 +106,9 @@ export const getFavorites = () => {
   return dispatch => {
     let favorites = localStorage.getItem('dining_favorites')
     if (favorites) {
-      favorites = JSON.parse(favorites)
+      favorites = JSON.parse(favorites).sort((a, b) => {
+        return a - b
+      })
     } else {
       localStorage.setItem('dining_favorites', JSON.stringify([]))
       favorites = []
@@ -130,7 +132,13 @@ export const addFavorite = venueID => {
       if (!favorites.includes(venueID)) {
         favorites.push(venueID)
       }
+
+      favorites = favorites.sort((a, b) => {
+        return a - b
+      })
     }
+
+    
 
     localStorage.setItem('dining_favorites', JSON.stringify(favorites))
 
@@ -145,7 +153,7 @@ export const removeFavorite = venueID => {
   return dispatch => {
     // favorites is an array of venueIDs
     let favorites = JSON.parse(localStorage.getItem('dining_favorites'))
-    favorites = favorites.filter(favorite =>  favorite != venueID)
+    favorites = favorites.filter(favorite => favorite != venueID)
     localStorage.setItem('dining_favorites', JSON.stringify(favorites))
     dispatch({
       type: updateDiningFavorites,

@@ -42,7 +42,6 @@ class Dining extends Component {
                       venueId={id}
                       name={venueData[id].name}
                       image={venueData[id].image}
-                      showMealLabels
                     />
                   </Col>
                 )

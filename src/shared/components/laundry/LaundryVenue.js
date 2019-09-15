@@ -193,6 +193,11 @@ class LaundryVenue extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { intervalID } = this.props
+    clearInterval(intervalID)
+  }
+
   render() {
     const {
       laundryHallInfo,

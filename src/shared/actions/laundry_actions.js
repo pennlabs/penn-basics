@@ -12,7 +12,8 @@ import {
   getLaundryHallInfoFulfilled,
   getFavoritesHome,
   updateLaundryFavorites,
-  updateIntervalID
+  updateIntervalID,
+  updateReminders
 } from './action_types';
 
 const publicVapidKey =

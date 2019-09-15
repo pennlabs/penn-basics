@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import uuid from 'uuid'
 
 import { Card, Scrollbar, Line, NavSectionHeader } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard'
 import { WHITE, BABY_BLUE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
+import Favorites from './Favorites'
 
 import venueData from '../../../server/database/venue_info.json'
 
@@ -44,6 +46,8 @@ class Nav extends Component {
         borderRight
         height={`calc(100vh - ${NAV_HEIGHT})`}
       >
+        <Favorites/>
+
         <Card background={BABY_BLUE} padding="0">
           <NavSectionHeader className="title is-5">Dining</NavSectionHeader>
           <Line />
@@ -53,11 +57,11 @@ class Nav extends Component {
           const { name, image } = venueData[key]
           return (
             <DiningCard
-              key={`${key}-${name}`}
+              key={uuid()}
               venueId={key}
               name={name}
               image={image}
-              showMealLabels
+              // showMealLabels
               isFavorited={favorites.includes(key)}
             />
           )
@@ -72,11 +76,11 @@ class Nav extends Component {
           const { name, image, showMealLabels } = venueData[key]
           return (
             <DiningCard
-              key={key}
+              key={uuid()}
               venueId={key}
               name={name}
               image={image}
-              showMealLabels={showMealLabels || false}
+              // showMealLabels={showMealLabels || false}
               isFavorited={favorites.includes(key)}
             />
           )
