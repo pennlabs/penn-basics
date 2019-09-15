@@ -44,4 +44,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(
+  null,
+  mapDispatchToProps
+)(App)

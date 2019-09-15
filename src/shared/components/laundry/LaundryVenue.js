@@ -122,9 +122,9 @@ const renderMachineAvailabilities = (
             ({ status, time_remaining: timeRemaining, id }) => {
               const reminded = reminders.some(
                 reminder =>
-                  reminder.machineID == id && reminder.hallID == laundryHallId
+                  reminder.machineID === id && reminder.hallID === laundryHallId
               )
-              const showBell = !(timeRemaining == 0 || reminded)
+              const showBell = !(timeRemaining === 0 || reminded)
               return (
                 <tr key={id}>
                   <td>{id}</td>
@@ -201,7 +201,6 @@ class LaundryVenue extends Component {
   render() {
     const {
       laundryHallInfo,
-      pending,
       favorites,
       laundryHallId,
       reminders,
@@ -243,19 +242,21 @@ class LaundryVenue extends Component {
                 className="button is-info"
                 onClick={() => dispatchRemoveFavorite(laundryHallId)}
               >
-                <FavoriteIcon className="fa fa-heart" /> &nbsp; Favorited
+                <FavoriteIcon className="fa fa-heart" />
+                <span>&nbsp; Favorited</span>
               </span>
             ) : (
-                <span // eslint-disable-line
-                  className="button"
-                  onClick={() =>
+              <span // eslint-disable-line
+                className="button"
+                onClick={() =>
                   dispatchAddFavorite(laundryHallId, location, hallName)
                 }
-                >
-                  <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
-                </span>
+              >
+                <FavoriteIcon className="far fa-heart" />
+                <span>&nbsp; Make Favorite</span>
+              </span>
             )}
-            {reminders.length == 0 ? null : (
+            {reminders.length === 0 ? null : (
               <span // eslint-disable-line
                 className="button"
                 style={{ marginLeft: '0.5rem' }}
@@ -310,9 +311,14 @@ LaundryVenue.defaultProps = {
   pending: true,
   laundryHallId: null,
   hallURLId: null,
+  intervalID: null,
+  reminders: [],
 }
 
 LaundryVenue.propTypes = {
+  reminders: PropTypes.arrayOf(PropTypes.string),
+  dispatchGetReminders: PropTypes.func.isRequired,
+  intervalID: PropTypes.number,
   laundryHallInfo: PropTypes.shape({
     hall_name: PropTypes.string,
     location: PropTypes.string,
@@ -320,7 +326,6 @@ LaundryVenue.propTypes = {
   }),
   laundryHallId: PropTypes.number,
   hallURLId: PropTypes.number,
-  pending: PropTypes.bool,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
   dispatchGetLaundryHall: PropTypes.func.isRequired,

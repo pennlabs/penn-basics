@@ -3,22 +3,15 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
-
 import DiningCard from './DiningCard'
 import venueData from '../../../server/database/venue_info.json'
-import {
-  Card,
-  Line,
-  NavSectionHeader,
-} from '../shared';
+import { Card, Line, NavSectionHeader } from '../shared'
 import { BABY_BLUE } from '../../styles/colors'
-
 
 class Favorites extends Component {
   constructor(props) {
     super(props)
   }
-
 
   render() {
     const { favorites } = this.props
@@ -28,7 +21,11 @@ class Favorites extends Component {
     return (
       <div>
         <Card background={BABY_BLUE} padding="0">
-          <NavSectionHeader className="title is-5"> Favorites </NavSectionHeader>
+          <NavSectionHeader className="title is-5">
+            {' '}
+            Favorites
+{' '}
+          </NavSectionHeader>
           <Line />
         </Card>
 
@@ -47,16 +44,15 @@ class Favorites extends Component {
   }
 }
 
-
 const mapStateToProps = ({ dining }) => {
-  const {
-    favorites
-  } = dining
+  const { favorites } = dining
 
   return {
-    favorites
+    favorites,
   }
 }
 
-
-export default connect(mapStateToProps, null)(Favorites)
+export default connect(
+  mapStateToProps,
+  null
+)(Favorites)

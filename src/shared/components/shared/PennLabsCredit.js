@@ -11,7 +11,8 @@ export default () => (
       Made with &hearts; by&nbsp;
       <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
         Penn Labs.
-      </a>{' '}
+      </a>
+      &nbsp;
       <a href={AIRTABLE_LINK} target="_BLANK" rel="noopener noreferrer">
         Feedback.
       </a>

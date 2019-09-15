@@ -81,7 +81,7 @@ class DiningCard extends Component {
     } else {
       showMealLabels = true
     }
-    
+
     // get the array of hours that are opened today
     const date = new Date()
     const currTime = `${pad(date.getHours())}:${pad(date.getMinutes())}`
@@ -105,7 +105,7 @@ class DiningCard extends Component {
             <span key={`${starttime}-${endtime}-${label}`}>
               {`${convertDate(starttime)} - ${convertDate(endtime)}${
                 showMealLabels ? ` • ${label}` : ''
-                }`}
+              }`}
               {index === openHours.length - 1 ? null : <br />}
             </span>
           ))}
@@ -121,7 +121,7 @@ class DiningCard extends Component {
     // Images are served through the public folder
     const img = `/img/venue_images/${image}`
 
-    if (isFavorited){
+    if (isFavorited) {
       return null
     }
 
@@ -134,9 +134,7 @@ class DiningCard extends Component {
             )}
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
-                <Subtitle marginBottom="0">
-                  {name}
-                </Subtitle>
+                <Subtitle marginBottom="0">{name}</Subtitle>
 
                 {this.renderSubtext()}
               </Content>

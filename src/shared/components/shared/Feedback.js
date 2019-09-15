@@ -34,12 +34,7 @@ const Icon = s.i`
 `
 
 export default () => (
-  <FeedbackLink
-    href={AIRTABLE_LINK}
-    title="Feedback"
-    target="_blank"
-    onClick={() => logEvent('feedback', 'clicked')}
-  >
+  <FeedbackLink href={AIRTABLE_LINK} title="Feedback" target="_blank">
     <Icon className="fa-comment far fa-lg" />
   </FeedbackLink>
 )

@@ -46,7 +46,7 @@ class Nav extends Component {
         borderRight
         height={`calc(100vh - ${NAV_HEIGHT})`}
       >
-        <Favorites/>
+        <Favorites />
 
         <Card background={BABY_BLUE} padding="0">
           <NavSectionHeader className="title is-5">Dining</NavSectionHeader>
@@ -93,13 +93,14 @@ class Nav extends Component {
 }
 
 const mapStateToProps = ({ dining }) => {
-  const {
-    favorites
-  } = dining
+  const { favorites } = dining
 
   return {
-    favorites
+    favorites,
   }
 }
 
-export default connect(mapStateToProps, null)(Nav)
+export default connect(
+  mapStateToProps,
+  null
+)(Nav)

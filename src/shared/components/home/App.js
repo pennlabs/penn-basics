@@ -30,7 +30,7 @@ const Wrapper = s.div`
 
 class Home extends Component {
   constructor(props) {
-    console.log("hey hey")
+    console.log('hey hey')
     super(props)
 
     this.state = {
