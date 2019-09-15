@@ -11,4 +11,4 @@ export default {
   'breads and toast': true,
   ovens: true,
   fruit: true,
-};
+}

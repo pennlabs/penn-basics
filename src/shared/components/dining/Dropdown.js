@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-
 class Dropdown extends Component {
   constructor(props) {
     super(props)
@@ -13,7 +12,6 @@ class Dropdown extends Component {
     this.handleChangeState = this.handleChangeState.bind(this)
   }
 
-
   componentDidUpdate(prevProps, prevState) {
     const { selected } = this.state
     const { callback } = this.props
@@ -23,13 +21,11 @@ class Dropdown extends Component {
     }
   }
 
-
   handleChangeState(event) {
     this.setState({
       selected: event.target.value,
     })
   }
-
 
   render() {
     const { values, options } = this.props
@@ -38,7 +34,7 @@ class Dropdown extends Component {
     const content = values.map((value, index) => {
       // Find the text for the dropdown option
       // NOTE that this is different from the value
-      let text = '';
+      let text = ''
 
       if (options && options.length > index) {
         text = options[index]
@@ -48,7 +44,7 @@ class Dropdown extends Component {
 
       return (
         <option key={value} value={value} defaultValue={value === selected}>
-          { text }
+          {text}
         </option>
       )
     })
@@ -61,18 +57,16 @@ class Dropdown extends Component {
           onChange={this.handleChangeState}
           value={selected}
         >
-          { content }
+          {content}
         </select>
       </div>
     )
   }
 }
 
-
 Dropdown.defaultProps = {
   callback: () => {},
 }
-
 
 Dropdown.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -81,5 +75,4 @@ Dropdown.propTypes = {
   callback: PropTypes.func,
 }
 
-
-export default Dropdown;
+export default Dropdown

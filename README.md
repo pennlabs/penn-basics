@@ -12,7 +12,7 @@ node -v
 
 If your Node version is not `10.x`, consider using Node Version Manager (nvm) to handle changing versions of node.
 
-After a `env.sh` file containing `PORT` and `MONGO_URL` values is created:
+After a `env.sh` file containing `PORT`, `GOOGLE_KEY`, and `MONGO_URI` values is created:
 
 ```
 git clone https://github.com/pennlabs/pennbasics.git

@@ -6,18 +6,9 @@ import uuid from 'uuid'
 import s from 'styled-components'
 import { getLaundryHall } from '../../actions/laundry_actions'
 
-
-import {
-  Card,
-  Text,
-  Row,
-  Line,
-  Col,
-} from '../shared'
-
+import { Card, Text, Row, Line, Col } from '../shared'
 
 import { DARK_GRAY } from '../../styles/colors'
-
 
 const StyledLink = s(Link)`
   h2 {
@@ -25,14 +16,12 @@ const StyledLink = s(Link)`
   }
 `
 
-
 class FavoriteCard extends Component {
   handleKeyPress(event) {
     if (event.keyCode === 32) {
       this.toggleModal()
     }
   }
-
 
   render() {
     const { hallId, locationName } = this.props
@@ -54,22 +43,21 @@ class FavoriteCard extends Component {
   }
 }
 
-
 FavoriteCard.defaultProps = {
   hallId: null,
   locationName: null,
 }
-
 
 FavoriteCard.propTypes = {
   hallId: PropTypes.string,
   locationName: PropTypes.string,
 }
 
-
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHall: hallId => dispatch(getLaundryHall(hallId)),
 })
 
-
-export default connect(null, mapDispatchToProps)(FavoriteCard)
+export default connect(
+  null,
+  mapDispatchToProps
+)(FavoriteCard)

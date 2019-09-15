@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import uuid from 'uuid/v4';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import uuid from 'uuid/v4'
 
-import SidebarSection from './SidebarSection';
+import SidebarSection from './SidebarSection'
 
-import {
-  sidebarDining,
-} from '../../../actions/action_types';
+import { sidebarDining } from '../../../actions/action_types'
 
 class Sidebar extends Component {
   renderSections() {
-    const { sections } = this.props;
+    const { sections } = this.props
 
-    return sections.map(section => (
-      <SidebarSection {...section} key={uuid()} />
-    ));
+    return sections.map(section => <SidebarSection {...section} key={uuid()} />)
   }
 
   render() {
@@ -23,7 +19,7 @@ class Sidebar extends Component {
       <div className="sidebar" id="sidebar">
         {this.renderSections()}
       </div>
-    );
+    )
   }
 }
 
@@ -34,11 +30,11 @@ const mapStateToProps = ({
 }) => {
   switch (sidebar) {
     case sidebarDining:
-      return { sections: diningSidebarInfo, link };
+      return { sections: diningSidebarInfo, link }
     default:
-      throw Error('Sidebar does not yet handle info from non-dining sections');
+      throw Error('Sidebar does not yet handle info from non-dining sections')
   }
-};
+}
 
 Sidebar.propTypes = {
   link: PropTypes.string.isRequired,
@@ -50,10 +46,10 @@ Sidebar.propTypes = {
           name: PropTypes.string,
           isOpen: PropTypes.bool,
           venueID: PropTypes.number,
-        }),
+        })
       ),
-    }),
+    })
   ).isRequired,
-};
+}
 
-export default connect(mapStateToProps)(Sidebar);
+export default connect(mapStateToProps)(Sidebar)

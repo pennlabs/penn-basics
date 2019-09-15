@@ -168,7 +168,7 @@ class LaundryVenue extends Component {
       hallURLId,
       intervalID,
       dispatchGetLaundryHall,
-      dispatchGetReminders
+      dispatchGetReminders,
     } = this.props
 
     if (hallURLId) {
@@ -179,11 +179,7 @@ class LaundryVenue extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      dispatchGetLaundryHall,
-      hallURLId,
-      intervalID
-    } = this.props
+    const { dispatchGetLaundryHall, hallURLId, intervalID } = this.props
 
     const prevHallURLId = prevProps.hallURLId
 
@@ -244,12 +240,12 @@ class LaundryVenue extends Component {
                 <span // eslint-disable-line
                   className="button"
                   onClick={() =>
-                    dispatchAddFavorite(laundryHallId, location, hallName)
-                  }
+                  dispatchAddFavorite(laundryHallId, location, hallName)
+                }
                 >
                   <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
-              </span>
-              )}
+                </span>
+            )}
             {reminders.length == 0 ? null : (
               <span // eslint-disable-line
                 className="button"
@@ -330,7 +326,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
     reminders,
-    intervalID
+    intervalID,
   } = laundry
 
   // Make sure that the ID is a number
@@ -352,7 +348,7 @@ const mapStateToProps = ({ laundry }) => {
     laundryHalls,
     favorites,
     reminders,
-    intervalID
+    intervalID,
   }
 }
 
@@ -361,7 +357,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addFavorite(laundryHallId, location, hallName)),
   dispatchRemoveFavorite: laundryHallId =>
     dispatch(removeFavorite(laundryHallId)),
-  dispatchGetLaundryHall: (hallId, intervalID) => dispatch(getLaundryHall(hallId, intervalID)),
+  dispatchGetLaundryHall: (hallId, intervalID) =>
+    dispatch(getLaundryHall(hallId, intervalID)),
   dispatchAddReminder: (machineID, hallID, hallName) =>
     dispatch(addReminder(machineID, hallID, hallName)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),

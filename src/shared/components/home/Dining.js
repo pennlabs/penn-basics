@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-
 import { BorderedCard } from '../shared'
 import DiningCards from './DiningCards'
-
 
 class Dining extends Component {
   constructor(props) {
     super(props)
     this.state = { object: false }
   }
-
 
   render() {
     const { object } = this.state
@@ -24,21 +21,21 @@ class Dining extends Component {
         </Link>
 
         <div className="space-1" />
-        {(object === null) ? (
+        {object === null ? (
           <img
             src="https://i.imgur.com/fFniYax.png"
             alt="No dining cards"
             width="500px"
           />
         ) : (
-            <div>
-              <DiningCards name="Kings Court English House" type={0} />
-              <DiningCards name="Pret a Manger" type={1} />
-            </div>
-          )}
+          <div>
+            <DiningCards name="Kings Court English House" type={0} />
+            <DiningCards name="Pret a Manger" type={1} />
+          </div>
+        )}
       </BorderedCard>
-    );
+    )
   }
 }
 
-export default Dining;
+export default Dining

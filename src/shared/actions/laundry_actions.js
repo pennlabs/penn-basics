@@ -13,8 +13,8 @@ import {
   updateFavorites,
   getFavoritesHome,
   updateReminders,
-  updateIntervalID
-} from './action_types';
+  updateIntervalID,
+} from './action_types'
 
 const publicVapidKey =
   'BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8'
@@ -61,7 +61,7 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
       clearInterval(prevIntervalID)
       dispatch({
         type: updateIntervalID,
-        intervalID: null
+        intervalID: null,
       })
     }
 
@@ -70,7 +70,9 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
     })
 
     try {
-      const axiosResponse = await axios.get(`${BASE}/laundry/hall/${laundryHallId}`)
+      const axiosResponse = await axios.get(
+        `${BASE}/laundry/hall/${laundryHallId}`
+      )
 
       const { data } = axiosResponse
       dispatch({
@@ -111,9 +113,8 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
 
     dispatch({
       type: updateIntervalID,
-      intervalID
+      intervalID,
     })
-
   }
 }
 
@@ -282,17 +283,17 @@ export const getReminders = () => {
 
   navigator.serviceWorker.register('/sw.js')
 
-  return (dispatch) => {
+  return dispatch => {
     const request = indexedDB.open('LocalDB', 1)
 
     request.onerror = event => {
-      console.error("Database error: " + event.target.errorCode);
+      console.error(`Database error: ${event.target.errorCode}`)
     }
 
     request.onupgradeneeded = event => {
       console.log('---IndexedDB: upgrading strucutre----')
       const db = event.target.result
-      db.createObjectStore("laundryReminders", { keyPath: "hallMachineID" })
+      db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
     }
 
     request.onsuccess = event => {
@@ -303,24 +304,27 @@ export const getReminders = () => {
         reminders = JSON.parse(reminders)
         console.log('----reminders----')
         console.log(reminders)
-        let newReminders = []
+        const newReminders = []
 
-        const transaction = db.transaction(["laundryReminders"], "readonly")
+        const transaction = db.transaction(['laundryReminders'], 'readonly')
 
         transaction.oncomplete = event => {
-          localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
+          localStorage.setItem(
+            'laundry_reminders',
+            JSON.stringify(newReminders)
+          )
           dispatch({
             type: updateReminders,
-            reminders: newReminders
+            reminders: newReminders,
           })
           console.log('---complete updating reminders in localStorage----')
         }
 
         transaction.onerror = event => {
-          console.error("Database error: " + event.target.errorCode);
+          console.error(`Database error: ${event.target.errorCode}`)
         }
 
-        const objectStore = transaction.objectStore("laundryReminders")
+        const objectStore = transaction.objectStore('laundryReminders')
 
         const getAllRequest = objectStore.getAll()
 
@@ -329,17 +333,22 @@ export const getReminders = () => {
         }
 
         reminders.forEach(reminder => {
-          const storeRequest = objectStore.get(`${reminder.hallID}-${reminder.machineID}`)
+          const storeRequest = objectStore.get(
+            `${reminder.hallID}-${reminder.machineID}`
+          )
           storeRequest.onsuccess = event => {
-            const result = event.target.result
+            const { result } = event.target
             console.log(result)
-            if (!result || (result && result.reminderID != reminder.reminderID)) {
+            if (
+              !result ||
+              (result && result.reminderID != reminder.reminderID)
+            ) {
               newReminders.push(reminder)
             }
           }
 
           storeRequest.onerror = event => {
-            console.error("Store error: " + event.target.errorCode);
+            console.error(`Store error: ${event.target.errorCode}`)
           }
         })
       } else {
@@ -347,14 +356,14 @@ export const getReminders = () => {
         dispatch({
           type: updateReminders,
           reminders: [],
-        });
+        })
       }
     }
   }
 }
 
 export const addReminder = (machineID, hallID, hallName) => {
-  return (dispatch) => {
+  return dispatch => {
     try {
       navigator.serviceWorker.register('/sw.js')
 
@@ -366,26 +375,36 @@ export const addReminder = (machineID, hallID, hallName) => {
           return registration.pushManager.subscribe({
             userVisibleOnly: true,
             // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-          });
-        }).then(async subscription => {
+            applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
+          })
+        })
+        .then(async subscription => {
           let reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
           const reminderID = uuidv4()
           reminders.push({ machineID, hallID, reminderID })
           dispatch({
             type: updateReminders,
-            reminders
+            reminders,
           })
           localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
 
-          const axiosResponse = await axios.post('/api/laundry/addReminder', { subscription, machineID, hallID, hallName, reminderID })
+          const axiosResponse = await axios.post('/api/laundry/addReminder', {
+            subscription,
+            machineID,
+            hallID,
+            hallName,
+            reminderID,
+          })
 
           if (!axiosResponse.data.error) {
             reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
-            reminders = reminders.filter(reminder => reminder.machineID != machineID || reminder.hallID != hallID)
+            reminders = reminders.filter(
+              reminder =>
+                reminder.machineID != machineID || reminder.hallID != hallID
+            )
             dispatch({
               type: updateReminders,
-              reminders
+              reminders,
             })
             localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
           }
@@ -397,26 +416,27 @@ export const addReminder = (machineID, hallID, hallName) => {
 }
 
 export const removeReminder = () => {
-  return (dispatch) => {
-    navigator.serviceWorker.ready.then(registration => {
-      return registration.pushManager.getSubscription()
-    }).then(subscription => {
-      subscription.unsubscribe().then(async successful => {
-        if (successful) {
-          dispatch({
-            type: updateReminders,
-            reminders: []
-          })
-          localStorage.setItem('laundry_reminders', JSON.stringify([]))
-          console.log("----Service Worker: Unsubscription successful----")
-        }
+  return dispatch => {
+    navigator.serviceWorker.ready
+      .then(registration => {
+        return registration.pushManager.getSubscription()
       })
-    })
+      .then(subscription => {
+        subscription.unsubscribe().then(async successful => {
+          if (successful) {
+            dispatch({
+              type: updateReminders,
+              reminders: [],
+            })
+            localStorage.setItem('laundry_reminders', JSON.stringify([]))
+            console.log('----Service Worker: Unsubscription successful----')
+          }
+        })
+      })
   }
 }
 
-
-const getRemindersInterval = (dispatch) => {
+const getRemindersInterval = dispatch => {
   if (!('serviceWorker' in navigator)) {
     throw new Error('No Service Worker support!')
   }
@@ -450,13 +470,13 @@ const getRemindersInterval = (dispatch) => {
   const request = indexedDB.open('LocalDB', 1)
 
   request.onerror = event => {
-    console.error("Database error: " + event.target.errorCode);
+    console.error(`Database error: ${event.target.errorCode}`)
   }
 
   request.onupgradeneeded = event => {
     console.log('---IndexedDB: upgrading strucutre----')
     const db = event.target.result
-    db.createObjectStore("laundryReminders", { keyPath: "hallMachineID" })
+    db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
   }
 
   request.onsuccess = event => {
@@ -467,24 +487,24 @@ const getRemindersInterval = (dispatch) => {
       reminders = JSON.parse(reminders)
       console.log('----reminders----')
       console.log(reminders)
-      let newReminders = []
+      const newReminders = []
 
-      const transaction = db.transaction(["laundryReminders"], "readonly")
+      const transaction = db.transaction(['laundryReminders'], 'readonly')
 
       transaction.oncomplete = event => {
         localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
         dispatch({
           type: updateReminders,
-          reminders: newReminders
+          reminders: newReminders,
         })
         console.log('---complete updating reminders in localStorage----')
       }
 
       transaction.onerror = event => {
-        console.error("Database error: " + event.target.errorCode);
+        console.error(`Database error: ${event.target.errorCode}`)
       }
 
-      const objectStore = transaction.objectStore("laundryReminders")
+      const objectStore = transaction.objectStore('laundryReminders')
 
       const getAllRequest = objectStore.getAll()
 
@@ -493,9 +513,11 @@ const getRemindersInterval = (dispatch) => {
       }
 
       reminders.forEach(reminder => {
-        const storeRequest = objectStore.get(`${reminder.hallID}-${reminder.machineID}`)
+        const storeRequest = objectStore.get(
+          `${reminder.hallID}-${reminder.machineID}`
+        )
         storeRequest.onsuccess = event => {
-          const result = event.target.result
+          const { result } = event.target
           console.log(result)
           if (!result || (result && result.reminderID != reminder.reminderID)) {
             newReminders.push(reminder)
@@ -503,7 +525,7 @@ const getRemindersInterval = (dispatch) => {
         }
 
         storeRequest.onerror = event => {
-          console.error("Store error: " + event.target.errorCode);
+          console.error(`Store error: ${event.target.errorCode}`)
         }
       })
     } else {
@@ -511,7 +533,7 @@ const getRemindersInterval = (dispatch) => {
       dispatch({
         type: updateReminders,
         reminders: [],
-      });
+      })
     }
   }
 }

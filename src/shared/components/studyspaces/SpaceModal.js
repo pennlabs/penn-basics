@@ -3,16 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { clearActiveSpace } from '../../actions/spaces_actions'
 
-import {
-  Title,
-  Text,
-  Modal,
-  ModalContainer,
-  Image,
-  Tag,
-  Map,
-  Subtext,
-} from '../shared'
+import { Title, Text, Modal, ModalContainer, Image, Tag, Map } from '../shared'
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
 

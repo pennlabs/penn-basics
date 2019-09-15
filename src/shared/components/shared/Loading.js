@@ -1,17 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Loading = ({
-  title = 'Loading, please wait',
-}) => (
+const Loading = ({ title = 'Loading, please wait' }) => (
   <div className="center-div">
-    {
-      title ? (
-        <h4 className="is-size-4 medium-gray-text marg-bot-2">
-          {title}
-        </h4>
-      ) : null
-    }
+    {title ? (
+      <h4 className="is-size-4 medium-gray-text marg-bot-2">{title}</h4>
+    ) : null}
     <img
       className="marg-top-2"
       alt="loading"
@@ -20,14 +14,14 @@ const Loading = ({
       width="300px"
     />
   </div>
-);
+)
 
 Loading.defaultProps = {
   title: 'Loading, please wait',
-};
+}
 
 Loading.propTypes = {
   title: PropTypes.string,
-};
+}
 
-export default Loading;
+export default Loading

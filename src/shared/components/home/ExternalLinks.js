@@ -6,11 +6,19 @@ const renderExternalLink = (pictureURL, websiteURL, productName) => {
     <BorderedCard>
       <Row>
         <Col width="20%">
-          <a href={websiteURL} target="_blank"> <img src={pictureURL} /> </a>
+          <a href={websiteURL} target="_blank">
+            {' '}
+            <img src={pictureURL} />
+{' '}
+          </a>
         </Col>
         <ColSpace />
         <Col>
-          <a href={websiteURL} target="_blank"> {productName} </a>
+          <a href={websiteURL} target="_blank">
+            {' '}
+            {productName}
+{' '}
+          </a>
         </Col>
       </Row>
     </BorderedCard>
@@ -19,20 +27,26 @@ const renderExternalLink = (pictureURL, websiteURL, productName) => {
 
 const renderUsefulLink = (websiteURL, description) => {
   return (
-    <a href={websiteURL} target="_blank"> {description} </a>
+    <a href={websiteURL} target="_blank">
+      {' '}
+      {description}
+{' '}
+    </a>
   )
 }
 
 const mapping = [
   {
-    "pictureURL": "https://raw.githubusercontent.com/pennlabs/clubs/master/static/img/peoplelogo.png",
-    "websiteURL": "https://pennclubs.com/",
-    "productName": "Penn Clubs"
+    pictureURL:
+      'https://raw.githubusercontent.com/pennlabs/clubs/master/static/img/peoplelogo.png',
+    websiteURL: 'https://pennclubs.com/',
+    productName: 'Penn Clubs',
   },
   {
-    "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCR.png",
-    "websiteURL": "https://penncoursereview.com/",
-    "productName": "Penn Course Review"
+    pictureURL:
+      'https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCR.png',
+    websiteURL: 'https://penncoursereview.com/',
+    productName: 'Penn Course Review',
   },
   // {
   //   "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCA.png",
@@ -46,25 +60,25 @@ const mapping = [
 
 const usefulLinks = [
   {
-    "websiteURL": "https://pennlabs.org/",
-    "description": "Penn Labs"
+    websiteURL: 'https://pennlabs.org/',
+    description: 'Penn Labs',
   },
   {
-    "websiteURL": "https://www.upenn.edu/",
-    "description": "Penn Homepage"
+    websiteURL: 'https://www.upenn.edu/',
+    description: 'Penn Homepage',
   },
   {
-    "websiteURL": "https://prod.campusexpress.upenn.edu/",
-    "description": "CampusExpress"
+    websiteURL: 'https://prod.campusexpress.upenn.edu/',
+    description: 'CampusExpress',
   },
   {
-    "websiteURL": "https://canvas.upenn.edu",
-    "description": "Canvas"
+    websiteURL: 'https://canvas.upenn.edu',
+    description: 'Canvas',
   },
   {
-    "PennInTouch": "https://pennintouch.apps.upenn.edu/pennInTouch/jsp/fast2.do",
-    "description": "PennInTouch"
-  }
+    PennInTouch: 'https://pennintouch.apps.upenn.edu/pennInTouch/jsp/fast2.do',
+    description: 'PennInTouch',
+  },
 ]
 
 class ExternalLinks extends Component {
@@ -87,11 +101,10 @@ class ExternalLinks extends Component {
           return (
             <>
               {renderUsefulLink(websiteURL, description)}
-              {index == usefulLinks.length - 1 ? <></> : <br/>}
+              {index == usefulLinks.length - 1 ? <></> : <br />}
             </>
           )
         })}
-
       </BorderedCard>
     )
   }

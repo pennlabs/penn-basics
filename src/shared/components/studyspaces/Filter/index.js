@@ -18,7 +18,6 @@ import {
   filterSpacesNoise,
   filterSpacesGroups,
   clearSpacesFilters,
-
   toggleSpacesOpen,
   toggleSpacesOutlets,
   toggleSpacesNoise,
@@ -66,7 +65,7 @@ class Filter extends Component {
       filterSpacesOpenDispatch,
       filterOpen,
       toggleSpacesOpenDispatch,
-    } = this.props;
+    } = this.props
 
     toggleSpacesOpenDispatch()
     filterSpacesOpenDispatch(!filterOpen)
@@ -117,7 +116,7 @@ class Filter extends Component {
       filterOutlets,
       filterNoise,
       filterGroups,
-    } = this.props;
+    } = this.props
 
     // TODO OTHER ACTIVE PROPS?
 
@@ -151,7 +150,11 @@ class Filter extends Component {
           text="Groups"
           onClick={toggleSpacesGroupsDispatch}
           onClickOption={this.handleClickGroups}
-          options={['No groups', 'Good for small groups', 'Good for large groups']}
+          options={[
+            'No groups',
+            'Good for small groups',
+            'Good for large groups',
+          ]}
           activeOptions={filterGroups}
           active={filterGroupsActive}
         />
@@ -196,13 +199,14 @@ Filter.propTypes = {
   filterGroups: PropTypes.arrayOf(PropTypes.number),
 }
 
-const mapStateToProps = ({ spaces }) => spaces;
+const mapStateToProps = ({ spaces }) => spaces
 
 const mapDispatchToProps = dispatch => ({
   clearSpacesFiltersDispatch: () => dispatch(clearSpacesFilters()),
 
   filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
-  filterSpacesOutletsDispatch: filters => dispatch(filterSpacesOutlets(filters)),
+  filterSpacesOutletsDispatch: filters =>
+    dispatch(filterSpacesOutlets(filters)),
   filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
   filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
 
@@ -214,5 +218,5 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Filter)

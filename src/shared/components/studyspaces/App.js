@@ -16,7 +16,8 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 
 class App extends Component {
   componentDidMount() {
-    this.props.getAllSpacesDataDispatch()
+    const { getAllSpacesDataDispatch } = this.props
+    getAllSpacesDataDispatch()
   }
 
   componentDidUpdate(prevProps) {
@@ -27,10 +28,13 @@ class App extends Component {
      * We solve this by checking if the new props lack necessary data, but the old props
      * did have that data. If this is the case, we request the data again.
      */
-    const { spacesData: currentSpacesData } = this.props
+    const {
+      spacesData: currentSpacesData,
+      getAllSpacesDataDispatch,
+    } = this.props
     const { spacesData: prevSpacesData } = prevProps
     if (!currentSpacesData && prevSpacesData) {
-      this.props.getAllSpacesDataDispatch()
+      getAllSpacesDataDispatch()
     }
   }
 
@@ -93,11 +97,30 @@ class App extends Component {
   }
 }
 
+const SpacesDataPropType = PropTypes.objectOf(
+  PropTypes.objectOf({
+    address: PropTypes.string,
+    description: PropTypes.string,
+    end: PropTypes.arrayOf(PropTypes.number),
+    groups: PropTypes.number,
+    hours: PropTypes.string,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    open: PropTypes.bool,
+    outlets: PropTypes.number,
+    quiet: PropTypes.number,
+    start: PropTypes.arrayOf(PropTypes.number),
+    tags: PropTypes.arrayOf(PropTypes.string),
+    _id: PropTypes.string,
+  })
+)
+
 App.defaultProps = {
   error: null,
   hoveredSpace: null,
   pending: false,
   filteredSpacesData: null,
+  spacesData: null,
 }
 
 App.propTypes = {
@@ -106,7 +129,8 @@ App.propTypes = {
   error: PropTypes.string,
   hoveredSpace: PropTypes.string,
   pending: PropTypes.bool,
-  filteredSpacesData: PropTypes.object, // eslint-disable-line
+  filteredSpacesData: SpacesDataPropType,
+  spacesData: SpacesDataPropType,
 }
 
 const mapStateToProps = ({ spaces }) => spaces

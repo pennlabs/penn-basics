@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import {
   FOCUS_GRAY,
@@ -9,9 +10,7 @@ import {
   BLUE,
   MEDIUM_GRAY,
 } from '../../../styles/colors'
-import {
-  filterOnCampus
-} from '../../../actions/spaces_actions'
+import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
@@ -29,7 +28,9 @@ const Label = s.span`
   cursor: pointer;
   opacity: 0.6;
 
-  ${({ active }) => active && `
+  ${({ active }) =>
+    active &&
+    `
     opacity: 1;
     color: ${BLUE} !important;
   `}
@@ -74,11 +75,11 @@ class ToggleNeighborhood extends Component {
   handleClick(e) {
     const { filterOnCampusDispatch, filterOnCampus } = this.props
     e.stopPropagation()
-    filterOnCampusDispatch(!filterOnCampus);
+    filterOnCampusDispatch(!filterOnCampus)
   }
 
   render() {
-    const { filterOnCampus } = this.props;
+    const { filterOnCampus } = this.props
     return (
       <Wrapper>
         <ToggleWrapper>
@@ -93,10 +94,22 @@ class ToggleNeighborhood extends Component {
   }
 }
 
-const mapStateToProps = ({ spaces }) => spaces;
+ToggleNeighborhood.propTypes = {
+  filterOnCampus: PropTypes.bool,
+  filterOnCampusDispatch: PropTypes.func.isRequired,
+}
+
+ToggleNeighborhood.defaultProps = {
+  filterOnCampus: false,
+}
+
+const mapStateToProps = ({ spaces }) => spaces
 
 const mapDispatchToProps = dispatch => ({
-  filterOnCampusDispatch: (filter) => dispatch(filterOnCampus(filter)),
+  filterOnCampusDispatch: filter => dispatch(setFilterOnCampus(filter)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ToggleNeighborhood)

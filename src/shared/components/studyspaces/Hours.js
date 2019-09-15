@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Text } from '../shared';
-import { getHours } from './mapper';
+import { Text } from '../shared'
+import { getHours } from './mapper'
 
 const Hours = ({ start, end }) => {
   const days = [
@@ -32,23 +32,19 @@ const Hours = ({ start, end }) => {
         <tbody>
           {hoursArr.map((str, idx) => (
             <tr key={days[idx]}>
-              <td>
-                {days[idx]}
-              </td>
-              <td>
-                {str}
-              </td>
+              <td>{days[idx]}</td>
+              <td>{str}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
 Hours.propTypes = {
   start: PropTypes.arrayOf(PropTypes.number).isRequired,
   end: PropTypes.arrayOf(PropTypes.number).isRequired,
-};
+}
 
-export default Hours;
+export default Hours

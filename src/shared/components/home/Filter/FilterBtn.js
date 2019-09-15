@@ -196,7 +196,7 @@ class FilterBtn extends Component {
     } = this.props
 
     const areOptions = options && options.length
-    let areActiveOptions =
+    const areActiveOptions =
       activeOptions && activeOptions.length < options.length
     let btnText = text
 

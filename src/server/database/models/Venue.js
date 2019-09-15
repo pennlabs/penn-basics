@@ -1,5 +1,6 @@
-const mongoose = require('../mongoose-connect');
-const { Schema } = mongoose;
+const mongoose = require('../mongoose-connect')
+
+const { Schema } = mongoose
 
 const venueSchema = new Schema({
   name: {
@@ -20,6 +21,6 @@ const venueSchema = new Schema({
     lat: Number,
     lng: Number,
   },
-});
+})
 
-module.exports = mongoose.model('Venue', venueSchema);
+module.exports = mongoose.model('Venue', venueSchema)

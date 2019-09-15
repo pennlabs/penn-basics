@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { GREEN, BORDER } from '../../styles/colors';
+import { GREEN, BORDER } from '../../styles/colors'
 
 export const Circle = styled.div`
   width: 0.5rem;

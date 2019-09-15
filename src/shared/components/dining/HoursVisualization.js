@@ -80,7 +80,7 @@ class HoursVisualization extends Component {
 
     const { starttime, endtime } = meal
     const dateObj = new Date()
-    const currTime = pad(dateObj.getHours()) + ':' + pad(dateObj.getMinutes())
+    const currTime = `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
 
     const today = this.getDay(dateObj)
 
@@ -104,7 +104,7 @@ class HoursVisualization extends Component {
       <table className="table is-fullwidth marg-bot-0">
         <tbody>
           {venueHours.map((venueHour, idx) => {
-            let meals = venueHour.dayparts
+            const meals = venueHour.dayparts
             meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
             return (
               <React.Fragment key={`${venueHour.date}-${idx}`}>

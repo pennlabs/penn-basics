@@ -1,5 +1,5 @@
-import React from 'react';
-import LinkItem from './LinkItem';
+import React from 'react'
+import LinkItem from './LinkItem'
 
 const Links = () => (
   <ul>
@@ -7,6 +7,6 @@ const Links = () => (
     <LinkItem url="/laundry" name="Laundry" />
     <LinkItem url="/studyspaces" name="Studyspaces" />
   </ul>
-);
+)
 
-export default Links;
+export default Links

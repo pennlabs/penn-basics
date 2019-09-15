@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import WrappedLink from '../WrappedLink';
+import WrappedLink from '../WrappedLink'
 
 const LinkItem = ({ name, url }) => (
   <li>
@@ -9,11 +9,11 @@ const LinkItem = ({ name, url }) => (
       {name}
     </WrappedLink>
   </li>
-);
+)
 
 LinkItem.propTypes = {
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-};
+}
 
-export default LinkItem;
+export default LinkItem

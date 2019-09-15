@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import s from 'styled-components'
 
-
-import {
-  Card,
-  Subtitle,
-  Subtext,
-  Row,
-  Col,
-  Circle,
-} from '../shared';
+import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
-
 
 const Content = s.div`
   width: 100%;
@@ -22,7 +13,6 @@ const Content = s.div`
   overflow-x: visible;
   padding-right: 0.5rem;
 `
-
 
 class SpaceCard extends Component {
   constructor(props) {
@@ -33,20 +23,14 @@ class SpaceCard extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
 
-
   handleKeyPress(event) {
     if (event.keyCode === 32) {
       this.handleClick()
     }
   }
 
-
   handleMouseEnter() {
-    const {
-      hoveredSpace,
-      spaceId,
-      setHoveredSpaceDispatch,
-    } = this.props
+    const { hoveredSpace, spaceId, setHoveredSpaceDispatch } = this.props
 
     // If there is no change to be made
     if (hoveredSpace === spaceId) return
@@ -54,22 +38,13 @@ class SpaceCard extends Component {
     setHoveredSpaceDispatch(spaceId)
   }
 
-
   handleClick() {
     const { setActiveSpaceDispatch, spaceId } = this.props
     setActiveSpaceDispatch(spaceId)
   }
 
-
   render() {
-    const {
-      name,
-      open,
-      image,
-      quiet,
-      outlets,
-      hours,
-    } = this.props
+    const { name, open, image, quiet, outlets, hours } = this.props
 
     const noiseLevel = getNoiseLevel(quiet)
     const outletsLevel = getOutletsLevel(outlets)
@@ -90,12 +65,15 @@ class SpaceCard extends Component {
             onMouseEnter={this.handleMouseEnter}
           >
             <Content>
-              <Subtitle marginBottom="0">
-                {name}
-              </Subtitle>
+              <Subtitle marginBottom="0">{name}</Subtitle>
 
               <Subtext marginBottom="0">
-                {open ? `Open: ${hours}` : `Closed • Opens at ${hours.substring(0, hours.indexOf("am"))}am`}
+                {open
+                  ? `Open: ${hours}`
+                  : `Closed • Opens at ${hours.substring(
+                      0,
+                      hours.indexOf('am')
+                    )}am`}
                 {outletsLevel ? ` • ${outletsLevel}` : ''}
                 {noiseLevel ? ` • ${noiseLevel}` : ''}
               </Subtext>
@@ -105,10 +83,9 @@ class SpaceCard extends Component {
           </Col>
         </Row>
       </Card>
-    );
+    )
   }
 }
-
 
 SpaceCard.defaultProps = {
   open: false,
@@ -117,7 +94,6 @@ SpaceCard.defaultProps = {
   quiet: -1,
   hoveredSpace: null,
 }
-
 
 SpaceCard.propTypes = {
   name: PropTypes.string.isRequired,
@@ -132,17 +108,17 @@ SpaceCard.propTypes = {
   setActiveSpaceDispatch: PropTypes.func.isRequired,
 }
 
-
 const mapStateToProps = ({ spaces }) => {
   const { hoveredSpace } = spaces
   return { hoveredSpace }
 }
-
 
 const mapDispatchToProps = dispatch => ({
   setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
   setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
 })
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(SpaceCard);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SpaceCard)

@@ -4,11 +4,11 @@ class App extends Component {
   render() {
     return (
       <div>
-          sorry this website isn't available on mobile yet,
-          get your information on the Penn mobile app
+        sorry this website isn't available on mobile yet, get your information
+        on the Penn mobile app
       </div>
     )
   }
 }
 
-export default App;
+export default App

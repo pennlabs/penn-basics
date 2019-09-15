@@ -1,27 +1,27 @@
 /* global document */
-import React from 'react';
+import React from 'react'
 
 const Menu = () => {
   const toggle = () => {
-    const sidebar = document.getElementById('sidebar');
-    const shadow = document.getElementById('shade');
-    shadow.classList.toggle('fade-in');
-    sidebar.classList.toggle('active');
-  };
+    const sidebar = document.getElementById('sidebar')
+    const shadow = document.getElementById('shade')
+    shadow.classList.toggle('fade-in')
+    sidebar.classList.toggle('active')
+  }
 
-  const handleKeyPress = (event) => {
-    event.preventDefault();
+  const handleKeyPress = event => {
+    event.preventDefault()
 
     if (event.keyCode === 32) {
-      toggle();
+      toggle()
     }
-  };
+  }
 
-  const handleClick = (event) => {
-    event.preventDefault();
+  const handleClick = event => {
+    event.preventDefault()
 
-    toggle();
-  };
+    toggle()
+  }
 
   // Shadow
   return (
@@ -37,7 +37,7 @@ const Menu = () => {
       <div className="bar" />
       <div id="shade" />
     </div>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

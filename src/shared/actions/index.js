@@ -9,14 +9,14 @@ import {
   setMealsFulfilled,
 } from './action_types'
 
-const pad = (number) => {
+const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
 
 const convertDate = dateObj => {
   const month = dateObj.getUTCMonth() + 1
   const day = dateObj.getUTCDate()
-  const year = dateObj.getUTCFullYear();
+  const year = dateObj.getUTCFullYear()
   return `${year}-${pad(month)}-${pad(day)}`
 }
 
@@ -29,8 +29,8 @@ export const getVenueInfo = venueId => {
     // Make a post request to pull the data
     try {
       const response = await axios.post('/api/dining/venue_hours', { venueId })
-      let venueHours = response.data.venueHours
-      
+      let { venueHours } = response.data
+
       let startDate = new Date()
       startDate.setHours(0, 0, 0, 0)
       startDate = convertDate(startDate)
@@ -39,7 +39,9 @@ export const getVenueInfo = venueId => {
       let endDate = new Date()
       endDate.setHours(72, 0, 0, 0)
       endDate = convertDate(endDate)
-      venueHours = venueHours.filter(hour => startDate <= hour.date && hour.date <= endDate)
+      venueHours = venueHours.filter(
+        hour => startDate <= hour.date && hour.date <= endDate
+      )
       dispatch({
         type: getVenueInfoFulfilled,
         venueHours,

@@ -8,7 +8,6 @@ export function getNoiseLevel(quiet) {
   return map[quiet]
 }
 
-
 export function getOutletsLevel(outlets) {
   const map = {
     0: 'No outlets',
@@ -18,7 +17,6 @@ export function getOutletsLevel(outlets) {
 
   return map[outlets]
 }
-
 
 export function getGroupLevel(groups) {
   const map = {
@@ -30,64 +28,60 @@ export function getGroupLevel(groups) {
   return map[groups]
 }
 
-
 function getMinutes(time) {
   // If there is a decimal
-  let minutes = '';
+  let minutes = ''
   if (time % 1 !== 0) {
-    minutes = `${Math.round((time % 1) * 60)}`;
+    minutes = `${Math.round((time % 1) * 60)}`
   }
 
-  return minutes;
+  return minutes
 }
-
 
 export function getTime(time) {
   // Edge case
-  if (time < 0) return '';
+  if (time < 0) return ''
 
-  const mins = getMinutes(time);
-  let hours = Math.floor(time);
-  let prefix;
+  const mins = getMinutes(time)
+  let hours = Math.floor(time)
+  let prefix
   if (hours < 12) {
-    hours = hours || 12; // Change 0 to 12
-    prefix = 'am';
+    hours = hours || 12 // Change 0 to 12
+    prefix = 'am'
   } else {
-    hours = (hours === 12) ? hours : hours - 12;
-    prefix = 'pm';
+    hours = hours === 12 ? hours : hours - 12
+    prefix = 'pm'
   }
 
-  let timeStr = `${hours}`;
+  let timeStr = `${hours}`
   if (mins) {
-    timeStr += `:${mins}`;
+    timeStr += `:${mins}`
   }
-  timeStr += prefix;
+  timeStr += prefix
 
-  return timeStr;
+  return timeStr
 }
 
-
 export function getHours({ start, end }, day) {
-  const startTime = start[day];
-  const endTime = end[day];
+  const startTime = start[day]
+  const endTime = end[day]
 
-  if (startTime < 0 || endTime < 0) return 'Closed';
+  if (startTime < 0 || endTime < 0) return 'Closed'
 
   return `
     ${getTime(startTime)}
     –
     ${getTime(endTime)}
-  `;
+  `
 }
 
-
 export function isOpen({ start, end }, time, day) {
-  const startTime = start[day];
-  const endTime = end[day];
+  const startTime = start[day]
+  const endTime = end[day]
 
   // If either time is less than 0 then the space is closed
   if (startTime < 0 || endTime < 0) {
-    return false;
+    return false
   }
 
   // If the end time wraps to the next day
@@ -95,13 +89,13 @@ export function isOpen({ start, end }, time, day) {
   if (endTime <= startTime) {
     if (time >= startTime) {
       // This must be before midnight
-      return time < endTime + 24;
+      return time < endTime + 24
     }
 
     // If the time is after midnight
-    return time < endTime;
+    return time < endTime
   }
 
   // If the building closes before midnight
-  return (time >= startTime && time < endTime);
+  return time >= startTime && time < endTime
 }

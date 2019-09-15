@@ -11,9 +11,8 @@ import {
   LIGHT_GREEN,
   LIGHT_YELLOW,
 } from '../../styles/colors'
-import { Row, LaundryOverview } from '../shared'
+import { Row, LaundryOverview, BorderedCard } from '../shared'
 
-import { BorderedCard } from '../shared'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
 
 class Laundry extends Component {
@@ -33,44 +32,41 @@ class Laundry extends Component {
       )
     }
 
-    return (
-      favoritesHome.map((favorite, index) => {
-        const {
-          open = 0,
-          running = 0,
-          out_of_order: outOfOrder = 0,
-          offline = 0,
-        } = favorite.machines.washers
+    return favoritesHome.map((favorite, index) => {
+      const {
+        open = 0,
+        running = 0,
+        out_of_order: outOfOrder = 0,
+        offline = 0,
+      } = favorite.machines.washers
 
-        return (
-          <>
-            <h1 className="title is-6">
-              {`${favorite.location}: ${favorite.hall_name}`}
-            </h1>
-            <Row justifyContent="space-between">
-                {[
-                  [open, 'Available', GREEN, LIGHT_GREEN],
-                  [running, 'Busy', MUSTARD, LIGHT_YELLOW],
-                  [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
-                ].map(([number, title, color, background]) => (
-                  <LaundryOverview
-                    width="30%"
-                    key={title}
-                    color={color}
-                    background={background}
-                  >
-                    <h1>{number}</h1>
-                    <p>{title}</p>
-                  </LaundryOverview>
-                ))}
-              </Row>
-              {index === favoritesHome.length - 1 ? null : <hr />}
-            <div className="columns" key={uuid()}>
-            </div>
-          </>
-        )
-      })
-    )
+      return (
+        <>
+          <h1 className="title is-6">
+            {`${favorite.location}: ${favorite.hall_name}`}
+          </h1>
+          <Row justifyContent="space-between">
+            {[
+              [open, 'Available', GREEN, LIGHT_GREEN],
+              [running, 'Busy', MUSTARD, LIGHT_YELLOW],
+              [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
+            ].map(([number, title, color, background]) => (
+              <LaundryOverview
+                width="30%"
+                key={title}
+                color={color}
+                background={background}
+              >
+                <h1>{number}</h1>
+                <p>{title}</p>
+              </LaundryOverview>
+            ))}
+          </Row>
+          {index === favoritesHome.length - 1 ? null : <hr />}
+          <div className="columns" key={uuid()} />
+        </>
+      )
+    })
   }
 
   render() {
@@ -82,7 +78,7 @@ class Laundry extends Component {
           </Link>
           <h3 className="subtitle is-6">Status of your favorite halls</h3>
         </article>
-        <br/>
+        <br />
         {this.renderFavorites()}
       </BorderedCard>
     )

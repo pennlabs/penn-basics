@@ -4,7 +4,7 @@ import s from 'styled-components'
 import { BORDER } from '../../styles/colors'
 import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
 
-const percent = numCols => (numCols / 12) * 100 + '%'
+const percent = numCols => `${(numCols / 12) * 100}%`
 
 export const Row = s.div`
   display: flex;

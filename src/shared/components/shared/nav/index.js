@@ -1,15 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import s from 'styled-components'
 
-import {
-  BLACK,
-  DARK_GRAY,
-  ALLBIRDS_GRAY,
-} from '../../../styles/colors'
+import { BLACK, DARK_GRAY, ALLBIRDS_GRAY } from '../../../styles/colors'
 
-import Links from './Links';
-import Menu from './Menu';
+import Links from './Links'
+import Menu from './Menu'
 
 const Wrapper = s.nav`
   padding: 0 0.5rem;
@@ -46,14 +42,12 @@ const Nav = () => (
     <Menu />
 
     <Link to="/" className="logo">
-      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo"/>
-      <LogoText>
-        Penn Basics
-      </LogoText>
+      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+      <LogoText>Penn Basics</LogoText>
     </Link>
 
     <Links />
   </Wrapper>
-);
+)
 
-export default Nav;
+export default Nav

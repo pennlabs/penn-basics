@@ -1,3 +1,4 @@
+/* global localStorage */
 import {
   filterHomeCustomizeRequested,
   TOGGLE_FILTER_HOME_CUSTOMIZE,

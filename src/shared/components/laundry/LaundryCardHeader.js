@@ -1,12 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Card,
-  Row,
-  Col,
-  Text,
-} from '../shared'
+import { Card, Row, Col, Text } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
 const LaundryCardHeader = ({ title }) => (

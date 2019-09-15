@@ -1,5 +1,5 @@
-import s from 'styled-components';
-import { Col } from './Flex';
+import s from 'styled-components'
+import { Col } from './Flex'
 
 export const LaundryOverview = s(Col)`
   margin-bottom: 1rem;

@@ -71,7 +71,7 @@ class DiningCard extends Component {
 
     // get the array of hours that are opened today
     const date = new Date()
-    const currTime = pad(date.getHours()) + ':' + pad(date.getMinutes())
+    const currTime = `${pad(date.getHours())}:${pad(date.getMinutes())}`
     const openHours = venueHours.filter(hour => {
       return hour.starttime <= currTime && currTime <= hour.endtime
     })

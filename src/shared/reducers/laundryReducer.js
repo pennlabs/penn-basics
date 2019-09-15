@@ -8,8 +8,8 @@ import {
   updateFavorites,
   getFavoritesHome,
   updateReminders,
-  updateIntervalID
-} from '../actions/action_types';
+  updateIntervalID,
+} from '../actions/action_types'
 
 const defaultState = {
   pending: true,
@@ -19,8 +19,8 @@ const defaultState = {
   favorites: [],
   favoritesHome: [],
   reminders: [],
-  intervalID: null
-};
+  intervalID: null,
+}
 
 const laundryReducer = (state = defaultState, action) => {
   switch (action.type) {
@@ -68,16 +68,16 @@ const laundryReducer = (state = defaultState, action) => {
       return {
         ...state,
         favoritesHome: action.favorites,
-      };
+      }
     case updateReminders:
       return {
         ...state,
-        reminders: action.reminders
-      };
+        reminders: action.reminders,
+      }
     case updateIntervalID:
       return {
         ...state,
-        intervalID: action.intervalID
+        intervalID: action.intervalID,
       }
     default:
       return state

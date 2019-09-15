@@ -58,7 +58,7 @@ class Home extends Component {
 
         this.setState({
           componentList: [
-            <Quotes/>,
+            <Quotes />,
             <Weather />,
             <Events />,
             <News />,

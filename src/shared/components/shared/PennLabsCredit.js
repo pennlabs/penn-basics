@@ -12,7 +12,7 @@ export default () => (
       <a href="https://pennlabs.org" target="_BLANK" rel="noopener noreferrer">
         Penn Labs.
       </a>{' '}
-      <a href={AIRTABLE_LINK} taget="_BLANK" rel="noopener noreferrer">
+      <a href={AIRTABLE_LINK} target="_BLANK" rel="noopener noreferrer">
         Feedback.
       </a>
     </Subtext>

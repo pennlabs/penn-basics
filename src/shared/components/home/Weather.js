@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { BorderedCard } from '../shared'
 import dateFormat from 'dateformat'
+import { BorderedCard } from '../shared'
 
 class Weather extends Component {
   render() {

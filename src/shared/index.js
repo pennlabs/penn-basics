@@ -1,4 +1,4 @@
-/* global document */
+/* global document, window */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
@@ -10,7 +10,7 @@ import rootReducer from './reducers/index'
 import App from './components/App'
 import './styles/app.scss'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose //Redux testing tool
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // Redux testing tool
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 

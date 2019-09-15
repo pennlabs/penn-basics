@@ -1,4 +1,4 @@
-import s from 'styled-components';
+import s from 'styled-components'
 
 export const ImageZoom = s.img`
 transition-duration: 0.7s;
