@@ -24,7 +24,9 @@ class News extends Component {
   }
 
   renderNews() {
-    const { picture, link, title, content, time } = this.state.data
+    const {
+      data: { picture, link, title, content, time },
+    } = this.state
     return (
       <Row>
         <Col width="70%">
@@ -43,7 +45,7 @@ class News extends Component {
             <small>{content}</small>
             <br />
             <br />
-            <small> {time} </small>
+            <small>{time}</small>
           </p>
         </Col>
       </Row>

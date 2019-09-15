@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import uuid from 'uuid'
 import PropTypes from 'prop-types'
 
-import venueData from '../../../server/database/venue_info.json'
-
 import { BorderedCard, Row, Col } from '../shared'
 import DiningCard from '../dining/DiningCard'
 import { getFavorites } from '../../actions/dining_actions'
