@@ -1,4 +1,4 @@
-/* globals localStorage, window, navigator */
+/* globals localStorage, window, navigator, Notification */
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
@@ -57,7 +57,6 @@ export function getLaundryHalls() {
 export function getLaundryHall(laundryHallId, prevIntervalID) {
   // eslint-disable-line
   return async dispatch => {
-    console.log('!!!!')
     if (prevIntervalID) {
       clearInterval(prevIntervalID)
       dispatch({
@@ -475,7 +474,7 @@ const getRemindersInterval = dispatch => {
   }
 
   request.onupgradeneeded = event => {
-    console.log('---IndexedDB: upgrading strucutre----')
+    console.log('---IndexedDB: upgrading structure----')
     const db = event.target.result
     db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
   }
@@ -509,24 +508,27 @@ const getRemindersInterval = dispatch => {
 
       const getAllRequest = objectStore.getAll()
 
-      getAllRequest.onsuccess = event => {
-        console.log(event.target.result)
+      getAllRequest.onsuccess = successEvent => {
+        console.log(successEvent.target.result)
       }
 
       reminders.forEach(reminder => {
         const storeRequest = objectStore.get(
           `${reminder.hallID}-${reminder.machineID}`
         )
-        storeRequest.onsuccess = event => {
-          const { result } = event.target
+        storeRequest.onsuccess = successEvent => {
+          const { result } = successEvent.target
           console.log(result)
-          if (!result || (result && result.reminderID != reminder.reminderID)) {
+          if (
+            !result ||
+            (result && result.reminderID !== reminder.reminderID)
+          ) {
             newReminders.push(reminder)
           }
         }
 
-        storeRequest.onerror = event => {
-          console.error(`Store error: ${event.target.errorCode}`)
+        storeRequest.onerror = errorEvent => {
+          console.error(`Store error: ${errorEvent.target.errorCode}`)
         }
       })
     } else {

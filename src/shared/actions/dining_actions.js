@@ -1,3 +1,4 @@
+/* global localStorage */
 import axios from 'axios'
 import {
   getDiningDataRequested,
@@ -50,14 +51,13 @@ export const getVenueInfo = venueId => {
     } catch (err) {
       dispatch({
         type: getVenueInfoRejected,
-        error: error.message,
+        error: err.message,
       })
     }
   }
 }
 
 export const getDiningData = venueId => {
-  console.log(venueId)
   return dispatch => {
     dispatch({
       type: getDiningDataRequested,
@@ -153,7 +153,7 @@ export const removeFavorite = venueID => {
   return dispatch => {
     // favorites is an array of venueIDs
     let favorites = JSON.parse(localStorage.getItem('dining_favorites'))
-    favorites = favorites.filter(favorite => favorite != venueID)
+    favorites = favorites.filter(favorite => favorite !== venueID)
     localStorage.setItem('dining_favorites', JSON.stringify(favorites))
     dispatch({
       type: updateDiningFavorites,
