@@ -5,7 +5,7 @@ import { MobileView, BrowserView } from 'react-device-detect'
 
 import { BLUE, DARK_BLUE } from '../styles/colors'
 
-import Nav from './shared/Nav/index'
+import Nav from './shared/nav/index'
 import Home from './home/App'
 import NotFound from './shared/NotFound'
 import Dining from './dining/App'

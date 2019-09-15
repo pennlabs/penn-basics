@@ -10,13 +10,13 @@ module.exports = function laundryRouter() {
     const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
     const { data } = axiosResponse
     const machine = data.machines.details.filter(
-      detail => detail.id == machineID
+      detail => detail.id === machineID
     )
-    let { time_remaining } = machine[0]
+    let { time_remaining: timeRemaining } = machine[0]
 
-    time_remaining =
-      time_remaining !== 0 ? Number(time_remaining) * 60 * 1000 : 20000
-    // time_remaining = 10000
+    timeRemaining =
+      timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
+    // timeRemaining = 10000
 
     setTimeout(async () => {
       try {
@@ -25,12 +25,10 @@ module.exports = function laundryRouter() {
           JSON.stringify({ machineID, hallID, hallName, reminderID })
         )
         res.status(200).json({})
-        console.log('----Web Push: notification pushed----')
       } catch (err) {
-        console.error(err)
         res.status(200).json({ error: err.message })
       }
-    }, time_remaining)
+    }, timeRemaining)
   })
 
   return router

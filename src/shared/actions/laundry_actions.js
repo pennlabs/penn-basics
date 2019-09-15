@@ -1,4 +1,4 @@
-/* globals localStorage, window, navigator */
+/* globals localStorage, window, navigator, Notification, indexedDB */
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
@@ -49,6 +49,108 @@ export function getLaundryHalls() {
       dispatch({
         type: getLaundryHallsDataRejected,
         error: error.message,
+      })
+    }
+  }
+}
+
+const getRemindersInterval = dispatch => {
+  if (!('serviceWorker' in navigator)) {
+    throw new Error('No Service Worker support!')
+  }
+  if (!('PushManager' in window)) {
+    throw new Error('No Push API Support!')
+  }
+
+  if (!window.indexedDB) {
+    throw new Error('No IndexedDB support')
+  }
+
+  Notification.requestPermission().then(permission => {
+    if (permission !== 'granted') {
+      throw new Error('permission not granted for notification')
+    }
+  })
+
+  // TODO: clear the notifications list once in a while
+  // navigator.serviceWorker.getRegistrations().then(registrations => {
+  //   registrations.forEach(registration => {
+  //     registration.unregister().then(successful => {
+  //       if (successful){
+
+  //       }
+  //     })
+  //   })
+  // })
+
+  navigator.serviceWorker.register('/sw.js')
+
+  const request = indexedDB.open('LocalDB', 1)
+
+  request.onerror = event => {
+    console.error(`Database error: ${event.target.errorCode}`)
+  }
+
+  request.onupgradeneeded = event => {
+    console.log('---IndexedDB: upgrading strucutre----')
+    const db = event.target.result
+    db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
+  }
+
+  request.onsuccess = event => {
+    console.log('----IndexedDB: loading is successful----')
+    const db = event.target.result
+    let reminders = localStorage.getItem('laundry_reminders')
+    if (reminders) {
+      reminders = JSON.parse(reminders)
+      console.log('----reminders----')
+      console.log(reminders)
+      const newReminders = []
+
+      const transaction = db.transaction(['laundryReminders'], 'readonly')
+
+      transaction.oncomplete = event => {
+        localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
+        dispatch({
+          type: updateReminders,
+          reminders: newReminders,
+        })
+        console.log('---complete updating reminders in localStorage----')
+      }
+
+      transaction.onerror = event => {
+        console.error(`Database error: ${event.target.errorCode}`)
+      }
+
+      const objectStore = transaction.objectStore('laundryReminders')
+
+      const getAllRequest = objectStore.getAll()
+
+      getAllRequest.onsuccess = event => {
+        console.log(event.target.result)
+      }
+
+      reminders.forEach(reminder => {
+        const storeRequest = objectStore.get(
+          `${reminder.hallID}-${reminder.machineID}`
+        )
+        storeRequest.onsuccess = event => {
+          const { result } = event.target
+          console.log(result)
+          if (!result || (result && result.reminderID != reminder.reminderID)) {
+            newReminders.push(reminder)
+          }
+        }
+
+        storeRequest.onerror = event => {
+          console.error(`Store error: ${event.target.errorCode}`)
+        }
+      })
+    } else {
+      localStorage.setItem('laundry_reminders', JSON.stringify([]))
+      dispatch({
+        type: updateReminders,
+        reminders: [],
       })
     }
   }
@@ -434,107 +536,5 @@ export const removeReminder = () => {
           }
         })
       })
-  }
-}
-
-const getRemindersInterval = dispatch => {
-  if (!('serviceWorker' in navigator)) {
-    throw new Error('No Service Worker support!')
-  }
-  if (!('PushManager' in window)) {
-    throw new Error('No Push API Support!')
-  }
-
-  if (!window.indexedDB) {
-    throw new Error('No IndexedDB support')
-  }
-
-  Notification.requestPermission().then(permission => {
-    if (permission !== 'granted') {
-      throw new Error('permission not granted for notification')
-    }
-  })
-
-  // TODO: clear the notifications list once in a while
-  // navigator.serviceWorker.getRegistrations().then(registrations => {
-  //   registrations.forEach(registration => {
-  //     registration.unregister().then(successful => {
-  //       if (successful){
-
-  //       }
-  //     })
-  //   })
-  // })
-
-  navigator.serviceWorker.register('/sw.js')
-
-  const request = indexedDB.open('LocalDB', 1)
-
-  request.onerror = event => {
-    console.error(`Database error: ${event.target.errorCode}`)
-  }
-
-  request.onupgradeneeded = event => {
-    console.log('---IndexedDB: upgrading strucutre----')
-    const db = event.target.result
-    db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
-  }
-
-  request.onsuccess = event => {
-    console.log('----IndexedDB: loading is successful----')
-    const db = event.target.result
-    let reminders = localStorage.getItem('laundry_reminders')
-    if (reminders) {
-      reminders = JSON.parse(reminders)
-      console.log('----reminders----')
-      console.log(reminders)
-      const newReminders = []
-
-      const transaction = db.transaction(['laundryReminders'], 'readonly')
-
-      transaction.oncomplete = event => {
-        localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
-        dispatch({
-          type: updateReminders,
-          reminders: newReminders,
-        })
-        console.log('---complete updating reminders in localStorage----')
-      }
-
-      transaction.onerror = event => {
-        console.error(`Database error: ${event.target.errorCode}`)
-      }
-
-      const objectStore = transaction.objectStore('laundryReminders')
-
-      const getAllRequest = objectStore.getAll()
-
-      getAllRequest.onsuccess = event => {
-        console.log(event.target.result)
-      }
-
-      reminders.forEach(reminder => {
-        const storeRequest = objectStore.get(
-          `${reminder.hallID}-${reminder.machineID}`
-        )
-        storeRequest.onsuccess = event => {
-          const { result } = event.target
-          console.log(result)
-          if (!result || (result && result.reminderID != reminder.reminderID)) {
-            newReminders.push(reminder)
-          }
-        }
-
-        storeRequest.onerror = event => {
-          console.error(`Store error: ${event.target.errorCode}`)
-        }
-      })
-    } else {
-      localStorage.setItem('laundry_reminders', JSON.stringify([]))
-      dispatch({
-        type: updateReminders,
-        reminders: [],
-      })
-    }
   }
 }
