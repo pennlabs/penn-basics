@@ -1,35 +1,43 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import uuid from 'uuid'
 
-import { Row, Col, Card, Scrollbar, Line, NavSectionHeader } from '../shared'
+import { Card, Scrollbar, Line, NavSectionHeader } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard'
 import { WHITE, BABY_BLUE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
+import Favorites from './Favorites'
 
 import venueData from '../../../server/database/venue_info.json'
 
-const Nav = ({ children }) => {
-  const keys = Object.keys(venueData)
-  const diningKeys = []
-  const retailKeys = []
-  keys.forEach(key => {
-    const data = venueData[key]
-    if (data.isRetail) {
-      retailKeys.push(key)
-    } else {
-      diningKeys.push(key)
-    }
-  })
+class Nav extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  diningKeys.sort((keyA, keyB) => {
-    const { name: nameA } = venueData[keyA]
-    const { name: nameB } = venueData[keyB]
-    return nameA.localeCompare(nameB)
-  })
+  render() {
+    const keys = Object.keys(venueData)
+    const diningKeys = []
+    const retailKeys = []
+    keys.forEach(key => {
+      const data = venueData[key]
+      if (data.isRetail) {
+        retailKeys.push(key)
+      } else {
+        diningKeys.push(key)
+      }
+    })
 
-  return (
-    <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+    diningKeys.sort((keyA, keyB) => {
+      const { name: nameA } = venueData[keyA]
+      const { name: nameB } = venueData[keyB]
+      return nameA.localeCompare(nameB)
+    })
+
+    const { favorites } = this.props
+
+    return (
       <Scrollbar
         padding="0 0 .5rem 0"
         background={WHITE}
@@ -38,6 +46,8 @@ const Nav = ({ children }) => {
         borderRight
         height={`calc(100vh - ${NAV_HEIGHT})`}
       >
+        <Favorites/>
+
         <Card background={BABY_BLUE} padding="0">
           <NavSectionHeader className="title is-5">Dining</NavSectionHeader>
           <Line />
@@ -47,11 +57,12 @@ const Nav = ({ children }) => {
           const { name, image } = venueData[key]
           return (
             <DiningCard
-              key={`${key}-${name}`}
+              key={uuid()}
               venueId={key}
               name={name}
               image={image}
-              showMealLabels
+              // showMealLabels
+              isFavorited={favorites.includes(key)}
             />
           )
         })}
@@ -65,30 +76,30 @@ const Nav = ({ children }) => {
           const { name, image, showMealLabels } = venueData[key]
           return (
             <DiningCard
-              key={key}
+              key={uuid()}
               venueId={key}
               name={name}
               image={image}
-              showMealLabels={showMealLabels || false}
+              // showMealLabels={showMealLabels || false}
+              isFavorited={favorites.includes(key)}
             />
           )
         })}
 
         <PennLabsCredit />
       </Scrollbar>
-      <Col
-        width="70%"
-        overflowY="scroll"
-        maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
-      >
-        {children}
-      </Col>
-    </Row>
-  )
+    )
+  }
 }
 
-Nav.propTypes = {
-  children: PropTypes.node.isRequired,
+const mapStateToProps = ({ dining }) => {
+  const {
+    favorites
+  } = dining
+
+  return {
+    favorites
+  }
 }
 
-export default Nav
+export default connect(mapStateToProps, null)(Nav)

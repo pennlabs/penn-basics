@@ -5,210 +5,189 @@ import s from 'styled-components'
 
 // TODO use the other venue data json
 import venueData from './content/venueData'
-import { getDiningData, getVenueInfo } from '../../actions/index'
+import {
+    getDiningData,
+    getVenueInfo,
+    addFavorite,
+    removeFavorite
+} from '../../actions/dining_actions'
 
-import Nav from './Nav'
 import DiningOverview from './DiningOverview'
-import ErrorMessage from '../shared/ErrorMessage'
 import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
 
 const NAV_HEIGHT = '57px'
 
+const Buttons = s.div`
+  float: right;
+`
+
 const Wrapper = s.div`
   padding: 1rem;
 `
 
+const FavoriteIcon = s.i`
+  opacity: 0.75;
+`
+
 // Render the view for a dining venue
 class DiningVenue extends Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props)
 
-    const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
+        const { venueId, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
-    // Pull meal data and hours data for the venue
-    const { id: venueId } = match.params
-
-    if (venueId) {
-      getDiningDataDispatch(venueId)
-      getVenueInfoDispatch(venueId)
+        if (venueId) {
+            getDiningDataDispatch(venueId)
+            getVenueInfoDispatch(venueId)
+        }
     }
 
-    // this.checkForErrors = this.checkForErrors.bind(this)
-    // this.renderError = this.renderError.bind(this)
-  }
+    componentDidUpdate(prevProps) {
+        const { venueId, getDiningDataDispatch, getVenueInfoDispatch } = this.props
 
-  componentDidUpdate(prevProps) {
-    const { match, getDiningDataDispatch, getVenueInfoDispatch } = this.props
+        const previousVenueId = prevProps.venueId
+        const currentVenueId = venueId
 
-    const { id: previousVenueId } = prevProps.match.params
-    const { id: currentVenueId } = match.params
-
-    if (previousVenueId !== currentVenueId) {
-      getDiningDataDispatch(currentVenueId)
-      getVenueInfoDispatch(currentVenueId)
-    }
-  }
-
-  // checkForErrors() {
-  //   let error = ''
-
-  //   const { match, diningData, dateFormatted, meal } = this.props
-  //   const { id } = match.params
-
-  //   if (!venueData[id]) {
-  //     // If no mapping is found
-  //     error = 'Dining venue not found'
-  //   } else if (diningData && dateFormatted) {
-  //     if (!diningData[dateFormatted]) {
-  //       error = "Dining data not found for today's date"
-  //     } else if (meal && !diningData[dateFormatted][meal]) {
-  //       error = `Dining data not found for meal: "${meal}"`
-  //     } else {
-  //       error = ''
-  //     }
-  //   } else if (!diningData) {
-  //     error = 'Failed to find meal data.'
-  //   } else {
-  //     error = ''
-  //   }
-
-  //   return error
-  // }
-
-  // Helper method to render any error
-  // renderError() {
-  //   const { diningDataPending, venueHoursPending } = this.props
-
-  //   if (diningDataPending || venueHoursPending) return null
-
-  //   // Check for errors
-  //   const { error: propsError } = this.props
-  //   const error = propsError || this.checkForErrors()
-
-  //   return <ErrorMessage message={error} />
-  // }
-
-  // Render the component
-  render() {
-    const {
-      match: { params: { id } = { id: undefined } } = {},
-      diningDataPending,
-      venueHoursPending,
-    } = this.props
-
-    if (!id) {
-      return (
-        <Nav>
-          <div
-            className="columns is-vcentered is-centered"
-            style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
-          >
-            <div className="column is-7">
-              <img src="/img/dining.png" alt="Dining plate" />
-              <p
-                style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}
-              >
-                Select a dining hall to see information
-              </p>
-            </div>
-          </div>
-        </Nav>
-      )
+        if (previousVenueId !== currentVenueId) {
+            getDiningDataDispatch(currentVenueId)
+            getVenueInfoDispatch(currentVenueId)
+        }
     }
 
-    // If the ID is not found
-    if (!venueData[id]) {
-      return (
-        <Nav>
-          <Wrapper>
-            <NotFound />
-          </Wrapper>
-        </Nav>
-      )
+    // Render the component
+    render() {
+        const {
+            diningDataPending,
+            venueHoursPending,
+            favorites,
+            venueId,
+            dispatchAddFavorite,
+            dispatchRemoveFavorite
+        } = this.props
+
+        if (!venueId) {
+            return (
+                <div
+                    className="columns is-vcentered is-centered"
+                    style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
+                >
+                    <div className="column is-7">
+                        <img src="/img/dining.png" alt="Dining plate" />
+                        <p
+                            style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}
+                        >
+                            Select a dining hall to see information
+                        </p>
+                    </div>
+                </div>
+
+            )
+        }
+
+        // If the ID is not found
+        if (!venueData[venueId]) {
+            return (
+                <Wrapper>
+                    <NotFound />
+                </Wrapper>
+
+            )
+        }
+
+        // If content is still loading
+        if (diningDataPending || venueHoursPending) {
+            return (
+
+                <Wrapper>
+                    <Loading />
+                </Wrapper>
+
+            )
+        }
+
+        const { name } = venueData[venueId]
+        const isFavorited = favorites.includes(venueId)
+
+        return (
+            // If there is no error and the data is not pending
+
+            <Wrapper>
+                <div style={{ marginBottom: '1rem' }}>
+                    <Buttons>
+                        {isFavorited ? (
+                            <span // eslint-disable-line
+                                className="button is-info"
+                                onClick={() => dispatchRemoveFavorite(venueId)}
+                            >
+                                <FavoriteIcon className="fa fa-heart" /> &nbsp; Favorited
+                            </span>
+                        ) : (
+                                <span // eslint-disable-line
+                                    className="button"
+                                    onClick={() =>
+                                        dispatchAddFavorite(venueId)
+                                    }
+                                >
+                                    <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
+                            </span>
+                            )}
+                    </Buttons>
+
+                    <h1 className="title">{name}</h1>
+                </div>
+
+                {/* Render the overview card at the top of the dining view */}
+                <DiningOverview id={venueId} />
+            </Wrapper>
+        )
     }
-
-    // If content is still loading
-    if (diningDataPending || venueHoursPending) {
-      return (
-        <Nav>
-          <Wrapper>
-            <Loading />
-          </Wrapper>
-        </Nav>
-      )
-    }
-
-    const { name } = venueData[id]
-
-    return (
-      // If there is no error and the data is not pending
-      <Nav>
-        <Wrapper>
-          {/* Render the title of the dining page */}
-          <h1 className="title">{name}</h1>
-
-          {/* {this.renderError()} */}
-
-          {/* Render the overview card at the top of the dining view */}
-          <DiningOverview id={id} />
-        </Wrapper>
-      </Nav>
-    )
-  }
 }
 
 DiningVenue.defaultProps = {
-  error: '',
-  diningData: null,
-  meal: '',
-  venueHours: null,
-  dateFormatted: null,
+    error: '',
+    diningData: null,
+    venueHours: null,
 }
 
 DiningVenue.propTypes = {
-  match: PropTypes.object.isRequired, // eslint-disable-line
-  getDiningDataDispatch: PropTypes.func.isRequired,
-  getVenueInfoDispatch: PropTypes.func.isRequired,
-  diningDataPending: PropTypes.bool.isRequired,
-  venueHoursPending: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  diningData: PropTypes.object, // eslint-disable-line
-  venueHours: PropTypes.array, // eslint-disable-line
-  dateFormatted: PropTypes.string,
-  meal: PropTypes.string,
+    match: PropTypes.object.isRequired, // eslint-disable-line
+    getDiningDataDispatch: PropTypes.func.isRequired,
+    getVenueInfoDispatch: PropTypes.func.isRequired,
+    diningDataPending: PropTypes.bool.isRequired,
+    venueHoursPending: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+    diningData: PropTypes.object, // eslint-disable-line
+    venueHours: PropTypes.array, // eslint-disable-line
 }
 
-const mapStateToProps = ({
-  dining: {
-    dateFormatted,
-    meal,
-    meals,
-    diningData,
-    venueHours,
-    venueInfo,
-    error,
-    diningDataPending,
-    venueHoursPending,
-  },
-}) => ({
-  dateFormatted,
-  meal,
-  meals,
-  diningData,
-  venueHours,
-  venueInfo,
-  error,
-  diningDataPending,
-  venueHoursPending,
-})
+const mapStateToProps = ({ dining }) => {
+    const {
+        diningData,
+        venueHours,
+        venueInfo,
+        error,
+        diningDataPending,
+        venueHoursPending,
+        favorites
+    } = dining
+
+    return {
+        diningData,
+        venueHours,
+        venueInfo,
+        error,
+        diningDataPending,
+        venueHoursPending,
+        favorites
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
-  getDiningDataDispatch: venueId => dispatch(getDiningData(venueId)),
-  getVenueInfoDispatch: venueId => dispatch(getVenueInfo(venueId)),
+    getDiningDataDispatch: venueId => dispatch(getDiningData(venueId)),
+    getVenueInfoDispatch: venueId => dispatch(getVenueInfo(venueId)),
+    dispatchAddFavorite: venueId => dispatch(addFavorite(venueId)),
+    dispatchRemoveFavorite: venueId => dispatch(removeFavorite(venueId))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DiningVenue)
+export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue)

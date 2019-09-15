@@ -8,6 +8,7 @@ import {
   getVenueInfoRejected,
   getVenueInfoFulfilled,
   setMealsFulfilled,
+  updateDiningFavorites
 } from '../actions/action_types'
 
 function getCurrentDateFormatted() {
@@ -96,6 +97,7 @@ const defaultState = {
   diningDataPending: true,
   meal: '',
   meals: [],
+  favorites: [],
   venueHoursCard: [],
   venueHoursPending: true,
   venueHoursCardPending: true,
@@ -194,6 +196,11 @@ const diningReducer = (state = defaultState, action) => {
         venueHoursPending: false,
         venueHours: action.venueHours,
         venueInfo: action.venueInfo,
+      }
+    case updateDiningFavorites:
+      return {
+        ...state,
+        favorites: action.favorites
       }
     default:
       return state

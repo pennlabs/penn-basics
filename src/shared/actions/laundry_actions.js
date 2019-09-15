@@ -1,4 +1,4 @@
-/* globals localStorage */
+/* globals localStorage, window, navigator */
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
@@ -10,10 +10,10 @@ import {
   getLaundryHallInfoRequested,
   getLaundryHallInfoRejected,
   getLaundryHallInfoFulfilled,
-  updateFavorites,
   getFavoritesHome,
-  updateReminders,
+  updateLaundryFavorites,
   updateIntervalID,
+  updateReminders,
 } from './action_types'
 
 const publicVapidKey =
@@ -166,7 +166,7 @@ export const getFavoritesHomePage = () => dispatch => {
   }
 }
 
-export function getFavorites() {
+export const getFavorites = () => {
   return dispatch => {
     let favorites = localStorage.getItem('laundry_favorites')
     if (favorites) {
@@ -176,13 +176,13 @@ export function getFavorites() {
       favorites = []
     }
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites,
     })
   }
 }
 
-export function addFavorite(laundryHallId, location, hallName) {
+export const addFavorite = (laundryHallId, location, hallName) => {
   return async dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -211,7 +211,7 @@ export function addFavorite(laundryHallId, location, hallName) {
     localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
 
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites: favoritesArray,
     })
   }
@@ -233,7 +233,7 @@ export function removeFavorite(laundryHallId) {
 
     localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
     dispatch({
-      type: updateFavorites,
+      type: updateLaundryFavorites,
       favorites: favoritesArray,
     })
   }
@@ -246,7 +246,7 @@ const urlBase64ToUint8Array = base64String => {
   const rawData = window.atob(base64)
   const outputArray = new Uint8Array(rawData.length)
 
-  for (let i = 0; i < rawData.length; ++i) {
+  for (let i = 0; i < rawData.length; i += 1) {
     outputArray[i] = rawData.charCodeAt(i)
   }
   return outputArray

@@ -4,7 +4,7 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 
 import { Row, Col, ColSpace } from '../shared'
-import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
 import Weather from './Weather'
@@ -30,6 +30,7 @@ const Wrapper = s.div`
 
 class Home extends Component {
   constructor(props) {
+    console.log("hey hey")
     super(props)
 
     this.state = {

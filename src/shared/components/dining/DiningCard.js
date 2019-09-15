@@ -9,6 +9,8 @@ import moment from 'moment'
 import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
+import venueData from '../../../server/database/venue_info.json'
+
 const StyledLink = s(Link)`
   h2 {
     color: ${DARK_GRAY} !important;
@@ -19,6 +21,10 @@ const Content = s.div`
   position: relative;
   overflow-x: visible;
   padding-right: 0.5rem;
+`
+const FavoriteIcon = s.i`
+  opacity: 0.75;
+  color: orange
 `
 
 const convertDate = time => {
@@ -66,9 +72,16 @@ class DiningCard extends Component {
   }
 
   renderSubtext() {
-    const { showMealLabels } = this.props
+    const { venueId } = this.props
     const { venueHours } = this.state
 
+    let showMealLabels
+    if (venueData[venueId].isRetail) {
+      showMealLabels = venueData[venueId].showMealLabels || false
+    } else {
+      showMealLabels = true
+    }
+    
     // get the array of hours that are opened today
     const date = new Date()
     const currTime = `${pad(date.getHours())}:${pad(date.getMinutes())}`
@@ -92,7 +105,7 @@ class DiningCard extends Component {
             <span key={`${starttime}-${endtime}-${label}`}>
               {`${convertDate(starttime)} - ${convertDate(endtime)}${
                 showMealLabels ? ` • ${label}` : ''
-              }`}
+                }`}
               {index === openHours.length - 1 ? null : <br />}
             </span>
           ))}
@@ -103,10 +116,14 @@ class DiningCard extends Component {
   }
 
   render() {
-    const { venueId, name, image } = this.props
+    const { venueId, name, image, isFavorited } = this.props
 
     // Images are served through the public folder
     const img = `/img/venue_images/${image}`
+
+    if (isFavorited){
+      return null
+    }
 
     return (
       <StyledLink to={`/dining/${venueId}`}>
@@ -117,7 +134,9 @@ class DiningCard extends Component {
             )}
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
-                <Subtitle marginBottom="0">{name}</Subtitle>
+                <Subtitle marginBottom="0">
+                  {name}
+                </Subtitle>
 
                 {this.renderSubtext()}
               </Content>
