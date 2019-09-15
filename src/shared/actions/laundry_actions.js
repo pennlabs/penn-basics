@@ -57,6 +57,7 @@ export function getLaundryHalls() {
 export function getLaundryHall(laundryHallId, prevIntervalID) {
   // eslint-disable-line
   return async dispatch => {
+    console.log("!!!!")
     if (prevIntervalID) {
       clearInterval(prevIntervalID)
       dispatch({
