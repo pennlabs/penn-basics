@@ -88,62 +88,56 @@ const getRemindersInterval = dispatch => {
   const request = indexedDB.open('LocalDB', 1)
 
   request.onerror = event => {
-    console.error(`Database error: ${event.target.errorCode}`)
+    throw new Error(event.target.errorCode)
   }
 
   request.onupgradeneeded = event => {
-    console.log('---IndexedDB: upgrading strucutre----')
     const db = event.target.result
     db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
   }
 
   request.onsuccess = event => {
-    console.log('----IndexedDB: loading is successful----')
     const db = event.target.result
     let reminders = localStorage.getItem('laundry_reminders')
     if (reminders) {
       reminders = JSON.parse(reminders)
-      console.log('----reminders----')
-      console.log(reminders)
       const newReminders = []
 
       const transaction = db.transaction(['laundryReminders'], 'readonly')
 
-      transaction.oncomplete = event => {
+      transaction.oncomplete = () => {
         localStorage.setItem('laundry_reminders', JSON.stringify(newReminders))
         dispatch({
           type: updateReminders,
           reminders: newReminders,
         })
-        console.log('---complete updating reminders in localStorage----')
       }
 
-      transaction.onerror = event => {
-        console.error(`Database error: ${event.target.errorCode}`)
+      transaction.onerror = e => {
+        throw new Error(e.target.errorCode)
       }
 
       const objectStore = transaction.objectStore('laundryReminders')
 
       const getAllRequest = objectStore.getAll()
 
-      getAllRequest.onsuccess = event => {
-        console.log(event.target.result)
+      getAllRequest.onsuccess = e => {
+        console.log(e.target.result)
       }
 
       reminders.forEach(reminder => {
         const storeRequest = objectStore.get(
           `${reminder.hallID}-${reminder.machineID}`
         )
-        storeRequest.onsuccess = event => {
-          const { result } = event.target
-          console.log(result)
+        storeRequest.onsuccess = e => {
+          const { result } = e.target
           if (!result || (result && result.reminderID != reminder.reminderID)) {
             newReminders.push(reminder)
           }
         }
 
-        storeRequest.onerror = event => {
-          console.error(`Store error: ${event.target.errorCode}`)
+        storeRequest.onerror = e => {
+          throw new Error(e.target.errorCode)
         }
       })
     } else {
@@ -410,7 +404,7 @@ export const getReminders = () => {
 
         const transaction = db.transaction(['laundryReminders'], 'readonly')
 
-        transaction.oncomplete = event => {
+        transaction.oncomplete = e => {
           localStorage.setItem(
             'laundry_reminders',
             JSON.stringify(newReminders)
@@ -422,16 +416,16 @@ export const getReminders = () => {
           console.log('---complete updating reminders in localStorage----')
         }
 
-        transaction.onerror = event => {
-          console.error(`Database error: ${event.target.errorCode}`)
+        transaction.onerror = e => {
+          console.error(`Database error: ${e.target.errorCode}`)
         }
 
         const objectStore = transaction.objectStore('laundryReminders')
 
         const getAllRequest = objectStore.getAll()
 
-        getAllRequest.onsuccess = event => {
-          console.log(event.target.result)
+        getAllRequest.onsuccess = e => {
+          console.log(e.target.result)
         }
 
         reminders.forEach(reminder => {

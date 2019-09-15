@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions'
 
-import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
+import { Card, Row, Col, Scrollbar, NavSectionHeader, Line, Favorites } from '../shared'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
-import Favorites from './Favorites'
+import favoriteCard from './FavoriteCard'
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class App extends Component {
           params: { id: '-1' },
         },
       },
+      favorites,
     } = this.props
 
     return (
@@ -38,7 +39,7 @@ class App extends Component {
           borderRight
           height={`calc(100vh - ${NAV_HEIGHT})`}
         >
-          <Favorites />
+          <Favorites favorites={favorites} favoriteCard={favoriteCard} />
 
           <Card background={BABY_BLUE} padding="0">
             <NavSectionHeader className="title is-5">
@@ -71,8 +72,8 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ laundry }) => {
-  const { laundryHalls } = laundry
-  return { laundryHalls }
+  const { laundryHalls, favorites } = laundry
+  return { laundryHalls, favorites }
 }
 
 const mapDispatchToProps = dispatch => ({
