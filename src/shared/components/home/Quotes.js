@@ -12,7 +12,6 @@ class Quotes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quotes: null,
       greetings: [
         'Hi There!',
         'How Are You Doing?',
@@ -40,7 +39,7 @@ class Quotes extends Component {
       .catch(err => {
         // TODO better error handling
 
-                console.log(err) // eslint-disable-line
+        console.log(err) // eslint-disable-line
       })
 
     const { greetings, emojis } = this.state

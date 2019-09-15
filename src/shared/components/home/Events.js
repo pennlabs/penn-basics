@@ -4,6 +4,8 @@ import uuid from 'uuid'
 import dateFormat from 'dateformat'
 import { BorderedCard } from '../shared'
 
+const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
+
 class Events extends Component {
   constructor(props) {
     super(props)
@@ -13,7 +15,7 @@ class Events extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://api.pennlabs.org/calendar/').then(res => {
+    axios.get(GET_EVENTS_ROUTE).then(res => {
       const calendarArray = res.data.calendar
       this.setState({ calendarArray })
     })
@@ -36,7 +38,6 @@ class Events extends Component {
               <img
                 src="https://pbs.twimg.com/profile_images/875383884862570496/TN7FoDDx.jpg"
                 alt="First"
-              />
               />
             </figure>
           </div>

@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+/* global localStorage */
+import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import FilterButton from './FilterBtn'
@@ -7,30 +9,31 @@ import {
   toggleHomeCustomize,
 } from '../../../actions/home_actions'
 
-class Filter extends Component {
-  constructor(props) {
-    super(props)
-  }
+// TODO abstract away localStorage from React components
 
-  render() {
-    const {
-      filterHomeCustomizeDispatch,
-      toggleHomeCustomizeDispatch,
-      filterCustomizeActive,
-    } = this.props
+const Filter = ({
+  filterHomeCustomizeDispatch,
+  toggleHomeCustomizeDispatch,
+  filterCustomizeActive,
+}) => (
+  <FilterButton
+    text="Customize this page"
+    onClick={toggleHomeCustomizeDispatch}
+    onClickOption={filterHomeCustomizeDispatch}
+    options={['Quotes', 'Weather', 'Events', 'News', 'Laundry', 'Dining']}
+    activeOptions={JSON.parse(localStorage.getItem('homeFilter'))}
+    active={filterCustomizeActive}
+  />
+)
 
-    // TODO get these options from somewhere else
-    return (
-      <FilterButton
-        text="Customize this page"
-        onClick={toggleHomeCustomizeDispatch}
-        onClickOption={filterHomeCustomizeDispatch}
-        options={['Quotes', 'Weather', 'Events', 'News', 'Laundry', 'Dining']}
-        activeOptions={JSON.parse(localStorage.getItem('homeFilter'))}
-        active={filterCustomizeActive}
-      />
-    )
-  }
+Filter.propTypes = {
+  filterHomeCustomizeDispatch: PropTypes.func.isRequired,
+  toggleHomeCustomizeDispatch: PropTypes.func.isRequired,
+  filterCustomizeActive: PropTypes.bool,
+}
+
+Filter.defaultProps = {
+  filterCustomizeActive: false,
 }
 
 const mapStateToProps = ({ home }) => home

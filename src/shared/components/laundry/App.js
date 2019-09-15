@@ -1,4 +1,3 @@
-/* globals isNaN */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -93,7 +92,9 @@ App.propTypes = {
     })
   ),
   match: PropTypes.shape({
-    id: PropTypes.string,
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
   }).isRequired,
   dispatchGetFavorites: PropTypes.func.isRequired,
   dispatchGetLaundryHalls: PropTypes.func.isRequired,

@@ -1,3 +1,4 @@
+/* global localStorage */
 import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
@@ -138,21 +139,21 @@ class FilterBtn extends Component {
     this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
   }
 
+  componentDidMount() {
+    if (!localStorage.getItem('homeFilter')) {
+      const { onClickOption, options } = this.props
+      options.forEach((_, index) => {
+        onClickOption(index)
+      })
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { active } = this.props
 
     // If we are showing the modal, focus on it
     if (active && !prevProps.active) {
       this.focusRef.current.focus()
-    }
-  }
-
-  componentDidMount() {
-    if (!localStorage.getItem('homeFilter')) {
-      const { onClickOption, options } = this.props
-      options.forEach((option, index) => {
-        onClickOption(index)
-      })
     }
   }
 

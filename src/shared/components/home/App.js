@@ -1,3 +1,4 @@
+/* global localStorage */
 import React, { Component } from 'react'
 import axios from 'axios'
 import s from 'styled-components'
@@ -17,6 +18,8 @@ import Quotes from './Quotes'
 import Events from './Events'
 import Footer from '../footer'
 
+// TODO abstract away localStorage from components
+
 const HOME_FILTER = 'homeFilter'
 
 const Wrapper = s.div`
@@ -30,7 +33,6 @@ const Wrapper = s.div`
 
 class Home extends Component {
   constructor(props) {
-    console.log('hey hey')
     super(props)
 
     this.state = {
@@ -57,6 +59,8 @@ class Home extends Component {
           })
         }
 
+        const { dining } = this.state
+
         this.setState({
           componentList: [
             <Quotes />,
@@ -64,7 +68,7 @@ class Home extends Component {
             <Events />,
             <News />,
             <Laundry />,
-            <Dining show={this.state.dining} />,
+            <Dining show={dining} />,
           ],
         })
       })

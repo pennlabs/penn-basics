@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BorderedCard, Row, Col, ColSpace, Line } from '../shared'
 
 const renderExternalLink = (pictureURL, websiteURL, productName) => {
@@ -6,18 +6,14 @@ const renderExternalLink = (pictureURL, websiteURL, productName) => {
     <BorderedCard>
       <Row>
         <Col width="20%">
-          <a href={websiteURL} target="_blank">
-            {' '}
-            <img src={pictureURL} />
-{' '}
+          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
+            <img src={pictureURL} alt={productName} />
           </a>
         </Col>
         <ColSpace />
         <Col>
-          <a href={websiteURL} target="_blank">
-            {' '}
+          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
             {productName}
-{' '}
           </a>
         </Col>
       </Row>
@@ -27,10 +23,8 @@ const renderExternalLink = (pictureURL, websiteURL, productName) => {
 
 const renderUsefulLink = (websiteURL, description) => {
   return (
-    <a href={websiteURL} target="_blank">
-      {' '}
+    <a href={websiteURL} target="_blank" rel="noopener noreferrer">
       {description}
-{' '}
     </a>
   )
 }
@@ -81,31 +75,23 @@ const usefulLinks = [
   },
 ]
 
-class ExternalLinks extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <BorderedCard>
-        <h1 className="title is-4">More in the Penn Ecosystem</h1>
-        {mapping.map(({ pictureURL, websiteURL, productName }) => {
-          return renderExternalLink(pictureURL, websiteURL, productName)
-        })}
-        <Line />
-        <br />
-        {usefulLinks.map(({ websiteURL, description }, index) => {
-          return (
-            <>
-              {renderUsefulLink(websiteURL, description)}
-              {index == usefulLinks.length - 1 ? <></> : <br />}
-            </>
-          )
-        })}
-      </BorderedCard>
-    )
-  }
-}
+const ExternalLinks = () => (
+  <BorderedCard>
+    <h1 className="title is-4">More in the Penn Ecosystem</h1>
+    {mapping.map(({ pictureURL, websiteURL, productName }) => {
+      return renderExternalLink(pictureURL, websiteURL, productName)
+    })}
+    <Line />
+    <br />
+    {usefulLinks.map(({ websiteURL, description }, index) => {
+      return (
+        <>
+          {renderUsefulLink(websiteURL, description)}
+          {index === usefulLinks.length - 1 ? null : <br />}
+        </>
+      )
+    })}
+  </BorderedCard>
+)
 
 export default ExternalLinks

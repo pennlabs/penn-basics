@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
@@ -12,10 +13,6 @@ import Favorites from './Favorites'
 import venueData from '../../../server/database/venue_info.json'
 
 class Nav extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const keys = Object.keys(venueData)
     const diningKeys = []
@@ -61,7 +58,6 @@ class Nav extends Component {
               venueId={key}
               name={name}
               image={image}
-              // showMealLabels
               isFavorited={favorites.includes(key)}
             />
           )
@@ -73,14 +69,13 @@ class Nav extends Component {
         </Card>
 
         {retailKeys.map(key => {
-          const { name, image, showMealLabels } = venueData[key]
+          const { name, image } = venueData[key]
           return (
             <DiningCard
               key={uuid()}
               venueId={key}
               name={name}
               image={image}
-              // showMealLabels={showMealLabels || false}
               isFavorited={favorites.includes(key)}
             />
           )
@@ -90,6 +85,14 @@ class Nav extends Component {
       </Scrollbar>
     )
   }
+}
+
+Nav.defaultProps = {
+  favorites: [],
+}
+
+Nav.propTypes = {
+  favorites: PropTypes.array,
 }
 
 const mapStateToProps = ({ dining }) => {

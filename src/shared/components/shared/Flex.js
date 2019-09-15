@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
@@ -112,6 +113,16 @@ export const Col = ({ margin, children, ...other }) => (
     )}
   </ColWrapper>
 )
+
+Col.defaultProps = {
+  margin: null,
+  children: null,
+}
+
+Col.propTypes = {
+  margin: PropTypes.string,
+  children: PropTypes.node,
+}
 
 export const ColSpace = s(Col)`
   flex: none;

@@ -23,11 +23,7 @@ class Favorites extends Component {
     return (
       <div>
         <Card background={BABY_BLUE} padding="0">
-          <NavSectionHeader className="title is-5">
-            {' '}
-            Favorites
-{' '}
-          </NavSectionHeader>
+          <NavSectionHeader className="title is-5">Favorites</NavSectionHeader>
           <Line />
         </Card>
 

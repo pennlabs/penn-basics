@@ -32,16 +32,16 @@ const BodyRow = s.tr`
 `
 
 const convertDate = time => {
-  const hour = parseInt(time.substring(0, time.indexOf(':')))
-  const minute = parseInt(time.substring(time.indexOf(':') + 1))
+  const hour = parseInt(time.substring(0, time.indexOf(':')), 10)
+  const minute = parseInt(time.substring(time.indexOf(':') + 1), 10)
 
-  if (hour == 12) {
-    return minute == 0 ? '12pm' : `12:${minute}pm`
+  if (hour === 12) {
+    return minute === 0 ? '12pm' : `12:${minute}pm`
   }
 
   if (hour >= 13)
-    return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
-  return minute == 0 ? `${hour}am` : `${hour}:${minute}am`
+    return minute === 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
+  return minute === 0 ? `${hour}am` : `${hour}:${minute}am`
 }
 
 const pad = number => {
@@ -49,11 +49,7 @@ const pad = number => {
 }
 
 class HoursVisualization extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  getDay(date) {
+  static getDay(date) {
     const week = [
       'Sunday',
       'Monday',
@@ -73,7 +69,7 @@ class HoursVisualization extends Component {
     return week[dayNum]
   }
 
-  isRightNow(meal, date) {
+  static isRightNow(meal, date) {
     if (!meal) {
       return false
     }
@@ -82,9 +78,9 @@ class HoursVisualization extends Component {
     const dateObj = new Date()
     const currTime = `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
 
-    const today = this.getDay(dateObj)
+    const today = HoursVisualization.getDay(dateObj)
 
-    return today == date && starttime <= currTime && currTime <= endtime
+    return today === date && starttime <= currTime && currTime <= endtime
   }
 
   renderList() {
@@ -95,15 +91,15 @@ class HoursVisualization extends Component {
       return null
     }
 
-    venueHours.forEach(venueHour => {
-      venueHour.date = this.getDay(venueHour.date)
+    const formattedVenueHours = venueHours.map(venueHour => {
+      return Object.assign({}, venueHour, { date: this.getDay(venueHour.date) })
     })
 
     // Else, return the hours in a table
     return (
       <table className="table is-fullwidth marg-bot-0">
         <tbody>
-          {venueHours.map((venueHour, idx) => {
+          {formattedVenueHours.map((venueHour, idx) => {
             const meals = venueHour.dayparts
             meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
             return (
@@ -119,7 +115,8 @@ class HoursVisualization extends Component {
                     <BodyRow
                       key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
                       className={
-                        this.isRightNow(meal, venueHour.date) && 'selected'
+                        HoursVisualization.isRightNow(meal, venueHour.date) &&
+                        'selected'
                       }
                     >
                       <td style={{ width: '12rem' }} />

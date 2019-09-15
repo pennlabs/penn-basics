@@ -57,8 +57,7 @@ class News extends Component {
       <BorderedCard>
         <h1 className="title is-4">Latest News</h1>
         <h6 className="subtitle is-6">
-          {' '}
-          More from{' '}
+          &nbsp; More from &nbsp;
           <i>
             <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
           </i>

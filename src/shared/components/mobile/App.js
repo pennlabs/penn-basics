@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        sorry this website isn't available on mobile yet, get your information
-        on the Penn mobile app
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div>
+    Sorry this website isn&apos;t available on mobile yet, get your information
+    on the Penn Mobile app on the App Store or on Google Play.
+  </div>
+)
 
 export default App
