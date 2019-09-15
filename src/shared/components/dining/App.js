@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Row, Col } from '../shared'
 import { NAV_HEIGHT } from '../../styles/sizes'
@@ -38,6 +39,19 @@ class App extends Component {
       </Row>
     )
   }
+}
+
+App.defaultProps = {
+  match: {},
+}
+
+App.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }),
+  dispatchGetFavorites: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({

@@ -22,22 +22,18 @@ const Content = s.div`
   overflow-x: visible;
   padding-right: 0.5rem;
 `
-const FavoriteIcon = s.i`
-  opacity: 0.75;
-  color: orange
-`
 
 const convertDate = time => {
-  const hour = parseInt(time.substring(0, time.indexOf(':')))
-  const minute = parseInt(time.substring(time.indexOf(':') + 1))
+  const hour = parseInt(time.substring(0, time.indexOf(':')), 10)
+  const minute = parseInt(time.substring(time.indexOf(':') + 1), 10)
 
-  if (hour == 12) {
-    return minute == 0 ? '12pm' : `12:${minute}pm`
+  if (hour === 12) {
+    return minute === 0 ? '12pm' : `12:${minute}pm`
   }
 
   if (hour >= 13)
-    return minute == 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
-  return minute == 0 ? `${hour}am` : `${hour}:${minute}am`
+    return minute === 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
+  return minute === 0 ? `${hour}am` : `${hour}:${minute}am`
 }
 
 const pad = number => {
@@ -66,7 +62,7 @@ class DiningCard extends Component {
           }
         })
         .catch(() => {
-          this.setState({ hours: [] })
+          this.setState({ venueHours: [] })
         })
     }
   }
@@ -116,7 +112,8 @@ class DiningCard extends Component {
   }
 
   render() {
-    const { venueId, name, image, isFavorited } = this.props
+    const { venueId, isFavorited } = this.props
+    const { name, image } = venueData[venueId]
 
     // Images are served through the public folder
     const img = `/img/venue_images/${image}`
@@ -148,15 +145,12 @@ class DiningCard extends Component {
 }
 
 DiningCard.defaultProps = {
-  image: null,
-  showMealLabels: true,
+  isFavorited: false,
 }
 
 DiningCard.propTypes = {
-  image: PropTypes.string,
   venueId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  showMealLabels: PropTypes.bool,
+  isFavorited: PropTypes.bool,
 }
 
 export default DiningCard

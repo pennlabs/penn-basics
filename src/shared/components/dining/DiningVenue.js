@@ -110,19 +110,21 @@ class DiningVenue extends Component {
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
             {isFavorited ? (
-                            <span // eslint-disable-line
-                              className="button is-info"
-                              onClick={() => dispatchRemoveFavorite(venueId)}
-                            >
-                              <FavoriteIcon className="fa fa-heart" /> &nbsp; Favorited
-                            </span>
+              <span // eslint-disable-line
+                className="button is-info"
+                onClick={() => dispatchRemoveFavorite(venueId)}
+              >
+                <FavoriteIcon className="fa fa-heart" />
+                &nbsp; Favorited
+              </span>
             ) : (
-                                <span // eslint-disable-line
+              <span // eslint-disable-line
                 className="button"
                 onClick={() => dispatchAddFavorite(venueId)}
-                                >
-                                  <FavoriteIcon className="far fa-heart" /> &nbsp; Make Favorite
-                                </span>
+              >
+                <FavoriteIcon className="far fa-heart" />
+                &nbsp; Make Favorite
+              </span>
             )}
           </Buttons>
 
@@ -137,20 +139,24 @@ class DiningVenue extends Component {
 }
 
 DiningVenue.defaultProps = {
-  error: '',
   diningData: null,
   venueHours: null,
+  venueId: null,
+  favorites: [],
 }
 
 DiningVenue.propTypes = {
-    match: PropTypes.object.isRequired, // eslint-disable-line
+  match: PropTypes.object.isRequired, // eslint-disable-line
   getDiningDataDispatch: PropTypes.func.isRequired,
   getVenueInfoDispatch: PropTypes.func.isRequired,
   diningDataPending: PropTypes.bool.isRequired,
   venueHoursPending: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-    diningData: PropTypes.object, // eslint-disable-line
-    venueHours: PropTypes.array, // eslint-disable-line
+  diningData: PropTypes.object, // eslint-disable-line
+  venueHours: PropTypes.array, // eslint-disable-line
+  venueId: PropTypes.string,
+  favorites: PropTypes.arrayOf(PropTypes.string),
+  dispatchAddFavorite: PropTypes.func.isRequired,
+  dispatchRemoveFavorite: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ dining }) => {
@@ -158,7 +164,6 @@ const mapStateToProps = ({ dining }) => {
     diningData,
     venueHours,
     venueInfo,
-    error,
     diningDataPending,
     venueHoursPending,
     favorites,
@@ -168,7 +173,6 @@ const mapStateToProps = ({ dining }) => {
     diningData,
     venueHours,
     venueInfo,
-    error,
     diningDataPending,
     venueHoursPending,
     favorites,

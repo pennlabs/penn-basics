@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 import moment from 'moment'
+import uuid from 'uuid'
 
 import ErrorMessage from '../shared/ErrorMessage'
 import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
@@ -92,7 +93,9 @@ class HoursVisualization extends Component {
     }
 
     const formattedVenueHours = venueHours.map(venueHour => {
-      return Object.assign({}, venueHour, { date: this.getDay(venueHour.date) })
+      return Object.assign({}, venueHour, {
+        date: HoursVisualization.getDay(venueHour.date),
+      })
     })
 
     // Else, return the hours in a table
@@ -103,7 +106,7 @@ class HoursVisualization extends Component {
             const meals = venueHour.dayparts
             meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
             return (
-              <React.Fragment key={`${venueHour.date}-${idx}`}>
+              <React.Fragment key={uuid()}>
                 <HeaderRow>
                   <th style={{ width: '12rem' }}>{venueHour.date}</th>
                   <th>{idx === 0 && 'Meal'}</th>

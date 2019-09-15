@@ -51,13 +51,10 @@ class Nav extends Component {
         </Card>
 
         {diningKeys.map(key => {
-          const { name, image } = venueData[key]
           return (
             <DiningCard
               key={uuid()}
               venueId={key}
-              name={name}
-              image={image}
               isFavorited={favorites.includes(key)}
             />
           )
@@ -69,13 +66,10 @@ class Nav extends Component {
         </Card>
 
         {retailKeys.map(key => {
-          const { name, image } = venueData[key]
           return (
             <DiningCard
               key={uuid()}
               venueId={key}
-              name={name}
-              image={image}
               isFavorited={favorites.includes(key)}
             />
           )
@@ -92,7 +86,7 @@ Nav.defaultProps = {
 }
 
 Nav.propTypes = {
-  favorites: PropTypes.array,
+  favorites: PropTypes.shape(PropTypes.string),
 }
 
 const mapStateToProps = ({ dining }) => {

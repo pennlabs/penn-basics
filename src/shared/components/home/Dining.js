@@ -37,12 +37,7 @@ class Dining extends Component {
             if (index <= 2) {
               return (
                 <Col>
-                  <DiningCard
-                    key={uuid()}
-                    venueId={id}
-                    name={venueData[id].name}
-                    image={venueData[id].image}
-                  />
+                  <DiningCard key={uuid()} venueId={id} />
                 </Col>
               )
             }
