@@ -165,7 +165,8 @@ class LaundryVenue extends Component {
     super(props)
 
     const {
-      hallURLId,
+      hallURLId, // passed during a click
+      laundryHallId, // reducer
       intervalID,
       dispatchGetLaundryHall,
       dispatchGetReminders
@@ -173,6 +174,8 @@ class LaundryVenue extends Component {
 
     if (hallURLId) {
       dispatchGetLaundryHall(hallURLId, intervalID)
+    } else if (laundryHallId) {
+      dispatchGetLaundryHall(laundryHallId, intervalID)
     }
 
     dispatchGetReminders()
@@ -194,6 +197,7 @@ class LaundryVenue extends Component {
   }
 
   componentWillUnmount() {
+    // clear the interval when another component is rendered
     const { intervalID } = this.props
     clearInterval(intervalID)
   }
