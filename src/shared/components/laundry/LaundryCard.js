@@ -29,12 +29,18 @@ class LaundryCard extends Component {
     } = this.props
 
     const { hallURLId } = this.props
+    const hallURLIdNum = Number(hallURLId)
+    if (!hallURLId || !hallURLIdNum) return
 
-    halls.map(({ id }) => {
-      if (hallURLId && id === Number(hallURLId)) {
+    // TODO peter why is this necessary
+    for (let i = 0; i < halls.length; i += 1) {
+      const hall = halls[i]
+      const { id } = hall
+      if (id === hallURLIdNum) {
         this.setState({ expanded: true })
+        return
       }
-    })
+    }
   }
 
   onLaundryLocationClick() {
@@ -60,11 +66,10 @@ class LaundryCard extends Component {
       )
     }
 
+    // TODO don't use UUID here
     return (
       <div>
         <div key={uuid()} onClick={() => this.onLaundryLocationClick()}>
-          {' '}
-          {/*eslint-disable-line*/}
           <LaundryCardHeader title={location} />
         </div>
 
