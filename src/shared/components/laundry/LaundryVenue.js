@@ -187,7 +187,6 @@ class LaundryVenue extends Component {
     const prevHallURLId = prevProps.hallURLId
 
     if (prevHallURLId !== hallURLId) {
-      console.log(intervalID)
       dispatchGetLaundryHall(hallURLId, intervalID)
     }
   }
@@ -308,14 +307,16 @@ class LaundryVenue extends Component {
 
 LaundryVenue.defaultProps = {
   laundryHallInfo: null,
-  pending: true,
   laundryHallId: null,
   hallURLId: null,
   intervalID: null,
   reminders: [],
+  favorites: [],
 }
 
 LaundryVenue.propTypes = {
+  dispatchAddReminder: PropTypes.func.isRequired,
+  dispatchRemoveReminder: PropTypes.func.isRequired,
   reminders: PropTypes.arrayOf(PropTypes.string),
   dispatchGetReminders: PropTypes.func.isRequired,
   intervalID: PropTypes.number,
@@ -329,7 +330,12 @@ LaundryVenue.propTypes = {
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
   dispatchGetLaundryHall: PropTypes.func.isRequired,
-  favorites: PropTypes.array, // eslint-disable-line
+  favorites: PropTypes.arrayOf(
+    PropTypes.shape({
+      locationName: PropTypes.string,
+      hallId: PropTypes.number,
+    })
+  ),
 }
 
 const mapStateToProps = ({ laundry }) => {
