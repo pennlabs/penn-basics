@@ -5,6 +5,7 @@ import s from 'styled-components'
 
 import StatusPill from './StatusPill'
 import { BorderedCard, Row, LaundryOverview, Col } from '../shared'
+import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
   GREEN,
   MUSTARD,
@@ -236,7 +237,14 @@ class LaundryVenue extends Component {
       <Wrapper>
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
-            {isFavorited ? (
+            <FavoriteButton
+              isFavorited={isFavorited}
+              addFunction={dispatchAddFavorite}
+              removeFunction={dispatchRemoveFavorite}
+              addParams={{ laundryHallId, location, hallName }}
+              removeParams={{ laundryHallId }}
+            />
+            {/* {isFavorited ? (
               <span // eslint-disable-line
                 className="button is-info"
                 onClick={() => dispatchRemoveFavorite(laundryHallId)}
@@ -254,7 +262,7 @@ class LaundryVenue extends Component {
                 <FavoriteIcon className="far fa-heart" />
                 <span>&nbsp; Make Favorite</span>
               </span>
-            )}
+            )} */}
             {reminders.length === 0 ? null : (
               <span // eslint-disable-line
                 className="button"

@@ -3,17 +3,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions'
 
-import {
-  Card,
-  Row,
-  Col,
-  Scrollbar,
-  NavSectionHeader,
-  Line,
-  Favorites,
-} from '../shared'
+import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
+import Favorites from '../shared/favorites/Favorites'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'

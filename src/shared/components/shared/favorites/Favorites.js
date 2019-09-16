@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Card, Line, NavSectionHeader } from './'
-import { BABY_BLUE } from '../../styles/colors'
+import { Card, Line, NavSectionHeader } from '..'
+import { BABY_BLUE } from '../../../styles/colors'
 
 // favorites: the array that includes all favorited elements
 // favoriteCard: a functional component that takes in a favorited element and render the card
 // inputName: name of the input that will be passed to FavoriteCard
-export const Favorites = ({ favorites, FavoriteCard, inputName }) => {
+const Favorites = ({ favorites, FavoriteCard, inputName }) => {
   if (!favorites || !favorites.length) return null
 
   return (
@@ -37,3 +37,5 @@ Favorites.propTypes = {
   FavoriteCard: PropTypes.func.isRequired,
   inputName: PropTypes.string,
 }
+
+export default Favorites
