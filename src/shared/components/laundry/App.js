@@ -3,7 +3,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions'
 
-import { Card, Row, Col, Scrollbar, NavSectionHeader, Line, Favorites } from '../shared'
+import {
+  Card,
+  Row,
+  Col,
+  Scrollbar,
+  NavSectionHeader,
+  Line,
+  Favorites,
+} from '../shared'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
@@ -83,6 +91,7 @@ const mapDispatchToProps = dispatch => ({
 
 App.defaultProps = {
   laundryHalls: null,
+  favorites: [],
 }
 
 App.propTypes = {
@@ -97,6 +106,12 @@ App.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  favorites: PropTypes.arrayOf(
+    PropTypes.shape({
+      hallId: PropTypes.string,
+      locationName: PropTypes.string,
+    })
+  ),
   dispatchGetFavorites: PropTypes.func.isRequired,
   dispatchGetLaundryHalls: PropTypes.func.isRequired,
 }

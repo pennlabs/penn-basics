@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
 import s from 'styled-components'
+import PropTypes from 'prop-types'
 
 import { Card, Text, Row, Line, Col } from '../shared'
 
@@ -28,6 +29,16 @@ const FavoriteCard = ({ hallId, locationName }) => {
       <Line />
     </StyledLink>
   )
+}
+
+FavoriteCard.defaultProps = {
+  hallId: null,
+  locationName: '',
+}
+
+FavoriteCard.propTypes = {
+  hallId: PropTypes.number,
+  locationName: PropTypes.string,
 }
 
 export default FavoriteCard

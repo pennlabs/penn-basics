@@ -484,7 +484,7 @@ export const addReminder = (machineID, hallID, hallName) => {
           })
           localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
 
-          const axiosResponse = await axios.post('/api/laundry/addReminder', {
+          const axiosResponse = await axios.post('/api/laundry/reminder/add', {
             subscription,
             machineID,
             hallID,

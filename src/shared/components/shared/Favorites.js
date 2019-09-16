@@ -5,6 +5,8 @@ import { Card, Line, NavSectionHeader } from './'
 import { BABY_BLUE } from '../../styles/colors'
 
 export const Favorites = props => {
+  // favorites: the array that includes all favorited elements
+  // favoriteCard: a functional component that takes in a favorited element and render the card
   const { favorites, favoriteCard } = props
 
   if (!favorites || !favorites.length) return null
