@@ -14,7 +14,8 @@ const StyledLink = s(Link)`
   }
 `
 
-const FavoriteCard = ({ hallId, locationName }) => {
+const FavoriteCard = ({ favorite }) => {
+  const { hallId, locationName } = favorite
   return (
     <StyledLink to={`/laundry/${hallId}`} key={uuid()}>
       <Card padding="0.5rem 1rem" hoverable>

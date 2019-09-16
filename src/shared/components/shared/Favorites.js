@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import { Card, Line, NavSectionHeader } from './'
 import { BABY_BLUE } from '../../styles/colors'
 
-export const Favorites = props => {
-  // favorites: the array that includes all favorited elements
-  // favoriteCard: a functional component that takes in a favorited element and render the card
-  const { favorites, favoriteCard } = props
-
+// favorites: the array that includes all favorited elements
+// favoriteCard: a functional component that takes in a favorited element and render the card
+// inputName: name of the input that will be passed to FavoriteCard
+export const Favorites = ({ favorites, FavoriteCard, inputName }) => {
   if (!favorites || !favorites.length) return null
 
   return (
@@ -19,17 +18,22 @@ export const Favorites = props => {
       </Card>
 
       {favorites.map(favorite => {
-        return favoriteCard(favorite)
+        // allow dynamic props name to be passed
+        const dynamicProps = {}
+        dynamicProps[inputName] = favorite
+        return <FavoriteCard {...dynamicProps} />
       })}
     </div>
   )
 }
 
 Favorites.defaultProps = {
-  favorites: null,
+  favorites: [],
+  inputName: '',
 }
 
 Favorites.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string),
-  favoriteCard: PropTypes.func.isRequired,
+  FavoriteCard: PropTypes.func.isRequired,
+  inputName: PropTypes.string,
 }

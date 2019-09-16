@@ -17,7 +17,7 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
-import favoriteCard from './FavoriteCard'
+import FavoriteCard from './FavoriteCard'
 
 class App extends Component {
   constructor(props) {
@@ -47,7 +47,11 @@ class App extends Component {
           borderRight
           height={`calc(100vh - ${NAV_HEIGHT})`}
         >
-          <Favorites favorites={favorites} favoriteCard={favoriteCard} />
+          <Favorites
+            favorites={favorites}
+            FavoriteCard={FavoriteCard}
+            inputName="favorite"
+          />
 
           <Card background={BABY_BLUE} padding="0">
             <NavSectionHeader className="title is-5">

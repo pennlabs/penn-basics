@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
-import { Card, Scrollbar, Line, NavSectionHeader } from '../shared'
+import { Card, Scrollbar, Line, NavSectionHeader, Favorites } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard'
 import { WHITE, BABY_BLUE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
-import Favorites from './Favorites'
 
 import venueData from '../../../server/database/venue_info.json'
 
@@ -43,7 +42,11 @@ class Nav extends Component {
         borderRight
         height={`calc(100vh - ${NAV_HEIGHT})`}
       >
-        <Favorites />
+        <Favorites
+          favorites={favorites}
+          FavoriteCard={DiningCard}
+          inputName="venueId"
+        />
 
         <Card background={BABY_BLUE} padding="0">
           <NavSectionHeader className="title is-5">Dining</NavSectionHeader>
