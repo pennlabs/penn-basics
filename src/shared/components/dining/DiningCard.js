@@ -40,12 +40,9 @@ const pad = number => {
 }
 
 const renderSubtext = (venueId, venueHours) => {
-  let showMealLabels
-  if (venueData[venueId].isRetail) {
-    showMealLabels = venueData[venueId].showMealLabels || false
-  } else {
-    showMealLabels = true
-  }
+  const showMealLabels = venueData[venueId].isRetail
+    ? venueData[venueId].showMealLabels || false
+    : true
 
   // get the array of hours that are opened today
   const date = new Date()

@@ -6,7 +6,6 @@ import s from 'styled-components'
 // TODO use the other venue data json
 import venueData from './content/venueData'
 import {
-  getDiningData,
   getVenueInfo,
   addFavorite,
   removeFavorite,
@@ -35,22 +34,20 @@ class DiningVenue extends Component {
   constructor(props) {
     super(props)
 
-    const { venueId, getDiningDataDispatch, getVenueInfoDispatch } = this.props
+    const { venueId, getVenueInfoDispatch } = this.props
 
     if (venueId) {
-      getDiningDataDispatch(venueId)
       getVenueInfoDispatch(venueId)
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { venueId, getDiningDataDispatch, getVenueInfoDispatch } = this.props
+    const { venueId, getVenueInfoDispatch } = this.props
 
     const previousVenueId = prevProps.venueId
     const currentVenueId = venueId
 
     if (previousVenueId !== currentVenueId) {
-      getDiningDataDispatch(currentVenueId)
       getVenueInfoDispatch(currentVenueId)
     }
   }
@@ -58,7 +55,6 @@ class DiningVenue extends Component {
   // Render the component
   render() {
     const {
-      diningDataPending,
       venueHoursPending,
       favorites,
       venueId,
@@ -92,7 +88,7 @@ class DiningVenue extends Component {
     }
 
     // If content is still loading
-    if (diningDataPending || venueHoursPending) {
+    if (venueHoursPending) {
       return (
         <Wrapper>
           <Loading />
@@ -105,7 +101,6 @@ class DiningVenue extends Component {
 
     return (
       // If there is no error and the data is not pending
-
       <Wrapper>
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
@@ -139,7 +134,6 @@ class DiningVenue extends Component {
 }
 
 DiningVenue.defaultProps = {
-  diningData: null,
   venueHours: null,
   venueId: null,
   favorites: [],
@@ -147,11 +141,8 @@ DiningVenue.defaultProps = {
 
 DiningVenue.propTypes = {
   match: PropTypes.object.isRequired, // eslint-disable-line
-  getDiningDataDispatch: PropTypes.func.isRequired,
   getVenueInfoDispatch: PropTypes.func.isRequired,
-  diningDataPending: PropTypes.bool.isRequired,
   venueHoursPending: PropTypes.bool.isRequired,
-  diningData: PropTypes.object, // eslint-disable-line
   venueHours: PropTypes.array, // eslint-disable-line
   venueId: PropTypes.string,
   favorites: PropTypes.arrayOf(PropTypes.string),
@@ -160,27 +151,16 @@ DiningVenue.propTypes = {
 }
 
 const mapStateToProps = ({ dining }) => {
-  const {
-    diningData,
-    venueHours,
-    venueInfo,
-    diningDataPending,
-    venueHoursPending,
-    favorites,
-  } = dining
+  const { venueHours, venueHoursPending, favorites } = dining
 
   return {
-    diningData,
     venueHours,
-    venueInfo,
-    diningDataPending,
     venueHoursPending,
     favorites,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getDiningDataDispatch: venueId => dispatch(getDiningData(venueId)),
   getVenueInfoDispatch: venueId => dispatch(getVenueInfo(venueId)),
   dispatchAddFavorite: venueId => dispatch(addFavorite(venueId)),
   dispatchRemoveFavorite: venueId => dispatch(removeFavorite(venueId)),

@@ -5,9 +5,10 @@ const cheerio = require('cheerio')
 module.exports = function newsRouter() {
   // can convert this to Labs API
   router.post('/', (req, response) => {
-    let { website, className } = req.body
+    const { website } = req.body
+    let { className } = req.body
     request(website, (err, res, html) => {
-      if (!err && res.statusCode == 200) {
+      if (!err && res.statusCode === 200) {
         const $ = cheerio.load(html)
         className = className.replace(/ /g, '.')
         const heading = $(`.${className}`)

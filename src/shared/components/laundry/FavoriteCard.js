@@ -33,13 +33,14 @@ const FavoriteCard = ({ favorite }) => {
 }
 
 FavoriteCard.defaultProps = {
-  hallId: null,
-  locationName: '',
+  favorite: null,
 }
 
 FavoriteCard.propTypes = {
-  hallId: PropTypes.number,
-  locationName: PropTypes.string,
+  favorite: PropTypes.shape({
+    hallId: PropTypes.string,
+    locationName: PropTypes.string,
+  }),
 }
 
 export default FavoriteCard
