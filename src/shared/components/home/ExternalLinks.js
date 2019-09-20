@@ -1,7 +1,11 @@
 import React from 'react'
-import { BorderedCard, Row, Col, ColSpace, Line } from '../shared'
+import PropTypes from 'prop-types'
 
-const renderExternalLink = (pictureURL, websiteURL, productName) => {
+import { BorderedCard, Row, Col, ColSpace, Line } from '../shared'
+import externalLinksData from '../../../server/resources/externalLinks.json'
+import usefulLinksData from '../../../server/resources/usefulLinks.json'
+
+const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
   return (
     <BorderedCard>
       <Row>
@@ -21,77 +25,40 @@ const renderExternalLink = (pictureURL, websiteURL, productName) => {
   )
 }
 
-const renderUsefulLink = (websiteURL, description) => {
-  return (
-    <a href={websiteURL} target="_blank" rel="noopener noreferrer">
-      {description}
-    </a>
-  )
-}
-
-const mapping = [
-  {
-    pictureURL:
-      'https://raw.githubusercontent.com/pennlabs/clubs/master/static/img/peoplelogo.png',
-    websiteURL: 'https://pennclubs.com/',
-    productName: 'Penn Clubs',
-  },
-  {
-    pictureURL:
-      'https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCR.png',
-    websiteURL: 'https://penncoursereview.com/',
-    productName: 'Penn Course Review',
-  },
-  // {
-  //   "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCA.png",
-  //   "websiteURL": "https://penncoursealert.com/"
-  // },
-  // {
-  //   "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCS.png",
-  //   "websiteURL": "https://penncoursesearch.com/"
-  // }
-]
-
-const usefulLinks = [
-  {
-    websiteURL: 'https://pennlabs.org/',
-    description: 'Penn Labs',
-  },
-  {
-    websiteURL: 'https://www.upenn.edu/',
-    description: 'Penn Homepage',
-  },
-  {
-    websiteURL: 'https://prod.campusexpress.upenn.edu/',
-    description: 'CampusExpress',
-  },
-  {
-    websiteURL: 'https://canvas.upenn.edu',
-    description: 'Canvas',
-  },
-  {
-    PennInTouch: 'https://pennintouch.apps.upenn.edu/pennInTouch/jsp/fast2.do',
-    description: 'PennInTouch',
-  },
-]
-
 const ExternalLinks = () => (
   <BorderedCard>
     <h1 className="title is-4">More in the Penn Ecosystem</h1>
-    {mapping.map(({ pictureURL, websiteURL, productName }) => {
-      return renderExternalLink(pictureURL, websiteURL, productName)
+
+    {externalLinksData.map(data => {
+      return <ExternalLink key={data.productName} {...data} />
     })}
+
     <Line />
     <br />
-    {usefulLinks.map(({ websiteURL, description }, index) => {
+
+    {usefulLinksData.map(({ websiteURL, description }, index) => {
       return (
         <>
-          {renderUsefulLink(websiteURL, description)}
-          {index === usefulLinks.length - 1 ? null : <br />}
+          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
+            {description}
+          </a>
+          {index === usefulLinksData.length - 1 ? null : <br />}
         </>
       )
     })}
   </BorderedCard>
 )
+
+ExternalLink.defaultProps = {
+  pictureURL: '',
+  websiteURL: '',
+  productName: '',
+}
+
+ExternalLink.propTypes = {
+  pictureURL: PropTypes.string,
+  websiteURL: PropTypes.string,
+  productName: PropTypes.string,
+}
 
 export default ExternalLinks

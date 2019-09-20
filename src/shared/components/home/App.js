@@ -5,6 +5,7 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 
 import { Row, Col, ColSpace } from '../shared'
+import PennLabsCredit from '../shared/PennLabsCredit'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
@@ -16,7 +17,6 @@ import Notification from './Notification'
 import ExternalLinks from './ExternalLinks'
 import Quotes from './Quotes'
 import Events from './Events'
-import Footer from '../footer'
 
 // TODO abstract away localStorage from components
 
@@ -112,7 +112,7 @@ class Home extends Component {
           </Col>
         </Row>
 
-        <Footer />
+        <PennLabsCredit />
       </Wrapper>
     )
   }

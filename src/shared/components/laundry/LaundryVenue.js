@@ -5,6 +5,7 @@ import s from 'styled-components'
 
 import StatusPill from './StatusPill'
 import { BorderedCard, Row, LaundryOverview, Col } from '../shared'
+import ErrorMessage from '../shared/ErrorMessage'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
   GREEN,
@@ -46,10 +47,6 @@ const BellIcon = s.span`
   &:hover {
     opacity: 0.75;
   }
-`
-
-const FavoriteIcon = s.i`
-  opacity: 0.75;
 `
 
 const handleReminder = (
@@ -235,6 +232,8 @@ class LaundryVenue extends Component {
 
     return (
       <Wrapper>
+        <ErrorMessage message="Laundry reminder is currently not supported for your browser. Please consider upgrading to the latest version!" />
+
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
             <FavoriteButton
@@ -244,25 +243,6 @@ class LaundryVenue extends Component {
               addParams={{ laundryHallId, location, hallName }}
               removeParams={{ laundryHallId }}
             />
-            {/* {isFavorited ? (
-              <span // eslint-disable-line
-                className="button is-info"
-                onClick={() => dispatchRemoveFavorite(laundryHallId)}
-              >
-                <FavoriteIcon className="fa fa-heart" />
-                <span>&nbsp; Favorited</span>
-              </span>
-            ) : (
-              <span // eslint-disable-line
-                className="button"
-                onClick={() =>
-                  dispatchAddFavorite(laundryHallId, location, hallName)
-                }
-              >
-                <FavoriteIcon className="far fa-heart" />
-                <span>&nbsp; Make Favorite</span>
-              </span>
-            )} */}
             {reminders.length === 0 ? null : (
               <span // eslint-disable-line
                 className="button"
@@ -381,9 +361,9 @@ const mapStateToProps = ({ laundry }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchAddFavorite: (laundryHallId, location, hallName) =>
+  dispatchAddFavorite: ({ laundryHallId, location, hallName }) =>
     dispatch(addFavorite(laundryHallId, location, hallName)),
-  dispatchRemoveFavorite: laundryHallId =>
+  dispatchRemoveFavorite: ({ laundryHallId }) =>
     dispatch(removeFavorite(laundryHallId)),
   dispatchGetLaundryHall: (hallId, intervalID) =>
     dispatch(getLaundryHall(hallId, intervalID)),

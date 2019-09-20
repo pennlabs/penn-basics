@@ -13,26 +13,25 @@ const FavoriteButton = ({
   addParams,
   removeParams,
 }) => {
+  if (isFavorited) {
+    return (
+      <span // eslint-disable-line
+        className="button is-info"
+        onClick={() => removeFunction(removeParams)}
+      >
+        <FavoriteIcon className="fa fa-heart" />
+        &nbsp; Favorited
+      </span>
+    )
+  }
   return (
-    <>
-      {isFavorited ? (
-        <span // eslint-disable-line
-          className="button is-info"
-          onClick={() => removeFunction( removeParams)}
-        >
-          <FavoriteIcon className="fa fa-heart" />
-          &nbsp; Favorited
-        </span>
-      ) : (
-        <span // eslint-disable-line
-          className="button"
-          onClick={() => addFunction({ ...addParams })}
-        >
-          <FavoriteIcon className="far fa-heart" />
-          &nbsp; Make Favorite
-        </span>
-      )}
-    </>
+    <span // eslint-disable-line
+      className="button"
+      onClick={() => addFunction(addParams)}
+    >
+      <FavoriteIcon className="far fa-heart" />
+      &nbsp; Make Favorite
+    </span>
   )
 }
 

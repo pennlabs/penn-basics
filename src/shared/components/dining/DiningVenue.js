@@ -142,8 +142,8 @@ const mapStateToProps = ({ dining }) => {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetVenueInfo: venueId => dispatch(getVenueInfo(venueId)),
-  dispatchAddFavorite: venueId => dispatch(addFavorite(venueId)),
-  dispatchRemoveFavorite: venueId => dispatch(removeFavorite(venueId)),
+  dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
+  dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
 })
 
 export default connect(
