@@ -38,7 +38,6 @@ class Home extends Component {
     this.state = {
       show: false,
       notification: '',
-      dining: false,
       componentList: [],
     }
 
@@ -59,8 +58,6 @@ class Home extends Component {
           })
         }
 
-        const { dining } = this.state
-
         this.setState({
           componentList: [
             <Quotes />,
@@ -68,7 +65,7 @@ class Home extends Component {
             <Events />,
             <News />,
             <Laundry />,
-            <Dining show={dining} />,
+            <Dining />,
           ],
         })
       })

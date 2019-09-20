@@ -87,7 +87,7 @@ Nav.defaultProps = {
 }
 
 Nav.propTypes = {
-  favorites: PropTypes.shape(PropTypes.string),
+  favorites: PropTypes.arrayOf(PropTypes.string),
 }
 
 const mapStateToProps = ({ dining }) => {

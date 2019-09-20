@@ -2,7 +2,7 @@ import React from 'react'
 import dateFormat from 'dateformat'
 import { BorderedCard } from '../shared'
 
-export const Weather = () => {
+const Weather = () => {
   return (
     <BorderedCard>
       <h1 className="title is-4">Weather in Philly</h1>

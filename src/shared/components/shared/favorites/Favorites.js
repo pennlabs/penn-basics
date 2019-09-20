@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import uuid from 'uuid'
 
 import { Card, Line, NavSectionHeader } from '..'
 import { BABY_BLUE } from '../../../styles/colors'
@@ -21,7 +22,7 @@ const Favorites = ({ favorites, FavoriteCard, inputName }) => {
         // allow dynamic props name to be passed
         const dynamicProps = {}
         dynamicProps[inputName] = favorite
-        return <FavoriteCard {...dynamicProps} />
+        return <FavoriteCard key={uuid()} {...dynamicProps} />
       })}
     </div>
   )
