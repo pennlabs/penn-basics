@@ -48,7 +48,7 @@ App.defaultProps = {
 App.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     }),
   }),
   dispatchGetFavorites: PropTypes.func.isRequired,

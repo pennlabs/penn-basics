@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
@@ -7,6 +7,7 @@ import uuid from 'uuid'
 
 import ErrorMessage from '../shared/ErrorMessage'
 import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
+import { convertDate, pad } from '../../helperFunctions'
 
 const HeaderRow = s.tr`
   background: transparent !important;
@@ -32,129 +33,113 @@ const BodyRow = s.tr`
   }
 `
 
-const convertDate = time => {
-  const hour = parseInt(time.substring(0, time.indexOf(':')), 10)
-  const minute = parseInt(time.substring(time.indexOf(':') + 1), 10)
+const getDay = date => {
+  const week = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ]
+  const obj = moment(date)
+  const dayNum = obj.day()
+  const today = moment().day()
 
-  if (hour === 12) {
-    return minute === 0 ? '12pm' : `12:${minute}pm`
-  }
+  if (today === dayNum) return 'Today'
+  if (dayNum === (today + 1) % 7) return 'Tomorrow'
 
-  if (hour >= 13)
-    return minute === 0 ? `${hour - 12}pm` : `${hour - 12}:${minute}pm`
-  return minute === 0 ? `${hour}am` : `${hour}:${minute}am`
+  return week[dayNum]
 }
 
-const pad = number => {
-  return number < 10 ? `0${number}` : `${number}`
+const isRightNow = (meal, date) => {
+  if (!meal) {
+    return false
+  }
+
+  const { starttime, endtime } = meal
+  const dateObj = new Date()
+  const currTime = `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
+
+  const today = getDay(dateObj)
+
+  return today === date && starttime <= currTime && currTime <= endtime
 }
 
-class HoursVisualization extends Component {
-  static getDay(date) {
-    const week = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]
-    const obj = moment(date)
-    const dayNum = obj.day()
-    const today = moment().day()
-
-    if (today === dayNum) return 'Today'
-    if (dayNum === (today + 1) % 7) return 'Tomorrow'
-
-    return week[dayNum]
+const List = ({ venueHours }) => {
+  if (!venueHours || !venueHours.length) {
+    return null
   }
 
-  static isRightNow(meal, date) {
-    if (!meal) {
-      return false
-    }
-
-    const { starttime, endtime } = meal
-    const dateObj = new Date()
-    const currTime = `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
-
-    const today = HoursVisualization.getDay(dateObj)
-
-    return today === date && starttime <= currTime && currTime <= endtime
-  }
-
-  renderList() {
-    const { venueHours } = this.props
-
-    // Don't return anything if there are no hours
-    if (!venueHours || !venueHours.length) {
-      return null
-    }
-
-    const formattedVenueHours = venueHours.map(venueHour => {
-      return Object.assign({}, venueHour, {
-        date: HoursVisualization.getDay(venueHour.date),
-      })
+  const formattedVenueHours = venueHours.map(venueHour => {
+    return Object.assign({}, venueHour, {
+      date: getDay(venueHour.date),
     })
+  })
 
-    // Else, return the hours in a table
-    return (
-      <table className="table is-fullwidth marg-bot-0">
-        <tbody>
-          {formattedVenueHours.map((venueHour, idx) => {
-            const meals = venueHour.dayparts
-            meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
-            return (
-              <React.Fragment key={uuid()}>
-                <HeaderRow>
-                  <th style={{ width: '12rem' }}>{venueHour.date}</th>
-                  <th>{idx === 0 && 'Meal'}</th>
-                  <th>{idx === 0 && 'From'}</th>
-                  <th>{idx === 0 && 'To'}</th>
-                </HeaderRow>
-                {meals.length ? (
-                  meals.map(meal => (
-                    <BodyRow
-                      key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
-                      className={
-                        HoursVisualization.isRightNow(meal, venueHour.date) &&
-                        'selected'
-                      }
-                    >
-                      <td style={{ width: '12rem' }} />
-                      <td>{meal.label}</td>
-                      <td>{convertDate(meal.starttime)}</td>
-                      <td>{convertDate(meal.endtime)}</td>
-                    </BodyRow>
-                  ))
-                ) : (
-                  <BodyRow>
+  // Else, return the hours in a table
+  return (
+    <table className="table is-fullwidth marg-bot-0">
+      <tbody>
+        {formattedVenueHours.map((venueHour, idx) => {
+          const meals = venueHour.dayparts
+          meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
+          return (
+            <React.Fragment key={uuid()}>
+              <HeaderRow>
+                <th style={{ width: '12rem' }}>{venueHour.date}</th>
+                <th>{idx === 0 && 'Meal'}</th>
+                <th>{idx === 0 && 'From'}</th>
+                <th>{idx === 0 && 'To'}</th>
+              </HeaderRow>
+              {meals.length ? (
+                meals.map(meal => (
+                  <BodyRow
+                    key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
+                    className={isRightNow(meal, venueHour.date) && 'selected'}
+                  >
                     <td style={{ width: '12rem' }} />
-                    <td>
-                      <i>Closed</i>
-                    </td>
-                    <td />
-                    <td />
+                    <td>{meal.label}</td>
+                    <td>{convertDate(meal.starttime)}</td>
+                    <td>{convertDate(meal.endtime)}</td>
                   </BodyRow>
-                )}
-              </React.Fragment>
-            )
-          })}
-        </tbody>
-      </table>
-    )
+                ))
+              ) : (
+                <BodyRow>
+                  <td style={{ width: '12rem' }} />
+                  <td>
+                    <i>Closed</i>
+                  </td>
+                  <td />
+                  <td />
+                </BodyRow>
+              )}
+            </React.Fragment>
+          )
+        })}
+      </tbody>
+    </table>
+  )
+}
+
+const HoursVisualization = ({ venueHours }) => {
+  if (!venueHours) {
+    return <ErrorMessage message="Failed to load hours of operation." />
   }
 
-  render() {
-    const { venueHours } = this.props
+  return <List venueHours={venueHours} />
+}
 
-    if (!venueHours) {
-      return <ErrorMessage message="Failed to load hours of operation." />
-    }
-
-    return this.renderList()
-  }
+List.propTypes = {
+  venueHours: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+      type: PropTypes.string,
+      open: PropTypes.string,
+      close: PropTypes.string,
+    })
+  ).isRequired,
 }
 
 HoursVisualization.propTypes = {

@@ -6,10 +6,7 @@ import {
   getVenueInfoFulfilled,
   updateDiningFavorites,
 } from './action_types'
-
-const pad = number => {
-  return number < 10 ? `0${number}` : `${number}`
-}
+import { pad } from '../helperFunctions'
 
 const convertDate = dateObj => {
   const month = dateObj.getUTCMonth() + 1

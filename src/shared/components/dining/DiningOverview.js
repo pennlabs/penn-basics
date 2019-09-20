@@ -18,6 +18,7 @@ const DiningOverview = ({ id }) => {
         {description && <p style={{ marginBottom: '1rem' }}>{description}</p>}
         <HoursVisualization id={id} />
       </BorderedCard>
+
       {pennDiningSlug && (
         <div style={{ textAlign: 'center' }}>
           <AnchorButton
