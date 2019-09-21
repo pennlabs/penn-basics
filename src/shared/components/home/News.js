@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 
@@ -30,36 +30,44 @@ const renderNews = ({ picture, link, title, content, time }) => {
   )
 }
 
-const News = () => {
-  const [data, setData] = useState(null)
-
-  const website = 'https://www.thedp.com/'
-  const className = 'col-lg-6 col-md-5 col-sm-12 frontpage-carousel'
-  axios
-    .post('/api/news', {
-      website,
-      className,
-    })
-    .then(res => {
-      setData(res.data)
-    })
-
-  if (!data) {
-    return null
+class News extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { data: null }
   }
 
-  return (
-    <BorderedCard>
-      <h1 className="title is-4">Latest News</h1>
-      <h6 className="subtitle is-6">
-        More from &nbsp;
-        <i>
-          <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
-        </i>
-      </h6>
-      {data && renderNews(data)}
-    </BorderedCard>
-  )
+  componentDidMount() {
+    const website = 'https://www.thedp.com/'
+    const className = 'col-lg-6 col-md-5 col-sm-12 frontpage-carousel'
+    axios
+      .post('/api/news', {
+        website,
+        className,
+      })
+      .then(res => {
+        this.setState({ data: res.data })
+      })
+  }
+
+  render() {
+    const { data } = this.state
+
+    if (!data) {
+      return null
+    }
+    return (
+      <BorderedCard>
+        <h1 className="title is-4">Latest News</h1>
+        <h6 className="subtitle is-6">
+          More from &nbsp;
+          <i>
+            <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
+          </i>
+        </h6>
+        {data && renderNews(data)}
+      </BorderedCard>
+    )
+  }
 }
 
 renderNews.defaultProps = {

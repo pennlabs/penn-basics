@@ -47,6 +47,7 @@ class DiningVenue extends Component {
   }
 
   render() {
+    console.log(this.props)
     const {
       venueHoursPending,
       favorites,
