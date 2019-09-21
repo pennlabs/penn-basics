@@ -3,18 +3,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import StatusPill from './StatusPill'
-import { BorderedCard, Row, LaundryOverview, Col } from '../shared'
+import MachineAvailability from './MachineAvailability'
+import { BorderedCard, Row, Col } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
-import {
-  GREEN,
-  MUSTARD,
-  MEDIUM_GRAY,
-  FOCUS_GRAY,
-  LIGHT_GREEN,
-  LIGHT_YELLOW,
-} from '../../styles/colors'
 import {
   addFavorite,
   removeFavorite,
@@ -22,6 +14,7 @@ import {
   getReminders,
   addReminder,
   removeReminder,
+  checkBrowserCompatability,
 } from '../../actions/laundry_actions'
 
 const MARGIN = '0.5rem'
@@ -30,133 +23,9 @@ const Wrapper = s.div`
   padding: 1rem;
 `
 
-const Table = s.table`
-  margin-bottom: 0;
-`
-
 const Buttons = s.div`
   float: right;
 `
-
-const BellIcon = s.span`
-  cursor: pointer;
-  line-height: 1;
-  height: 1rem;
-
-  opacity:  0.5;
-  &:hover {
-    opacity: 0.75;
-  }
-`
-
-const handleReminder = (
-  machineID,
-  hallID,
-  hallName,
-  dispatchAddReminder,
-  reminded
-) => {
-  if (!reminded) {
-    dispatchAddReminder(machineID, hallID, hallName)
-  }
-}
-
-const renderMachineAvailabilities = (
-  machineData,
-  machineType,
-  allMachines,
-  laundryHallId,
-  hallName,
-  reminders,
-  dispatchAddReminder
-) => {
-  const tableMachines = allMachines.filter(
-    machine => machine.type === machineType
-  )
-  const {
-    open = 0,
-    running = 0,
-    out_of_order: outOfOrder = 0,
-    offline = 0,
-  } = machineData
-
-  // navigator.serviceWorker.ready.then(registration => {
-  //   registration.getNotifications().then(notifications => {
-  //     console.log(notifications)
-  //   })
-  // })
-
-  return (
-    <>
-      <Row justifyContent="space-between">
-        {[
-          [open, 'Available', GREEN, LIGHT_GREEN],
-          [running, 'Busy', MUSTARD, LIGHT_YELLOW],
-          [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
-        ].map(([number, title, color, background]) => (
-          <LaundryOverview
-            width="30%"
-            key={title}
-            color={color}
-            background={background}
-          >
-            <h1>{number}</h1>
-            <p>{title}</p>
-          </LaundryOverview>
-        ))}
-      </Row>
-
-      <Table className="table is-fullwidth">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Status</th>
-            <th>Minutes left</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {tableMachines.map(
-            ({ status, time_remaining: timeRemaining, id }) => {
-              const reminded = reminders.some(
-                reminder =>
-                  reminder.machineID === id && reminder.hallID === laundryHallId
-              )
-              const showBell = !(timeRemaining === 0 || reminded)
-              return (
-                <tr key={id}>
-                  <td>{id}</td>
-                  <td>
-                    <StatusPill status={status} />
-                  </td>
-                  <td>{status === 'Not online' ? '-' : timeRemaining}</td>
-                  <td>
-                    {showBell ? (
-                      <BellIcon
-                        className="icon"
-                        onClick={() =>
-                          handleReminder(
-                            id,
-                            laundryHallId,
-                            hallName,
-                            dispatchAddReminder,
-                            reminded
-                          )
-                        }
-                      >
-                        <i className="far fa-bell" />
-                      </BellIcon>
-                    ) : null}
-                  </td>
-                </tr>
-              )
-            }
-          )}
-        </tbody>
-      </Table>
-    </>
-  )
-}
 
 class LaundryVenue extends Component {
   constructor(props) {
@@ -165,49 +34,52 @@ class LaundryVenue extends Component {
     const {
       hallURLId, // passed during a click
       laundryHallId, // reducer
-      intervalID,
+      hallIntervalID,
       dispatchGetLaundryHall,
       dispatchGetReminders,
+      dispatchCheckBrowser,
     } = this.props
 
     if (hallURLId) {
-      dispatchGetLaundryHall(hallURLId, intervalID)
+      dispatchGetLaundryHall(hallURLId, hallIntervalID)
     } else if (laundryHallId) {
-      dispatchGetLaundryHall(laundryHallId, intervalID)
+      dispatchGetLaundryHall(laundryHallId, hallIntervalID)
     }
 
+    dispatchCheckBrowser()
     dispatchGetReminders()
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatchGetLaundryHall, hallURLId, intervalID } = this.props
+    const { dispatchGetLaundryHall, hallURLId, hallIntervalID } = this.props
 
     const prevHallURLId = prevProps.hallURLId
 
     if (prevHallURLId !== hallURLId) {
-      dispatchGetLaundryHall(hallURLId, intervalID)
+      dispatchGetLaundryHall(hallURLId, hallIntervalID)
     }
   }
 
   componentWillUnmount() {
     // clear the interval when another component is rendered
-    const { intervalID } = this.props
-    clearInterval(intervalID)
+    const { hallIntervalID, reminderIntervalID } = this.props
+    clearInterval(hallIntervalID)
+    clearInterval(reminderIntervalID)
   }
 
   render() {
     const {
+      error,
+      browserError,
       laundryHallInfo,
       favorites,
-      laundryHallId,
+      laundryHallId, // reducer
       reminders,
       dispatchAddFavorite,
       dispatchRemoveFavorite,
       dispatchAddReminder,
       dispatchRemoveReminder,
     } = this.props
-
-    // console.log(reminders)
 
     const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
@@ -232,7 +104,8 @@ class LaundryVenue extends Component {
 
     return (
       <Wrapper>
-        <ErrorMessage message="Laundry reminder is currently not supported for your browser. Please consider upgrading to the latest version!" />
+        <ErrorMessage message={browserError} />
+        <ErrorMessage message={error} />
 
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
@@ -243,7 +116,7 @@ class LaundryVenue extends Component {
               addParams={{ laundryHallId, location, hallName }}
               removeParams={{ laundryHallId }}
             />
-            {reminders.length === 0 ? null : (
+            {browserError || reminders.length === 0 ? null : (
               <span // eslint-disable-line
                 className="button"
                 style={{ marginLeft: '0.5rem' }}
@@ -261,30 +134,32 @@ class LaundryVenue extends Component {
           <Col lg={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Washers</p>
-              {renderMachineAvailabilities(
-                washers,
-                'washer',
-                machines,
-                laundryHallId,
-                hallName,
-                reminders,
-                dispatchAddReminder
-              )}
+              <MachineAvailability
+                machineData={washers}
+                machineType="washer"
+                allMachines={machines}
+                laundryHallId={laundryHallId}
+                hallName={hallName}
+                reminders={reminders}
+                dispatchAddReminder={dispatchAddReminder}
+                enableReminder={!browserError}
+              />
             </BorderedCard>
           </Col>
 
           <Col lg={6} sm={12} margin={MARGIN}>
             <BorderedCard>
               <p className="title is-4">Dryers</p>
-              {renderMachineAvailabilities(
-                dryers,
-                'dryer',
-                machines,
-                laundryHallId,
-                hallName,
-                reminders,
-                dispatchAddReminder
-              )}
+              <MachineAvailability
+                machineData={dryers}
+                machineType="dryer"
+                allMachines={machines}
+                laundryHallId={laundryHallId}
+                hallName={hallName}
+                reminders={reminders}
+                dispatchAddReminder={dispatchAddReminder}
+                enableReminder={!browserError}
+              />
             </BorderedCard>
           </Col>
         </Row>
@@ -297,9 +172,10 @@ LaundryVenue.defaultProps = {
   laundryHallInfo: null,
   laundryHallId: null,
   hallURLId: null,
-  intervalID: null,
   reminders: [],
   favorites: [],
+  hallIntervalID: null,
+  reminderIntervalID: null,
 }
 
 LaundryVenue.propTypes = {
@@ -307,7 +183,8 @@ LaundryVenue.propTypes = {
   dispatchRemoveReminder: PropTypes.func.isRequired,
   reminders: PropTypes.arrayOf(PropTypes.string),
   dispatchGetReminders: PropTypes.func.isRequired,
-  intervalID: PropTypes.number,
+  hallIntervalID: PropTypes.number,
+  reminderIntervalID: PropTypes.number,
   laundryHallInfo: PropTypes.shape({
     hall_name: PropTypes.string,
     location: PropTypes.string,
@@ -328,13 +205,16 @@ LaundryVenue.propTypes = {
 
 const mapStateToProps = ({ laundry }) => {
   const {
+    error,
+    browserError,
     laundryHallInfo,
     pending,
     laundryHallId,
     laundryHalls,
     favorites,
     reminders,
-    intervalID,
+    hallIntervalID,
+    reminderIntervalID,
   } = laundry
 
   // Make sure that the ID is a number
@@ -350,13 +230,16 @@ const mapStateToProps = ({ laundry }) => {
   }
 
   return {
+    error,
+    browserError,
     laundryHallInfo,
     pending,
     laundryHallId: id,
     laundryHalls,
     favorites,
     reminders,
-    intervalID,
+    hallIntervalID,
+    reminderIntervalID,
   }
 }
 
@@ -371,6 +254,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addReminder(machineID, hallID, hallName)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
   dispatchGetReminders: () => dispatch(getReminders()),
+  dispatchCheckBrowser: () => dispatch(checkBrowserCompatability()),
 })
 
 export default connect(

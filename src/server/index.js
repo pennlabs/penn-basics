@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const webpush = require('web-push')
 
 const frontendRouter = require('./routes/frontend')
-const eventsRouter = require('./routes/events')
 const spacesRouter = require('./routes/spaces')
 const diningRouter = require('./routes/dining')
 const newsRouter = require('./routes/news')
@@ -55,7 +54,6 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/spaces', spacesRouter(DB))
-app.use('/api/events', eventsRouter(DB))
 app.use('/api/dining', diningRouter(DB))
 app.use('/api/laundry', laundryRouter())
 app.use('/api/news', newsRouter())
