@@ -8,6 +8,7 @@ import {
   updateLaundryFavorites,
   getFavoritesHome,
   browserSupportRejected,
+  getRemindersRejected,
   updateReminders,
   updateHallIntervalID,
   updateReminderIntervalID,
@@ -77,6 +78,11 @@ const laundryReducer = (state = defaultState, action) => {
       return {
         ...state,
         browserError: action.error,
+      }
+    case getRemindersRejected:
+      return {
+        ...state,
+        error: action.error,
       }
     case updateReminders:
       return {

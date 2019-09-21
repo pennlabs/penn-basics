@@ -186,7 +186,7 @@ LaundryVenue.propTypes = {
   dispatchCheckBrowser: PropTypes.func.isRequired,
   dispatchAddReminder: PropTypes.func.isRequired,
   dispatchRemoveReminder: PropTypes.func.isRequired,
-  reminders: PropTypes.arrayOf(PropTypes.string),
+  reminders: PropTypes.arrayOf(PropTypes.object),
   dispatchGetReminders: PropTypes.func.isRequired,
   hallIntervalID: PropTypes.number,
   reminderIntervalID: PropTypes.number,
