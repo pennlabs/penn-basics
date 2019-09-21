@@ -10,7 +10,7 @@ import DiningCard from './DiningCard'
 import { WHITE, BABY_BLUE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
-import venueData from '../../../server/database/venue_info.json'
+import venueData from '../../../server/resources/dining/venue_info.json'
 
 const Nav = ({ favorites }) => {
   const keys = Object.keys(venueData)

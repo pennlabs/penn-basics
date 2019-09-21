@@ -1,34 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 
 import { BorderedCard, ImageZoom, Col, ColSpace, Row } from '../shared'
-
-const renderNews = ({ picture, link, title, content, time }) => {
-  return (
-    <Row>
-      <Col width="70%">
-        <a href={link}>
-          <ImageZoom src={picture} alt="First" />
-        </a>
-      </Col>
-      <ColSpace />
-      <Col>
-        <p className="is-size-6">
-          <strong>
-            <a href={link}>{title}</a>
-          </strong>
-          <br />
-          <br />
-          <small>{content}</small>
-          <br />
-          <br />
-          <small>{time}</small>
-        </p>
-      </Col>
-    </Row>
-  )
-}
 
 class News extends Component {
   constructor(props) {
@@ -49,6 +22,36 @@ class News extends Component {
       })
   }
 
+  renderNews() {
+    const {
+      data: { picture, link, title, content, time },
+    } = this.state
+
+    return (
+      <Row>
+        <Col width="70%">
+          <a href={link}>
+            <ImageZoom src={picture} alt="First" />
+          </a>
+        </Col>
+        <ColSpace />
+        <Col>
+          <p className="is-size-6">
+            <strong>
+              <a href={link}>{title}</a>
+            </strong>
+            <br />
+            <br />
+            <small>{content}</small>
+            <br />
+            <br />
+            <small>{time}</small>
+          </p>
+        </Col>
+      </Row>
+    )
+  }
+
   render() {
     const { data } = this.state
 
@@ -64,26 +67,10 @@ class News extends Component {
             <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
           </i>
         </h6>
-        {data && renderNews(data)}
+        {data && this.renderNews()}
       </BorderedCard>
     )
   }
-}
-
-renderNews.defaultProps = {
-  picture: '',
-  link: '',
-  title: '',
-  content: '',
-  time: '',
-}
-
-renderNews.propTypes = {
-  picture: PropTypes.string,
-  link: PropTypes.string,
-  title: PropTypes.string,
-  content: PropTypes.string,
-  time: PropTypes.string,
 }
 
 export default News

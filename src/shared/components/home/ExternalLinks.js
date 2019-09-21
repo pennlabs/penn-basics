@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { BorderedCard, Row, Col, ColSpace, Line } from '../shared'
-import externalLinksData from '../../../server/resources/externalLinks.json'
-import usefulLinksData from '../../../server/resources/usefulLinks.json'
+import externalLinksData from '../../../server/resources/home/externalLinks.json'
+import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 
 const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
   return (

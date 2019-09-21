@@ -46,7 +46,8 @@ const mapDispatchToProps = dispatch => ({
   dispatchFilterHomeCustomize: (filterList, filter) =>
     dispatch(filterHomeCustomize(filterList, filter)),
   dispatchToggleHomeCustomize: () => dispatch(toggleHomeCustomize()),
-  dispatchInitializeFilterHome: () => dispatch(initializeFilterHome()),
+  dispatchInitializeFilterHome: optionsLength =>
+    dispatch(initializeFilterHome(optionsLength)),
 })
 
 export default connect(

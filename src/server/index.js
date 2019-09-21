@@ -12,8 +12,6 @@ const laundryRouter = require('./routes/laundry')
 
 const DB = require('./database/db')
 
-const quotes = require('./database/homepage_quotes')
-
 const app = express()
 const PORT = process.env.PORT || 5000
 require('dotenv').config()
@@ -59,9 +57,6 @@ app.use((req, res, next) => {
 app.use('/api/spaces', spacesRouter(DB))
 app.use('/api/events', eventsRouter(DB))
 app.use('/api/dining', diningRouter(DB))
-app.use('/api/quotes', (req, res) => {
-  res.json(quotes)
-})
 app.use('/api/laundry', laundryRouter())
 app.use('/api/news', newsRouter())
 app.use('/', frontendRouter(DB))

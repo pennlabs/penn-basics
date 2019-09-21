@@ -22,8 +22,8 @@ class FilterBtn extends Component {
   }
 
   componentDidMount() {
-    const { initialize } = this.props
-    initialize()
+    const { initialize, options } = this.props
+    initialize(options.length)
   }
 
   componentDidUpdate(prevProps) {

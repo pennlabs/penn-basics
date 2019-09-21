@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import venueData from '../../../server/database/venue_info.json'
+import venueData from '../../../server/resources/dining/venue_info.json'
 import {
   getVenueInfo,
   addFavorite,

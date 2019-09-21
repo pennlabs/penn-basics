@@ -20,10 +20,10 @@ const updateFilters = (arr, num) => {
   return newArr.sort()
 }
 
-export const initializeFilterHome = () => {
+export const initializeFilterHome = optionsLength => {
   return dispatch => {
     if (!localStorage.getItem('homeFilter')) {
-      const filterList = [...Array(6).keys()]
+      const filterList = [...Array(optionsLength).keys()]
       localStorage.setItem('homeFilter', JSON.stringify(filterList))
       dispatch({
         type: filterHomeCustomizeRequested,

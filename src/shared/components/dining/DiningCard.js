@@ -9,7 +9,7 @@ import { convertDate, pad } from '../../helperFunctions'
 import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
-import venueData from '../../../server/database/venue_info.json'
+import venueData from '../../../server/resources/dining/venue_info.json'
 
 const StyledLink = s(Link)`
   h2 {
