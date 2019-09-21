@@ -34,7 +34,7 @@ Favorites.defaultProps = {
 }
 
 Favorites.propTypes = {
-  favorites: PropTypes.arrayOf(PropTypes.string),
+  favorites: PropTypes.arrayOf(PropTypes.object),
   FavoriteCard: PropTypes.func.isRequired,
   inputName: PropTypes.string,
 }

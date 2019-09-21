@@ -38,7 +38,7 @@ FavoriteCard.defaultProps = {
 
 FavoriteCard.propTypes = {
   favorite: PropTypes.shape({
-    hallId: PropTypes.string,
+    hallId: PropTypes.number,
     locationName: PropTypes.string,
   }),
 }

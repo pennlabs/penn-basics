@@ -169,6 +169,8 @@ class LaundryVenue extends Component {
 }
 
 LaundryVenue.defaultProps = {
+  error: null,
+  browserError: null,
   laundryHallInfo: null,
   laundryHallId: null,
   hallURLId: null,
@@ -179,6 +181,9 @@ LaundryVenue.defaultProps = {
 }
 
 LaundryVenue.propTypes = {
+  error: PropTypes.string,
+  browserError: PropTypes.string,
+  dispatchCheckBrowser: PropTypes.func.isRequired,
   dispatchAddReminder: PropTypes.func.isRequired,
   dispatchRemoveReminder: PropTypes.func.isRequired,
   reminders: PropTypes.arrayOf(PropTypes.string),
@@ -191,7 +196,7 @@ LaundryVenue.propTypes = {
     machines: PropTypes.object,
   }),
   laundryHallId: PropTypes.number,
-  hallURLId: PropTypes.number,
+  hallURLId: PropTypes.string,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
   dispatchGetLaundryHall: PropTypes.func.isRequired,

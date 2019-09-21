@@ -1,5 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
+import PropTypes from 'prop-types'
 
 import {
   GREEN,
@@ -130,6 +131,32 @@ const MachineAvailability = ({
       </Table>
     </>
   )
+}
+
+MachineAvailability.defaultProps = {
+  machineData: {},
+  machineType: '',
+  allMachines: [],
+  laundryHallId: null,
+  hallName: '',
+  reminders: [],
+  enableReminder: false,
+}
+
+MachineAvailability.propTypes = {
+  machineData: PropTypes.shape({
+    open: PropTypes.number,
+    running: PropTypes.number,
+    out_of_order: PropTypes.number,
+    offline: PropTypes.number,
+  }),
+  machineType: PropTypes.string,
+  allMachines: PropTypes.array, // eslint-disable-line
+  laundryHallId: PropTypes.number,
+  hallName: PropTypes.string,
+  reminders: PropTypes.arrayOf(PropTypes.string),
+  dispatchAddReminder: PropTypes.func.isRequired,
+  enableReminder: PropTypes.bool,
 }
 
 export default MachineAvailability

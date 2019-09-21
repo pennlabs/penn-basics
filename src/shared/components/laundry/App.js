@@ -105,7 +105,7 @@ App.propTypes = {
   }).isRequired,
   favorites: PropTypes.arrayOf(
     PropTypes.shape({
-      hallId: PropTypes.string,
+      hallId: PropTypes.number,
       locationName: PropTypes.string,
     })
   ),
