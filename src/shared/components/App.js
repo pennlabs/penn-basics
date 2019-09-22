@@ -26,7 +26,7 @@ const App = s.div`
     &:hover,
     &:focus,
     &:active {
-      color: ${DARK_BLUE} !important;
+      color: ${DARK_BLUE};
     }
   }
 `
