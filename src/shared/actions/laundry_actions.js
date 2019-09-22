@@ -225,7 +225,14 @@ export function removeFavorite(laundryHallId) {
 export const checkBrowserCompatability = () => {
   return dispatch => {
     try {
-      Notification.requestPermission()
+      Notification.requestPermission().then(permission => {
+        if (permission !== 'granted') {
+          dispatch({
+            type: browserSupportRejected,
+            error: 'Please enable notifications to support laundry reminders',
+          })
+        }
+      })
       if (!('serviceWorker' in navigator) || !window.indexedDB) {
         dispatch({
           type: browserSupportRejected,
@@ -239,13 +246,6 @@ export const checkBrowserCompatability = () => {
           type: browserSupportRejected,
           error:
             'Laundry reminder is not supported for your browser. Please consider switching to Chrome or Firefox!',
-        })
-      }
-
-      if (Notification.permission !== 'granted') {
-        dispatch({
-          type: browserSupportRejected,
-          error: 'Please enbale notifications to support laundry reminders',
         })
       }
     } catch (err) {
