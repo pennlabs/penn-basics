@@ -41,6 +41,7 @@ const handleReminder = (
 }
 
 const MachineAvailability = ({
+  displayDetails,
   machineData,
   machineType,
   allMachines,
@@ -80,60 +81,64 @@ const MachineAvailability = ({
         ))}
       </Row>
 
-      <Table className="table is-fullwidth">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Status</th>
-            <th>Minutes left</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {tableMachines.map(
-            ({ status, time_remaining: timeRemaining, id }) => {
-              const reminded = reminders.some(
-                reminder =>
-                  reminder.machineID === id && reminder.hallID === laundryHallId
-              )
-              const showBell =
-                !(timeRemaining === 0 || reminded) && enableReminder
-              return (
-                <tr key={id}>
-                  <td>{id}</td>
-                  <td>
-                    <StatusPill status={status} />
-                  </td>
-                  <td>{status === 'Not online' ? '-' : timeRemaining}</td>
-                  <td>
-                    {showBell ? (
-                      <BellIcon
-                        className="icon"
-                        onClick={() =>
-                          handleReminder(
-                            id,
-                            laundryHallId,
-                            hallName,
-                            dispatchAddReminder,
-                            reminded
-                          )
-                        }
-                      >
-                        <i className="far fa-bell" />
-                      </BellIcon>
-                    ) : null}
-                  </td>
-                </tr>
-              )
-            }
-          )}
-        </tbody>
-      </Table>
+      {displayDetails && (
+        <Table className="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Status</th>
+              <th>Minutes left</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {tableMachines.map(
+              ({ status, time_remaining: timeRemaining, id }) => {
+                const reminded = reminders.some(
+                  reminder =>
+                    reminder.machineID === id &&
+                    reminder.hallID === laundryHallId
+                )
+                const showBell =
+                  !(timeRemaining === 0 || reminded) && enableReminder
+                return (
+                  <tr key={id}>
+                    <td>{id}</td>
+                    <td>
+                      <StatusPill status={status} />
+                    </td>
+                    <td>{status === 'Not online' ? '-' : timeRemaining}</td>
+                    <td>
+                      {showBell ? (
+                        <BellIcon
+                          className="icon"
+                          onClick={() =>
+                            handleReminder(
+                              id,
+                              laundryHallId,
+                              hallName,
+                              dispatchAddReminder,
+                              reminded
+                            )
+                          }
+                        >
+                          <i className="far fa-bell" />
+                        </BellIcon>
+                      ) : null}
+                    </td>
+                  </tr>
+                )
+              }
+            )}
+          </tbody>
+        </Table>
+      )}
     </>
   )
 }
 
 MachineAvailability.defaultProps = {
+  displayDetails: false,
   machineData: {},
   machineType: '',
   allMachines: [],
@@ -144,6 +149,7 @@ MachineAvailability.defaultProps = {
 }
 
 MachineAvailability.propTypes = {
+  displayDetails: PropTypes.bool,
   machineData: PropTypes.shape({
     open: PropTypes.number,
     running: PropTypes.number,

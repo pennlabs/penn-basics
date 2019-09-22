@@ -135,6 +135,7 @@ class LaundryVenue extends Component {
             <BorderedCard>
               <p className="title is-4">Washers</p>
               <MachineAvailability
+                displayDetails
                 machineData={washers}
                 machineType="washer"
                 allMachines={machines}
@@ -151,6 +152,7 @@ class LaundryVenue extends Component {
             <BorderedCard>
               <p className="title is-4">Dryers</p>
               <MachineAvailability
+                displayDetails
                 machineData={dryers}
                 machineType="dryer"
                 allMachines={machines}
