@@ -40,13 +40,14 @@ export const initializeFilterHome = optionsLength => {
 
 // filterList is the existing list of filters
 // filter is a number/ index
-export const filterHomeCustomize = (filterList, filter) => {
+export const filterHomeCustomize = filter => {
   return dispatch => {
-    const newFilterList = updateFilters(filterList, filter)
-    localStorage.setItem('homeFilter', JSON.stringify(newFilterList))
+    let filterList = JSON.parse(localStorage.getItem('homeFilter'))
+    filterList = updateFilters(filterList, filter)
+    localStorage.setItem('homeFilter', JSON.stringify(filterList))
     dispatch({
       type: filterHomeCustomizeRequested,
-      filterList: newFilterList,
+      filterList,
     })
   }
 }

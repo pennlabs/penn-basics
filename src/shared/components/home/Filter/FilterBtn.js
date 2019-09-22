@@ -52,10 +52,10 @@ class FilterBtn extends Component {
 
   handleOptionKeyPress(event, idx) {
     const SPACE_KEY_CODE = 32
-    const { onClickOption, activeOptions } = this.props
+    const { onClickOption } = this.props
 
     if (event.keyCode === SPACE_KEY_CODE || event.key === ' ') {
-      onClickOption(activeOptions, idx)
+      onClickOption(idx)
     }
   }
 
@@ -108,7 +108,7 @@ class FilterBtn extends Component {
                 return (
                   <Option
                     key={o}
-                    onClick={() => onClickOption(activeOptions, idx)}
+                    onClick={() => onClickOption(idx)}
                     role="option"
                     tabIndex={0}
                     aria-selected={isActiveOption}

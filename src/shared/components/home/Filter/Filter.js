@@ -43,8 +43,7 @@ Filter.propTypes = {
 const mapStateToProps = ({ home }) => home
 
 const mapDispatchToProps = dispatch => ({
-  dispatchFilterHomeCustomize: (filterList, filter) =>
-    dispatch(filterHomeCustomize(filterList, filter)),
+  dispatchFilterHomeCustomize: filter => dispatch(filterHomeCustomize(filter)),
   dispatchToggleHomeCustomize: () => dispatch(toggleHomeCustomize()),
   dispatchInitializeFilterHome: optionsLength =>
     dispatch(initializeFilterHome(optionsLength)),
