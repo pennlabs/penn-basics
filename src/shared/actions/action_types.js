@@ -5,17 +5,9 @@ export const filterHomeCustomizeRequested = 'FILTER_HOME_CUSTOMIZE_REQUESTED'
 export const TOGGLE_FILTER_HOME_CUSTOMIZE = 'TOGGLE_FILTER_HOME_CUSTOMIZE'
 
 // dining actions
-export const getDiningDataRequested = 'GET_DINING_DATA_REQUESTED'
-export const getDiningDataRejected = 'GET_DINING_DATA_REJECTED'
-export const getDiningDataFulfilled = 'GET_DINING_DATA_FULFILLED'
-
-// dining venue actions
 export const getVenueInfoRequested = 'GET_VENUE_INFO_REQUESTED'
 export const getVenueInfoRejected = 'GET_VENUE_INFO_REJECTED'
 export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED'
-export const dateFormattedChange = 'DATE_FORMATTED_CHANGE'
-export const selectedMealChangeFulfilled = 'SELECTED_MEAL_CHANGE_FULFILLED'
-export const setMealsFulfilled = 'SET_MEALS_FULFILLED'
 export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
 
 // sidebar actions
@@ -52,8 +44,11 @@ export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED'
 export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED'
 export const updateLaundryFavorites = 'UPDATE_LAUNDRY_FAVORITES'
 export const getFavoritesHome = 'GET_FAVORITES_HOME'
+export const browserSupportRejected = 'BROWSER_SUPPORT_REJECTED'
+export const getRemindersRejected = 'GET_REMINDERS_REJECTED'
 export const updateReminders = 'UPDATE_REMINDERS'
-export const updateIntervalID = 'UPDATE_INTERVAL_ID'
+export const updateHallIntervalID = 'UPDATE_HALL_INTERVAL_ID'
+export const updateReminderIntervalID = 'UPDATE_REMINDER_INTERVAL_ID'
 
 // misc actions
 export const updateLink = 'UPDATE_LINK'

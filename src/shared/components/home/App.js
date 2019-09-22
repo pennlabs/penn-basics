@@ -1,10 +1,10 @@
-/* global localStorage */
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Row, Col, ColSpace } from '../shared'
+import PennLabsCredit from '../shared/PennLabsCredit'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
@@ -12,15 +12,9 @@ import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'
 import Laundry from './Laundry'
-import Notification from './Notification'
 import ExternalLinks from './ExternalLinks'
 import Quotes from './Quotes'
 import Events from './Events'
-import Footer from '../footer'
-
-// TODO abstract away localStorage from components
-
-const HOME_FILTER = 'homeFilter'
 
 const Wrapper = s.div`
   padding-top: 1rem;
@@ -31,96 +25,44 @@ const Wrapper = s.div`
   }
 `
 
-class Home extends Component {
-  constructor(props) {
-    super(props)
+const Home = ({ filterList }) => {
+  const componentList = [
+    <Quotes />,
+    <Weather />,
+    <Events />,
+    <News />,
+    <Laundry />,
+    <Dining />,
+  ]
 
-    this.state = {
-      show: false,
-      notification: '',
-      dining: false,
-      componentList: [],
-    }
+  return (
+    <Wrapper>
+      <Row>
+        <Col width="70%">{filterList.map(filter => componentList[filter])}</Col>
+        <ColSpace />
+        <Col>
+          <ExternalLinks />
 
-    this.close = this.close.bind(this)
-  }
+          <Filter />
+        </Col>
+      </Row>
 
-  componentDidMount() {
-    // TODO reduxify this
-    axios
-      .get(`/api/events/${Date.now()}`)
-      .then(resp => {
-        if (resp.data.events.length === 0) {
-          this.setState({ show: false })
-        } else {
-          this.setState({
-            show: true,
-            notification: resp.data.events[0].event,
-          })
-        }
-
-        const { dining } = this.state
-
-        this.setState({
-          componentList: [
-            <Quotes />,
-            <Weather />,
-            <Events />,
-            <News />,
-            <Laundry />,
-            <Dining show={dining} />,
-          ],
-        })
-      })
-      .catch(err => {
-        // TODO better error handling
-
-        console.log(err) // eslint-disable-line
-      })
-  }
-
-  close() {
-    this.setState({ show: false })
-  }
-
-  renderComponents() {
-    if (!localStorage.getItem(HOME_FILTER)) {
-      return null
-    }
-
-    const filter = JSON.parse(localStorage.getItem(HOME_FILTER))
-    const { componentList } = this.state
-
-    return filter.map(index => componentList[index])
-  }
-
-  render() {
-    // TODO less bulma madness
-    const { show, notification } = this.state
-
-    return (
-      <Wrapper>
-        {show && <Notification show={this.close} text={notification} />}
-
-        <Row>
-          <Col width="70%">{this.renderComponents()}</Col>
-          <ColSpace />
-          <Col>
-            <ExternalLinks />
-
-            <Filter />
-          </Col>
-        </Row>
-
-        <Footer />
-      </Wrapper>
-    )
-  }
+      <PennLabsCredit />
+    </Wrapper>
+  )
 }
 
-const mapStateToProps = ({ home }) => home
+Home.propTypes = {
+  filterList: [],
+}
 
-export default connect(
-  mapStateToProps,
-  null
-)(Home)
+Home.defaultProps = {
+  filterList: PropTypes.arrayOf(PropTypes.number),
+}
+
+const mapStateToProps = ({ home }) => {
+  const { filterList } = home
+  return { filterList }
+}
+
+export default connect(mapStateToProps)(Home)

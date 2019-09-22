@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import uuid from 'uuid'
-import dateFormat from 'dateformat'
+import moment from 'moment'
 import { BorderedCard } from '../shared'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
@@ -24,13 +24,8 @@ class Events extends Component {
   renderCalendarCards() {
     const { calendarArray } = this.state
     return calendarArray.map(event => {
-      let startDate = event.start
-      const index = startDate.lastIndexOf('-')
-      startDate = `${startDate.substring(0, index + 1)}${parseInt(
-        startDate.substring(index + 1),
-        10
-      ) + 1}`
-      startDate = dateFormat(startDate, 'dddd, mmmm dS')
+      const { start, name } = event
+      const startDate = moment(start).format('dddd[,] MMMM Do')
       return (
         <article className="media" key={uuid()}>
           <div className="media-left">
@@ -45,7 +40,7 @@ class Events extends Component {
           <div className="media-content">
             <div className="content">
               <p className="is-size-6">
-                <strong>{event.name}</strong>
+                <strong>{name}</strong>
                 <br />
                 <small>
                   Starts from
@@ -59,13 +54,22 @@ class Events extends Component {
     })
   }
 
+  renderSubtext() {
+    const { calendarArray } = this.state
+    if (calendarArray.length === 0)
+      return 'No Events happening in next two weeks'
+    return `${calendarArray.length} Events happening in next two weeks`
+  }
+
   render() {
     const { calendarArray } = this.state
 
     return (
       <BorderedCard>
         <h1 className="title is-4">University Calendar</h1>
-        <h2 className="subtitle is-6">Events happening in next two weeks</h2>
+        {calendarArray && (
+          <h2 className="subtitle is-6"> {this.renderSubtext()} </h2>
+        )}
         {calendarArray && this.renderCalendarCards()}
       </BorderedCard>
     )

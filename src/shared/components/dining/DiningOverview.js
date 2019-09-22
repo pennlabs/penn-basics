@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { BorderedCard } from '../shared'
 import HoursVisualization from './HoursVisualization'
-import venueData from '../../../server/database/venue_info.json'
+import venueData from '../../../server/resources/dining/venue_info.json'
 import { AnchorButton } from '../shared/Button'
 
 const PENN_DINING_BASE_URL =
@@ -18,6 +18,7 @@ const DiningOverview = ({ id }) => {
         {description && <p style={{ marginBottom: '1rem' }}>{description}</p>}
         <HoursVisualization id={id} />
       </BorderedCard>
+
       {pennDiningSlug && (
         <div style={{ textAlign: 'center' }}>
           <AnchorButton

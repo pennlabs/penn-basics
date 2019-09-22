@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import s from 'styled-components'
+import quotes from '../../../server/resources/home/homepage_quotes.json'
 
 const Author = s.p`
     font-size: 80%;
@@ -8,17 +8,19 @@ const Author = s.p`
     font-style: italic;
 `
 
+const greetings = [
+  'Hi There!',
+  'How Are You Doing?',
+  "Yo, What's Up?",
+  'Howdy!',
+]
+
+const emojis = ['😀', '😛', '😗', '🤠']
+
 class Quotes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      greetings: [
-        'Hi There!',
-        'How Are You Doing?',
-        "Yo, What's Up?",
-        'Howdy!',
-      ],
-      emojis: ['😀', '😛', '😗', '🤠'],
       greeting: '',
       quote: '',
       author: '',
@@ -26,27 +28,10 @@ class Quotes extends Component {
   }
 
   componentDidMount() {
-    // TODO reduxify this
-    axios
-      .get('/api/quotes')
-      .then(res => {
-        const quotes = res.data
-        const { quote, author } = quotes[
-          Math.floor(Math.random() * quotes.length)
-        ]
-        this.setState({ quote, author })
-      })
-      .catch(err => {
-        // TODO better error handling
-
-        console.log(err) // eslint-disable-line
-      })
-
-    const { greetings, emojis } = this.state
-
+    const quote = quotes[Math.floor(Math.random() * quotes.length)]
     const greeting = greetings[Math.floor(Math.random() * greetings.length)]
     const emoji = emojis[Math.floor(Math.random() * emojis.length)]
-    this.setState({ greeting: `${greeting} ${emoji}` })
+    this.setState({ ...quote, greeting: `${greeting} ${emoji}` })
   }
 
   render() {

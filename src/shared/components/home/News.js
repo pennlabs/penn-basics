@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+
 import { BorderedCard, ImageZoom, Col, ColSpace, Row } from '../shared'
 
 class News extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: null,
-    }
+    this.state = { data: null }
   }
 
   componentDidMount() {
@@ -27,6 +26,7 @@ class News extends Component {
     const {
       data: { picture, link, title, content, time },
     } = this.state
+
     return (
       <Row>
         <Col width="70%">
@@ -55,11 +55,14 @@ class News extends Component {
   render() {
     const { data } = this.state
 
+    if (!data) {
+      return null
+    }
     return (
       <BorderedCard>
         <h1 className="title is-4">Latest News</h1>
         <h6 className="subtitle is-6">
-          &nbsp; More from &nbsp;
+          More from &nbsp;
           <i>
             <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
           </i>

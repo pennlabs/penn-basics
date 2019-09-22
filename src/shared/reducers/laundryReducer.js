@@ -7,19 +7,24 @@ import {
   getLaundryHallInfoFulfilled,
   updateLaundryFavorites,
   getFavoritesHome,
+  browserSupportRejected,
+  getRemindersRejected,
   updateReminders,
-  updateIntervalID,
+  updateHallIntervalID,
+  updateReminderIntervalID,
 } from '../actions/action_types'
 
 const defaultState = {
   pending: true,
-  error: false,
+  error: null,
+  browserError: null,
   laundryHalls: null,
   laundryHallInfo: null,
   favorites: [],
   favoritesHome: [],
   reminders: [],
-  intervalID: null,
+  hallIntervalID: null,
+  reminderIntervalID: null,
 }
 
 const laundryReducer = (state = defaultState, action) => {
@@ -69,15 +74,30 @@ const laundryReducer = (state = defaultState, action) => {
         ...state,
         favoritesHome: action.favorites,
       }
+    case browserSupportRejected:
+      return {
+        ...state,
+        browserError: action.error,
+      }
+    case getRemindersRejected:
+      return {
+        ...state,
+        error: action.error,
+      }
     case updateReminders:
       return {
         ...state,
         reminders: action.reminders,
       }
-    case updateIntervalID:
+    case updateHallIntervalID:
       return {
         ...state,
-        intervalID: action.intervalID,
+        hallIntervalID: action.intervalID,
+      }
+    case updateReminderIntervalID:
+      return {
+        ...state,
+        reminderIntervalID: action.intervalID,
       }
     default:
       return state

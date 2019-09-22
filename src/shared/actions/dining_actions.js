@@ -1,19 +1,12 @@
 /* global localStorage */
 import axios from 'axios'
 import {
-  getDiningDataRequested,
-  getDiningDataRejected,
-  getDiningDataFulfilled,
   getVenueInfoRequested,
   getVenueInfoRejected,
   getVenueInfoFulfilled,
-  setMealsFulfilled,
   updateDiningFavorites,
 } from './action_types'
-
-const pad = number => {
-  return number < 10 ? `0${number}` : `${number}`
-}
+import { pad } from '../helperFunctions'
 
 const convertDate = dateObj => {
   const month = dateObj.getUTCMonth() + 1
@@ -54,53 +47,6 @@ export const getVenueInfo = venueId => {
         error: err.message,
       })
     }
-  }
-}
-
-export const getDiningData = venueId => {
-  return dispatch => {
-    dispatch({
-      type: getDiningDataRequested,
-    })
-
-    // Format the dates for the request
-    // The start date is today
-    const startDate = new Date()
-    startDate.setHours(0, 0, 0, 0)
-
-    // The end date is three days from today
-    const endDate = new Date()
-    endDate.setHours(72, 0, 0, 0)
-
-    // Send the request
-    axios
-      .post('/api/dining/menu_date_range/', {
-        venueId,
-        startDate,
-        endDate,
-      })
-      .then(res => {
-        const diningData = res.data
-        dispatch({
-          type: getDiningDataFulfilled,
-          diningData,
-        })
-      })
-      .catch(error => {
-        dispatch({
-          type: getDiningDataRejected,
-          error: error.message,
-        })
-      })
-  }
-}
-
-export function setMeals(dateFormatted) {
-  return dispatch => {
-    dispatch({
-      type: setMealsFulfilled,
-      dateFormatted,
-    })
   }
 }
 

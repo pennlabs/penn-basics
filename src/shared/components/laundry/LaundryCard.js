@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import { connect } from 'react-redux'
 import s from 'styled-components'
 
 import { Card, Text, Row, Col, Line } from '../shared'
@@ -14,95 +13,53 @@ const StyledLink = s(Link)`
     color: ${DARK_GRAY} !important;
   }
 `
+const LaundryCard = ({ locationObject }) => {
+  const [expanded, setExpanded] = useState(false)
 
-class LaundryCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      expanded: false,
-    }
-  }
+  const { halls, location } = locationObject
 
-  componentDidMount() {
-    const {
-      locationObject: { halls },
-    } = this.props
-
-    const { hallURLId } = this.props
-    const hallURLIdNum = Number(hallURLId)
-    if (!hallURLId || !hallURLIdNum) return
-
-    // TODO peter why is this necessary
-    for (let i = 0; i < halls.length; i += 1) {
-      const hall = halls[i]
-      const { id } = hall
-      if (id === hallURLIdNum) {
-        this.setState({ expanded: true })
-        return
-      }
-    }
-  }
-
-  onLaundryLocationClick() {
-    const { expanded } = this.state
-    this.setState({
-      expanded: !expanded,
-    })
-  }
-
-  render() {
-    const {
-      locationObject: { halls, location },
-    } = this.props
-    const { expanded } = this.state
-
-    // Check if the hall has only one location object
-    if (halls.length === 1) {
-      return (
-        <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
-          <LaundryCardHeader title={location} />
-          <Line />
-        </StyledLink>
-      )
-    }
-
-    // TODO don't use UUID here
+  // Check if the hall has only one location
+  if (halls.length === 1) {
     return (
-      <div>
-        <div key={uuid()} onClick={() => this.onLaundryLocationClick()}>
-          <LaundryCardHeader title={location} />
-        </div>
-
-        {expanded &&
-          halls.map(({ hall_name: hallName, id }) => (
-            <StyledLink to={`/laundry/${id}`} key={uuid()}>
-              <Card padding="0.5rem 1rem" hoverable>
-                <Row>
-                  <Col padding="0 0 0 1rem">
-                    <Text marginBottom="0">{hallName}</Text>
-                  </Col>
-                </Row>
-              </Card>
-            </StyledLink>
-          ))}
-
+      <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
+        <LaundryCardHeader title={location} />
         <Line />
-      </div>
+      </StyledLink>
     )
   }
-}
 
-const mapStateToProps = ({ laundry }) => {
-  const { laundryHalls, laundryHallInfo } = laundry
-  return { laundryHalls, laundryHallInfo }
+  return (
+    <div>
+      <div //eslint-disable-line
+        key={uuid()}
+        onClick={() => setExpanded(!expanded)}
+      >
+        <LaundryCardHeader title={location} />
+      </div>
+
+      {expanded &&
+        halls.map(({ hall_name: hallName, id }) => (
+          <StyledLink to={`/laundry/${id}`} key={`laundry${id}`}>
+            <Card padding="0.5rem 1rem" hoverable>
+              <Row>
+                <Col padding="0 0 0 1rem">
+                  <Text marginBottom="0">{hallName}</Text>
+                </Col>
+              </Row>
+            </Card>
+          </StyledLink>
+        ))}
+
+      <Line />
+    </div>
+  )
 }
 
 LaundryCard.defaultProps = {
-  hallURLId: null,
+  locationObject: {},
 }
 
 LaundryCard.propTypes = {
-  hallURLId: PropTypes.string,
   locationObject: PropTypes.shape({
     location: PropTypes.string,
     halls: PropTypes.arrayOf(
@@ -112,10 +69,7 @@ LaundryCard.propTypes = {
         location: PropTypes.string,
       })
     ),
-  }).isRequired,
+  }),
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(LaundryCard)
+export default LaundryCard

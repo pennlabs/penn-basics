@@ -1,0 +1,12 @@
+[
+    {
+        "pictureURL": "https://raw.githubusercontent.com/pennlabs/clubs/master/static/img/peoplelogo.png",
+        "websiteURL": "https://pennclubs.com/",
+        "productName": "Penn Clubs"
+    },
+    {
+        "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCR.png",
+        "websiteURL": "https://penncoursereview.com/",
+        "productName": "Penn Course Review"
+    }
+]
