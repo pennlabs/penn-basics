@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import s from 'styled-components'
 
-import { BLACK, DARK_GRAY, ALLBIRDS_GRAY } from '../../../styles/colors'
-import { maxWidth, TABLET, NAV_HEIGHT } from '../../../styles/sizes'
+import {
+  BLACK,
+  DARK_GRAY,
+  ALLBIRDS_GRAY,
+  BLACK_ALPHA,
+} from '../../../styles/colors'
+import {
+  maxWidth,
+  minWidth,
+  TABLET,
+  NAV_HEIGHT,
+  PHONE,
+} from '../../../styles/sizes'
 
 import Links from './Links'
 import Menu from './Menu'
+
+const Z_INDEX = 1300
+
+const NavSpace = s.div`
+  width: 100%;
+  height: ${NAV_HEIGHT};
+`
 
 const Wrapper = s.nav`
   padding: 0 1rem;
@@ -14,6 +32,10 @@ const Wrapper = s.nav`
   display: flex;
   width: 100%;
   min-height: ${NAV_HEIGHT};
+  z-index: ${Z_INDEX};
+  position: fixed;
+  top: 0;
+  left: 0;
 `
 
 const LogoText = s.h1`
@@ -39,22 +61,45 @@ const Logo = s.img`
   width: auto;
 `
 
+const Shade = s.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: ${BLACK_ALPHA(0.5)};
+  z-index: ${({ zIndex }) => zIndex - 1};
+
+  ${minWidth(PHONE)} {
+    display: none;
+  }
+`
+
 // TODO replace imgur jawn with local jawn
 
-const Nav = () => (
-  <Wrapper className="navbar" id="navbar">
-    <Link to="/">
-      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
-    </Link>
+const Nav = () => {
+  const [active, toggleActive] = useState(false)
+  return (
+    <>
+      <Wrapper className="navbar" id="navbar">
+        <Link to="/">
+          <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+        </Link>
 
-    <Link to="/">
-      <LogoText>Penn Basics</LogoText>
-    </Link>
+        <Link to="/">
+          <LogoText>Penn Basics</LogoText>
+        </Link>
 
-    <Menu />
+        <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 
-    <Links />
-  </Wrapper>
-)
+        <Links active={active} zIndex={Z_INDEX} />
+      </Wrapper>
+      {active && (
+        <Shade zIndex={Z_INDEX} onClick={() => toggleActive(!active)} />
+      )}
+      <NavSpace />
+    </>
+  )
+}
 
 export default Nav

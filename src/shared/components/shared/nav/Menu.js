@@ -1,38 +1,29 @@
-/* global document */
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Bars from './Bars'
 
-// TODO shade thing
-
-const Menu = () => {
-  const toggle = () => {
-    const sidebar = document.getElementById('sidebar')
-    const shadow = document.getElementById('shade')
-    shadow.classList.toggle('fade-in')
-    sidebar.classList.toggle('active')
-  }
-
+const Menu = ({ active, toggleActive }) => {
   const handleKeyPress = event => {
     event.preventDefault()
 
     if (event.keyCode === 32) {
-      toggle()
+      toggleActive(!active)
     }
   }
 
-  const handleClick = event => {
-    event.preventDefault()
-
-    toggle()
-  }
-
-  // Shadow
   return (
-    <>
-      <Bars onClick={handleClick} onKeyPress={handleKeyPress} tabIndex={0} />
-      <div id="shade" />
-    </>
+    <Bars
+      handleClick={() => toggleActive(!active)}
+      onKeyPress={handleKeyPress}
+      tabIndex={0}
+    />
   )
+}
+
+Menu.propTypes = {
+  active: PropTypes.bool.isRequired,
+  toggleActive: PropTypes.func.isRequired,
 }
 
 export default Menu
