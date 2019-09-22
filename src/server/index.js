@@ -21,18 +21,12 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-// TODO Peter better docs--what is web push?
-// Should these be env variables?
-// web push relevant info
-const publicVapidKey =
-  'BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8'
-const privateVapidKey = '_jQNq46LkvTXlvPZVgnmXRFOSIluwGv2s9qXY4laBBw'
-webpush.setVapidDetails(
-  'mailto:cbaile@seas.upenn.edu',
-  publicVapidKey,
-  privateVapidKey
-)
+const { publicKey, privateKey } = webpush.generateVAPIDKeys()
+webpush.setVapidDetails('mailto:contact@pennlabs.org', publicKey, privateKey)
 
+app.use('/api/getPublicVapidKey', (_, res) => {
+  res.status(200).json({ publicKey })
+})
 app.use('/api/spaces', spacesRouter(DB))
 app.use('/api/dining', diningRouter(DB))
 app.use('/api/laundry', laundryRouter())

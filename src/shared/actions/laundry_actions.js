@@ -19,8 +19,6 @@ import {
   updateReminderIntervalID,
 } from './action_types'
 
-const publicVapidKey =
-  'BFlvGJCEH3s7ofWwBy-h-VSzGiQmBD_Mg80qpA-nkBUeRBFJPN4-YjPu5zE3oRy1uFCG9fyfMhyVnElGhI-fQb8'
 const BASE = 'http://api.pennlabs.org'
 
 function processLaundryHallsData(idData) {
@@ -387,13 +385,12 @@ export const addReminder = (machineID, hallID, hallName) => {
       navigator.serviceWorker.register('/sw.js')
 
       navigator.serviceWorker.ready
-        .then(registration => {
-          // const response = await fetch('/api/laundry/vapidPublicKey');
-          // const vapidPublicKey = await response.text();
+        .then(async registration => {
+          const resp = await axios.get('/api/getPublicVapidKey')
+          const { publicKey: publicVapidKey } = resp.data
 
           return registration.pushManager.subscribe({
             userVisibleOnly: true,
-            // applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
             applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
           })
         })
