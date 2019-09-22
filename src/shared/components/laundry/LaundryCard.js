@@ -29,12 +29,12 @@ const LaundryCard = ({ locationObject }) => {
   }
 
   return (
-    <div>
-      <div //eslint-disable-line
+    <>
+      <div // eslint-disable-line
         key={uuid()}
         onClick={() => setExpanded(!expanded)}
       >
-        <LaundryCardHeader title={location} />
+        <LaundryCardHeader title={location} hasDropdown expanded={expanded} />
       </div>
 
       {expanded &&
@@ -51,7 +51,7 @@ const LaundryCard = ({ locationObject }) => {
         ))}
 
       <Line />
-    </div>
+    </>
   )
 }
 

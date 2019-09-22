@@ -1,16 +1,42 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import s from 'styled-components'
 
 import { Card, Row, Col, Text } from '../shared'
-import { DARK_GRAY } from '../../styles/colors'
+import { DARK_GRAY, LIGHT_GRAY } from '../../styles/colors'
 
-const LaundryCardHeader = ({ title }) => (
+const Chevron = s.span`
+  position: absolute;
+  right: 0;
+  margin: 6px;
+  width: 0.6rem;
+  height: 0.6rem;
+  display: inline-block;
+  border-right: 2px solid ${LIGHT_GRAY};
+  border-bottom: 2px solid ${LIGHT_GRAY};
+  transition: all 0.2s ease;
+
+  ${({ expanded }) =>
+    expanded
+      ? `
+      transform: rotate(-135deg);
+      margin-top: 9px;
+    `
+      : `transform: rotate(45deg);`}
+`
+
+const LaundryCardHeader = ({ title, hasDropdown, expanded }) => (
   <Card padding="0.5rem 1rem" hoverable>
     <Row>
-      <Col padding="0">
-        <Text medium marginBottom="0" color={DARK_GRAY}>
-          {title}
-        </Text>
+      <Col padding="0" style={{ overflowX: 'visible' }}>
+        <div
+          style={{ position: 'relative', width: '100%', overflowX: 'visible' }}
+        >
+          <Text medium marginBottom="0" color={DARK_GRAY}>
+            {title}
+          </Text>
+          {hasDropdown && <Chevron expanded={expanded} />}
+        </div>
       </Col>
     </Row>
   </Card>
@@ -18,6 +44,13 @@ const LaundryCardHeader = ({ title }) => (
 
 LaundryCardHeader.propTypes = {
   title: PropTypes.string.isRequired,
+  hasDropdown: PropTypes.bool,
+  expanded: PropTypes.bool,
+}
+
+LaundryCardHeader.defaultProps = {
+  hasDropdown: false,
+  expanded: false,
 }
 
 export default LaundryCardHeader
