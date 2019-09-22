@@ -19,7 +19,7 @@ const ErrorMessage = ({ message = '' }) => {
 }
 
 ErrorMessage.defaultProps = {
-  message: '',
+  message: null,
 }
 
 ErrorMessage.propTypes = {

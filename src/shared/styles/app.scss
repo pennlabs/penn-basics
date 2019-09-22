@@ -1,6 +1,5 @@
 @import './spacing';
 @import './palette';
-@import './navbar';
 @import './text';
 @import './sidebar';
 @import './dining';
@@ -43,13 +42,13 @@
 
   &:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background: #FAFAFA;
+    background: #fafafa;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &:active,
   &:focus {
-    background: #F8F8F8;
+    background: #f8f8f8;
     outline: $medium-gray !important;
   }
 }

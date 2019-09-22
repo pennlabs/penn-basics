@@ -6,7 +6,7 @@ import moment from 'moment'
 import uuid from 'uuid'
 
 import ErrorMessage from '../shared/ErrorMessage'
-import { LIGHTER_BLUE, BORDER } from '../../styles/colors'
+import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
 import { convertDate, pad } from '../../helperFunctions'
 
 const HeaderRow = s.tr`
@@ -33,16 +33,17 @@ const BodyRow = s.tr`
   }
 `
 
+const week = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
+
 const getDay = date => {
-  const week = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
   const obj = moment(date)
   const dayNum = obj.day()
   const today = moment().day()
@@ -109,7 +110,7 @@ const List = ({ venueHours }) => {
                 <BodyRow>
                   <td style={{ width: '12rem' }} />
                   <td>
-                    <i>Closed</i>
+                    <i style={{ color: MEDIUM_GRAY }}>Closed</i>
                   </td>
                   <td />
                   <td />

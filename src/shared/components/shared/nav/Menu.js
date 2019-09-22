@@ -1,5 +1,8 @@
 /* global document */
 import React from 'react'
+import Bars from './Bars'
+
+// TODO shade thing
 
 const Menu = () => {
   const toggle = () => {
@@ -25,18 +28,10 @@ const Menu = () => {
 
   // Shadow
   return (
-    <div
-      id="sidebar-toggle"
-      onClick={handleClick}
-      onKeyPress={handleKeyPress}
-      role="button"
-      tabIndex={0}
-    >
-      <div className="bar" />
-      <div className="bar" />
-      <div className="bar" />
+    <>
+      <Bars onClick={handleClick} onKeyPress={handleKeyPress} tabIndex={0} />
       <div id="shade" />
-    </div>
+    </>
   )
 }
 
