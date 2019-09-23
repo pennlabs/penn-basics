@@ -30,7 +30,7 @@ class News extends Component {
     return (
       <Row>
         <Col width="70%">
-          <a href={link}>
+          <a href={link} target="_blank" rel="noopener noreferrer">
             <ImageZoom src={picture} alt="First" />
           </a>
         </Col>
@@ -38,7 +38,9 @@ class News extends Component {
         <Col>
           <p className="is-size-6">
             <strong>
-              <a href={link}>{title}</a>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                {title}
+              </a>
             </strong>
             <br />
             <br />
@@ -64,7 +66,13 @@ class News extends Component {
         <h6 className="subtitle is-6">
           More from &nbsp;
           <i>
-            <a href="https://www.thedp.com/">The Daily Pennsylvanian</a>
+            <a
+              href="https://www.thedp.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The Daily Pennsylvanian
+            </a>
           </i>
         </h6>
         {data && this.renderNews()}

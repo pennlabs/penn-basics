@@ -14,15 +14,38 @@ const Chevron = s.span`
   display: inline-block;
   border-right: 2px solid ${LIGHT_GRAY};
   border-bottom: 2px solid ${LIGHT_GRAY};
-  transition: all 0.2s ease;
+
+  @keyframes rotation-back {
+    from {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    to {
+      -webkit-transform: rotate(225deg);
+      transform: rotate(225deg);
+    }
+  }
+
+  @keyframes rotation-cw {
+    from {
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+    to {
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
 
   ${({ expanded }) =>
     expanded
       ? `
+      -webkit-animation: rotation-back 0.4s;
+      animation: rotation-back: 0.4s;
       transform: rotate(-135deg);
       margin-top: 9px;
     `
-      : `transform: rotate(45deg);`}
+      : `-webkit-animation: rotation-cw 0.4s; animation: rotation-cw 0.4s; transform: rotate(45deg)`}
 `
 
 const LaundryCardHeader = ({ title, hasDropdown, expanded }) => (
@@ -30,7 +53,11 @@ const LaundryCardHeader = ({ title, hasDropdown, expanded }) => (
     <Row>
       <Col padding="0" style={{ overflowX: 'visible' }}>
         <div
-          style={{ position: 'relative', width: '100%', overflowX: 'visible' }}
+          style={{
+            position: 'relative',
+            width: '100%',
+            overflowX: 'visible',
+          }}
         >
           <Text medium marginBottom="0" color={DARK_GRAY}>
             {title}
