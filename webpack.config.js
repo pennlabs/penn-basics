@@ -1,9 +1,9 @@
-const webpack = require('webpack'); // eslint-disable-line
-const path = require('path');
-const workboxplugin = require('workbox-webpack-plugin');
+const webpack = require('webpack') // eslint-disable-line
+const path = require('path')
+const workboxplugin = require('workbox-webpack-plugin')
 
-const BUILD_DIR = path.join(__dirname, 'public', 'js');
-const APP_DIR = path.join(__dirname, 'src', 'shared');
+const BUILD_DIR = path.join(__dirname, 'public', 'js')
+const APP_DIR = path.join(__dirname, 'src', 'shared')
 
 const config = {
   entry: ['babel-polyfill', `${APP_DIR}/index.js`],
@@ -25,13 +25,17 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-        }, {
-          loader: 'sass-loader',
-        }],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
@@ -39,8 +43,8 @@ const config = {
     // new swplugin({
     //   entry: path.join(__dirname, 'public/sw.js'),
     // }),
-    new workboxplugin.GenerateSW()
-  ]
-};
+    new workboxplugin.GenerateSW(),
+  ],
+}
 
-module.exports = config;
+module.exports = config
