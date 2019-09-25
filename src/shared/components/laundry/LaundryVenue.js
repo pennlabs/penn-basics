@@ -14,7 +14,6 @@ import {
   getReminders,
   addReminder,
   removeReminder,
-  checkBrowserCompatability,
 } from '../../actions/laundry_actions'
 
 const MARGIN = '0.5rem'
@@ -37,7 +36,6 @@ class LaundryVenue extends Component {
       hallIntervalID,
       dispatchGetLaundryHall,
       dispatchGetReminders,
-      dispatchCheckBrowser,
     } = this.props
 
     if (hallURLId) {
@@ -46,7 +44,6 @@ class LaundryVenue extends Component {
       dispatchGetLaundryHall(laundryHallId, hallIntervalID)
     }
 
-    dispatchCheckBrowser()
     dispatchGetReminders()
   }
 
@@ -185,7 +182,6 @@ LaundryVenue.defaultProps = {
 LaundryVenue.propTypes = {
   error: PropTypes.string,
   browserError: PropTypes.string,
-  dispatchCheckBrowser: PropTypes.func.isRequired,
   dispatchAddReminder: PropTypes.func.isRequired,
   dispatchRemoveReminder: PropTypes.func.isRequired,
   reminders: PropTypes.arrayOf(PropTypes.object),
@@ -261,7 +257,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addReminder(machineID, hallID, hallName)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
   dispatchGetReminders: () => dispatch(getReminders()),
-  dispatchCheckBrowser: () => dispatch(checkBrowserCompatability()),
 })
 
 export default connect(

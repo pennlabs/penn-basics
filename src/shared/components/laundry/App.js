@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getLaundryHalls, getFavorites } from '../../actions/laundry_actions'
 
+import {
+  getLaundryHalls,
+  getFavorites,
+  checkBrowserCompatability,
+} from '../../actions/laundry_actions'
 import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
@@ -15,10 +19,15 @@ import FavoriteCard from './FavoriteCard'
 class App extends Component {
   constructor(props) {
     super(props)
-    const { dispatchGetLaundryHalls, dispatchGetFavorites } = this.props
+    const {
+      dispatchGetLaundryHalls,
+      dispatchGetFavorites,
+      dispatchCheckBrowser,
+    } = this.props
 
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
+    dispatchCheckBrowser()
   }
 
   render() {
@@ -84,6 +93,7 @@ const mapStateToProps = ({ laundry }) => {
 const mapDispatchToProps = dispatch => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
   dispatchGetFavorites: () => dispatch(getFavorites()),
+  dispatchCheckBrowser: () => dispatch(checkBrowserCompatability()),
 })
 
 App.defaultProps = {
@@ -111,6 +121,7 @@ App.propTypes = {
   ),
   dispatchGetFavorites: PropTypes.func.isRequired,
   dispatchGetLaundryHalls: PropTypes.func.isRequired,
+  dispatchCheckBrowser: PropTypes.func.isRequired,
 }
 
 export default connect(

@@ -247,7 +247,9 @@ export const checkBrowserCompatability = () => {
           await registration.pushManager
             .getSubscription()
             .then(subscription => {
-              subscription.unsubscribe()
+              if (subscription) {
+                subscription.unsubscribe()
+              }
             })
         })
       }
