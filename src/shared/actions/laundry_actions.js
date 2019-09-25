@@ -239,6 +239,17 @@ export const checkBrowserCompatability = () => {
           error:
             'Laundry reminder is currently not supported for your browser. Please consider upgrading to the latest version!',
         })
+      } else {
+        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.ready.then(async registration => {
+          // serviceWorker can only subscribe once
+          // --> need to clear the previous subscription first
+          await registration.pushManager
+            .getSubscription()
+            .then(subscription => {
+              subscription.unsubscribe()
+            })
+        })
       }
 
       if (!('PushManager' in window)) {
@@ -281,7 +292,6 @@ const getRemindersInterval = dispatch => {
     // Object Store: laundryReminders
     // Key: hallMachineID ({hallID}-{machineID})
     // value: reminderID
-    navigator.serviceWorker.register('/sw.js')
     const dbRequest = indexedDB.open('LocalDB', 1) // opens the first version of LocalDB
 
     dbRequest.onerror = event => {
@@ -382,38 +392,32 @@ export const getReminders = () => {
 export const addReminder = (machineID, hallID, hallName) => {
   return dispatch => {
     try {
-      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker.ready.then(async registration => {
+        // get public vapid key
+        const resp = await axios.get('/api/getPublicVapidKey')
+        const { publicKey: publicVapidKey } = resp.data
 
-      navigator.serviceWorker.ready
-        .then(async registration => {
-          const resp = await axios.get('/api/getPublicVapidKey')
-          const { publicKey: publicVapidKey } = resp.data
-
-          return registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
-          })
+        const subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
         })
-        .then(async subscription => {
-          const reminders = JSON.parse(
-            localStorage.getItem('laundry_reminders')
-          )
-          const reminderID = uuidv4()
-          reminders.push({ machineID, hallID, reminderID })
-          dispatch({
-            type: updateReminders,
-            reminders,
-          })
-          localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
-
-          await axios.post('/api/laundry/reminder/add', {
-            subscription,
-            machineID,
-            hallID,
-            hallName,
-            reminderID,
-          })
+        const reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+        const reminderID = uuidv4()
+        reminders.push({ machineID, hallID, reminderID })
+        dispatch({
+          type: updateReminders,
+          reminders,
         })
+        localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+
+        await axios.post('/api/laundry/reminder/add', {
+          subscription,
+          machineID,
+          hallID,
+          hallName,
+          reminderID,
+        })
+      })
     } catch (err) {
       dispatch({
         type: getRemindersRejected,
