@@ -70,8 +70,12 @@ const DiningCard = ({ venueId, isFavorited }) => {
   // useEffect will be triggered only if values in the second argument is modified
   // using an empty array ensures that useEffect is called only once
   useEffect(() => {
+    const cancelToken = axios.CancelToken
+    const source = cancelToken.source()
     axios
-      .get(`https://api.pennlabs.org/dining/hours/${venueId}`)
+      .get(`https://api.pennlabs.org/dining/hours/${venueId}`, {
+        cancelToken: source.token,
+      })
       .then(response => {
         let venueHours = response.data.cafes[venueId].days
         let currDate = moment().format()
@@ -84,6 +88,9 @@ const DiningCard = ({ venueId, isFavorited }) => {
         }
       })
       .catch(() => {})
+    return () => {
+      source.cancel()
+    }
   }, [])
 
   if (!stateVenueHours) {

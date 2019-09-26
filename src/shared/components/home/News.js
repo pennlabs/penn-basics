@@ -1,33 +1,50 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import { BorderedCard, ImageZoom, Col, ColSpace, Row } from '../shared'
 
-class News extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { data: null }
-  }
-
-  componentDidMount() {
+const News = () => {
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    const cancelToken = axios.CancelToken
+    const source = cancelToken.source()
     const website = 'https://www.thedp.com/'
     const className = 'col-lg-6 col-md-5 col-sm-12 frontpage-carousel'
     axios
       .post('/api/news', {
+        cancelToken: source.token,
         website,
         className,
       })
       .then(res => {
-        this.setState({ data: res.data })
+        setData(res.data)
       })
+    return () => {
+      source.cancel()
+    }
+  }, [])
+
+  if (!data) {
+    return null
   }
 
-  renderNews() {
-    const {
-      data: { picture, link, title, content, time },
-    } = this.state
+  const { picture, link, title, content, time } = data
 
-    return (
+  return (
+    <BorderedCard>
+      <h1 className="title is-4">Latest News</h1>
+      <h6 className="subtitle is-6">
+        More from &nbsp;
+        <i>
+          <a
+            href="https://www.thedp.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            The Daily Pennsylvanian
+          </a>
+        </i>
+      </h6>
       <Row>
         <Col width="70%">
           <a href={link} target="_blank" rel="noopener noreferrer">
@@ -51,34 +68,8 @@ class News extends Component {
           </p>
         </Col>
       </Row>
-    )
-  }
-
-  render() {
-    const { data } = this.state
-
-    if (!data) {
-      return null
-    }
-    return (
-      <BorderedCard>
-        <h1 className="title is-4">Latest News</h1>
-        <h6 className="subtitle is-6">
-          More from &nbsp;
-          <i>
-            <a
-              href="https://www.thedp.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              The Daily Pennsylvanian
-            </a>
-          </i>
-        </h6>
-        {data && this.renderNews()}
-      </BorderedCard>
-    )
-  }
+    </BorderedCard>
+  )
 }
 
 export default News
