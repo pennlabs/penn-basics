@@ -8,6 +8,7 @@ export const Image = s.img`
 
 export const ImageZoom = s.img`
 transition-duration: 0.7s;
+max-width: 100%;
 &:hover{
     transform: scale(1.2);
     -webkit-transform: scale(1.2);

@@ -1,8 +1,12 @@
+/* global document */
 import React from 'react'
 import moment from 'moment'
 import { BorderedCard } from '../shared'
 
 const Weather = () => {
+  const tag = document.createElement('script')
+  tag.setAttribute('src', 'https://weatherwidget.io/js/widget.min.js')
+  document.getElementsByTagName('body')[0].appendChild(tag)
   return (
     <BorderedCard>
       <h1 className="title is-4">Weather in Philly</h1>
