@@ -20,10 +20,12 @@ class App extends Component {
     const {
       match: {
         params: { id } = {
-          params: { id: '-1' },
+          params: { id: null },
         },
       },
     } = this.props
+
+    const parsedVenueId = Number.isNaN(id) ? null : id
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
@@ -34,7 +36,7 @@ class App extends Component {
           overflowY="scroll"
           maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
         >
-          <DiningVenue venueId={Number.isNaN(id) ? null : id} />
+          <DiningVenue venueId={parsedVenueId} />
         </Col>
       </Row>
     )
