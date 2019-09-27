@@ -2,6 +2,8 @@ import React from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 
+// TODO split this into components
+
 import {
   GREEN,
   MUSTARD,

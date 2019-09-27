@@ -26,8 +26,8 @@ const Chevron = s.span`
     `}
 `
 
-const LaundryCardHeader = ({ title, hasDropdown, expanded }) => (
-  <Card padding="0.5rem 1rem" hoverable>
+const LaundryCardHeader = ({ title, hasDropdown, expanded, selected }) => (
+  <Card padding="0.5rem 1rem" hoverable selected={selected}>
     <Row>
       <Col padding="0" style={{ overflowX: 'visible' }}>
         <div
@@ -51,11 +51,13 @@ LaundryCardHeader.propTypes = {
   title: PropTypes.string.isRequired,
   hasDropdown: PropTypes.bool,
   expanded: PropTypes.bool,
+  selected: PropTypes.bool,
 }
 
 LaundryCardHeader.defaultProps = {
   hasDropdown: false,
   expanded: false,
+  selected: false,
 }
 
 export default LaundryCardHeader

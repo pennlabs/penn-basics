@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import uuid from 'uuid'
 import s from 'styled-components'
 
 import { Card, Text, Row, Col, Line } from '../shared'
@@ -13,25 +12,30 @@ const StyledLink = s(Link)`
     color: ${DARK_GRAY} !important;
   }
 `
-const LaundryCard = ({ locationObject }) => {
+const LaundryCard = ({ locationObject, selectedHallId }) => {
   const [expanded, setExpanded] = useState(false)
 
   const { halls, location } = locationObject
 
   // Check if the hall has only one location
   if (halls.length === 1) {
+    const { id } = halls[0]
     return (
-      <StyledLink to={`/laundry/${halls[0].id}`} key={uuid()}>
-        <LaundryCardHeader title={location} />
+      <StyledLink to={`/laundry/${id}`} key={`laundry-hall-${location}-${id}`}>
+        <LaundryCardHeader
+          title={location}
+          selected={Number(id) === selectedHallId}
+        />
         <Line />
       </StyledLink>
     )
   }
 
+  console.log(`SELECTED ID: ${selectedHallId}`, typeof selectedHallId)
+
   return (
     <>
       <div // eslint-disable-line
-        key={uuid()}
         onClick={() => setExpanded(!expanded)}
       >
         <LaundryCardHeader title={location} hasDropdown expanded={expanded} />
@@ -40,7 +44,11 @@ const LaundryCard = ({ locationObject }) => {
       {expanded &&
         halls.map(({ hall_name: hallName, id }) => (
           <StyledLink to={`/laundry/${id}`} key={`laundry${id}`}>
-            <Card padding="0.5rem 1rem" hoverable>
+            <Card
+              padding="0.5rem 1rem"
+              hoverable
+              selected={Number(id) === selectedHallId}
+            >
               <Row>
                 <Col padding="0 0 0 1rem">
                   <Text marginBottom="0">{hallName}</Text>
@@ -57,9 +65,11 @@ const LaundryCard = ({ locationObject }) => {
 
 LaundryCard.defaultProps = {
   locationObject: {},
+  selectedHallId: null,
 }
 
 LaundryCard.propTypes = {
+  selectedHallId: PropTypes.number,
   locationObject: PropTypes.shape({
     location: PropTypes.string,
     halls: PropTypes.arrayOf(
