@@ -9,12 +9,24 @@ import {
   FOCUS_GRAY,
   LIGHT_GREEN,
   LIGHT_YELLOW,
+  BLUE,
 } from '../../styles/colors'
 import StatusPill from './StatusPill'
 import { Row, LaundryOverview } from '../shared'
 
 const Table = s.table`
   margin-bottom: 0;
+`
+
+const RemindedBellIcon = s.span`
+  line-height: 1;
+  height: 1rem;
+  color: ${BLUE};
+
+  opacity:  0.5;
+  &:hover {
+    opacity: 0.75;
+  }
 `
 
 const BellIcon = s.span`
@@ -27,7 +39,6 @@ const BellIcon = s.span`
     opacity: 0.75;
   }
 `
-
 const handleReminder = (
   machineID,
   hallID,
@@ -37,6 +48,39 @@ const handleReminder = (
 ) => {
   if (!reminded) {
     dispatchAddReminder(machineID, hallID, hallName)
+  }
+}
+
+const Bell = ({enableReminder, timeRemaining, reminded, id, laundryHallId, dispatchAddReminder, hallName}) => {
+  console.log(timeRemaining === 0)
+  console.log(!enableReminder)
+  if (!enableReminder || timeRemaining === 0){
+    return null
+  }
+  if (timeRemaining !== 0 && !reminded) {
+    return (
+      <BellIcon
+        className="icon"
+        onClick={() =>
+          handleReminder(
+            id,
+            laundryHallId,
+            hallName,
+            dispatchAddReminder,
+            reminded
+          )
+        }
+      >
+        <i className="far fa-bell" />
+      </BellIcon>
+    )
+  }
+  if (reminded) {
+    return (
+      <RemindedBellIcon className="icon">
+        <i className="fas fa-bell" />
+      </RemindedBellIcon>
+    )
   }
 }
 
@@ -99,8 +143,6 @@ const MachineAvailability = ({
                     reminder.machineID === id &&
                     reminder.hallID === laundryHallId
                 )
-                const showBell =
-                  !(timeRemaining === 0 || reminded) && enableReminder
                 return (
                   <tr key={id}>
                     <td>{id}</td>
@@ -109,22 +151,15 @@ const MachineAvailability = ({
                     </td>
                     <td>{status === 'Not online' ? '-' : timeRemaining}</td>
                     <td>
-                      {showBell ? (
-                        <BellIcon
-                          className="icon"
-                          onClick={() =>
-                            handleReminder(
-                              id,
-                              laundryHallId,
-                              hallName,
-                              dispatchAddReminder,
-                              reminded
-                            )
-                          }
-                        >
-                          <i className="far fa-bell" />
-                        </BellIcon>
-                      ) : null}
+                      <Bell
+                        enableReminder={enableReminder}
+                        timeRemaining={timeRemaining}
+                        reminded={reminded}
+                        id={id}
+                        laundryHallId={laundryHallId}
+                        dispatchAddReminder={dispatchAddReminder}
+                        hallName={hallName}
+                      />
                     </td>
                   </tr>
                 )
