@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import MachineAvailability from './MachineAvailability'
-import { BorderedCard, Row, Col } from '../shared'
+import { BorderedCard, Row, Col, Subtext } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
@@ -98,6 +98,7 @@ class LaundryVenue extends Component {
 
     const { hall_name: hallName, location } = laundryHallInfo
     const { washers, dryers, details: machines } = laundryHallInfo.machines
+    const enableReminder = !browserError
 
     return (
       <Wrapper>
@@ -140,7 +141,7 @@ class LaundryVenue extends Component {
                 hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
-                enableReminder={!browserError}
+                enableReminder={enableReminder}
               />
             </BorderedCard>
           </Col>
@@ -157,11 +158,21 @@ class LaundryVenue extends Component {
                 hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
-                enableReminder={!browserError}
+                enableReminder={enableReminder}
               />
             </BorderedCard>
           </Col>
         </Row>
+
+        {enableReminder && (
+          <Subtext>
+            <span>
+              <i className="far fa-bell" />
+            </span>
+            &nbsp; Click the bell icon to send you a reminder when that machine
+            is done running.
+          </Subtext>
+        )}
       </Wrapper>
     )
   }
