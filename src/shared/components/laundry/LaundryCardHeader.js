@@ -14,38 +14,16 @@ const Chevron = s.span`
   display: inline-block;
   border-right: 2px solid ${LIGHT_GRAY};
   border-bottom: 2px solid ${LIGHT_GRAY};
-
-  @keyframes rotation-back {
-    from {
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-    to {
-      -webkit-transform: rotate(225deg);
-      transform: rotate(225deg);
-    }
-  }
-
-  @keyframes rotation-cw {
-    from {
-      -webkit-transform: rotate(-135deg);
-      transform: rotate(-135deg);
-    }
-    to {
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-    }
-  }
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 
   ${({ expanded }) =>
-    expanded
-      ? `
-      -webkit-animation: rotation-back 0.4s;
-      animation: rotation-back: 0.4s;
-      transform: rotate(-135deg);
-      margin-top: 9px;
+    expanded &&
     `
-      : `-webkit-animation: rotation-cw 0.4s; animation: rotation-cw 0.4s; transform: rotate(45deg)`}
+    margin: 9px 6px 3px 6px;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    `}
 `
 
 const LaundryCardHeader = ({ title, hasDropdown, expanded }) => (

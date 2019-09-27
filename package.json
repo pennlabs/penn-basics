@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pennlabs/penncentral.git"
+    "url": "git+https://github.com/pennlabs/pennbasics.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pennlabs/penncentral/issues"
+    "url": "https://github.com/pennlabs/pennbasics/issues"
   },
-  "homepage": "https://github.com/pennlabs/penncentral#readme",
+  "homepage": "https://github.com/pennlabs/pennbasics#readme",
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
