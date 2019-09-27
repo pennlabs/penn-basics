@@ -15,6 +15,7 @@ const colorMap = {
   'Ready to start': [GREEN, LIGHT_GREEN],
   Available: [GREEN, LIGHT_GREEN],
   'In use': [MUSTARD, LIGHT_YELLOW],
+  'Almost done': [MUSTARD, LIGHT_YELLOW],
   'End of cycle': [GREEN, LIGHT_GREEN],
   'Not online': [MEDIUM_GRAY, FOCUS_GRAY],
 }
