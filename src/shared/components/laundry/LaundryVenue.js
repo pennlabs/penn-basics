@@ -205,7 +205,7 @@ LaundryVenue.propTypes = {
     machines: PropTypes.object,
   }),
   laundryHallId: PropTypes.number,
-  hallURLId: PropTypes.string,
+  hallURLId: PropTypes.number,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
   dispatchGetLaundryHall: PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components'
 
 import { WHITE, LIGHT_GRAY, SNOW_ALPHA, SHADOW } from '../../styles/colors'
 
-const Z_INDEX = 1200
+const Z_INDEX = 1305
 const ANIMATION_DURATION = '0.4s'
 const LG_WIDTH = 50
 const SM_WIDTH = 80

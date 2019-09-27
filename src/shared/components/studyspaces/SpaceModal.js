@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
+import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { clearActiveSpace } from '../../actions/spaces_actions'
 
-import { Title, Text, Modal, ModalContainer, Image, Tag, Map } from '../shared'
+import {
+  Title,
+  Text,
+  Modal,
+  ModalContainer,
+  Image,
+  Tag,
+  Map,
+  Subtext,
+} from '../shared'
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
+
+const Credit = s.div`
+  width: 100%;
+  padding: 0 1rem;
+`
 
 class SpaceModal extends Component {
   constructor(props) {
@@ -46,7 +61,14 @@ class SpaceModal extends Component {
 
             {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
 
-            {imageCredit && <a href={image}>{imageCredit.name}</a>}
+            {imageCredit && (
+              <Credit>
+                <Subtext>
+                  {'Image credit: '}
+                  <a href={imageCredit.link}>{imageCredit.name}</a>
+                </Subtext>
+              </Credit>
+            )}
 
             {description && (
               <ModalContainer paddingTop="0.5rem">

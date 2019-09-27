@@ -61,7 +61,7 @@ const CardSubtext = ({ venueId, stateVenueHours }) => {
   )
 }
 
-const DiningCard = ({ venueId, isFavorited }) => {
+const DiningCard = ({ venueId, isFavorited, selected }) => {
   // use React Hook to initialize state in a functional component
   const [stateVenueHours, setVenueHours] = useState([])
 
@@ -108,7 +108,7 @@ const DiningCard = ({ venueId, isFavorited }) => {
 
   return (
     <StyledLink to={`/dining/${venueId}`}>
-      <Card padding="0.5rem 1rem" hoverable key={venueId}>
+      <Card padding="0.5rem 1rem" hoverable key={venueId} selected={selected}>
         <Row>
           {image && (
             <Col backgroundImage={img} width="30%" borderRadius="4px" />
@@ -141,11 +141,13 @@ CardSubtext.propTypes = {
 
 DiningCard.defaultProps = {
   isFavorited: false,
+  selected: false,
 }
 
 DiningCard.propTypes = {
   venueId: PropTypes.string.isRequired,
   isFavorited: PropTypes.bool,
+  selected: PropTypes.bool,
 }
 
 export default DiningCard

@@ -5,6 +5,8 @@ import uuid from 'uuid'
 import { Card, Line, NavSectionHeader } from '..'
 import { BABY_BLUE } from '../../../styles/colors'
 
+// TODO we can't use UUID here--should supply ID as a prop
+
 // favorites: the array that includes all favorited elements
 // favoriteCard: a functional component that takes in a favorited element and render the card
 // inputName: name of the input that will be passed to FavoriteCard

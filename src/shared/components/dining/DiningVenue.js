@@ -46,8 +46,23 @@ class DiningVenue extends Component {
     }
   }
 
+  static renderNoVenue() {
+    return (
+      <div
+        className="columns is-vcentered is-centered"
+        style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
+      >
+        <div className="column is-7">
+          <img src="/img/dining.png" alt="Dining plate" />
+          <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+            Select a dining hall to see information
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   render() {
-    console.log(this.props)
     const {
       venueHoursPending,
       favorites,
@@ -56,21 +71,7 @@ class DiningVenue extends Component {
       dispatchRemoveFavorite,
     } = this.props
 
-    if (!venueId) {
-      return (
-        <div
-          className="columns is-vcentered is-centered"
-          style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
-        >
-          <div className="column is-7">
-            <img src="/img/dining.png" alt="Dining plate" />
-            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
-              Select a dining hall to see information
-            </p>
-          </div>
-        </div>
-      )
-    }
+    if (!venueId) return DiningVenue.renderNoVenue()
 
     // If the ID is not found
     if (!venueData[venueId]) {

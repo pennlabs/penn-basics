@@ -1,5 +1,5 @@
 {
-  "name": "penncentral",
+  "name": "pennbasics",
   "version": "1.0.0",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",

@@ -19,22 +19,22 @@ class App extends Component {
   render() {
     const {
       match: {
-        params: { id } = {
-          params: { id: '-1' },
-        },
+        params: { id },
       },
     } = this.props
 
+    const parsedVenueId = Number.isNaN(id) ? null : id
+
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
-        <Nav />
+        <Nav selectedVenueId={parsedVenueId} />
 
         <Col
           width="70%"
           overflowY="scroll"
           maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
         >
-          <DiningVenue venueId={Number.isNaN(id) ? null : id} />
+          <DiningVenue venueId={parsedVenueId} />
         </Col>
       </Row>
     )

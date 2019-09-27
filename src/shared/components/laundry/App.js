@@ -41,6 +41,8 @@ class App extends Component {
       favorites,
     } = this.props
 
+    const parsedHallId = Number.isNaN(id) ? null : Number(id)
+
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
         <Scrollbar
@@ -65,6 +67,7 @@ class App extends Component {
           {laundryHalls &&
             laundryHalls.map(locationObject => (
               <LaundryCard
+                selectedHallId={parsedHallId}
                 locationObject={locationObject}
                 key={locationObject.location}
               />
@@ -78,7 +81,7 @@ class App extends Component {
           overflowY="auto"
           maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
         >
-          <LaundryVenue hallURLId={Number.isNaN(id) ? null : id} />
+          <LaundryVenue hallURLId={parsedHallId} />
         </Col>
       </Row>
     )

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { WHITE, SHADOW, FOCUS_GRAY, BORDER } from '../../styles/colors'
+import { WHITE, SHADOW, FOCUS_GRAY, BORDER, PURPLE } from '../../styles/colors'
 
 export const Card = styled.div`
   background: ${({ background }) => background || WHITE};
@@ -7,6 +7,8 @@ export const Card = styled.div`
   box-shadow: ${({ shade }) => (shade ? `0 0 14px 0 ${SHADOW}` : 'none')};
   opacity: 1;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
+
+  ${({ selected }) => selected && `border-left: 6px solid ${PURPLE}`}
 
   ${({ hoverable }) =>
     hoverable &&
