@@ -19,9 +19,7 @@ class App extends Component {
   render() {
     const {
       match: {
-        params: { id } = {
-          params: { id: null },
-        },
+        params: { id },
       },
     } = this.props
 
@@ -29,7 +27,7 @@ class App extends Component {
 
     return (
       <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
-        <Nav />
+        <Nav selectedVenueId={parsedVenueId} />
 
         <Col
           width="70%"

@@ -12,7 +12,7 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const Nav = ({ favorites }) => {
+const Nav = ({ favorites, selectedVenueId }) => {
   const keys = Object.keys(venueData)
   const diningKeys = []
   const retailKeys = []
@@ -57,6 +57,7 @@ const Nav = ({ favorites }) => {
           <DiningCard
             key={uuid()}
             venueId={key}
+            selected={selectedVenueId === key}
             isFavorited={favorites.includes(key)}
           />
         )
@@ -72,6 +73,7 @@ const Nav = ({ favorites }) => {
           <DiningCard
             key={uuid()}
             venueId={key}
+            selected={selectedVenueId === key}
             isFavorited={favorites.includes(key)}
           />
         )
@@ -84,10 +86,12 @@ const Nav = ({ favorites }) => {
 
 Nav.defaultProps = {
   favorites: [],
+  selectedVenueId: null,
 }
 
 Nav.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string),
+  selectedVenueId: PropTypes.number,
 }
 
 const mapStateToProps = ({ dining }) => {
