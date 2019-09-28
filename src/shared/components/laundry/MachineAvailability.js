@@ -97,6 +97,25 @@ const Bell = ({
   return null
 }
 
+Bell.defaultProps = {
+  enableReminder: false,
+  timeRemaining: 0,
+  reminded: false,
+  id: null,
+  laundryHallId: null,
+  hallName: null,
+}
+
+Bell.propTypes = {
+  enableReminder: PropTypes.bool,
+  timeRemaining: PropTypes.number,
+  reminded: PropTypes.bool,
+  id: PropTypes.number,
+  laundryHallId: PropTypes.number,
+  dispatchAddReminder: PropTypes.func.isRequired,
+  hallName: PropTypes.string,
+}
+
 const MachineAvailability = ({
   displayDetails,
   machineData,
