@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import MachineAvailability from './MachineAvailability'
-import { BorderedCard, Row, Col, Subtext } from '../shared'
+import { BorderedCard, Row, Col, Subtext, NoData } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
-import { NAV_HEIGHT } from '../../styles/sizes'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
   addFavorite,
@@ -76,20 +75,13 @@ class LaundryVenue extends Component {
   }
 
   static renderNoHall() {
+    // TODO store image locally
     return (
-      <div
-        className="columns is-vcentered"
-        style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
-      >
-        <Row>
-          <Col sm={12} offsetMd={2} md={8} offsetLg={3} lg={6}>
-            <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
-            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
-              Select a laundry hall to see information
-            </p>
-          </Col>
-        </Row>
-      </div>
+      <NoData
+        image="/img/laundry.png"
+        imageAlt="Laundry machine"
+        text="Select a laundry hall to see information"
+      />
     )
   }
 
