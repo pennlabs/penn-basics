@@ -3,7 +3,7 @@ const path = require('path')
 const workboxplugin = require('workbox-webpack-plugin')
 
 const BUILD_DIR = path.join(__dirname, 'public', 'js')
-const APP_DIR = path.join(__dirname, 'src', 'shared')
+const APP_DIR = path.join(__dirname, 'src', 'frontend')
 
 const config = {
   entry: ['babel-polyfill', `${APP_DIR}/index.js`],
