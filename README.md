@@ -1,5 +1,7 @@
 # Penn Basics
 
+[![CircleCI](https://circleci.com/gh/pennlabs/pennbasics.svg?style=shield)](https://circleci.com/gh/pennlabs/pennbasics)
+
 General documentation for the Penn Basics codebase is available in Notion [here](https://www.notion.so/pennlabs/PennBasics-2043ee53cc784e739bb654352a516609). Docs are updated as new features are pushed to the code repository.
 
 ### Usage

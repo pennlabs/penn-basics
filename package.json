@@ -9,7 +9,7 @@
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "webpack-prod": "webpack -p",
-    "dev": "source env.sh && (yarn webpack &) && yarn start",
+    "dev": "source env.sh && (yarn webpack &) && node src/server/index.js",
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
     "lint-fix": "eslint ./src/**/ --fix"

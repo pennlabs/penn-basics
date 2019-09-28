@@ -7,7 +7,7 @@ import {
   getFavorites,
   checkBrowserCompatability,
 } from '../../actions/laundry_actions'
-import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
+import { Card, Row, Col, Scrollbar, NavHeader, Line } from '../shared'
 import Loading from '../shared/Loading'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
@@ -58,9 +58,7 @@ class App extends Component {
           />
 
           <Card background={BABY_BLUE} padding="0">
-            <NavSectionHeader className="title is-5">
-              Laundry Halls
-            </NavSectionHeader>
+            <NavHeader className="title is-5">Laundry Halls</NavHeader>
             <Line />
           </Card>
 

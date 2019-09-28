@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const ErrorMessage = ({ message = '' }) => {
+export const ErrorMessage = ({ message = '' }) => {
   const [visible, setVisibility] = useState(true)
   if (!message || !visible) return null
 
@@ -25,5 +25,3 @@ ErrorMessage.defaultProps = {
 ErrorMessage.propTypes = {
   message: PropTypes.string,
 }
-
-export default ErrorMessage

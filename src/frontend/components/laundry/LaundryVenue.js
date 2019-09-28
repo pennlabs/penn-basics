@@ -4,8 +4,15 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import MachineAvailability from './MachineAvailability'
-import { BorderedCard, Row, Col, Subtext, NoData } from '../shared'
-import ErrorMessage from '../shared/ErrorMessage'
+import {
+  BorderedCard,
+  Row,
+  Col,
+  Subtext,
+  NoData,
+  ErrorMessage,
+} from '../shared'
+
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
   addFavorite,
