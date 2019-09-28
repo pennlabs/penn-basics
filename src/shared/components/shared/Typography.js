@@ -2,6 +2,11 @@ import styled from 'styled-components'
 
 import { MEDIUM_GRAY, LIGHTER_BLUE } from '../../styles/colors'
 
+export const NavHeader = styled.p`
+  padding: 0.5rem 1rem;
+  margin-bottom: 0 !important;
+`
+
 export const Text = styled.p`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
   line-height: 1.5;

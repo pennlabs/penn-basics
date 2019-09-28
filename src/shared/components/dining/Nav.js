@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
-import { Card, Scrollbar, Line, NavSectionHeader } from '../shared'
+import { Card, Scrollbar, Line, NavHeader } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import Favorites from '../shared/favorites/Favorites'
 import DiningCard from './DiningCard'
@@ -49,7 +49,7 @@ const Nav = ({ favorites, selectedVenueId }) => {
       />
 
       <Card background={BABY_BLUE} padding="0">
-        <NavSectionHeader className="title is-5">Dining</NavSectionHeader>
+        <NavHeader className="title is-5">Dining</NavHeader>
         <Line />
       </Card>
 
@@ -65,7 +65,7 @@ const Nav = ({ favorites, selectedVenueId }) => {
       })}
 
       <Card background={BABY_BLUE} padding="0">
-        <NavSectionHeader className="title is-5">Retail</NavSectionHeader>
+        <NavHeader className="title is-5">Retail</NavHeader>
         <Line />
       </Card>
 

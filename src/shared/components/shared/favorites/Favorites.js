@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Card, Line, NavSectionHeader } from '..'
+import { Line } from '../Line'
+import { Card } from '../Card'
+import { NavHeader } from '../Typography'
 import { BABY_BLUE } from '../../../styles/colors'
 
 // TODO we can't use UUID here--should supply ID as a prop
@@ -20,7 +22,7 @@ const Favorites = ({
   return (
     <div>
       <Card background={BABY_BLUE} padding="0">
-        <NavSectionHeader className="title is-5">Favorites</NavSectionHeader>
+        <NavHeader className="title is-5">Favorites</NavHeader>
         <Line />
       </Card>
 
