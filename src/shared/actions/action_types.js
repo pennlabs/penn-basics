@@ -1,20 +1,14 @@
 // NOTE setting actions to have string names makes debugging easier
 
-// home actions
+// Home actions
 export const filterHomeCustomizeRequested = 'FILTER_HOME_CUSTOMIZE_REQUESTED'
 export const TOGGLE_FILTER_HOME_CUSTOMIZE = 'TOGGLE_FILTER_HOME_CUSTOMIZE'
 
-// dining actions
+// Dining actions
 export const getVenueInfoRequested = 'GET_VENUE_INFO_REQUESTED'
 export const getVenueInfoRejected = 'GET_VENUE_INFO_REJECTED'
 export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED'
 export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
-
-// sidebar actions
-export const sidebarDining = 'SIDEBAR_DINING'
-export const sidebarLaundry = 'SIDEBAR_LAUNDRY'
-export const sidebarReservations = 'SIDEBAR_RESERVATIONS'
-export const sidebarStudyspaces = 'SIDEBAR_STUDYSPACES'
 
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'
@@ -39,15 +33,19 @@ export const TOGGLE_FILTER_SPACES_GROUPS = 'TOGGLE_FILTER_SPACES_GROUPS'
 export const getLaundryHallsDataRequested = 'GET_LAUNDRY_HALLS_DATA_REQUESTED'
 export const getLaundryHallsDataRejected = 'GET_LAUNDRY_HALLS_DATA_REJECTED'
 export const getLaundryHallsDataFulfilled = 'GET_LAUNDRY_HALLS_DATA_FULFILLED'
+
 export const getLaundryHallInfoRequested = 'GET_LAUNDRY_HALL_INFO_REQUESTED'
 export const getLaundryHallInfoRejected = 'GET_LAUNDRY_HALL_INFO_REJECTED'
 export const getLaundryHallInfoFulfilled = 'GET_LAUNDRY_HALL_INFO_FULFILLED'
+
+export const updateHallIntervalID = 'UPDATE_HALL_INTERVAL_ID'
+
+// TODO classify these (@peter)
 export const updateLaundryFavorites = 'UPDATE_LAUNDRY_FAVORITES'
 export const getFavoritesHome = 'GET_FAVORITES_HOME'
 export const browserSupportRejected = 'BROWSER_SUPPORT_REJECTED'
 export const getRemindersRejected = 'GET_REMINDERS_REJECTED'
 export const updateReminders = 'UPDATE_REMINDERS'
-export const updateHallIntervalID = 'UPDATE_HALL_INTERVAL_ID'
 export const updateReminderIntervalID = 'UPDATE_REMINDER_INTERVAL_ID'
 
 // misc actions

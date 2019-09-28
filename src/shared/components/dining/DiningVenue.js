@@ -13,6 +13,7 @@ import DiningOverview from './DiningOverview'
 import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
+import { Row, Col } from '../shared'
 
 const NAV_HEIGHT = '57px'
 
@@ -49,15 +50,17 @@ class DiningVenue extends Component {
   static renderNoVenue() {
     return (
       <div
-        className="columns is-vcentered is-centered"
+        className="columns is-vcentered"
         style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
       >
-        <div className="column is-7">
-          <img src="/img/dining.png" alt="Dining plate" />
-          <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
-            Select a dining hall to see information
-          </p>
-        </div>
+        <Row>
+          <Col sm={12} offsetMd={2} md={8} offsetLg={3} lg={6}>
+            <img src="/img/dining.png" alt="Dining plate" />
+            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+              Select a dining hall to see information
+            </p>
+          </Col>
+        </Row>
       </div>
     )
   }

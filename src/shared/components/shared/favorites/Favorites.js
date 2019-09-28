@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import uuid from 'uuid'
 
 import { Card, Line, NavSectionHeader } from '..'
 import { BABY_BLUE } from '../../../styles/colors'
@@ -10,7 +9,12 @@ import { BABY_BLUE } from '../../../styles/colors'
 // favorites: the array that includes all favorited elements
 // favoriteCard: a functional component that takes in a favorited element and render the card
 // inputName: name of the input that will be passed to FavoriteCard
-const Favorites = ({ favorites, FavoriteCard, inputName }) => {
+const Favorites = ({
+  favorites,
+  FavoriteCard,
+  inputName,
+  keyAttributeName,
+}) => {
   if (!favorites || !favorites.length) return null
 
   return (
@@ -24,7 +28,12 @@ const Favorites = ({ favorites, FavoriteCard, inputName }) => {
         // allow dynamic props name to be passed
         const dynamicProps = {}
         dynamicProps[inputName] = favorite
-        return <FavoriteCard key={uuid()} {...dynamicProps} />
+        return (
+          <FavoriteCard
+            key={`favorite-${favorite[keyAttributeName]}`}
+            {...dynamicProps}
+          />
+        )
       })}
     </div>
   )
@@ -32,13 +41,13 @@ const Favorites = ({ favorites, FavoriteCard, inputName }) => {
 
 Favorites.defaultProps = {
   favorites: [],
-  inputName: '',
 }
 
 Favorites.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.object),
   FavoriteCard: PropTypes.func.isRequired,
-  inputName: PropTypes.string,
+  inputName: PropTypes.string.isRequired,
+  keyAttributeName: PropTypes.string.isRequired,
 }
 
 export default Favorites

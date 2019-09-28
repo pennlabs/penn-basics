@@ -6,6 +6,7 @@ import s from 'styled-components'
 import MachineAvailability from './MachineAvailability'
 import { BorderedCard, Row, Col, Subtext } from '../shared'
 import ErrorMessage from '../shared/ErrorMessage'
+import { NAV_HEIGHT } from '../../styles/sizes'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
   addFavorite,
@@ -15,6 +16,7 @@ import {
   addReminder,
   removeReminder,
 } from '../../actions/laundry_actions'
+import { isValidNumericId } from '../../helperFunctions'
 
 const MARGIN = '0.5rem'
 
@@ -38,17 +40,26 @@ class LaundryVenue extends Component {
       dispatchGetReminders,
     } = this.props
 
-    if (hallURLId) {
+    // TODO why are there two hall IDs??? this should be documented
+    const isValidHallURLId = isValidNumericId(hallURLId)
+    const isValidLaundryHallId = isValidNumericId(laundryHallId)
+    if (isValidHallURLId) {
       dispatchGetLaundryHall(hallURLId, hallIntervalID)
-    } else if (laundryHallId) {
+    } else if (isValidLaundryHallId) {
       dispatchGetLaundryHall(laundryHallId, hallIntervalID)
     }
 
-    dispatchGetReminders()
+    // TODO is this check useful?? Should we always get reminders?
+    if (isValidHallURLId || isValidLaundryHallId) {
+      // TODO what is this getting reminders for?
+      dispatchGetReminders()
+    }
   }
 
   componentDidUpdate(prevProps) {
     const { dispatchGetLaundryHall, hallURLId, hallIntervalID } = this.props
+
+    if (!isValidNumericId(hallURLId)) return
 
     const prevHallURLId = prevProps.hallURLId
 
@@ -64,13 +75,31 @@ class LaundryVenue extends Component {
     clearInterval(reminderIntervalID)
   }
 
+  static renderNoHall() {
+    return (
+      <div
+        className="columns is-vcentered"
+        style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
+      >
+        <Row>
+          <Col sm={12} offsetMd={2} md={8} offsetLg={3} lg={6}>
+            <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
+            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
+              Select a laundry hall to see information
+            </p>
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+
   render() {
     const {
       error,
       browserError,
       laundryHallInfo,
       favorites,
-      laundryHallId, // reducer
+      laundryHallId,
       reminders,
       dispatchAddFavorite,
       dispatchRemoveFavorite,
@@ -78,23 +107,14 @@ class LaundryVenue extends Component {
       dispatchRemoveReminder,
     } = this.props
 
-    const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
+    if (
+      laundryHallId === null ||
+      laundryHallId === undefined ||
+      !laundryHallInfo
+    )
+      return LaundryVenue.renderNoHall()
 
-    if (!laundryHallInfo) {
-      return (
-        <div
-          className="columns is-vcentered is-centered"
-          style={{ height: 'calc(100% - 57px' }}
-        >
-          <div className="column is-7">
-            <img src="https://i.imgur.com/JDX9ism.png" alt="Laundry" />
-            <p style={{ opacity: 0.5, fontSize: '150%', textAlign: 'center' }}>
-              Select a laundry hall to see information
-            </p>
-          </div>
-        </div>
-      )
-    }
+    const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
 
     const { hall_name: hallName, location } = laundryHallInfo
     const { washers, dryers, details: machines } = laundryHallInfo.machines

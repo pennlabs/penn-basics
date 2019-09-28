@@ -31,8 +31,6 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
     )
   }
 
-  console.log(`SELECTED ID: ${selectedHallId}`, typeof selectedHallId)
-
   return (
     <>
       <div // eslint-disable-line

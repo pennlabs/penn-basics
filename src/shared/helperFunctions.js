@@ -14,3 +14,11 @@ export const convertDate = time => {
 export const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
+
+export const isValidNumericId = id => {
+  if (id === null || id === undefined) return false
+  const num = Number(id)
+  if (Number.isNaN(num)) return false
+  if (num < 0) return false
+  return true
+}

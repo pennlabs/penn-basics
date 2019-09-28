@@ -8,6 +8,7 @@ import {
   checkBrowserCompatability,
 } from '../../actions/laundry_actions'
 import { Card, Row, Col, Scrollbar, NavSectionHeader, Line } from '../shared'
+import Loading from '../shared/Loading'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import Favorites from '../shared/favorites/Favorites'
@@ -34,9 +35,7 @@ class App extends Component {
     const {
       laundryHalls,
       match: {
-        params: { id } = {
-          params: { id: '-1' },
-        },
+        params: { id },
       },
       favorites,
     } = this.props
@@ -55,6 +54,7 @@ class App extends Component {
             favorites={favorites}
             FavoriteCard={FavoriteCard}
             inputName="favorite"
+            keyAttributeName="hallId"
           />
 
           <Card background={BABY_BLUE} padding="0">
@@ -64,14 +64,17 @@ class App extends Component {
             <Line />
           </Card>
 
-          {laundryHalls &&
+          {laundryHalls ? (
             laundryHalls.map(locationObject => (
               <LaundryCard
                 selectedHallId={parsedHallId}
                 locationObject={locationObject}
                 key={locationObject.location}
               />
-            ))}
+            ))
+          ) : (
+            <Loading />
+          )}
 
           <PennLabsCredit />
         </Scrollbar>

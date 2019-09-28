@@ -1,20 +1,19 @@
 require('./mongoose-connect')
 
-// Dining Imports
-const _ = require('lodash')
 const Space = require('./models/Space')
 const Event = require('./models/Event')
 
-// SPACES DATABASE FUNCTIONS
-
-// params: none
 function findAllSpaces() {
   return Space.find()
 }
 
-// params: filter =
-// (open: Boolean, outlets: Integer, noise: Integer, groups: Integer, hour: integer)
-
+/**
+ * @param {boolean} open
+ * @param {number} outletLevel
+ * @param {number} quietLevel
+ * @param {number} groupLevel
+ * @param {number} hour
+ */
 function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
   if (open) {
     return Space.find({
@@ -33,18 +32,23 @@ function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
   })
 }
 
-// params: spaceId
-function getSpace(space) {
-  return Space.findOne(space)
+/**
+ * @param {any} spaceId
+ */
+function getSpace(spaceId) {
+  return Space.findOne(spaceId)
 }
 
-// params: new space
+/**
+ * @param {object} space
+ */
 function insertSpace(space) {
   return new Space(space).save()
 }
 
-// Events Functions
-
+/**
+ * @param {Date} date
+ */
 function getEvents(date) {
   return Event.find({
     start: {
@@ -57,12 +61,9 @@ function getEvents(date) {
 }
 
 module.exports = {
-  // Spaces functions
   filterSpaces,
   getSpace,
   insertSpace,
   findAllSpaces,
-
-  // Event Functions
   getEvents,
 }

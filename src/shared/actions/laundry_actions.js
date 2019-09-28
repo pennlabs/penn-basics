@@ -2,6 +2,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
+import { isValidNumericId } from '../helperFunctions'
 
 import {
   getLaundryHallsDataRequested,
@@ -55,6 +56,17 @@ export function getLaundryHalls() {
 }
 
 const getLaundryHallInterval = async (dispatch, laundryHallId) => {
+  if (!isValidNumericId(laundryHallId)) {
+    dispatch({
+      type: getLaundryHallInfoRejected,
+      error: 'Missing laundryHallId',
+    })
+    return
+  }
+
+  // TODO why is this being reused??? should be separate actions
+  // TODO why is this called interval????
+  // Document this...
   dispatch({
     type: getLaundryHallInfoRequested,
   })
@@ -101,14 +113,17 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
   }
 }
 
+// TODO document....
 export const getFavoritesHomePage = () => dispatch => {
   dispatch({ type: getLaundryHallInfoRequested })
 
-  // get the list of laundry halls from local storage
+  // Get the list of laundry halls from local storage
   const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
-  // get the first 3 halls
+
+  // Get the first 3 halls
   let IdArray = []
-  // only update IdArray if laundryHalls exist
+
+  // Only update IdArray if laundryHalls exist
   if (laundryHalls) {
     IdArray = laundryHalls.map((hall, index) => {
       if (index <= 2) {
@@ -119,13 +134,15 @@ export const getFavoritesHomePage = () => dispatch => {
     })
   }
 
-  // remove the null Id in the array
+  // Remove the null Id in the array
   IdArray = IdArray.filter(id => id !== null)
-  // get the set of Promise set
-  const responsesSet = IdArray.map(id =>
+
+  // Get the set of Promise set
+  const responsesSet = IdArray.filter(isValidNumericId).map(id =>
     axios.get(`${BASE}/laundry/hall/${id}`)
   )
-  // dispatch information from the Promise set
+
+  // Dispatch information from the Promise set
   try {
     Promise.all(responsesSet).then(values => {
       const dataSet = values.map(value => {
@@ -153,7 +170,10 @@ export const getFavorites = () => {
   return dispatch => {
     let favorites = localStorage.getItem('laundry_favorites')
     if (favorites) {
-      favorites = JSON.parse(favorites)
+      // Read in from localStore, map from strings to numbers
+      favorites = JSON.parse(favorites).map(fav =>
+        Object.assign({}, fav, { hallId: Number(fav.hallId) })
+      )
     } else {
       localStorage.setItem('laundry_favorites', JSON.stringify([]))
       favorites = []
@@ -270,10 +290,9 @@ export const checkBrowserCompatability = () => {
         })
       }
     } catch (err) {
-      console.log(err)
       dispatch({
         type: browserSupportRejected,
-        error: 'Error Occurs',
+        error: err.message || 'Sorry, an error occurred.',
       })
     }
   }
@@ -339,7 +358,7 @@ const getRemindersInterval = dispatch => {
             type: updateReminders,
             reminders: newReminders,
           })
-          console.log('---complete updating reminders from localStorage----')
+          console.log('---complete updating reminders from localStorage----') // eslint-disable-line
         }
 
         transaction.onerror = e => {
@@ -385,6 +404,7 @@ const getRemindersInterval = dispatch => {
   }
 }
 
+// TODO document this
 export const getReminders = () => {
   return dispatch => {
     getRemindersInterval(dispatch)

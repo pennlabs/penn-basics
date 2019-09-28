@@ -1,15 +1,32 @@
 const router = require('express').Router()
+const HttpStatus = require('http-status-codes')
 const webpush = require('web-push')
 const axios = require('axios')
 
+const BASE = 'http://api.pennlabs.org'
+
+const isValidNumericId = id => {
+  if (id === null || id === undefined) return false
+  const num = Number(id)
+  if (Number.isNaN(num)) return false
+  if (num < 0) return false
+  return true
+}
+
 module.exports = function laundryRouter() {
   router.post('/reminder/add', async (req, res) => {
+    // TODO check for bad request (@peter)
+
     // a unique reminderID is used to distinguish between multiple reminders
     // that have the same hallID and machineID
     const { subscription, machineID, hallID, hallName, reminderID } = req.body
 
+    if (!isValidNumericId(hallID)) {
+      res.status(HttpStatus.BAD_REQUEST).send('Missing hallID')
+      return
+    }
+
     // fetch the time remaining using Labs API
-    const BASE = 'http://api.pennlabs.org'
     const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
     const { data } = axiosResponse
     const machine = data.machines.details.filter(

@@ -45,6 +45,7 @@ const Nav = ({ favorites, selectedVenueId }) => {
         favorites={favorites}
         FavoriteCard={DiningCard}
         inputName="venueId"
+        keyAttributeName="venueId"
       />
 
       <Card background={BABY_BLUE} padding="0">

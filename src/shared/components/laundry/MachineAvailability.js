@@ -53,13 +53,20 @@ const handleReminder = (
   }
 }
 
-const Bell = ({enableReminder, timeRemaining, reminded, id, laundryHallId, dispatchAddReminder, hallName}) => {
-  console.log(timeRemaining === 0)
-  console.log(!enableReminder)
-  if (!enableReminder || timeRemaining === 0){
+// TODO add prop types and use the linter
+const Bell = ({
+  enableReminder,
+  timeRemaining,
+  reminded,
+  id,
+  laundryHallId,
+  dispatchAddReminder,
+  hallName,
+}) => {
+  if (!enableReminder || timeRemaining <= 0) {
     return null
   }
-  if (timeRemaining !== 0 && !reminded) {
+  if (timeRemaining > 0 && !reminded) {
     return (
       <BellIcon
         className="icon"
@@ -77,6 +84,8 @@ const Bell = ({enableReminder, timeRemaining, reminded, id, laundryHallId, dispa
       </BellIcon>
     )
   }
+
+  // TODO is reminded the right word?
   if (reminded) {
     return (
       <RemindedBellIcon className="icon">
@@ -84,6 +93,8 @@ const Bell = ({enableReminder, timeRemaining, reminded, id, laundryHallId, dispa
       </RemindedBellIcon>
     )
   }
+
+  return null
 }
 
 const MachineAvailability = ({
