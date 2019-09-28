@@ -20,7 +20,7 @@ import {
   updateReminderIntervalID,
 } from './action_types'
 
-const BASE = 'http://api.pennlabs.org'
+const BASE = 'https://api.pennlabs.org'
 
 function processLaundryHallsData(idData) {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
