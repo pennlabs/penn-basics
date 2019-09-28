@@ -5,7 +5,7 @@ import s from 'styled-components'
 import moment from 'moment'
 import uuid from 'uuid'
 
-import ErrorMessage from '../shared/ErrorMessage'
+import { ErrorMessage } from '../shared'
 import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
 import { convertDate, pad } from '../../helperFunctions'
 

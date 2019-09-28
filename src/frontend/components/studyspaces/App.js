@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import SpaceCard from './SpaceCard'
-import { Map, Row, Col, Scrollbar, Line } from '../shared'
-import ErrorMessage from '../shared/ErrorMessage'
+import { Map, Row, Col, Scrollbar, Line, ErrorMessage } from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
