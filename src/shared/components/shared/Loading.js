@@ -1,27 +1,70 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import s, { keyframes } from 'styled-components'
 
-const Loading = ({ title = 'Loading, please wait' }) => (
-  <div className="center-div">
-    {title ? (
-      <h4 className="is-size-4 medium-gray-text marg-bot-2">{title}</h4>
-    ) : null}
-    <img
-      className="marg-top-2"
-      alt="loading"
-      id="loading"
-      src="https://i.imgur.com/Iq7qUnH.png"
-      width="300px"
-    />
-  </div>
-)
+import { Subtext } from './index'
+import { BORDER, BLUE } from '../../styles/colors'
+
+const SIZE = '2.5rem'
+const THICKNESS = '0.25rem'
+const TIMER = '1.25s'
+
+const LoadingWrapper = s.div`
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+  transition: opacity 0.5s ease;
+  opacity: ${({ hide }) => (hide ? '0' : '1')};
+`
+
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`
+
+const LoadingCircle = s.span`
+  display: inline-block;
+  width: ${SIZE};
+  height: ${SIZE};
+  border-radius: 50%;
+  border-width: ${THICKNESS};
+  border-style: solid;
+  border-right-color: ${BORDER};
+  border-left-color: ${BLUE};
+  border-bottom-color: ${BLUE};
+  border-top-color: ${BLUE};
+  animation: ${spin} ${TIMER} infinite linear;
+`
+
+const Loading = ({ title, delay }) => {
+  const [hidden, toggleHidden] = useState(true)
+
+  useEffect(() => {
+    if (hidden) {
+      const timer = setTimeout(() => {
+        toggleHidden(false)
+      }, delay)
+      return () => clearTimeout(timer)
+    }
+    return () => {}
+  })
+
+  return (
+    <LoadingWrapper hide={hidden}>
+      <LoadingCircle />
+      {title && <Subtext>{title}</Subtext>}
+    </LoadingWrapper>
+  )
+}
 
 Loading.defaultProps = {
-  title: 'Loading, please wait',
+  title: null,
+  delay: 200,
 }
 
 Loading.propTypes = {
   title: PropTypes.string,
+  delay: PropTypes.number,
 }
 
 export default Loading
