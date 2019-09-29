@@ -53,11 +53,8 @@ export const filterHomeCustomize = filter => {
   }
 }
 
-export const toggleTemperature = () => {
-  return dispatch => {
-    dispatch({ type: TOGGLE_FILTER_TEMPERATURE })
-  }
-}
+export const toggleTemperature = () => dispatch =>
+  dispatch({ type: TOGGLE_FILTER_TEMPERATURE })
 
 export const toggleHomeCustomize = () => dispatch =>
   dispatch({ type: TOGGLE_FILTER_HOME_CUSTOMIZE })

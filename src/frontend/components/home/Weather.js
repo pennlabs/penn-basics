@@ -8,7 +8,7 @@ import { toggleTemperature } from '../../actions/home_actions'
 import { BorderedCard } from '../shared'
 import Toggle from '../shared/Toggle'
 
-const tempBASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
+const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
 const Weather = ({ filter, dispatchToggleTemperature }) => {
   const tag = document.createElement('script')
@@ -20,7 +20,7 @@ const Weather = ({ filter, dispatchToggleTemperature }) => {
       <h1 className="title is-4">Weather in Philly</h1>
       <a
         className="weatherwidget-io"
-        href={filter ? tempBASE : `${tempBASE}?unit=us`}
+        href={filter ? TEMP_BASE : `${TEMP_BASE}?unit=us`}
         data-label_1="Philadelphia"
         data-label_2={moment().format('dddd[,] MMMM Do')}
         data-days="3"
