@@ -2,6 +2,7 @@
 import {
   filterHomeCustomizeRequested,
   TOGGLE_FILTER_HOME_CUSTOMIZE,
+  TOGGLE_FILTER_TEMPERATURE,
 } from './action_types'
 
 const updateFilters = (arr, num) => {
@@ -49,6 +50,12 @@ export const filterHomeCustomize = filter => {
       type: filterHomeCustomizeRequested,
       filterList,
     })
+  }
+}
+
+export const toggleTemperature = () => {
+  return dispatch => {
+    dispatch({ type: TOGGLE_FILTER_TEMPERATURE })
   }
 }
 
