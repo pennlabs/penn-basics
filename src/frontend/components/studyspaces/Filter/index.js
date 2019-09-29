@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn'
+import Search from './Search'
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -122,6 +123,7 @@ class Filter extends Component {
 
     return (
       <FilterWrapper>
+        <Search />
         <FilterBtn
           text="Open"
           onClick={this.handleClickOpen}

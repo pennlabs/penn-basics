@@ -9,6 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  filterSpacesNameRequested,
   filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
@@ -206,6 +207,15 @@ export const filterOnCampus = filter => {
   return dispatch => {
     dispatch({
       type: filterOnCampusRequested,
+      filter,
+    })
+  }
+}
+
+export const filterSpacesName = filter => {
+  return dispatch => {
+    dispatch({
+      type: filterSpacesNameRequested,
       filter,
     })
   }

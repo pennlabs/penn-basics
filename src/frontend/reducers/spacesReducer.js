@@ -52,6 +52,8 @@ const filterSpaces = state => {
     filterOnCampus,
   } = state
 
+  console.log(state.spacesData)
+
   // If there is nothing to filter on, remove all filters and reset the data
   if (
     !filterOpen &&
