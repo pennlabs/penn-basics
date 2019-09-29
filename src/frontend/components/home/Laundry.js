@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import uuid from 'uuid'
-import { BorderedCard, Text } from '../shared'
+import {
+  BorderedCard,
+  Text,
+  Title,
+  Subtext,
+  Col,
+  Row,
+  ColSpace,
+  Subtitle,
+} from '../shared'
 import MachineAvailability from '../laundry/MachineAvailability'
 
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
@@ -25,21 +33,33 @@ class Laundry extends Component {
       )
     }
 
-    return favoritesHome.map((favorite, index) => {
+    return favoritesHome.map(favorite => {
       const { washers, dryers } = favorite.machines
 
       return (
-        <React.Fragment key={`${favorite.location}-${favorite.hall_name}`}>
-          <h1 className="title is-6">
-            {`${favorite.location}: ${favorite.hall_name}`}
-          </h1>
-          <Text>Washer</Text>
-          <MachineAvailability displayDetails={false} machineData={washers} />
-          <Text>Dryer</Text>
-          <MachineAvailability displayDetails={false} machineData={dryers} />
-          {index === favoritesHome.length - 1 ? null : <hr />}
-          <div className="columns" key={uuid()} />
-        </React.Fragment>
+        <BorderedCard
+          key={`${favorite.location}-${favorite.hall_name}`}
+          padding="1rem 1rem 0 1rem"
+        >
+          <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
+          <Row>
+            <Col>
+              <Text>Washer</Text>
+              <MachineAvailability
+                displayDetails={false}
+                machineData={washers}
+              />
+            </Col>
+            <ColSpace />
+            <Col>
+              <Text>Dryer</Text>
+              <MachineAvailability
+                displayDetails={false}
+                machineData={dryers}
+              />
+            </Col>
+          </Row>
+        </BorderedCard>
       )
     })
   }
@@ -47,12 +67,11 @@ class Laundry extends Component {
   render() {
     return (
       <BorderedCard>
-        <article className="tile is-child">
-          <Link to="/laundry" className="link">
-            <h1 className="title is-4">Laundry</h1>
-          </Link>
-          <h3 className="subtitle is-6">Status of your favorite halls</h3>
-        </article>
+        <Link to="/laundry" className="link">
+          <Title>Laundry</Title>
+        </Link>
+        <Subtext>Status of your favorite halls</Subtext>
+
         <br />
         {this.renderFavorites()}
       </BorderedCard>

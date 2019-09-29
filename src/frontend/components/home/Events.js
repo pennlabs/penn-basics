@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import uuid from 'uuid'
 import moment from 'moment'
-import { BorderedCard, Title } from '../shared'
+import { BorderedCard, Title, Subtext } from '../shared'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 
-const Subtext = ({ length }) => {
+const getSubtext = ({ length }) => {
   switch (length) {
     case 0:
       return 'No Events happening in next two weeks'
@@ -34,9 +34,7 @@ const Events = () => {
     <BorderedCard>
       <Title>University Calendar</Title>
 
-      <h2 className="subtitle is-6">
-        <Subtext length={calendarArray.length} />
-      </h2>
+      <Subtext>{getSubtext({ length: calendarArray.length })}</Subtext>
       {calendarArray.map(event => {
         const { start, name } = event
         const startDate = moment(start).format('dddd[,] MMMM Do')

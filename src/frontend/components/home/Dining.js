@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { BorderedCard, Row, Col, Title } from '../shared'
+import { BorderedCard, Row, Col, Title, Subtext } from '../shared'
 import DiningCard from '../dining/DiningCard'
 import { getFavorites } from '../../actions/dining_actions'
 
@@ -23,10 +23,9 @@ class Dining extends Component {
       <BorderedCard>
         <Link to="/dining" className="link">
           <Title>Dining</Title>
-          <h2 className="subtitle is-6">
-            Status of your favorite dining halls
-          </h2>
         </Link>
+
+        <Subtext>Status of your favorite dining halls</Subtext>
         <br />
 
         <Row>
