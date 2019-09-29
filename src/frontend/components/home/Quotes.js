@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import s from 'styled-components'
 import quotes from '../../../server/resources/home/homepage_quotes.json'
 
