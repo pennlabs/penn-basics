@@ -228,7 +228,6 @@ const mapStateToProps = ({ laundry }) => {
     browserError,
     laundryHallInfo,
     pending,
-    laundryHallId,
     laundryHalls,
     favorites,
     reminders,
@@ -236,24 +235,11 @@ const mapStateToProps = ({ laundry }) => {
     reminderIntervalID,
   } = laundry
 
-  // Make sure that the ID is a number
-  let id
-  if (typeof laundryHallId === 'string') {
-    try {
-      id = parseInt(laundryHallId, 10)
-    } catch (e) {
-      id = null
-    }
-  } else {
-    id = laundryHallId
-  }
-
   return {
     error,
     browserError,
     laundryHallInfo,
     pending,
-    laundryHallId: id,
     laundryHalls,
     favorites,
     reminders,
