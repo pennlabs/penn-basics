@@ -1,40 +1,59 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import s from 'styled-components'
 
-import { BorderedCard, Row, Col, ColSpace, Line } from '../shared'
+import { BorderedCard, Row, Col, ColSpace, Line, Subtitle } from '../shared'
 import externalLinksData from '../../../server/resources/home/externalLinks.json'
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
+import { BORDER, HOVER_GRAY } from '../../styles/colors'
+import { BORDER_RADIUS } from '../../styles/sizes'
+
+const ExternalLinkTag = s.a`
+  border: 1px solid ${BORDER};
+  border-radius: ${BORDER_RADIUS};
+  padding: 0.5rem;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background: ${HOVER_GRAY};
+  }
+`
+
+const ExternalLinkImg = s.img`
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+`
 
 const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
   return (
-    <BorderedCard>
+    <ExternalLinkTag
+      href={websiteURL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <Row>
-        <Col width="20%">
-          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
-            <img src={pictureURL} alt={productName} />
-          </a>
+        <Col width="1.5rem">
+          <ExternalLinkImg src={pictureURL} alt={productName} />
         </Col>
-        <ColSpace />
-        <Col>
-          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
-            {productName}
-          </a>
-        </Col>
+        <ColSpace width="0.5rem" />
+        <Col>{productName}</Col>
       </Row>
-    </BorderedCard>
+    </ExternalLinkTag>
   )
 }
 
 const ExternalLinks = () => (
   <BorderedCard>
-    <h1 className="title is-4">More in the Penn Ecosystem</h1>
+    <Subtitle>More in the Penn Ecosystem</Subtitle>
 
     {externalLinksData.map(data => {
       return <ExternalLink key={data.productName} {...data} />
     })}
 
-    <Line />
-    <br />
+    <Line margin="0.5rem 0" />
 
     {usefulLinksData.map(({ websiteURL, description }, index) => {
       return (

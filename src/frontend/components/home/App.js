@@ -44,7 +44,9 @@ const Home = ({ filterList }) => {
           {filterList.map(filter => componentList[filter])}
         </Col>
         <ColSpace />
-        <Col>
+
+        {/* Overflow visible so customize this page filter dropdown works */}
+        <Col style={{ overflow: 'visible' }}>
           <ExternalLinks />
 
           <Filter />
