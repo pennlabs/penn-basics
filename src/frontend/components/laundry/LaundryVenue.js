@@ -39,20 +39,18 @@ class LaundryVenue extends Component {
     super(props)
 
     const {
-      hallURLId, // passed during a click
+      hallURLId,
       hallIntervalID,
       dispatchGetLaundryHall,
       dispatchGetReminders,
     } = this.props
 
-    // TODO why are there two hall IDs??? this should be documented
     const isValidHallURLId = isValidNumericId(hallURLId)
     if (isValidHallURLId) {
       dispatchGetLaundryHall(hallURLId, hallIntervalID)
-      dispatchGetReminders()
     }
 
-    // TODO is this check useful?? Should we always get reminders?
+    dispatchGetReminders()
   }
 
   componentDidUpdate(prevProps) {
@@ -99,10 +97,9 @@ class LaundryVenue extends Component {
       dispatchRemoveReminder,
     } = this.props
 
-    if (hallURLId === null || hallURLId === undefined || !laundryHallInfo)
+    if (!isValidNumericId(hallURLId) || !laundryHallInfo) {
       return LaundryVenue.renderNoHall()
-
-    if (!hallURLId && laundryHallInfo) return LaundryVenue.renderNoHall()
+    }
 
     const isFavorited = favorites.some(({ hallId }) => hallId === hallURLId)
 
@@ -231,7 +228,6 @@ const mapStateToProps = ({ laundry }) => {
     browserError,
     laundryHallInfo,
     pending,
-    laundryHallId,
     laundryHalls,
     favorites,
     reminders,
@@ -239,24 +235,11 @@ const mapStateToProps = ({ laundry }) => {
     reminderIntervalID,
   } = laundry
 
-  // Make sure that the ID is a number
-  let id
-  if (typeof laundryHallId === 'string') {
-    try {
-      id = parseInt(laundryHallId, 10)
-    } catch (e) {
-      id = null
-    }
-  } else {
-    id = laundryHallId
-  }
-
   return {
     error,
     browserError,
     laundryHallInfo,
     pending,
-    laundryHallId: id,
     laundryHalls,
     favorites,
     reminders,
@@ -266,10 +249,10 @@ const mapStateToProps = ({ laundry }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchAddFavorite: ({ laundryHallId, location, hallName }) =>
-    dispatch(addFavorite(laundryHallId, location, hallName)),
-  dispatchRemoveFavorite: ({ laundryHallId }) =>
-    dispatch(removeFavorite(laundryHallId)),
+  dispatchAddFavorite: ({ hallURLId, location, hallName }) =>
+    dispatch(addFavorite(hallURLId, location, hallName)),
+  dispatchRemoveFavorite: ({ hallURLId }) =>
+    dispatch(removeFavorite(hallURLId)),
   dispatchGetLaundryHall: (hallId, intervalID) =>
     dispatch(getLaundryHall(hallId, intervalID)),
   dispatchAddReminder: (machineID, hallID, hallName) =>

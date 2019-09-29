@@ -184,7 +184,7 @@ export const getFavorites = () => {
   }
 }
 
-export const addFavorite = (laundryHallId, location, hallName) => {
+export const addFavorite = (hallURLId, location, hallName) => {
   return async dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -195,7 +195,7 @@ export const addFavorite = (laundryHallId, location, hallName) => {
 
     // update fields for favoritesArray
     favoriteLocation.locationName = `${location}: ${hallName}`
-    favoriteLocation.hallId = laundryHallId
+    favoriteLocation.hallId = hallURLId
 
     if (!favoritesString) {
       favoritesArray = [favoriteLocation]
@@ -219,16 +219,15 @@ export const addFavorite = (laundryHallId, location, hallName) => {
   }
 }
 
-export function removeFavorite(laundryHallId) {
+export function removeFavorite(hallURLId) {
   return dispatch => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
-
     const favoritesString = localStorage.getItem('laundry_favorites')
     const favoritesArray = JSON.parse(favoritesString)
 
     favoritesArray.forEach((favorite, index) => {
-      if (favorite.hallId === laundryHallId) {
+      if (favorite.hallId === hallURLId) {
         favoritesArray.splice(index, 1)
       }
     })
