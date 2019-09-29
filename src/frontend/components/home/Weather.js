@@ -1,5 +1,5 @@
 /* global document */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -11,12 +11,20 @@ import Toggle from '../shared/Toggle'
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
 const Weather = ({ filter, dispatchToggleTemperature }) => {
-  const tag = document.createElement('script')
-  tag.setAttribute('src', 'https://weatherwidget.io/js/widget.min.js')
-  document.getElementsByTagName('body')[0].appendChild(tag)
+  useEffect(() => {
+    const tag = document.createElement('script')
+    tag.setAttribute('src', 'https://weatherwidget.io/js/widget.min.js')
+    document.getElementsByTagName('body')[0].appendChild(tag)
+  }, [filter])
 
   return (
     <BorderedCard>
+      <Toggle
+        filter={filter}
+        dispatchFilterAction={dispatchToggleTemperature}
+        filterOffText="Farenheit"
+        filterOnText="Celsius"
+      />
       <Title>Weather in Philly</Title>
       <a
         className="weatherwidget-io"
@@ -31,12 +39,6 @@ const Weather = ({ filter, dispatchToggleTemperature }) => {
       >
         Weather in Philly
       </a>
-      <Toggle
-        filter={filter}
-        dispatchFilterAction={dispatchToggleTemperature}
-        filterOffText="Farenheit"
-        filterOnText="Celsius"
-      />
     </BorderedCard>
   )
 }

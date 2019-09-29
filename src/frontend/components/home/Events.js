@@ -32,7 +32,15 @@ const Events = () => {
 
   return (
     <BorderedCard>
-      <Title>University Calendar</Title>
+      <Title>
+        <a
+          href="https://almanac.upenn.edu/penn-academic-calendar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          University Calendar
+        </a>
+      </Title>
 
       <Subtext>{getSubtext({ length: calendarArray.length })}</Subtext>
       {calendarArray.map(event => {
