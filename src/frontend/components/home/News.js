@@ -50,7 +50,7 @@ const News = () => {
 
   return (
     <BorderedCard>
-      <h1 className="title is-4">Latest News</h1>
+      <Title>Latest News</Title>
       <Subtext>
         More from&nbsp;
         <i>

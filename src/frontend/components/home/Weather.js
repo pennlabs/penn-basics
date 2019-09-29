@@ -5,7 +5,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { toggleTemperature } from '../../actions/home_actions'
-import { BorderedCard } from '../shared'
+import { BorderedCard, Title } from '../shared'
 import Toggle from '../shared/Toggle'
 
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
@@ -17,7 +17,7 @@ const Weather = ({ filter, dispatchToggleTemperature }) => {
 
   return (
     <BorderedCard>
-      <h1 className="title is-4">Weather in Philly</h1>
+      <Title>Weather in Philly</Title>
       <a
         className="weatherwidget-io"
         href={filter ? TEMP_BASE : `${TEMP_BASE}?unit=us`}

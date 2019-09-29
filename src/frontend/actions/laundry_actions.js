@@ -80,7 +80,6 @@ const getLaundryHallInterval = async (dispatch, laundryHallId) => {
     dispatch({
       type: getLaundryHallInfoFulfilled,
       laundryHallInfo: data,
-      laundryHallId,
     })
   } catch (error) {
     dispatch({

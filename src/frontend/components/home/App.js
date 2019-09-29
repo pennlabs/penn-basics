@@ -8,6 +8,7 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
+import Greeting from './Greeting'
 import Weather from './Weather'
 import News from './News'
 import Dining from './Dining'
@@ -27,18 +28,21 @@ const Wrapper = s.div`
 
 const Home = ({ filterList }) => {
   const componentList = [
-    <Quotes />,
     <Weather />,
     <Events />,
     <News />,
     <Laundry />,
     <Dining />,
+    <Quotes />,
   ]
 
   return (
     <Wrapper>
       <Row>
-        <Col width="70%">{filterList.map(filter => componentList[filter])}</Col>
+        <Col width="70%">
+          <Greeting />
+          {filterList.map(filter => componentList[filter])}
+        </Col>
         <ColSpace />
         <Col>
           <ExternalLinks />
@@ -47,7 +51,7 @@ const Home = ({ filterList }) => {
         </Col>
       </Row>
 
-      <PennLabsCredit />
+      <PennLabsCredit padding="0 0 1rem 0" />
     </Wrapper>
   )
 }

@@ -62,7 +62,6 @@ const laundryReducer = (state = defaultState, action) => {
         ...state,
         pending: false,
         laundryHallInfo: action.laundryHallInfo,
-        laundryHallId: action.laundryHallId,
       }
     case updateLaundryFavorites:
       return {
