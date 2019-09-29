@@ -63,7 +63,7 @@ const Bell = ({
   dispatchAddReminder,
   hallName,
 }) => {
-  if (!enableReminder || timeRemaining <= 0) {
+  if (!enableReminder || timeRemaining <= 0 || !dispatchAddReminder) {
     return null
   }
   if (timeRemaining > 0 && !reminded) {
@@ -104,6 +104,7 @@ Bell.defaultProps = {
   id: null,
   laundryHallId: null,
   hallName: null,
+  dispatchAddReminder: null,
 }
 
 Bell.propTypes = {
@@ -112,7 +113,7 @@ Bell.propTypes = {
   reminded: PropTypes.bool,
   id: PropTypes.number,
   laundryHallId: PropTypes.number,
-  dispatchAddReminder: PropTypes.func.isRequired,
+  dispatchAddReminder: PropTypes.func,
   hallName: PropTypes.string,
 }
 
@@ -213,6 +214,7 @@ MachineAvailability.defaultProps = {
   hallName: '',
   reminders: [],
   enableReminder: false,
+  dispatchAddReminder: null,
 }
 
 MachineAvailability.propTypes = {
@@ -228,7 +230,7 @@ MachineAvailability.propTypes = {
   laundryHallId: PropTypes.number,
   hallName: PropTypes.string,
   reminders: PropTypes.arrayOf(PropTypes.object),
-  dispatchAddReminder: PropTypes.func.isRequired,
+  dispatchAddReminder: PropTypes.func,
   enableReminder: PropTypes.bool,
 }
 

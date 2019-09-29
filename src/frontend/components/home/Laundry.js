@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import { BorderedCard } from '../shared'
+import { BorderedCard, Text } from '../shared'
 import MachineAvailability from '../laundry/MachineAvailability'
 
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
@@ -20,7 +20,7 @@ class Laundry extends Component {
     if (favoritesHome.length === 0) {
       return (
         <Link to="/laundry" className="link">
-          <h4> Select your favorite Laundry hall </h4>
+          <h4>Select your favorite Laundry hall</h4>
         </Link>
       )
     }
@@ -29,17 +29,17 @@ class Laundry extends Component {
       const { washers, dryers } = favorite.machines
 
       return (
-        <>
+        <React.Fragment key={`${favorite.location}-${favorite.hall_name}`}>
           <h1 className="title is-6">
             {`${favorite.location}: ${favorite.hall_name}`}
           </h1>
-          <p> Washer </p>
+          <Text>Washer</Text>
           <MachineAvailability displayDetails={false} machineData={washers} />
-          <p> Dryer </p>
+          <Text>Dryer</Text>
           <MachineAvailability displayDetails={false} machineData={dryers} />
           {index === favoritesHome.length - 1 ? null : <hr />}
           <div className="columns" key={uuid()} />
-        </>
+        </React.Fragment>
       )
     })
   }

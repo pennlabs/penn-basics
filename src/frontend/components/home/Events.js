@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import uuid from 'uuid'
 import moment from 'moment'
-import { BorderedCard } from '../shared'
+import { BorderedCard, Title } from '../shared'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 
@@ -32,7 +32,7 @@ const Events = () => {
 
   return (
     <BorderedCard>
-      <h1 className="title is-4">University Calendar</h1>
+      <Title>University Calendar</Title>
 
       <h2 className="subtitle is-6">
         <Subtext length={calendarArray.length} />
@@ -57,7 +57,7 @@ const Events = () => {
                   <strong>{name}</strong>
                   <br />
                   <small>
-                    Starts from
+                    Starts from&nbsp;
                     {startDate}
                   </small>
                 </p>

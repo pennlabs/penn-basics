@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import uuid from 'uuid'
 import PropTypes from 'prop-types'
 
-import { BorderedCard, Row, Col } from '../shared'
+import { BorderedCard, Row, Col, Title } from '../shared'
 import DiningCard from '../dining/DiningCard'
 import { getFavorites } from '../../actions/dining_actions'
 
@@ -23,7 +22,7 @@ class Dining extends Component {
     return (
       <BorderedCard>
         <Link to="/dining" className="link">
-          <h1 className="title is-4">Dining</h1>
+          <Title>Dining</Title>
           <h2 className="subtitle is-6">
             Status of your favorite dining halls
           </h2>
@@ -34,8 +33,8 @@ class Dining extends Component {
           {favorites.map((id, index) => {
             if (index <= 2) {
               return (
-                <Col>
-                  <DiningCard key={uuid()} venueId={id} />
+                <Col key={id}>
+                  <DiningCard venueId={id} />
                 </Col>
               )
             }
