@@ -40,7 +40,6 @@ class LaundryVenue extends Component {
 
     const {
       hallURLId, // passed during a click
-      laundryHallId, // reducer
       hallIntervalID,
       dispatchGetLaundryHall,
       dispatchGetReminders,
@@ -48,18 +47,12 @@ class LaundryVenue extends Component {
 
     // TODO why are there two hall IDs??? this should be documented
     const isValidHallURLId = isValidNumericId(hallURLId)
-    const isValidLaundryHallId = isValidNumericId(laundryHallId)
     if (isValidHallURLId) {
       dispatchGetLaundryHall(hallURLId, hallIntervalID)
-    } else if (isValidLaundryHallId) {
-      dispatchGetLaundryHall(laundryHallId, hallIntervalID)
+      dispatchGetReminders()
     }
 
     // TODO is this check useful?? Should we always get reminders?
-    if (isValidHallURLId || isValidLaundryHallId) {
-      // TODO what is this getting reminders for?
-      dispatchGetReminders()
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -98,7 +91,7 @@ class LaundryVenue extends Component {
       browserError,
       laundryHallInfo,
       favorites,
-      laundryHallId,
+      hallURLId,
       reminders,
       dispatchAddFavorite,
       dispatchRemoveFavorite,
@@ -106,14 +99,12 @@ class LaundryVenue extends Component {
       dispatchRemoveReminder,
     } = this.props
 
-    if (
-      laundryHallId === null ||
-      laundryHallId === undefined ||
-      !laundryHallInfo
-    )
+    if (hallURLId === null || hallURLId === undefined || !laundryHallInfo)
       return LaundryVenue.renderNoHall()
 
-    const isFavorited = favorites.some(({ hallId }) => hallId === laundryHallId)
+    if (!hallURLId && laundryHallInfo) return LaundryVenue.renderNoHall()
+
+    const isFavorited = favorites.some(({ hallId }) => hallId === hallURLId)
 
     const { hall_name: hallName, location } = laundryHallInfo
     const { washers, dryers, details: machines } = laundryHallInfo.machines
@@ -130,8 +121,8 @@ class LaundryVenue extends Component {
               isFavorited={isFavorited}
               addFunction={dispatchAddFavorite}
               removeFunction={dispatchRemoveFavorite}
-              addParams={{ laundryHallId, location, hallName }}
-              removeParams={{ laundryHallId }}
+              addParams={{ hallURLId, location, hallName }}
+              removeParams={{ hallURLId }}
             />
             {browserError || reminders.length === 0 ? null : (
               <span // eslint-disable-line
@@ -156,7 +147,7 @@ class LaundryVenue extends Component {
                 machineData={washers}
                 machineType="washer"
                 allMachines={machines}
-                laundryHallId={laundryHallId}
+                laundryHallId={hallURLId}
                 hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
@@ -173,7 +164,7 @@ class LaundryVenue extends Component {
                 machineData={dryers}
                 machineType="dryer"
                 allMachines={machines}
-                laundryHallId={laundryHallId}
+                laundryHallId={hallURLId}
                 hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
@@ -201,7 +192,6 @@ LaundryVenue.defaultProps = {
   error: null,
   browserError: null,
   laundryHallInfo: null,
-  laundryHallId: null,
   hallURLId: null,
   reminders: [],
   favorites: [],
@@ -223,7 +213,6 @@ LaundryVenue.propTypes = {
     location: PropTypes.string,
     machines: PropTypes.object,
   }),
-  laundryHallId: PropTypes.number,
   hallURLId: PropTypes.number,
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
