@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import s from 'styled-components'
 import axios from 'axios'
 
-import { BorderedCard, ImageZoom, Col, ColSpace, Row } from '../shared'
+import { maxWidth, PHONE } from '../../styles/sizes'
+import {
+  BorderedCard,
+  ImageZoom,
+  Col,
+  Text,
+  Row,
+  Title,
+  Subtext,
+} from '../shared'
+
+const NewsContent = s.div`
+  margin-left: 1rem;
+
+  ${maxWidth(PHONE)} {
+    margin-left: 0;
+  }
+`
 
 const News = () => {
   const [data, setData] = useState(null)
@@ -33,8 +51,8 @@ const News = () => {
   return (
     <BorderedCard>
       <h1 className="title is-4">Latest News</h1>
-      <h6 className="subtitle is-6">
-        More from &nbsp;
+      <Subtext>
+        More from&nbsp;
         <i>
           <a
             href="https://www.thedp.com/"
@@ -44,28 +62,23 @@ const News = () => {
             The Daily Pennsylvanian
           </a>
         </i>
-      </h6>
+      </Subtext>
       <Row>
-        <Col width="70%">
+        <Col sm={12} md={6} lg={7}>
           <a href={link} target="_blank" rel="noopener noreferrer">
             <ImageZoom src={picture} alt="First" />
           </a>
         </Col>
-        <ColSpace />
-        <Col>
-          <p className="is-size-6">
-            <strong>
+        <Col sm={12} md={6} lg={5}>
+          <NewsContent>
+            <Title>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 {title}
               </a>
-            </strong>
-            <br />
-            <br />
-            <small>{content}</small>
-            <br />
-            <br />
-            <small>{time}</small>
-          </p>
+            </Title>
+            <Text>{content}</Text>
+            <Subtext>{time}</Subtext>
+          </NewsContent>
         </Col>
       </Row>
     </BorderedCard>
