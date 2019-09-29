@@ -192,7 +192,6 @@ LaundryVenue.defaultProps = {
   error: null,
   browserError: null,
   laundryHallInfo: null,
-  laundryHallId: null,
   hallURLId: null,
   reminders: [],
   favorites: [],
