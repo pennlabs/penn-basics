@@ -33,9 +33,9 @@ module.exports = function laundryRouter() {
       detail => detail.id === machineID
     )
     const { time_remaining: timeRemaining } = machine[0]
-    const timeRemainingFormatted =
+    let timeRemainingFormatted =
       timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
-    // timeRemainingFormatted = 5000
+    timeRemainingFormatted = 5000
 
     // set a timeout that equals to the timeRemaining
     setTimeout(async () => {
