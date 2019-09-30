@@ -11,7 +11,6 @@ import {
   Subtext,
   NoData,
   ErrorMessage,
-  WarningMessage,
 } from '../shared'
 
 import FavoriteButton from '../shared/favorites/FavoriteButton'
@@ -112,7 +111,6 @@ class LaundryVenue extends Component {
       <Wrapper>
         <ErrorMessage message={browserError} />
         <ErrorMessage message={error} />
-        <WarningMessage message="Laundry Reminder is in testing stage." />
 
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
