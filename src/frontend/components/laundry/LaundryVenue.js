@@ -112,7 +112,7 @@ class LaundryVenue extends Component {
       <Wrapper>
         <ErrorMessage message={browserError} />
         <ErrorMessage message={error} />
-        <WarningMessage message="Laundry Reminder is in testing stage." />
+        {/* <WarningMessage message="Laundry Reminder is in testing stage." /> */}
 
         <div style={{ marginBottom: '1rem' }}>
           <Buttons>
