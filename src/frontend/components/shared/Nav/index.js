@@ -7,6 +7,8 @@ import {
   DARK_GRAY,
   ALLBIRDS_GRAY,
   BLACK_ALPHA,
+  WHITE,
+  BLUE,
 } from '../../../styles/colors'
 import {
   maxWidth,
@@ -75,6 +77,15 @@ const Shade = s.div`
   }
 `
 
+const BetaTag = s.span`
+  margin-left: 3px;
+  border-radius: 25px;
+  background-color: #60B8F2 !important;
+  color: ${WHITE} !important;
+  margin-top: 15px;
+  box-shadow: 0 0px 8px rgba(25, 89, 130, .4);
+`
+
 // TODO replace imgur jawn with local jawn
 
 const Nav = () => {
@@ -87,8 +98,10 @@ const Nav = () => {
         </Link>
 
         <Link to="/">
-          <LogoText>Penn Basics</LogoText>
+          <LogoText>Penn Basics </LogoText>
         </Link>
+
+        <BetaTag className="tag is-rounded">Beta</BetaTag>
 
         <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 
