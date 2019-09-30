@@ -8,7 +8,6 @@ import {
   ALLBIRDS_GRAY,
   BLACK_ALPHA,
   WHITE,
-  BLUE,
 } from '../../../styles/colors'
 import {
   maxWidth,
