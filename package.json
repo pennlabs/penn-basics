@@ -9,7 +9,7 @@
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "webpack-prod": "webpack -p",
-    "dev": "source env.sh && (yarn webpack &) && node src/server/index.js",
+    "dev": "source env.sh && concurrently \"yarn webpack\" \"node src/server/index.js\"",
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
     "lint-fix": "eslint ./src/**/ --fix"
@@ -64,6 +64,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "concurrently": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.3.0",
