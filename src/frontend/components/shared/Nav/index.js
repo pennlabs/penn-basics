@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import s from 'styled-components'
 
+import pjson from '../../../../../package.json'
 import {
   BLACK,
   DARK_GRAY,
@@ -100,7 +101,7 @@ const Nav = () => {
           <LogoText>Penn Basics </LogoText>
         </Link>
 
-        <BetaTag className="tag is-rounded">Beta</BetaTag>
+        <BetaTag className="tag is-rounded">{`Beta v${pjson.version}`}</BetaTag>
 
         <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 
