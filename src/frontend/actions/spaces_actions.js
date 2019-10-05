@@ -9,7 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
-  filterSpacesNameRequested,
+  filterSpacesStringRequested,
   filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
@@ -212,10 +212,14 @@ export const filterOnCampus = filter => {
   }
 }
 
-export const filterSpacesName = filter => {
+/**
+ *
+ * @param {string} filter filterString from user input
+ */
+export const filterSpacesString = filter => {
   return dispatch => {
     dispatch({
-      type: filterSpacesNameRequested,
+      type: filterSpacesStringRequested,
       filter,
     })
   }

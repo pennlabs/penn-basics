@@ -48,8 +48,8 @@ class App extends Component {
 
     if (
       pending ||
-      !filteredSpacesData ||
-      !Object.keys(filteredSpacesData).length
+      !filteredSpacesData
+      // !Object.keys(filteredSpacesData).length
     ) {
       return <Filter />
     }

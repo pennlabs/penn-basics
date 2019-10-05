@@ -18,6 +18,7 @@ import {
   filterSpacesOutlets,
   filterSpacesNoise,
   filterSpacesGroups,
+  filterSpacesString,
   clearSpacesFilters,
   toggleSpacesOpen,
   toggleSpacesOutlets,
@@ -54,6 +55,7 @@ class Filter extends Component {
     this.handleClickOutlets = this.handleClickOutlets.bind(this)
     this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
     this.handleClickGroups = this.handleClickGroups.bind(this)
+    this.handleInputString = this.handleInputString.bind(this)
   }
 
   /**
@@ -102,6 +104,16 @@ class Filter extends Component {
     filterSpacesGroupsDispatch(num)
   }
 
+  /**
+   *
+   * @param {string} filterString input from user
+   */
+
+  handleInputString(filterString) {
+    const { filterSpacesStringDispatch } = this.props
+    filterSpacesStringDispatch(filterString)
+  }
+
   render() {
     const {
       clearSpacesFiltersDispatch,
@@ -123,7 +135,7 @@ class Filter extends Component {
 
     return (
       <FilterWrapper>
-        <Search />
+        <Search filterFunction={this.handleInputString} />
         <FilterBtn
           text="Open"
           onClick={this.handleClickOpen}
@@ -184,6 +196,7 @@ Filter.propTypes = {
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
   clearSpacesFiltersDispatch: PropTypes.func.isRequired,
+  filterSpacesStringDispatch: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 
   toggleSpacesOpenDispatch: PropTypes.func.isRequired,
@@ -211,6 +224,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(filterSpacesOutlets(filters)),
   filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
   filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
+  filterSpacesStringDispatch: filterString =>
+    dispatch(filterSpacesString(filterString)),
 
   toggleSpacesOpenDispatch: () => dispatch(toggleSpacesOpen()),
   toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),
