@@ -2,7 +2,12 @@ import s from 'styled-components'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY } from '../../../styles/colors'
+import {
+  BORDER,
+  FOCUS_GRAY,
+  MEDIUM_GRAY,
+  DARK_GRAY,
+} from '../../../styles/colors'
 
 const SearchComponent = s.input`
   font-size: 16px;
