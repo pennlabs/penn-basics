@@ -7,6 +7,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  filterSpacesStringRequested,
   filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
@@ -28,6 +29,7 @@ const clearFilterState = {
   filterNoiseActive: false,
   filterGroupsActive: false,
   filterOnCampus: false,
+  filterString: null,
 }
 
 const updateFilters = (arr, num) => {
@@ -50,6 +52,7 @@ const filterSpaces = state => {
     filterNoise,
     filterGroups,
     filterOnCampus,
+    filterString,
   } = state
 
   // If there is nothing to filter on, remove all filters and reset the data
@@ -58,7 +61,8 @@ const filterSpaces = state => {
     !filterOutlets &&
     !filterNoise &&
     !filterGroups &&
-    !filterOnCampus
+    !filterOnCampus &&
+    !filterString
   ) {
     const newState = Object.assign(state, {})
     newState.filteredSpacesData = state.spacesData
@@ -94,6 +98,15 @@ const filterSpaces = state => {
   if (filterOnCampus) {
     filteredSpaceIDs = filteredSpaceIDs.filter(id =>
       spacesData[id].tags.includes('On Campus')
+    )
+  }
+
+  // can use Fuse.js
+  if (filterString) {
+    filteredSpaceIDs = filteredSpaceIDs.filter(id =>
+      spacesData[id].name
+        .toLowerCase()
+        .includes(filterString.toLowerCase().trim())
     )
   }
 
@@ -173,6 +186,10 @@ const spacesReducer = (state = { pending: true }, action) => {
 
     case filterOnCampusRequested:
       newState.filterOnCampus = action.filter
+      return filterSpaces(newState)
+
+    case filterSpacesStringRequested:
+      newState.filterString = action.filter
       return filterSpaces(newState)
 
     case clearFilterSpacesRequested:

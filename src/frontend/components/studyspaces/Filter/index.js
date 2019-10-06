@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn'
+import Search from './Search'
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -17,6 +18,7 @@ import {
   filterSpacesOutlets,
   filterSpacesNoise,
   filterSpacesGroups,
+  filterSpacesString,
   clearSpacesFilters,
   toggleSpacesOpen,
   toggleSpacesOutlets,
@@ -53,6 +55,7 @@ class Filter extends Component {
     this.handleClickOutlets = this.handleClickOutlets.bind(this)
     this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
     this.handleClickGroups = this.handleClickGroups.bind(this)
+    this.handleInputString = this.handleInputString.bind(this)
   }
 
   /**
@@ -101,6 +104,16 @@ class Filter extends Component {
     filterSpacesGroupsDispatch(num)
   }
 
+  /**
+   *
+   * @param {string} filterString input from user
+   */
+
+  handleInputString(filterString) {
+    const { filterSpacesStringDispatch } = this.props
+    filterSpacesStringDispatch(filterString)
+  }
+
   render() {
     const {
       clearSpacesFiltersDispatch,
@@ -116,12 +129,18 @@ class Filter extends Component {
       filterOutlets,
       filterNoise,
       filterGroups,
+      filterString,
     } = this.props
 
     // TODO OTHER ACTIVE PROPS?
 
     return (
       <FilterWrapper>
+        <Search
+          filterFunction={this.handleInputString}
+          filterString={filterString}
+        />
+
         <FilterBtn
           text="Open"
           onClick={this.handleClickOpen}
@@ -174,6 +193,7 @@ Filter.defaultProps = {
   filterOutlets: [],
   filterNoise: [],
   filterGroups: [],
+  filterString: null,
 }
 
 Filter.propTypes = {
@@ -182,6 +202,7 @@ Filter.propTypes = {
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
   clearSpacesFiltersDispatch: PropTypes.func.isRequired,
+  filterSpacesStringDispatch: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 
   toggleSpacesOpenDispatch: PropTypes.func.isRequired,
@@ -197,6 +218,7 @@ Filter.propTypes = {
   filterOutlets: PropTypes.arrayOf(PropTypes.number),
   filterNoise: PropTypes.arrayOf(PropTypes.number),
   filterGroups: PropTypes.arrayOf(PropTypes.number),
+  filterString: PropTypes.string,
 }
 
 const mapStateToProps = ({ spaces }) => spaces
@@ -209,6 +231,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(filterSpacesOutlets(filters)),
   filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
   filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
+  filterSpacesStringDispatch: filterString =>
+    dispatch(filterSpacesString(filterString)),
 
   toggleSpacesOpenDispatch: () => dispatch(toggleSpacesOpen()),
   toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),

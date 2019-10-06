@@ -58,12 +58,13 @@ const Circle = s.div`
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 `
-/*
-  dispatchFilterAction: the redux action that toggles the filter
-  filter: filter in the redux
-  filterOffText:
-  filterOnText:
-*/
+
+/**
+ * @param {function} dispatchFilterAction: the redux action that toggles the filter
+ * @param {boolean} filter: filter in the redux
+ * @param {string} filterOffText: text rendered when the filter is off
+ * @param {string} filterOnText text rendered when filter is on
+ */
 
 class Toggle extends Component {
   constructor(props) {

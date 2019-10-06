@@ -9,6 +9,7 @@ import {
   filterSpacesOutletsRequested,
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
+  filterSpacesStringRequested,
   filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
@@ -206,6 +207,19 @@ export const filterOnCampus = filter => {
   return dispatch => {
     dispatch({
       type: filterOnCampusRequested,
+      filter,
+    })
+  }
+}
+
+/**
+ *
+ * @param {string} filter filterString from user input
+ */
+export const filterSpacesString = filter => {
+  return dispatch => {
+    dispatch({
+      type: filterSpacesStringRequested,
       filter,
     })
   }
