@@ -22,7 +22,7 @@ const Weather = ({ filter, dispatchToggleTemperature }) => {
       <Toggle
         filter={filter}
         dispatchFilterAction={dispatchToggleTemperature}
-        filterOffText="Farenheit"
+        filterOffText="Fahrenheit"
         filterOnText="Celsius"
       />
       <Title>Weather in Philly</Title>
