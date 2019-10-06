@@ -1,6 +1,6 @@
 {
   "name": "pennbasics",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
