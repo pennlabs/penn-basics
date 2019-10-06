@@ -54,11 +54,7 @@ class App extends Component {
       setActiveSpaceDispatch,
     } = this.props
 
-    if (
-      pending ||
-      !filteredSpacesData
-      // !Object.keys(filteredSpacesData).length
-    ) {
+    if (pending || !filteredSpacesData) {
       return <Filter />
     }
 
