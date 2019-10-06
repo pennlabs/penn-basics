@@ -3,7 +3,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import SpaceCard from './SpaceCard'
-import { Map, Row, Col, Scrollbar, Line, ErrorMessage } from '../shared'
+import {
+  Map,
+  Row,
+  Col,
+  Scrollbar,
+  Line,
+  ErrorMessage,
+  NoDataScroll,
+} from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
@@ -66,6 +74,14 @@ class App extends Component {
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
           >
             <ErrorMessage message={error} />
+
+            {!Object.keys(filteredSpacesData).length && (
+              <NoDataScroll
+                image="/img/studyspace-empty-state.svg"
+                imageAlt="Empty Studyspaces"
+                text="No study space matches the criteria"
+              />
+            )}
 
             {Object.keys(filteredSpacesData).map(spaceId => {
               const space = filteredSpacesData[spaceId]

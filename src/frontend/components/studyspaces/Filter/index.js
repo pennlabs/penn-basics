@@ -129,13 +129,18 @@ class Filter extends Component {
       filterOutlets,
       filterNoise,
       filterGroups,
+      filterString,
     } = this.props
 
     // TODO OTHER ACTIVE PROPS?
 
     return (
       <FilterWrapper>
-        <Search filterFunction={this.handleInputString} />
+        <Search
+          filterFunction={this.handleInputString}
+          filterString={filterString}
+        />
+
         <FilterBtn
           text="Open"
           onClick={this.handleClickOpen}
@@ -188,6 +193,7 @@ Filter.defaultProps = {
   filterOutlets: [],
   filterNoise: [],
   filterGroups: [],
+  filterString: null,
 }
 
 Filter.propTypes = {
@@ -212,6 +218,7 @@ Filter.propTypes = {
   filterOutlets: PropTypes.arrayOf(PropTypes.number),
   filterNoise: PropTypes.arrayOf(PropTypes.number),
   filterGroups: PropTypes.arrayOf(PropTypes.number),
+  filterString: PropTypes.string,
 }
 
 const mapStateToProps = ({ spaces }) => spaces

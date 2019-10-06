@@ -24,19 +24,30 @@ const SearchComponent = s.input`
     border-bottom-color: ${BORDER};
   }
 `
+const inputId = 'searchLine'
 
 const SearchIcon = s.i`
   cursor: pointer;
   ${({ active }) => (active ? 'margin-right: 0.3em' : 'margin-right: 1em')}
 `
 
-const Search = ({ filterFunction }) => {
+const Search = ({ filterFunction, filterString }) => {
   const [showInput, setInput] = useState(false)
   return (
     <span>
-      <SearchIcon className="fas fa-search" onClick={() => setInput(!showInput)} active={showInput} /*eslint-disable-line*/ />
+      <label htmlFor={inputId} /* eslint-disable-line */>
+        <SearchIcon
+          className="fas fa-search"
+          onClick={() => setInput(!showInput)}
+          active={showInput}
+        />
+      </label>
       {showInput && (
-        <SearchComponent onChange={e => filterFunction(e.target.value)} />
+        <SearchComponent
+          id={inputId}
+          onChange={e => filterFunction(e.target.value)}
+          value={filterString}
+        />
       )}
     </span>
   )
@@ -44,6 +55,7 @@ const Search = ({ filterFunction }) => {
 
 Search.propTypes = {
   filterFunction: PropTypes.func.isRequired,
+  filterString: PropTypes.string.isRequired,
 }
 
 export default Search
