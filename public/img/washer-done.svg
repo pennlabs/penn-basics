@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="98px" height="106px" viewBox="0 0 98 106" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 9</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="85" height="93" rx="8"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-138.000000, -518.000000)">
+            <g id="Group-9" transform="translate(138.000000, 516.000000)">
+                <rect id="Rectangle" stroke="#5F7691" stroke-width="3" fill="#FFFFFF" fill-rule="nonzero" x="1.5" y="16.5" width="82" height="90" rx="8"></rect>
+                <g id="Path-17" transform="translate(0.000000, 15.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <path d="M72,2 C72,42.9277344 72,67.4817708 72,75.6621094 C72,83.8424479 65.0579427,88.9934896 51.1738281,91.1152344 C71.0332031,92.4863281 81.4707031,91.4811198 82.4863281,88.0996094 C83.5019531,84.718099 83.5019531,65.4075521 82.4863281,30.1679688 L82.4863281,2 L72,2 Z" fill="#F3F8FA" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                </g>
+                <rect id="Mask" stroke="#5F7691" stroke-width="3" fill-rule="nonzero" x="1.5" y="16.5" width="82" height="90" rx="8"></rect>
+                <path d="M20.0546875,64.000006 C23.3190104,61.936851 27.9674479,61.936849 34,64 C43.0488281,67.0947266 43.953125,74.6705856 50.8876953,76.9505272 C55.5107422,78.4704882 60.5481771,77.7135417 66,74.6796875 C62.6666667,85.9016927 54.5299479,91.5126953 41.5898438,91.5126953 C28.6497396,91.5126953 21.4713542,82.3417989 20.0546875,64.000006 Z" id="Path-16" fill="#75A5DC" fill-rule="nonzero"></path>
+                <circle id="Oval" stroke="#5F7691" stroke-width="2" fill-rule="nonzero" cx="43" cy="69" r="23"></circle>
+                <path d="M1.5,33 L82,33" id="Line-2" stroke="#5F7691" stroke-width="2" stroke-linecap="square" fill-rule="nonzero"></path>
+                <g id="Oval-2" transform="translate(56.000000, 2.000000)" fill="#ED6D6D" fill-rule="nonzero">
+                    <circle id="Oval" cx="21" cy="21" r="21"></circle>
+                </g>
+                <text id="!" font-family="WorkSans-Medium, Work Sans" font-size="38" font-weight="400" fill="#FFFFFF">
+                    <tspan x="72" y="35">!</tspan>
+                </text>
+                <rect id="Rectangle" stroke="#5F7691" fill="#FFFFFF" fill-rule="nonzero" x="9.5" y="22.5" width="18" height="5" rx="2.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
