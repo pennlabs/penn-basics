@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-mongoose.connect(process.env.MONGO_URI, {
+const { MONGO_URI } = process.env
+
+if (!MONGO_URI) throw new Error('Missing MONGO_URI in env')
+
+mongoose.connect(MONGO_URI, {
   useMongoClient: true,
 })
 
