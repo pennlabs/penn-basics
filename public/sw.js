@@ -4,7 +4,7 @@ self.addEventListener('push', e => {
   const { machineID, hallID, reminderID, hallName } = payload
   self.registration.showNotification('Penn Basics', {
     body: 'Your laundry’s done!',
-    icon: 'https://raw.githubusercontent.com/pennlabs/pennbasics/master/public/android-chrome-256x256.png',
+    icon: 'https://github.com/pennlabs/pennbasics/blob/fixLaundryReminder/public/img/washer-done.svg',
     requireInteraction: true,
     // icon: '../../../public/android-chrome-256x256.png'
   })
