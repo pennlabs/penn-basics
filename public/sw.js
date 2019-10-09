@@ -9,7 +9,6 @@ self.addEventListener('push', e => {
     requireInteraction: true,
     // icon: '../../../public/android-chrome-256x256.png'
   })
-
   const request = indexedDB.open('LocalDB', 1)
 
   request.onerror = event => {
