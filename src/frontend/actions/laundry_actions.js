@@ -277,6 +277,7 @@ export const checkBrowserCompatability = () => {
                 subscription.unsubscribe()
               }
             })
+          await registration.update()
         })
       }
 
