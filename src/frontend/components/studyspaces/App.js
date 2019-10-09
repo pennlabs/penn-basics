@@ -1,3 +1,5 @@
+/* global document */
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -22,9 +24,26 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 // TODO ghost loaders
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { googleMapError: null }
+  }
+
   componentDidMount() {
     const { getAllSpacesDataDispatch } = this.props
     getAllSpacesDataDispatch()
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY
+    // const apiKey = null
+    if (apiKey) {
+      const tag = document.createElement('script')
+      tag.setAttribute(
+        'src',
+        `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+      )
+      document.getElementsByTagName('body')[0].appendChild(tag)
+    } else {
+      this.setState({ googleMapError: 'Sorry, Google Map cannot be shown' })
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -53,6 +72,8 @@ class App extends Component {
       hoveredSpace,
       setActiveSpaceDispatch,
     } = this.props
+
+    const { googleMapError } = this.state
 
     if (pending || !filteredSpacesData) {
       return <Filter />
@@ -92,13 +113,16 @@ class App extends Component {
             <PennLabsCredit />
           </Scrollbar>
           <Col>
-            <Map
-              mapId="map"
-              height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-              markers={filteredSpacesData}
-              handleClickMarker={setActiveSpaceDispatch}
-              activeMarker={hoveredSpace}
-            />
+            <ErrorMessage message={googleMapError} />
+            {!googleMapError && (
+              <Map
+                mapId="map"
+                height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+                markers={filteredSpacesData}
+                handleClickMarker={setActiveSpaceDispatch}
+                activeMarker={hoveredSpace}
+              />
+            )}
           </Col>
         </Row>
 
