@@ -19,7 +19,7 @@ module.exports = function laundryRouter() {
 
     // a unique reminderID is used to distinguish between multiple reminders
     // that have the same hallID and machineID
-    const { subscription, machineID, hallID, hallName, reminderID } = req.body
+    const { subscription, machineID, hallID, reminderID } = req.body
 
     if (!isValidNumericId(hallID)) {
       res.status(HttpStatus.BAD_REQUEST).send('Missing hallID')
@@ -32,7 +32,7 @@ module.exports = function laundryRouter() {
     const machine = data.machines.details.filter(
       detail => detail.id === machineID
     )
-    const { time_remaining: timeRemaining } = machine[0]
+    const { type, time_remaining: timeRemaining } = machine[0]
     let timeRemainingFormatted =
       timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
     timeRemainingFormatted = 2000
@@ -43,7 +43,7 @@ module.exports = function laundryRouter() {
         // use webpush to instruct the service worker to push notification
         await webpush.sendNotification(
           subscription,
-          JSON.stringify({ machineID, hallID, hallName, reminderID }) // payload received by the service worker
+          JSON.stringify({ machineID, hallID, reminderID, type }) // payload received by the service worker
         )
         // respond to frontend until the instruction is received by the service worker
         res.status(200).json({})

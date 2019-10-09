@@ -1,10 +1,11 @@
 /* global self, indexedDB */
 self.addEventListener('push', e => {
   const payload = e.data.json()
-  const { machineID, hallID, reminderID, hallName } = payload
+  const { machineID, hallID, reminderID, type } = payload
+  const iconDir = type === 'washer' ? 'washer-done' : 'dryer-done'
   self.registration.showNotification('Penn Basics', {
-    body: 'Your laundry’s done!',
-    icon: 'https://github.com/pennlabs/pennbasics/blob/fixLaundryReminder/public/img/washer-done.svg',
+    body: `Your ${type}’s done!`,
+    icon: `/img/${iconDir}.png`,
     requireInteraction: true,
     // icon: '../../../public/android-chrome-256x256.png'
   })
