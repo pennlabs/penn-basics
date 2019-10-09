@@ -3,7 +3,6 @@
 // Home actions
 export const filterHomeCustomizeRequested = 'FILTER_HOME_CUSTOMIZE_REQUESTED'
 export const TOGGLE_FILTER_HOME_CUSTOMIZE = 'TOGGLE_FILTER_HOME_CUSTOMIZE'
-export const TOGGLE_FILTER_TEMPERATURE = 'TOGGLE_FILTER_TEMPERATURE'
 
 // Dining actions
 export const getVenueInfoRequested = 'GET_VENUE_INFO_REQUESTED'
