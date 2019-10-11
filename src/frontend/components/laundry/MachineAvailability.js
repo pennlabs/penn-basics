@@ -44,12 +44,13 @@ const BellIcon = s.span`
 const handleReminder = (
   machineID,
   hallID,
-  hallName,
   dispatchAddReminder,
-  reminded
+  reminded,
+  machineType,
+  timeRemaining
 ) => {
   if (!reminded) {
-    dispatchAddReminder(machineID, hallID, hallName)
+    dispatchAddReminder(machineID, hallID, machineType, timeRemaining)
   }
 }
 
@@ -61,7 +62,7 @@ const Bell = ({
   id,
   laundryHallId,
   dispatchAddReminder,
-  hallName,
+  machineType,
 }) => {
   if (!enableReminder || timeRemaining <= 0 || !dispatchAddReminder) {
     return null
@@ -74,9 +75,10 @@ const Bell = ({
           handleReminder(
             id,
             laundryHallId,
-            hallName,
             dispatchAddReminder,
-            reminded
+            reminded,
+            machineType,
+            timeRemaining
           )
         }
       >
@@ -103,8 +105,8 @@ Bell.defaultProps = {
   reminded: false,
   id: null,
   laundryHallId: null,
-  hallName: null,
   dispatchAddReminder: null,
+  machineType: '',
 }
 
 Bell.propTypes = {
@@ -114,7 +116,7 @@ Bell.propTypes = {
   id: PropTypes.number,
   laundryHallId: PropTypes.number,
   dispatchAddReminder: PropTypes.func,
-  hallName: PropTypes.string,
+  machineType: PropTypes.string,
 }
 
 const MachineAvailability = ({
@@ -123,7 +125,6 @@ const MachineAvailability = ({
   machineType,
   allMachines,
   laundryHallId,
-  hallName,
   reminders,
   dispatchAddReminder,
   enableReminder,
@@ -191,7 +192,7 @@ const MachineAvailability = ({
                         id={id}
                         laundryHallId={laundryHallId}
                         dispatchAddReminder={dispatchAddReminder}
-                        hallName={hallName}
+                        machineType={machineType}
                       />
                     </td>
                   </tr>

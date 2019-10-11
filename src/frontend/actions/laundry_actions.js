@@ -419,7 +419,7 @@ export const getReminders = () => {
   }
 }
 
-export const addReminder = (machineID, hallID, hallName) => {
+export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
   return dispatch => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
@@ -443,7 +443,8 @@ export const addReminder = (machineID, hallID, hallName) => {
           subscription,
           machineID,
           hallID,
-          hallName,
+          machineType,
+          timeRemaining,
           reminderID,
         })
       })
