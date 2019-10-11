@@ -212,7 +212,6 @@ MachineAvailability.defaultProps = {
   machineType: '',
   allMachines: [],
   laundryHallId: null,
-  hallName: '',
   reminders: [],
   enableReminder: false,
   dispatchAddReminder: null,
