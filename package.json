@@ -1,6 +1,6 @@
 {
   "name": "pennbasics",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
@@ -49,6 +49,7 @@
     "react": "^16.9.0",
     "react-device-detect": "^1.7.5",
     "react-dom": "^16.9.0",
+    "react-ga": "^2.7.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.3.1",
     "redux": "^3.7.2",

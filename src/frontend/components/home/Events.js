@@ -3,6 +3,7 @@ import axios from 'axios'
 import uuid from 'uuid'
 import moment from 'moment'
 import { BorderedCard, Title, Subtext } from '../shared'
+import { logEvent } from '../../analytics/index'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 
@@ -37,6 +38,7 @@ const Events = () => {
           href="https://almanac.upenn.edu/penn-academic-calendar"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => logEvent('external links', 'penn academic calendar')}
         >
           University Calendar
         </a>

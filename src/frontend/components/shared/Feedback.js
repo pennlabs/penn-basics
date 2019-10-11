@@ -2,6 +2,7 @@ import React from 'react'
 import s from 'styled-components'
 
 import { WHITE, BLUE, DARK_BLUE } from '../../styles/colors'
+import { logEvent } from '../../analytics/index'
 
 const DIAMETER = '3rem'
 const OFFSET = '18px'
@@ -34,7 +35,13 @@ const Icon = s.i`
 `
 
 export default () => (
-  <FeedbackLink href={AIRTABLE_LINK} title="Feedback" target="_blank">
+  <FeedbackLink
+    href={AIRTABLE_LINK}
+    title="Feedback"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={() => logEvent('feeback', 'click from icon')}
+  >
     <Icon className="fa-comment far fa-lg" />
   </FeedbackLink>
 )

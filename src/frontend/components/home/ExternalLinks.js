@@ -7,6 +7,7 @@ import externalLinksData from '../../../server/resources/home/externalLinks.json
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 import { BORDER, HOVER_GRAY } from '../../styles/colors'
 import { BORDER_RADIUS } from '../../styles/sizes'
+import { logEvent } from '../../analytics/index'
 
 const ExternalLinkTag = s.a`
   border: 1px solid ${BORDER};
@@ -33,6 +34,7 @@ const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
       href={websiteURL}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => logEvent('external links', productName)}
     >
       <Row>
         <Col width="1.5rem">
@@ -58,7 +60,12 @@ const ExternalLinks = () => (
     {usefulLinksData.map(({ websiteURL, description }, index) => {
       return (
         <>
-          <a href={websiteURL} target="_blank" rel="noopener noreferrer">
+          <a
+            href={websiteURL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => logEvent('external links', description)}
+          >
             {description}
           </a>
           {index === usefulLinksData.length - 1 ? null : <br />}

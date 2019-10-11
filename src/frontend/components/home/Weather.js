@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { BorderedCard, Title } from '../shared'
 import Toggle from '../shared/Toggle'
+import { logEvent } from '../../analytics/index'
 
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
@@ -36,6 +37,7 @@ const Weather = () => {
         data-highcolor=""
         data-lowcolor=""
         style={{ transition: 'height 0.5s ease' }}
+        onClick={() => logEvent('external links', 'temperature widget')}
       >
         Weather in Philly
       </a>

@@ -6,6 +6,7 @@ import {
   getVenueInfoFulfilled,
   updateDiningFavorites,
 } from './action_types'
+import { logEvent } from '../analytics/index'
 import { pad } from '../helperFunctions'
 
 const convertDate = dateObj => {
@@ -18,8 +19,6 @@ const convertDate = dateObj => {
 export const getVenueInfo = venueId => {
   return async dispatch => {
     dispatch({ type: getVenueInfoRequested })
-
-    // Set the start date to today
 
     // Make a post request to pull the data
     try {
@@ -70,8 +69,8 @@ export const getFavorites = () => {
 
 export const addFavorite = venueID => {
   return dispatch => {
+    logEvent('dining', 'addFavorite')
     let favorites = localStorage.getItem('dining_favorites')
-
     if (!favorites) {
       favorites = [venueID]
     } else {
@@ -97,6 +96,7 @@ export const addFavorite = venueID => {
 
 export const removeFavorite = venueID => {
   return dispatch => {
+    logEvent('dining', 'removeFavorite')
     // favorites is an array of venueIDs
     let favorites = JSON.parse(localStorage.getItem('dining_favorites'))
     favorites = favorites.filter(favorite => favorite !== venueID)
