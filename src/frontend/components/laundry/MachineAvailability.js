@@ -229,7 +229,6 @@ MachineAvailability.propTypes = {
   machineType: PropTypes.string,
   allMachines: PropTypes.array, // eslint-disable-line
   laundryHallId: PropTypes.number,
-  hallName: PropTypes.string,
   reminders: PropTypes.arrayOf(PropTypes.object),
   dispatchAddReminder: PropTypes.func,
   enableReminder: PropTypes.bool,
