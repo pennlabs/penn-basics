@@ -12,6 +12,7 @@ import {
   Title,
   Subtext,
 } from '../shared'
+import { logEvent } from '../../analytics/index'
 
 const NewsContent = s.div`
   margin-left: 1rem;
@@ -58,6 +59,7 @@ const News = () => {
             href="https://www.thedp.com/"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => logEvent('external links', 'the dp')}
           >
             The Daily Pennsylvanian
           </a>
@@ -65,14 +67,24 @@ const News = () => {
       </Subtext>
       <Row>
         <Col sm={12} md={6} lg={7}>
-          <a href={link} target="_blank" rel="noopener noreferrer">
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => logEvent('external links', 'the dp headline')}
+          >
             <ImageZoom src={picture} alt="First" />
           </a>
         </Col>
         <Col sm={12} md={6} lg={5}>
           <NewsContent>
             <Title>
-              <a href={link} target="_blank" rel="noopener noreferrer">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => logEvent('external links', 'the dp headline')}
+              >
                 {title}
               </a>
             </Title>
