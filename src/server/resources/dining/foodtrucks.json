@@ -1,6 +1,329 @@
 [
     {
+        "name": "Ahmad Gyro King",
+        "payments": ["Cash", "Square", "Visa", "MasterCard", "American Express", "Discover"],
+        "start": ["8:30am", "8:30am", "8:30am", "8:30am", "8:30am", "8:30am", null],
+        "end": ["6pm", "6pm", "6pm", "6pm", "6pm", "6pm", null],
+        "location": {
+            "plusCode": "XR22+FF",
+            "lat": 39.9511621,
+            "lng": -75.1988082
+        },
+        "tags": ["gyro", "halal"],
+        "menu": [
+            {
+                "name": "Chicken over Rice",
+                "price": 6
+            },
+            {
+                "name": "Lamb over Rice",
+                "price": 6
+            },
+            {
+                "name": "Combo Platter",
+                "price": 6
+            },
+            {
+                "name": "Falafel over Rice",
+                "price": 6
+            },
+            {
+                "name": "Fish over Rice",
+                "price": 6
+            },
+            {
+                "name": "Shrimp over Rice",
+                "price": 6
+            },
+            {
+                "name": "Kabab over Rice",
+                "price": 6
+            },
+            {
+                "name": "Chicken Salad",
+                "price": 6
+            },
+            {
+                "name": "Lamb Salad",
+                "price": 6
+            },
+            {
+                "name": "Combo Salad",
+                "price": 6
+            },
+            {
+                "name": "Shrimp Salad",
+                "price": 6
+            },
+            {
+                "name": "Fish Salad",
+                "price": 6
+            },
+            {
+                "name": "Kabab Salad",
+                "price": 6
+            },
+            {
+                "name": "Falafel Salad",
+                "price": 6
+            },
+            {
+                "name": "Chicken Gyro",
+                "price": 5
+            },
+            {
+                "name": "Lamb Gyro",
+                "price": 5
+            },
+            {
+                "name": "Combo Gyro",
+                "price": 5
+            },
+            {
+                "name": "Falafel Gyro",
+                "price": 5
+            },
+            {
+                "name": "Fish Gyro",
+                "price": 5
+            },
+            {
+                "name": "Shrimp Gyro",
+                "price": 5
+            },
+            {
+                "name": "Kabab Gyro",
+                "price": 5
+            }
+        ]
+    },
+    {
+        "name": "Bui's Lunch Truck",
+        "location": {
+            "plusCode": "XR22+J7",
+            "lat": 39.951704,
+            "lng": -75.199282
+        },
+        "tags": ["sandwich"],
+        "link": "https://www.facebook.com/BuisLunchTruck/"
+    },
+    {
+        "name": "George's Food Truck",
+        "start": ["7am", "7am", "7am", "7am", "7am", "10am", null],
+        "end": ["5:30pm", "5:30pm", "5:30pm", "5:30pm", "5:30pm", "7pm", null],
+        "location": {
+            "plusCode": "XR33+H2",
+            "lat": 39.9541962,
+            "lng": -75.1974906
+        },
+        "tags": ["sandwich", "hoagies", "coffee"],
+        "priceTypes": {
+            "Breakfast": ["Kaiser", "Long"]
+        },
+        "menu": {
+            "Breakfast": [
+                {
+                    "name": "Egg on Roll",
+                    "price": [2.15, 2.50]
+                },
+                {
+                    "name": "Egg and Cheese",
+                    "price": [2.25, 2.75]
+                },
+                {
+                    "name": "Egg Whites and Cheese",
+                    "price": [2.75, 3.25]
+                },
+                {
+                    "name": "Bacon and Egg White Cheese",
+                    "price": [3.50, 3.95]
+                },
+                {
+                    "name": "Bacon Egg and Cheese",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Sausage and Egg",
+                    "price": [2.90, 3.25]
+                },
+                {
+                    "name": "Sausage Egg and Cheese",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Scrapple Egg and Cheese",
+                    "price": [3.25, 3.75]
+                },
+                {
+                    "name": "Pork Roll Egg and Cheese",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Pork Roll and Cheese",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Ham and Egg White Cheese",
+                    "price": [3.50, 3.95]
+                },
+                {
+                    "name": "Ham Egg and Cheese",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Turkey Bacon Egg and Cheese",
+                    "price": [3.25, 3.75]
+                },
+                {
+                    "name": "Vegetable Omelet",
+                    "price": [2.95, 3.50]
+                },
+                {
+                    "name": "Western Omelet",
+                    "price": [3.25, 3.75]
+                },
+                {
+                    "name": "Hot Sausage Egg and Cheese",
+                    "price": [3.50, 3.95]
+                },
+                {
+                    "name": "3 Eggs with Cheese and Spinach",
+                    "price": 3.50
+                },
+                {
+                    "name": "Bagel with Cream Cheese",
+                    "price": 1.65
+                },
+                {
+                    "name": "Hashbrown",
+                    "price": 1.00
+                },
+                {
+                    "name": "2 or more Hashbrown",
+                    "price": 0.75
+                },
+                {
+                    "name": "Muffin Toasted with Butter",
+                    "price": 1.50
+                }
+            ],
+            "Grilled Sandwiches": [
+                {
+                    "name": "Grilled Cheese",
+                    "price": 2.50
+                },
+                {
+                    "name": "Grilled Cheese and Tomatoes",
+                    "price": 2.75
+                },
+                {
+                    "name": "Grilled Ham and Cheese",
+                    "price": 3.75
+                },
+                {
+                    "name": "Grilled Turkey and Cheese",
+                    "price": 3.75
+                },
+                {
+                    "name": "Grilled Corned Beef and Cheese",
+                    "price": 3.75
+                },
+                {
+                    "name": "Grilled Roast Beef and Cheese",
+                    "price": 3.75
+                },
+                {
+                    "name": "Grilled Bacon and Cheese",
+                    "price": 3.75
+                }
+            ],
+            "Sandwiches": [
+                {
+                    "name": "Bacon Lettuce and Tomato (B.L.T)",
+                    "price": 3.25
+                },
+                {
+                    "name": "Tuna Salad",
+                    "price": 3.50
+                },
+                {
+                    "name": "Chicken Salad",
+                    "price": 3.75
+                },
+                {
+                    "name": "Egg Salad",
+                    "price": 3.00
+                },
+                {
+                    "name": "Egg Salad B.L.T",
+                    "price": 3.75
+                },
+                {
+                    "name": "American Cheese",
+                    "price": 3.00
+                },
+                {
+                    "name": "Ham and Cheese",
+                    "price": 3.50
+                },
+                {
+                    "name": "Roast Beef",
+                    "price": 3.50
+                },
+                {
+                    "name": "Turkey Bacon B.L.T",
+                    "price": 3.75
+                },
+                {
+                    "name": "Corn Beef",
+                    "price": 3.50
+                },
+                {
+                    "name": "Turkey",
+                    "price": 3.50
+                },
+                {
+                    "name": "Corn Beef Special with Russian Dressing & Coleslaw",
+                    "price": 3.75
+                },
+                {
+                    "name": "Crispy Chicken",
+                    "price": 3.50
+                },
+                {
+                    "name": "Grilled Chicken",
+                    "price": 3.75
+                },
+                {
+                    "name": "Tuna Melt (with Cheese Tomatoes)",
+                    "price": 3.75
+                }
+            ],
+            "Double Decker Sandwiches": [
+                {
+                    "name": "Turkey & Bacon",
+                    "price": 4.50
+                },
+                {
+                    "name": "Roast Beef and Swiss Cheese",
+                    "price": 4.50
+                }
+            ]
+        }
+    },
+    {
         "name": "Yue Kee",
         "address": "238 South 38th Street, Philadelphia, PA 19104"
+    },
+    {
+        "name": "Halal Gyro Express",
+        "hours": "10:30am - 6pm except for weekend"
+    },
+    {
+        "name": "Kim's Oriental Food",
+    },
+    {
+        "name": "Halal Guys",
+        "hours": "9-5 Monday to Saturday"
     }
 ]
