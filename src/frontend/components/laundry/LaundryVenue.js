@@ -145,7 +145,6 @@ class LaundryVenue extends Component {
                 machineType="washer"
                 allMachines={machines}
                 laundryHallId={hallURLId}
-                hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
                 enableReminder={enableReminder}
@@ -162,7 +161,6 @@ class LaundryVenue extends Component {
                 machineType="dryer"
                 allMachines={machines}
                 laundryHallId={hallURLId}
-                hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
                 enableReminder={enableReminder}
@@ -255,8 +253,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(removeFavorite(hallURLId)),
   dispatchGetLaundryHall: (hallId, intervalID) =>
     dispatch(getLaundryHall(hallId, intervalID)),
-  dispatchAddReminder: (machineID, hallID, hallName) =>
-    dispatch(addReminder(machineID, hallID, hallName)),
+  dispatchAddReminder: (machineID, hallID, machineType, timeRemaining) =>
+    dispatch(addReminder(machineID, hallID, machineType, timeRemaining)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
   dispatchGetReminders: () => dispatch(getReminders()),
 })

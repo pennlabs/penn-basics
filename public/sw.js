@@ -1,13 +1,12 @@
 /* global self, indexedDB */
 self.addEventListener('push', e => {
   const payload = e.data.json()
-  const { machineID, hallID, reminderID, type } = payload
+  const { machineID, hallID, reminderID, machineType: type } = payload
   const iconDir = type === 'washer' ? 'washer-done' : 'dryer-done'
   self.registration.showNotification('Penn Basics', {
     body: `Your ${type}’s done!`,
     icon: `/img/${iconDir}.png`,
     requireInteraction: true,
-    // icon: '../../../public/android-chrome-256x256.png'
   })
   const request = indexedDB.open('LocalDB', 1)
 
