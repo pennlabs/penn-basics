@@ -8,7 +8,8 @@ import { logEvent } from '../../analytics/index'
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
 const Weather = () => {
-  const [isFahrenheit, setIsFahrenheit] = useState(true)
+  // TODO: change Fahreheit to be default
+  const [isFahrenheit, setIsFahrenheit] = useState(false)
   useEffect(() => {
     const tag = document.createElement('script')
     tag.setAttribute('src', 'https://weatherwidget.io/js/widget.min.js')
@@ -22,13 +23,13 @@ const Weather = () => {
       <Toggle
         filter={isFahrenheit}
         dispatchFilterAction={toggleIsFahrenheit}
-        filterOffText="°C"
-        filterOnText="°F"
+        filterOffText="°F"
+        filterOnText="°C"
       />
       <Title>Weather in Philly</Title>
       <a
         className="weatherwidget-io"
-        href={isFahrenheit ? `${TEMP_BASE}?unit=us` : TEMP_BASE}
+        href={isFahrenheit ? TEMP_BASE : `${TEMP_BASE}?unit=us`}
         data-label_1="Philadelphia"
         data-label_2={moment().format('dddd[,] MMMM Do')}
         data-days="3"

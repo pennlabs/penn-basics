@@ -34,6 +34,8 @@ module.exports = function laundryRouter() {
       return
     }
 
+    // console.log("---Notification entered to backend---")
+
     // set a timeout that equals to the timeRemaining
     setTimeout(async () => {
       try {
@@ -43,6 +45,7 @@ module.exports = function laundryRouter() {
           JSON.stringify({ machineID, hallID, reminderID, machineType }) // payload received by the service worker
         )
         // respond to frontend until the instruction is received by the service worker
+        // console.log("---Notification sent from backend---")
         res.status(200).json({})
       } catch (err) {
         res.status(200).json({ error: err.message })

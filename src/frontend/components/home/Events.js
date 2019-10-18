@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import uuid from 'uuid'
 import moment from 'moment'
-import { BorderedCard, Title, Subtext } from '../shared'
+import { BorderedCard, Title, Subtext, NoDataHome } from '../shared'
 import { logEvent } from '../../analytics/index'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
@@ -10,7 +10,7 @@ const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 const getSubtext = ({ length }) => {
   switch (length) {
     case 0:
-      return 'No Events happening in next two weeks'
+      return null
     case 1:
       return '1 Event happening in next two weeks'
     default:
@@ -45,6 +45,15 @@ const Events = () => {
       </Title>
 
       <Subtext>{getSubtext({ length: calendarArray.length })}</Subtext>
+
+      {calendarArray.length === 0 && (
+        <NoDataHome
+          image="/img/empty-calendar-v2.svg"
+          imageAlt="Empty Events"
+          text="No events happening in next two weeks"
+        />
+      )}
+
       {calendarArray.map(event => {
         const { start, name } = event
         const startDate = moment(start).format('dddd[,] MMMM Do')
