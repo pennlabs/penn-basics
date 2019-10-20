@@ -1,5 +1,7 @@
 const router = require('express').Router()
 
+require('dotenv').config()
+
 module.exports = function spacesRouter(DB) {
   router.get('/all', (req, res) => {
     DB.findAllSpaces().then(spaces => {
