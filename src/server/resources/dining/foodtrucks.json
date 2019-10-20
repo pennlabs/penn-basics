@@ -118,7 +118,8 @@
         },
         "tags": ["sandwich", "hoagies", "coffee"],
         "priceTypes": {
-            "Breakfast": ["Kaiser", "Long"]
+            "Breakfast": ["Kaiser", "Long"],
+            "Drinks": ["SM", "LG"]
         },
         "menu": {
             "Breakfast": [
@@ -307,6 +308,150 @@
                 {
                     "name": "Roast Beef and Swiss Cheese",
                     "price": 4.50
+                },
+                {
+                    "name": "Corned Beef and Bacon",
+                    "price": 4.50
+                },
+                {
+                    "name": "Ham and Cheese",
+                    "price": 4.50
+                },
+                {
+                    "name": "Tuna with Boiled Egg",
+                    "price": 4.75
+                },
+                {
+                    "name": "Chicken Salad Bacon",
+                    "price": 4.95
+                }
+            ],
+            "Hoagies": [
+                {
+                    "name": "American Cheese",
+                    "price": 4.00
+                },
+                {
+                    "name": "Swiss or Provolone Cheese",
+                    "price": 4.00
+                },
+                {
+                    "name": "Corned Beef",
+                    "price": 4.50
+                },
+                {
+                    "name": "Roast Beef",
+                    "price": 4.50
+                },
+                {   
+                    "name": "Chicken Salad",
+                    "price": 4.75
+                },
+                {
+                    "name": "Egg Salad B.L.T.",
+                    "price": 4.50
+                },
+                {
+                    "name": "Tuna Salad",
+                    "price": 4.50
+                },
+                {
+                    "name": "Egg Salad",
+                    "price": 4.00
+                },
+                {
+                    "name": "Italian Hoagie (with Pepperoni Salami, Ham and Cheese)",
+                    "price": 4.75
+                },
+                {
+                    "name": "Turkey with Cheese",
+                    "price": 4.50
+                },
+                {
+                    "name": "Vegetable and Cheese",
+                    "price": 3.75
+                },
+                {
+                    "name": "Ham and Cheese Hoagie",
+                    "price": 4.50
+                }
+            ],
+            "Steaks": [
+                {
+                    "name": "Plain Steak",
+                    "price": 4.75
+                },
+                {
+                    "name": "Cheese Steak",
+                    "price": 5.00
+                },
+                {
+                    "name": "Chicken Cheese Steak",
+                    "price": 4.75
+                },
+                {
+                    "name": "Mushroom Cheese Steak",
+                    "price": 5.50
+                },
+                {
+                    "name": "Cheese Steak Hoagies",
+                    "price": 5.50
+                }
+            ],
+            "Quarter Pound Burgers": [
+                {
+                    "name": "Hamburger",
+                    "price": 2.90
+                },
+                {
+                    "name": "Cheeseburger",
+                    "price": 3.00
+                },
+                {
+                    "name": "Bacon Cheeseburger",
+                    "price": 3.50
+                },
+                {
+                    "name": "Double Hamburger",
+                    "price": 3.95
+                },
+                {
+                    "name": "Double Cheeseburger",
+                    "price": 4.25
+                },
+                {
+                    "name": "Double Bacon Cheeseburger",
+                    "price": 4.75
+                },
+                {
+                    "name": "1 Grilled Hot Dog",
+                    "price": 1.25
+                },
+                {
+                    "name": "2 Grilled Hot Dogs",
+                    "price": 2.25
+                },
+                {
+                    "name": "Hot Sausage (Beef)",
+                    "price": 2.50
+                },
+                {
+                    "name": "Hot Sausage with Cheese",
+                    "price": 2.75
+                }
+            ],
+            "Drinks": [
+                {
+                    "name": "Hot Coffee",
+                    "price": [0.75, 1.25]
+                },
+                {
+                    "name": "Hot Tea",
+                    "price": [0.75, 1.25]
+                },
+                {
+                    "name": "Hot Chocolate",
+                    "price": [0.75, 1.25]
                 }
             ]
         }
