@@ -458,7 +458,111 @@
     },
     {
         "name": "Yue Kee",
-        "address": "238 South 38th Street, Philadelphia, PA 19104"
+        "location": {
+            "address": "238 South 38th Street, Philadelphia, PA 19104"
+        },
+        "tags": ["Cantonese"],
+        "priceTypes": {
+            "Soup & Appetizers": ["Pt", "Qt"],
+            "Fried Rice": ["Pt", "Qt"],
+            "Noodles": ["Pt", "Qt"],
+            "Side Orders":["Pt", "Qt"]
+        },
+        "menu": {
+            "Soup & Appetizers": [
+                {
+                    "name": "Wonton Soup",
+                    "price": [1.25, 2.25]
+                },
+                {
+                    "name": "Hot & Sour Soup",
+                    "price": [1.25, 2.25]
+                },
+                {
+                    "name": "Chicken Vegetable Soup",
+                    "price": [1.75, 3.00]
+                },
+                {
+                    "name": "House Special Wonton",
+                    "price": 4.50
+                },
+                {
+                    "name": "Fried Wonton (5)",
+                    "price": 1.25
+                },
+                {
+                    "name": "Shrimp Egg Roll (1)",
+                    "price": 1.25
+                },
+                {
+                    "name": "Steamed Pork Dumplings (6)",
+                    "price": 3.25
+                },
+                {
+                    "name": "Pan Fried Pork Dumplings (6)",
+                    "price": 3.75
+                }
+            ],
+            "Fried Rice": [
+                {
+                    "name": "Vegetable, Chicken, Pork, Beef, or Shrimp Lo Mein",
+                    "price": [4.00, 7.00]
+                },
+                {
+                    "name": "Subgum Lo Mein",
+                    "price": [5.25, 8.00]
+                },
+                {
+                    "name": "Beijing Hot Noodle",
+                    "price": [3.00, 4.25]
+                },
+                {
+                    "name": "Chicken, Pork, Beef or Shrimp Yat Mein",
+                    "price": 3.00
+                },
+                {
+                    "name": "Chicken, Pork, Beef or Shrimp Singapore Noodles",
+                    "price": 4.25
+                }
+            ],
+            "Side Orders": [
+                {
+                    "name": "White Rice",
+                    "price": [1.00, 2.00]
+                },
+                {
+                    "name": "Plain Fried Rice",
+                    "price": [1.00, 2.00]
+                },
+                {
+                    "name": "Fried Egg",
+                    "price": 0.50
+                },
+                {
+                    "name": "Add Vegetable",
+                    "price": 1.00
+                },
+                {
+                    "name": "Add Meat",
+                    "price": 2.00
+                },
+                {
+                    "name": "Noodle instead of Rice",
+                    "price": 1.00
+                }
+            ],
+            "Beverages": [
+                {
+                    "name": "Can Soda",
+                    "price": 0.75
+                },
+                {
+                    "name": "Juice",
+                    "price": 1.50
+                }
+            ],
+            "Entrees": 
+        }
     },
     {
         "name": "Halal Gyro Express",
