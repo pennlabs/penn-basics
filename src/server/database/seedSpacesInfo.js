@@ -8,8 +8,7 @@ if (!MONGO_URI) {
   process.exit(1)
 }
 
-const GOOGLE_KEY =
-  process.env.Google_MAPS_API_PROD_KEY || process.env.GOOGLE_MAPS_API_DEV_KEY
+const GOOGLE_KEY = process.env.GOOGLE_MAPS_API_KEY
 const GOOGLE_URL =
   'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
 
