@@ -59,7 +59,10 @@ function loadSpacesIntoDB() {
     spaces.map(
       space => new Space(space).save().then(console.log) // eslint-disable-line
     )
-  )
+  ).then(() => {
+    console.log("----seeding completed----") // eslint-disable-line
+    process.exit(0)
+  })
 }
 
 updateSpaces()
