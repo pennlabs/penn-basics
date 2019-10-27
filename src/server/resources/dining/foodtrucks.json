@@ -2,100 +2,102 @@
     {
         "name": "Ahmad Gyro King",
         "payments": ["Cash", "Square", "Visa", "MasterCard", "American Express", "Discover"],
-        "start": ["8:30am", "8:30am", "8:30am", "8:30am", "8:30am", "8:30am", null],
-        "end": ["6pm", "6pm", "6pm", "6pm", "6pm", "6pm", null],
+        "start": ["8:30", "8:30", "8:30", "8:30", "8:30", "8:30", null],
+        "end": ["18:00", "18:00", "18:00", "18:00", "18:00", "18:00", null],
         "location": {
             "plusCode": "XR22+FF",
             "lat": 39.9511621,
             "lng": -75.1988082
         },
         "tags": ["gyro", "halal"],
-        "menu": [
-            {
-                "name": "Chicken over Rice",
-                "price": 6
-            },
-            {
-                "name": "Lamb over Rice",
-                "price": 6
-            },
-            {
-                "name": "Combo Platter",
-                "price": 6
-            },
-            {
-                "name": "Falafel over Rice",
-                "price": 6
-            },
-            {
-                "name": "Fish over Rice",
-                "price": 6
-            },
-            {
-                "name": "Shrimp over Rice",
-                "price": 6
-            },
-            {
-                "name": "Kabab over Rice",
-                "price": 6
-            },
-            {
-                "name": "Chicken Salad",
-                "price": 6
-            },
-            {
-                "name": "Lamb Salad",
-                "price": 6
-            },
-            {
-                "name": "Combo Salad",
-                "price": 6
-            },
-            {
-                "name": "Shrimp Salad",
-                "price": 6
-            },
-            {
-                "name": "Fish Salad",
-                "price": 6
-            },
-            {
-                "name": "Kabab Salad",
-                "price": 6
-            },
-            {
-                "name": "Falafel Salad",
-                "price": 6
-            },
-            {
-                "name": "Chicken Gyro",
-                "price": 5
-            },
-            {
-                "name": "Lamb Gyro",
-                "price": 5
-            },
-            {
-                "name": "Combo Gyro",
-                "price": 5
-            },
-            {
-                "name": "Falafel Gyro",
-                "price": 5
-            },
-            {
-                "name": "Fish Gyro",
-                "price": 5
-            },
-            {
-                "name": "Shrimp Gyro",
-                "price": 5
-            },
-            {
-                "name": "Kabab Gyro",
-                "price": 5
-            }
-        ]
+        "menu": {
+            "All": [
+                {
+                    "name": "Chicken over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Lamb over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Combo Platter",
+                    "price": 6
+                },
+                {
+                    "name": "Falafel over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Fish over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Shrimp over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Kabab over Rice",
+                    "price": 6
+                },
+                {
+                    "name": "Chicken Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Lamb Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Combo Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Shrimp Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Fish Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Kabab Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Falafel Salad",
+                    "price": 6
+                },
+                {
+                    "name": "Chicken Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Lamb Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Combo Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Falafel Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Fish Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Shrimp Gyro",
+                    "price": 5
+                },
+                {
+                    "name": "Kabab Gyro",
+                    "price": 5
+                }
+            ]
+        }
     },
     {
         "name": "Bui's Lunch Truck",
@@ -109,8 +111,8 @@
     },
     {
         "name": "George's Food Truck",
-        "start": ["7am", "7am", "7am", "7am", "7am", "10am", null],
-        "end": ["5:30pm", "5:30pm", "5:30pm", "5:30pm", "5:30pm", "7pm", null],
+        "start": ["7:00", "7:00", "7:00", "7:00", "7:00", "10:00", null],
+        "end": ["17:30", "5:30", "5:30", "5:30", "5:30", "19:00", null],
         "location": {
             "plusCode": "XR33+H2",
             "lat": 39.9541962,
@@ -462,6 +464,7 @@
             "address": "238 South 38th Street, Philadelphia, PA 19104"
         },
         "tags": ["Cantonese"],
+        "payments": ["Cash"],
         "priceTypes": {
             "Soup & Appetizers": ["Pt", "Qt"],
             "Fried Rice": ["Pt", "Qt"],
@@ -561,12 +564,216 @@
                     "price": 1.50
                 }
             ],
-            "Entrees": 
+            "Entrees": [
+                {
+                    "name": "Pork, Vegetable, Chicken, Shrimp, or Beef Egg Foo Youg",
+                    "price": 4.25
+                },
+                {
+                    "name": "Mixed Vegetables with Beef, Chicken, Pork, or Shrimp",
+                    "price": 4.25
+                },
+                {
+                    "name": "Beef, Pork, Shrimp, or Chicken Chow Mein",
+                    "price": 4.25
+                },
+                {
+                    "name": "Tofu & Mushrooms with Beef, Pork, Chicken, or Shrimp",
+                    "price": 4.25
+                },
+                {
+                    "name": "Bean Sprouts with Beef, Pork, Shrimp, or Chicken",
+                    "price": 4.00
+                },
+                {
+                    "name": "Mushrooms with Beef, Pork, or Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Chinese Vegatables with Beef, Pork, Chicken, or Shrimp",
+                    "price": 4.25
+                },
+                {
+                    "name": "Broccoli with Beef, Pork, Shrimp, or Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Snow Peas with Beef, Pork, Shrimp, or Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Eggplant in Black Bean Sauce with Beef, Pork, Shrimp, or Chicken",
+                    "price": 5.00
+                },
+                {
+                    "name": "Beef with Oyster Sauce",
+                    "price": 4.75
+                },
+                {
+                    "name": "Tomato Beef",
+                    "price": 4.25
+                },
+                {
+                    "name": "Ginger Beef or Chicken",
+                    "price": 4.50
+                },
+                {
+                    "name": "String Beans with Beef or Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Beef, Chicken, or Shrimp in Black Bean Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Beef, Shrimp, or Chicken in Szechuan Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Hunan Beef, Shrimp, or Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Beef with Mushroom and Bamboo Shoots",
+                    "price": 4.25
+                },
+                {
+                    "name": "Beef or Chicken in Curry Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Pepper Steak",
+                    "price": 4.25
+                },
+                {
+                    "name": "Shrimp or Chicken with Peanuts",
+                    "price": 4.25
+                },
+                {
+                    "name": "Shrimp with Lobster Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Chicken with Cashews",
+                    "price": 4.25
+                },
+                {
+                    "name": "Chicken in Garlic Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Chicken with Chili Bean Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Tai Chin Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Moo Goo Gai Pan",
+                    "price": 4.25
+                },
+                {
+                    "name": "Sweet and Sour Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Mixed Vegetables",
+                    "price": 3.75
+                },
+                {
+                    "name": "Szechuan Tofu",
+                    "price": 3.75
+                },
+                {
+                    "name": "Broccoli with Garlic Sauce",
+                    "price": 3.75
+                },
+                {
+                    "name": "Vegetarian General Tso's Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Eggplant in Garlic Sauce",
+                    "price": 4.25
+                }
+            ],
+            "Daily Specials": [
+                {
+                    "name": "B.B.Q. Spare Ribs",
+                    "price": 4.25
+                },
+                {
+                    "name": "Grandfather Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Crispy Spare Rib Tips",
+                    "price": 4.25
+                },
+                {
+                    "name": "Spare Rib Tips in Black Bean Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Orange Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Sesame Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "General Tso's Chicken",
+                    "price": 4.25
+                },
+                {
+                    "name": "Fried Fish in Garlic Sauce",
+                    "price": 4.25
+                },
+                {
+                    "name": "Sam Kip Dai",
+                    "price": 5.50
+                },
+                {
+                    "name": "Spicy Triple Delight",
+                    "price": 5.50
+                },
+                {
+                    "name": "Beef Belly",
+                    "price": 5.00
+                },
+                {
+                    "name": "Beef Chow Fun",
+                    "price": 4.25
+                },
+                {
+                    "name": "Ma Paul Tofu",
+                    "price": 3.75
+                },
+                {
+                    "name": "Pork Belly",
+                    "price": 4.25
+                },
+                {
+                    "name": "Moo Goo Zui Pan",
+                    "price": 4.25
+                },
+                {
+                    "name": "Braised Tofu with Pork",
+                    "price": 4.25
+                },
+                {
+                    "name": "Potato Beef",
+                    "price": 4.25
+                }
+            ]
         }
     },
     {
         "name": "Halal Gyro Express",
-        "hours": "10:30am - 6pm except for weekend"
+        "start": ["10:30", "10:30", "10:30", "10:30", "10:30", null, null],
+        "end": ["18:00", "18:00", "18:00", "18:00", "18:00", null, null],
     },
     {
         "name": "Kim's Oriental Food"
