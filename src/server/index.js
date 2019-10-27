@@ -8,6 +8,7 @@ const spacesRouter = require('./routes/spaces')
 const diningRouter = require('./routes/dining')
 const newsRouter = require('./routes/news')
 const laundryRouter = require('./routes/laundry')
+const foodtrucksRouter = require('./routes/foodtrucks')
 
 const DB = require('./database/db')
 
@@ -28,6 +29,7 @@ app.use('/api/getPublicVapidKey', (_, res) => {
   res.status(200).json({ publicKey })
 })
 app.use('/api/spaces', spacesRouter(DB))
+app.use('/api/foodtrucks', foodtrucksRouter(DB))
 app.use('/api/dining', diningRouter(DB))
 app.use('/api/laundry', laundryRouter())
 app.use('/api/news', newsRouter())

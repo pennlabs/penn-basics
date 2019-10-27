@@ -38,6 +38,7 @@ const LinksDiv = s.div`
 const Links = ({ active, zIndex }) => (
   <LinksDiv active={active} zIndex={zIndex}>
     <Link to="/dining">Dining</Link>
+    <Link to="/foodtrucks">Foodtrucks</Link>
     <Link to="/laundry">Laundry</Link>
     <Link to="/studyspaces">Studyspaces</Link>
   </LinksDiv>
