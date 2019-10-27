@@ -2,6 +2,13 @@ require('./mongoose-connect')
 
 const Space = require('./models/Space')
 const Event = require('./models/Event')
+const Foodtrucks = require('./models/FoodTruck')
+
+const findAllFoodtrucks = () => {
+  return Foodtrucks.find()
+}
+
+const 
 
 function findAllSpaces() {
   return Space.find()
