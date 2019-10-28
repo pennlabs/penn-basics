@@ -1,4 +1,4 @@
-const trucks = require('../resources/dining/foodtrucks.json')
+const trucks = require('../resources/foodtrucks/foodtrucks.json')
 const FoodTruck = require('./models/FoodTruck')
 
 const { MONGO_URI } = process.env
@@ -74,6 +74,16 @@ function loadFoodTrucksIntoDB(truckArray) {
 }
 
 /*
-initial test of food truck code
+// initial test of food truck code
 console.log(new FoodTruck(updateFoodTrucks()[0]))
+*/
+
+/*
+// initial try at the insertion pipeline
+deleteFoodTrucksInDB()
+  .then(() => {
+    const trucksToInsert = updateFoodTrucks()
+    return loadFoodTrucksIntoDB(trucksToInsert)
+  })
+  .catch(err => console.error(err)) // eslint-disable-line
 */
