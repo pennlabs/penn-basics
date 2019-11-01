@@ -12,7 +12,7 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map(truck => {
+  return trucks.map((truck, truckIndex) => {
     const { name, payments, start, end, location, tags, link } = truck
 
     const { priceTypes } = truck
@@ -56,6 +56,7 @@ function updateFoodTrucks() {
       tags,
       link,
       menu: newMenu,
+      foodTruckID: truckIndex,
     }
 
     return newTruck

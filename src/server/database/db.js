@@ -45,6 +45,15 @@ function getSpace(spaceId) {
 }
 
 /**
+ * @param {Number} truckId
+ */
+function getFoodTruck(truckId) {
+  return Foodtrucks.findOne({
+    foodTruckID: { $in: [truckId] },
+  })
+}
+
+/**
  * @param {object} space
  */
 function insertSpace(space) {
@@ -68,6 +77,7 @@ function getEvents(date) {
 module.exports = {
   filterSpaces,
   getSpace,
+  getFoodTruck,
   insertSpace,
   findAllSpaces,
   findAllFoodtrucks,
