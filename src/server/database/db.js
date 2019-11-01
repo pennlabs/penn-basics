@@ -4,11 +4,9 @@ const Space = require('./models/Space')
 const Event = require('./models/Event')
 const Foodtrucks = require('./models/FoodTruck')
 
-const findAllFoodtrucks = () => {
+function findAllFoodtrucks() {
   return Foodtrucks.find()
 }
-
-const 
 
 function findAllSpaces() {
   return Space.find()
@@ -72,5 +70,6 @@ module.exports = {
   getSpace,
   insertSpace,
   findAllSpaces,
+  findAllFoodtrucks,
   getEvents,
 }

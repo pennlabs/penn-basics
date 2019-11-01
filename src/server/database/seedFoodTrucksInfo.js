@@ -29,14 +29,14 @@ function updateFoodTrucks() {
         if (typeof price === 'number') {
           price = [price]
         } else {
-          price = { ...price }
+          price = [...price]
         }
 
         const newItem = {
           name: item.name,
           /* options, if it exists, is the list of options corresponding to the number of prices available for the item */
           options: options ? options.slice(0, price.length) : options,
-          price,
+          prices: price,
         }
         return newItem
       })
@@ -78,7 +78,6 @@ function loadFoodTrucksIntoDB(truckArray) {
 console.log(new FoodTruck(updateFoodTrucks()[0]))
 */
 
-/*
 // initial try at the insertion pipeline
 deleteFoodTrucksInDB()
   .then(() => {
@@ -86,4 +85,3 @@ deleteFoodTrucksInDB()
     return loadFoodTrucksIntoDB(trucksToInsert)
   })
   .catch(err => console.error(err)) // eslint-disable-line
-*/
