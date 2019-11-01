@@ -43,7 +43,7 @@ function updateFoodTrucks() {
 
       return {
         name: smName,
-        items: items,
+        items,
       }
     })
 
