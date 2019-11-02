@@ -1,4 +1,4 @@
-const trucks = require('../resources/dining/foodtrucks.json')
+const trucks = require('../resources/foodtrucks/foodtrucks.json')
 const FoodTruck = require('./models/FoodTruck')
 
 const { MONGO_URI } = process.env
@@ -12,7 +12,7 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map(truck => {
+  return trucks.map((truck, truckIndex) => {
     const { name, payments, start, end, location, tags, link } = truck
 
     const { priceTypes } = truck
@@ -29,21 +29,21 @@ function updateFoodTrucks() {
         if (typeof price === 'number') {
           price = [price]
         } else {
-          price = { ...price }
+          price = [...price]
         }
 
         const newItem = {
           name: item.name,
           /* options, if it exists, is the list of options corresponding to the number of prices available for the item */
           options: options ? options.slice(0, price.length) : options,
-          price,
+          prices: price,
         }
         return newItem
       })
 
       return {
         name: smName,
-        items: items,
+        items,
       }
     })
 
@@ -56,6 +56,7 @@ function updateFoodTrucks() {
       tags,
       link,
       menu: newMenu,
+      foodTruckID: truckIndex,
     }
 
     return newTruck
@@ -74,6 +75,14 @@ function loadFoodTrucksIntoDB(truckArray) {
 }
 
 /*
-initial test of food truck code
+// initial test of food truck code
 console.log(new FoodTruck(updateFoodTrucks()[0]))
 */
+
+// initial try at the insertion pipeline
+deleteFoodTrucksInDB()
+  .then(() => {
+    const trucksToInsert = updateFoodTrucks()
+    return loadFoodTrucksIntoDB(trucksToInsert)
+  })
+  .catch(err => console.error(err)) // eslint-disable-line

@@ -4,7 +4,7 @@ const Space = require('./models/Space')
 const Event = require('./models/Event')
 const Foodtrucks = require('./models/FoodTruck')
 
-const findAllFoodtrucks = () => {
+function findAllFoodtrucks() {
   return Foodtrucks.find()
 }
 
@@ -49,6 +49,15 @@ function getSpace(spaceId) {
 }
 
 /**
+ * @param {Number} truckId
+ */
+function getFoodTruck(truckId) {
+  return Foodtrucks.findOne({
+    foodTruckID: { $in: [truckId] },
+  })
+}
+
+/**
  * @param {object} space
  */
 function insertSpace(space) {
@@ -58,7 +67,9 @@ function insertSpace(space) {
 module.exports = {
   filterSpaces,
   getSpace,
+  getFoodTruck,
   insertSpace,
   findAllSpaces,
+  findAllFoodtrucks,
   getEvents,
 }

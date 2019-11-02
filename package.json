@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack -p && node src/server/index.js",
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
+    "seedFoodTrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "webpack-prod": "webpack -p",
