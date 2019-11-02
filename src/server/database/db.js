@@ -8,7 +8,9 @@ const findAllFoodtrucks = () => {
   return Foodtrucks.find()
 }
 
-const 
+const filterFoodtrucks = () => {
+  
+}
 
 function findAllSpaces() {
   return Space.find()
@@ -51,20 +53,6 @@ function getSpace(spaceId) {
  */
 function insertSpace(space) {
   return new Space(space).save()
-}
-
-/**
- * @param {Date} date
- */
-function getEvents(date) {
-  return Event.find({
-    start: {
-      $lte: date,
-    },
-    end: {
-      $gte: date,
-    },
-  })
 }
 
 module.exports = {
