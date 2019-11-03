@@ -33,7 +33,7 @@ class FoodtruckCard extends Component {
     const {
       hoveredFoodtruck,
       foodtruckId,
-      dispatchSetHoveredFoodtruck
+      dispatchSetHoveredFoodtruck,
     } = this.props
 
     // If there is no change to be made

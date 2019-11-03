@@ -1,22 +1,22 @@
 [
-    {
-      "websiteURL": "https://pennlabs.org/",
-      "description": "Penn Labs"
-    },
-    {
-      "websiteURL": "https://www.upenn.edu/",
-      "description": "Penn Homepage"
-    },
-    {
-      "websiteURL": "https://prod.campusexpress.upenn.edu/",
-      "description": "CampusExpress"
-    },
-    {
-      "websiteURL": "https://canvas.upenn.edu",
-      "description": "Canvas"
-    },
-    {
-      "websiteURL": "https://pennintouch.apps.upenn.edu/pennInTouch/jsp/fast2.do",
-      "description": "PennInTouch"
-    }
-  ]
+  {
+    "websiteURL": "https://pennlabs.org/",
+    "description": "Penn Labs"
+  },
+  {
+    "websiteURL": "https://www.upenn.edu/",
+    "description": "Penn Homepage"
+  },
+  {
+    "websiteURL": "https://prod.campusexpress.upenn.edu/",
+    "description": "CampusExpress"
+  },
+  {
+    "websiteURL": "https://canvas.upenn.edu",
+    "description": "Canvas"
+  },
+  {
+    "websiteURL": "https://pennintouch.apps.upenn.edu/pennInTouch/jsp/fast2.do",
+    "description": "PennInTouch"
+  }
+]

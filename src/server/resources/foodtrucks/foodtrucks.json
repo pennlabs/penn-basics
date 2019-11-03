@@ -1,1133 +1,1140 @@
 [
-    {
-        "name": "Ahmad Gyro King",
-        "payments": ["Cash", "Square", "Visa", "MasterCard", "American Express", "Discover"],
-        "start": ["8:30", "8:30", "8:30", "8:30", "8:30", "8:30", null],
-        "end": ["18:00", "18:00", "18:00", "18:00", "18:00", "18:00", null],
-        "location": {
-            "plusCode": "XR22+FF",
-            "lat": 39.9511621,
-            "lng": -75.1988082
-        },
-        "tags": ["gyro", "halal"],
-        "menu": {
-            "All": [
-                {
-                    "name": "Chicken over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Lamb over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Combo Platter",
-                    "price": 6
-                },
-                {
-                    "name": "Falafel over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Fish over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Shrimp over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Kabab over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Lamb Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Combo Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Shrimp Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Fish Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Kabab Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Falafel Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Lamb Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Combo Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Falafel Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Fish Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Shrimp Gyro",
-                    "price": 5
-                },
-                {
-                    "name": "Kabab Gyro",
-                    "price": 5
-                }
-            ]
-        }
+  {
+    "name": "Ahmad Gyro King",
+    "payments": [
+      "Cash",
+      "Square",
+      "Visa",
+      "MasterCard",
+      "American Express",
+      "Discover"
+    ],
+    "start": ["8:30", "8:30", "8:30", "8:30", "8:30", "8:30", null],
+    "end": ["18:00", "18:00", "18:00", "18:00", "18:00", "18:00", null],
+    "location": {
+      "plusCode": "XR22+FF",
+      "lat": 39.9511621,
+      "lng": -75.1988082
     },
-    {
-        "name": "Bui's Lunch Truck",
-        "location": {
-            "plusCode": "XR22+J7",
-            "lat": 39.951704,
-            "lng": -75.199282
+    "tags": ["gyro", "halal"],
+    "menu": {
+      "All": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6
         },
-        "tags": ["sandwich"],
-        "link": "https://www.facebook.com/BuisLunchTruck/"
-    },
-    {
-        "name": "George's Food Truck",
-        "start": ["7:00", "7:00", "7:00", "7:00", "7:00", "10:00", null],
-        "end": ["17:30", "5:30", "5:30", "5:30", "5:30", "19:00", null],
-        "location": {
-            "plusCode": "XR33+H2",
-            "lat": 39.9541962,
-            "lng": -75.1974906
+        {
+          "name": "Lamb over Rice",
+          "price": 6
         },
-        "tags": ["sandwich", "hoagies", "coffee"],
-        "priceTypes": {
-            "Breakfast": ["Kaiser", "Long"],
-            "Drinks": ["SM", "LG"]
+        {
+          "name": "Combo Platter",
+          "price": 6
         },
-        "menu": {
-            "Breakfast": [
-                {
-                    "name": "Egg on Roll",
-                    "price": [2.15, 2.50]
-                },
-                {
-                    "name": "Egg and Cheese",
-                    "price": [2.25, 2.75]
-                },
-                {
-                    "name": "Egg Whites and Cheese",
-                    "price": [2.75, 3.25]
-                },
-                {
-                    "name": "Bacon and Egg White Cheese",
-                    "price": [3.50, 3.95]
-                },
-                {
-                    "name": "Bacon Egg and Cheese",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Sausage and Egg",
-                    "price": [2.90, 3.25]
-                },
-                {
-                    "name": "Sausage Egg and Cheese",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Scrapple Egg and Cheese",
-                    "price": [3.25, 3.75]
-                },
-                {
-                    "name": "Pork Roll Egg and Cheese",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Pork Roll and Cheese",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Ham and Egg White Cheese",
-                    "price": [3.50, 3.95]
-                },
-                {
-                    "name": "Ham Egg and Cheese",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Turkey Bacon Egg and Cheese",
-                    "price": [3.25, 3.75]
-                },
-                {
-                    "name": "Vegetable Omelet",
-                    "price": [2.95, 3.50]
-                },
-                {
-                    "name": "Western Omelet",
-                    "price": [3.25, 3.75]
-                },
-                {
-                    "name": "Hot Sausage Egg and Cheese",
-                    "price": [3.50, 3.95]
-                },
-                {
-                    "name": "3 Eggs with Cheese and Spinach",
-                    "price": 3.50
-                },
-                {
-                    "name": "Bagel with Cream Cheese",
-                    "price": 1.65
-                },
-                {
-                    "name": "Hashbrown",
-                    "price": 1.00
-                },
-                {
-                    "name": "2 or more Hashbrown",
-                    "price": 0.75
-                },
-                {
-                    "name": "Muffin Toasted with Butter",
-                    "price": 1.50
-                }
-            ],
-            "Grilled Sandwiches": [
-                {
-                    "name": "Grilled Cheese",
-                    "price": 2.50
-                },
-                {
-                    "name": "Grilled Cheese and Tomatoes",
-                    "price": 2.75
-                },
-                {
-                    "name": "Grilled Ham and Cheese",
-                    "price": 3.75
-                },
-                {
-                    "name": "Grilled Turkey and Cheese",
-                    "price": 3.75
-                },
-                {
-                    "name": "Grilled Corned Beef and Cheese",
-                    "price": 3.75
-                },
-                {
-                    "name": "Grilled Roast Beef and Cheese",
-                    "price": 3.75
-                },
-                {
-                    "name": "Grilled Bacon and Cheese",
-                    "price": 3.75
-                }
-            ],
-            "Sandwiches": [
-                {
-                    "name": "Bacon Lettuce and Tomato (B.L.T)",
-                    "price": 3.25
-                },
-                {
-                    "name": "Tuna Salad",
-                    "price": 3.50
-                },
-                {
-                    "name": "Chicken Salad",
-                    "price": 3.75
-                },
-                {
-                    "name": "Egg Salad",
-                    "price": 3.00
-                },
-                {
-                    "name": "Egg Salad B.L.T",
-                    "price": 3.75
-                },
-                {
-                    "name": "American Cheese",
-                    "price": 3.00
-                },
-                {
-                    "name": "Ham and Cheese",
-                    "price": 3.50
-                },
-                {
-                    "name": "Roast Beef",
-                    "price": 3.50
-                },
-                {
-                    "name": "Turkey Bacon B.L.T",
-                    "price": 3.75
-                },
-                {
-                    "name": "Corn Beef",
-                    "price": 3.50
-                },
-                {
-                    "name": "Turkey",
-                    "price": 3.50
-                },
-                {
-                    "name": "Corn Beef Special with Russian Dressing & Coleslaw",
-                    "price": 3.75
-                },
-                {
-                    "name": "Crispy Chicken",
-                    "price": 3.50
-                },
-                {
-                    "name": "Grilled Chicken",
-                    "price": 3.75
-                },
-                {
-                    "name": "Tuna Melt (with Cheese Tomatoes)",
-                    "price": 3.75
-                }
-            ],
-            "Double Decker Sandwiches": [
-                {
-                    "name": "Turkey & Bacon",
-                    "price": 4.50
-                },
-                {
-                    "name": "Roast Beef and Swiss Cheese",
-                    "price": 4.50
-                },
-                {
-                    "name": "Corned Beef and Bacon",
-                    "price": 4.50
-                },
-                {
-                    "name": "Ham and Cheese",
-                    "price": 4.50
-                },
-                {
-                    "name": "Tuna with Boiled Egg",
-                    "price": 4.75
-                },
-                {
-                    "name": "Chicken Salad Bacon",
-                    "price": 4.95
-                }
-            ],
-            "Hoagies": [
-                {
-                    "name": "American Cheese",
-                    "price": 4.00
-                },
-                {
-                    "name": "Swiss or Provolone Cheese",
-                    "price": 4.00
-                },
-                {
-                    "name": "Corned Beef",
-                    "price": 4.50
-                },
-                {
-                    "name": "Roast Beef",
-                    "price": 4.50
-                },
-                {   
-                    "name": "Chicken Salad",
-                    "price": 4.75
-                },
-                {
-                    "name": "Egg Salad B.L.T.",
-                    "price": 4.50
-                },
-                {
-                    "name": "Tuna Salad",
-                    "price": 4.50
-                },
-                {
-                    "name": "Egg Salad",
-                    "price": 4.00
-                },
-                {
-                    "name": "Italian Hoagie (with Pepperoni Salami, Ham and Cheese)",
-                    "price": 4.75
-                },
-                {
-                    "name": "Turkey with Cheese",
-                    "price": 4.50
-                },
-                {
-                    "name": "Vegetable and Cheese",
-                    "price": 3.75
-                },
-                {
-                    "name": "Ham and Cheese Hoagie",
-                    "price": 4.50
-                }
-            ],
-            "Steaks": [
-                {
-                    "name": "Plain Steak",
-                    "price": 4.75
-                },
-                {
-                    "name": "Cheese Steak",
-                    "price": 5.00
-                },
-                {
-                    "name": "Chicken Cheese Steak",
-                    "price": 4.75
-                },
-                {
-                    "name": "Mushroom Cheese Steak",
-                    "price": 5.50
-                },
-                {
-                    "name": "Cheese Steak Hoagies",
-                    "price": 5.50
-                }
-            ],
-            "Quarter Pound Burgers": [
-                {
-                    "name": "Hamburger",
-                    "price": 2.90
-                },
-                {
-                    "name": "Cheeseburger",
-                    "price": 3.00
-                },
-                {
-                    "name": "Bacon Cheeseburger",
-                    "price": 3.50
-                },
-                {
-                    "name": "Double Hamburger",
-                    "price": 3.95
-                },
-                {
-                    "name": "Double Cheeseburger",
-                    "price": 4.25
-                },
-                {
-                    "name": "Double Bacon Cheeseburger",
-                    "price": 4.75
-                },
-                {
-                    "name": "1 Grilled Hot Dog",
-                    "price": 1.25
-                },
-                {
-                    "name": "2 Grilled Hot Dogs",
-                    "price": 2.25
-                },
-                {
-                    "name": "Hot Sausage (Beef)",
-                    "price": 2.50
-                },
-                {
-                    "name": "Hot Sausage with Cheese",
-                    "price": 2.75
-                }
-            ],
-            "Drinks": [
-                {
-                    "name": "Hot Coffee",
-                    "price": [0.75, 1.25]
-                },
-                {
-                    "name": "Hot Tea",
-                    "price": [0.75, 1.25]
-                },
-                {
-                    "name": "Hot Chocolate",
-                    "price": [0.75, 1.25]
-                }
-            ]
+        {
+          "name": "Falafel over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish over Rice",
+          "price": 6
+        },
+        {
+          "name": "Shrimp over Rice",
+          "price": 6
+        },
+        {
+          "name": "Kabab over Rice",
+          "price": 6
+        },
+        {
+          "name": "Chicken Salad",
+          "price": 6
+        },
+        {
+          "name": "Lamb Salad",
+          "price": 6
+        },
+        {
+          "name": "Combo Salad",
+          "price": 6
+        },
+        {
+          "name": "Shrimp Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish Salad",
+          "price": 6
+        },
+        {
+          "name": "Kabab Salad",
+          "price": 6
+        },
+        {
+          "name": "Falafel Salad",
+          "price": 6
+        },
+        {
+          "name": "Chicken Gyro",
+          "price": 5
+        },
+        {
+          "name": "Lamb Gyro",
+          "price": 5
+        },
+        {
+          "name": "Combo Gyro",
+          "price": 5
+        },
+        {
+          "name": "Falafel Gyro",
+          "price": 5
+        },
+        {
+          "name": "Fish Gyro",
+          "price": 5
+        },
+        {
+          "name": "Shrimp Gyro",
+          "price": 5
+        },
+        {
+          "name": "Kabab Gyro",
+          "price": 5
         }
-    },
-    {
-        "name": "Halal Guys",
-        "payments": ["Cash"],
-        "start": ["9:00", "9:00", "9:00", "9:00", "9:00", "9:00", null],
-        "end": ["17:00", "17:00", "17:00", "17:00", "17:00", "17:00", null],
-        "location": {
-            "lat": 39.9523545,
-            "lng": -75.1923495
-        },
-        "tags": ["gyro", "halal", "sandwich"],
-        "menu": {
-            "Rice Platters": [
-                {
-                    "name": "Chicken over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Lamb over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Fish over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Falafel over Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Veggie over Rice",
-                    "price": 6
-                }
-            ],
-            "Combo Platters": [
-                {
-                    "name": "Chicken & Lamb with Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Fish & Chicken with Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Lamb & Falafel with Rice",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken & Falafel with Rice",
-                    "price": 6
-                }
-            ],
-            "Salads": [
-                {
-                    "name": "Chicken Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Lamb Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken & Lamb Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Fish Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Falafel Salad",
-                    "price": 6
-                }
-            ],
-            "Sandwiches": [
-                {
-                    "name": "Chicken on Pita",
-                    "price": 5
-                },
-                {
-                    "name": "Lamb Gyro on Pita",
-                    "price": 5
-                },
-                {
-                    "name": "Chicken & Lamb on Pita",
-                    "price": 5
-                },
-                {
-                    "name": "Falafel Sandwich",
-                    "price": 5
-                },
-                {
-                    "name": "Fish Sandwich",
-                    "price": 5
-                }
-            ]
-        }
-    },
-    {
-        "name": "Halal Gyro Express",
-        "payments": ["Cash"],
-        "start": ["10:30", "10:30", "10:30", "10:30", "10:30", null, null],
-        "end": ["18:00", "18:00", "18:00", "18:00", "18:00", null, null],
-        "location": {
-            "lat": 39.9538680,
-            "lng": -75.1986617
-        },
-        "tags": ["halal", "free drink with meal"],
-        "menu": {
-            "All": [
-                {
-                    "name": "Chicken over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Lamb over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Falafel over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Mix Vegi over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Chicken Kebab over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Fish over Rice/ Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Fish & Chicken over Rice/ Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken Falafel Combo",
-                    "price": 5
-                },
-                {
-                    "name": "Combo over Rice/ Salad",
-                    "price": 5
-                },
-                {
-                    "name": "Special Combo over Rice/ Salad",
-                    "price": 6
-                },
-                {
-                    "name": "Chicken on Pita",
-                    "price": 4
-                },
-                {
-                    "name": "Lamb on Pita",
-                    "price": 4
-                },
-                {
-                    "name": "Combo on Pita",
-                    "price": 4
-                },
-                {
-                    "name": "Chicken Kebab on Pita",
-                    "price": 4
-                },
-                {
-                    "name": "Fish on Pita",
-                    "price": 5
-                },
-                {
-                    "name": "Falafel on Pita",
-                    "price": 4
-                }
-            ]
-        }
-    },
-    {
-        "name": "Kim's Oriental Food",
-        "payments": ["Cash"],
-        "location": {
-            "lat": 39.9541962,
-            "lng": -75.1974906
-        },
-        "tags": ["Chinese"],
-        "languageTypes": ["English", "Chinese"],
-        "menu": {
-            "General": [
-                {
-                    "name": ["Veggie Tofu", "蔬菜豆腐"],
-                    "price": 5
-                },
-                {
-                    "name": ["Kung Pao Tofu", "宮保豆腐"],
-                    "price": 5
-                },
-                {
-                    "name": ["Sesame Tofu", "芝麻豆腐"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["General Tso Tofu", "左宗豆腐"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Roast Pork Lo Mein", "叉燒撈麵"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Chicken Singapore Noodle", "雞新州米粉"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Broccoli Chicken", "芥蘭雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Eggplant Chicken", "茄子雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Curry Chicken", "咖喱雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Chicken with Mix Veg.", "素菜雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Beef Chow Fun", "乾炒牛河"],
-                    "price": 5.50
-                },
-                {
-                    "name": ["Pepper Steak", "青椒牛肉"],
-                    "price": 5.50
-                },
-                {
-                    "name": ["Salt Crispy Chicken", "鹽酥雞"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Mapo Tofu", "麻婆豆腐"],
-                    "price": 5.00
-                },
-                {
-                    "name": ["Kung Pao Chicken", "宮保雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Sausage Fried Rice", "臘腸炒飯"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Szechuan Chicken", "四川雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Sausage Freen Pepper and Onion", "青椒臘腸"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Hunan Chicken", "湖南雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["String Bean with Meet", "四季豆炒肉"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Chicken with Garlic Sauce", "魚香雞"],
-                    "price": 5.25
-                },
-                {
-                    "name": ["Green Pepper Squid", "青椒魷魚"],
-                    "price": 6.50
-                },
-                {
-                    "name": ["Tomato Egg", "番茄炒蛋"],
-                    "price": 5.50
-                },
-                {
-                    "name": ["Sweet & Sour Fish", "糖醋魚"],
-                    "price": 6.25
-                },
-                {
-                    "name": ["Black Pepper Fish", "黑椒斑斕魚"],
-                    "price": 6.25
-                }
-            ],
-            "Teriyaki": [
-                {
-                    "name": ["Teriyaki Seitan", "鐵板麵筋"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Teriyaki Tofu", "鐵板豆腐"],
-                    "price": 5.75
-                },
-                {
-                    "name": ["Teriyaki Pork", "鐵板豬"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Teriyaki Chicken", "鐵板雞"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Teriyaki Squid", "鐵板魷魚"],
-                    "price": 6.50
-                },
-                {
-                    "name": ["Teriyaki Beef", "鐵板牛"],
-                    "price": 6.25
-                },
-                {
-                    "name": ["Teriyaki Shrimp", "鐵板蝦"],
-                    "price": 6.25
-                }
-            ],
-            "Mongolian": [
-                {
-                    "name": ["Mongolian Seitan", "蔥爆麵筋"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Mongolian Tofu", "蔥爆豆腐"],
-                    "price": 5.75
-                },
-                {
-                    "name": ["Mongolian Pork", "蔥爆豬"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Mongolian Chicken", "蔥爆雞"],
-                    "price": 6.00
-                },
-                {
-                    "name": ["Mongolian Squid", "蔥爆魷魚"],
-                    "price": 6.50
-                },
-                {
-                    "name": ["Mongolian Beef", "蔥爆牛"],
-                    "price": 6.25
-                },
-                {
-                    "name": ["Mongolian Shrimp", "蔥爆蝦"],
-                    "price": 6.25
-                }
-            ],
-            "Others": [
-                {
-                    "name": ["Fried Chicken Leg", "炸雞腿"],
-                    "price": 1.50
-                },
-                {
-                    "name": ["Tea Egg", "滷蛋"],
-                    "price": 0.75
-                }
-            ]
-        }
-    },
-    {
-        "name": "Yue Kee",
-        "location": {
-            "address": "238 South 38th Street, Philadelphia, PA 19104"
-        },
-        "tags": ["Cantonese"],
-        "payments": ["Cash"],
-        "priceTypes": {
-            "Soup & Appetizers": ["Pt", "Qt"],
-            "Fried Rice": ["Pt", "Qt"],
-            "Noodles": ["Pt", "Qt"],
-            "Side Orders":["Pt", "Qt"]
-        },
-        "menu": {
-            "Soup & Appetizers": [
-                {
-                    "name": "Wonton Soup",
-                    "price": [1.25, 2.25]
-                },
-                {
-                    "name": "Hot & Sour Soup",
-                    "price": [1.25, 2.25]
-                },
-                {
-                    "name": "Chicken Vegetable Soup",
-                    "price": [1.75, 3.00]
-                },
-                {
-                    "name": "House Special Wonton",
-                    "price": 4.50
-                },
-                {
-                    "name": "Fried Wonton (5)",
-                    "price": 1.25
-                },
-                {
-                    "name": "Shrimp Egg Roll (1)",
-                    "price": 1.25
-                },
-                {
-                    "name": "Steamed Pork Dumplings (6)",
-                    "price": 3.25
-                },
-                {
-                    "name": "Pan Fried Pork Dumplings (6)",
-                    "price": 3.75
-                }
-            ],
-            "Fried Rice": [
-                {
-                    "name": "Vegetable, Chicken, Pork, Beef, or Shrimp Lo Mein",
-                    "price": [4.00, 7.00]
-                },
-                {
-                    "name": "Subgum Lo Mein",
-                    "price": [5.25, 8.00]
-                },
-                {
-                    "name": "Beijing Hot Noodle",
-                    "price": [3.00, 4.25]
-                },
-                {
-                    "name": "Chicken, Pork, Beef or Shrimp Yat Mein",
-                    "price": 3.00
-                },
-                {
-                    "name": "Chicken, Pork, Beef or Shrimp Singapore Noodles",
-                    "price": 4.25
-                }
-            ],
-            "Side Orders": [
-                {
-                    "name": "White Rice",
-                    "price": [1.00, 2.00]
-                },
-                {
-                    "name": "Plain Fried Rice",
-                    "price": [1.00, 2.00]
-                },
-                {
-                    "name": "Fried Egg",
-                    "price": 0.50
-                },
-                {
-                    "name": "Add Vegetable",
-                    "price": 1.00
-                },
-                {
-                    "name": "Add Meat",
-                    "price": 2.00
-                },
-                {
-                    "name": "Noodle instead of Rice",
-                    "price": 1.00
-                }
-            ],
-            "Beverages": [
-                {
-                    "name": "Can Soda",
-                    "price": 0.75
-                },
-                {
-                    "name": "Juice",
-                    "price": 1.50
-                }
-            ],
-            "Entrees": [
-                {
-                    "name": "Pork, Vegetable, Chicken, Shrimp, or Beef Egg Foo Youg",
-                    "price": 4.25
-                },
-                {
-                    "name": "Mixed Vegetables with Beef, Chicken, Pork, or Shrimp",
-                    "price": 4.25
-                },
-                {
-                    "name": "Beef, Pork, Shrimp, or Chicken Chow Mein",
-                    "price": 4.25
-                },
-                {
-                    "name": "Tofu & Mushrooms with Beef, Pork, Chicken, or Shrimp",
-                    "price": 4.25
-                },
-                {
-                    "name": "Bean Sprouts with Beef, Pork, Shrimp, or Chicken",
-                    "price": 4.00
-                },
-                {
-                    "name": "Mushrooms with Beef, Pork, or Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Chinese Vegatables with Beef, Pork, Chicken, or Shrimp",
-                    "price": 4.25
-                },
-                {
-                    "name": "Broccoli with Beef, Pork, Shrimp, or Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Snow Peas with Beef, Pork, Shrimp, or Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Eggplant in Black Bean Sauce with Beef, Pork, Shrimp, or Chicken",
-                    "price": 5.00
-                },
-                {
-                    "name": "Beef with Oyster Sauce",
-                    "price": 4.75
-                },
-                {
-                    "name": "Tomato Beef",
-                    "price": 4.25
-                },
-                {
-                    "name": "Ginger Beef or Chicken",
-                    "price": 4.50
-                },
-                {
-                    "name": "String Beans with Beef or Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Beef, Chicken, or Shrimp in Black Bean Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Beef, Shrimp, or Chicken in Szechuan Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Hunan Beef, Shrimp, or Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Beef with Mushroom and Bamboo Shoots",
-                    "price": 4.25
-                },
-                {
-                    "name": "Beef or Chicken in Curry Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Pepper Steak",
-                    "price": 4.25
-                },
-                {
-                    "name": "Shrimp or Chicken with Peanuts",
-                    "price": 4.25
-                },
-                {
-                    "name": "Shrimp with Lobster Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Chicken with Cashews",
-                    "price": 4.25
-                },
-                {
-                    "name": "Chicken in Garlic Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Chicken with Chili Bean Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Tai Chin Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Moo Goo Gai Pan",
-                    "price": 4.25
-                },
-                {
-                    "name": "Sweet and Sour Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Mixed Vegetables",
-                    "price": 3.75
-                },
-                {
-                    "name": "Szechuan Tofu",
-                    "price": 3.75
-                },
-                {
-                    "name": "Broccoli with Garlic Sauce",
-                    "price": 3.75
-                },
-                {
-                    "name": "Vegetarian General Tso's Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Eggplant in Garlic Sauce",
-                    "price": 4.25
-                }
-            ],
-            "Daily Specials": [
-                {
-                    "name": "B.B.Q. Spare Ribs",
-                    "price": 4.25
-                },
-                {
-                    "name": "Grandfather Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Crispy Spare Rib Tips",
-                    "price": 4.25
-                },
-                {
-                    "name": "Spare Rib Tips in Black Bean Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Orange Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Sesame Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "General Tso's Chicken",
-                    "price": 4.25
-                },
-                {
-                    "name": "Fried Fish in Garlic Sauce",
-                    "price": 4.25
-                },
-                {
-                    "name": "Sam Kip Dai",
-                    "price": 5.50
-                },
-                {
-                    "name": "Spicy Triple Delight",
-                    "price": 5.50
-                },
-                {
-                    "name": "Beef Belly",
-                    "price": 5.00
-                },
-                {
-                    "name": "Beef Chow Fun",
-                    "price": 4.25
-                },
-                {
-                    "name": "Ma Paul Tofu",
-                    "price": 3.75
-                },
-                {
-                    "name": "Pork Belly",
-                    "price": 4.25
-                },
-                {
-                    "name": "Moo Goo Zui Pan",
-                    "price": 4.25
-                },
-                {
-                    "name": "Braised Tofu with Pork",
-                    "price": 4.25
-                },
-                {
-                    "name": "Potato Beef",
-                    "price": 4.25
-                }
-            ]
-        }
+      ]
     }
+  },
+  {
+    "name": "Bui's Lunch Truck",
+    "location": {
+      "plusCode": "XR22+J7",
+      "lat": 39.951704,
+      "lng": -75.199282
+    },
+    "tags": ["sandwich"],
+    "link": "https://www.facebook.com/BuisLunchTruck/"
+  },
+  {
+    "name": "George's Food Truck",
+    "start": ["7:00", "7:00", "7:00", "7:00", "7:00", "10:00", null],
+    "end": ["17:30", "5:30", "5:30", "5:30", "5:30", "19:00", null],
+    "location": {
+      "plusCode": "XR33+H2",
+      "lat": 39.9541962,
+      "lng": -75.1974906
+    },
+    "tags": ["sandwich", "hoagies", "coffee"],
+    "priceTypes": {
+      "Breakfast": ["Kaiser", "Long"],
+      "Drinks": ["SM", "LG"]
+    },
+    "menu": {
+      "Breakfast": [
+        {
+          "name": "Egg on Roll",
+          "price": [2.15, 2.5]
+        },
+        {
+          "name": "Egg and Cheese",
+          "price": [2.25, 2.75]
+        },
+        {
+          "name": "Egg Whites and Cheese",
+          "price": [2.75, 3.25]
+        },
+        {
+          "name": "Bacon and Egg White Cheese",
+          "price": [3.5, 3.95]
+        },
+        {
+          "name": "Bacon Egg and Cheese",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Sausage and Egg",
+          "price": [2.9, 3.25]
+        },
+        {
+          "name": "Sausage Egg and Cheese",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Scrapple Egg and Cheese",
+          "price": [3.25, 3.75]
+        },
+        {
+          "name": "Pork Roll Egg and Cheese",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Pork Roll and Cheese",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Ham and Egg White Cheese",
+          "price": [3.5, 3.95]
+        },
+        {
+          "name": "Ham Egg and Cheese",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Turkey Bacon Egg and Cheese",
+          "price": [3.25, 3.75]
+        },
+        {
+          "name": "Vegetable Omelet",
+          "price": [2.95, 3.5]
+        },
+        {
+          "name": "Western Omelet",
+          "price": [3.25, 3.75]
+        },
+        {
+          "name": "Hot Sausage Egg and Cheese",
+          "price": [3.5, 3.95]
+        },
+        {
+          "name": "3 Eggs with Cheese and Spinach",
+          "price": 3.5
+        },
+        {
+          "name": "Bagel with Cream Cheese",
+          "price": 1.65
+        },
+        {
+          "name": "Hashbrown",
+          "price": 1.0
+        },
+        {
+          "name": "2 or more Hashbrown",
+          "price": 0.75
+        },
+        {
+          "name": "Muffin Toasted with Butter",
+          "price": 1.5
+        }
+      ],
+      "Grilled Sandwiches": [
+        {
+          "name": "Grilled Cheese",
+          "price": 2.5
+        },
+        {
+          "name": "Grilled Cheese and Tomatoes",
+          "price": 2.75
+        },
+        {
+          "name": "Grilled Ham and Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Grilled Turkey and Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Grilled Corned Beef and Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Grilled Roast Beef and Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Grilled Bacon and Cheese",
+          "price": 3.75
+        }
+      ],
+      "Sandwiches": [
+        {
+          "name": "Bacon Lettuce and Tomato (B.L.T)",
+          "price": 3.25
+        },
+        {
+          "name": "Tuna Salad",
+          "price": 3.5
+        },
+        {
+          "name": "Chicken Salad",
+          "price": 3.75
+        },
+        {
+          "name": "Egg Salad",
+          "price": 3.0
+        },
+        {
+          "name": "Egg Salad B.L.T",
+          "price": 3.75
+        },
+        {
+          "name": "American Cheese",
+          "price": 3.0
+        },
+        {
+          "name": "Ham and Cheese",
+          "price": 3.5
+        },
+        {
+          "name": "Roast Beef",
+          "price": 3.5
+        },
+        {
+          "name": "Turkey Bacon B.L.T",
+          "price": 3.75
+        },
+        {
+          "name": "Corn Beef",
+          "price": 3.5
+        },
+        {
+          "name": "Turkey",
+          "price": 3.5
+        },
+        {
+          "name": "Corn Beef Special with Russian Dressing & Coleslaw",
+          "price": 3.75
+        },
+        {
+          "name": "Crispy Chicken",
+          "price": 3.5
+        },
+        {
+          "name": "Grilled Chicken",
+          "price": 3.75
+        },
+        {
+          "name": "Tuna Melt (with Cheese Tomatoes)",
+          "price": 3.75
+        }
+      ],
+      "Double Decker Sandwiches": [
+        {
+          "name": "Turkey & Bacon",
+          "price": 4.5
+        },
+        {
+          "name": "Roast Beef and Swiss Cheese",
+          "price": 4.5
+        },
+        {
+          "name": "Corned Beef and Bacon",
+          "price": 4.5
+        },
+        {
+          "name": "Ham and Cheese",
+          "price": 4.5
+        },
+        {
+          "name": "Tuna with Boiled Egg",
+          "price": 4.75
+        },
+        {
+          "name": "Chicken Salad Bacon",
+          "price": 4.95
+        }
+      ],
+      "Hoagies": [
+        {
+          "name": "American Cheese",
+          "price": 4.0
+        },
+        {
+          "name": "Swiss or Provolone Cheese",
+          "price": 4.0
+        },
+        {
+          "name": "Corned Beef",
+          "price": 4.5
+        },
+        {
+          "name": "Roast Beef",
+          "price": 4.5
+        },
+        {
+          "name": "Chicken Salad",
+          "price": 4.75
+        },
+        {
+          "name": "Egg Salad B.L.T.",
+          "price": 4.5
+        },
+        {
+          "name": "Tuna Salad",
+          "price": 4.5
+        },
+        {
+          "name": "Egg Salad",
+          "price": 4.0
+        },
+        {
+          "name": "Italian Hoagie (with Pepperoni Salami, Ham and Cheese)",
+          "price": 4.75
+        },
+        {
+          "name": "Turkey with Cheese",
+          "price": 4.5
+        },
+        {
+          "name": "Vegetable and Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Ham and Cheese Hoagie",
+          "price": 4.5
+        }
+      ],
+      "Steaks": [
+        {
+          "name": "Plain Steak",
+          "price": 4.75
+        },
+        {
+          "name": "Cheese Steak",
+          "price": 5.0
+        },
+        {
+          "name": "Chicken Cheese Steak",
+          "price": 4.75
+        },
+        {
+          "name": "Mushroom Cheese Steak",
+          "price": 5.5
+        },
+        {
+          "name": "Cheese Steak Hoagies",
+          "price": 5.5
+        }
+      ],
+      "Quarter Pound Burgers": [
+        {
+          "name": "Hamburger",
+          "price": 2.9
+        },
+        {
+          "name": "Cheeseburger",
+          "price": 3.0
+        },
+        {
+          "name": "Bacon Cheeseburger",
+          "price": 3.5
+        },
+        {
+          "name": "Double Hamburger",
+          "price": 3.95
+        },
+        {
+          "name": "Double Cheeseburger",
+          "price": 4.25
+        },
+        {
+          "name": "Double Bacon Cheeseburger",
+          "price": 4.75
+        },
+        {
+          "name": "1 Grilled Hot Dog",
+          "price": 1.25
+        },
+        {
+          "name": "2 Grilled Hot Dogs",
+          "price": 2.25
+        },
+        {
+          "name": "Hot Sausage (Beef)",
+          "price": 2.5
+        },
+        {
+          "name": "Hot Sausage with Cheese",
+          "price": 2.75
+        }
+      ],
+      "Drinks": [
+        {
+          "name": "Hot Coffee",
+          "price": [0.75, 1.25]
+        },
+        {
+          "name": "Hot Tea",
+          "price": [0.75, 1.25]
+        },
+        {
+          "name": "Hot Chocolate",
+          "price": [0.75, 1.25]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Halal Guys",
+    "payments": ["Cash"],
+    "start": ["9:00", "9:00", "9:00", "9:00", "9:00", "9:00", null],
+    "end": ["17:00", "17:00", "17:00", "17:00", "17:00", "17:00", null],
+    "location": {
+      "lat": 39.9523545,
+      "lng": -75.1923495
+    },
+    "tags": ["gyro", "halal", "sandwich"],
+    "menu": {
+      "Rice Platters": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish over Rice",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Rice",
+          "price": 6
+        },
+        {
+          "name": "Veggie over Rice",
+          "price": 6
+        }
+      ],
+      "Combo Platters": [
+        {
+          "name": "Chicken & Lamb with Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish & Chicken with Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb & Falafel with Rice",
+          "price": 6
+        },
+        {
+          "name": "Chicken & Falafel with Rice",
+          "price": 6
+        }
+      ],
+      "Salads": [
+        {
+          "name": "Chicken Salad",
+          "price": 6
+        },
+        {
+          "name": "Lamb Salad",
+          "price": 6
+        },
+        {
+          "name": "Chicken & Lamb Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish Salad",
+          "price": 6
+        },
+        {
+          "name": "Falafel Salad",
+          "price": 6
+        }
+      ],
+      "Sandwiches": [
+        {
+          "name": "Chicken on Pita",
+          "price": 5
+        },
+        {
+          "name": "Lamb Gyro on Pita",
+          "price": 5
+        },
+        {
+          "name": "Chicken & Lamb on Pita",
+          "price": 5
+        },
+        {
+          "name": "Falafel Sandwich",
+          "price": 5
+        },
+        {
+          "name": "Fish Sandwich",
+          "price": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Halal Gyro Express",
+    "payments": ["Cash"],
+    "start": ["10:30", "10:30", "10:30", "10:30", "10:30", null, null],
+    "end": ["18:00", "18:00", "18:00", "18:00", "18:00", null, null],
+    "location": {
+      "lat": 39.953868,
+      "lng": -75.1986617
+    },
+    "tags": ["halal", "free drink with meal"],
+    "menu": {
+      "All": [
+        {
+          "name": "Chicken over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Lamb over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Falafel over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Mix Vegi over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Chicken Kebab over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Fish over Rice/ Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish & Chicken over Rice/ Salad",
+          "price": 6
+        },
+        {
+          "name": "Chicken Falafel Combo",
+          "price": 5
+        },
+        {
+          "name": "Combo over Rice/ Salad",
+          "price": 5
+        },
+        {
+          "name": "Special Combo over Rice/ Salad",
+          "price": 6
+        },
+        {
+          "name": "Chicken on Pita",
+          "price": 4
+        },
+        {
+          "name": "Lamb on Pita",
+          "price": 4
+        },
+        {
+          "name": "Combo on Pita",
+          "price": 4
+        },
+        {
+          "name": "Chicken Kebab on Pita",
+          "price": 4
+        },
+        {
+          "name": "Fish on Pita",
+          "price": 5
+        },
+        {
+          "name": "Falafel on Pita",
+          "price": 4
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kim's Oriental Food",
+    "payments": ["Cash"],
+    "location": {
+      "lat": 39.9541962,
+      "lng": -75.1974906
+    },
+    "tags": ["Chinese"],
+    "languageTypes": ["English", "Chinese"],
+    "menu": {
+      "General": [
+        {
+          "name": ["Veggie Tofu", "蔬菜豆腐"],
+          "price": 5
+        },
+        {
+          "name": ["Kung Pao Tofu", "宮保豆腐"],
+          "price": 5
+        },
+        {
+          "name": ["Sesame Tofu", "芝麻豆腐"],
+          "price": 5.25
+        },
+        {
+          "name": ["General Tso Tofu", "左宗豆腐"],
+          "price": 5.25
+        },
+        {
+          "name": ["Roast Pork Lo Mein", "叉燒撈麵"],
+          "price": 5.25
+        },
+        {
+          "name": ["Chicken Singapore Noodle", "雞新州米粉"],
+          "price": 5.25
+        },
+        {
+          "name": ["Broccoli Chicken", "芥蘭雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Eggplant Chicken", "茄子雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Curry Chicken", "咖喱雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Chicken with Mix Veg.", "素菜雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Beef Chow Fun", "乾炒牛河"],
+          "price": 5.5
+        },
+        {
+          "name": ["Pepper Steak", "青椒牛肉"],
+          "price": 5.5
+        },
+        {
+          "name": ["Salt Crispy Chicken", "鹽酥雞"],
+          "price": 6.0
+        },
+        {
+          "name": ["Mapo Tofu", "麻婆豆腐"],
+          "price": 5.0
+        },
+        {
+          "name": ["Kung Pao Chicken", "宮保雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Sausage Fried Rice", "臘腸炒飯"],
+          "price": 6.0
+        },
+        {
+          "name": ["Szechuan Chicken", "四川雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Sausage Freen Pepper and Onion", "青椒臘腸"],
+          "price": 6.0
+        },
+        {
+          "name": ["Hunan Chicken", "湖南雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["String Bean with Meet", "四季豆炒肉"],
+          "price": 6.0
+        },
+        {
+          "name": ["Chicken with Garlic Sauce", "魚香雞"],
+          "price": 5.25
+        },
+        {
+          "name": ["Green Pepper Squid", "青椒魷魚"],
+          "price": 6.5
+        },
+        {
+          "name": ["Tomato Egg", "番茄炒蛋"],
+          "price": 5.5
+        },
+        {
+          "name": ["Sweet & Sour Fish", "糖醋魚"],
+          "price": 6.25
+        },
+        {
+          "name": ["Black Pepper Fish", "黑椒斑斕魚"],
+          "price": 6.25
+        }
+      ],
+      "Teriyaki": [
+        {
+          "name": ["Teriyaki Seitan", "鐵板麵筋"],
+          "price": 6.0
+        },
+        {
+          "name": ["Teriyaki Tofu", "鐵板豆腐"],
+          "price": 5.75
+        },
+        {
+          "name": ["Teriyaki Pork", "鐵板豬"],
+          "price": 6.0
+        },
+        {
+          "name": ["Teriyaki Chicken", "鐵板雞"],
+          "price": 6.0
+        },
+        {
+          "name": ["Teriyaki Squid", "鐵板魷魚"],
+          "price": 6.5
+        },
+        {
+          "name": ["Teriyaki Beef", "鐵板牛"],
+          "price": 6.25
+        },
+        {
+          "name": ["Teriyaki Shrimp", "鐵板蝦"],
+          "price": 6.25
+        }
+      ],
+      "Mongolian": [
+        {
+          "name": ["Mongolian Seitan", "蔥爆麵筋"],
+          "price": 6.0
+        },
+        {
+          "name": ["Mongolian Tofu", "蔥爆豆腐"],
+          "price": 5.75
+        },
+        {
+          "name": ["Mongolian Pork", "蔥爆豬"],
+          "price": 6.0
+        },
+        {
+          "name": ["Mongolian Chicken", "蔥爆雞"],
+          "price": 6.0
+        },
+        {
+          "name": ["Mongolian Squid", "蔥爆魷魚"],
+          "price": 6.5
+        },
+        {
+          "name": ["Mongolian Beef", "蔥爆牛"],
+          "price": 6.25
+        },
+        {
+          "name": ["Mongolian Shrimp", "蔥爆蝦"],
+          "price": 6.25
+        }
+      ],
+      "Others": [
+        {
+          "name": ["Fried Chicken Leg", "炸雞腿"],
+          "price": 1.5
+        },
+        {
+          "name": ["Tea Egg", "滷蛋"],
+          "price": 0.75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Yue Kee",
+    "location": {
+      "address": "238 South 38th Street, Philadelphia, PA 19104"
+    },
+    "tags": ["Cantonese"],
+    "payments": ["Cash"],
+    "priceTypes": {
+      "Soup & Appetizers": ["Pt", "Qt"],
+      "Fried Rice": ["Pt", "Qt"],
+      "Noodles": ["Pt", "Qt"],
+      "Side Orders": ["Pt", "Qt"]
+    },
+    "menu": {
+      "Soup & Appetizers": [
+        {
+          "name": "Wonton Soup",
+          "price": [1.25, 2.25]
+        },
+        {
+          "name": "Hot & Sour Soup",
+          "price": [1.25, 2.25]
+        },
+        {
+          "name": "Chicken Vegetable Soup",
+          "price": [1.75, 3.0]
+        },
+        {
+          "name": "House Special Wonton",
+          "price": 4.5
+        },
+        {
+          "name": "Fried Wonton (5)",
+          "price": 1.25
+        },
+        {
+          "name": "Shrimp Egg Roll (1)",
+          "price": 1.25
+        },
+        {
+          "name": "Steamed Pork Dumplings (6)",
+          "price": 3.25
+        },
+        {
+          "name": "Pan Fried Pork Dumplings (6)",
+          "price": 3.75
+        }
+      ],
+      "Fried Rice": [
+        {
+          "name": "Vegetable, Chicken, Pork, Beef, or Shrimp Lo Mein",
+          "price": [4.0, 7.0]
+        },
+        {
+          "name": "Subgum Lo Mein",
+          "price": [5.25, 8.0]
+        },
+        {
+          "name": "Beijing Hot Noodle",
+          "price": [3.0, 4.25]
+        },
+        {
+          "name": "Chicken, Pork, Beef or Shrimp Yat Mein",
+          "price": 3.0
+        },
+        {
+          "name": "Chicken, Pork, Beef or Shrimp Singapore Noodles",
+          "price": 4.25
+        }
+      ],
+      "Side Orders": [
+        {
+          "name": "White Rice",
+          "price": [1.0, 2.0]
+        },
+        {
+          "name": "Plain Fried Rice",
+          "price": [1.0, 2.0]
+        },
+        {
+          "name": "Fried Egg",
+          "price": 0.5
+        },
+        {
+          "name": "Add Vegetable",
+          "price": 1.0
+        },
+        {
+          "name": "Add Meat",
+          "price": 2.0
+        },
+        {
+          "name": "Noodle instead of Rice",
+          "price": 1.0
+        }
+      ],
+      "Beverages": [
+        {
+          "name": "Can Soda",
+          "price": 0.75
+        },
+        {
+          "name": "Juice",
+          "price": 1.5
+        }
+      ],
+      "Entrees": [
+        {
+          "name": "Pork, Vegetable, Chicken, Shrimp, or Beef Egg Foo Youg",
+          "price": 4.25
+        },
+        {
+          "name": "Mixed Vegetables with Beef, Chicken, Pork, or Shrimp",
+          "price": 4.25
+        },
+        {
+          "name": "Beef, Pork, Shrimp, or Chicken Chow Mein",
+          "price": 4.25
+        },
+        {
+          "name": "Tofu & Mushrooms with Beef, Pork, Chicken, or Shrimp",
+          "price": 4.25
+        },
+        {
+          "name": "Bean Sprouts with Beef, Pork, Shrimp, or Chicken",
+          "price": 4.0
+        },
+        {
+          "name": "Mushrooms with Beef, Pork, or Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Chinese Vegatables with Beef, Pork, Chicken, or Shrimp",
+          "price": 4.25
+        },
+        {
+          "name": "Broccoli with Beef, Pork, Shrimp, or Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Snow Peas with Beef, Pork, Shrimp, or Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Eggplant in Black Bean Sauce with Beef, Pork, Shrimp, or Chicken",
+          "price": 5.0
+        },
+        {
+          "name": "Beef with Oyster Sauce",
+          "price": 4.75
+        },
+        {
+          "name": "Tomato Beef",
+          "price": 4.25
+        },
+        {
+          "name": "Ginger Beef or Chicken",
+          "price": 4.5
+        },
+        {
+          "name": "String Beans with Beef or Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Beef, Chicken, or Shrimp in Black Bean Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Beef, Shrimp, or Chicken in Szechuan Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Hunan Beef, Shrimp, or Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Beef with Mushroom and Bamboo Shoots",
+          "price": 4.25
+        },
+        {
+          "name": "Beef or Chicken in Curry Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Pepper Steak",
+          "price": 4.25
+        },
+        {
+          "name": "Shrimp or Chicken with Peanuts",
+          "price": 4.25
+        },
+        {
+          "name": "Shrimp with Lobster Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Chicken with Cashews",
+          "price": 4.25
+        },
+        {
+          "name": "Chicken in Garlic Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Chicken with Chili Bean Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Tai Chin Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Moo Goo Gai Pan",
+          "price": 4.25
+        },
+        {
+          "name": "Sweet and Sour Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Mixed Vegetables",
+          "price": 3.75
+        },
+        {
+          "name": "Szechuan Tofu",
+          "price": 3.75
+        },
+        {
+          "name": "Broccoli with Garlic Sauce",
+          "price": 3.75
+        },
+        {
+          "name": "Vegetarian General Tso's Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Eggplant in Garlic Sauce",
+          "price": 4.25
+        }
+      ],
+      "Daily Specials": [
+        {
+          "name": "B.B.Q. Spare Ribs",
+          "price": 4.25
+        },
+        {
+          "name": "Grandfather Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Crispy Spare Rib Tips",
+          "price": 4.25
+        },
+        {
+          "name": "Spare Rib Tips in Black Bean Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Orange Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Sesame Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "General Tso's Chicken",
+          "price": 4.25
+        },
+        {
+          "name": "Fried Fish in Garlic Sauce",
+          "price": 4.25
+        },
+        {
+          "name": "Sam Kip Dai",
+          "price": 5.5
+        },
+        {
+          "name": "Spicy Triple Delight",
+          "price": 5.5
+        },
+        {
+          "name": "Beef Belly",
+          "price": 5.0
+        },
+        {
+          "name": "Beef Chow Fun",
+          "price": 4.25
+        },
+        {
+          "name": "Ma Paul Tofu",
+          "price": 3.75
+        },
+        {
+          "name": "Pork Belly",
+          "price": 4.25
+        },
+        {
+          "name": "Moo Goo Zui Pan",
+          "price": 4.25
+        },
+        {
+          "name": "Braised Tofu with Pork",
+          "price": 4.25
+        },
+        {
+          "name": "Potato Beef",
+          "price": 4.25
+        }
+      ]
+    }
+  }
 ]

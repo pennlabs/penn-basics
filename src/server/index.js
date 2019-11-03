@@ -9,6 +9,7 @@ const diningRouter = require('./routes/dining')
 const newsRouter = require('./routes/news')
 const laundryRouter = require('./routes/laundry')
 const foodtrucksRouter = require('./routes/foodtrucks')
+const authRouter = require('./routes/auth')
 
 const DB = require('./database/db')
 
@@ -33,6 +34,7 @@ app.use('/api/foodtrucks', foodtrucksRouter(DB))
 app.use('/api/dining', diningRouter(DB))
 app.use('/api/laundry', laundryRouter())
 app.use('/api/news', newsRouter())
+app.use('/api/auth', authRouter(DB))
 app.use('/', frontendRouter(DB))
 
 app.listen(PORT, () => {
