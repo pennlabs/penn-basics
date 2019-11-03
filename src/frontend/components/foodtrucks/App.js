@@ -17,7 +17,7 @@ import {
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
 
-// import Filter from './Filter'
+import Filter from './Filter'
 import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 
@@ -85,7 +85,7 @@ class App extends Component {
 
     return (
       <>
-        {/* <Filter /> */}
+        <Filter />
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
           <Scrollbar

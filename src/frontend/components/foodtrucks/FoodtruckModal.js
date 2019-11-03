@@ -7,7 +7,7 @@ import { getFoodtruckInfo } from '../../actions/foodtrucks_action'
 import {
   Title,
   Text,
-  Modal,
+  ModalFoodtrucks,
   ModalContainer,
   Image,
   Tag,
@@ -24,10 +24,6 @@ const Credit = s.div`
 `
 
 class FoodtruckModal extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     const { foodtruckId, dispatchGetFoodtruckInfo } = this.props
     if (foodtruckId) {
@@ -61,7 +57,7 @@ class FoodtruckModal extends Component {
     } = foodtruckInfo || {}
 
     return (
-      <Modal show={show} toggle={this.toggle}>
+      <ModalFoodtrucks show={show} toggle={this.toggle}>
         {foodtruckInfo ? (
           <>
             <ModalContainer>
@@ -123,7 +119,7 @@ class FoodtruckModal extends Component {
         ) : (
           <div />
         )}
-      </Modal>
+      </ModalFoodtrucks>
     )
   }
 }

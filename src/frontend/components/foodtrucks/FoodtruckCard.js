@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import s from 'styled-components'
 
 import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
 import { setHoveredFoodtruck } from '../../actions/foodtrucks_action'
+import { DARK_GRAY } from '../../styles/colors'
 // import { getNoiseLevel, getOutletsLevel } from './mapper'
+
+const StyledLink = s(Link)`
+  h2 {
+    color: ${DARK_GRAY} !important;
+  }
+`
 
 const Content = s.div`
   width: 100%;
@@ -48,39 +56,40 @@ class FoodtruckCard extends Component {
   }
 
   render() {
-    const { name, open, hours } = this.props
+    const { name, open, hours, foodtruckId } = this.props
 
     return (
-      <Card
-        onClick={this.handleClick}
-        onKeyPress={this.handleKeyPress}
-        padding="0.5rem 0.5rem 0.5rem 1rem"
-        hoverable
-      >
-        <Row>
-          {/* {image && (
-            <Col backgroundImage={image} width="30%" borderRadius="4px" />
-          )} */}
-          <Col padding="0" onMouseEnter={this.handleMouseEnter}>
-            <Content>
-              <Subtitle marginBottom="0">{name}</Subtitle>
+      <StyledLink to={`/foodtrucks/${foodtruckId}`} className="link">
+        <Card
+          onKeyPress={this.handleKeyPress}
+          padding="0.5rem 0.5rem 0.5rem 1rem"
+          hoverable
+        >
+          <Row>
+            {/* {image && (
+              <Col backgroundImage={image} width="30%" borderRadius="4px" />
+            )} */}
+            <Col padding="0" onMouseEnter={this.handleMouseEnter}>
+              <Content>
+                <Subtitle marginBottom="0">{name}</Subtitle>
 
-              <Subtext marginBottom="0">
-                {open
-                  ? `Open: ${hours}`
-                  : `Closed • Opens at ${hours.substring(
-                      0,
-                      hours.indexOf('am')
-                    )}am`}
-                {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
-                {noiseLevel ? ` • ${noiseLevel}` : ''} */}
-              </Subtext>
+                <Subtext marginBottom="0">
+                  {open
+                    ? `Open: ${hours}`
+                    : `Closed • Opens at ${hours.substring(
+                        0,
+                        hours.indexOf('am')
+                      )}am`}
+                  {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
+                  {noiseLevel ? ` • ${noiseLevel}` : ''} */}
+                </Subtext>
 
-              <Circle open={open} />
-            </Content>
-          </Col>
-        </Row>
-      </Card>
+                <Circle open={open} />
+              </Content>
+            </Col>
+          </Row>
+        </Card>
+      </StyledLink>
     )
   }
 }

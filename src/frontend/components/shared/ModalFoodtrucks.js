@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
+import { Link, useHistory } from 'react-router-dom'
 
 import { WHITE, LIGHT_GRAY, SNOW_ALPHA, SHADOW } from '../../styles/colors'
 
@@ -153,7 +154,7 @@ const Times = styled.span`
 // This would otherwise cause the modal to close on any click
 const noop = event => event.stopPropagation()
 
-export class ModalCenter extends Component {
+export class ModalFoodtrucks extends Component {
   constructor(props) {
     super(props)
 
@@ -195,9 +196,6 @@ export class ModalCenter extends Component {
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      const { toggle } = this.props
-
-      toggle()
     }
   }
 
@@ -210,15 +208,17 @@ export class ModalCenter extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={toggle}
+        onClick={() => this.goHome()}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <ModalClose onClick={toggle}>
-            <Times>&times;</Times>
-          </ModalClose>
+          <Link to="/foodtrucks" className="link">
+            <ModalClose>
+              <Times>&times;</Times>
+            </ModalClose>
+          </Link>
 
           {children}
         </ModalContent>
@@ -227,15 +227,8 @@ export class ModalCenter extends Component {
   }
 }
 
-ModalCenter.propTypes = {
+ModalFoodtrucks.propTypes = {
   show: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired, // eslint-disable-line
 }
-
-export const ModalContainer = styled.div`
-  padding: 0 8.33vw;
-  background: ${({ background }) => background || WHITE};
-  padding-top: ${({ paddingTop }) => paddingTop || 0};
-  padding-bottom: ${({ paddingBottom }) => paddingBottom || 0};
-`

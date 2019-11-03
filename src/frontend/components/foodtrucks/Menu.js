@@ -4,10 +4,7 @@ import PropTypes from 'prop-types'
 import { Text } from '../shared'
 
 const Menu = ({ foodtruckInfo }) => {
-  console.log("!!!")
-  console.log(foodtruckInfo)
-  const { menu, priceTypes, languageTypes } = foodtruckInfo
-  console.log(menu)
+  const { menu, priceTypes } = foodtruckInfo
   return (
     <div>
       <Text fullWidth>
@@ -23,18 +20,21 @@ const Menu = ({ foodtruckInfo }) => {
               <br />
               <tr>
                 {priceTypes[category.name] ? <th> </th> : null}
-                {priceTypes[category.name] && priceTypes[category.name].map(type => (
-                  <th> {type} </th>
-                ))}
+                {priceTypes[category.name] &&
+                  priceTypes[category.name].map(type => (
+                    <th style={{ 'font-size': '80%' }}> {type} </th>
+                  ))}
               </tr>
               {category.items.map(item => (
                 <tr>
-                  <td>{item.name}</td>
+                  <td style={{ 'font-size': '80%' }}>{item.name}</td>
                   {item.prices.map(price => (
-                    <td>${parseFloat(Math.round(price * 100) / 100).toFixed(2)}</td>
+                    <td style={{ 'font-size': '80%' }}>${parseFloat(Math.round(price * 100) / 100).toFixed(2)}</td>
                   ))}
                 </tr>
               ))}
+              <br />
+              <br />
               <br />
             </>
           ))}
