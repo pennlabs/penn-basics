@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { WHITE, LIGHT_GRAY, SNOW_ALPHA, SHADOW } from '../../styles/colors'
+import { WHITE, LIGHT_GRAY, BLACK_ALPHA } from '../../styles/colors'
 
 const Z_INDEX = 1305
 const ANIMATION_DURATION = '0.4s'
-const LG_WIDTH = 50
-const SM_WIDTH = 80
-
-// TODO mobile responsiveness
-// TODO use refactored modal code
 
 const fadeIn = keyframes`
   0% {
     opacity: 0;
     max-height: 100vh;
   }
-
   100% {
     opacity: 1;
     max-height: 100vh;
@@ -30,7 +24,6 @@ const fadeOut = keyframes`
     opacity: 1;
     max-height: 100vh;
   }
-
   100% {
     opacity: 0;
     max-height: 100vh;
@@ -39,41 +32,23 @@ const fadeOut = keyframes`
 
 const slideIn = keyframes`
   0% {
-    margin-left: 100%;
+    opacity: 0;
+    margin-top: 100%;
   }
-
   100% {
-    margin-left: ${LG_WIDTH}%;
+    opacity: 1;
+    margin-top: calc(1rem + 5vh);
   }
 `
 
 const slideOut = keyframes`
   0% {
-    margin-left: ${LG_WIDTH}%;
+    opacity: 1;
+    margin-top: calc(1rem + 5vh);
   }
-
   100% {
-    margin-right: 100%;
-  }
-`
-
-const slideInMobile = keyframes`
-  0% {
-    margin-left: 100%;
-  }
-
-  100% {
-    margin-left: ${SM_WIDTH}%;
-  }
-`
-
-const slideOutMobile = keyframes`
-  0% {
-    margin-left: ${SM_WIDTH}%;
-  }
-
-  100% {
-    margin-right: 100%;
+    opacity: 0;
+    margin-top: 100%;
   }
 `
 
@@ -82,13 +57,14 @@ const ModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   left: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
   right: 0;
   top: 0;
   bottom: 0;
-  background: ${SNOW_ALPHA};
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: ${BLACK_ALPHA(0.5)};
   z-index: ${Z_INDEX};
+  text-align: center;
   animation-name: ${({ isNewlyMounted, show }) => {
     if (isNewlyMounted) {
       return ''
@@ -96,7 +72,6 @@ const ModalWrapper = styled.div`
     if (show) {
       return fadeIn
     }
-
     return fadeOut
   }};
   animation-duration: ${ANIMATION_DURATION};
@@ -108,26 +83,34 @@ const ModalContent = styled.div`
   min-height: 100%;
   background: ${WHITE};
   width: 50%;
-  margin-left: ${({ show }) => (show ? '50%' : '100%')};
-  animation-name: ${({ show }) => (show ? slideIn : slideOut)};
-  animation-duration: ${ANIMATION_DURATION};
+  display: inline-block;
+  margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
+  margin-bottom: calc(1rem + 5vh);
   box-sizing: border-box;
   padding: 10.41vh 0;
-
-  @media screen and (max-width: 900px) {
+  border-radius: 1rem;
+  text-align: left;
+  position: relative;
+  animation-name: ${({ show }) => (show ? slideIn : slideOut)};
+  animation-duration: ${ANIMATION_DURATION};
+  @media screen and (max-width: 1024px) {
     width: 75%;
-    margin-left: ${({ show }) => (show ? '25%' : '100%')};
-    animation-name: ${({ show }) => (show ? slideInMobile : slideOutMobile)};
+  }
+  @media screen and (max-width: 848px) {
+    width: calc(100% - 1rem);
   }
 `
 
 const ModalClose = styled.div`
+  animation-name: ${({ show }) => (show ? slideIn : slideOut)};
+  animation-duration: ${ANIMATION_DURATION};
+  margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
   position: fixed;
-  top: 4.16vw;
-  right: 4.16vw;
+  top: 1rem;
+  margin-left: 1rem;
   background: ${WHITE};
   border-radius: 50%;
-  box-shadow: 0 1px 4px ${SHADOW};
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   cursor: hand;
   line-height: 1;
   width: 2rem;
@@ -136,7 +119,6 @@ const ModalClose = styled.div`
   vertical-align: middle;
   z-index: 1300;
   transition: opacity 0.2s ease;
-
   :hover {
     opacity: 0.75;
   }
@@ -196,6 +178,9 @@ export class ModalFoodtrucks extends Component {
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
+      const { toggle } = this.props
+
+      toggle()
     }
   }
 
@@ -208,14 +193,14 @@ export class ModalFoodtrucks extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => this.goHome()}
+        onClick={toggle}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
           <Link to="/foodtrucks" className="link">
-            <ModalClose>
+            <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>
           </Link>
