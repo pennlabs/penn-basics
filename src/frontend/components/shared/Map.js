@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
-const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+const RED = 'https://raw.githubusercontent.com/pennlabs/pennbasics/foodtrucks/public/img/food-pin.png'
 const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 
 const MapWrapper = styled.div`
@@ -122,7 +122,7 @@ export class Map extends Component {
 
     const marker = new google.maps.Marker({
       position: location,
-      icon,
+      icon: {...icon, scaledSize: new google.maps.Size(10, 10),},
       map,
     })
 
