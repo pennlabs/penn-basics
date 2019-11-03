@@ -33,7 +33,6 @@ class App extends Component {
     const { getAllSpacesDataDispatch } = this.props
     getAllSpacesDataDispatch()
     const apiKey = process.env.GOOGLE_MAPS_API_KEY
-    // const apiKey = null
     if (apiKey) {
       const tag = document.createElement('script')
       tag.setAttribute(

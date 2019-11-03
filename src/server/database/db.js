@@ -3,8 +3,9 @@ require('./mongoose-connect')
 const Space = require('./models/Space')
 const Foodtruck = require('./models/FoodTruck')
 
-function findAllFoodtrucks() {
-  return Foodtruck.find()
+// return all fields exceept for menu and priceTypes
+const findAllFoodtrucks = () => {
+  return Foodtruck.find({}, { menu: 0, priceTypes: 0 })
 }
 
 function findAllSpaces() {
