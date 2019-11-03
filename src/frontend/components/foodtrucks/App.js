@@ -15,10 +15,10 @@ import {
   NoDataScroll,
 } from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
-import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
+import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
 
-import Filter from './Filter'
-import SpaceModal from './SpaceModal'
+// import Filter from './Filter'
+// import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 
 // TODO ghost loaders
@@ -30,8 +30,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { getAllSpacesDataDispatch } = this.props
-    getAllSpacesDataDispatch()
+    const { dispatchGetAllFoodtrucks } = this.props
+    dispatchGetAllFoodtrucks()
+
     const apiKey = process.env.GOOGLE_MAPS_API_KEY
     if (apiKey) {
       const tag = document.createElement('script')
@@ -54,33 +55,34 @@ class App extends Component {
      * did have that data. If this is the case, we request the data again.
      */
     const {
-      spacesData: currentSpacesData,
-      getAllSpacesDataDispatch,
+      foodtrucksData: currentFoodtrucksData,
+      dispatchGetAllFoodtrucks,
     } = this.props
-    const { spacesData: prevSpacesData } = prevProps
-    if (!currentSpacesData && prevSpacesData) {
-      getAllSpacesDataDispatch()
+    const { foodtrucksData: prevFoodtrucksData } = prevProps
+    if (!currentFoodtrucksData && prevFoodtrucksData) {
+      dispatchGetAllFoodtrucks()
     }
   }
 
   render() {
     const {
-      filteredSpacesData,
+      filteredFoodtrucksData,
       error,
       pending,
-      hoveredSpace,
-      setActiveSpaceDispatch,
+      hoveredFoodtruck,
     } = this.props
+
+    console.log(filteredFoodtrucksData)
 
     const { googleMapError } = this.state
 
-    if (pending || !filteredSpacesData) {
-      return <Filter />
+    if (pending || !filteredFoodtrucksData) {
+      return null
     }
 
     return (
       <>
-        <Filter />
+        {/* <Filter /> */}
 
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
           <Scrollbar
@@ -91,19 +93,20 @@ class App extends Component {
           >
             <ErrorMessage message={error} />
 
-            {!Object.keys(filteredSpacesData).length && (
+            {!Object.keys(filteredFoodtrucksData).length && (
               <NoDataScroll
-                image="/img/studyspace-empty-state.svg"
-                imageAlt="Empty Studyspaces"
-                text="No study space matches the criteria"
+                image="/img/empty-foodtruck.svg"
+                imageAlt="Empty Foodtrucks"
+                text="No foodtruck matches the criteria"
               />
             )}
 
-            {Object.keys(filteredSpacesData).map(spaceId => {
-              const space = filteredSpacesData[spaceId]
+            {Object.keys(filteredFoodtrucksData).map(foodtruckId => {
+              const foodtruck = filteredFoodtrucksData[foodtruckId]
+              console.log(foodtruck)
               return (
-                <div key={spaceId}>
-                  <FoodtruckCard spaceId={spaceId} {...space} />
+                <div key={foodtruckId}>
+                  <FoodtruckCard foodtruckId={foodtruckId} {...foodtruck} />
                   <Line />
                 </div>
               )
@@ -117,21 +120,20 @@ class App extends Component {
               <Map
                 mapId="map"
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-                markers={filteredSpacesData}
-                handleClickMarker={setActiveSpaceDispatch}
-                activeMarker={hoveredSpace}
+                markers={filteredFoodtrucksData}
+                activeMarker={hoveredFoodtruck}
               />
             )}
           </Col>
         </Row>
 
-        <SpaceModal />
+        {/* <SpaceModal /> */}
       </>
     )
   }
 }
 
-const SpacesDataPropType = PropTypes.objectOf(
+const FoodtrucksDataPropType = PropTypes.objectOf(
   PropTypes.shape({
     address: PropTypes.string,
     description: PropTypes.string,
@@ -151,27 +153,25 @@ const SpacesDataPropType = PropTypes.objectOf(
 
 App.defaultProps = {
   error: null,
-  hoveredSpace: null,
+  hoveredFoodtruck: null,
   pending: false,
-  filteredSpacesData: null,
-  spacesData: null,
+  filteredFoodtrucksData: null,
+  foodtrucksData: null,
 }
 
 App.propTypes = {
-  getAllSpacesDataDispatch: PropTypes.func.isRequired,
-  setActiveSpaceDispatch: PropTypes.func.isRequired,
+  dispatchGetAllFoodtrucks: PropTypes.func.isRequired,
   error: PropTypes.string,
-  hoveredSpace: PropTypes.string,
+  hoveredFoodtruck: PropTypes.string,
   pending: PropTypes.bool,
-  filteredSpacesData: SpacesDataPropType,
-  spacesData: SpacesDataPropType,
+  filteredFoodtrucksData: FoodtrucksDataPropType,
+  foodtrucksData: FoodtrucksDataPropType,
 }
 
-const mapStateToProps = ({ spaces }) => spaces
+const mapStateToProps = ({ foodtrucks }) => foodtrucks
 
 const mapDispatchToProps = dispatch => ({
-  getAllSpacesDataDispatch: id => dispatch(getAllSpacesData(id)),
-  setActiveSpaceDispatch: id => dispatch(setActiveSpace(id)),
+  dispatchGetAllFoodtrucks: () => dispatch(getAllFoodtrucksData()),
 })
 
 // Redux config

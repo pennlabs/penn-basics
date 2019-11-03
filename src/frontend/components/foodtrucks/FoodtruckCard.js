@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import s from 'styled-components'
 
 import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
-import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
-import { getNoiseLevel, getOutletsLevel } from './mapper'
+import { setHoveredFoodtruck } from '../../actions/foodtrucks_action'
+// import { getNoiseLevel, getOutletsLevel } from './mapper'
 
 const Content = s.div`
   width: 100%;
@@ -30,12 +30,16 @@ class FoodtruckCard extends Component {
   }
 
   handleMouseEnter() {
-    const { hoveredSpace, spaceId, setHoveredSpaceDispatch } = this.props
+    const {
+      hoveredFoodtruck,
+      foodtruckId,
+      dispatchSetHoveredFoodtruck
+    } = this.props
 
     // If there is no change to be made
-    if (hoveredSpace === spaceId) return
+    if (hoveredFoodtruck === foodtruckId) return
 
-    setHoveredSpaceDispatch(spaceId)
+    dispatchSetHoveredFoodtruck(foodtruckId)
   }
 
   handleClick() {
@@ -44,10 +48,7 @@ class FoodtruckCard extends Component {
   }
 
   render() {
-    const { name, open, image, quiet, outlets, hours } = this.props
-
-    const noiseLevel = getNoiseLevel(quiet)
-    const outletsLevel = getOutletsLevel(outlets)
+    const { name, open, hours } = this.props
 
     return (
       <Card
@@ -57,13 +58,10 @@ class FoodtruckCard extends Component {
         hoverable
       >
         <Row>
-          {image && (
+          {/* {image && (
             <Col backgroundImage={image} width="30%" borderRadius="4px" />
-          )}
-          <Col
-            padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
-            onMouseEnter={this.handleMouseEnter}
-          >
+          )} */}
+          <Col padding="0" onMouseEnter={this.handleMouseEnter}>
             <Content>
               <Subtitle marginBottom="0">{name}</Subtitle>
 
@@ -74,8 +72,8 @@ class FoodtruckCard extends Component {
                       0,
                       hours.indexOf('am')
                     )}am`}
-                {outletsLevel ? ` • ${outletsLevel}` : ''}
-                {noiseLevel ? ` • ${noiseLevel}` : ''}
+                {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
+                {noiseLevel ? ` • ${noiseLevel}` : ''} */}
               </Subtext>
 
               <Circle open={open} />
@@ -87,7 +85,7 @@ class FoodtruckCard extends Component {
   }
 }
 
-SpaceCard.defaultProps = {
+FoodtruckCard.defaultProps = {
   open: false,
   image: '',
   outlets: -1,
@@ -95,7 +93,7 @@ SpaceCard.defaultProps = {
   hoveredSpace: null,
 }
 
-SpaceCard.propTypes = {
+FoodtruckCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
   image: PropTypes.string,
@@ -103,19 +101,19 @@ SpaceCard.propTypes = {
   quiet: PropTypes.number,
   hours: PropTypes.string.isRequired,
   hoveredSpace: PropTypes.string,
-  spaceId: PropTypes.string.isRequired,
-  setHoveredSpaceDispatch: PropTypes.func.isRequired,
-  setActiveSpaceDispatch: PropTypes.func.isRequired,
+  foodtruckId: PropTypes.string.isRequired,
+  dispatchSetHoveredFoodtruck: PropTypes.func.isRequired,
+  // setActiveSpaceDispatch: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ spaces }) => {
-  const { hoveredSpace } = spaces
-  return { hoveredSpace }
+const mapStateToProps = ({ foodtrucks }) => {
+  const { hoveredFoodtruck } = foodtrucks
+  return { hoveredFoodtruck }
 }
 
 const mapDispatchToProps = dispatch => ({
-  setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
-  setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
+  dispatchSetHoveredFoodtruck: foodtruckId =>
+    dispatch(setHoveredFoodtruck(foodtruckId)),
 })
 
 export default connect(

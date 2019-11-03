@@ -4,6 +4,7 @@ import linkReducer from './linkReducer'
 import spacesReducer from './spacesReducer'
 import laundryReducer from './laundryReducer'
 import homeReducer from './homeReducer'
+import foodtrucksReducer from './foodtrucksReducer'
 
 export default combineReducers({
   dining: diningReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   spaces: spacesReducer,
   laundry: laundryReducer,
   home: homeReducer,
+  foodtrucks: foodtrucksReducer,
 })

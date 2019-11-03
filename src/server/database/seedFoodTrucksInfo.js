@@ -12,7 +12,7 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map((truck, foodTruckID) => {
+  return trucks.map((truck, foodtruckID) => {
     const { menu = [], priceTypes = [] } = truck
 
     const newMenu = Object.entries(menu).map(([smName, submenu]) => {
@@ -42,7 +42,7 @@ function updateFoodTrucks() {
       }
     })
 
-    return { ...truck, menu: newMenu, foodTruckID, priceTypes: newPriceTypes }
+    return { ...truck, menu: newMenu, foodtruckID, priceTypes: newPriceTypes }
   })
 }
 

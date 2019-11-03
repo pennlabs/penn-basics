@@ -9,6 +9,7 @@ import Nav from './shared/Nav'
 import Home from './home/App'
 import NotFound from './shared/NotFound'
 import Dining from './dining/App'
+import Foodtrucks from './foodtrucks/App'
 import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
@@ -50,6 +51,7 @@ export default () => (
             <Route exact path="/" component={Home} />
             <Route exact path="/dining" component={Dining} />
             <Route exact path="/dining/:id" component={Dining} />
+            <Route exact path="/foodtrucks" component={Foodtrucks} />
             <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/laundry/:id" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />

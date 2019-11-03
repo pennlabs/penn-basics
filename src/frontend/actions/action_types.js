@@ -10,6 +10,13 @@ export const getVenueInfoRejected = 'GET_VENUE_INFO_REJECTED'
 export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED'
 export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
 
+// foodtrucks actions
+export const getFoodtrucksDataRequested = 'GET_FOODTRUCKS_DATA_REQUESTED'
+export const getFoodtrucksDataRejected = 'GET_FOODTRUCKS_DATA_REQUESTED'
+export const getFoodtrucksDataFulfilled = 'GET_FOODTRUCKS_DATA_FULFILLED'
+export const setHoveredFoodtruckFulfilled = 'SET_HOVERED_FOODTRUCK_FULFILLED'
+export const setActiveFoodtruckFulfilled = 'SET_ACTIVE_FOODTRUCK_FULFILLED'
+
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'
 export const getSpacesDataRejected = 'GET_SPACES_DATA_REJECTED'
