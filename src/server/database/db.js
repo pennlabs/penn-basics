@@ -49,7 +49,7 @@ function getSpace(spaceId) {
  */
 function getFoodTruck(truckId) {
   return Foodtruck.findOne({
-    foodTruckID: { $in: [truckId] },
+    foodtruckID: { $in: [truckId] },
   })
 }
 

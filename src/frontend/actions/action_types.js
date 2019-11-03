@@ -14,8 +14,10 @@ export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
 export const getFoodtrucksDataRequested = 'GET_FOODTRUCKS_DATA_REQUESTED'
 export const getFoodtrucksDataRejected = 'GET_FOODTRUCKS_DATA_REQUESTED'
 export const getFoodtrucksDataFulfilled = 'GET_FOODTRUCKS_DATA_FULFILLED'
+export const getFoodtruckInfoRequested = 'GET_FOODTRUCK_INFO_REQUESTED'
+export const getFoodtruckInfoFulfilled = 'GET_FOODTRUCK_INFO_FULFILLED'
+export const getFoodtruckInfoRejected = 'GET_FOODTRUCK_INFO_REJECTED'
 export const setHoveredFoodtruckFulfilled = 'SET_HOVERED_FOODTRUCK_FULFILLED'
-export const setActiveFoodtruckFulfilled = 'SET_ACTIVE_FOODTRUCK_FULFILLED'
 
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'

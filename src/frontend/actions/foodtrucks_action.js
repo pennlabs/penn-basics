@@ -5,8 +5,10 @@ import {
   getFoodtrucksDataRequested,
   getFoodtrucksDataRejected,
   getFoodtrucksDataFulfilled,
+  getFoodtruckInfoRequested,
+  getFoodtruckInfoFulfilled,
+  getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
-  setActiveFoodtruckFulfilled,
 } from './action_types'
 import { convertDate } from '../helperFunctions'
 
@@ -62,7 +64,7 @@ export const getAllFoodtrucksData = () => {
           const { foodtruckID } = foodtruck
           formattedData[foodtruckID] = foodtruckObj
         })
-        // console.log(formattedData)
+
         dispatch({
           type: getFoodtrucksDataFulfilled,
           foodtrucksData: formattedData,
@@ -72,6 +74,40 @@ export const getAllFoodtrucksData = () => {
       dispatch({
         type: getFoodtrucksDataRejected,
         error: error.message || 'There was an error pulling studyspaces data',
+      })
+    }
+  }
+}
+
+export const getFoodtruckInfo = id => {
+  return dispatch => {
+    dispatch({
+      type: getFoodtruckInfoRequested,
+    })
+
+    try {
+      axios.get(`/api/foodtrucks/${id}`).then(res => {
+        const { trucks: truck } = res.data
+        const formattedPriceTypes = {}
+        const { priceTypes = [] } = truck
+        priceTypes.forEach(priceType => {
+          formattedPriceTypes[priceType.name] = priceType.options
+        })
+
+        dispatch({
+          type: getFoodtruckInfoFulfilled,
+          foodtruckInfo: {
+            ...truck,
+            priceTypes: formattedPriceTypes,
+          },
+        })
+      })
+    } catch (err) {
+      dispatch({
+        type: getFoodtruckInfoRejected,
+        error:
+          err.message ||
+          'There was an error pulling relavant information about the foodtruck'
       })
     }
   }
