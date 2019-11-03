@@ -12,31 +12,19 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map((truck, truckIndex) => {
-    const { name, payments, start, end, location, tags, link } = truck
-
-    const { priceTypes } = truck
-
-    const menu = { ...truck.menu }
+  return trucks.map((truck, foodTruckID) => {
+    const { menu = [], priceTypes = [] } = truck
 
     const newMenu = Object.entries(menu).map(([smName, submenu]) => {
-      const options = priceTypes ? priceTypes[smName] : null
-
+      // const options = priceTypes ? priceTypes[smName] : null
       const items = submenu.map(item => {
-        let { price } = item
-
-        /* enforce price as type [Number] */
-        if (typeof price === 'number') {
-          price = [price]
-        } else {
-          price = [...price]
-        }
+        const { price, name } = item
 
         const newItem = {
-          name: item.name,
+          name: typeof name === 'string' ? name : name.toString(), // enfore name as type String
           /* options, if it exists, is the list of options corresponding to the number of prices available for the item */
-          options: options ? options.slice(0, price.length) : options,
-          prices: price,
+          // options: options ? options.slice(0, price.length) : options,
+          prices: typeof price === 'number' ? [price] : price, // enfore price as type [Number]
         }
         return newItem
       })
@@ -47,19 +35,14 @@ function updateFoodTrucks() {
       }
     })
 
-    const newTruck = {
-      name,
-      payments,
-      start,
-      end,
-      location,
-      tags,
-      link,
-      menu: newMenu,
-      foodTruckID: truckIndex,
-    }
+    const newPriceTypes = Object.entries(priceTypes).map(([smName, types]) => {
+      return {
+        name: smName,
+        options: types,
+      }
+    })
 
-    return newTruck
+    return { ...truck, menu: newMenu, foodTruckID, priceTypes: newPriceTypes }
   })
 }
 
@@ -69,7 +52,7 @@ function loadFoodTrucksIntoDB(truckArray) {
       truck => new FoodTruck(truck).save().then(console.log) // eslint-disable-line
     )
   ).then(() => {
-    console.log('----seeding completed----') // eslint-disable-line
+    console.log('----foodtrucks seeding completed----') // eslint-disable-line
     process.exit(0)
   })
 }

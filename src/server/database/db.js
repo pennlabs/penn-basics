@@ -1,15 +1,10 @@
 require('./mongoose-connect')
 
 const Space = require('./models/Space')
-const Event = require('./models/Event')
-const Foodtrucks = require('./models/FoodTruck')
+const Foodtruck = require('./models/FoodTruck')
 
 function findAllFoodtrucks() {
-  return Foodtrucks.find()
-}
-
-const filterFoodtrucks = () => {
-  
+  return Foodtruck.find()
 }
 
 function findAllSpaces() {
@@ -52,7 +47,7 @@ function getSpace(spaceId) {
  * @param {Number} truckId
  */
 function getFoodTruck(truckId) {
-  return Foodtrucks.findOne({
+  return Foodtruck.findOne({
     foodTruckID: { $in: [truckId] },
   })
 }
@@ -71,5 +66,4 @@ module.exports = {
   insertSpace,
   findAllSpaces,
   findAllFoodtrucks,
-  getEvents,
 }

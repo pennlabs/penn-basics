@@ -101,7 +101,7 @@ const Nav = () => {
           <LogoText>Penn Basics </LogoText>
         </Link>
 
-        <BetaTag className="tag is-rounded">{`Beta v${pjson.version}`}</BetaTag>
+        <BetaTag className="tag is-rounded">{`v${pjson.version}`}</BetaTag>
 
         <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 

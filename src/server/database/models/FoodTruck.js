@@ -13,11 +13,11 @@ const { Schema } = mongoose
  */
 
 const FoodTruckSchema = new Schema({
+  foodTruckID: Number,
   name: {
     type: String,
     required: true,
   },
-  foodTruckID: Number,
   payments: [String],
   start: [String],
   end: [String],
@@ -26,15 +26,21 @@ const FoodTruckSchema = new Schema({
     lat: Number,
     lng: Number,
   },
-  link: String,
   tags: [String],
+  link: String,
+  languageTypes: [String],
+  priceTypes: [
+    {
+      name: String,
+      options: [String],
+    },
+  ],
   menu: [
     {
       name: String,
       items: [
         {
           name: String,
-          options: [String],
           prices: [Number],
         },
       ],
