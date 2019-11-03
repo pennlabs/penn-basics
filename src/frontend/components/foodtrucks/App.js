@@ -18,7 +18,7 @@ import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
 
 // import Filter from './Filter'
-// import SpaceModal from './SpaceModal'
+import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 
 // TODO ghost loaders
@@ -70,9 +70,12 @@ class App extends Component {
       error,
       pending,
       hoveredFoodtruck,
+      match: {
+        params: { id },
+      },
     } = this.props
 
-    console.log(filteredFoodtrucksData)
+    const parsedFoodtruckId = Number.isNaN(id) ? null : id
 
     const { googleMapError } = this.state
 
@@ -103,7 +106,6 @@ class App extends Component {
 
             {Object.keys(filteredFoodtrucksData).map(foodtruckId => {
               const foodtruck = filteredFoodtrucksData[foodtruckId]
-              console.log(foodtruck)
               return (
                 <div key={foodtruckId}>
                   <FoodtruckCard foodtruckId={foodtruckId} {...foodtruck} />
@@ -127,7 +129,7 @@ class App extends Component {
           </Col>
         </Row>
 
-        {/* <SpaceModal /> */}
+        <FoodtruckModal foodtruckId={parsedFoodtruckId} />
       </>
     )
   }

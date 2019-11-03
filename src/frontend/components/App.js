@@ -52,6 +52,7 @@ export default () => (
             <Route exact path="/dining" component={Dining} />
             <Route exact path="/dining/:id" component={Dining} />
             <Route exact path="/foodtrucks" component={Foodtrucks} />
+            <Route exact path="/foodtrucks/:id" component={Foodtrucks} />
             <Route exact path="/laundry" component={Laundry} />
             <Route exact path="/laundry/:id" component={Laundry} />
             <Route exact path="/studyspaces" component={StudySpaces} />
