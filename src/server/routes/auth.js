@@ -4,19 +4,13 @@ const router = require('express').Router()
 
 require('dotenv').config()
 
-const requestTokenURL =
-  process.env.OAUTH_REQUEST_TOKEN_URL ||
-  'https://www.provider.com/oauth/request_token'
-const accessTokenURL =
-  process.env.OAUTH_ACCESS_TOKEN_URL ||
-  'https://www.provider.com/oauth/access_token'
-const userAuthorizationURL =
+const tokenURL =
+  process.env.OAUTH_TOKEN_URL || 'https://www.provider.com/oauth/token'
+const authorizationURL =
   process.env.OAUTH_USER_AUTHORIZATION_URL ||
   'https://platform.pennlabs.org/accounts/authorize'
-const consumerKey =
-  process.env.OAUTH_CONSUMER_KEYconsumerKey || 'keyboard-cat-key'
-const consumerSecret =
-  process.env.OAUTH_CONSUMER_SECRET || 'keyboard-cat-secret'
+const clientID = process.env.OAUTH_CLIENT_ID || 'keyboard-cat-id'
+const clientSecret = process.env.OAUTH_CLIENT_SECRET || 'keyboard-cat-secret'
 // this is localhost when acting locally
 const callbackURL =
   process.env.callbackURL ||
@@ -26,14 +20,7 @@ module.exports = function authRouter(DB) {
   passport.use(
     'provider',
     new OAuthStrategy(
-      {
-        requestTokenURL,
-        accessTokenURL,
-        userAuthorizationURL,
-        consumerKey,
-        consumerSecret,
-        callbackURL,
-      },
+      { tokenURL, authorizationURL, clientID, clientSecret, callbackURL },
       (accessToken, refreshToken, profile, done) => {
         DB.getUser(profile.pennID)
           .then(user => {
