@@ -2,6 +2,7 @@ require('./mongoose-connect')
 
 const Space = require('./models/Space')
 const Foodtruck = require('./models/FoodTruck')
+const User = require('./models/User')
 
 // return all fields exceept for menu and priceTypes
 const findAllFoodtrucks = () => {
@@ -60,6 +61,14 @@ function insertSpace(space) {
   return new Space(space).save()
 }
 
+function getUser(pennID) {
+  return User.findOne({ pennID: { $in: [pennID] } })
+}
+
+function insertUser(userData) {
+  return new User(userData).save()
+}
+
 module.exports = {
   filterSpaces,
   getSpace,
@@ -67,4 +76,6 @@ module.exports = {
   insertSpace,
   findAllSpaces,
   findAllFoodtrucks,
+  insertUser,
+  getUser,
 }
