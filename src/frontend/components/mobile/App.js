@@ -2,9 +2,9 @@ import React from 'react'
 import s from 'styled-components'
 
 const DownloadImage = s.img`
-margin-bottom: 1.5rem;
-width: 100%;
-max-width: 14rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 14rem;
 `
 
 const App = () => (
