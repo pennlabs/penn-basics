@@ -217,10 +217,3 @@ ModalFoodtrucks.propTypes = {
   toggle: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired, // eslint-disable-line
 }
-
-export const FoodtrucksModalContainer = styled.div`
-  padding: 0 5vw;
-  background: ${({ background }) => background || WHITE};
-  padding-top: ${({ paddingTop }) => paddingTop || 0};
-  padding-bottom: ${({ paddingBottom }) => paddingBottom || 0};
-`

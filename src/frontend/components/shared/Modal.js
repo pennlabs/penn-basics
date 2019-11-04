@@ -216,7 +216,7 @@ Modal.propTypes = {
 }
 
 export const ModalContainer = styled.div`
-  padding: 0 8.33vw;
+  padding: 0 ${({ padding = 8.33 }) => padding}vw;
   background: ${({ background }) => background || WHITE};
   padding-top: ${({ paddingTop }) => paddingTop || 0};
   padding-bottom: ${({ paddingBottom }) => paddingBottom || 0};

@@ -9,16 +9,16 @@ import {
   Text,
   ModalFoodtrucks,
   ModalContainer,
-  FoodtrucksModalContainer,
   Image,
   Tag,
   Map,
   Subtext,
 } from '../shared'
-import { SNOW } from '../../styles/colors'
+import { SNOW, LIGHT_GRAY } from '../../styles/colors'
 import Hours from './Hours'
 import Menu from './Menu'
 import Form from './Form'
+import Review from './Review'
 
 const Credit = s.div`
   width: 100%;
@@ -29,10 +29,32 @@ const Buttons = s.div`
   float: right;
 `
 
+const Chevron = s.span`
+  cursor: pointer;
+  right: 0;
+  margin: 4px 10px 4px 10px;
+  width: 0.6rem;
+  height: 0.6rem;
+  display: inline-block;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+
+  ${({ expanded }) =>
+    expanded &&
+    `
+    margin: 4px 10px 0px 10px;
+    -webkit-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    `}
+`
+const reviews = ["hello", "this is a nice foodtruck"]
+
 class FoodtruckModal extends Component {
   constructor(props) {
     super(props)
-    this.state = { showForm: false }
+    this.state = { showForm: false, showReview: false }
   }
 
   componentDidMount() {
@@ -67,13 +89,13 @@ class FoodtruckModal extends Component {
       tags,
     } = foodtruckInfo || {}
 
-    const { showForm } = this.state
+    const { showForm, showReview } = this.state
 
     return (
       <ModalFoodtrucks show={show} toggle={this.toggle}>
         {foodtruckInfo ? (
           <>
-            <FoodtrucksModalContainer style={{ marginBottom: '3vh' }}>
+            <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
               {!showForm && (
                 <Buttons>
                   <span // eslint-disable-line
@@ -96,7 +118,7 @@ class FoodtruckModal extends Component {
                 10&nbsp;
                 <i className="fas fa-comment-alt" />
               </span>
-            </FoodtrucksModalContainer>
+            </ModalContainer>
 
             {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
 
@@ -110,23 +132,24 @@ class FoodtruckModal extends Component {
             )}
 
             {description && (
-              <FoodtrucksModalContainer paddingTop="0.5rem">
+              <ModalContainer paddingTop="0.5rem" padding="5">
                 <Text>{description}</Text>
-              </FoodtrucksModalContainer>
+              </ModalContainer>
             )}
 
             {tags && (
-              <FoodtrucksModalContainer paddingBottom="0.5rem">
+              <ModalContainer paddingBottom="0.5rem" padding="5">
                 {tags.map(tag => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
-              </FoodtrucksModalContainer>
+              </ModalContainer>
             )}
 
-            <FoodtrucksModalContainer
+            <ModalContainer
               background={SNOW}
               paddingTop="1.5rem"
               paddingBottom="1rem"
+              padding="5"
             >
               <Form
                 show={showForm}
@@ -139,7 +162,7 @@ class FoodtruckModal extends Component {
               </Text>
               <br />
               <Text>{address}</Text>
-            </FoodtrucksModalContainer>
+            </ModalContainer>
 
             {location && location.lat && location.lng ? (
               <Map
@@ -151,7 +174,20 @@ class FoodtruckModal extends Component {
               />
             ) : null}
 
-            <ModalContainer paddingTop="1.5rem">
+            <ModalContainer padding="5" paddingTop="1.5rem">
+              <Text>
+                <strong> Read Reviews (10)</strong>
+              </Text>
+              <Chevron
+                onClick={() => {
+                  this.setState({ showReview: !showReview })
+                }}
+                expanded={showReview}
+              />
+              <Review show={showReview} reviews={reviews} />
+            </ModalContainer>
+
+            <ModalContainer paddingTop="1.5rem" padding="5">
               <Menu foodtruckInfo={foodtruckInfo} />
               {/* <Hours start={start} end={end} /> */}
             </ModalContainer>
