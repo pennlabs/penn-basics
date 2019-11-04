@@ -25,7 +25,6 @@ import {
   toggleSpacesNoise,
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
-import ToggleNeighborhood from './ToggleNeighborhood'
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -181,8 +180,6 @@ class Filter extends Component {
         <ClearText onClick={clearSpacesFiltersDispatch}>
           Clear filters
         </ClearText>
-
-        <ToggleNeighborhood />
       </FilterWrapper>
     )
   }

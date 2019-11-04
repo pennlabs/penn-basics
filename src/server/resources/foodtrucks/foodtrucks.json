@@ -826,6 +826,369 @@
     }
   },
   {
+    "name": "New York Famous Halal",
+    "payments": ["Cash", "Venmo", "MasterCard", "American Express"],
+    "start": ["9:00", "9:00", "9:00", "9:00", "9:00", "9:00", "9:00"],
+    "end": ["19:30", "19:30", "19:30", "19:30", "19:30", "19:30", "19:30"],
+    "location": {
+      "lat": 39.9512115,
+      "lng": -75.1982896
+    },
+    "tags": ["halal", "free drink with meal"],
+    "menu": {
+      "Rice Platters": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6.00
+        },
+        {
+          "name": "Lamb over Rice",
+          "price": 6.00
+        },
+        {
+          "name": "Combination",
+          "price": 6.00
+        },
+        {
+          "name": "Fish over Rice",
+          "price": 6.00
+        },
+        {
+          "name": "Falafel Rice",
+          "price": 6.00
+        },
+        {
+          "name": "Shrimp over Roce",
+          "price": 6.00
+        }
+      ],
+      "Sandwiches": [
+        {
+          "name": "Chicken Gryo",
+          "price": 5.00
+        },
+        {
+          "name": "Lamb Gyro",
+          "price": 5
+        },
+        {
+          "name": "Combo Gyro",
+          "price": 5
+        },
+        {
+          "name": "Falafel Sandwich",
+          "price": 5
+        },
+        {
+          "name": "Fish Sandwich",
+          "price": 5
+        }
+      ],
+      "Salads": [
+        {
+          "name": "Chicken Salad",
+          "price": 6
+        },
+        {
+          "name": "Lamb Salad",
+          "price": 6
+        },
+        {
+          "name": "Combo Salad",
+          "price": 6
+        },
+        {
+          "name": "Falafel Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish Salad",
+          "price": 6
+        }
+      ]
+    }
+  },
+  {
+    "name": "Penn Halal Gyro",
+    "payments": ["Cash", "Credit Card", "Debit Card"],
+    "start": ["10:30", "10:30", "10:30", "10:30", "10:30", "10:30", "10:30"],
+    "end": ["21:00", "21:00", "21:00", "21:00", "21:00", "21:00", "21:00"],
+    "location": {
+      "lat": 39.953093,
+      "lng": -75.203014
+    },
+    "tags": ["gyro", "halal"],
+    "menu": {
+      "Rice Special": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish over Rice",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Rice",
+          "price": 6
+        },
+        {
+          "name": "Combo over Rice",
+          "price": 7
+        },
+        {
+          "name": "Kabab over Rice",
+          "price": 6
+        },
+        {
+          "name": "Mix Veggie over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fried Shrimp over Rice",
+          "price": 7
+        },
+        {
+          "name": "Philly Steak over Rice",
+          "price": 6
+        }
+      ],
+      "Gyros": [
+        {
+          "name": "Chicken Gyro",
+          "price": "5"
+        },
+        {
+          "name": "Lamb Gyro",
+          "price": "5"
+        },
+        {
+          "name": "Fried Shrimp Gyro",
+          "price": 6
+        },
+        {
+          "name": "Combo Gyro",
+          "price": 6
+        },
+        {
+          "name": "Chicken Quesadillas",
+          "price": 6
+        },
+        {
+          "name": "Falafel Sandwich",
+          "price": 5
+        },
+        {
+          "name": "Kabab Sandwich",
+          "price": 5
+        }
+      ],
+      "Burger": [
+        {
+          "name": "Chicken Cheesesteak",
+          "price": 6
+        },
+        {
+          "name": "Philly Cheesesteak",
+          "price": 6
+        },
+        {
+          "name": "BBQ Chicken Cheesesteak",
+          "price": 6
+        },
+        {
+          "name": "Cheese Burger",
+          "price": 4
+        },
+        {
+          "name": "Double Cheese Burger",
+          "price": 5
+        }
+      ],
+      "Salad Special": [
+        {
+          "name": "Chicken over Salad",
+          "price": 6
+        },
+        {
+          "name": "Lamb over Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish over Salad",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Salad",
+          "price": 6
+        },
+        {
+          "name": "Kabab over Salad",
+          "price": 6
+        },
+        {
+          "name": "Combo over Salad",
+          "price": 6
+        }
+      ],
+      "Hoagies": [
+        {
+          "name": "Chicken Hoagie",
+          "price": 6
+        },
+        {
+          "name": "Lamb Hoagie",
+          "price": 6
+        },
+        {
+          "name": "Fish Hoagie",
+          "price": 6
+        },
+        {
+          "name": "Falafel Hoagie",
+          "price": 6
+        },
+        {
+          "name": "Kabab Hoagie",
+          "price": 6
+        },
+        {
+          "name": "Combo Hoagie",
+          "price": 6.5
+        },
+        {
+          "name": "Fried Shrimp Hoagie",
+          "price": 7
+        }
+      ],
+      "Others": [
+        {
+          "name": "French Fries",
+          "price": 3
+        },
+        {
+          "name": "French Fries with Soda",
+          "price": 4
+        },
+        {
+          "name": "Cheese Fries",
+          "price": 4
+        },
+        {
+          "name": "Cheese Fries with Soda",
+          "price": 5
+        },
+        {
+          "name": "Wings (4 pieces)",
+          "price": 6
+        },
+        {
+          "name": "Wing (4 pieces) with Soda",
+          "price": 6
+        }
+      ]
+    }
+  },
+  {
+    "name": "Troy Halal Station",
+    "payments": ["Cash", "Venmo", "Square", "Visa", "MasterCard", "American Express"],
+    "start": ["9:00", "9:00", "9:00", "9:00", "9:00", null, "9:00"],
+    "end": ["20:00", "20:00", "20:00", "20:00", "20:00", null, "20:00"],
+    "location": {
+      "lat": 39.9511858,
+      "lng": -75.1987472
+    },
+    "tags": ["gyro", "halal", "free fries and drink with meal"],
+    "menu": {
+      "Chicken": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6
+        },
+        {
+          "name": "Chicken Wrap",
+          "price": 5
+        },
+        {
+          "name": "Chicken Salad",
+          "price": 6
+        },
+        {
+          "name": "Chicken and Lamb over Rice",
+          "price": 6
+        },
+        {
+          "name": "Chicken over Fries",
+          "price": 6
+        },
+        {
+          "name": "Chicken and Lamb over Fries",
+          "price": 6
+        }
+      ],
+      "Lamb": [
+        {
+          "name": "Lamb over Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb Wrap",
+          "price": 5
+        },
+        {
+          "name": "Lamb over Fries",
+          "price": 6
+        }
+      ],
+      "Falafel": [
+        {
+          "name": "Falafel over Rice",
+          "price": 6
+        },
+        {
+          "name": "Falafel Wrap",
+          "price": 5
+        },
+        {
+          "name": "Falafel over Salad",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Fries",
+          "price": 6
+        }
+      ],
+      "Fish": [
+        {
+          "name": "Fish over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish over Salad",
+          "price": 6
+        },
+        {
+          "name": "Fish Wrap",
+          "price": 5
+        },
+        {
+          "name": "Fish over Fries",
+          "price": 6
+        }
+      ],
+      "Others": [
+        {
+          "name": "Halal Philly Cheesesteak",
+          "price": 6
+        }
+      ]
+    }
+  },
+  {
     "name": "Yue Kee",
     "location": {
       "address": "238 South 38th Street, Philadelphia, PA 19104"
