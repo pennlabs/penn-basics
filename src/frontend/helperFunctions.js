@@ -15,6 +15,13 @@ export const pad = number => {
   return number < 10 ? `0${number}` : `${number}`
 }
 
+export const padHours = hourString => {
+  if (!hourString) return null
+  const hour = parseInt(hourString.substring(0, hourString.indexOf(':')), 10)
+  const remaining = hourString.substring(hourString.indexOf(':'))
+  return `${pad(hour)}${remaining}`
+}
+
 export const isValidNumericId = id => {
   if (id === null || id === undefined) return false
   const num = Number(id)

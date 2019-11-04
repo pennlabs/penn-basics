@@ -10,11 +10,11 @@ import {
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
 } from './action_types'
-import { convertDate } from '../helperFunctions'
+import { convertDate, padHours } from '../helperFunctions'
 
 const isOpen = ({ start, end }, day) => {
-  const startTime = start[day]
-  const endTime = end[day]
+  const startTime = padHours(start[day])
+  const endTime = padHours(end[day])
 
   // If either time is null then the space is closed
   if (!startTime || !endTime) {
