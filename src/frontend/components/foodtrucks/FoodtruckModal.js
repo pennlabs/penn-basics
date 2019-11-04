@@ -9,6 +9,7 @@ import {
   Text,
   ModalFoodtrucks,
   ModalContainer,
+  FoodtrucksModalContainer,
   Image,
   Tag,
   Map,
@@ -21,6 +22,10 @@ import Menu from './Menu'
 const Credit = s.div`
   width: 100%;
   padding: 0 1rem;
+`
+
+const Buttons = s.div`
+  float: right;
 `
 
 class FoodtruckModal extends Component {
@@ -60,9 +65,25 @@ class FoodtruckModal extends Component {
       <ModalFoodtrucks show={show} toggle={this.toggle}>
         {foodtruckInfo ? (
           <>
-            <ModalContainer>
-              <Title marginBottom="2.5vh">{name}</Title>
-            </ModalContainer>
+            <FoodtrucksModalContainer style={{ marginBottom: '3vh' }}>
+              <Buttons>
+                <span // eslint-disable-line
+                  className="button is-info"
+                >
+                  <i className="fas fa-edit" />
+                  &nbsp; Leave a Review
+                </span>
+              </Buttons>
+              <Title marginBottom="0.5vh">{name}</Title>
+              <span style={{ fontSize: '80%', marginRight: '0.7em' }}>
+                5.00&nbsp;
+                <i className="fas fa-star" />
+              </span>
+              <span style={{ fontSize: '80%' }}>
+                10&nbsp;
+                <i className="fas fa-comment-alt" />
+              </span>
+            </FoodtrucksModalContainer>
 
             {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
 
@@ -76,20 +97,20 @@ class FoodtruckModal extends Component {
             )}
 
             {description && (
-              <ModalContainer paddingTop="0.5rem">
+              <FoodtrucksModalContainer paddingTop="0.5rem">
                 <Text>{description}</Text>
-              </ModalContainer>
+              </FoodtrucksModalContainer>
             )}
 
             {tags && (
-              <ModalContainer paddingBottom="0.5rem">
+              <FoodtrucksModalContainer paddingBottom="0.5rem">
                 {tags.map(tag => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
-              </ModalContainer>
+              </FoodtrucksModalContainer>
             )}
 
-            <ModalContainer
+            <FoodtrucksModalContainer
               background={SNOW}
               paddingTop="1.5rem"
               paddingBottom="1rem"
@@ -99,7 +120,7 @@ class FoodtruckModal extends Component {
               </Text>
               <br />
               <Text>{address}</Text>
-            </ModalContainer>
+            </FoodtrucksModalContainer>
 
             {location && location.lat && location.lng ? (
               <Map

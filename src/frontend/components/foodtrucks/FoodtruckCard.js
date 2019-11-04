@@ -74,9 +74,11 @@ class FoodtruckCard extends Component {
                 <Subtitle marginBottom="0">{name}</Subtitle>
 
                 <Subtext marginBottom="0">
+                  5.00&nbsp;
+                  <i className="fas fa-star" />
                   {open
-                    ? `Open: ${hours}`
-                    : `Closed • Opens at ${hours.substring(
+                    ? ` • Open: ${hours}`
+                    : ` • Closed • Opens at ${hours.substring(
                         0,
                         hours.indexOf('am')
                       )}am`}
