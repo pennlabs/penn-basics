@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
-const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+const RED = '/img/food-pin.png'
 const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 
 const MapWrapper = styled.div`
@@ -13,7 +13,7 @@ const MapWrapper = styled.div`
   height: ${({ height }) => height || '100%'};
 `
 
-export class Map extends Component {
+export class FoodtruckMap extends Component {
   constructor(props) {
     super(props)
 
@@ -91,11 +91,10 @@ export class Map extends Component {
     const marker = markers[key]
 
     if (!marker) return
-
-    marker.setIcon(icon) // TODO this might not work
+    marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 33) })
   }
 
-  createMarker(key, { location, icon = RED }) {
+  createMarker(key, { location }) {
     const { handleClickMarker } = this.props
 
     if (!location) {
@@ -122,8 +121,7 @@ export class Map extends Component {
 
     const marker = new google.maps.Marker({
       position: location,
-      icon,
-      // icon: {url: RED, scaledSize: new google.maps.Size(20,33)},
+      icon: { url: RED, scaledSize: new google.maps.Size(20, 33) },
       map,
     })
 
@@ -192,7 +190,7 @@ export class Map extends Component {
   }
 }
 
-Map.defaultProps = {
+FoodtruckMap.defaultProps = {
   location: {
     lat: 39.9522,
     lng: -75.1932,
@@ -205,7 +203,7 @@ Map.defaultProps = {
   handleClickMarker: null,
 }
 
-Map.propTypes = {
+FoodtruckMap.propTypes = {
   location: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number,

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import FoodtruckCard from './FoodtruckCard'
 import {
-  Map,
+  FoodtruckMap,
   Row,
   Col,
   Scrollbar,
@@ -119,7 +119,7 @@ class App extends Component {
           <Col>
             <ErrorMessage message={googleMapError} />
             {!googleMapError && (
-              <Map
+              <FoodtruckMap
                 mapId="map"
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
                 markers={filteredFoodtrucksData}

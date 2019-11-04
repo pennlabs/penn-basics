@@ -11,7 +11,7 @@ import {
   ModalContainer,
   Image,
   Tag,
-  Map,
+  FoodtruckMap,
   Subtext,
 } from '../shared'
 import { SNOW, LIGHT_GRAY } from '../../styles/colors'
@@ -165,7 +165,7 @@ class FoodtruckModal extends Component {
             </ModalContainer>
 
             {location && location.lat && location.lng ? (
-              <Map
+              <FoodtruckMap
                 mapId={name}
                 location={location}
                 showMarker

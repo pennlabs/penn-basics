@@ -18,7 +18,7 @@
     },
     "tags": ["gyro", "halal"],
     "menu": {
-      "All": [
+      "Rice Platters": [
         {
           "name": "Chicken over Rice",
           "price": 6
@@ -46,7 +46,9 @@
         {
           "name": "Kabab over Rice",
           "price": 6
-        },
+        }
+      ],
+      "Salads": [
         {
           "name": "Chicken Salad",
           "price": 6
@@ -74,7 +76,9 @@
         {
           "name": "Falafel Salad",
           "price": 6
-        },
+        }
+      ],
+      "Gyro": [
         {
           "name": "Chicken Gyro",
           "price": 5
@@ -1191,7 +1195,9 @@
   {
     "name": "Yue Kee",
     "location": {
-      "address": "238 South 38th Street, Philadelphia, PA 19104"
+      "address": "238 South 38th Street, Philadelphia, PA 19104",
+      "lat": 39.953010,
+      "lng": -75.198941
     },
     "tags": ["Cantonese"],
     "payments": ["Cash"],
