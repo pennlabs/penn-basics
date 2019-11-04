@@ -18,6 +18,7 @@ import {
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
 import Menu from './Menu'
+import Form from './Form'
 
 const Credit = s.div`
   width: 100%;
@@ -29,6 +30,11 @@ const Buttons = s.div`
 `
 
 class FoodtruckModal extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { showForm: false }
+  }
+
   componentDidMount() {
     const { foodtruckId, dispatchGetFoodtruckInfo } = this.props
     if (foodtruckId) {
@@ -61,19 +67,26 @@ class FoodtruckModal extends Component {
       tags,
     } = foodtruckInfo || {}
 
+    const { showForm } = this.state
+
     return (
       <ModalFoodtrucks show={show} toggle={this.toggle}>
         {foodtruckInfo ? (
           <>
             <FoodtrucksModalContainer style={{ marginBottom: '3vh' }}>
-              <Buttons>
-                <span // eslint-disable-line
-                  className="button is-info"
-                >
-                  <i className="fas fa-edit" />
-                  &nbsp; Leave a Review
-                </span>
-              </Buttons>
+              {!showForm && (
+                <Buttons>
+                  <span // eslint-disable-line
+                    className="button is-info"
+                    onClick={() => {
+                      this.setState({ showForm: true })
+                    }}
+                  >
+                    <i className="fas fa-edit" />
+                    &nbsp; Leave a Review
+                  </span>
+                </Buttons>
+              )}
               <Title marginBottom="0.5vh">{name}</Title>
               <span style={{ fontSize: '80%', marginRight: '0.7em' }}>
                 5.00&nbsp;
@@ -115,6 +128,12 @@ class FoodtruckModal extends Component {
               paddingTop="1.5rem"
               paddingBottom="1rem"
             >
+              <Form
+                show={showForm}
+                hideFunction={() => {
+                  this.setState({ showForm: false })
+                }}
+              />
               <Text>
                 <strong>Address</strong>
               </Text>
