@@ -7,6 +7,7 @@ import s from 'styled-components'
 import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
 import { setHoveredFoodtruck } from '../../actions/foodtrucks_action'
 import { DARK_GRAY } from '../../styles/colors'
+import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 // import { getNoiseLevel, getOutletsLevel } from './mapper'
 
 const StyledLink = s(Link)`
@@ -74,14 +75,21 @@ class FoodtruckCard extends Component {
                 <Subtitle marginBottom="0">{name}</Subtitle>
 
                 <Subtext marginBottom="0">
-                  5.00&nbsp;
-                  <i className="fas fa-star" />
                   {open
-                    ? ` • Open: ${hours}`
-                    : ` • Closed • Opens at ${hours.substring(
+                    ? ` Open: ${hours}`
+                    : ` Closed • Opens at ${hours.substring(
                         0,
                         hours.indexOf('am')
                       )}am`}
+                  {' • 5.00'}
+                  &nbsp;
+                  <StarIcon
+                    fill="black"
+                    color="black"
+                    viewBox="0 0 35 35"
+                    opacity="0.5"
+                    transform="translate(0, 11)"
+                  />
                   {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
                   {noiseLevel ? ` • ${noiseLevel}` : ''} */}
                 </Subtext>

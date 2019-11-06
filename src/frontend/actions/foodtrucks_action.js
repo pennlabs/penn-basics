@@ -46,19 +46,16 @@ export const getAllFoodtrucksData = () => {
           const day =
             moment().format('d') === '0' ? 6 : Number(moment().format('d')) - 1
 
-          if (foodtruck.start.length !== 0 && foodtruck.end.length !== 0) {
+          if (foodtruck.start.length && foodtruck.end.length) {
             foodtruckObj.open = isOpen(foodtruck, day)
-            if (foodtruckObj.open) {
-              foodtruckObj.hours = `
-              ${convertDate(foodtruck.start[day])}
-              -
-              ${convertDate(foodtruck.end[day])}
-            `
-            } else {
-              foodtruckObj.hours = 'Closed'
-            }
+            foodtruckObj.hours = `
+            ${convertDate(foodtruck.start[day])}
+            -
+            ${convertDate(foodtruck.end[day])}
+          `
           } else {
-            foodtruckObj.hours = 'Closed'
+            foodtruckObj.open = false
+            foodtruckObj.hours = ''
           }
 
           const { foodtruckID } = foodtruck
@@ -107,7 +104,7 @@ export const getFoodtruckInfo = id => {
         type: getFoodtruckInfoRejected,
         error:
           err.message ||
-          'There was an error pulling relavant information about the foodtruck'
+          'There was an error pulling relavant information about the foodtruck',
       })
     }
   }
@@ -117,15 +114,6 @@ export const setHoveredFoodtruck = footruckId => {
   return dispatch => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
-      footruckId,
-    })
-  }
-}
-
-export const setActiveSpace = footruckId => {
-  return dispatch => {
-    dispatch({
-      type: setActiveFoodtruckFulfilled,
       footruckId,
     })
   }

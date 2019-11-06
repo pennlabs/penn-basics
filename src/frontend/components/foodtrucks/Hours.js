@@ -1,25 +1,54 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import s from 'styled-components'
+import moment from 'moment'
 
 import { Text } from '../shared'
-// import { getHours } from './mapper'
+import { convertDate } from '../../helperFunctions'
+import { LIGHTER_BLUE } from '../../styles/colors'
+
+const BodyRow = s.tr`
+  font-size: 80%;
+
+  &.selected {
+    background: ${LIGHTER_BLUE};
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: ${LIGHTER_BLUE};
+    }
+  }
+`
+
+const todayIdx =
+  moment().format('d') === '0' ? 6 : Number(moment().format('d')) - 1
 
 const Hours = ({ start, end }) => {
   const days = [
-    'Sunday',
     'Monday',
     'Tuesday',
     'Wednesday',
     'Thursday',
     'Friday',
     'Saturday',
+    'Sunday',
   ]
 
   const hoursArr = []
 
-  let i
-  for (i = 0; i < 7; i += 1) {
-    hoursArr.push(getHours({ start, end }, i))
+  if (start.length && end.length) {
+    days.forEach((_, idx) => {
+      if (!start[idx]) {
+        hoursArr.push(`Closed`)
+      } else {
+        hoursArr.push(`
+          ${convertDate(start[idx])}
+          -
+          ${convertDate(end[idx])}
+        `)
+      }
+    })
   }
 
   return (
@@ -30,11 +59,11 @@ const Hours = ({ start, end }) => {
 
       <table className="table is-bordered is-fullwidth">
         <tbody>
-          {hoursArr.map((str, idx) => (
-            <tr key={days[idx]}>
-              <td>{days[idx]}</td>
+          {days.map((str, idx) => (
+            <BodyRow key={str} className={idx === todayIdx && 'selected'}>
               <td>{str}</td>
-            </tr>
+              <td> {hoursArr.length ? hoursArr[idx] : 'No Available'} </td>
+            </BodyRow>
           ))}
         </tbody>
       </table>

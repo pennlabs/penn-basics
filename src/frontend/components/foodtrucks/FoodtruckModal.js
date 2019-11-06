@@ -107,21 +107,29 @@ class FoodtruckModal extends Component {
                       this.setState({ showForm: true })
                     }}
                   >
-                    <EditIcon fill="none" />
-                    &nbsp; Leave a Review
+                    <EditIcon fill="none" viewBox="0 -2 30 30" />
+                    &nbsp;Leave a Review
                   </span>
                 </Buttons>
               )}
               <Title marginBottom="0.5vh">{name}</Title>
               <span style={{ fontSize: '80%' }}>
                 5.00&nbsp;
-                <StarIcon fill="none" viewBox="0 -18 40 40" />
-                {/* <i className="fas fa-star" /> */}
+                <StarIcon
+                  fill="none"
+                  viewBox="0 0 40 40"
+                  opacity="0.7"
+                  transform="translate(0, 12)"
+                />
               </span>
               <span style={{ fontSize: '80%' }}>
                 10&nbsp;
-                <CommentIcon fill="none" viewBox="0 -18 40 40" />
-                {/* <i className="fas fa-comment-alt" /> */}
+                <CommentIcon
+                  fill="none"
+                  viewBox="0 0 40 40"
+                  opacity="0.7"
+                  transform="translate(0, 12)"
+                />
               </span>
             </ModalContainer>
 
@@ -193,8 +201,8 @@ class FoodtruckModal extends Component {
             </ModalContainer>
 
             <ModalContainer paddingTop="1.5rem" padding="5">
+              <Hours start={start} end={end} />
               <Menu foodtruckInfo={foodtruckInfo} />
-              {/* <Hours start={start} end={end} /> */}
             </ModalContainer>
           </>
         ) : (

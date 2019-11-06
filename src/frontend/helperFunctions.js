@@ -1,4 +1,5 @@
 export const convertDate = time => {
+  if (!time) return 'Closed'
   const hour = parseInt(time.substring(0, time.indexOf(':')), 10)
   const minute = parseInt(time.substring(time.indexOf(':') + 1), 10)
 

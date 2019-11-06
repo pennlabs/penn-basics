@@ -22,14 +22,14 @@ const Menu = ({ foodtruckInfo }) => {
                 {priceTypes[category.name] ? <th> </th> : null}
                 {priceTypes[category.name] &&
                   priceTypes[category.name].map(type => (
-                    <th style={{ 'font-size': '80%' }}> {type} </th>
+                    <th style={{ fontSize: '80%' }}> {type} </th>
                   ))}
               </tr>
               {category.items.map(item => (
                 <tr>
-                  <td style={{ 'font-size': '80%' }}>{item.name}</td>
+                  <td style={{ fontSize: '80%' }}>{item.name}</td>
                   {item.prices.map(price => (
-                    <td style={{ 'font-size': '80%' }}>${parseFloat(Math.round(price * 100) / 100).toFixed(2)}</td>
+                    <td style={{ fontSize: '80%' }}>${parseFloat(Math.round(price * 100) / 100).toFixed(2)}</td>
                   ))}
                 </tr>
               ))}
