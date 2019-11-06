@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { getFoodtruckInfo } from '../../actions/foodtrucks_action'
 
+import { getFoodtruckInfo } from '../../actions/foodtrucks_action'
 import {
   Title,
   Text,
@@ -19,6 +19,9 @@ import Hours from './Hours'
 import Menu from './Menu'
 import Form from './Form'
 import Review from './Review'
+import EditIcon from '../../../../public/img/foodtrucks/edit.svg'
+import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
+import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 
 const Credit = s.div`
   width: 100%;
@@ -104,19 +107,21 @@ class FoodtruckModal extends Component {
                       this.setState({ showForm: true })
                     }}
                   >
-                    <i className="fas fa-edit" />
+                    <EditIcon fill="none" />
                     &nbsp; Leave a Review
                   </span>
                 </Buttons>
               )}
               <Title marginBottom="0.5vh">{name}</Title>
-              <span style={{ fontSize: '80%', marginRight: '0.7em' }}>
+              <span style={{ fontSize: '80%' }}>
                 5.00&nbsp;
-                <i className="fas fa-star" />
+                <StarIcon fill="none" viewBox="0 -18 40 40" />
+                {/* <i className="fas fa-star" /> */}
               </span>
               <span style={{ fontSize: '80%' }}>
                 10&nbsp;
-                <i className="fas fa-comment-alt" />
+                <CommentIcon fill="none" viewBox="0 -18 40 40" />
+                {/* <i className="fas fa-comment-alt" /> */}
               </span>
             </ModalContainer>
 

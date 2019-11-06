@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
-const RED = '/img/food-pin.png'
-const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+const RED = '/img/foodtrucks/food-pin-red.png'
+const BLUE = '/img/foodtrucks/food-pin-blue.png'
 
 const MapWrapper = styled.div`
   width: 100%;
@@ -91,7 +91,7 @@ export class FoodtruckMap extends Component {
     const marker = markers[key]
 
     if (!marker) return
-    marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 33) })
+    marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
 
   createMarker(key, { location }) {
@@ -121,7 +121,7 @@ export class FoodtruckMap extends Component {
 
     const marker = new google.maps.Marker({
       position: location,
-      icon: { url: RED, scaledSize: new google.maps.Size(20, 33) },
+      icon: { url: RED, scaledSize: new google.maps.Size(20, 34) },
       map,
     })
 
