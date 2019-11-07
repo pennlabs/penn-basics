@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn'
-import Search from './Search'
+import { Search } from '../../shared'
 import {
   WHITE,
   ALLBIRDS_GRAY,

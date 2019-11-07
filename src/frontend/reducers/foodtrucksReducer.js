@@ -19,6 +19,47 @@ const defaultState = {
   hoveredFoodtruck: null, // id of the foodtruck hovered on
 }
 
+// Default state where all filters are cleared and none are active
+const clearFilterState = {
+  filterOpen: null,
+  filterString: null,
+}
+
+/**
+ * @param foodtrucksData
+ * @param filter
+ * @returns filteredFoodtrucksData
+ */
+const filterFoodtrucks = ({ foodtrucksData, filterOpen, filterString }) => {
+  if (!filterOpen && !filterString) {
+    const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
+    return filteredFoodtrucksData
+  }
+
+  const filteredFoodtrucksData = {}
+  let filteredFoodtrucksIDs = Object.keys(foodtrucksData)
+
+  if (filterOpen) {
+    filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(
+      id => foodtrucksData[id].open
+    )
+  }
+
+  if (filterString) {
+    filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(id =>
+      foodtrucksData[id].name
+        .toLowerCase()
+        .includes(filterString.toLowerCase().trim())
+    )
+  }
+
+  filteredFoodtrucksIDs.forEach(id => {
+    filteredFoodtrucksData[id] = foodtrucksData[id]
+  })
+
+  return filteredFoodtrucksData
+}
+
 const foodtrucksReducer = (state = defaultState, action) => {
   switch (action.type) {
     case getFoodtrucksDataRequested:

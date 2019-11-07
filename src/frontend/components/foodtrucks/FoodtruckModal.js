@@ -71,7 +71,7 @@ class FoodtruckModal extends Component {
     const { foodtruckId: currId, dispatchGetFoodtruckInfo } = this.props
     const { foodtruckId: prevId } = prevProps
 
-    if (prevId !== currId) {
+    if (prevId !== currId && currId) {
       dispatchGetFoodtruckInfo(currId)
     }
   }

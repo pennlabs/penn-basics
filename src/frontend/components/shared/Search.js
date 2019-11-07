@@ -2,12 +2,8 @@ import s from 'styled-components'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  BORDER,
-  FOCUS_GRAY,
-  MEDIUM_GRAY,
-  DARK_GRAY,
-} from '../../../styles/colors'
+import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
+import SearchIcon from '../../../../public/img/search.svg'
 
 const SearchComponent = s.input`
   font-size: 16px;
@@ -26,20 +22,16 @@ const SearchComponent = s.input`
 `
 const inputId = 'searchLine'
 
-const SearchIcon = s.i`
-  cursor: pointer;
-  ${({ active }) => (active ? 'margin-right: 0.3em' : 'margin-right: 1em')}
-`
-
-const Search = ({ filterFunction, filterString }) => {
+export const Search = ({ filterFunction, filterString }) => {
   const [showInput, setInput] = useState(false)
   return (
     <span>
-      <label htmlFor={inputId} /* eslint-disable-line */>
+      <label htmlFor={inputId} style={{marginRight: showInput ? '0.3em' : '0.5em' }} /* eslint-disable-line */>
         <SearchIcon
-          className="fas fa-search"
+          viewBox="0 0 30 30"
+          transform="translate(0, 9)"
           onClick={() => setInput(!showInput)}
-          active={showInput}
+          cursor="pointer"
         />
       </label>
       {showInput && (
