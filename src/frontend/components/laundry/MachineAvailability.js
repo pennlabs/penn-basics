@@ -141,14 +141,15 @@ const MachineAvailability = ({
 
   return (
     <>
-      <Row justifyContent="space-between">
+      <Row margin="0.5rem">
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
           <LaundryOverview
-            width="30%"
+            sm={4}
+            margin="0.5rem"
             key={title}
             color={color}
             background={background}

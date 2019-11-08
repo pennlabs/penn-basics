@@ -1,49 +1,66 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import s from 'styled-components'
+import s, { css } from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
 import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
 
 const percent = numCols => `${(numCols / 12) * 100}%`
 
-export const Row = s.div`
+export const Row = s.div(
+  ({ maxHeight, overflowY, margin, justifyContent }) => css`
   display: flex;
   flex-direction: row;
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-height: ${({ maxHeight }) => maxHeight || 'none'};
-  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+  max-height: ${maxHeight || 'none'};
+  overflow-y: ${overflowY || 'hidden'};
 
-  ${({ margin }) =>
-    margin &&
+  ${margin &&
     `
     margin-left: -${margin};
     margin-right: -${margin};
-    width: calc(100% + ${margin} + ${margin});
-  `}
+    width: calc(100% + ${margin} + ${margin});`}
 
-  ${({ justifyContent }) =>
-    justifyContent && `justify-content: ${justifyContent};`}
+  ${justifyContent && `justify-content: ${justifyContent};`}
 
   ${maxWidth(PHONE)} {
     display: block;
-  }
-`
+  }`
+)
 
-const ColWrapper = s.div`
-  flex: ${({ width }) => (width ? 'none' : 1)};
-  width: ${({ width }) => width || 'auto'};
-  padding: ${({ padding }) => padding || 0};
+const ColWrapper = s.div(
+  ({
+    width,
+    padding,
+    maxHeight,
+    minHeight,
+    height,
+    flex,
+    backgroundImage,
+    background,
+    overflowY,
+    overflowX,
+    borderRadius,
+    borderRight,
+    sm,
+    offsetSm,
+    md,
+    offsetMd,
+    lg,
+    offsetLg,
+  }) => css`
+  flex: ${width ? 'none' : 1};
+  width: ${width || 'auto'};
+  padding: ${padding || 0};
   
-  ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
-  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
-  ${({ height }) => height && `height: ${height};`}
+  ${maxHeight && `max-height: ${maxHeight};`}
+  ${minHeight && `min-height: ${minHeight};`}
+  ${height && `height: ${height};`}
 
-  ${({ flex }) => flex && `display: flex;`}
-  ${({ backgroundImage }) =>
-    backgroundImage &&
+  ${flex && `display: flex;`}
+  ${backgroundImage &&
     `
     background-image: url(${backgroundImage});
     background-position: center;
@@ -51,58 +68,32 @@ const ColWrapper = s.div`
     background-repeat: no-repeat;
   `}
   
-  background: ${({ background }) => background || ''};
-  max-height: ${({ maxHeight }) => maxHeight || 'none'};
-  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
-  overflow-x: ${({ overflowX }) => overflowX || 'visible'};
+  background: ${background || ''};
+  max-height: ${maxHeight || 'none'};
+  overflow-y: ${overflowY || 'hidden'};
+  overflow-x: ${overflowX || 'visible'};
   box-sizing: border-box;
-  border-radius: ${({ borderRadius }) => borderRadius || 0};
-  border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};
+  border-radius: ${borderRadius || 0};
+  border-right: ${borderRight && `1px solid ${BORDER}`};
 
-  ${({ sm }) =>
-    sm &&
-    `
-    width: ${percent(sm)};
-    flex: none;
-  `}
+  ${sm && `width: ${percent(sm)}; flex: none;`}
 
-  ${({ offsetSm }) => offsetSm && `margin-left: ${percent(offsetSm)};`}
+  ${offsetSm && `margin-left: ${percent(offsetSm)};`}
 
   ${minWidth(PHONE)} {
-    ${({ md }) =>
-      md &&
-      `
-      width: ${percent(md)}
-      flex: none;
-    `}
-
-    ${({ offsetMd }) => offsetMd && `margin-left: ${percent(offsetMd)};`}
+    ${md && `width: ${percent(md)}; flex: none;`}
+    ${offsetMd && `margin-left: ${percent(offsetMd)};`}
   }
 
   ${minWidth(TABLET)} {
-    ${({ lg }) =>
-      lg &&
-      `
-      width: ${percent(lg)}
-      flex: none;
-    `}
+    ${lg && `width: ${percent(lg)}; flex: none;`}
+    ${offsetLg && `margin-left: ${percent(offsetLg)};`}
+  }`
+)
 
-    ${({ offsetLg }) =>
-      offsetLg &&
-      `
-      margin-left: ${percent(offsetLg)};
-    `}
-  }
-`
-
-const ColContainer = s.div`
-  ${({ margin }) =>
-    margin &&
-    `
-    margin-left: ${margin};
-    margin-right: ${margin};
-  `}
-`
+const ColContainer = s.div(({ margin }) =>
+  margin ? `margin-left: ${margin}; margin-right: ${margin};` : ``
+)
 
 export const Col = ({ margin, children, ...other }) => (
   <ColWrapper {...other}>

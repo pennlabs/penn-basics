@@ -61,7 +61,17 @@ const CardSubtext = ({ venueId, stateVenueHours }) => {
   )
 }
 
-const DiningCard = ({ venueId, isFavorited, selected }) => {
+CardSubtext.defaultProps = {
+  venueId: '',
+  stateVenueHours: [],
+}
+
+CardSubtext.propTypes = {
+  venueId: PropTypes.string,
+  stateVenueHours: PropTypes.array, //eslint-disable-line
+}
+
+const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
   // use React Hook to initialize state in a functional component
   const [stateVenueHours, setVenueHours] = useState([])
 
@@ -108,7 +118,13 @@ const DiningCard = ({ venueId, isFavorited, selected }) => {
 
   return (
     <StyledLink to={`/dining/${venueId}`}>
-      <Card padding="0.5rem 1rem" hoverable key={venueId} selected={selected}>
+      <Card
+        padding="0.5rem 1rem"
+        hoverable
+        key={venueId}
+        selected={selected}
+        style={style}
+      >
         <Row>
           {image && (
             <Col backgroundImage={img} width="30%" borderRadius="4px" />
@@ -124,30 +140,24 @@ const DiningCard = ({ venueId, isFavorited, selected }) => {
           </Col>
         </Row>
       </Card>
-      <Line />
+      {showLine && <Line />}
     </StyledLink>
   )
 }
 
-CardSubtext.defaultProps = {
-  venueId: '',
-  stateVenueHours: [],
-}
-
-CardSubtext.propTypes = {
-  venueId: PropTypes.string,
-  stateVenueHours: PropTypes.array, //eslint-disable-line
-}
-
 DiningCard.defaultProps = {
+  showLine: true,
   isFavorited: false,
   selected: false,
+  style: {},
 }
 
 DiningCard.propTypes = {
+  showLine: PropTypes.bool,
   venueId: PropTypes.string.isRequired,
   isFavorited: PropTypes.bool,
   selected: PropTypes.bool,
+  style: PropTypes.object, // eslint-disable-line
 }
 
 export default DiningCard

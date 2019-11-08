@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import { BorderedCard, Row, Col, Title, Subtext } from '../shared'
 import DiningCard from '../dining/DiningCard'
 import { getFavorites } from '../../actions/dining_actions'
+import { BORDER } from '../../styles/colors'
 
 class Dining extends Component {
   constructor(props) {
@@ -28,12 +29,20 @@ class Dining extends Component {
         <Subtext>Status of your favorite dining halls</Subtext>
         <br />
 
-        <Row>
+        <Row margin="0.5rem">
           {favorites.map((id, index) => {
             if (index <= 2) {
               return (
-                <Col key={id}>
-                  <DiningCard venueId={id} />
+                <Col margin="0.5rem" key={id}>
+                  <DiningCard
+                    venueId={id}
+                    showLine={false}
+                    style={{
+                      border: `1px solid ${BORDER}`,
+                      borderRadius: '4px',
+                      marginBottom: '0.5rem',
+                    }}
+                  />
                 </Col>
               )
             }

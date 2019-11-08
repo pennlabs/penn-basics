@@ -8,7 +8,6 @@ import { logEvent } from '../../analytics/index'
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
 const Weather = () => {
-  // TODO: change Fahreheit to be default
   const [isFahrenheit, setIsFahrenheit] = useState(false)
   useEffect(() => {
     const tag = document.createElement('script')
