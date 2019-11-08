@@ -28,6 +28,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@svgr/webpack": "^4.3.3",
     "async": "^2.6.3",
     "axios": "^0.19.0",
     "babel-cli": "^6.26.0",

@@ -30,7 +30,8 @@ class App extends Component {
         <Nav selectedVenueId={parsedVenueId} />
 
         <Col
-          width="70%"
+          sm={12}
+          md={8}
           overflowY="scroll"
           maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
         >

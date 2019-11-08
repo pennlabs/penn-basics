@@ -54,6 +54,7 @@ const ColWrapper = s.div(
     offsetMd,
     lg,
     offsetLg,
+    hideOnMobile,
   }) => css`
   flex: ${width ? 'none' : 1};
   width: ${width || 'auto'};
@@ -92,6 +93,10 @@ const ColWrapper = s.div(
   ${minWidth(TABLET)} {
     ${lg && `width: ${percent(lg)}; flex: none;`}
     ${offsetLg && `margin-left: ${percent(offsetLg)};`}
+  }
+  
+  ${maxWidth(PHONE)} {
+    ${hideOnMobile && 'display: none !important;'}
   }`
 )
 
