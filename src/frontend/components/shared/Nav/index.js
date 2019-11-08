@@ -45,18 +45,15 @@ const Shade = s.div`
 const Nav = () => {
   const [active, toggleActive] = useState(false)
 
-  const showBackButton = true
-
   return (
     <>
       <Wrapper className="navbar" id="navbar">
-        {showBackButton && <Back />}
-
+        <Back />
         <Logo />
 
         <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 
-        <Links active={active} zIndex={Z_INDEX} />
+        <Links active={active} zIndex={Z_INDEX} toggleActive={toggleActive} />
       </Wrapper>
       {active && (
         <Shade zIndex={Z_INDEX} onClick={() => toggleActive(!active)} />

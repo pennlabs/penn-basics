@@ -35,17 +35,24 @@ const LinksDiv = s.div`
   }
 `
 
-const Links = ({ active, zIndex }) => (
+const Links = ({ active, zIndex, toggleActive }) => (
   <LinksDiv active={active} zIndex={zIndex}>
-    <Link to="/dining">Dining</Link>
-    <Link to="/laundry">Laundry</Link>
-    <Link to="/studyspaces">Studyspaces</Link>
+    <Link to="/dining" onClick={() => toggleActive(false)}>
+      Dining
+    </Link>
+    <Link to="/laundry" onClick={() => toggleActive(false)}>
+      Laundry
+    </Link>
+    <Link to="/studyspaces" onClick={() => toggleActive(false)}>
+      Studyspaces
+    </Link>
   </LinksDiv>
 )
 
 Links.propTypes = {
   active: PropTypes.bool,
   zIndex: PropTypes.number.isRequired,
+  toggleActive: PropTypes.func.isRequired,
 }
 
 Links.defaultProps = {

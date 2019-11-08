@@ -1,5 +1,6 @@
+/* globals window */
+
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -25,16 +26,21 @@ const Wrapper = s.div`
   }
 `
 
-const Back = ({ to = '/' }) => (
-  <Wrapper>
-    <Link to={to} style={{ color: BLACK }}>
-      <Chevron style={{ transform: 'scale(1.4)' }} />
-    </Link>
-  </Wrapper>
-)
+const Back = () => {
+  const route = window.location.pathname
 
-Back.propTypes = {
-  to: PropTypes.string.isRequired,
+  if (!route || route === '/') return null
+
+  const lastIdx = route.lastIndexOf('/')
+  const to = route.substring(0, lastIdx) || '/'
+
+  return (
+    <Wrapper>
+      <Link to={to} style={{ color: BLACK }}>
+        <Chevron style={{ transform: 'scale(1.4)' }} />
+      </Link>
+    </Wrapper>
+  )
 }
 
 export default Back
