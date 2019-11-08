@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import { BorderedCard, Row, Col, ColSpace, Line, Subtitle } from '../shared'
+import { BorderedCard, FlexRow, Col, ColSpace, Line, Subtitle } from '../shared'
 import externalLinksData from '../../../server/resources/home/externalLinks.json'
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 import { BORDER, HOVER_GRAY } from '../../styles/colors'
@@ -26,6 +26,7 @@ const ExternalLinkImg = s.img`
   width: 1.5rem;
   height: 1.5rem;
   object-fit: contain;
+  display: block;
 `
 
 const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
@@ -36,13 +37,12 @@ const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
       rel="noopener noreferrer"
       onClick={() => logEvent('external links', productName)}
     >
-      <Row>
-        <Col width="1.5rem">
+      <FlexRow>
+        <Col width="2rem">
           <ExternalLinkImg src={pictureURL} alt={productName} />
         </Col>
-        <ColSpace width="0.5rem" />
         <Col>{productName}</Col>
-      </Row>
+      </FlexRow>
     </ExternalLinkTag>
   )
 }

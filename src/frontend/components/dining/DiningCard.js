@@ -6,7 +6,7 @@ import axios from 'axios'
 import moment from 'moment'
 
 import { convertDate, pad } from '../../helperFunctions'
-import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
+import { FlexRow, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
 import { DARK_GRAY } from '../../styles/colors'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
@@ -125,7 +125,7 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
         selected={selected}
         style={style}
       >
-        <Row>
+        <FlexRow>
           {image && (
             <Col backgroundImage={img} width="30%" borderRadius="4px" />
           )}
@@ -138,7 +138,7 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
               />
             </Content>
           </Col>
-        </Row>
+        </FlexRow>
       </Card>
       {showLine && <Line />}
     </StyledLink>

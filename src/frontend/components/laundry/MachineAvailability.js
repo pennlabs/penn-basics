@@ -14,7 +14,7 @@ import {
   BLUE,
 } from '../../styles/colors'
 import StatusPill from './StatusPill'
-import { Row, LaundryOverview } from '../shared'
+import { FlexRow, LaundryOverview } from '../shared'
 
 const Table = s.table`
   margin-bottom: 0;
@@ -141,7 +141,7 @@ const MachineAvailability = ({
 
   return (
     <>
-      <Row margin="0.5rem">
+      <FlexRow margin="0.5rem">
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
@@ -158,7 +158,7 @@ const MachineAvailability = ({
             <p>{title}</p>
           </LaundryOverview>
         ))}
-      </Row>
+      </FlexRow>
 
       {displayDetails && (
         <Table className="table is-fullwidth">

@@ -30,6 +30,10 @@ export const Row = s.div(
   }`
 )
 
+export const FlexRow = s(Row)`
+  display: flex !important;
+`
+
 const ColWrapper = s.div(
   ({
     width,
