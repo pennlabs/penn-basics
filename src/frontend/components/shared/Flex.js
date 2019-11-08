@@ -3,12 +3,18 @@ import PropTypes from 'prop-types'
 import s, { css } from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
-import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
+import {
+  maxWidth,
+  PHONE,
+  TABLET,
+  minWidth,
+  MAX_BODY_HEIGHT,
+} from '../../styles/sizes'
 
 const percent = numCols => `${(numCols / 12) * 100}%`
 
 export const Row = s.div(
-  ({ maxHeight, overflowY, margin, justifyContent }) => css`
+  ({ maxHeight, overflowY, margin, justifyContent, fullHeight }) => css`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -27,6 +33,11 @@ export const Row = s.div(
 
   ${maxWidth(PHONE)} {
     display: block;
+  }
+  
+  // Allow scrolling on mobile
+  ${minWidth(TABLET)} {
+    ${fullHeight && `height: ${MAX_BODY_HEIGHT};`}
   }`
 )
 
@@ -41,6 +52,7 @@ const ColWrapper = s.div(
     maxHeight,
     minHeight,
     height,
+    fullHeight,
     flex,
     backgroundImage,
     background,
@@ -93,6 +105,7 @@ const ColWrapper = s.div(
   ${minWidth(TABLET)} {
     ${lg && `width: ${percent(lg)}; flex: none;`}
     ${offsetLg && `margin-left: ${percent(offsetLg)};`}
+    ${fullHeight && `height: ${MAX_BODY_HEIGHT};`}
   }
   
   ${maxWidth(PHONE)} {

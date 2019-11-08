@@ -41,14 +41,22 @@ class App extends Component {
     } = this.props
 
     const parsedHallId = Number.isNaN(id) ? null : Number(id)
+    const isActiveHall =
+      parsedHallId !== null &&
+      parsedHallId !== undefined &&
+      !Number.isNaN(parsedHallId)
+
+    console.log('ID', parsedHallId, isActiveHall)
 
     return (
-      <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+      <Row fullHeight>
         <Scrollbar
           padding="0 0 .5rem 0"
-          width="20%"
+          sm={12}
+          md={3}
           borderRight
-          height={`calc(100vh - ${NAV_HEIGHT})`}
+          fullHeight
+          hideOnMobile={isActiveHall}
         >
           <Favorites
             favorites={favorites}
@@ -78,9 +86,11 @@ class App extends Component {
         </Scrollbar>
 
         <Col
-          width="80%"
+          sm={12}
+          md={9}
           overflowY="auto"
-          maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+          fullHeight
+          hideOnMobile={!isActiveHall}
         >
           <LaundryVenue hallURLId={parsedHallId} />
         </Col>

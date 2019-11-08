@@ -26,7 +26,7 @@ class App extends Component {
     const parsedVenueId = Number.isNaN(id) ? null : id
 
     return (
-      <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+      <Row fullHeightDesktop>
         <Nav selectedVenueId={parsedVenueId} />
 
         <Col
@@ -34,6 +34,7 @@ class App extends Component {
           md={8}
           overflowY="scroll"
           maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+          hideOnMobile={!parsedVenueId}
         >
           <DiningVenue venueId={parsedVenueId} />
         </Col>

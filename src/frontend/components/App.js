@@ -50,32 +50,32 @@ export default class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <MobileView>
+        {/* <MobileView>
           <div id="wrapper">
             <div id="app">
               <Mobile />
             </div>
           </div>
-        </MobileView>
+        </MobileView> */}
 
-        <BrowserView>
-          <Nav />
-          <Feedback />
-          <div id="wrapper">
-            <div id="app">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/dining" component={Dining} />
-                <Route exact path="/dining/:id" component={Dining} />
-                <Route exact path="/laundry" component={Laundry} />
-                <Route exact path="/laundry/:id" component={Laundry} />
-                <Route exact path="/studyspaces" component={StudySpaces} />
-                <Route exact path="/reservations" component={Reservations} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </div>
+        {/* <BrowserView> */}
+        <Nav />
+        <Feedback />
+        <div id="wrapper">
+          <div id="app">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/dining" component={Dining} />
+              <Route exact path="/dining/:id" component={Dining} />
+              <Route exact path="/laundry" component={Laundry} />
+              <Route exact path="/laundry/:id" component={Laundry} />
+              <Route exact path="/studyspaces" component={StudySpaces} />
+              <Route exact path="/reservations" component={Reservations} />
+              <Route path="*" component={NotFound} />
+            </Switch>
           </div>
-        </BrowserView>
+        </div>
+        {/* </BrowserView> */}
       </AppWrapper>
     )
   }
