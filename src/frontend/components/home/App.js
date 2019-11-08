@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { Row, Col } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import { maxWidth, PHONE } from '../../styles/sizes'
+import { maxWidth, PHONE, TABLET } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
 import Greeting from './Greeting'
@@ -22,8 +22,12 @@ const Wrapper = s.div`
   padding-left: calc(2rem + 1.25vw);
   padding-right: calc(2rem + 1.25vw);
 
-  ${maxWidth(PHONE)} {
+  ${maxWidth(TABLET)} {
     padding: 1rem;
+  }
+
+  ${maxWidth(PHONE)} {
+    padding: 0.5rem;
   }
 `
 

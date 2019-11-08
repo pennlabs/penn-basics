@@ -1,6 +1,6 @@
-export const WHITE = '#fff'
+export const WHITE = '#ffffff'
 export const SHADOW = 'rgba(0, 0, 0, 0.07)'
-export const SNOW = '#fafcff'
+export const SNOW = '#f5f8fc'
 export const SNOW_ALPHA = 'rgba(244, 246, 249, 0.75)'
 export const ALLBIRDS_GRAY = '#EAEAEA'
 export const BLACK = '#000'

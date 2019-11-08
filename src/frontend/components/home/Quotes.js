@@ -14,7 +14,10 @@ const Quotes = () => {
   const { quote, author } = quoteObj
 
   return (
-    <div className="content is-medium" style={{ marginTop: '0.5rem' }}>
+    <div
+      className="content is-medium"
+      style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}
+    >
       <p className="has-text-centered">{`"${quote}"`}</p>
       <Author className="has-text-right">
         &#8212;
