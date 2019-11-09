@@ -13,7 +13,11 @@ import {
   MEDIUM_GRAY,
   DARK_GRAY,
 } from '../../../styles/colors'
-import { filterFoodtrucksString } from '../../../actions/foodtrucks_action'
+import {
+  filterFoodtrucksString,
+  filterFoodtrucksOpen,
+  toggleFoodtrucksOpen,
+} from '../../../actions/foodtrucks_action'
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -53,13 +57,13 @@ class Filter extends Component {
    */
   handleClickOpen() {
     const {
-      filterSpacesOpenDispatch,
+      dispatchFilterFoodtrucksOpen,
       filterOpen,
-      toggleSpacesOpenDispatch,
+      dispatchToggleFoodtrucksOpen,
     } = this.props
 
-    toggleSpacesOpenDispatch()
-    filterSpacesOpenDispatch(!filterOpen)
+    dispatchToggleFoodtrucksOpen()
+    dispatchFilterFoodtrucksOpen(!filterOpen)
   }
 
   /**
@@ -183,15 +187,15 @@ Filter.defaultProps = {
 }
 
 Filter.propTypes = {
-  filterSpacesOpenDispatch: PropTypes.func.isRequired,
+  dispatchFilterFoodtrucksOpen: PropTypes.func.isRequired,
   filterSpacesOutletsDispatch: PropTypes.func.isRequired,
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
   clearSpacesFiltersDispatch: PropTypes.func.isRequired,
-  filterSpacesStringDispatch: PropTypes.func.isRequired,
+  dispatchFilterFoodtrucksString: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 
-  toggleSpacesOpenDispatch: PropTypes.func.isRequired,
+  dispatchToggleFoodtrucksOpen: PropTypes.func.isRequired,
   toggleSpacesOutletsDispatch: PropTypes.func.isRequired,
   toggleSpacesNoiseDispatch: PropTypes.func.isRequired,
   toggleSpacesGroupsDispatch: PropTypes.func.isRequired,
@@ -212,6 +216,9 @@ const mapStateToProps = ({ foodtrucks }) => foodtrucks
 const mapDispatchToProps = dispatch => ({
   dispatchFilterFoodtrucksString: filterString =>
     dispatch(filterFoodtrucksString(filterString)),
+  dispatchFilterFoodtrucksOpen: filter =>
+    dispatch(filterFoodtrucksOpen(filter)),
+  dispatchToggleFoodtrucksOpen: () => dispatch(toggleFoodtrucksOpen()),
 })
 
 export default connect(

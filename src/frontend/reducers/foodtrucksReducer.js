@@ -7,6 +7,8 @@ import {
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
   filterFoodtrucksStringRequested,
+  filterFoodtrucksOpenRequested,
+  TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
 
 const defaultState = {
@@ -18,6 +20,9 @@ const defaultState = {
   filteredFoodtrucksData: null,
   foodtruckInfo: null,
   hoveredFoodtruck: null, // id of the foodtruck hovered on
+  filterOpen: false,
+  filterString: null,
+  filterOpenActive: false,
 }
 
 // Default state where all filters are cleared and none are active
@@ -107,7 +112,26 @@ const foodtrucksReducer = (state = defaultState, action) => {
       return {
         ...state,
         filterString: action.filterString,
-        filteredFoodtrucksData: filterFoodtrucks(state.foodtrucksData, state.filterOpen, action.filterString),
+        filteredFoodtrucksData: filterFoodtrucks(
+          state.foodtrucksData,
+          state.filterOpen,
+          action.filterString
+        ),
+      }
+    case filterFoodtrucksOpenRequested:
+      return {
+        ...state,
+        filterOpen: action.filter,
+        filteredFoodtrucksData: filterFoodtrucks(
+          state.foodtrucksData,
+          action.filter,
+          state.filterString
+        ),
+      }
+    case TOGGLE_FILTER_FOODTRUCKS_OPEN:
+      return {
+        ...state,
+        filterOpenActive: !state.filterOpenActive,
       }
     default:
       return state

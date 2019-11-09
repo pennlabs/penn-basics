@@ -10,6 +10,8 @@ import {
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
   filterFoodtrucksStringRequested,
+  filterFoodtrucksOpenRequested,
+  TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from './action_types'
 import { convertDate, padHours } from '../helperFunctions'
 
@@ -132,3 +134,19 @@ export const filterFoodtrucksString = filterString => {
     })
   }
 }
+
+/**
+ *
+ * @param {boolean} filter
+ */
+export const filterFoodtrucksOpen = filter => {
+  return dispatch => {
+    dispatch({
+      type: filterFoodtrucksOpenRequested,
+      filter,
+    })
+  }
+}
+
+export const toggleFoodtrucksOpen = () => dispatch =>
+  dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })
