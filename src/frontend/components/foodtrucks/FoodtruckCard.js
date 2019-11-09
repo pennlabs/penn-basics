@@ -26,16 +26,7 @@ const Content = s.div`
 class FoodtruckCard extends Component {
   constructor(props) {
     super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-    this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
-  }
-
-  handleKeyPress(event) {
-    if (event.keyCode === 32) {
-      this.handleClick()
-    }
   }
 
   handleMouseEnter() {
@@ -51,21 +42,12 @@ class FoodtruckCard extends Component {
     dispatchSetHoveredFoodtruck(foodtruckId)
   }
 
-  handleClick() {
-    const { setActiveSpaceDispatch, spaceId } = this.props
-    setActiveSpaceDispatch(spaceId)
-  }
-
   render() {
     const { name, open, hours, foodtruckId } = this.props
 
     return (
       <StyledLink to={`/foodtrucks/${foodtruckId}`} className="link">
-        <Card
-          onKeyPress={this.handleKeyPress}
-          padding="0.5rem 0.5rem 0.5rem 1rem"
-          hoverable
-        >
+        <Card padding="0.5rem 0.5rem 0.5rem 1rem" hoverable>
           <Row>
             {/* {image && (
               <Col backgroundImage={image} width="30%" borderRadius="4px" />
@@ -106,23 +88,22 @@ class FoodtruckCard extends Component {
 
 FoodtruckCard.defaultProps = {
   open: false,
-  image: '',
-  outlets: -1,
-  quiet: -1,
-  hoveredSpace: null,
+  // image: '',
+  // outlets: -1,
+  // quiet: -1,
+  hoveredFoodtruck: null,
 }
 
 FoodtruckCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
-  image: PropTypes.string,
-  outlets: PropTypes.number,
-  quiet: PropTypes.number,
+  // image: PropTypes.string,
+  // outlets: PropTypes.number,
+  // quiet: PropTypes.number,
   hours: PropTypes.string.isRequired,
-  hoveredSpace: PropTypes.string,
+  hoveredFoodtruck: PropTypes.string,
   foodtruckId: PropTypes.string.isRequired,
   dispatchSetHoveredFoodtruck: PropTypes.func.isRequired,
-  // setActiveSpaceDispatch: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ foodtrucks }) => {

@@ -12,10 +12,9 @@ import {
   Tag,
   FoodtruckMap,
   Subtext,
-  Map,
 } from '../shared'
 import ModalFoodtrucks from '../shared/ModalFoodtrucks'
-import { SNOW, LIGHT_GRAY } from '../../styles/colors'
+import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
 import Menu from './Menu'
 import Form from './Form'
@@ -53,7 +52,7 @@ const Chevron = s.span`
     transform: rotate(-135deg);
     `}
 `
-const reviews = ["hello", "this is a nice foodtruck"]
+const reviews = ['hello', 'this is a nice foodtruck']
 
 class FoodtruckModal extends Component {
   constructor(props) {

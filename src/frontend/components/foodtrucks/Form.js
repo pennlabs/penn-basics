@@ -94,4 +94,8 @@ Form.propTypes = {
   hideFunction: PropTypes.func.isRequired,
 }
 
+Rating.propTypes = {
+  setIsEdited: PropTypes.func.isRequired,
+}
+
 export default Form

@@ -210,10 +210,14 @@ class ModalFoodtrucks extends Component {
   }
 }
 
+ModalFoodtrucks.defaultProps = {
+  history: {},
+}
+
 ModalFoodtrucks.propTypes = {
   show: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired, // eslint-disable-line
+  history: PropTypes.object, // eslint-disable-line
 }
 
 export default withRouter(ModalFoodtrucks)

@@ -126,7 +126,9 @@ class App extends Component {
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
                 markers={filteredFoodtrucksData}
                 activeMarker={hoveredFoodtruck}
-                handleClickMarker={truckId => history.push(`/foodtrucks/${truckId}`)}
+                handleClickMarker={truckId =>
+                  history.push(`/foodtrucks/${truckId}`)
+                }
               />
             )}
           </Col>
@@ -162,15 +164,23 @@ App.defaultProps = {
   pending: false,
   filteredFoodtrucksData: null,
   foodtrucksData: null,
+  match: {},
+  history: {},
 }
 
 App.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
   dispatchGetAllFoodtrucks: PropTypes.func.isRequired,
   error: PropTypes.string,
   hoveredFoodtruck: PropTypes.string,
   pending: PropTypes.bool,
   filteredFoodtrucksData: FoodtrucksDataPropType,
   foodtrucksData: FoodtrucksDataPropType,
+  history: PropTypes.object, // eslint-disable-line
 }
 
 const mapStateToProps = ({ foodtrucks }) => foodtrucks
@@ -179,7 +189,6 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetAllFoodtrucks: () => dispatch(getAllFoodtrucksData()),
 })
 
-// Redux config
 export default connect(
   mapStateToProps,
   mapDispatchToProps
