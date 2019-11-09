@@ -13,18 +13,7 @@ import {
   MEDIUM_GRAY,
   DARK_GRAY,
 } from '../../../styles/colors'
-import {
-  filterSpacesOpen,
-  filterSpacesOutlets,
-  filterSpacesNoise,
-  filterSpacesGroups,
-  filterSpacesString,
-  clearSpacesFilters,
-  toggleSpacesOpen,
-  toggleSpacesOutlets,
-  toggleSpacesNoise,
-  toggleSpacesGroups,
-} from '../../../actions/spaces_actions'
+import { filterFoodtrucksString } from '../../../actions/foodtrucks_action'
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -109,8 +98,8 @@ class Filter extends Component {
    */
 
   handleInputString(filterString) {
-    const { filterSpacesStringDispatch } = this.props
-    filterSpacesStringDispatch(filterString)
+    const { dispatchFilterFoodtrucksString } = this.props
+    dispatchFilterFoodtrucksString(filterString)
   }
 
   render() {
@@ -218,23 +207,11 @@ Filter.propTypes = {
   filterString: PropTypes.string,
 }
 
-const mapStateToProps = ({ spaces }) => spaces
+const mapStateToProps = ({ foodtrucks }) => foodtrucks
 
 const mapDispatchToProps = dispatch => ({
-  clearSpacesFiltersDispatch: () => dispatch(clearSpacesFilters()),
-
-  filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
-  filterSpacesOutletsDispatch: filters =>
-    dispatch(filterSpacesOutlets(filters)),
-  filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
-  filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
-  filterSpacesStringDispatch: filterString =>
-    dispatch(filterSpacesString(filterString)),
-
-  toggleSpacesOpenDispatch: () => dispatch(toggleSpacesOpen()),
-  toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),
-  toggleSpacesNoiseDispatch: () => dispatch(toggleSpacesNoise()),
-  toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
+  dispatchFilterFoodtrucksString: filterString =>
+    dispatch(filterFoodtrucksString(filterString)),
 })
 
 export default connect(

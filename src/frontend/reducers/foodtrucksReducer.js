@@ -6,6 +6,7 @@ import {
   getFoodtruckInfoFulfilled,
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
+  filterFoodtrucksStringRequested,
 } from '../actions/action_types'
 
 const defaultState = {
@@ -13,7 +14,7 @@ const defaultState = {
   infoPending: false,
   error: null,
   infoError: null,
-  foodtrucksData: null, // excluding menu & priceTypes
+  foodtrucksData: null, // excluding menu, priceTypes, and reviews
   filteredFoodtrucksData: null,
   foodtruckInfo: null,
   hoveredFoodtruck: null, // id of the foodtruck hovered on
@@ -30,7 +31,7 @@ const clearFilterState = {
  * @param filter
  * @returns filteredFoodtrucksData
  */
-const filterFoodtrucks = ({ foodtrucksData, filterOpen, filterString }) => {
+const filterFoodtrucks = (foodtrucksData, filterOpen, filterString) => {
   if (!filterOpen && !filterString) {
     const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
     return filteredFoodtrucksData
@@ -46,6 +47,7 @@ const filterFoodtrucks = ({ foodtrucksData, filterOpen, filterString }) => {
   }
 
   if (filterString) {
+    console.log(filterString)
     filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(id =>
       foodtrucksData[id].name
         .toLowerCase()
@@ -101,6 +103,12 @@ const foodtrucksReducer = (state = defaultState, action) => {
         ...state,
         infoPending: false,
         infoError: action.error,
+      }
+    case filterFoodtrucksStringRequested:
+      return {
+        ...state,
+        filterString: action.filterString,
+        filteredFoodtrucksData: filterFoodtrucks(state.foodtrucksData, state.filterOpen, action.filterString),
       }
     default:
       return state

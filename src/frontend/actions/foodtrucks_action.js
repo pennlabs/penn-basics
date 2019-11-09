@@ -9,6 +9,7 @@ import {
   getFoodtruckInfoFulfilled,
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
+  filterFoodtrucksStringRequested,
 } from './action_types'
 import { convertDate, padHours } from '../helperFunctions'
 
@@ -115,6 +116,19 @@ export const setHoveredFoodtruck = footruckId => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
       footruckId,
+    })
+  }
+}
+
+/**
+ *
+ * @param {string} filterString user input string
+ */
+export const filterFoodtrucksString = filterString => {
+  return dispatch => {
+    dispatch({
+      type: filterFoodtrucksStringRequested,
+      filterString,
     })
   }
 }

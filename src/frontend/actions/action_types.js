@@ -18,6 +18,8 @@ export const getFoodtruckInfoRequested = 'GET_FOODTRUCK_INFO_REQUESTED'
 export const getFoodtruckInfoFulfilled = 'GET_FOODTRUCK_INFO_FULFILLED'
 export const getFoodtruckInfoRejected = 'GET_FOODTRUCK_INFO_REJECTED'
 export const setHoveredFoodtruckFulfilled = 'SET_HOVERED_FOODTRUCK_FULFILLED'
+export const filterFoodtrucksStringRequested =
+  'FILTER_FOODTRUCKS_STRING_REQUESTED'
 
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'

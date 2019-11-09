@@ -7,13 +7,14 @@ import { getFoodtruckInfo } from '../../actions/foodtrucks_action'
 import {
   Title,
   Text,
-  ModalFoodtrucks,
   ModalContainer,
   Image,
   Tag,
   FoodtruckMap,
   Subtext,
+  Map,
 } from '../shared'
+import ModalFoodtrucks from '../shared/ModalFoodtrucks'
 import { SNOW, LIGHT_GRAY } from '../../styles/colors'
 import Hours from './Hours'
 import Menu from './Menu'

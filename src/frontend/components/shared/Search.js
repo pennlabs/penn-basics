@@ -26,7 +26,7 @@ export const Search = ({ filterFunction, filterString }) => {
   const [showInput, setInput] = useState(false)
   return (
     <span>
-      <label htmlFor={inputId} style={{marginRight: showInput ? '0.3em' : '0.5em' }} /* eslint-disable-line */>
+      <label htmlFor={inputId} style={{ marginRight: showInput ? '0.3em' : '0.5em' }} /* eslint-disable-line */>
         <SearchIcon
           viewBox="0 0 30 30"
           transform="translate(0, 9)"

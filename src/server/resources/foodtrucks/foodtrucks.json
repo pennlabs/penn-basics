@@ -126,7 +126,7 @@
     "end": ["17:30", "17:30", "17:30", "17:30", "17:30", "19:00", null],
     "location": {
       "plusCode": "XR33+H2",
-      "lat": 39.9541962,
+      "lat": 39.9538962,
       "lng": -75.1974906
     },
     "tags": ["sandwich", "hoagies", "coffee"],
@@ -649,7 +649,7 @@
     "name": "Kim's Oriental Food",
     "payments": ["Cash"],
     "location": {
-      "lat": 39.9541962,
+      "lat": 39.953998,
       "lng": -75.1974906
     },
     "tags": ["Chinese"],
@@ -1104,7 +1104,7 @@
     "end": ["20:00", "20:00", "20:00", "20:00", "20:00", null, "20:00"],
     "location": {
       "lat": 39.9511858,
-      "lng": -75.1987472
+      "lng": -75.1985472
     },
     "tags": ["gyro", "halal", "free fries and drink with meal"],
     "menu": {
@@ -1196,8 +1196,8 @@
     "name": "Yue Kee",
     "location": {
       "address": "238 South 38th Street, Philadelphia, PA 19104",
-      "lat": 39.953010,
-      "lng": -75.198941
+      "lat": 39.952671,
+      "lng": -75.199208
     },
     "tags": ["Cantonese"],
     "payments": ["Cash"],

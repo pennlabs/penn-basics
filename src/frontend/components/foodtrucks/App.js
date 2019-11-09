@@ -13,6 +13,7 @@ import {
   Line,
   ErrorMessage,
   NoDataScroll,
+  Map,
 } from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'

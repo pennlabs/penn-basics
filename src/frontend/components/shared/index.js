@@ -1,7 +1,6 @@
 export * from './Card'
 export * from './Typography'
 export * from './Modal'
-export * from './ModalFoodtrucks'
 export * from './Image'
 export * from './Flex'
 export * from './Map'

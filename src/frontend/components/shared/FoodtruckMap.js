@@ -51,14 +51,14 @@ export class FoodtruckMap extends Component {
 
   updateMarkers() {
     return new Promise(resolve => {
-      const { markers: dataMarkers = {} } = this.props
-      const { markers: mapMarkers = {} } = this.state
+      const { markers: dataMarkers = {} } = this.props // curr markers
+      const { markers: mapMarkers = {} } = this.state // old markers
 
       const dataKeys = Object.keys(dataMarkers)
       const mapKeys = Object.keys(mapMarkers)
 
       mapKeys.forEach(key => {
-        if (!dataKeys[key] && key !== SHOW_MARKER_KEY) {
+        if (!dataKeys.includes(key) && key !== SHOW_MARKER_KEY) {
           // Delete the marker on the map and remove it from the object
           const marker = mapMarkers[key]
           marker.setMap(null)
@@ -67,7 +67,7 @@ export class FoodtruckMap extends Component {
       })
 
       dataKeys.forEach(key => {
-        if (!mapKeys[key]) {
+        if (!mapKeys.includes(key)) {
           // Create a marker new marker and add it to the state
           const marker = this.createMarker(key, dataMarkers[key])
           mapMarkers[key] = marker
@@ -91,6 +91,7 @@ export class FoodtruckMap extends Component {
     const marker = markers[key]
 
     if (!marker) return
+
     marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
 
