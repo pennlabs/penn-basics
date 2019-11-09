@@ -47,7 +47,6 @@ const filterFoodtrucks = (foodtrucksData, filterOpen, filterString) => {
   }
 
   if (filterString) {
-    console.log(filterString)
     filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(id =>
       foodtrucksData[id].name
         .toLowerCase()

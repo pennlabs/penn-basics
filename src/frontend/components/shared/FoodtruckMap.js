@@ -33,6 +33,10 @@ export class FoodtruckMap extends Component {
 
   componentDidUpdate(prevProps) {
     // Check if the active marker changes
+    if (prevProps.location !== this.props.location) {
+      this.waitForGoogle()
+      return
+    }
     const { activeMarker } = this.props
     const oldActiveMarker = prevProps.activeMarker
 
@@ -47,6 +51,10 @@ export class FoodtruckMap extends Component {
     if (markers !== prevProps.markers) {
       this.updateMarkers()
     }
+  }
+
+  componentWillUnmount() {
+    console.log("@!#")
   }
 
   updateMarkers() {
