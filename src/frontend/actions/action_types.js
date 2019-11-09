@@ -23,6 +23,8 @@ export const filterFoodtrucksStringRequested =
 export const filterFoodtrucksOpenRequested = 'FILTER_FOODTRUCKS_OPEN_REQUESTED'
 
 export const TOGGLE_FILTER_FOODTRUCKS_OPEN = 'TOGGLE_FILTER_FOODTRUCKS_OPEN'
+export const clearFilterFoodtrucksRequested =
+  'CLEAR_FILTER_FOODTRUCKS_REQUESTED'
 
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'

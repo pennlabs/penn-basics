@@ -8,6 +8,7 @@ import {
   setHoveredFoodtruckFulfilled,
   filterFoodtrucksStringRequested,
   filterFoodtrucksOpenRequested,
+  clearFilterFoodtrucksRequested,
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
 
@@ -21,13 +22,13 @@ const defaultState = {
   foodtruckInfo: null,
   hoveredFoodtruck: null, // id of the foodtruck hovered on
   filterOpen: false,
-  filterString: null,
+  filterString: '',
   filterOpenActive: false,
 }
 
 // Default state where all filters are cleared and none are active
 const clearFilterState = {
-  filterOpen: null,
+  filterOpen: false,
   filterString: null,
 }
 
@@ -127,6 +128,12 @@ const foodtrucksReducer = (state = defaultState, action) => {
           action.filter,
           state.filterString
         ),
+      }
+    case clearFilterFoodtrucksRequested:
+      return {
+        ...defaultState,
+        foodtrucksData: state.foodtrucksData,
+        filteredFoodtrucksData: state.foodtrucksData,
       }
     case TOGGLE_FILTER_FOODTRUCKS_OPEN:
       return {

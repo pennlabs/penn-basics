@@ -16,6 +16,7 @@ import {
 import {
   filterFoodtrucksString,
   filterFoodtrucksOpen,
+  clearFoodtrucksFilter,
   toggleFoodtrucksOpen,
 } from '../../../actions/foodtrucks_action'
 
@@ -108,7 +109,7 @@ class Filter extends Component {
 
   render() {
     const {
-      clearSpacesFiltersDispatch,
+      dispatchClearFoodtrucksFilter,
       toggleSpacesOutletsDispatch,
       toggleSpacesNoiseDispatch,
       toggleSpacesGroupsDispatch,
@@ -170,7 +171,7 @@ class Filter extends Component {
           active={filterGroupsActive}
         />
 
-        <ClearText onClick={clearSpacesFiltersDispatch}>
+        <ClearText onClick={dispatchClearFoodtrucksFilter}>
           Clear filters
         </ClearText>
       </FilterWrapper>
@@ -191,7 +192,7 @@ Filter.propTypes = {
   filterSpacesOutletsDispatch: PropTypes.func.isRequired,
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
-  clearSpacesFiltersDispatch: PropTypes.func.isRequired,
+  dispatchClearFoodtrucksFilter: PropTypes.func.isRequired,
   dispatchFilterFoodtrucksString: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 
@@ -219,6 +220,7 @@ const mapDispatchToProps = dispatch => ({
   dispatchFilterFoodtrucksOpen: filter =>
     dispatch(filterFoodtrucksOpen(filter)),
   dispatchToggleFoodtrucksOpen: () => dispatch(toggleFoodtrucksOpen()),
+  dispatchClearFoodtrucksFilter: () => dispatch(clearFoodtrucksFilter()),
 })
 
 export default connect(

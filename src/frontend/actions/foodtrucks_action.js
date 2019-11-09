@@ -12,6 +12,7 @@ import {
   filterFoodtrucksStringRequested,
   filterFoodtrucksOpenRequested,
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
+  clearFilterFoodtrucksRequested,
 } from './action_types'
 import { convertDate, padHours } from '../helperFunctions'
 
@@ -150,3 +151,6 @@ export const filterFoodtrucksOpen = filter => {
 
 export const toggleFoodtrucksOpen = () => dispatch =>
   dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })
+
+export const clearFoodtrucksFilter = () => dispatch =>
+  dispatch({ type: clearFilterFoodtrucksRequested })
