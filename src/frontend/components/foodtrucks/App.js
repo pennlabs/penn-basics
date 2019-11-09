@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
 import FoodtruckCard from './FoodtruckCard'
 import {
@@ -13,7 +14,6 @@ import {
   Line,
   ErrorMessage,
   NoDataScroll,
-  Map,
 } from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
@@ -74,6 +74,7 @@ class App extends Component {
       match: {
         params: { id },
       },
+      history,
     } = this.props
 
     const parsedFoodtruckId = Number.isNaN(id) ? null : id
@@ -125,6 +126,7 @@ class App extends Component {
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
                 markers={filteredFoodtrucksData}
                 activeMarker={hoveredFoodtruck}
+                handleClickMarker={truckId => history.push(`/foodtrucks/${truckId}`)}
               />
             )}
           </Col>
@@ -181,4 +183,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(withRouter(App))

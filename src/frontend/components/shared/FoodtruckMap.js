@@ -53,10 +53,6 @@ export class FoodtruckMap extends Component {
     }
   }
 
-  componentWillUnmount() {
-    console.log("@!#")
-  }
-
   updateMarkers() {
     return new Promise(resolve => {
       const { markers: dataMarkers = {} } = this.props // curr markers
