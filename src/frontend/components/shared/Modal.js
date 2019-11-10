@@ -1,89 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-import { WHITE, LIGHT_GRAY, BLACK_ALPHA } from '../../styles/colors'
-
-const Z_INDEX = 1305
-const ANIMATION_DURATION = '0.4s'
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-    max-height: 100vh;
-  }
-
-  100% {
-    opacity: 1;
-    max-height: 100vh;
-  }
-`
-
-const fadeOut = keyframes`
-  0% {
-    opacity: 1;
-    max-height: 100vh;
-  }
-
-  100% {
-    opacity: 0;
-    max-height: 100vh;
-  }
-`
-
-const slideIn = keyframes`
-  0% {
-    opacity: 0;
-    margin-top: 100%;
-  }
-
-  100% {
-    opacity: 1;
-    margin-top: calc(1rem + 5vh);
-  }
-`
-
-const slideOut = keyframes`
-  0% {
-    opacity: 1;
-    margin-top: calc(1rem + 5vh);
-  }
-
-  100% {
-    opacity: 0;
-    margin-top: 100%;
-  }
-`
-
-const ModalWrapper = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: ${BLACK_ALPHA(0.5)};
-  z-index: ${Z_INDEX};
-  text-align: center;
-  animation-name: ${({ isNewlyMounted, show }) => {
-    if (isNewlyMounted) {
-      return ''
-    }
-    if (show) {
-      return fadeIn
-    }
-
-    return fadeOut
-  }};
-  animation-duration: ${ANIMATION_DURATION};
-  max-height: ${({ show }) => (show ? '100vh' : '0vh')};
-  opacity: ${({ show }) => (show ? '1' : '0')};
-`
+import { WHITE, LIGHT_GRAY } from '../../styles/colors'
+import { LONG_ANIMATION_DURATION } from '../../styles/sizes'
+import { slideIn, slideOut } from './Animations'
+import { Shade } from './Shade'
 
 const ModalContent = styled.div`
   min-height: 100%;
@@ -99,7 +21,7 @@ const ModalContent = styled.div`
   position: relative;
 
   animation-name: ${({ show }) => (show ? slideIn : slideOut)};
-  animation-duration: ${ANIMATION_DURATION};
+  animation-duration: ${LONG_ANIMATION_DURATION};
 
   @media screen and (max-width: 1024px) {
     width: 75%;
@@ -112,7 +34,7 @@ const ModalContent = styled.div`
 
 const ModalClose = styled.div`
   animation-name: ${({ show }) => (show ? slideIn : slideOut)};
-  animation-duration: ${ANIMATION_DURATION};
+  animation-duration: ${LONG_ANIMATION_DURATION};
 
   margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
 
@@ -201,7 +123,7 @@ export class Modal extends Component {
     const { isNewlyMounted } = this.state
 
     return (
-      <ModalWrapper
+      <Shade
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
@@ -217,7 +139,7 @@ export class Modal extends Component {
 
           {children}
         </ModalContent>
-      </ModalWrapper>
+      </Shade>
     )
   }
 }
