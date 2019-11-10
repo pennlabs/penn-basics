@@ -26,12 +26,26 @@ import {
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
 import ToggleNeighborhood from './ToggleNeighborhood'
+import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
 
 const FilterWrapper = s.div`
   width: 100%;
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
   padding: 0.5rem 1rem;
+
+  ${maxWidth(PHONE)} {
+    padding: 0.5rem;
+    position: fixed;
+    top: ${NAV_HEIGHT};
+    left: 0;
+    background: ${WHITE};
+    z-index: 1500;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: visible;
+    white-space: nowrap;
+  }
 `
 
 const ClearText = s.p`
@@ -44,6 +58,10 @@ const ClearText = s.p`
   :active,
   :focus {
     color: ${DARK_GRAY};
+  }
+
+  ${maxWidth(PHONE)} {
+    font-size: 80%;
   }
 `
 

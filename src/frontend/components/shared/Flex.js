@@ -91,7 +91,6 @@ const ColWrapper = s.div(
   overflow-x: ${overflowX || 'visible'};
   box-sizing: border-box;
   border-radius: ${borderRadius || 0};
-  border-right: ${borderRight && `1px solid ${BORDER}`};
 
   ${sm && `width: ${percent(sm)}; flex: none;`}
 
@@ -100,6 +99,10 @@ const ColWrapper = s.div(
   ${minWidth(PHONE)} {
     ${md && `width: ${percent(md)}; flex: none;`}
     ${offsetMd && `margin-left: ${percent(offsetMd)};`}
+
+    // Only show border right when the column is not full width
+    // On mobile the col will always be full width so this would look odd
+    border-right: ${borderRight && `1px solid ${BORDER}`};
   }
 
   ${minWidth(TABLET)} {
