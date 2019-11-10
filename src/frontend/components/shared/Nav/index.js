@@ -8,6 +8,7 @@ import Links from './Links'
 import Menu from './Menu'
 import Logo from './Logo'
 import Back from './Back'
+import { Shade } from '../Shade'
 
 const Z_INDEX = 1300
 
@@ -28,7 +29,7 @@ const Wrapper = s.nav`
   left: 0;
 `
 
-const Shade = s.div`
+const StyledShade = s(Shade)`
   position: fixed;
   left: 0;
   top: 0;
@@ -43,7 +44,15 @@ const Shade = s.div`
 `
 
 const Nav = () => {
+  const [isNewlyMounted, setIsNewlyMounted] = useState(true)
   const [active, toggleActive] = useState(false)
+
+  const toggle = () => {
+    if (isNewlyMounted) {
+      setIsNewlyMounted(false)
+    }
+    toggleActive(!active)
+  }
 
   return (
     <>
@@ -51,14 +60,18 @@ const Nav = () => {
         <Back />
         <Logo />
 
-        <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
+        <Menu active={active} toggleActive={toggle} zIndex={Z_INDEX} />
 
-        <Links active={active} zIndex={Z_INDEX} toggleActive={toggleActive} />
+        <Links active={active} zIndex={Z_INDEX} toggleActive={toggle} />
       </Wrapper>
-      {active && (
-        <Shade zIndex={Z_INDEX} onClick={() => toggleActive(!active)} />
-      )}
-      <NavSpace />
+
+      <StyledShade
+        show={active}
+        isNewlyMounted={isNewlyMounted}
+        zIndex={Z_INDEX}
+        onClick={toggle}
+      />
+      <avSpace />
     </>
   )
 }

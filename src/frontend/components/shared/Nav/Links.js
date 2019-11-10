@@ -19,19 +19,23 @@ const LinksDiv = s.div`
     position: absolute;
     top: ${NAV_HEIGHT};
     left: 0;
-    padding: 1rem 1rem 0 1rem;
     border-bottom: 1px solid ${BORDER};
     z-index: ${({ zIndex }) => zIndex + 1};
-
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 200ms ease, opacity 200ms ease;
+    
     a {
       font-size: 120%;
       margin-left: 0;
       display: block;
       width: auto;
-      margin-bottom: 1rem;
+      margin: 1rem;
     }
 
-    ${({ active }) => !active && `display: none;`}
+    ${({ active }) => active && `max-height: 150px; opacity: 1;`}
   }
 `
 
