@@ -14,17 +14,11 @@ import {
   DARK_GRAY,
 } from '../../../styles/colors'
 import {
-  filterSpacesOpen,
-  filterSpacesOutlets,
-  filterSpacesNoise,
-  filterSpacesGroups,
-  filterSpacesString,
-  clearSpacesFilters,
-  toggleSpacesOpen,
-  toggleSpacesOutlets,
-  toggleSpacesNoise,
-  toggleSpacesGroups,
-} from '../../../actions/spaces_actions'
+  filterFoodtrucksString,
+  filterFoodtrucksOpen,
+  clearFoodtrucksFilter,
+  toggleFoodtrucksOpen,
+} from '../../../actions/foodtrucks_action'
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -64,13 +58,13 @@ class Filter extends Component {
    */
   handleClickOpen() {
     const {
-      filterSpacesOpenDispatch,
+      dispatchFilterFoodtrucksOpen,
       filterOpen,
-      toggleSpacesOpenDispatch,
+      dispatchToggleFoodtrucksOpen,
     } = this.props
 
-    toggleSpacesOpenDispatch()
-    filterSpacesOpenDispatch(!filterOpen)
+    dispatchToggleFoodtrucksOpen()
+    dispatchFilterFoodtrucksOpen(!filterOpen)
   }
 
   /**
@@ -109,13 +103,13 @@ class Filter extends Component {
    */
 
   handleInputString(filterString) {
-    const { filterSpacesStringDispatch } = this.props
-    filterSpacesStringDispatch(filterString)
+    const { dispatchFilterFoodtrucksString } = this.props
+    dispatchFilterFoodtrucksString(filterString)
   }
 
   render() {
     const {
-      clearSpacesFiltersDispatch,
+      dispatchClearFoodtrucksFilter,
       toggleSpacesOutletsDispatch,
       toggleSpacesNoiseDispatch,
       toggleSpacesGroupsDispatch,
@@ -177,7 +171,7 @@ class Filter extends Component {
           active={filterGroupsActive}
         />
 
-        <ClearText onClick={clearSpacesFiltersDispatch}>
+        <ClearText onClick={dispatchClearFoodtrucksFilter}>
           Clear filters
         </ClearText>
       </FilterWrapper>
@@ -194,15 +188,15 @@ Filter.defaultProps = {
 }
 
 Filter.propTypes = {
-  filterSpacesOpenDispatch: PropTypes.func.isRequired,
+  dispatchFilterFoodtrucksOpen: PropTypes.func.isRequired,
   filterSpacesOutletsDispatch: PropTypes.func.isRequired,
   filterSpacesNoiseDispatch: PropTypes.func.isRequired,
   filterSpacesGroupsDispatch: PropTypes.func.isRequired,
-  clearSpacesFiltersDispatch: PropTypes.func.isRequired,
-  filterSpacesStringDispatch: PropTypes.func.isRequired,
+  dispatchClearFoodtrucksFilter: PropTypes.func.isRequired,
+  dispatchFilterFoodtrucksString: PropTypes.func.isRequired,
   filterOpen: PropTypes.bool,
 
-  toggleSpacesOpenDispatch: PropTypes.func.isRequired,
+  dispatchToggleFoodtrucksOpen: PropTypes.func.isRequired,
   toggleSpacesOutletsDispatch: PropTypes.func.isRequired,
   toggleSpacesNoiseDispatch: PropTypes.func.isRequired,
   toggleSpacesGroupsDispatch: PropTypes.func.isRequired,
@@ -218,23 +212,15 @@ Filter.propTypes = {
   filterString: PropTypes.string,
 }
 
-const mapStateToProps = ({ spaces }) => spaces
+const mapStateToProps = ({ foodtrucks }) => foodtrucks
 
 const mapDispatchToProps = dispatch => ({
-  clearSpacesFiltersDispatch: () => dispatch(clearSpacesFilters()),
-
-  filterSpacesOpenDispatch: filter => dispatch(filterSpacesOpen(filter)),
-  filterSpacesOutletsDispatch: filters =>
-    dispatch(filterSpacesOutlets(filters)),
-  filterSpacesNoiseDispatch: filters => dispatch(filterSpacesNoise(filters)),
-  filterSpacesGroupsDispatch: filters => dispatch(filterSpacesGroups(filters)),
-  filterSpacesStringDispatch: filterString =>
-    dispatch(filterSpacesString(filterString)),
-
-  toggleSpacesOpenDispatch: () => dispatch(toggleSpacesOpen()),
-  toggleSpacesOutletsDispatch: () => dispatch(toggleSpacesOutlets()),
-  toggleSpacesNoiseDispatch: () => dispatch(toggleSpacesNoise()),
-  toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
+  dispatchFilterFoodtrucksString: filterString =>
+    dispatch(filterFoodtrucksString(filterString)),
+  dispatchFilterFoodtrucksOpen: filter =>
+    dispatch(filterFoodtrucksOpen(filter)),
+  dispatchToggleFoodtrucksOpen: () => dispatch(toggleFoodtrucksOpen()),
+  dispatchClearFoodtrucksFilter: () => dispatch(clearFoodtrucksFilter()),
 })
 
 export default connect(

@@ -34,15 +34,15 @@ const App = s.div`
 
 export default () => (
   <App>
-    <MobileView>
+    {/* <MobileView>
       <div id="wrapper">
         <div id="app">
           <Mobile />
         </div>
       </div>
-    </MobileView>
+    </MobileView> */}
 
-    <BrowserView>
+    {/* <BrowserView> */}
       <Nav />
       <Feedback />
       <div id="wrapper">
@@ -61,6 +61,6 @@ export default () => (
           </Switch>
         </div>
       </div>
-    </BrowserView>
+    {/* </BrowserView> */}
   </App>
 )

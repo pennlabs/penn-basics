@@ -9,6 +9,10 @@ import {
   getFoodtruckInfoFulfilled,
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
+  filterFoodtrucksStringRequested,
+  filterFoodtrucksOpenRequested,
+  TOGGLE_FILTER_FOODTRUCKS_OPEN,
+  clearFilterFoodtrucksRequested,
 } from './action_types'
 import { convertDate, padHours } from '../helperFunctions'
 
@@ -118,3 +122,35 @@ export const setHoveredFoodtruck = footruckId => {
     })
   }
 }
+
+/**
+ *
+ * @param {string} filterString user input string
+ */
+export const filterFoodtrucksString = filterString => {
+  return dispatch => {
+    dispatch({
+      type: filterFoodtrucksStringRequested,
+      filterString,
+    })
+  }
+}
+
+/**
+ *
+ * @param {boolean} filter
+ */
+export const filterFoodtrucksOpen = filter => {
+  return dispatch => {
+    dispatch({
+      type: filterFoodtrucksOpenRequested,
+      filter,
+    })
+  }
+}
+
+export const toggleFoodtrucksOpen = () => dispatch =>
+  dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })
+
+export const clearFoodtrucksFilter = () => dispatch =>
+  dispatch({ type: clearFilterFoodtrucksRequested })

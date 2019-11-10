@@ -6,6 +6,10 @@ import {
   getFoodtruckInfoFulfilled,
   getFoodtruckInfoRejected,
   setHoveredFoodtruckFulfilled,
+  filterFoodtrucksStringRequested,
+  filterFoodtrucksOpenRequested,
+  clearFilterFoodtrucksRequested,
+  TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
 
 const defaultState = {
@@ -13,15 +17,18 @@ const defaultState = {
   infoPending: false,
   error: null,
   infoError: null,
-  foodtrucksData: null, // excluding menu & priceTypes
+  foodtrucksData: null, // excluding menu, priceTypes, and reviews
   filteredFoodtrucksData: null,
   foodtruckInfo: null,
   hoveredFoodtruck: null, // id of the foodtruck hovered on
+  filterOpen: false,
+  filterString: '',
+  filterOpenActive: false,
 }
 
 // Default state where all filters are cleared and none are active
 const clearFilterState = {
-  filterOpen: null,
+  filterOpen: false,
   filterString: null,
 }
 
@@ -30,7 +37,7 @@ const clearFilterState = {
  * @param filter
  * @returns filteredFoodtrucksData
  */
-const filterFoodtrucks = ({ foodtrucksData, filterOpen, filterString }) => {
+const filterFoodtrucks = (foodtrucksData, filterOpen, filterString) => {
   if (!filterOpen && !filterString) {
     const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
     return filteredFoodtrucksData
@@ -101,6 +108,37 @@ const foodtrucksReducer = (state = defaultState, action) => {
         ...state,
         infoPending: false,
         infoError: action.error,
+      }
+    case filterFoodtrucksStringRequested:
+      return {
+        ...state,
+        filterString: action.filterString,
+        filteredFoodtrucksData: filterFoodtrucks(
+          state.foodtrucksData,
+          state.filterOpen,
+          action.filterString
+        ),
+      }
+    case filterFoodtrucksOpenRequested:
+      return {
+        ...state,
+        filterOpen: action.filter,
+        filteredFoodtrucksData: filterFoodtrucks(
+          state.foodtrucksData,
+          action.filter,
+          state.filterString
+        ),
+      }
+    case clearFilterFoodtrucksRequested:
+      return {
+        ...defaultState,
+        foodtrucksData: state.foodtrucksData,
+        filteredFoodtrucksData: state.foodtrucksData,
+      }
+    case TOGGLE_FILTER_FOODTRUCKS_OPEN:
+      return {
+        ...state,
+        filterOpenActive: !state.filterOpenActive,
       }
     default:
       return state
