@@ -46,6 +46,15 @@ const FoodTruckSchema = new Schema({
       ],
     },
   ],
+  reviews: [
+    {
+      pennID: Number,
+      rating: Number,
+      comment: String,
+      timeCreated: Date,
+      timeEdited: Date,
+    },
+  ],
 })
 
 module.exports = mongoose.model('FoodTruck', FoodTruckSchema)
