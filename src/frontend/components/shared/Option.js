@@ -10,7 +10,9 @@ import {
   SNOW_ALPHA,
   MEDIUM_GRAY,
   BABY_BLUE,
+  LIGHTER_BLUE,
 } from '../../styles/colors'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
@@ -32,7 +34,13 @@ export const FilterBtnWrapper = s.a`
   
   :focus {
     outline: 0 !important;
-    box-shadow: 0 0 0 2px ${DARK_BLUE};
+    box-shadow: 0 0 0 2px ${LIGHTER_BLUE};
+  }
+
+  ${maxWidth(PHONE)} {
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.25rem;
+    font-size: 80%;
   }
 
   ${({ active }) =>
@@ -68,6 +76,13 @@ export const OptionsModalWrapper = s.div`
   border: 1px solid ${BORDER};
   cursor: default;
   box-shadow: 0 0 8px ${BORDER};
+
+  ${maxWidth(PHONE)} {
+    width: calc(100vw - 2rem);
+    left: 1rem;
+    transform: translateY(calc(1rem + 1px));
+    position: fixed;
+  }
 
   div {
     margin-bottom: 0.2rem;
