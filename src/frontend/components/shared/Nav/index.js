@@ -71,7 +71,7 @@ const Nav = () => {
         zIndex={Z_INDEX}
         onClick={toggle}
       />
-      <avSpace />
+      <NavSpace />
     </>
   )
 }
