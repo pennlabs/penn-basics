@@ -33,6 +33,8 @@ export const Row = s.div(
 
   ${maxWidth(PHONE)} {
     display: block;
+    max-height: none !important;
+    overflow-y: visible;
   }
   
   // Allow scrolling on mobile

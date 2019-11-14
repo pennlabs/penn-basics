@@ -74,6 +74,7 @@ class App extends Component {
 
     const { googleMapError } = this.state
 
+    // TODO loading spinner
     if (pending || !filteredSpacesData) {
       return <Filter />
     }
@@ -85,7 +86,6 @@ class App extends Component {
         <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
           <Scrollbar
             padding="0 0 .5rem 0"
-            overflowY="scroll"
             sm={12}
             md={4}
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
