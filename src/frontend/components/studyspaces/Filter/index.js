@@ -26,7 +26,29 @@ import {
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
 import ToggleNeighborhood from './ToggleNeighborhood'
-import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
+import {
+  maxWidth,
+  PHONE,
+  NAV_HEIGHT,
+  TABLET,
+  minWidth,
+  Z_INDEX,
+} from '../../../styles/sizes'
+import { Modal, ModalContainer, Subtitle } from '../../shared'
+
+const MOBILE_HEIGHT = '46px'
+
+const HideOnTablet = s.span`
+  ${maxWidth(TABLET)} {
+    display: none;
+  }
+`
+
+const HideAboveTablet = s.span`
+  ${minWidth(TABLET)} {
+    display: none;
+  }
+`
 
 const FilterWrapper = s.div`
   width: 100%;
@@ -35,24 +57,52 @@ const FilterWrapper = s.div`
   padding: 0.5rem 1rem;
 
   ${maxWidth(PHONE)} {
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     position: fixed;
     top: ${NAV_HEIGHT};
     left: 0;
     background: ${WHITE};
-    z-index: 1500;
+    z-index: ${Z_INDEX - 1};
     width: 100%;
     overflow-x: scroll;
     overflow-y: visible;
     white-space: nowrap;
+
+    // &::-webkit-scrollbar {
+    //   width: 0px;
+    //   background: transparent;
+    // }
+
+    &:before {
+      content: "";
+      background: linear-gradient(0.25turn, ${WHITE}, transparent);
+      display: block;
+      width: 1.2rem;
+      height: calc(${MOBILE_HEIGHT} - 1px);
+      position: fixed;
+      left: 0;
+      transform: translateY(-0.5rem);
+    }
+
+    &:after {
+      content: "";
+      background: linear-gradient(0.25turn, transparent, ${WHITE});
+      display: block;
+      width: 1.2rem;
+      height: calc(${MOBILE_HEIGHT} - 1px);
+      position: fixed;
+      right: 0;
+      transform: translateY(calc(-${MOBILE_HEIGHT} + 0.5rem + 1px));
+    }
   }
 `
 
-const ClearText = s.p`
+const FilterText = s.p`
   display: inline-block;
   color: ${MEDIUM_GRAY};
   cursor: hand;
   opacity: 0.8;
+  margin-right: 1rem;
 
   :hover,
   :active,
@@ -62,6 +112,7 @@ const ClearText = s.p`
 
   ${maxWidth(PHONE)} {
     font-size: 80%;
+    margin-right: 0.5rem;
   }
 `
 
@@ -69,11 +120,16 @@ class Filter extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      showMoreFilters: false,
+    }
+
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClickOutlets = this.handleClickOutlets.bind(this)
     this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
     this.handleClickGroups = this.handleClickGroups.bind(this)
     this.handleInputString = this.handleInputString.bind(this)
+    this.toggleMoreFilters = this.toggleMoreFilters.bind(this)
   }
 
   /**
@@ -132,6 +188,11 @@ class Filter extends Component {
     filterSpacesStringDispatch(filterString)
   }
 
+  toggleMoreFilters() {
+    const { showMoreFilters } = this.state
+    this.setState({ showMoreFilters: !showMoreFilters })
+  }
+
   render() {
     const {
       clearSpacesFiltersDispatch,
@@ -150,7 +211,7 @@ class Filter extends Component {
       filterString,
     } = this.props
 
-    // TODO OTHER ACTIVE PROPS?
+    const { showMoreFilters } = this.state
 
     return (
       <FilterWrapper>
@@ -196,11 +257,24 @@ class Filter extends Component {
           active={filterGroupsActive}
         />
 
-        <ClearText onClick={clearSpacesFiltersDispatch}>
+        <FilterText onClick={clearSpacesFiltersDispatch}>
           Clear filters
-        </ClearText>
+        </FilterText>
 
-        <ToggleNeighborhood />
+        <HideAboveTablet>
+          <FilterText onClick={this.toggleMoreFilters}>More filters</FilterText>
+
+          <Modal show={showMoreFilters} toggle={this.toggleMoreFilters}>
+            <ModalContainer>
+              <Subtitle>More Filters</Subtitle>
+              <ToggleNeighborhood />
+            </ModalContainer>
+          </Modal>
+        </HideAboveTablet>
+
+        <HideOnTablet>
+          <ToggleNeighborhood />
+        </HideOnTablet>
       </FilterWrapper>
     )
   }

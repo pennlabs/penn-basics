@@ -13,3 +13,5 @@ export const maxWidth = w => `@media screen and (max-width: ${w})`
 
 export const LONG_ANIMATION_DURATION = '400ms'
 export const SHORT_ANIMATION_DURATION = '200ms'
+
+export const Z_INDEX = 1300

@@ -11,7 +11,7 @@ import {
   MEDIUM_GRAY,
 } from '../../../styles/colors'
 import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
-import { maxWidth, PHONE } from '../../../styles/sizes'
+import { maxWidth, TABLET } from '../../../styles/sizes'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
@@ -19,8 +19,8 @@ const WIDTH = 2.25
 const Wrapper = s.div`
   float: right;
 
-  ${maxWidth(PHONE)} {
-    display: none;
+  ${maxWidth(TABLET)} {
+    float: none;
   }
 `
 
