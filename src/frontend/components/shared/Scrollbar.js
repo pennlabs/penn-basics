@@ -3,12 +3,12 @@ import s from 'styled-components'
 import { WHITE, LIGHTER_BLUE, BLUE } from '../../styles/colors'
 
 import { Col } from './Flex'
-import { maxWidth, PHONE, minWidth, TABLET } from '../../styles/sizes'
+import { maxWidth, PHONE, minWidth } from '../../styles/sizes'
 
 export const Scrollbar = s(Col)`
   background: ${WHITE};
 
-  ${minWidth(TABLET)} {
+  ${minWidth(PHONE)} {
     overflow-y: scroll;
     overflow-x: hidden;
   
