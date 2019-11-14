@@ -87,7 +87,8 @@ class App extends Component {
           <Scrollbar
             padding="0 0 .5rem 0"
             sm={12}
-            md={4}
+            md={6}
+            lg={4}
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
           >
             <ErrorMessage message={error} />
@@ -112,7 +113,7 @@ class App extends Component {
 
             <PennLabsCredit />
           </Scrollbar>
-          <Col sm={12} md={8}>
+          <Col sm={12} md={6} lg={8}>
             <ErrorMessage message={googleMapError} />
             {!googleMapError && (
               <Map
