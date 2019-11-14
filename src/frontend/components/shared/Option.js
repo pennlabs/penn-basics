@@ -7,12 +7,12 @@ import {
   BLUE,
   DARK_BLUE,
   BORDER,
-  SNOW_ALPHA,
   MEDIUM_GRAY,
   BABY_BLUE,
   LIGHTER_BLUE,
+  BLACK_ALPHA,
 } from '../../styles/colors'
-import { maxWidth, PHONE } from '../../styles/sizes'
+import { maxWidth, PHONE, Z_INDEX } from '../../styles/sizes'
 
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
@@ -62,20 +62,19 @@ export const OptionsModalBacking = s.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: ${SNOW_ALPHA};
+  background: ${BLACK_ALPHA(0.5)};
   z-index: 1299;
 `
 
 export const OptionsModalWrapper = s.div`
   position: absolute;
-  z-index: 1300;
+  z-index: ${Z_INDEX + 1};
   background: ${WHITE};
   border-radius: 4px;
   transform: translate(-0.75rem, calc(1rem + 1px));
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
-  box-shadow: 0 0 8px ${BORDER};
 
   ${maxWidth(PHONE)} {
     width: calc(100vw - 2rem);

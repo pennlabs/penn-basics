@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import s from 'styled-components'
 
 import { ALLBIRDS_GRAY, BLACK_ALPHA } from '../../../styles/colors'
-import { minWidth, NAV_HEIGHT, PHONE } from '../../../styles/sizes'
+import { minWidth, NAV_HEIGHT, PHONE, Z_INDEX } from '../../../styles/sizes'
 
 import Links from './Links'
 import Menu from './Menu'
 import Logo from './Logo'
 import Back from './Back'
 import { Shade } from '../Shade'
-
-const Z_INDEX = 1300
 
 const NavSpace = s.div`
   width: 100%;

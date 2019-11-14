@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { WHITE, LIGHT_GRAY } from '../../styles/colors'
-import { LONG_ANIMATION_DURATION } from '../../styles/sizes'
+import { LONG_ANIMATION_DURATION, Z_INDEX } from '../../styles/sizes'
 import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
 
 const ModalContent = styled.div`
-  min-height: 100%;
   background: ${WHITE};
   width: 50%;
   display: inline-block;
@@ -50,7 +49,7 @@ const ModalClose = styled.div`
   height: 2rem;
   text-align: center;
   vertical-align: middle;
-  z-index: 1300;
+  z-index: ${Z_INDEX + 2};
   transition: opacity 0.2s ease;
 
   :hover {
