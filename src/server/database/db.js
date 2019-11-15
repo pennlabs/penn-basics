@@ -29,14 +29,15 @@ function getFoodTruck(truckId) {
  */
 
 const updateReview = (foodtruckId, userReview) => {
-  Foodtrucks.findOne(
+  return Foodtrucks.findOne(
     { foodtruckID: foodtruckId },
     { reviews: 1 },
     (err, data) => {
       const { reviews } = data // reviews in the DB
       const { rating, comment } = userReview
       let exist = false
-      for (let i = 0; i < reviews.length; i++) { // eslint-disable-line
+      for (let i = 0; i < reviews.length; i++) {
+        // eslint-disable-line
         if (reviews[i].pennID === userReview.pennID) {
           exist = true
           reviews[i] = {
@@ -58,23 +59,14 @@ const updateReview = (foodtruckId, userReview) => {
       }
 
       console.log(reviews)
-      Foodtrucks.findOneAndUpdate(
+      return Foodtrucks.findOneAndUpdate(
         { foodtruckID: foodtruckId },
         { reviews },
-        { new: true },
-        (err, data) => {
-          console.log(data)
-        }
+        { new: true }
       )
     }
   )
 }
-
-updateReview(1, {
-  pennID: 19927664,
-  rating: 5,
-  comment: 'nice foodtruck from peter',
-})
 
 function findAllSpaces() {
   return Space.find()
@@ -136,4 +128,5 @@ module.exports = {
   findAllFoodtrucks,
   insertUser,
   getUser,
+  updateReview,
 }
