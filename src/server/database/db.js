@@ -5,35 +5,34 @@ const Space = require('./models/Space')
 const Foodtrucks = require('./models/FoodTruck')
 const User = require('./models/User')
 
-// return all fields exceept for menu, priceTypes, and reviews
+// return all fields except for menu, priceTypes, and reviews
 const findAllFoodtrucks = () => {
   return Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
 }
 
 /**
- * @param {Number} truckId
+ * @param {Number} foodtruckID
  */
-function getFoodTruck(truckId) {
-  return Foodtrucks.findOne({
-    foodtruckID: { $in: [truckId] },
-  })
+function getFoodTruck(foodtruckID) {
+  return Foodtrucks.findOne({ foodtruckID })
 }
 
 /**
  *
- * look at the reviews in the DB with the foodtruckId and
+ * 1. look at the reviews in the DB with the foodtruckId and
  * if there exists a review with the pennID, update the review
  * otherwise, insert a new review
- * @param {*} foodtruckId the id of the foodtruck
+ * 2. update overallRating of the foodtruck
+ * @param {*} foodtruckID the id of the foodtruck
  * @param {*} userReview an object contains fields: pennID, rating, comment
  */
 
-const updateReview = (foodtruckId, userReview) => {
-  return Foodtrucks.findOne(
-    { foodtruckID: foodtruckId },
-    { reviews: 1 },
-    (err, data) => {
-      const { reviews } = data // reviews in the DB
+const updateReview = (foodtruckID, userReview) => {
+  Foodtrucks.findOne(
+    { foodtruckID },
+    { reviews: 1, overallRating: 1 },
+    async (err, data) => {
+      const { reviews, overallRating } = data // reviews in the DB
       const { rating, comment } = userReview
       let exist = false
       for (let i = 0; i < reviews.length; i++) {
@@ -46,6 +45,7 @@ const updateReview = (foodtruckId, userReview) => {
             comment,
             timeEdited: moment().format(),
           }
+          const ratingSum = overallRating * reviews.length
           break
         }
       }
@@ -58,11 +58,17 @@ const updateReview = (foodtruckId, userReview) => {
         })
       }
 
-      console.log(reviews)
-      return Foodtrucks.findOneAndUpdate(
-        { foodtruckID: foodtruckId },
-        { reviews },
-        { new: true }
+      // calculate the new overall rating
+      if (reviews.length) {
+        // there is already ratings
+        const ratingSum = overallRating * reviews.length
+        // ratingSum -
+      } else {
+      }
+
+      await Foodtrucks.findOneAndUpdate(
+        { foodtruckID },
+        { overallRating: rating, reviews }
       )
     }
   )

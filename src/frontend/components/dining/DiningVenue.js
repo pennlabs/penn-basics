@@ -59,6 +59,7 @@ class DiningVenue extends Component {
     const {
       venueHoursPending,
       favorites,
+      messages,
       venueId,
       dispatchAddFavorite,
       dispatchRemoveFavorite,

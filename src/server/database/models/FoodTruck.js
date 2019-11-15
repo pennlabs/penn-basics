@@ -35,6 +35,7 @@ const FoodTruckSchema = new Schema({
       options: [String],
     },
   ],
+  overallRating: Number,
   menu: [
     {
       name: String,
