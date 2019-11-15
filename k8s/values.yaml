@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: pennlabs/pennbasics
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+ingress:
+  enabled: true
+  domain: pennbasics.com
+
+secrets:
+  secretEnv: basics
