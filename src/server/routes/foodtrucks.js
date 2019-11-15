@@ -18,16 +18,18 @@ module.exports = function foodtrucksRouter(DB) {
     })
   })
 
+  // updateReview(1, { pennID: 19927662, rating: 1, comment: '2this is a nice foodtruck' })
+
   router.post('/:id/review', (req, res) => {
-    const truckId = Number(req.params.id)
+    const foodtruckId = Number(req.params.id)
     const { pennID, rating, comment } = req.body
-    DB.updateReview(truckId, {
+    DB.updateReview(foodtruckId, {
       pennID: Number(pennID),
       rating: Number(rating),
       comment,
-    }).then(truck => {
+    }).then(foodtruck => {
       res.status(200).json({
-        trucks: truck,
+        foodtruck,
       })
     })
   })
