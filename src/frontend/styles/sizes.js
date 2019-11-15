@@ -1,6 +1,8 @@
 export const NAV_HEIGHT = '56px'
 export const MAX_BODY_HEIGHT = `calc(100vh - ${NAV_HEIGHT})`
+
 export const FILTER_HEIGHT = '59px'
+export const MOBILE_FILTER_HEIGHT = '46px'
 
 export const DESKTOP = '1248px'
 export const TABLET = '992px'

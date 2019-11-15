@@ -15,7 +15,11 @@ import {
   ErrorMessage,
   NoDataScroll,
 } from '../shared'
-import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
+import {
+  NAV_HEIGHT,
+  FILTER_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+} from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
 import Filter from './Filter'
@@ -134,6 +138,7 @@ class App extends Component {
               <Map
                 mapId="map"
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+                mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
                 handleClickMarker={setActiveSpaceDispatch}
                 activeMarker={hoveredSpace}
