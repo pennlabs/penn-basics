@@ -8,7 +8,6 @@ branch-filters: &branch-filters
       only:
         - master
         - staging
-jobs:
 
 jobs:
   test:
@@ -44,6 +43,7 @@ jobs:
       - run:
           name: Deploy to k8s
           command: /deploy.sh
+
 workflows:
   version: 2
   build-and-deploy:
