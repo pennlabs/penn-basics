@@ -2,6 +2,14 @@ version: 2.1
 orbs:
   docker: circleci/docker@0.5.13
 
+branch-filters: &branch-filters
+  filters:
+    branches:
+      only:
+        - master
+        - staging
+jobs:
+
 jobs:
   test:
     working_directory: ~/pennlabs
@@ -48,7 +56,9 @@ workflows:
           image: $IMAGE_NAME
           tag: $CIRCLE_SHA1
           context: docker-publish
+          <<: *branch-filters
       - deploy:
           requires:
             - publish
           context: k8s-deploy
+          <<: *branch-filters
