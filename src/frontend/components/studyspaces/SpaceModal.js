@@ -1,3 +1,5 @@
+/* global window */
+
 import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
@@ -21,6 +23,7 @@ const Credit = s.div`
   width: 100%;
   padding: 0 1rem;
 `
+const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
 class SpaceModal extends Component {
   constructor(props) {
@@ -103,6 +106,9 @@ class SpaceModal extends Component {
                 showMarker
                 gestureHandling="cooperative"
                 height="50%"
+                handleClickMarker={() => {
+                  window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                }}
               />
             ) : null}
 
