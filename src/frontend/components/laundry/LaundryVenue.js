@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
+import BellIcon from '../../../../public/img/bell.svg'
 import MachineAvailability from './MachineAvailability'
 import {
   BorderedCard,
@@ -172,7 +173,7 @@ class LaundryVenue extends Component {
         {enableReminder && (
           <Subtext>
             <span>
-              <i className="far fa-bell" />
+              <BellIcon style={{ transform: 'scale(0.7) translateY(10px)' }} />
             </span>
             &nbsp; Click the bell icon to send you a reminder when that machine
             is done running.

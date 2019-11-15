@@ -15,6 +15,7 @@ import {
 } from '../../styles/colors'
 import StatusPill from './StatusPill'
 import { FlexRow, LaundryOverview } from '../shared'
+import BellSVG from '../../../../public/img/bell.svg'
 
 const Table = s.table`
   margin-bottom: 0;
@@ -82,7 +83,7 @@ const Bell = ({
           )
         }
       >
-        <i className="far fa-bell" />
+        <BellSVG style={{ transform: 'scale(0.7) translateY(2px)' }} />
       </BellIcon>
     )
   }
@@ -91,7 +92,10 @@ const Bell = ({
   if (reminded) {
     return (
       <RemindedBellIcon className="icon">
-        <i className="fas fa-bell" />
+        <BellSVG
+          style={{ transform: 'scale(0.7) translateY(2px)' }}
+          fill={BLUE}
+        />
       </RemindedBellIcon>
     )
   }

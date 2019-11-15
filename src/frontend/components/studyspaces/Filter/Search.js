@@ -8,6 +8,7 @@ import {
   MEDIUM_GRAY,
   DARK_GRAY,
 } from '../../../styles/colors'
+import SearchIcon from '../../../../../public/img/search.svg'
 
 const SearchComponent = s.input`
   font-size: 16px;
@@ -26,20 +27,21 @@ const SearchComponent = s.input`
 `
 const inputId = 'searchLine'
 
-const SearchIcon = s.i`
-  cursor: pointer;
-  ${({ active }) => (active ? 'margin-right: 0.3em' : 'margin-right: 1em')}
-`
+// const SearchIcon = s.i`
+//   cursor: pointer;
+//   ${({ active }) => (active ? 'margin-right: 0.3em' : 'margin-right: 1em')}
+// `
 
 const Search = ({ filterFunction, filterString }) => {
   const [showInput, setInput] = useState(false)
   return (
     <span>
-      <label htmlFor={inputId} /* eslint-disable-line */>
+      <label htmlFor={inputId} style={{ marginRight: showInput ? '0.3em' : '0.5em' }} /* eslint-disable-line */>
         <SearchIcon
           className="fas fa-search"
+          style={{ transform: 'scale(0.8) translateY(8px)' }}
           onClick={() => setInput(!showInput)}
-          active={showInput}
+          cursor="pointer"
         />
       </label>
       {showInput && (

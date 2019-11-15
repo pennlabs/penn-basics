@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 import { Col } from './Flex'
-import { DARK_GRAY, ALLBIRDS_GRAY } from '../../styles/colors'
+// import { DARK_GRAY, ALLBIRDS_GRAY } from '../../styles/colors'
 
 const Wrapper = s.div`
   border-radius: 4px;
