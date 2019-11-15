@@ -49,7 +49,7 @@ const ModalClose = styled.div`
   height: 2rem;
   text-align: center;
   vertical-align: middle;
-  z-index: ${Z_INDEX + 2};
+  z-index: ${Z_INDEX + 3};
   transition: opacity 0.2s ease;
 
   :hover {
