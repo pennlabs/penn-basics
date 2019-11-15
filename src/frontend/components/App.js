@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import s from 'styled-components'
-import { MobileView, BrowserView } from 'react-device-detect'
+// import { MobileView, BrowserView } from 'react-device-detect'
 
 import { BLUE, DARK_BLUE } from '../styles/colors'
 import { initGA, logPageView } from '../analytics/index'
@@ -15,7 +15,7 @@ import Dining from './dining/App'
 import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
-import Mobile from './mobile/App'
+// import Mobile from './mobile/App'
 import Feedback from './shared/Feedback'
 
 const AppWrapper = s.div`
