@@ -1,10 +1,7 @@
 version: 2.1
-executors:
-  docker-publisher:
-    environment:
-      IMAGE_NAME: pennlabs/pennbasics
-    docker:
-      - image: circleci/buildpack-deps:buster
+orbs:
+  docker: circleci/docker@0.5.13
+
 jobs:
   test:
     working_directory: ~/pennlabs
@@ -55,8 +52,3 @@ workflows:
           requires:
             - publish
           context: k8s-deploy
-          filters:
-            branches:
-              only:
-                - master
-                - staging
