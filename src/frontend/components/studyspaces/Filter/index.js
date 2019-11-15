@@ -271,13 +271,6 @@ class Filter extends Component {
 
           <HideAboveTablet>
             <FilterText onClick={this.toggleMoreFilters}>More</FilterText>
-
-            <Modal show={showMoreFilters} toggle={this.toggleMoreFilters}>
-              <ModalContainer>
-                <Subtitle>More Filters</Subtitle>
-                <ToggleNeighborhood />
-              </ModalContainer>
-            </Modal>
           </HideAboveTablet>
 
           <FilterText
@@ -292,6 +285,13 @@ class Filter extends Component {
           </HideOnTablet>
         </FilterWrapper>
         <FilterSpace />
+
+        <Modal show={showMoreFilters} toggle={this.toggleMoreFilters}>
+          <ModalContainer>
+            <Subtitle>More Filters</Subtitle>
+            <ToggleNeighborhood />
+          </ModalContainer>
+        </Modal>
       </>
     )
   }
