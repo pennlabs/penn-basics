@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
 const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
@@ -11,6 +12,10 @@ const MapWrapper = styled.div`
   width: 100%;
   flex: 1;
   height: ${({ height }) => height || '100%'};
+
+  ${maxWidth(PHONE)} {
+    height: ${({ mobileHeight }) => mobileHeight || '100%'};
+  }
 `
 
 export class Map extends Component {
@@ -185,9 +190,9 @@ export class Map extends Component {
   }
 
   render() {
-    const { height, mapId } = this.props
+    const { height, mobileHeight, mapId } = this.props
 
-    return <MapWrapper height={height} id={mapId} />
+    return <MapWrapper height={height} mobileHeight={mobileHeight} id={mapId} />
   }
 }
 
@@ -197,6 +202,7 @@ Map.defaultProps = {
     lng: -75.1932,
   },
   height: undefined,
+  mobileHeight: undefined,
   gestureHandling: '',
   markers: {},
   showMarker: false,
@@ -211,6 +217,7 @@ Map.propTypes = {
   }),
   handleClickMarker: PropTypes.func,
   height: PropTypes.string,
+  mobileHeight: PropTypes.string,
   mapId: PropTypes.string.isRequired,
   gestureHandling: PropTypes.string,
   markers: PropTypes.object, // eslint-disable-line

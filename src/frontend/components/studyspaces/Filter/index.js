@@ -30,13 +30,12 @@ import {
   maxWidth,
   PHONE,
   NAV_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
   TABLET,
   minWidth,
   Z_INDEX,
 } from '../../../styles/sizes'
 import { Modal, ModalContainer, Subtitle } from '../../shared'
-
-const MOBILE_FILTER_HEIGHT = '46px'
 
 const HideOnTablet = s.span`
   ${maxWidth(TABLET)} {
