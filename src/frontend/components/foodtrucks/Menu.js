@@ -29,7 +29,9 @@ const Menu = ({ foodtruckInfo }) => {
                 <tr>
                   <td style={{ fontSize: '80%' }}>{item.name}</td>
                   {item.prices.map(price => (
-                    <td style={{ fontSize: '80%' }}>${parseFloat(Math.round(price * 100) / 100).toFixed(2)}</td>
+                    <td style={{ fontSize: '80%' }}>
+                      ${parseFloat(Math.round(price * 100) / 100).toFixed(2)}
+                    </td>
                   ))}
                 </tr>
               ))}
@@ -44,7 +46,6 @@ const Menu = ({ foodtruckInfo }) => {
   )
 }
 
-Menu.propTypes = {
-}
+Menu.propTypes = {}
 
 export default Menu

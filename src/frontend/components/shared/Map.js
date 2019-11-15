@@ -28,7 +28,7 @@ export class Map extends Component {
   }
 
   componentDidMount() {
-    console.log("???")
+    console.log('???')
     this.waitForGoogle()
   }
 

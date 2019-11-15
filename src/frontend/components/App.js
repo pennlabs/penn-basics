@@ -43,24 +43,24 @@ export default () => (
     </MobileView> */}
 
     {/* <BrowserView> */}
-      <Nav />
-      <Feedback />
-      <div id="wrapper">
-        <div id="app">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dining" component={Dining} />
-            <Route exact path="/dining/:id" component={Dining} />
-            <Route exact path="/foodtrucks" component={Foodtrucks} />
-            <Route exact path="/foodtrucks/:id" component={Foodtrucks} />
-            <Route exact path="/laundry" component={Laundry} />
-            <Route exact path="/laundry/:id" component={Laundry} />
-            <Route exact path="/studyspaces" component={StudySpaces} />
-            <Route exact path="/reservations" component={Reservations} />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </div>
+    <Nav />
+    <Feedback />
+    <div id="wrapper">
+      <div id="app">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/dining" component={Dining} />
+          <Route exact path="/dining/:id" component={Dining} />
+          <Route exact path="/foodtrucks" component={Foodtrucks} />
+          <Route exact path="/foodtrucks/:id" component={Foodtrucks} />
+          <Route exact path="/laundry" component={Laundry} />
+          <Route exact path="/laundry/:id" component={Laundry} />
+          <Route exact path="/studyspaces" component={StudySpaces} />
+          <Route exact path="/reservations" component={Reservations} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </div>
+    </div>
     {/* </BrowserView> */}
   </App>
 )
