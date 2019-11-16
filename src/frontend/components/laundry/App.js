@@ -12,7 +12,6 @@ import Loading from '../shared/Loading'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import Favorites from '../shared/favorites/Favorites'
-import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
@@ -46,7 +45,7 @@ class App extends Component {
       parsedHallId !== undefined &&
       !Number.isNaN(parsedHallId)
 
-    console.log('ID', parsedHallId, isActiveHall)
+    // console.log('ID', parsedHallId, isActiveHall)
 
     return (
       <Row fullHeight>

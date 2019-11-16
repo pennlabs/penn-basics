@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import { BorderedCard, FlexRow, Col, ColSpace, Line, Subtitle } from '../shared'
+import { BorderedCard, FlexRow, Col, Line, Subtitle } from '../shared'
 import externalLinksData from '../../../server/resources/home/externalLinks.json'
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 import { BORDER, HOVER_GRAY } from '../../styles/colors'
