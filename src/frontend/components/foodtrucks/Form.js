@@ -26,32 +26,28 @@ const Buttons = s.div`
 
 const array = [1, 2, 3, 4, 5]
 
-const Rating = ({ setIsEdited }) => {
+const Rating = ({ rating, setRating }) => (
+  <div>
+    {array.map(index => (
+      <span // eslint-disable-line
+        style={{ marginRight: '0.5em', cursor: 'pointer' }}
+        onClick={() => {
+          setRating(index)
+        }}
+      >
+        <StarIcon
+          color="#ffc520"
+          fill={rating && index <= rating ? '#ffc520' : 'none'}
+          viewBox="0 0 25 25"
+        />
+      </span>
+    ))}
+  </div>
+)
+
+const Form = ({ show, hideFunction, updateReview }) => {
   const [rating, setRating] = useState(null)
-
-  return (
-    <div>
-      {array.map(index => (
-        <span // eslint-disable-line
-          style={{ marginRight: '0.5em', cursor: 'pointer' }}
-          onClick={() => {
-            setRating(index)
-            setIsEdited(true)
-          }}
-        >
-          <StarIcon
-            color="#ffc520"
-            fill={rating && index <= rating ? '#ffc520' : 'none'}
-            viewBox="0 0 25 25"
-          />
-        </span>
-      ))}
-    </div>
-  )
-}
-
-const Form = ({ show, hideFunction }) => {
-  const [isEdited, setIsEdited] = useState(false)
+  const [comment, setComment] = useState(null)
   if (!show) return null
 
   return (
@@ -60,15 +56,16 @@ const Form = ({ show, hideFunction }) => {
         <strong>Write a Review</strong>
       </Text>
       <br />
-      <Rating setIsEdited={setIsEdited} />
+      <Rating rating={rating} setRating={setRating} />
       <br />
-      <TextArea />
+      <TextArea onChange={e => setComment(e.target.value)} />
       <Buttons>
         <span // eslint-disable-line
           className="button is-light"
           onClick={() => {
             hideFunction()
-            setIsEdited(false)
+            setRating(null)
+            setComment(null)
           }}
         >
           Cancel
@@ -76,7 +73,10 @@ const Form = ({ show, hideFunction }) => {
         <span // eslint-disable-line
           className="button is-success is-light"
           style={{ marginLeft: '0.5rem' }}
-          disabled={!isEdited}
+          disabled={!rating || !comment}
+          onClick={() => {
+            updateReview(rating, comment)
+          }}
         >
           Submit
         </span>
@@ -92,10 +92,16 @@ Form.defaultProps = {
 Form.propTypes = {
   show: PropTypes.bool,
   hideFunction: PropTypes.func.isRequired,
+  updateReview: PropTypes.func.isRequired,
+}
+
+Rating.defaultProps = {
+  rating: null,
 }
 
 Rating.propTypes = {
-  setIsEdited: PropTypes.func.isRequired,
+  rating: Number,
+  setRating: PropTypes.func.isRequired,
 }
 
 export default Form

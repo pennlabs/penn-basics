@@ -3,7 +3,10 @@ import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { getFoodtruckInfo } from '../../actions/foodtrucks_action'
+import {
+  getFoodtruckInfo,
+  updateFoodtruckReview,
+} from '../../actions/foodtrucks_action'
 import {
   Title,
   Text,
@@ -52,7 +55,8 @@ const Chevron = s.span`
     transform: rotate(-135deg);
     `}
 `
-const reviews = ['hello', 'this is a nice foodtruck']
+// const reviews = ['hello', 'this is a nice foodtruck']
+const pennID = 19927664
 
 class FoodtruckModal extends Component {
   constructor(props) {
@@ -77,7 +81,7 @@ class FoodtruckModal extends Component {
   }
 
   render() {
-    const { foodtruckId, infoPending, infoError, foodtruckInfo } = this.props
+    const { foodtruckId, infoPending, infoError, foodtruckInfo, dispatchUpdateFoodtruckReview } = this.props
     const show = Boolean(foodtruckId)
 
     const {
@@ -90,6 +94,7 @@ class FoodtruckModal extends Component {
       start,
       end,
       tags,
+      reviews,
     } = foodtruckInfo || {}
 
     const { showForm, showReview } = this.state
@@ -123,7 +128,8 @@ class FoodtruckModal extends Component {
                 />
               </span>
               <span style={{ fontSize: '80%' }}>
-                10&nbsp;
+                {reviews.length}
+                &nbsp;
                 <CommentIcon
                   fill="none"
                   viewBox="0 0 40 40"
@@ -169,6 +175,7 @@ class FoodtruckModal extends Component {
                 hideFunction={() => {
                   this.setState({ showForm: false })
                 }}
+                updateReview={(rating, comment) => {dispatchUpdateFoodtruckReview(foodtruckId, pennID, rating, comment)}}
               />
               <Text>
                 <strong>Address</strong>
@@ -189,7 +196,7 @@ class FoodtruckModal extends Component {
 
             <ModalContainer padding="5" paddingTop="1.5rem">
               <Text>
-                <strong> Read Reviews (10)</strong>
+                <strong> Read Reviews ({reviews.length}) </strong>
               </Text>
               <Chevron
                 onClick={() => {
@@ -240,6 +247,8 @@ const mapStateToProps = ({ foodtrucks }) => {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetFoodtruckInfo: id => dispatch(getFoodtruckInfo(id)),
+  dispatchUpdateFoodtruckReview: (foodtruckID, pennID, rating, comment) =>
+    dispatch(updateFoodtruckReview(foodtruckID, pennID, rating, comment)),
 })
 
 export default connect(

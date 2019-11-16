@@ -27,63 +27,59 @@ function getFoodTruck(foodtruckID) {
  * @param {*} userReview an object contains fields: pennID, rating, comment
  */
 
-const updateReview = (foodtruckID, userReview) => {
-  Foodtrucks.findOne(
+const updateReview = async (foodtruckID, userReview) => {
+  const data = await Foodtrucks.findOne(
     { foodtruckID },
-    { reviews: 1, overallRating: 1 },
-    async (err, data) => {
-      let { overallRating } = data
-      if (!overallRating) overallRating = 0.0
-
-      const { reviews } = data // reviews in the DB
-      const { pennID, rating, comment } = userReview
-      let exist = false
-      let newOverallRating
-
-      for (let i = 0; i < reviews.length; i++) { // eslint-disable-line
-        if (reviews[i].pennID === pennID) {
-          exist = true
-          // first, compute the new overall rating
-          // becareful of no rating initially
-          let ratingSum = overallRating * reviews.length
-          ratingSum -= reviews[i].rating
-          ratingSum += rating
-          newOverallRating = (ratingSum * 1.0) / reviews.length
-
-          // next, update the reviews array
-          reviews[i].rating = rating
-          reviews[i].comment = comment
-          reviews[i].timeEdited = moment().format()
-
-          break
-        }
-      }
-
-      if (!exist) {
-        // first, compute the new overall rating
-        newOverallRating =
-          ((overallRating * reviews.length + rating) * 1.0) /
-          (reviews.length + 1)
-
-        // next, update the reviews array
-        reviews.push({
-          ...userReview,
-          timeCreated: moment().format(),
-          timeEdited: moment().format(),
-        })
-      }
-
-      // update the DB
-      const foodtruck = await Foodtrucks.findOneAndUpdate(
-        { foodtruckID },
-        { overallRating: newOverallRating, reviews },
-        { new: true }
-      )
-
-      // return the updated foodtruck
-      return foodtruck
-    }
+    { reviews: 1, overallRating: 1 }
   )
+
+  let { overallRating } = data
+  if (!overallRating) overallRating = 0.0
+
+  const { reviews } = data // reviews in the DB
+  const { pennID, rating, comment } = userReview
+  let exist = false
+  let newOverallRating
+
+  for (let i = 0; i < reviews.length; i++) { // eslint-disable-line
+    if (reviews[i].pennID === pennID) {
+      exist = true
+      // first, compute the new overall rating
+      // becareful of no rating initially
+      let ratingSum = overallRating * reviews.length
+      ratingSum -= reviews[i].rating
+      ratingSum += rating
+      newOverallRating = (ratingSum * 1.0) / reviews.length
+
+      // next, update the reviews array
+      reviews[i].rating = rating
+      reviews[i].comment = comment
+      reviews[i].timeEdited = moment().format()
+
+      break
+    }
+  }
+
+  if (!exist) {
+    // first, compute the new overall rating
+    newOverallRating =
+      ((overallRating * reviews.length + rating) * 1.0) / (reviews.length + 1)
+
+    // next, update the reviews array
+    reviews.push({
+      ...userReview,
+      timeCreated: moment().format(),
+      timeEdited: moment().format(),
+    })
+  }
+
+  // update the DB
+  const foodtruck = Foodtrucks.findOneAndUpdate(
+    { foodtruckID },
+    { overallRating: newOverallRating, reviews },
+    { new: true }
+  )
+  return foodtruck
 }
 
 function findAllSpaces() {
