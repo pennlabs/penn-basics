@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const webpush = require('web-push')
+const passport = require('passport')
 
 const frontendRouter = require('./routes/frontend')
 const spacesRouter = require('./routes/spaces')
@@ -22,6 +23,8 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+app.use(passport.initialize())
 
 const { publicKey, privateKey } = webpush.generateVAPIDKeys()
 webpush.setVapidDetails('mailto:contact@pennlabs.org', publicKey, privateKey)
