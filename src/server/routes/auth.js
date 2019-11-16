@@ -92,7 +92,7 @@ module.exports = function authRouter(DB) {
     const { /*_successRedirect,*/ failureRedirect } = req.query
     const authenticator = passport.authenticate('provider', {
       successRedirect: '/',
-      failureRedirect: failureRedirect || '/foodtrucks',
+      failureRedirect: failureRedirect || '/',
       scope: 'read write introspection',
     })
     authenticator(req, res, next)
@@ -102,7 +102,7 @@ module.exports = function authRouter(DB) {
     '/provider/callback',
     passport.authenticate('provider', {
       successRedirect: '/',
-      failureRedirect: '/foodtrucks',
+      failureRedirect: '/',
     })
   )
 
