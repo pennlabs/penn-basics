@@ -88,22 +88,33 @@ module.exports = function authRouter(DB) {
     })
   })
 
-  router.get('/provider/callback', (req, res, next) => {
-    const { successRedirect, failureRedirect } = req.query
-    console.log(successRedirect)
-    console.log(failureRedirect)
+  router.get('/authenticate', (req, res, next) => {
+    const { /*_successRedirect,*/ failureRedirect } = req.query
     const authenticator = passport.authenticate('provider', {
-      successRedirect: successRedirect || '/studyspaces',
-      failureRedirect: failureRedirect || '/foodtrucks',
+      successRedirect: '/',
+      failureRedirect: failureRedirect || '/',
       scope: 'read write introspection',
     })
     authenticator(req, res, next)
   })
 
   router.get(
+    '/provider/callback',
+    passport.authenticate('provider', {
+      successRedirect: '/',
+      failureRedirect: '/',
+    })
+  )
+
+  router.get(
     '/provider',
     passport.authenticate('provider', { scope: 'read write introspection' })
   )
+
+  router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+  })
 
   return router
 }
