@@ -88,10 +88,10 @@ module.exports = function authRouter(DB) {
     })
   })
 
-  router.get('/provider/callback', (req, res, next) => {
-    const { successRedirect, failureRedirect } = req.query
+  router.get('/authenticate', (req, res, next) => {
+    const { /*_successRedirect,*/ failureRedirect } = req.query
     const authenticator = passport.authenticate('provider', {
-      successRedirect: successRedirect || '/studyspaces',
+      successRedirect: '/',
       failureRedirect: failureRedirect || '/foodtrucks',
       scope: 'read write introspection',
     })
@@ -99,9 +99,22 @@ module.exports = function authRouter(DB) {
   })
 
   router.get(
+    '/provider/callback',
+    passport.authenticate('provider', {
+      successRedirect: '/',
+      failureRedirect: '/foodtrucks',
+    })
+  )
+
+  router.get(
     '/provider',
     passport.authenticate('provider', { scope: 'read write introspection' })
   )
+
+  router.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+  })
 
   return router
 }
