@@ -16,10 +16,19 @@ const callbackURL =
   process.env.OAUTH_CALLBACK_URL ||
   'https://www.pennbasics.com/api/auth/provider/callback'
 
-console.log(tokenURL)
-console.log(callbackURL)
-
 module.exports = function authRouter(DB) {
+  passport.serializeUser((user, done) => {
+    done(null, user.pennid)
+  })
+
+  passport.deserializeUser((pennid, done) => {
+    DB.getUser(pennid).then(user => {
+      if (user) {
+        return done(null, user)
+      }
+      return done(new Error('User not found'), null)
+    })
+  })
   passport.use(
     'provider',
     new OAuth2Strategy(
@@ -39,33 +48,30 @@ module.exports = function authRouter(DB) {
           .get(introspectURL, { params: data, ...config })
           .then(res => {
             const userData = res.data.user
-            console.log(userData)
             DB.getUser(userData.pennid).then(user => {
               if (user) {
-                console.log('found the user')
-                console.log(user)
+                console.log('found old user')
                 return done(null, user)
               }
-              DB.insertUser(userData)
+              return DB.insertUser(userData)
                 .then(newUser => {
                   if (newUser) {
-                    console.log('new user created')
-                    console.log(newUser)
+                    console.log('new user made')
                     return done(null, newUser)
                   }
-                  console.error("User wasn't returned")
+                  console.error("User wasn't returned") // eslint-disable-line
                   return new Error("User wasn't returned")
                 })
                 .catch(err => {
-                  console.error('Error in creating user')
-                  console.error(err)
-                  return done(null, null)
+                  console.error('Error in creating user') // eslint-disable-line
+                  console.error(err) // eslint-disable-line
+                  return done(null, false)
                 })
             })
           })
           .catch(err => {
-            console.error('Error found in finding user')
-            console.error(err)
+            console.error('Error found in finding user') // eslint-disable-line
+            console.error(err) // eslint-disable-line
           })
       }
     )
