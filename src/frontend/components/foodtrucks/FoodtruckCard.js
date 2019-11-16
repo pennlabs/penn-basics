@@ -68,9 +68,10 @@ class FoodtruckCard extends Component {
                   <StarIcon
                     fill="black"
                     color="black"
-                    viewBox="0 0 35 35"
+                    style={{
+                      transform: 'scale(0.7) translateY(10px) translateX(-3px)',
+                    }}
                     opacity="0.5"
-                    transform="translate(0, 11)"
                   />
                   {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
                   {noiseLevel ? ` • ${noiseLevel}` : ''} */}

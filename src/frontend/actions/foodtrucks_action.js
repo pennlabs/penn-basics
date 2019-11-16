@@ -114,6 +114,44 @@ export const getFoodtruckInfo = id => {
   }
 }
 
+export const updateFoodtruckReview = (foodtruckID, pennID, rating, comment) => {
+  return dispatch => {
+    dispatch({
+      type: getFoodtruckInfoRequested,
+    })
+
+    try {
+      axios
+        .post(`/api/foodtrucks/${foodtruckID}/review`, {
+          pennID,
+          rating,
+          comment,
+        })
+        .then(res => {
+          const { foodtruck } = res.data
+          const formattedPriceTypes = {}
+          const { priceTypes = [] } = foodtruck
+          priceTypes.forEach(priceType => {
+            formattedPriceTypes[priceType.name] = priceType.options
+          })
+          dispatch({
+            type: getFoodtruckInfoFulfilled,
+            foodtruckInfo: {
+              ...foodtruck,
+              priceTypes: formattedPriceTypes,
+            },
+          })
+        })
+    } catch (err) {
+      dispatch({
+        type: getFoodtruckInfoRejected,
+        error:
+          err.message || 'There was an error updating relavant information',
+      })
+    }
+  }
+}
+
 export const setHoveredFoodtruck = footruckId => {
   return dispatch => {
     dispatch({
