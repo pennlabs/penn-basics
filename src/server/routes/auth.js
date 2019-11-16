@@ -53,7 +53,8 @@ module.exports = function authRouter(DB) {
                     console.log(newUser)
                     return done(null, newUser)
                   }
-                  throw new Error("User wasn't returned")
+                  console.error("User wasn't returned")
+                  return new Error("User wasn't returned")
                 })
                 .catch(err => {
                   console.error('Error in creating user')

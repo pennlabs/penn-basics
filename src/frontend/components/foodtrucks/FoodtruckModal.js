@@ -81,7 +81,13 @@ class FoodtruckModal extends Component {
   }
 
   render() {
-    const { foodtruckId, infoPending, infoError, foodtruckInfo, dispatchUpdateFoodtruckReview } = this.props
+    const {
+      foodtruckId,
+      infoPending,
+      infoError,
+      foodtruckInfo,
+      dispatchUpdateFoodtruckReview,
+    } = this.props
     const show = Boolean(foodtruckId)
 
     const {
@@ -175,7 +181,14 @@ class FoodtruckModal extends Component {
                 hideFunction={() => {
                   this.setState({ showForm: false })
                 }}
-                updateReview={(rating, comment) => {dispatchUpdateFoodtruckReview(foodtruckId, pennID, rating, comment)}}
+                updateReview={(rating, comment) => {
+                  dispatchUpdateFoodtruckReview(
+                    foodtruckId,
+                    pennID,
+                    rating,
+                    comment
+                  )
+                }}
               />
               <Text>
                 <strong>Address</strong>
