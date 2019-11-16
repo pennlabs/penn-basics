@@ -36,7 +36,7 @@ app.use(
       */
     },
     saveUninitialized: false,
-    resave: false,
+    resave: true,
     secret: process.env.SESSION_SECRET || 'keyboard cat',
   })
 )

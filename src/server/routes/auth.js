@@ -50,13 +50,11 @@ module.exports = function authRouter(DB) {
             const userData = res.data.user
             DB.getUser(userData.pennid).then(user => {
               if (user) {
-                console.log('found old user')
                 return done(null, user)
               }
               return DB.insertUser(userData)
                 .then(newUser => {
                   if (newUser) {
-                    console.log('new user made')
                     return done(null, newUser)
                   }
                   console.error("User wasn't returned") // eslint-disable-line
@@ -76,6 +74,29 @@ module.exports = function authRouter(DB) {
       }
     )
   )
+
+  router.get('/loggedIn', (req, res) => {
+    if (req.user) {
+      return res.send({
+        pennid: req.user.pennid,
+        expires: req.session.cookie.expires,
+        loggedIn: true,
+      })
+    }
+    return res.send({
+      loggedIn: false,
+    })
+  })
+
+  router.get('/authenticate', (req, res, next) => {
+    const { successRedirect, failureRedirect } = req.query
+    return passport.authenticate('provider', {
+      successRedirect: successRedirect || '/',
+      failureRedirect: failureRedirect || '/studyspaces',
+      scope: 'read write introspection',
+    })(req, res, next)
+  })
+
   router.get(
     '/provider',
     passport.authenticate('provider', { scope: 'read write introspection' })
@@ -89,6 +110,15 @@ module.exports = function authRouter(DB) {
       scope: 'read write introspection',
     })
   )
+
+  /*
+  router.get('/test', (req, res) => {
+    console.log(req.query)
+    const { user } = req
+    console.log(user)
+    res.send(user)
+  })
+  */
 
   return router
 }
