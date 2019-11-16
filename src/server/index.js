@@ -2,6 +2,9 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const webpush = require('web-push')
+const passport = require('passport')
+const session = require('express-session')
+const moment = require('moment')
 
 const frontendRouter = require('./routes/frontend')
 const spacesRouter = require('./routes/spaces')
@@ -22,6 +25,24 @@ app.use(express.static(path.join(__dirname, '..', '..', 'public')))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(
+  session({
+    cookie: {
+      // expire in 24 hours (expressed in ms)
+      maxAge: 24 * 60 * 60 * 1000,
+      /*
+      // enable secure in dev
+      secure: process.env.prod ? true : false
+      */
+    },
+    saveUninitialized: false,
+    resave: false,
+    secret: process.env.SESSION_SECRET || 'keyboard cat',
+  })
+)
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 const { publicKey, privateKey } = webpush.generateVAPIDKeys()
 webpush.setVapidDetails('mailto:contact@pennlabs.org', publicKey, privateKey)

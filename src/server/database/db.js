@@ -125,8 +125,8 @@ function insertSpace(space) {
   return new Space(space).save()
 }
 
-function getUser(pennID) {
-  return User.findOne({ pennID: { $in: [pennID] } })
+function getUser(pennid) {
+  return User.findOne({ pennid })
 }
 
 function insertUser(userData) {
