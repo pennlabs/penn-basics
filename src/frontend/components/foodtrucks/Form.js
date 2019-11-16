@@ -81,6 +81,9 @@ const Form = ({ show, hideFunction, updateReview }) => {
           Submit
         </span>
       </Buttons>
+      <span>
+        Show My Name
+      </span>
     </div>
   )
 }

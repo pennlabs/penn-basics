@@ -43,7 +43,7 @@ class FoodtruckCard extends Component {
   }
 
   render() {
-    const { name, open, hours, foodtruckId } = this.props
+    const { name, open, hours, foodtruckId, overallRating } = this.props
 
     return (
       <StyledLink to={`/foodtrucks/${foodtruckId}`} className="link">
@@ -63,7 +63,9 @@ class FoodtruckCard extends Component {
                         0,
                         hours.indexOf('am')
                       )}am`}
-                  {' • 5.00'}
+                  {` • ${parseFloat(
+                    Math.round(overallRating * 100) / 100
+                  ).toFixed(2)}`}
                   &nbsp;
                   <StarIcon
                     fill="black"

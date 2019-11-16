@@ -1,3 +1,5 @@
+/* global window */
+
 import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
@@ -57,6 +59,7 @@ const Chevron = s.span`
 `
 // const reviews = ['hello', 'this is a nice foodtruck']
 const pennID = 19927664
+const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
 class FoodtruckModal extends Component {
   constructor(props) {
@@ -101,6 +104,7 @@ class FoodtruckModal extends Component {
       end,
       tags,
       reviews,
+      overallRating,
     } = foodtruckInfo || {}
 
     const { showForm, showReview } = this.state
@@ -125,7 +129,8 @@ class FoodtruckModal extends Component {
               )}
               <Title marginBottom="0.5vh">{name}</Title>
               <span style={{ fontSize: '80%' }}>
-                5.00&nbsp;
+                {parseFloat(Math.round(overallRating * 100) / 100).toFixed(2)}
+                &nbsp;
                 <StarIcon
                   fill="none"
                   viewBox="0 0 40 40"
@@ -195,6 +200,9 @@ class FoodtruckModal extends Component {
               </Text>
               <br />
               <Text>{address}</Text>
+              <Text style={{ fontSize: '80%' }}>
+                &#42;Click on the marker to open Google Maps
+              </Text>
             </ModalContainer>
 
             {location && location.lat && location.lng ? (
@@ -204,6 +212,9 @@ class FoodtruckModal extends Component {
                 showMarker
                 gestureHandling="cooperative"
                 height="50%"
+                handleClickMarker={() => {
+                  window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                }}
               />
             ) : null}
 

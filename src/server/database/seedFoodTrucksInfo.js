@@ -42,7 +42,7 @@ function updateFoodTrucks() {
       }
     })
 
-    return { ...truck, menu: newMenu, foodtruckID, priceTypes: newPriceTypes }
+    return { ...truck, menu: newMenu, foodtruckID, priceTypes: newPriceTypes, overallRating: 0 }
   })
 }
 
