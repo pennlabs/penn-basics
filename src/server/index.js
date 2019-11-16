@@ -29,7 +29,7 @@ app.use(
   session({
     cookie: {
       // expire in 24 hours (expressed in ms)
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: moment.duration(24, 'hours').asMilliseconds(),
       /*
       // enable secure in dev
       secure: process.env.prod ? true : false
