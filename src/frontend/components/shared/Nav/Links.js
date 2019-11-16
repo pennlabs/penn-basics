@@ -1,9 +1,13 @@
+/* global window */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import s from 'styled-components'
+
 import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
 import { WHITE, BORDER } from '../../../styles/colors'
+import { authenticate } from '../../../actions/auth_actions'
 
 const LinksDiv = s.div`
   margin-left: auto;
@@ -41,6 +45,7 @@ const Links = ({ active, zIndex }) => (
     <Link to="/foodtrucks">Foodtrucks</Link>
     <Link to="/laundry">Laundry</Link>
     <Link to="/studyspaces">Studyspaces</Link>
+    <a href={`/api/auth/provider/callback?successRedirect=/foodtrucks&failureRedirect=/`}> Login </a>
   </LinksDiv>
 )
 
