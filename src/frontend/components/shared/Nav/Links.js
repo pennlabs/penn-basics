@@ -39,15 +39,24 @@ const LinksDiv = s.div`
   }
 `
 
-const Links = ({ active, zIndex }) => (
-  <LinksDiv active={active} zIndex={zIndex}>
-    <Link to="/dining">Dining</Link>
-    <Link to="/foodtrucks">Foodtrucks</Link>
-    <Link to="/laundry">Laundry</Link>
-    <Link to="/studyspaces">Studyspaces</Link>
-    <a href={`/api/auth/authenticate/?successRedirect=/foodtrucks&failureRedirect=/`}> Login </a>
-  </LinksDiv>
-)
+const Links = ({ active, zIndex }) => {
+  // TODO: change these redirects to use the current route
+  const successRedirect = '/foodtrucks'
+  const failureRedirect = '/'
+  return (
+    <LinksDiv active={active} zIndex={zIndex}>
+      <Link to="/dining">Dining</Link>
+      <Link to="/foodtrucks">Foodtrucks</Link>
+      <Link to="/laundry">Laundry</Link>
+      <Link to="/studyspaces">Studyspaces</Link>
+      <a
+        href={`/api/auth/authenticate?successRedirect=${successRedirect}&failureRedirect=${failureRedirect}`}
+      >
+        Login
+      </a>
+    </LinksDiv>
+  )
+}
 
 Links.propTypes = {
   active: PropTypes.bool,
