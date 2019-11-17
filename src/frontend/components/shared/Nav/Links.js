@@ -45,7 +45,7 @@ const Links = ({ active, zIndex }) => (
     <Link to="/foodtrucks">Foodtrucks</Link>
     <Link to="/laundry">Laundry</Link>
     <Link to="/studyspaces">Studyspaces</Link>
-    <a href={`/api/auth/provider/callback?successRedirect=/foodtrucks&failureRedirect=/`}> Login </a>
+    <a href={`/api/auth/authenticate/?successRedirect=/foodtrucks&failureRedirect=/`}> Login </a>
   </LinksDiv>
 )
 
