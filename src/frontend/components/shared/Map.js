@@ -14,7 +14,7 @@ const MapWrapper = styled.div`
   height: ${({ height }) => height || '100%'};
 
   ${maxWidth(PHONE)} {
-    height: ${({ mobileHeight }) => mobileHeight || '100%'};
+    height: ${({ mobileHeight, height }) => mobileHeight || height || '100%'};
   }
 `
 

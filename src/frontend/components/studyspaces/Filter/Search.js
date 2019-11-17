@@ -17,6 +17,7 @@ const SearchComponent = s.input`
   border-bottom-color: ${FOCUS_GRAY};
   margin-right: 1em;
   color: ${MEDIUM_GRAY};
+  border-radius: 0;
   
   :focus {
     outline: none;
@@ -24,18 +25,19 @@ const SearchComponent = s.input`
     border-bottom-color: ${BORDER};
   }
 `
-const inputId = 'searchLine'
 
 const SearchIcon = s.i`
   cursor: pointer;
-  ${({ active }) => (active ? 'margin-right: 0.3em' : 'margin-right: 1em')}
+  margin-right: ${({ active }) => (active ? '0.3em' : '1em')};
 `
+
+const INPUT_ID = 'search-line'
 
 const Search = ({ filterFunction, filterString }) => {
   const [showInput, setInput] = useState(false)
   return (
     <span>
-      <label htmlFor={inputId} /* eslint-disable-line */>
+      <label htmlFor={INPUT_ID} /* eslint-disable-line */>
         <SearchIcon
           className="fas fa-search"
           onClick={() => setInput(!showInput)}
@@ -44,7 +46,7 @@ const Search = ({ filterFunction, filterString }) => {
       </label>
       {showInput && (
         <SearchComponent
-          id={inputId}
+          id={INPUT_ID}
           onChange={e => filterFunction(e.target.value)}
           value={filterString}
         />
