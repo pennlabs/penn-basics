@@ -80,8 +80,8 @@ module.exports = function authRouter(DB) {
       return res.send({
         pennid: req.user.pennid,
         email: req.user.email,
-        name: `${req.user.first_name} ${req.user.last_name}`,
-        displayName: req.user.displayName,
+        fullName: `${req.user.first_name} ${req.user.last_name}`,
+        preferredName: req.user.preferredName,
         expires: req.session.cookie.expires,
         loggedIn: true,
       })

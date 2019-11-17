@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   email: String,
   first_name: String,
   last_name: String,
+  preferredName: String,
   affiliation: [String],
 })
 
