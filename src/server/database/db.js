@@ -20,11 +20,11 @@ function getFoodTruck(foodtruckID) {
 /**
  *
  * 1. look at the reviews in the DB with the foodtruckId and
- * if there exists a review with the input pennID, update the review
+ * if there exists a review with the input pennid, update the review
  * otherwise, insert a new review
  * 2. update overallRating of the foodtruck
  * @param {*} foodtruckID the id of the foodtruck
- * @param {*} userReview an object contains fields: pennID, rating, comment
+ * @param {*} userReview an object contains fields: pennid, rating, comment
  */
 
 const updateReview = async (foodtruckID, userReview) => {
@@ -37,12 +37,13 @@ const updateReview = async (foodtruckID, userReview) => {
   if (!overallRating) overallRating = 0.0
 
   const { reviews } = data // reviews in the DB
-  const { pennID, rating, comment } = userReview
+  const { pennid, rating, comment } = userReview
   let exist = false
   let newOverallRating
 
-  for (let i = 0; i < reviews.length; i++) { // eslint-disable-line
-    if (reviews[i].pennID === pennID) {
+  for (let i = 0; i < reviews.length; i++) {
+    // eslint-disable-line
+    if (reviews[i].pennid === pennid) {
       exist = true
       // first, compute the new overall rating
       // becareful of no rating initially
