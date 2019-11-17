@@ -123,7 +123,7 @@ export const updateFoodtruckReview = (foodtruckID, pennID, rating, comment) => {
     try {
       axios
         .post(`/api/foodtrucks/${foodtruckID}/review`, {
-          pennID,
+          pennid: pennID,
           rating,
           comment,
         })

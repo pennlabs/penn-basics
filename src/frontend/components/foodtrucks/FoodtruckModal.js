@@ -150,6 +150,27 @@ class FoodtruckModal extends Component {
               </span>
             </ModalContainer>
 
+            <ModalContainer
+              paddingTop="1.5rem"
+              paddingBottom="1rem"
+              padding="5"
+            >
+              <Form
+                show={showForm}
+                hideFunction={() => {
+                  this.setState({ showForm: false })
+                }}
+                updateReview={(rating, comment) => {
+                  dispatchUpdateFoodtruckReview(
+                    foodtruckId,
+                    pennID,
+                    rating,
+                    comment
+                  )
+                }}
+              />
+            </ModalContainer>
+
             {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
 
             {imageCredit && (
@@ -181,20 +202,6 @@ class FoodtruckModal extends Component {
               paddingBottom="1rem"
               padding="5"
             >
-              <Form
-                show={showForm}
-                hideFunction={() => {
-                  this.setState({ showForm: false })
-                }}
-                updateReview={(rating, comment) => {
-                  dispatchUpdateFoodtruckReview(
-                    foodtruckId,
-                    pennID,
-                    rating,
-                    comment
-                  )
-                }}
-              />
               <Text>
                 <strong>Address</strong>
               </Text>

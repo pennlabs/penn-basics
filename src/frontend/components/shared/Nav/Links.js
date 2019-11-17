@@ -1,13 +1,10 @@
-/* global window */
-
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import s from 'styled-components'
 
 import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
 import { WHITE, BORDER } from '../../../styles/colors'
-import { authenticate } from '../../../actions/auth_actions'
 
 const LinksDiv = s.div`
   margin-left: auto;
@@ -39,9 +36,8 @@ const LinksDiv = s.div`
   }
 `
 
-const Links = ({ active, zIndex }) => {
+const Links = ({ active, zIndex, location }) => {
   // TODO: change these redirects to use the current route
-  const successRedirect = '/foodtrucks'
   const failureRedirect = '/'
   return (
     <LinksDiv active={active} zIndex={zIndex}>
@@ -50,7 +46,7 @@ const Links = ({ active, zIndex }) => {
       <Link to="/laundry">Laundry</Link>
       <Link to="/studyspaces">Studyspaces</Link>
       <a
-        href={`/api/auth/authenticate?successRedirect=${successRedirect}&failureRedirect=${failureRedirect}`}
+        href={`/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${failureRedirect}`}
       >
         Login
       </a>
@@ -58,13 +54,14 @@ const Links = ({ active, zIndex }) => {
   )
 }
 
-Links.propTypes = {
-  active: PropTypes.bool,
-  zIndex: PropTypes.number.isRequired,
-}
-
 Links.defaultProps = {
   active: false,
 }
 
-export default Links
+Links.propTypes = {
+  active: PropTypes.bool,
+  zIndex: PropTypes.number.isRequired,
+  location: PropTypes.shape.isRequired,
+}
+
+export default withRouter(Links)

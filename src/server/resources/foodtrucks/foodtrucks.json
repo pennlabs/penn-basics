@@ -118,7 +118,9 @@
       "lng": -75.199282
     },
     "tags": ["sandwich"],
-    "link": "https://www.facebook.com/BuisLunchTruck/"
+    "link": "https://www.facebook.com/BuisLunchTruck/",
+    "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Bui%27s%20Lunch%20Truck/16c89b70-0feb-4801-9845-6b9292b286b8",
+    "description": "Bui's Lunch Truck is an all-star at quick breakfast and lunches. They serve classic breakfast and lunch options at affordable prices. Make sure to try the Bui sauce on any sandwich you get!"
   },
   {
     "name": "George's Food Truck",
@@ -576,6 +578,8 @@
       "lng": -75.1986617
     },
     "tags": ["halal", "free drink with meal"],
+    "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Halal%20Gyro%20Express/158ae3bb-9822-44ee-a9fa-7f1e6fbd8689",
+    "description": "Nalda's pick for the best chicken-over-rice on the western end of campus. There is nothing in particular that stands out from all the other halal trucks, but their food is consistently good. They also only charge $5 instead of $6!",
     "menu": {
       "All": [
         {
@@ -654,6 +658,8 @@
     },
     "tags": ["Chinese"],
     "languageTypes": ["English", "Chinese"],
+    "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Kim%27s%20Oriental%20Food/e0f64133-a55c-41c1-bd78-32bfd699d058",
+    "description": "Located behind Pottruck Gym, Kim's is a favorite amongst Penn students and faculty for serving homey and reliable Chinese food.",
     "menu": {
       "General": [
         {
@@ -839,6 +845,8 @@
       "lng": -75.1982896
     },
     "tags": ["halal", "free drink with meal"],
+    "image": "https://naldacampus.s3.amazonaws.com/listingpictures/New%20York%20Famous%20Halal%20Gyro/dbdfca63-700e-4093-8247-bef215a45678",
+    "description": "Why they chose to settle right next to Halal Food will always be a mystery. The menu is pretty much the same as its neighbor’s, but the addition of the green sauce is a plus.",
     "menu": {
       "Rice Platters": [
         {
@@ -1209,6 +1217,8 @@
       "Noodles": ["Pt", "Qt"],
       "Side Orders": ["Pt", "Qt"]
     },
+    "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Yue%20Kee%20Mobile%20Kitchen/dbba946f-d146-4dcb-b24d-d62596d50036",
+    "description": "Located near the Bridge on Penn's campus, Yue Kee provides classic home-cooked Chinese meals. Don't be fooled by Yue Kee's run-down appearance; every dish is made-to-order and makes you feel right at home in a Chinese household.",
     "menu": {
       "Soup & Appetizers": [
         {
