@@ -41,8 +41,6 @@ const StyledLink = s(Link)`
 `
 
 const AuthLink = withRouter(({ userInfo, location }) => {
-  console.log(userInfo)
-  console.log(location)
   const failureRedirect = '/'
   if (!userInfo) return null
   const { loggedIn } = userInfo
