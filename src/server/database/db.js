@@ -119,6 +119,21 @@ function getSpace(spaceId) {
   return Space.findOne(spaceId)
 }
 
+function deleteReview(foodtruckName, pennid) {
+  if (pennid && foodtruckName)
+    return Foodtrucks.findOne({ name: foodtruckName }).then(truck => {
+      if (!truck) throw new Error('Truck not found')
+      const { reviews } = truck
+      const newReviews = reviews.filter(
+        r => r.pennid !== pennid && r.pennID !== pennid
+      )
+      return truck.update({ reviews: newReviews })
+    })
+  return new Error(
+    'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
+  )
+}
+
 /**
  * @param {object} space
  */
@@ -144,4 +159,5 @@ module.exports = {
   insertUser,
   getUser,
   updateReview,
+  deleteReview,
 }
