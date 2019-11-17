@@ -56,6 +56,7 @@ const FoodTruckSchema = new Schema({
       timeEdited: Date,
     },
   ],
+  timeUpdated: Date,
 })
 
 module.exports = mongoose.model('FoodTruck', FoodTruckSchema)

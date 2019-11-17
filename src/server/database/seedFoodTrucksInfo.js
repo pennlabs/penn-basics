@@ -42,30 +42,38 @@ function updateFoodTrucks() {
       }
     })
 
-    return { ...truck, menu: newMenu, foodtruckID, priceTypes: newPriceTypes, overallRating: 0 }
+    return {
+      ...truck,
+      menu: newMenu,
+      foodtruckID,
+      priceTypes: newPriceTypes,
+      overallRating: 0,
+      timeUpdated: new Date(),
+    }
   })
 }
 
 function loadFoodTrucksIntoDB(truckArray) {
   return Promise.all(
-    truckArray.map(
-      truck => new FoodTruck(truck).save().then(console.log) // eslint-disable-line
-    )
+    truckArray.map(truck => {
+      return FoodTruck.findOneAndUpdate(
+        { name: truck.name },
+        { ...truck }
+      ).then(console.log) // eslint-disable-line
+    })
   ).then(() => {
     console.log('----foodtrucks seeding completed----') // eslint-disable-line
     process.exit(0)
   })
 }
 
-/*
-// initial test of food truck code
-console.log(new FoodTruck(updateFoodTrucks()[0]))
-*/
-
-// initial try at the insertion pipeline
-deleteFoodTrucksInDB()
-  .then(() => {
+async function main() {
+  try {
     const trucksToInsert = updateFoodTrucks()
-    return loadFoodTrucksIntoDB(trucksToInsert)
-  })
-  .catch(err => console.error(err)) // eslint-disable-line
+    await loadFoodTrucksIntoDB(trucksToInsert)
+  } catch (err) {
+    console.error(err) // eslint-disable-line
+  }
+}
+
+main()
