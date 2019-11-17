@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import s from 'styled-components'
+import axios from 'axios'
 
 import pjson from '../../../../../package.json'
 import {
@@ -90,6 +91,16 @@ const BetaTag = s.span`
 
 const Nav = () => {
   const [active, toggleActive] = useState(false)
+  const [userInfo, setUserInfo] = useState(null)
+
+  useEffect(() => {
+    const cancelToken = axios.CancelToken
+    const source = cancelToken.source()
+    axios
+      .get('/api/auth/checkAuth', { cancelToken: source.token })
+      .then(res => setUserInfo(res.data))
+  }, [])
+
   return (
     <>
       <Wrapper className="navbar" id="navbar">
@@ -105,7 +116,7 @@ const Nav = () => {
 
         <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
 
-        <Links active={active} zIndex={Z_INDEX} />
+        <Links active={active} zIndex={Z_INDEX} userInfo={userInfo} />
       </Wrapper>
       {active && (
         <Shade zIndex={Z_INDEX} onClick={() => toggleActive(!active)} />

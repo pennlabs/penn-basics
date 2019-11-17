@@ -4,7 +4,8 @@ import { Link, withRouter } from 'react-router-dom'
 import s from 'styled-components'
 
 import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
-import { WHITE, BORDER } from '../../../styles/colors'
+import { WHITE, BORDER, DARK_GRAY } from '../../../styles/colors'
+import UserSVG from '../../../../../public/img/user.svg'
 
 const LinksDiv = s.div`
   margin-left: auto;
@@ -35,21 +36,46 @@ const LinksDiv = s.div`
     ${({ active }) => !active && `display: none;`}
   }
 `
+const StyledLink = s(Link)`
+  color: ${DARK_GRAY} !important;
+`
 
-const Links = ({ active, zIndex, location }) => {
-  // TODO: change these redirects to use the current route
+const AuthLink = withRouter(({ userInfo, location }) => {
+  console.log(userInfo)
+  console.log(location)
   const failureRedirect = '/'
+  if (!userInfo) return null
+  const { loggedIn } = userInfo
+  if (!loggedIn) {
+    return (
+      <a
+        href={`/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${failureRedirect}`}
+      >
+        Login
+      </a>
+    )
+  }
+  return (
+    <StyledLink to="/profile" style={{ marginLeft: '1.5rem' }}>
+      <UserSVG
+        style={{
+          transform: 'scale(0.8) translateY(6px)',
+          marginRight: '0.5em',
+        }}
+      />
+      {userInfo.fullName}
+    </StyledLink>
+  )
+})
+
+const Links = ({ active, zIndex, userInfo }) => {
   return (
     <LinksDiv active={active} zIndex={zIndex}>
       <Link to="/dining">Dining</Link>
       <Link to="/foodtrucks">Foodtrucks</Link>
       <Link to="/laundry">Laundry</Link>
       <Link to="/studyspaces">Studyspaces</Link>
-      <a
-        href={`/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${failureRedirect}`}
-      >
-        Login
-      </a>
+      <AuthLink userInfo={userInfo} />
     </LinksDiv>
   )
 }
@@ -61,7 +87,6 @@ Links.defaultProps = {
 Links.propTypes = {
   active: PropTypes.bool,
   zIndex: PropTypes.number.isRequired,
-  location: PropTypes.shape.isRequired,
 }
 
-export default withRouter(Links)
+export default Links

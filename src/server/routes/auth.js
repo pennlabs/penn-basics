@@ -75,7 +75,7 @@ module.exports = function authRouter(DB) {
     )
   )
 
-  router.get('/loggedIn', (req, res) => {
+  router.get('/checkAuth', (req, res) => {
     if (req.user) {
       return res.send({
         pennid: req.user.pennid,

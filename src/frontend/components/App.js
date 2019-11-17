@@ -15,6 +15,7 @@ import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
 import Mobile from './mobile/App'
 import Feedback from './shared/Feedback'
+import Profile from './profile/App'
 
 const App = s.div`
   a {
@@ -57,6 +58,7 @@ export default () => (
           <Route exact path="/laundry/:id" component={Laundry} />
           <Route exact path="/studyspaces" component={StudySpaces} />
           <Route exact path="/reservations" component={Reservations} />
+          <Route exact path="/profile" component={Profile} />
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
