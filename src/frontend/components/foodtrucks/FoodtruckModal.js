@@ -90,6 +90,7 @@ class FoodtruckModal extends Component {
       infoError,
       foodtruckInfo,
       dispatchUpdateFoodtruckReview,
+      userInfo,
     } = this.props
     const show = Boolean(foodtruckId)
 
@@ -107,6 +108,8 @@ class FoodtruckModal extends Component {
       overallRating,
     } = foodtruckInfo || {}
 
+    const { pennid, fullName, loggedIn } = userInfo
+
     const { showForm, showReview } = this.state
 
     return (
@@ -114,7 +117,7 @@ class FoodtruckModal extends Component {
         {foodtruckInfo ? (
           <>
             <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
-              {!showForm && (
+              {loggedIn && !showForm && (
                 <Buttons>
                   <span // eslint-disable-line
                     className="button is-info"
@@ -163,7 +166,8 @@ class FoodtruckModal extends Component {
                 updateReview={(rating, comment) => {
                   dispatchUpdateFoodtruckReview(
                     foodtruckId,
-                    pennID,
+                    pennid,
+                    fullName,
                     rating,
                     comment
                   )
@@ -267,12 +271,14 @@ FoodtruckModal.propTypes = {
   }),
 }
 
-const mapStateToProps = ({ foodtrucks }) => {
+const mapStateToProps = ({ foodtrucks, authentication }) => {
   const { infoPending, infoError, foodtruckInfo } = foodtrucks
+  const { userInfo } = authentication
   return {
     infoPending,
     infoError,
     foodtruckInfo,
+    userInfo,
   }
 }
 

@@ -1,5 +1,11 @@
 import axios from 'axios'
 
-export const authenticate = (successRedirect, failureRedirect) => {
-  axios.get(`/api/auth/authenticate?successRedirect=${successRedirect}&failureRedirect=${failureRedirect}`)
+import { getUserInfoFulfilled } from './action_types'
+
+export const getUserInfo = () => {
+  return dispatch => {
+    axios.get('/api/auth/getUserInfo').then(res => {
+      dispatch({ type: getUserInfoFulfilled, userInfo: res.data })
+    })
+  }
 }

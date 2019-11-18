@@ -97,7 +97,7 @@ const Nav = () => {
     const cancelToken = axios.CancelToken
     const source = cancelToken.source()
     axios
-      .get('/api/auth/checkAuth', { cancelToken: source.token })
+      .get('/api/auth/getUserInfo', { cancelToken: source.token })
       .then(res => setUserInfo(res.data))
   }, [])
 

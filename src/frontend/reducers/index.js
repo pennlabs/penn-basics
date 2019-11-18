@@ -5,6 +5,7 @@ import spacesReducer from './spacesReducer'
 import laundryReducer from './laundryReducer'
 import homeReducer from './homeReducer'
 import foodtrucksReducer from './foodtrucksReducer'
+import authReducer from './authReducer'
 
 export default combineReducers({
   dining: diningReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   laundry: laundryReducer,
   home: homeReducer,
   foodtrucks: foodtrucksReducer,
+  authentication: authReducer,
 })
