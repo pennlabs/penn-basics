@@ -45,8 +45,6 @@ class App extends Component {
       parsedHallId !== undefined &&
       !Number.isNaN(parsedHallId)
 
-    // console.log('ID', parsedHallId, isActiveHall)
-
     return (
       <Row fullHeight>
         <Scrollbar

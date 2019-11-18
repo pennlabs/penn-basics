@@ -1,10 +1,7 @@
 import React from 'react'
-import s from 'styled-components'
 import PropTypes from 'prop-types'
 
-const FavoriteIcon = s.i`
-  opacity: 0.75;
-`
+import FavoriteIcon from '../../../../../public/img/heart.svg'
 
 const FavoriteButton = ({
   isFavorited,
@@ -19,7 +16,11 @@ const FavoriteButton = ({
         className="button is-info"
         onClick={() => removeFunction(removeParams)}
       >
-        <FavoriteIcon className="fa fa-heart" />
+        <FavoriteIcon
+          opacity="0.75"
+          fill="white"
+          style={{ transform: 'scale(0.75)' }}
+        />
         &nbsp; Favorited
       </span>
     )
@@ -29,7 +30,7 @@ const FavoriteButton = ({
       className="button"
       onClick={() => addFunction(addParams)}
     >
-      <FavoriteIcon className="far fa-heart" />
+      <FavoriteIcon opacity="0.75" style={{ transform: 'scale(0.75)' }} />
       &nbsp; Make Favorite
     </span>
   )
