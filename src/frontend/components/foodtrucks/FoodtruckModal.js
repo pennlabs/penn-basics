@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ReactTooltip from 'react-tooltip'
 
 import {
   getFoodtruckInfo,
@@ -27,6 +28,7 @@ import Review from './Review'
 import EditIcon from '../../../../public/img/foodtrucks/edit.svg'
 import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
+import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
 
 const Credit = s.div`
   width: 100%;
@@ -116,16 +118,18 @@ class FoodtruckModal extends Component {
         {foodtruckInfo ? (
           <>
             <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
-              {loggedIn && !showForm && (
+              {!showForm && (
                 <Buttons>
                   <span // eslint-disable-line
                     className="button is-info"
                     onClick={() => {
-                      this.setState({ showForm: true })
+                      if (loggedIn) this.setState({ showForm: true })
                     }}
+                    disabled={!loggedIn}
                   >
                     <EditIcon fill="none" viewBox="0 -2 30 30" />
-                    &nbsp;Leave a Review
+                    &nbsp;
+                    {loggedIn ? 'Leave a Review' : 'Login to leave a Review'}
                   </span>
                 </Buttons>
               )}
@@ -207,12 +211,26 @@ class FoodtruckModal extends Component {
             >
               <Text>
                 <strong>Address</strong>
+                <InfoIcon
+                  style={{
+                    transform: 'scale(0.8) translateY(8px)',
+                    marginLeft: '0.5rem',
+                  }}
+                  data-tip
+                  data-for="infoIcon"
+                />
+                <ReactTooltip
+                  id="infoIcon"
+                  place="right"
+                  type="dark"
+                  effect="solid"
+                  multiline="true"
+                >
+                  <div> Click on the marker to open Google Maps </div>
+                </ReactTooltip>
               </Text>
               <br />
               <Text>{address}</Text>
-              <Text style={{ fontSize: '80%' }}>
-                &#42;Click on the marker to open Google Maps
-              </Text>
             </ModalContainer>
 
             {location && location.lat && location.lng ? (
