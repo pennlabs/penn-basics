@@ -114,7 +114,13 @@ export const getFoodtruckInfo = id => {
   }
 }
 
-export const updateFoodtruckReview = (foodtruckID, pennID, rating, comment) => {
+export const updateFoodtruckReview = (
+  foodtruckID,
+  pennID,
+  fullName,
+  rating,
+  comment
+) => {
   return dispatch => {
     dispatch({
       type: getFoodtruckInfoRequested,
@@ -124,6 +130,7 @@ export const updateFoodtruckReview = (foodtruckID, pennID, rating, comment) => {
       axios
         .post(`/api/foodtrucks/${foodtruckID}/review`, {
           pennid: pennID,
+          fullName,
           rating,
           comment,
         })

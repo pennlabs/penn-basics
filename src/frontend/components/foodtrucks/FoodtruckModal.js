@@ -58,7 +58,6 @@ const Chevron = s.span`
     `}
 `
 // const reviews = ['hello', 'this is a nice foodtruck']
-const pennID = 19927664
 const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
 class FoodtruckModal extends Component {
@@ -284,8 +283,16 @@ const mapStateToProps = ({ foodtrucks, authentication }) => {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetFoodtruckInfo: id => dispatch(getFoodtruckInfo(id)),
-  dispatchUpdateFoodtruckReview: (foodtruckID, pennID, rating, comment) =>
-    dispatch(updateFoodtruckReview(foodtruckID, pennID, rating, comment)),
+  dispatchUpdateFoodtruckReview: (
+    foodtruckID,
+    pennID,
+    fullName,
+    rating,
+    comment
+  ) =>
+    dispatch(
+      updateFoodtruckReview(foodtruckID, pennID, fullName, rating, comment)
+    ),
 })
 
 export default connect(

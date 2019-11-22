@@ -21,10 +21,11 @@ module.exports = function foodtrucksRouter(DB) {
   router.post('/:id/review', async (req, res) => {
     const foodtruckId = Number(req.params.id)
     let { pennid } = req.body
-    const { rating, comment } = req.body
+    const { rating, comment, fullName } = req.body
     pennid = pennid || req.user.pennid
     DB.updateReview(foodtruckId, {
       pennid: Number(pennid),
+      fullName,
       rating: Number(rating),
       comment,
     }).then(foodtruck => {

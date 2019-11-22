@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
+import ReactTooltip from 'react-tooltip'
 
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
@@ -23,21 +24,6 @@ const TextArea = s.textarea`
 
 const Buttons = s.div`
   float: right;
-`
-
-const TooltipWrapper = s.span`
-  :hover {
-    
-  }
-`
-
-const Tooltip = s.span`
-  visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
-  background-color: gray;
-  text-align: center;
-  border-radius: 6px;
-
-  position: absolute;
 `
 
 const array = [1, 2, 3, 4, 5]
@@ -64,10 +50,7 @@ const Rating = ({ rating, setRating }) => (
 const Form = ({ show, hideFunction, updateReview }) => {
   const [rating, setRating] = useState(null)
   const [comment, setComment] = useState(null)
-  const [tooltipVisible, setTooltipVisibility] = useState(false)
   if (!show) return null
-
-  console.log(tooltipVisible)
 
   return (
     <div style={{ marginBottom: '3rem' }}>
@@ -103,10 +86,23 @@ const Form = ({ show, hideFunction, updateReview }) => {
       <div>
         <span style={{ fontSize: '80%' }}>
           Show My Name
-          <TooltipWrapper>
-            <InfoIcon style={{ transform: 'scale(0.8) translateY(8px)' }} />
-            <Tooltip> Hello </Tooltip>
-          </TooltipWrapper>
+          <InfoIcon
+            style={{ transform: 'scale(0.8) translateY(8px) translateX(2px)' }}
+            data-tip
+            data-for="infoIcon"
+          />
+          <ReactTooltip
+            id="infoIcon"
+            place="right"
+            type="dark"
+            effect="solid"
+            multiline="true"
+          >
+            <div style={{ width: '200px' }}>
+              Please note that every submitted review will be associated with
+              your account information.
+            </div>
+          </ReactTooltip>
         </span>
       </div>
     </div>

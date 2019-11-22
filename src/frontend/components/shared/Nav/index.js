@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import s from 'styled-components'
-import axios from 'axios'
+import { connect } from 'react-redux'
 
 import pjson from '../../../../../package.json'
 import {
@@ -18,6 +18,7 @@ import {
   NAV_HEIGHT,
   PHONE,
 } from '../../../styles/sizes'
+import { getUserInfo } from '../../../actions/auth_actions'
 
 import Links from './Links'
 import Menu from './Menu'
@@ -89,41 +90,59 @@ const BetaTag = s.span`
 
 // TODO replace imgur jawn with local jawn
 
-const Nav = () => {
-  const [active, toggleActive] = useState(false)
-  const [userInfo, setUserInfo] = useState(null)
+class Nav extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { active: false }
 
-  useEffect(() => {
-    const cancelToken = axios.CancelToken
-    const source = cancelToken.source()
-    axios
-      .get('/api/auth/getUserInfo', { cancelToken: source.token })
-      .then(res => setUserInfo(res.data))
-  }, [])
+    const { dispatchGetUserInfo } = this.props
+    dispatchGetUserInfo()
+  }
 
-  return (
-    <>
-      <Wrapper className="navbar" id="navbar">
-        <Link to="/">
-          <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
-        </Link>
+  render() {
+    const { active } = this.state
+    const { userInfo } = this.props
 
-        <Link to="/">
-          <LogoText>Penn Basics </LogoText>
-        </Link>
+    return (
+      <>
+        <Wrapper className="navbar" id="navbar">
+          <Link to="/">
+            <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+          </Link>
 
-        <BetaTag className="tag is-rounded">{`v${pjson.version}`}</BetaTag>
+          <Link to="/">
+            <LogoText>Penn Basics </LogoText>
+          </Link>
 
-        <Menu active={active} toggleActive={toggleActive} zIndex={Z_INDEX} />
+          <BetaTag className="tag is-rounded">{`v${pjson.version}`}</BetaTag>
 
-        <Links active={active} zIndex={Z_INDEX} userInfo={userInfo} />
-      </Wrapper>
-      {active && (
-        <Shade zIndex={Z_INDEX} onClick={() => toggleActive(!active)} />
-      )}
-      <NavSpace />
-    </>
-  )
+          <Menu
+            active={active}
+            toggleActive={() => this.setState({ active: !active })}
+            zIndex={Z_INDEX}
+          />
+
+          <Links active={active} zIndex={Z_INDEX} userInfo={userInfo} />
+        </Wrapper>
+        {active && (
+          <Shade
+            zIndex={Z_INDEX}
+            onClick={() => this.setState({ active: !active })}
+          />
+        )}
+        <NavSpace />
+      </>
+    )
+  }
 }
 
-export default Nav
+const mapStateToProps = ({ authentication }) => authentication
+
+const mapDispatchToProps = dispatch => ({
+  dispatchGetUserInfo: () => dispatch(getUserInfo()),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav)
