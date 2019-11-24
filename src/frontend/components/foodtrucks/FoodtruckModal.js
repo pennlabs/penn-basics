@@ -87,7 +87,10 @@ class FoodtruckModal extends Component {
   }
 
   handleReviewOnClick() {
-    const { userInfo: { loggedIn }, location } = this.props
+    const {
+      userInfo: { loggedIn },
+      location,
+    } = this.props
     if (loggedIn) {
       this.setState({ showForm: true })
     } else {
@@ -121,7 +124,7 @@ class FoodtruckModal extends Component {
       overallRating,
     } = foodtruckInfo || {}
 
-    const { pennid, fullName, loggedIn } = userInfo
+    const { pennid, fullName } = userInfo
 
     const { showForm, showReview } = this.state
 
@@ -323,8 +326,7 @@ const mapDispatchToProps = dispatch => ({
 
 const FoodtruckModalWithRouter = withRouter(FoodtruckModal)
 
-export default
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(FoodtruckModalWithRouter)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FoodtruckModalWithRouter)
