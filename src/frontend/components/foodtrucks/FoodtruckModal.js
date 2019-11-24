@@ -1,6 +1,7 @@
 /* global window */
 
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -59,13 +60,14 @@ const Chevron = s.span`
     transform: rotate(-135deg);
     `}
 `
-// const reviews = ['hello', 'this is a nice foodtruck']
+
 const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
 class FoodtruckModal extends Component {
   constructor(props) {
     super(props)
     this.state = { showForm: false, showReview: false }
+    this.handleReviewOnClick = this.handleReviewOnClick.bind(this)
   }
 
   componentDidMount() {
@@ -84,6 +86,15 @@ class FoodtruckModal extends Component {
     }
   }
 
+  handleReviewOnClick() {
+    const { userInfo: { loggedIn }, location } = this.props
+    if (loggedIn) {
+      this.setState({ showForm: true })
+    } else {
+      window.location.href = `/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${location.pathname}`
+    }
+  }
+
   render() {
     const {
       foodtruckId,
@@ -93,6 +104,7 @@ class FoodtruckModal extends Component {
       dispatchUpdateFoodtruckReview,
       userInfo,
     } = this.props
+
     const show = Boolean(foodtruckId)
 
     const {
@@ -122,14 +134,10 @@ class FoodtruckModal extends Component {
                 <Buttons>
                   <span // eslint-disable-line
                     className="button is-info"
-                    onClick={() => {
-                      if (loggedIn) this.setState({ showForm: true })
-                    }}
-                    disabled={!loggedIn}
+                    onClick={this.handleReviewOnClick}
                   >
                     <EditIcon fill="none" viewBox="0 -2 30 30" />
-                    &nbsp;
-                    {loggedIn ? 'Leave a Review' : 'Login to leave a Review'}
+                    &nbsp; Leave a Review
                   </span>
                 </Buttons>
               )}
@@ -313,7 +321,10 @@ const mapDispatchToProps = dispatch => ({
     ),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FoodtruckModal)
+const FoodtruckModalWithRouter = withRouter(FoodtruckModal)
+
+export default
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(FoodtruckModalWithRouter)

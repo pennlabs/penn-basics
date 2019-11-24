@@ -13,7 +13,7 @@ const { Schema } = mongoose
  */
 
 const FoodTruckSchema = new Schema({
-  foodtruckID: Number,
+  foodtruckID: { type: String, index: true },
   name: {
     type: String,
     required: true,

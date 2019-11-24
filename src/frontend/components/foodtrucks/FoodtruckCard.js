@@ -43,16 +43,19 @@ class FoodtruckCard extends Component {
   }
 
   render() {
-    const { name, open, hours, foodtruckId, overallRating } = this.props
+    const { name, open, hours, foodtruckId, overallRating, image } = this.props
 
     return (
       <StyledLink to={`/foodtrucks/${foodtruckId}`} className="link">
         <Card padding="0.5rem 0.5rem 0.5rem 1rem" hoverable>
           <Row>
-            {/* {image && (
+            {image && (
               <Col backgroundImage={image} width="30%" borderRadius="4px" />
-            )} */}
-            <Col padding="0" onMouseEnter={this.handleMouseEnter}>
+            )}
+            <Col
+              padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
+              onMouseEnter={this.handleMouseEnter}
+            >
               <Content>
                 <Subtitle marginBottom="0">{name}</Subtitle>
 
@@ -91,18 +94,20 @@ class FoodtruckCard extends Component {
 
 FoodtruckCard.defaultProps = {
   open: false,
-  // image: '',
+  image: '',
   // outlets: -1,
   // quiet: -1,
+  overallRating: null,
   hoveredFoodtruck: null,
 }
 
 FoodtruckCard.propTypes = {
   name: PropTypes.string.isRequired,
   open: PropTypes.bool,
-  // image: PropTypes.string,
+  image: PropTypes.string,
   // outlets: PropTypes.number,
   // quiet: PropTypes.number,
+  overallRating: PropTypes.number,
   hours: PropTypes.string.isRequired,
   hoveredFoodtruck: PropTypes.string,
   foodtruckId: PropTypes.string.isRequired,

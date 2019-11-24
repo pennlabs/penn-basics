@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 
 import { Line } from '../shared'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
@@ -23,7 +24,7 @@ const Review = ({ show, reviews }) => {
   return reviews.map(({ rating, fullName, comment, timeEdited }) => (
     <div style={{ fontSize: '90%' }}>
       <div style={{ marginBottom: '1em' }}>
-        <strong style={{ marginRight: '0.3em' }}> {fullName ? fullName : 'N/A'} </strong>
+        <strong style={{ marginRight: '0.3em' }}> {fullName} </strong>
         <Rating rating={rating} />
         <span style={{ float: 'right', transform: 'translateY(9px)' }}>
           {moment(timeEdited).format('MM/D/YYYY h:mma')}
@@ -33,6 +34,14 @@ const Review = ({ show, reviews }) => {
       <Line style={{ marginTop: '1em', marginBottom: '1em' }} />
     </div>
   ))
+}
+
+Rating.defaultProps = {
+  rating: null,
+}
+
+Rating.propTypes = {
+  rating: PropTypes.number,
 }
 
 export default Review

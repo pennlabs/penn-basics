@@ -19,6 +19,8 @@ const Favorites = ({
 }) => {
   if (!favorites || !favorites.length) return null
 
+  console.log(favorites)
+
   return (
     <div>
       <Card background={BABY_BLUE} padding="0">
@@ -46,7 +48,7 @@ Favorites.defaultProps = {
 }
 
 Favorites.propTypes = {
-  favorites: PropTypes.arrayOf(PropTypes.object),
+  favorites: PropTypes.arrayOf(PropTypes.string),
   FavoriteCard: PropTypes.func.isRequired,
   inputName: PropTypes.string.isRequired,
   keyAttributeName: PropTypes.string.isRequired,

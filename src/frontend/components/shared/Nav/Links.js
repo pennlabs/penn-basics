@@ -41,13 +41,12 @@ const StyledLink = s(Link)`
 `
 
 const AuthLink = withRouter(({ userInfo, location }) => {
-  const failureRedirect = '/'
   if (!userInfo) return null
   const { loggedIn } = userInfo
   if (!loggedIn) {
     return (
       <a
-        href={`/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${failureRedirect}`}
+        href={`/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${location.pathname}`}
       >
         Login
       </a>

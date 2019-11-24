@@ -12,8 +12,13 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map((truck, foodtruckID) => {
+  return trucks.map(truck => {
     const { menu = [], priceTypes = [] } = truck
+    let { name: foodtruckName } = truck
+    foodtruckName = foodtruckName
+      .replace(/'/g, '')
+      .replace(/\s+/g, '-')
+      .toLowerCase()
 
     const newMenu = Object.entries(menu).map(([smName, submenu]) => {
       // const options = priceTypes ? priceTypes[smName] : null
@@ -45,7 +50,7 @@ function updateFoodTrucks() {
     return {
       ...truck,
       menu: newMenu,
-      foodtruckID,
+      foodtruckID: foodtruckName,
       priceTypes: newPriceTypes,
       overallRating: 0,
       timeUpdated: new Date(),
@@ -53,27 +58,51 @@ function updateFoodTrucks() {
   })
 }
 
+// function loadFoodTrucksIntoDB(truckArray) {
+//   return Promise.all(
+//     truckArray.map(truck => {
+//       return FoodTruck.findOneAndUpdate(
+//         { name: truck.name },
+//         { ...truck }
+//       ).then(console.log) // eslint-disable-line
+//     })
+//   ).then(() => {
+//     console.log('----foodtrucks seeding completed----') // eslint-disable-line
+//     process.exit(0)
+//   })
+// }
+
 function loadFoodTrucksIntoDB(truckArray) {
   return Promise.all(
-    truckArray.map(truck => {
-      return FoodTruck.findOneAndUpdate(
-        { name: truck.name },
-        { ...truck }
-      ).then(console.log) // eslint-disable-line
-    })
+    truckArray.map(
+      truck => new FoodTruck(truck).save().then(console.log) // eslint-disable-line
+    )
   ).then(() => {
-    console.log('----foodtrucks seeding completed----') // eslint-disable-line
+    console.log('----seeding completed----') // eslint-disable-line
     process.exit(0)
   })
 }
 
-async function main() {
-  try {
-    const trucksToInsert = updateFoodTrucks()
-    await loadFoodTrucksIntoDB(trucksToInsert)
-  } catch (err) {
-    console.error(err) // eslint-disable-line
-  }
-}
+/*
+// initial test of food truck code
+console.log(new FoodTruck(updateFoodTrucks()[0]))
+*/
 
-main()
+// initial try at the insertion pipeline
+deleteFoodTrucksInDB()
+  .then(() => {
+    const trucksToInsert = updateFoodTrucks()
+    return loadFoodTrucksIntoDB(trucksToInsert)
+  })
+  .catch(err => console.error(err)) // eslint-disable-line
+
+// async function main() {
+//   try {
+//     const trucksToInsert = updateFoodTrucks()
+//     await loadFoodTrucksIntoDB(trucksToInsert)
+//   } catch (err) {
+//     console.error(err) // eslint-disable-line
+//   }
+// }
+
+// main()
