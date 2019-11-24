@@ -70,6 +70,7 @@ export default class App extends Component {
                 <Route exact path="/laundry" component={Laundry} />
                 <Route exact path="/laundry/:id" component={Laundry} />
                 <Route exact path="/studyspaces" component={StudySpaces} />
+                <Route exact path="/studyspaces/:id" component={StudySpaces} />
                 <Route exact path="/reservations" component={Reservations} />
                 <Route path="*" component={NotFound} />
               </Switch>

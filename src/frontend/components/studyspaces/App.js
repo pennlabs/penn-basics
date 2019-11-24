@@ -70,7 +70,13 @@ class App extends Component {
       pending,
       hoveredSpace,
       setActiveSpaceDispatch,
+      match: {
+        params: { id },
+      },
+      history,
     } = this.props
+
+    const parsedSpaceId = null || id
 
     const { googleMapError } = this.state
 
@@ -125,7 +131,7 @@ class App extends Component {
           </Col>
         </Row>
 
-        <SpaceModal />
+        <SpaceModal spaceId={parsedSpaceId} />
       </>
     )
   }

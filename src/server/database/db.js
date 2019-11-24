@@ -33,10 +33,10 @@ function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
 }
 
 /**
- * @param {any} spaceId
+ * @param {String} spaceId
  */
 function getSpace(spaceId) {
-  return Space.findOne(spaceId)
+  return Space.findOne({ spaceId })
 }
 
 /**

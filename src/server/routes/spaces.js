@@ -63,7 +63,7 @@ module.exports = function spacesRouter(DB) {
   })
 
   router.get('/:id', (req, res) => {
-    const spaceId = req.params[0]
+    const spaceId = req.params.id
     DB.getSpace(spaceId).then(space => {
       res.status(200).json({
         spaces: space,

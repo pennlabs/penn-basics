@@ -20,10 +20,17 @@ function updateSpaces() {
   return Promise.all(
     spaces.map((space, spaceIndex) => {
       const { address } = space
+      let { name } = space
+      name = name
+        .replace(/[^\w\s]/gi, '')
+        .replace(/\s+/g, '-')
+        .toLowerCase()
+
       const fields = ['formatted_address', 'geometry']
       const url = `${GOOGLE_URL}?key=${GOOGLE_KEY}&input=${address}&inputtype=textquery&fields=${fields.join(
         ','
       )}`
+      spaces[spaceIndex].spaceID = name
       if (address) {
         return axios
           .get(url)
