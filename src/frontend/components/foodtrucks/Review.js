@@ -20,10 +20,10 @@ const Rating = ({ rating }) => (
 
 const Review = ({ show, reviews }) => {
   if (!show) return null
-  return reviews.map(({ rating, comment, timeEdited }) => (
+  return reviews.map(({ rating, fullName, comment, timeEdited }) => (
     <div style={{ fontSize: '90%' }}>
       <div style={{ marginBottom: '1em' }}>
-        <strong style={{ marginRight: '0.3em' }}> Peter Chen </strong>
+        <strong style={{ marginRight: '0.3em' }}> {fullName ? fullName : 'N/A'} </strong>
         <Rating rating={rating} />
         <span style={{ float: 'right', transform: 'translateY(9px)' }}>
           {moment(timeEdited).format('MM/D/YYYY h:mma')}

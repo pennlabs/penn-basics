@@ -156,6 +156,14 @@ class FoodtruckModal extends Component {
               </span>
             </ModalContainer>
 
+            {tags && (
+              <ModalContainer paddingBottom="0.5rem" padding="5">
+                {tags.map(tag => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </ModalContainer>
+            )}
+
             <ModalContainer
               paddingTop="1.5rem"
               paddingBottom="1rem"
@@ -192,14 +200,6 @@ class FoodtruckModal extends Component {
             {description && (
               <ModalContainer paddingTop="0.5rem" padding="5">
                 <Text>{description}</Text>
-              </ModalContainer>
-            )}
-
-            {tags && (
-              <ModalContainer paddingBottom="0.5rem" padding="5">
-                {tags.map(tag => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
               </ModalContainer>
             )}
 

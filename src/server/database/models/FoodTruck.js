@@ -52,6 +52,7 @@ const FoodTruckSchema = new Schema({
   reviews: [
     {
       pennid: Number,
+      fullName: String,
       rating: Number,
       comment: String,
       timeCreated: Date,
