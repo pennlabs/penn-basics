@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import s from 'styled-components'
 // import { MobileView, BrowserView } from 'react-device-detect'
 
-import { BLUE, DARK_BLUE } from '../styles/colors'
+import { BLUE, DARK_BLUE, SNOW } from '../styles/colors'
 import { initGA, logPageView } from '../analytics/index'
 
 import Nav from './shared/Nav'
@@ -61,7 +61,7 @@ export default class App extends Component {
         {/* <BrowserView> */}
         <Nav />
         <Feedback />
-        <div id="wrapper">
+        <div id="wrapper" style={{ background: SNOW }}>
           <div id="app">
             <Switch>
               <Route exact path="/" component={Home} />

@@ -14,9 +14,20 @@ import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import { NoData } from '../shared'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 const Buttons = s.div`
   float: right;
+
+  ${maxWidth(PHONE)} {
+    float: none;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .button {
+      width: 100%;
+    }
+  }
 `
 
 const Wrapper = s.div`
