@@ -64,6 +64,7 @@ const FilterWrapper = s.div`
 
   ${maxWidth(PHONE)} {
     overflow-x: -moz-scrollbars-none;
+    ${({ active }) => active && `height: calc(100vh - ${NAV_HEIGHT});`}
 
     // Scroll horizontally but hide the scrollbar from view
     overflow-x: scroll;
@@ -228,9 +229,12 @@ class Filter extends Component {
 
     const { showMoreFilters } = this.state
 
+    const anyFilterModalActive =
+      filterOutletsActive || filterNoiseActive || filterGroupsActive
+
     return (
       <>
-        <FilterWrapper>
+        <FilterWrapper active={anyFilterModalActive}>
           <Search
             filterFunction={this.handleInputString}
             filterString={filterString}

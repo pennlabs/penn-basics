@@ -12,7 +12,13 @@ import {
   LIGHTER_BLUE,
   BLACK_ALPHA,
 } from '../../styles/colors'
-import { maxWidth, PHONE, Z_INDEX, NAV_HEIGHT } from '../../styles/sizes'
+import {
+  maxWidth,
+  PHONE,
+  Z_INDEX,
+  NAV_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+} from '../../styles/sizes'
 
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
@@ -78,9 +84,10 @@ export const OptionsModalWrapper = s.div`
   left: ${({ left }) => left + 1 || '0'};
 
   ${maxWidth(PHONE)} {
-    position: relative;
-    width: 100%;
-    left: 0;
+    position: fixed;
+    top: calc(${NAV_HEIGHT} + ${MOBILE_FILTER_HEIGHT});
+    width: calc(100% - 2rem);
+    left: 1rem;
     margin-bottom: 0.5rem;
   }
 
