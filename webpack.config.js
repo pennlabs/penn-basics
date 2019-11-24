@@ -25,20 +25,6 @@ const config = {
         },
       },
       {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      },
-      {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },

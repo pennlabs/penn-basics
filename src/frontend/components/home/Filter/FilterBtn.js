@@ -17,8 +17,10 @@ class FilterBtn extends Component {
     this.focusRef = React.createRef()
 
     this.areOptions = this.areOptions.bind(this)
+    this.areActiveOptions = this.areActiveOptions.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
+    this.renderModal = this.renderModal.bind(this)
   }
 
   componentDidMount() {
@@ -64,19 +66,60 @@ class FilterBtn extends Component {
     return Boolean(options && options.length)
   }
 
-  render() {
+  areActiveOptions() {
+    const { activeOptions, options } = this.props
+    return Boolean(activeOptions && activeOptions.length < options.length)
+  }
+
+  renderModal() {
     const {
-      text,
-      options,
       onClick,
       onClickOption,
       active,
+      options,
       activeOptions = [],
     } = this.props
 
+    if (!this.areOptions() || !active) return null
+    const { offsetLeft } = this.focusRef.current
+
+    return (
+      <>
+        <OptionsModalBacking onClick={onClick} />
+
+        <OptionsModalWrapper
+          onClick={e => e.stopPropagation()}
+          left={offsetLeft}
+        >
+          {options.map((o, idx) => {
+            const isActiveOption = Boolean(
+              activeOptions && activeOptions.includes(idx)
+            )
+
+            return (
+              <Option
+                key={o}
+                onClick={() => onClickOption(idx)}
+                role="option"
+                tabIndex={0}
+                aria-selected={isActiveOption}
+                onKeyPress={e => this.handleOptionKeyPress(e, idx)}
+              >
+                <Circle active={isActiveOption} />
+                <OptionText active={isActiveOption}>{o}</OptionText>
+              </Option>
+            )
+          })}
+        </OptionsModalWrapper>
+      </>
+    )
+  }
+
+  render() {
+    const { text, onClick, options, active, activeOptions = [] } = this.props
+
     const areOptions = options && options.length
-    const areActiveOptions =
-      activeOptions && activeOptions.length < options.length
+    const areActiveOptions = this.areActiveOptions()
     let btnText = text
 
     if (areOptions && activeOptions && activeOptions.length < options.length) {
@@ -84,45 +127,20 @@ class FilterBtn extends Component {
     }
 
     return (
-      <FilterBtnWrapper
-        tabIndex={0}
-        active={active || areActiveOptions}
-        options={areOptions}
-        onClick={onClick}
-        ref={this.focusRef}
-        onKeyPress={this.handleKeyPress}
-        onKeyDown={this.handleKeyPress}
-      >
-        {btnText}
-
-        {areOptions && active && (
-          <>
-            <OptionsModalBacking />
-
-            <OptionsModalWrapper onClick={e => e.stopPropagation()}>
-              {options.map((o, idx) => {
-                const isActiveOption = Boolean(
-                  activeOptions && activeOptions.includes(idx)
-                )
-
-                return (
-                  <Option
-                    key={o}
-                    onClick={() => onClickOption(idx)}
-                    role="option"
-                    tabIndex={0}
-                    aria-selected={isActiveOption}
-                    onKeyPress={e => this.handleOptionKeyPress(e, idx)}
-                  >
-                    <Circle active={isActiveOption} />
-                    <OptionText active={isActiveOption}>{o}</OptionText>
-                  </Option>
-                )
-              })}
-            </OptionsModalWrapper>
-          </>
-        )}
-      </FilterBtnWrapper>
+      <>
+        <FilterBtnWrapper
+          tabIndex={0}
+          active={active || areActiveOptions}
+          options={areOptions}
+          onClick={onClick}
+          ref={this.focusRef}
+          onKeyPress={this.handleKeyPress}
+          onKeyDown={this.handleKeyPress}
+        >
+          {btnText}
+        </FilterBtnWrapper>
+        {this.renderModal()}
+      </>
     )
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 
-import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
+import { Card, Subtitle, Subtext, FlexRow, Col, Circle } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
 
@@ -56,7 +56,7 @@ class SpaceCard extends Component {
         padding="0.5rem 0.5rem 0.5rem 1rem"
         hoverable
       >
-        <Row>
+        <FlexRow>
           {image && (
             <Col backgroundImage={image} width="30%" borderRadius="4px" />
           )}
@@ -81,7 +81,7 @@ class SpaceCard extends Component {
               <Circle open={open} />
             </Content>
           </Col>
-        </Row>
+        </FlexRow>
       </Card>
     )
   }

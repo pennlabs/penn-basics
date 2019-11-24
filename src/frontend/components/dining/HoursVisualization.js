@@ -81,7 +81,7 @@ const List = ({ venueHours }) => {
 
   // Else, return the hours in a table
   return (
-    <table className="table is-fullwidth marg-bot-0">
+    <table className="table is-fullwidth" style={{ marginBottom: 0 }}>
       <tbody>
         {formattedVenueHours.map((venueHour, idx) => {
           const meals = venueHour.dayparts

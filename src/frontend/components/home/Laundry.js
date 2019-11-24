@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -13,15 +12,11 @@ import {
   Row,
   ColSpace,
   Subtitle,
+  StyledLink,
 } from '../shared'
 import MachineAvailability from '../laundry/MachineAvailability'
 
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
-import { DARK_GRAY } from '../../styles/colors'
-
-const StyledLink = s(Link)`
-  color: ${DARK_GRAY} !important;
-`
 
 class Laundry extends Component {
   componentDidMount() {

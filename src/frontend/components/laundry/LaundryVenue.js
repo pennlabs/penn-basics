@@ -24,6 +24,7 @@ import {
   removeReminder,
 } from '../../actions/laundry_actions'
 import { isValidNumericId } from '../../helperFunctions'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 const MARGIN = '0.5rem'
 
@@ -33,6 +34,11 @@ const Wrapper = s.div`
 
 const Buttons = s.div`
   float: right;
+
+  ${maxWidth(PHONE)} {
+    float: none;
+    width: 100%;
+  }
 `
 
 class LaundryVenue extends Component {

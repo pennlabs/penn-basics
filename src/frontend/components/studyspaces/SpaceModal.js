@@ -1,3 +1,5 @@
+/* global window */
+
 import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
@@ -21,6 +23,7 @@ const Credit = s.div`
   width: 100%;
   padding: 0 1rem;
 `
+const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
 class SpaceModal extends Component {
   constructor(props) {
@@ -53,66 +56,71 @@ class SpaceModal extends Component {
 
     return (
       <Modal show={show} toggle={this.toggle}>
-        {space ? (
-          <>
-            <ModalContainer>
-              <Title marginBottom="2.5vh">{name}</Title>
-            </ModalContainer>
-
-            {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
-
-            {imageCredit && (
-              <Credit>
-                <Subtext>
-                  {'Image credit: '}
-                  <a href={imageCredit.link}>{imageCredit.name}</a>
-                </Subtext>
-              </Credit>
-            )}
-
-            {description && (
-              <ModalContainer paddingTop="0.5rem">
-                <Text>{description}</Text>
+        <div style={{ minHeight: '80vh' }}>
+          {space && (
+            <>
+              <ModalContainer>
+                <Title marginBottom="2.5vh">{name}</Title>
               </ModalContainer>
-            )}
 
-            {tags && (
-              <ModalContainer paddingBottom="0.5rem">
-                {tags.map(tag => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
+              {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
+
+              {imageCredit && (
+                <Credit>
+                  <Subtext>
+                    {'Image credit: '}
+                    <a href={imageCredit.link}>
+                      {imageCredit.name || imageCredit.link}
+                    </a>
+                  </Subtext>
+                </Credit>
+              )}
+
+              {description && (
+                <ModalContainer paddingTop="0.5rem">
+                  <Text>{description}</Text>
+                </ModalContainer>
+              )}
+
+              {tags && (
+                <ModalContainer paddingBottom="0.5rem">
+                  {tags.map(tag => (
+                    <Tag key={tag}>{tag}</Tag>
+                  ))}
+                </ModalContainer>
+              )}
+
+              <ModalContainer
+                background={SNOW}
+                paddingTop="1.5rem"
+                paddingBottom="1rem"
+              >
+                <Text>
+                  <strong>Address</strong>
+                </Text>
+                <br />
+                <Text>{address}</Text>
               </ModalContainer>
-            )}
 
-            <ModalContainer
-              background={SNOW}
-              paddingTop="1.5rem"
-              paddingBottom="1rem"
-            >
-              <Text>
-                <strong>Address</strong>
-              </Text>
-              <br />
-              <Text>{address}</Text>
-            </ModalContainer>
+              {location && location.lat && location.lng ? (
+                <Map
+                  mapId={name}
+                  location={location}
+                  showMarker
+                  gestureHandling="cooperative"
+                  height="50%"
+                  handleClickMarker={() => {
+                    window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                  }}
+                />
+              ) : null}
 
-            {location && location.lat && location.lng ? (
-              <Map
-                mapId={name}
-                location={location}
-                showMarker
-                gestureHandling="cooperative"
-                height="50%"
-              />
-            ) : null}
-
-            <ModalContainer paddingTop="1.5rem">
-              <Hours start={start} end={end} />
-            </ModalContainer>
-          </>
-        ) : (
-          <div />
-        )}
+              <ModalContainer paddingTop="1.5rem">
+                <Hours start={start} end={end} />
+              </ModalContainer>
+            </>
+          )}
+        </div>
       </Modal>
     )
   }

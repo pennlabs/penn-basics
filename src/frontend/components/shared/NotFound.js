@@ -1,31 +1,50 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import s from 'styled-components'
+
+import { Title, Text } from './Typography'
+import { Button } from './Button'
+import PennLabsCredit from './PennLabsCredit'
+import { NAV_HEIGHT } from '../../styles/sizes'
+
+const Wrapper = s.div`
+  padding-top: calc(1rem + 2.5vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - ${NAV_HEIGHT});
+`
+
+const Image = s.img`
+  max-width: 100%;
+  width: 400px;
+  margin-bottom: 2rem;
+`
 
 // TODO remove imgur jawn
-
 const NotFound = ({
   message = 'It seems like the content you are looking for was either moved or does not exist.',
-  title = '404: Content not found',
+  title = '404: Content Not Found!',
   url = '/',
   urlText = 'Back to home',
 }) => (
-  <div className="center-div">
-    <img
-      className="marg-bot-2"
-      src="https://i.imgur.com/PMJ4fDJ.png"
-      width="400px"
-      alt="not found"
-    />
+  <Wrapper>
+    <Image src="https://i.imgur.com/PMJ4fDJ.png" alt="not found" />
 
-    <h1 className="is-size-3 medium-gray-text">{title}</h1>
+    <Title>{title}</Title>
 
-    <p>{message}</p>
+    <Text>{message}</Text>
 
-    <Link to={url} className="btn marg-top-1">
-      {urlText}
+    <Link to={url}>
+      <Button style={{ marginTop: '1rem', marginBottom: '2rem' }}>
+        {urlText}
+      </Button>
     </Link>
-  </div>
+
+    <PennLabsCredit padding="0 0 1rem 0" />
+  </Wrapper>
 )
 
 NotFound.defaultProps = {
