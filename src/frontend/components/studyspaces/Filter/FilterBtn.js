@@ -26,6 +26,7 @@ class FilterBtn extends Component {
     this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
     this.areActiveOptions = this.areActiveOptions.bind(this)
     this.getBtnText = this.getBtnText.bind(this)
+    this.renderModal = this.renderModal.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -46,15 +47,7 @@ class FilterBtn extends Component {
 
     // If the user is filtering by some attributes, set the text of the button
     // to be the "active" attributes separated by commas
-    const activeOptionsArr = options.filter((_, idx) =>
-      activeOptions.includes(idx)
-    )
-
-    // if (activeOptionsArr && activeOptionsArr.length) {
-    return activeOptionsArr.join(', ')
-    // }
-
-    // return text
+    return options.filter((_, idx) => activeOptions.includes(idx)).join(', ')
   }
 
   handleKeyPress(event) {
@@ -89,14 +82,51 @@ class FilterBtn extends Component {
     return Boolean(activeOptions && activeOptions.length)
   }
 
-  render() {
+  renderModal() {
     const {
-      options,
       onClick,
-      onClickOption,
       active,
+      options,
+      onClickOption,
       activeOptions = [],
     } = this.props
+
+    if (!this.areOptions() || !active) return null
+    const { offsetLeft } = this.focusRef.current
+    console.log(offsetLeft)
+
+    return (
+      <>
+        <OptionsModalBacking onClick={onClick} />
+
+        <OptionsModalWrapper
+          onClick={e => e.stopPropagation()}
+          left={offsetLeft}
+        >
+          {options.map((o, idx) => {
+            const isActiveOption = activeOptions && activeOptions.includes(idx)
+
+            return (
+              <Option
+                key={o}
+                onClick={() => onClickOption(idx)}
+                role="option"
+                tabIndex={0}
+                aria-selected={isActiveOption}
+                onKeyPress={e => this.handleOptionKeyPress(e, idx)}
+              >
+                <Circle active={isActiveOption} />
+                <OptionText active={isActiveOption}>{o}</OptionText>
+              </Option>
+            )
+          })}
+        </OptionsModalWrapper>
+      </>
+    )
+  }
+
+  render() {
+    const { onClick, active } = this.props
 
     const areOptions = this.areOptions()
     const areActiveOptions = this.areActiveOptions()
@@ -114,33 +144,7 @@ class FilterBtn extends Component {
         >
           {this.getBtnText()}
         </FilterBtnWrapper>
-        {areOptions && active && (
-          <>
-            <OptionsModalBacking onClick={onClick} />
-
-            <OptionsModalWrapper onClick={e => e.stopPropagation()}>
-              {options.map((o, idx) => {
-                const isActiveOption = Boolean(
-                  activeOptions && activeOptions.includes(idx)
-                )
-
-                return (
-                  <Option
-                    key={o}
-                    onClick={() => onClickOption(idx)}
-                    role="option"
-                    tabIndex={0}
-                    aria-selected={isActiveOption}
-                    onKeyPress={e => this.handleOptionKeyPress(e, idx)}
-                  >
-                    <Circle active={isActiveOption} />
-                    <OptionText active={isActiveOption}>{o}</OptionText>
-                  </Option>
-                )
-              })}
-            </OptionsModalWrapper>
-          </>
-        )}
+        {this.renderModal()}
       </>
     )
   }

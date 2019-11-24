@@ -76,7 +76,7 @@ class App extends Component {
               />
             ))
           ) : (
-            <Loading />
+            <Loading padding="40vh 0" />
           )}
 
           <PennLabsCredit />

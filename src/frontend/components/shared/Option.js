@@ -71,15 +71,16 @@ export const OptionsModalWrapper = s.div`
   z-index: ${Z_INDEX + 3};
   background: ${WHITE};
   border-radius: 4px;
-  margin-top: 1rem;
-  margin-left: -0.75rem;
+  margin-top: 0.5rem;
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
+  left: ${({ left }) => left + 1 || '0'};
 
   ${maxWidth(PHONE)} {
     position: relative;
     width: 100%;
+    left: 0;
     // left: 1rem;
     // margin-left: 0;
     // top: calc(${NAV_HEIGHT} + 1rem);

@@ -11,7 +11,7 @@ const TIMER = '1.25s'
 
 const LoadingWrapper = s.div`
   width: 100%;
-  padding: 1rem 0;
+  padding: ${({ padding }) => padding || '1rem 0'};
   text-align: center;
   transition: opacity 0.5s ease;
   opacity: ${({ hide }) => (hide ? '0' : '1')};
@@ -36,7 +36,7 @@ const LoadingCircle = s.span`
   animation: ${spin} ${TIMER} infinite linear;
 `
 
-const Loading = ({ title, delay }) => {
+const Loading = ({ title, delay, padding }) => {
   const [hidden, toggleHidden] = useState(true)
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Loading = ({ title, delay }) => {
   })
 
   return (
-    <LoadingWrapper hide={hidden}>
+    <LoadingWrapper hide={hidden} padding={padding}>
       <LoadingCircle />
       {title && <Subtext>{title}</Subtext>}
     </LoadingWrapper>
@@ -60,11 +60,13 @@ const Loading = ({ title, delay }) => {
 Loading.defaultProps = {
   title: null,
   delay: 200,
+  padding: undefined,
 }
 
 Loading.propTypes = {
   title: PropTypes.string,
   delay: PropTypes.number,
+  padding: PropTypes.string,
 }
 
 export default Loading

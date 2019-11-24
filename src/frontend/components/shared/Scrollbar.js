@@ -3,7 +3,7 @@ import s from 'styled-components'
 import { WHITE, LIGHTER_BLUE, BLUE } from '../../styles/colors'
 
 import { Col } from './Flex'
-import { maxWidth, PHONE, minWidth } from '../../styles/sizes'
+import { maxWidth, PHONE, minWidth, MAX_BODY_HEIGHT } from '../../styles/sizes'
 
 export const Scrollbar = s(Col)`
   background: ${WHITE};
@@ -25,7 +25,8 @@ export const Scrollbar = s(Col)`
       background-color: ${BLUE};
     }
   }
-
+  
+  ${({ fullHeight }) => fullHeight && `height: ${MAX_BODY_HEIGHT};`}
   ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
 
   // Make full height on mobile
