@@ -78,11 +78,11 @@ export const OptionsModalWrapper = s.div`
   cursor: default;
 
   ${maxWidth(PHONE)} {
-    position: fixed;
-    width: calc(100vw - 2rem);
-    left: 1rem;
-    margin-left: 0;
-    top: calc(${NAV_HEIGHT} + 1rem);
+    position: relative;
+    width: 100%;
+    // left: 1rem;
+    // margin-left: 0;
+    // top: calc(${NAV_HEIGHT} + 1rem);
   }
 
   div {

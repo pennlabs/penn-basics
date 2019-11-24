@@ -79,6 +79,7 @@ const FilterWrapper = s.div`
       background: transparent;
     }
 
+    // Put a white fading gradient on the left and right sides
     &:before {
       content: "";
       background: linear-gradient(0.25turn, ${WHITE}, ${WHITE_ALPHA(0)});

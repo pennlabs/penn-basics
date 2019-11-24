@@ -10,6 +10,11 @@ import {
   OptionText,
 } from '../../shared/Option'
 
+const ESCAPE_KEY_CODE = 27
+const ESCAPE = 'escape'
+const SPACE_KEY_CODE = 32
+const SPACE = ' '
+
 class FilterBtn extends Component {
   constructor(props) {
     super(props)
@@ -19,6 +24,8 @@ class FilterBtn extends Component {
     this.areOptions = this.areOptions.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.handleOptionKeyPress = this.handleOptionKeyPress.bind(this)
+    this.areActiveOptions = this.areActiveOptions.bind(this)
+    this.getBtnText = this.getBtnText.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -30,26 +37,44 @@ class FilterBtn extends Component {
     }
   }
 
+  getBtnText() {
+    const { text, options, activeOptions = [] } = this.props
+
+    if (!this.areOptions() || !this.areActiveOptions()) {
+      return text
+    }
+
+    // If the user is filtering by some attributes, set the text of the button
+    // to be the "active" attributes separated by commas
+    const activeOptionsArr = options.filter((_, idx) =>
+      activeOptions.includes(idx)
+    )
+
+    // if (activeOptionsArr && activeOptionsArr.length) {
+    return activeOptionsArr.join(', ')
+    // }
+
+    // return text
+  }
+
   handleKeyPress(event) {
-    const ESCAPE_KEY_CODE = 27
     const { active } = this.props
+    if (!active) return
 
-    if (
-      (event.keyCode === ESCAPE_KEY_CODE ||
-        event.key.toLowerCase() === 'escape') &&
-      active
-    ) {
+    const { key, keyCode } = event
+    const isEscapeEvent =
+      keyCode === ESCAPE_KEY_CODE || key.toLowerCase() === ESCAPE
+
+    if (isEscapeEvent) {
       const { onClick } = this.props
-
       onClick()
     }
   }
 
   handleOptionKeyPress(event, idx) {
-    const SPACE_KEY_CODE = 32
     const { onClickOption } = this.props
 
-    if (event.keyCode === SPACE_KEY_CODE || event.key === ' ') {
+    if (event.keyCode === SPACE_KEY_CODE || event.key === SPACE) {
       onClickOption(idx)
     }
   }
@@ -59,9 +84,13 @@ class FilterBtn extends Component {
     return Boolean(options && options.length)
   }
 
+  areActiveOptions() {
+    const { activeOptions = [] } = this.props
+    return Boolean(activeOptions && activeOptions.length)
+  }
+
   render() {
     const {
-      text,
       options,
       onClick,
       onClickOption,
@@ -69,45 +98,25 @@ class FilterBtn extends Component {
       activeOptions = [],
     } = this.props
 
-    const areOptions = options && options.length
-    let areActiveOptions = activeOptions && activeOptions.length
-    let btnText = text
-
-    // If the user is filtering by some attributes, set the text of the button
-    // to be the "active" attributes separated by commas
-    if (areOptions && activeOptions && activeOptions.length) {
-      const activeOptionsArr = options.filter((o, idx) =>
-        activeOptions.includes(idx)
-      )
-
-      if (activeOptionsArr && activeOptionsArr.length) {
-        areActiveOptions = true
-        btnText = ''
-
-        activeOptionsArr.forEach(o => {
-          btnText += `${o}, `
-        })
-
-        // Strip off the last comma
-        btnText = btnText.substring(0, btnText.length - 2)
-      }
-    }
+    const areOptions = this.areOptions()
+    const areActiveOptions = this.areActiveOptions()
 
     return (
-      <FilterBtnWrapper
-        tabIndex={0}
-        active={active || areActiveOptions}
-        options={areOptions}
-        onClick={onClick}
-        ref={this.focusRef}
-        onKeyPress={this.handleKeyPress}
-        onKeyDown={this.handleKeyPress}
-      >
-        {btnText}
-
+      <>
+        <FilterBtnWrapper
+          tabIndex={0}
+          active={active || areActiveOptions}
+          options={areOptions}
+          onClick={onClick}
+          ref={this.focusRef}
+          onKeyPress={this.handleKeyPress}
+          onKeyDown={this.handleKeyPress}
+        >
+          {this.getBtnText()}
+        </FilterBtnWrapper>
         {areOptions && active && (
           <>
-            <OptionsModalBacking />
+            <OptionsModalBacking onClick={onClick} />
 
             <OptionsModalWrapper onClick={e => e.stopPropagation()}>
               {options.map((o, idx) => {
@@ -132,7 +141,7 @@ class FilterBtn extends Component {
             </OptionsModalWrapper>
           </>
         )}
-      </FilterBtnWrapper>
+      </>
     )
   }
 }
