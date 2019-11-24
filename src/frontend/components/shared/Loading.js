@@ -36,6 +36,11 @@ const LoadingCircle = s.span`
   animation: ${spin} ${TIMER} infinite linear;
 `
 
+/**
+ * @property title string to show below spinner
+ * @property delay number in ms to wait before showing spinner
+ * @property padding string around the spinner and title
+ */
 const Loading = ({ title, delay, padding }) => {
   const [hidden, toggleHidden] = useState(true)
 
@@ -59,7 +64,7 @@ const Loading = ({ title, delay, padding }) => {
 
 Loading.defaultProps = {
   title: null,
-  delay: 200,
+  delay: 100,
   padding: undefined,
 }
 

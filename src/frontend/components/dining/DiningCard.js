@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 import moment from 'moment'
 
 import { convertDate, pad } from '../../helperFunctions'
-import { FlexRow, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
-import { DARK_GRAY } from '../../styles/colors'
+import {
+  StyledLink,
+  FlexRow,
+  Col,
+  Card,
+  Subtitle,
+  Subtext,
+  Line,
+  Circle,
+} from '../shared'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const StyledLink = s(Link)`
-  h2 {
-    color: ${DARK_GRAY} !important;
-  }
-`
 const Content = s.div`
   width: 100%;
   position: relative;

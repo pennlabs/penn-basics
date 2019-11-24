@@ -90,7 +90,7 @@ class DiningVenue extends Component {
     if (venueHoursPending) {
       return (
         <Wrapper>
-          <Loading />
+          <Loading padding="40vh 0" />
         </Wrapper>
       )
     }

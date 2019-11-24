@@ -81,9 +81,7 @@ export const OptionsModalWrapper = s.div`
     position: relative;
     width: 100%;
     left: 0;
-    // left: 1rem;
-    // margin-left: 0;
-    // top: calc(${NAV_HEIGHT} + 1rem);
+    margin-bottom: 0.5rem;
   }
 
   div {
@@ -127,11 +125,7 @@ export const Circle = s.span`
   margin-right: 0.5rem;
 
   ${({ active }) =>
-    active &&
-    `
-    background: ${BLUE};
-    border: 2px solid ${DARK_BLUE};
-  `}
+    active && `background: ${BLUE}; border: 2px solid ${DARK_BLUE};`}
 `
 
 export const OptionText = s.span`

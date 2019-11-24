@@ -25,6 +25,7 @@ import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 import Filter from './Filter'
 import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
+import { SNOW } from '../../styles/colors'
 
 // TODO ghost loaders
 // TODO port this over to hooks
@@ -101,7 +102,10 @@ class App extends Component {
 
         <Filter />
 
-        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
+        <Row
+          maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+          style={{ background: SNOW }}
+        >
           <Scrollbar
             padding="0 0 .5rem 0"
             sm={12}

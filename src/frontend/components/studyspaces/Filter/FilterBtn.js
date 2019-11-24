@@ -93,7 +93,6 @@ class FilterBtn extends Component {
 
     if (!this.areOptions() || !active) return null
     const { offsetLeft } = this.focusRef.current
-    console.log(offsetLeft)
 
     return (
       <>
