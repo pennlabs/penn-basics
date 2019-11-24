@@ -7,7 +7,6 @@ import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
   Title,
   Text,
-  Modal,
   ModalContainer,
   Image,
   Tag,
@@ -16,6 +15,7 @@ import {
 } from '../shared'
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
+import Modal from '../shared/Modal'
 
 const Credit = s.div`
   width: 100%;
@@ -35,9 +35,9 @@ class SpaceModal extends Component {
   }
 
   render() {
-    const { activeSpace, spacesData } = this.props
-    const space = spacesData[activeSpace]
-    const show = Boolean(activeSpace && space)
+    const { spaceId, spacesData } = this.props
+    const space = spacesData[spaceId]
+    const show = Boolean(spaceId)
 
     const {
       name,
@@ -120,12 +120,12 @@ class SpaceModal extends Component {
 
 SpaceModal.defaultProps = {
   location: null,
-  activeSpace: null,
+  spaceId: null,
   spacesData: {},
 }
 
 SpaceModal.propTypes = {
-  activeSpace: PropTypes.string,
+  spaceId: PropTypes.string,
   clearActiveSpaceDispatch: PropTypes.func.isRequired,
   spacesData: PropTypes.object, // eslint-disable-line
   location: PropTypes.shape({
