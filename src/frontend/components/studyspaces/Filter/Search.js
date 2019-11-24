@@ -38,7 +38,7 @@ const SearchComponent = s.input`
   border-radius: 0;
   padding-left: 28px;
   padding-right: 4px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 
   :focus {
     outline: none;
