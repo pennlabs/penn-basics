@@ -7,10 +7,18 @@ import {
   BLUE,
   DARK_BLUE,
   BORDER,
-  SNOW_ALPHA,
   MEDIUM_GRAY,
   BABY_BLUE,
+  LIGHTER_BLUE,
+  BLACK_ALPHA,
 } from '../../styles/colors'
+import {
+  maxWidth,
+  PHONE,
+  Z_INDEX,
+  NAV_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+} from '../../styles/sizes'
 
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
@@ -32,7 +40,13 @@ export const FilterBtnWrapper = s.a`
   
   :focus {
     outline: 0 !important;
-    box-shadow: 0 0 0 2px ${DARK_BLUE};
+    box-shadow: 0 0 0 2px ${LIGHTER_BLUE};
+  }
+
+  ${maxWidth(PHONE)} {
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.25rem;
+    font-size: 80%;
   }
 
   ${({ active }) =>
@@ -54,20 +68,28 @@ export const OptionsModalBacking = s.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background: ${SNOW_ALPHA};
-  z-index: 1299;
+  background: ${BLACK_ALPHA(0.5)};
+  z-index: ${Z_INDEX + 2};
 `
 
 export const OptionsModalWrapper = s.div`
   position: absolute;
-  z-index: 1300;
+  z-index: ${Z_INDEX + 3};
   background: ${WHITE};
   border-radius: 4px;
-  transform: translate(-0.75rem, calc(1rem + 1px));
+  margin-top: 0.5rem;
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
-  box-shadow: 0 0 8px ${BORDER};
+  left: ${({ left }) => left + 1 || '0'};
+
+  ${maxWidth(PHONE)} {
+    position: fixed;
+    top: calc(${NAV_HEIGHT} + ${MOBILE_FILTER_HEIGHT});
+    width: calc(100% - 2rem);
+    left: 1rem;
+    margin-bottom: 0.5rem;
+  }
 
   div {
     margin-bottom: 0.2rem;
@@ -110,11 +132,7 @@ export const Circle = s.span`
   margin-right: 0.5rem;
 
   ${({ active }) =>
-    active &&
-    `
-    background: ${BLUE};
-    border: 2px solid ${DARK_BLUE};
-  `}
+    active && `background: ${BLUE}; border: 2px solid ${DARK_BLUE};`}
 `
 
 export const OptionText = s.span`

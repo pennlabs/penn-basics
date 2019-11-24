@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import s from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
+import { Card, Subtitle, Subtext, FlexRow, Col, Circle } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
 import { DARK_GRAY } from '../../styles/colors'

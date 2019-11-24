@@ -11,12 +11,17 @@ import {
   MEDIUM_GRAY,
 } from '../../../styles/colors'
 import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
+import { maxWidth, TABLET } from '../../../styles/sizes'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
 
 const Wrapper = s.div`
   float: right;
+
+  ${maxWidth(TABLET)} {
+    float: none;
+  }
 `
 
 const Label = s.span`
@@ -28,12 +33,7 @@ const Label = s.span`
   cursor: pointer;
   opacity: 0.6;
 
-  ${({ active }) =>
-    active &&
-    `
-    opacity: 1;
-    color: ${BLUE} !important;
-  `}
+  ${({ active }) => active && `opacity: 1; color: ${BLUE} !important;`}
 `
 
 const ToggleWrapper = s.div`

@@ -1,17 +1,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import s from 'styled-components'
 
-import { Card, Text, Row, Col, Line } from '../shared'
-import { DARK_GRAY } from '../../styles/colors'
+import { Card, Text, Row, Col, Line, StyledLink } from '../shared'
 import LaundryCardHeader from './LaundryCardHeader'
 
-const StyledLink = s(Link)`
-  h2 {
-    color: ${DARK_GRAY} !important;
-  }
-`
 const LaundryCard = ({ locationObject, selectedHallId }) => {
   const [expanded, setExpanded] = useState(false)
 

@@ -2,8 +2,6 @@ import React from 'react'
 import s from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import pjson from '../../../../../package.json'
-
 import { maxWidth, TABLET } from '../../../styles/sizes'
 import { BLACK, DARK_GRAY, WHITE } from '../../../styles/colors'
 
@@ -49,6 +47,6 @@ export default () => (
       <LogoText>Penn Basics </LogoText>
     </Link>
 
-    <BetaTag className="tag is-rounded">{`Beta v${pjson.version}`}</BetaTag>
+    <BetaTag className="tag is-rounded">Beta</BetaTag>
   </>
 )

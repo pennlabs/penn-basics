@@ -12,6 +12,7 @@ import {
   ALLBIRDS_GRAY,
   MEDIUM_GRAY,
   DARK_GRAY,
+  WHITE_ALPHA,
 } from '../../../styles/colors'
 import {
   filterSpacesOpen,
@@ -26,24 +27,110 @@ import {
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
 import ToggleNeighborhood from './ToggleNeighborhood'
+import {
+  maxWidth,
+  PHONE,
+  NAV_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+  TABLET,
+  minWidth,
+  Z_INDEX,
+  FILTER_HEIGHT,
+} from '../../../styles/sizes'
+import { Modal, ModalContainer, Subtitle } from '../../shared'
+
+const HideOnTablet = s.span`
+  ${maxWidth(TABLET)} {
+    display: none;
+  }
+`
+
+const HideAboveTablet = s.span`
+  ${minWidth(TABLET)} {
+    display: none;
+  }
+`
 
 const FilterWrapper = s.div`
   width: 100%;
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
+  top: ${NAV_HEIGHT};
+  left: 0;
   padding: 0.5rem 1rem;
+  overflow: visible;
+  position: fixed;
+  z-index: ${Z_INDEX - 1};
+
+  ${maxWidth(PHONE)} {
+    overflow-x: -moz-scrollbars-none;
+    ${({ active }) => active && `height: calc(100vh - ${NAV_HEIGHT});`}
+
+    // Scroll horizontally but hide the scrollbar from view
+    overflow-x: scroll;
+    overflow-y: visible;
+    white-space: nowrap;
+
+    -ms-overflow-style: none;
+    
+    ::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none;
+      background: transparent;
+    }
+
+    // Put a white fading gradient on the left and right sides
+    &:before {
+      content: "";
+      background: linear-gradient(0.25turn, ${WHITE}, ${WHITE_ALPHA(0)});
+      display: block;
+      width: 1.2rem;
+      height: calc(${MOBILE_FILTER_HEIGHT} - 1px);
+      position: fixed;
+      left: 0;
+      transform: translateY(-0.5rem);
+    }
+
+    &:after {
+      content: "";
+      background: linear-gradient(0.25turn, ${WHITE_ALPHA(0)}, ${WHITE});
+      display: block;
+      width: 1.2rem;
+      height: calc(${MOBILE_FILTER_HEIGHT} - 1px);
+      position: fixed;
+      right: 0;
+      transform: translateY(calc(-${MOBILE_FILTER_HEIGHT} + 0.5rem + 1px));
+    }
+  }
 `
 
-const ClearText = s.p`
+const FilterText = s.p`
   display: inline-block;
   color: ${MEDIUM_GRAY};
   cursor: hand;
   opacity: 0.8;
+  margin-right: 1rem;
 
   :hover,
   :active,
   :focus {
     color: ${DARK_GRAY};
+  }
+
+  ${maxWidth(PHONE)} {
+    font-size: 80%;
+    margin-right: 0.5rem;
+  }
+`
+
+const FilterSpace = s.div`
+  display: block;
+  width: 100%;
+  height: ${FILTER_HEIGHT};
+
+  ${maxWidth(PHONE)} {
+    height: ${MOBILE_FILTER_HEIGHT};
   }
 `
 
@@ -51,11 +138,16 @@ class Filter extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      showMoreFilters: false,
+    }
+
     this.handleClickOpen = this.handleClickOpen.bind(this)
     this.handleClickOutlets = this.handleClickOutlets.bind(this)
     this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
     this.handleClickGroups = this.handleClickGroups.bind(this)
     this.handleInputString = this.handleInputString.bind(this)
+    this.toggleMoreFilters = this.toggleMoreFilters.bind(this)
   }
 
   /**
@@ -105,13 +197,16 @@ class Filter extends Component {
   }
 
   /**
-   *
    * @param {string} filterString input from user
    */
-
   handleInputString(filterString) {
     const { filterSpacesStringDispatch } = this.props
     filterSpacesStringDispatch(filterString)
+  }
+
+  toggleMoreFilters() {
+    const { showMoreFilters } = this.state
+    this.setState({ showMoreFilters: !showMoreFilters })
   }
 
   render() {
@@ -132,58 +227,81 @@ class Filter extends Component {
       filterString,
     } = this.props
 
-    // TODO OTHER ACTIVE PROPS?
+    const { showMoreFilters } = this.state
+
+    const anyFilterModalActive =
+      filterOutletsActive || filterNoiseActive || filterGroupsActive
 
     return (
-      <FilterWrapper>
-        <Search
-          filterFunction={this.handleInputString}
-          filterString={filterString}
-        />
+      <>
+        <FilterWrapper active={anyFilterModalActive}>
+          <Search
+            filterFunction={this.handleInputString}
+            filterString={filterString}
+          />
 
-        <FilterBtn
-          text="Open"
-          onClick={this.handleClickOpen}
-          active={filterOpenActive}
-        />
+          <FilterBtn
+            text="Open"
+            onClick={this.handleClickOpen}
+            active={filterOpenActive}
+          />
 
-        <FilterBtn
-          text="Outlets"
-          onClick={toggleSpacesOutletsDispatch}
-          onClickOption={this.handleClickOutlets}
-          options={['No outlets', 'Few outlets', 'Many outlets']}
-          activeOptions={filterOutlets}
-          active={filterOutletsActive}
-        />
+          <FilterBtn
+            text="Outlets"
+            onClick={toggleSpacesOutletsDispatch}
+            onClickOption={this.handleClickOutlets}
+            options={['No outlets', 'Few outlets', 'Many outlets']}
+            activeOptions={filterOutlets}
+            active={filterOutletsActive}
+          />
 
-        <FilterBtn
-          text="Noise level"
-          onClick={toggleSpacesNoiseDispatch}
-          onClickOption={this.handleClickNoiseLevel}
-          options={['Talkative', 'Quiet', 'Silent']}
-          activeOptions={filterNoise}
-          active={filterNoiseActive}
-        />
+          <FilterBtn
+            text="Noise level"
+            onClick={toggleSpacesNoiseDispatch}
+            onClickOption={this.handleClickNoiseLevel}
+            options={['Talkative', 'Quiet', 'Silent']}
+            activeOptions={filterNoise}
+            active={filterNoiseActive}
+          />
 
-        <FilterBtn
-          text="Groups"
-          onClick={toggleSpacesGroupsDispatch}
-          onClickOption={this.handleClickGroups}
-          options={[
-            'No groups',
-            'Good for small groups',
-            'Good for large groups',
-          ]}
-          activeOptions={filterGroups}
-          active={filterGroupsActive}
-        />
+          <FilterBtn
+            text="Groups"
+            onClick={toggleSpacesGroupsDispatch}
+            onClickOption={this.handleClickGroups}
+            options={[
+              'No groups',
+              'Good for small groups',
+              'Good for large groups',
+            ]}
+            activeOptions={filterGroups}
+            active={filterGroupsActive}
+          />
 
-        <ClearText onClick={clearSpacesFiltersDispatch}>
-          Clear filters
-        </ClearText>
+          <HideAboveTablet>
+            <FilterText onClick={this.toggleMoreFilters}>More</FilterText>
+          </HideAboveTablet>
 
-        <ToggleNeighborhood />
-      </FilterWrapper>
+          <FilterText
+            onClick={clearSpacesFiltersDispatch}
+            style={{ marginRight: 0 }}
+          >
+            Clear filters
+          </FilterText>
+
+          <HideOnTablet>
+            <ToggleNeighborhood />
+          </HideOnTablet>
+        </FilterWrapper>
+
+        <FilterSpace />
+
+        <Modal show={showMoreFilters} toggle={this.toggleMoreFilters}>
+          <ModalContainer>
+            <Subtitle>More Filters</Subtitle>
+            <ToggleNeighborhood />
+          </ModalContainer>
+        </Modal>
+      </>
     )
   }
 }
