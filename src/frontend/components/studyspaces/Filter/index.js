@@ -195,10 +195,8 @@ class Filter extends Component {
   }
 
   /**
-   *
    * @param {string} filterString input from user
    */
-
   handleInputString(filterString) {
     const { filterSpacesStringDispatch } = this.props
     filterSpacesStringDispatch(filterString)
