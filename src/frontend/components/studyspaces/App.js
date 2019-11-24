@@ -116,7 +116,7 @@ class App extends Component {
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"
                 imageAlt="Empty Studyspaces"
-                text="No study space matches the criteria"
+                text="No study spaces match your criteria"
               />
             )}
 

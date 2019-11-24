@@ -30,12 +30,13 @@ const ToggleViewWrapper = s.div`
     width: 2.25rem;
     border: 1px solid ${BORDER};
 
-    &:first-child {
-      border-right-width: 0;
+    :first-child {
+      border-right-width: 0.5px;
       border-radius: ${BORDER_RADIUS} 0 0 ${BORDER_RADIUS};
     }
 
-    &:last-child {
+    :last-child {
+      border-left-width: 0.5px;
       border-radius: 0 ${BORDER_RADIUS} ${BORDER_RADIUS} 0;
     }
   }
@@ -48,6 +49,7 @@ const ToggleViewWrapper = s.div`
 const Button = s.button(
   ({ active }) => css`
     cursor: pointer;
+    background: ${WHITE};
 
     :hover {
       background: ${BABY_BLUE};

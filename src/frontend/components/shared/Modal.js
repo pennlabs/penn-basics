@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { WHITE, LIGHT_GRAY } from '../../styles/colors'
-import { LONG_ANIMATION_DURATION, Z_INDEX } from '../../styles/sizes'
+import {
+  LONG_ANIMATION_DURATION,
+  Z_INDEX,
+  maxWidth,
+  TABLET,
+} from '../../styles/sizes'
 import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
 
@@ -23,10 +28,11 @@ const ModalContent = styled.div`
   animation-duration: ${LONG_ANIMATION_DURATION};
 
   @media screen and (max-width: 1024px) {
+    padding: 1rem 0;
     width: 75%;
   }
 
-  @media screen and (max-width: 848px) {
+  ${maxWidth(TABLET)} {
     width: calc(100% - 1rem);
   }
 `
@@ -54,6 +60,12 @@ const ModalClose = styled.div`
 
   :hover {
     opacity: 0.75;
+  }
+
+  ${maxWidth(TABLET)} {
+    margin-left: 0;
+    top: 0.5rem;
+    right: 1rem;
   }
 `
 

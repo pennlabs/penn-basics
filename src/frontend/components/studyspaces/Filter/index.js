@@ -12,6 +12,7 @@ import {
   ALLBIRDS_GRAY,
   MEDIUM_GRAY,
   DARK_GRAY,
+  WHITE_ALPHA,
 } from '../../../styles/colors'
 import {
   filterSpacesOpen,
@@ -34,6 +35,7 @@ import {
   TABLET,
   minWidth,
   Z_INDEX,
+  FILTER_HEIGHT,
 } from '../../../styles/sizes'
 import { Modal, ModalContainer, Subtitle } from '../../shared'
 
@@ -53,29 +55,33 @@ const FilterWrapper = s.div`
   width: 100%;
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
+  top: ${NAV_HEIGHT};
+  left: 0;
   padding: 0.5rem 1rem;
+  overflow: visible;
+  position: fixed;
+  z-index: ${Z_INDEX - 1};
 
   ${maxWidth(PHONE)} {
-    padding: 0.5rem 1rem;
-    position: fixed;
-    top: ${NAV_HEIGHT};
-    left: 0;
-    background: ${WHITE};
-    z-index: ${Z_INDEX - 1};
-    width: 100%;
+    overflow-x: -moz-scrollbars-none;
+
+    // Scroll horizontally but hide the scrollbar from view
     overflow-x: scroll;
     overflow-y: visible;
     white-space: nowrap;
 
-    // TODO
-    // &::-webkit-scrollbar {
-    //   width: 0px;
-    //   background: transparent;
-    // }
+    -ms-overflow-style: none;
+    
+    ::-webkit-scrollbar {
+      width: 0 !important;
+      height: 0 !important;
+      display: none;
+      background: transparent;
+    }
 
     &:before {
       content: "";
-      background: linear-gradient(0.25turn, ${WHITE}, transparent);
+      background: linear-gradient(0.25turn, ${WHITE}, ${WHITE_ALPHA(0)});
       display: block;
       width: 1.2rem;
       height: calc(${MOBILE_FILTER_HEIGHT} - 1px);
@@ -86,7 +92,7 @@ const FilterWrapper = s.div`
 
     &:after {
       content: "";
-      background: linear-gradient(0.25turn, transparent, ${WHITE});
+      background: linear-gradient(0.25turn, ${WHITE_ALPHA(0)}, ${WHITE});
       display: block;
       width: 1.2rem;
       height: calc(${MOBILE_FILTER_HEIGHT} - 1px);
@@ -117,11 +123,11 @@ const FilterText = s.p`
 `
 
 const FilterSpace = s.div`
-  display: none;
+  display: block;
+  width: 100%;
+  height: ${FILTER_HEIGHT};
 
   ${maxWidth(PHONE)} {
-    display: block;
-    width: 100%;
     height: ${MOBILE_FILTER_HEIGHT};
   }
 `
@@ -283,6 +289,7 @@ class Filter extends Component {
             <ToggleNeighborhood />
           </HideOnTablet>
         </FilterWrapper>
+
         <FilterSpace />
 
         <Modal show={showMoreFilters} toggle={this.toggleMoreFilters}>

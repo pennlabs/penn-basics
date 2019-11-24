@@ -1,4 +1,5 @@
 export const WHITE = '#ffffff'
+export const WHITE_ALPHA = alpha => `rgba(255, 255, 255, ${alpha})`
 export const SHADOW = 'rgba(0, 0, 0, 0.07)'
 export const SNOW = '#f5f8fc'
 export const SNOW_ALPHA = 'rgba(244, 246, 249, 0.75)'
