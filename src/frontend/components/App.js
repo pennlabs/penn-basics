@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import s from 'styled-components'
-// import { MobileView, BrowserView } from 'react-device-detect'
+import { MobileView, BrowserView } from 'react-device-detect'
 
 import { BLUE, DARK_BLUE, SNOW } from '../styles/colors'
 import { initGA, logPageView } from '../analytics/index'
@@ -15,7 +15,7 @@ import Dining from './dining/App'
 import Laundry from './laundry/App'
 import StudySpaces from './studyspaces/App'
 import Reservations from './reservations/App'
-// import Mobile from './mobile/App'
+import Mobile from './mobile/App'
 import Feedback from './shared/Feedback'
 
 const AppWrapper = s.div`
@@ -50,32 +50,32 @@ export default class App extends Component {
   render() {
     return (
       <AppWrapper>
-        {/* <MobileView>
+        <MobileView>
           <div id="wrapper">
             <div id="app">
               <Mobile />
             </div>
           </div>
-        </MobileView> */}
+        </MobileView>
 
-        {/* <BrowserView> */}
-        <Nav />
-        <Feedback />
-        <div id="wrapper" style={{ background: SNOW }}>
-          <div id="app">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/dining" component={Dining} />
-              <Route exact path="/dining/:id" component={Dining} />
-              <Route exact path="/laundry" component={Laundry} />
-              <Route exact path="/laundry/:id" component={Laundry} />
-              <Route exact path="/studyspaces" component={StudySpaces} />
-              <Route exact path="/reservations" component={Reservations} />
-              <Route path="*" component={NotFound} />
-            </Switch>
+        <BrowserView>
+          <Nav />
+          <Feedback />
+          <div id="wrapper" style={{ background: SNOW }}>
+            <div id="app">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/dining" component={Dining} />
+                <Route exact path="/dining/:id" component={Dining} />
+                <Route exact path="/laundry" component={Laundry} />
+                <Route exact path="/laundry/:id" component={Laundry} />
+                <Route exact path="/studyspaces" component={StudySpaces} />
+                <Route exact path="/reservations" component={Reservations} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </div>
           </div>
-        </div>
-        {/* </BrowserView> */}
+        </BrowserView>
       </AppWrapper>
     )
   }
