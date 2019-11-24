@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link, withRouter } from 'react-router-dom'
 
 import { WHITE, LIGHT_GRAY } from '../../styles/colors'
 import {
@@ -81,7 +82,7 @@ const Times = styled.span`
 // This would otherwise cause the modal to close on any click
 const noop = event => event.stopPropagation()
 
-export class Modal extends Component {
+class Modal extends Component {
   constructor(props) {
     super(props)
 
@@ -116,21 +117,19 @@ export class Modal extends Component {
   // Close the modal when the user presses the escape key
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27
-    const { show } = this.props
+    const { show, history } = this.props
 
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      const { toggle } = this.props
-
-      toggle()
+      history.push('/studyspaces')
     }
   }
 
   render() {
-    const { show, toggle, children } = this.props
+    const { show, children, history } = this.props
     const { isNewlyMounted } = this.state
 
     return (
@@ -138,15 +137,17 @@ export class Modal extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={toggle}
+        onClick={() => history.push('/studyspaces')}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <ModalClose onClick={toggle} show={show}>
-            <Times>&times;</Times>
-          </ModalClose>
+          <Link to="/studyspaces" className="link">
+            <ModalClose show={show}>
+              <Times>&times;</Times>
+            </ModalClose>
+          </Link>
 
           {children}
         </ModalContent>
@@ -157,9 +158,11 @@ export class Modal extends Component {
 
 Modal.propTypes = {
   show: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
+  history: PropTypes.object, // eslint-disable-line
   children: PropTypes.any.isRequired, // eslint-disable-line
 }
+
+export default withRouter(Modal)
 
 export const ModalContainer = styled.div`
   padding: 0 8.33vw;

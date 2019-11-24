@@ -83,8 +83,13 @@ class App extends Component {
       error,
       pending,
       hoveredSpace,
-      setActiveSpaceDispatch,
+      match: {
+        params: { id },
+      },
+      history,
     } = this.props
+
+    const parsedSpaceId = null || id
 
     const { googleMapError, isListViewMobile } = this.state
 
@@ -144,14 +149,16 @@ class App extends Component {
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
                 mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
-                handleClickMarker={setActiveSpaceDispatch}
                 activeMarker={hoveredSpace}
+                handleClickMarker={spaceId =>
+                  history.push(`/studyspaces/${spaceId}`)
+                }
               />
             )}
           </Col>
         </Row>
 
-        <SpaceModal />
+        <SpaceModal spaceId={parsedSpaceId} />
       </>
     )
   }
@@ -181,9 +188,16 @@ App.defaultProps = {
   pending: false,
   filteredSpacesData: null,
   spacesData: null,
+  match: {},
 }
 
 App.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  history: PropTypes.object, // eslint-disable-line
   getAllSpacesDataDispatch: PropTypes.func.isRequired,
   setActiveSpaceDispatch: PropTypes.func.isRequired,
   error: PropTypes.string,

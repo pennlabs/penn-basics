@@ -37,7 +37,8 @@ import {
   Z_INDEX,
   FILTER_HEIGHT,
 } from '../../../styles/sizes'
-import { Modal, ModalContainer, Subtitle } from '../../shared'
+import { ModalContainer, Subtitle } from '../../shared'
+import Modal from '../../shared/Modal'
 
 const HideOnTablet = s.span`
   ${maxWidth(TABLET)} {

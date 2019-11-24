@@ -122,9 +122,9 @@ export function getAllSpacesData() {
           spaceObj.open = isOpen(space, time, day)
           spaceObj.hours = getHours(space, day)
 
-          const { _id: spaceId } = spaceObj
+          const { spaceID } = spaceObj
 
-          formattedSpaces[spaceId] = spaceObj
+          formattedSpaces[spaceID] = spaceObj
         })
 
         dispatch({
