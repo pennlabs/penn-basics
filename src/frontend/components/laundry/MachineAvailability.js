@@ -170,7 +170,7 @@ const MachineAvailability = ({
             <tr>
               <th>#</th>
               <th>Status</th>
-              <th>Minutes left</th>
+              <th>Mins left</th>
               <th />
             </tr>
           </thead>
