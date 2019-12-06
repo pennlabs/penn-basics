@@ -1,4 +1,4 @@
-import s from 'styled-components'
+import s, { css } from 'styled-components'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
@@ -7,35 +7,58 @@ import {
   FOCUS_GRAY,
   MEDIUM_GRAY,
   DARK_GRAY,
+  LIGHTER_BLUE,
+  BLACK_ALPHA,
+  WHITE,
 } from '../../../styles/colors'
 import SearchIcon from '../../../../../public/img/search.svg'
 import { maxWidth, PHONE } from '../../../styles/sizes'
 
-const Label = s.label`
-  margin-right: ${({ showInput }) => (showInput ? '1rem' : '0.5rem')};
-  max-height: 29px;
-  display: inline-block;
-  padding: 0;
-  margin-bottom: 0;
-  min-width: 24px;
+const HEIGHT = 42
+const MOBILE_HEIGHT = 29.2
 
-  ${maxWidth(PHONE)} {
-    font-size: 80%;
-    line-height: 1;
-    margin-right: 0.5rem;
-  }
-`
+const Label = s.label(
+  ({ showInput, active }) => css`
+    margin-right: 1rem;
+    padding: 0 8px;
+    height: ${HEIGHT}px;
+    min-width: ${HEIGHT}px;
+    background: ${WHITE};
+    display: inline-block;
+    margin-bottom: 0;
+    border: 1px solid ${BORDER};
+    border-radius: ${HEIGHT / 2}px;
+    box-shadow: 0 1px 4px ${BLACK_ALPHA(0.3)};
+    cursor: pointer;
+
+    ${showInput &&
+      `box-shadow: none; background: ${FOCUS_GRAY}; border-color: transparent;`}
+
+    ${active && `box-shadow: 0 0 0 2px ${LIGHTER_BLUE};`}
+
+    ${maxWidth(PHONE)} {
+      font-size: 80%;
+      line-height: 1;
+      margin-right: 0.5rem;
+      height: ${MOBILE_HEIGHT}px;
+      min-width: ${MOBILE_HEIGHT}px;
+      border-radius: ${MOBILE_HEIGHT / 2}px;
+      padding: 0 2px;
+    }
+  `
+)
 
 const SearchComponent = s.input`
   font-size: 1rem;
   font-weight: 400;
-  border-width: 0 0 2px 0;
   background: transparent;
-  border-bottom-color: ${FOCUS_GRAY};
-  margin-left: 0.2rem;
-  line-height: 1;
+  line-height: ${HEIGHT};
+  height: ${HEIGHT};
   color: ${MEDIUM_GRAY};
+  border: 0;
+  border-color: transparent;
   border-radius: 0;
+  margin: 0;
   padding-left: 28px;
   padding-right: 4px;
   padding-bottom: 4px;
@@ -44,6 +67,11 @@ const SearchComponent = s.input`
     outline: none;
     color: ${DARK_GRAY};
     border-bottom-color: ${BORDER};
+  }
+
+  ${maxWidth(PHONE)} {
+    line-height: ${MOBILE_HEIGHT};
+    height: ${MOBILE_HEIGHT};
   }
 `
 
@@ -54,23 +82,39 @@ const SearchIconStyled = s(SearchIcon)`
 
   ${maxWidth(PHONE)} {
     top: 10px;
+    transform: scale(0.64);
   }
 `
 
 const INPUT_ID = 'search-line'
 
 const Search = ({ filterFunction, filterString }) => {
-  const [showInput, setInput] = useState(false)
+  const [showInput, setShowInput] = useState(false)
+  const [active, setActive] = useState(false)
   return (
-    <Label htmlFor={INPUT_ID} showInput={showInput}>
+    <Label
+      htmlFor={INPUT_ID}
+      showInput={showInput}
+      active={active}
+      onClick={() => {
+        if (!showInput) {
+          setShowInput(true)
+        }
+      }}
+    >
       <SearchIconStyled
         className="fas fa-search"
-        onClick={() => setInput(!showInput)}
+        onClick={e => {
+          e.stopPropagation()
+          setShowInput(!showInput)
+        }}
         cursor="pointer"
       />
       {showInput && (
         <SearchComponent
           id={INPUT_ID}
+          onFocus={() => setActive(true)}
+          onBlur={() => setActive(false)}
           onChange={e => filterFunction(e.target.value)}
           value={filterString}
         />

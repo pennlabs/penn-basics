@@ -53,6 +53,8 @@ const HideAboveTablet = s.span`
 `
 
 const FilterWrapper = s.div`
+  display: flex;
+  align-items: center;
   width: 100%;
   background: ${WHITE};
   border-bottom: 1px solid ${ALLBIRDS_GRAY};
@@ -206,6 +208,7 @@ class Filter extends Component {
   }
 
   toggleMoreFilters() {
+    console.log('toggle')
     const { showMoreFilters } = this.state
     this.setState({ showMoreFilters: !showMoreFilters })
   }
@@ -289,7 +292,7 @@ class Filter extends Component {
             Clear filters
           </FilterText>
 
-          <HideOnTablet>
+          <HideOnTablet style={{ marginLeft: 'auto' }}>
             <ToggleNeighborhood />
           </HideOnTablet>
         </FilterWrapper>
