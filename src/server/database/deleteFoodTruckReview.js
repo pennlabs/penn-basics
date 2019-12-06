@@ -19,9 +19,11 @@ async function main() {
 
     const res = await deleteReview(foodTruckName, Number(pennid))
     console.log(res) // eslint-disable-line
+
     process.exit(0)
   } catch (err) {
     console.error(err)
+    process.exit(1)
   }
 }
 
