@@ -5,6 +5,8 @@ import moment from 'moment'
 import { BorderedCard, Title, Subtext } from '../shared'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
+const PENN_SHIELD_LOGO =
+  'https://pbs.twimg.com/profile_images/1197612145820594176/omdc0qqe_400x400.jpg'
 
 const getSubtext = ({ length }) => {
   switch (length) {
@@ -50,10 +52,7 @@ const Events = () => {
           <article className="media" key={uuid()}>
             <div className="media-left">
               <figure className="image is-64x64">
-                <img
-                  src="https://pbs.twimg.com/profile_images/875383884862570496/TN7FoDDx.jpg"
-                  alt="First"
-                />
+                <img src={PENN_SHIELD_LOGO} alt="First" />
               </figure>
             </div>
             <div className="spacer-20" />
