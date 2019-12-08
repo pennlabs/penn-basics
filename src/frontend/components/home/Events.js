@@ -6,7 +6,7 @@ import { BorderedCard, Title, Subtext } from '../shared'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 const PENN_SHIELD_LOGO =
-  'https://pbs.twimg.com/profile_images/1197612145820594176/omdc0qqe_400x400.jpg'
+  'https://pennbasics.s3.amazonaws.com/shield-simple-small.png'
 
 const getSubtext = ({ length }) => {
   switch (length) {
