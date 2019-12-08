@@ -41,7 +41,7 @@ const updateReview = async (foodtruckID, userReview) => {
   let exist = false
   let newOverallRating
 
-  for (let i = 0; i < reviews.length; i++) {
+  for (let i = 0; i < reviews.length; i += 1) {
     // eslint-disable-line
     if (reviews[i].pennid === pennid) {
       exist = true
