@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   docker: circleci/docker@0.5.19
-  deploy: pennlabs/deploy@0.0.2
+  deploy: pennlabs/deploy@0.0.3
 
 branch-filters: &branch-filters
   filters:
