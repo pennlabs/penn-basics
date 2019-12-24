@@ -1,16 +1,11 @@
-replicaCount: 1
+deploy_version: 0.1.0
+image_tag: latest
 
-image:
-  repository: pennlabs/pennbasics
-  tag: latest
-  pullPolicy: IfNotPresent
-
-service:
-  port: 80
-
-ingress:
-  enabled: true
-  domain: pennbasics.com
-
-secrets:
-  secretEnv: basics
+applications:
+  - name: basics
+    image: pennlabs/pennbasics
+    secret: basics
+    ingress:
+      hosts:
+        - host: pennbasics.com
+          paths: ["/"]
