@@ -44,7 +44,7 @@ workflows:
           requires:
             - test
           image: pennlabs/pennbasics
-          tag: $CIRCLE_SHA1,latest
+          tag: "$CIRCLE_SHA1,latest"
           context: docker-publish
           <<: *branch-filters
       - deploy/deploy:
