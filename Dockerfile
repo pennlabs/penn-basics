@@ -14,6 +14,4 @@ RUN npm install --production=true
 # Copy project files
 COPY . /app/
 
-RUN npm run webpack-prod
-
 CMD ["npm", "start"]
