@@ -5,6 +5,9 @@ applications:
   - name: basics
     image: pennlabs/pennbasics
     secret: basics
+    extraEnv:
+      - name: PORT
+        value: 80
     ingress:
       hosts:
         - host: pennbasics.com
