@@ -6,12 +6,12 @@ WORKDIR /app/
 
 # Copy project dependencies
 COPY package*.json /app/
-COPY yarn.lock /app/
+COPY package-lock.json /app/
 
 # Install project dependencies
-RUN yarn install --production=true
+RUN npm install --production=true
 
 # Copy project files
 COPY . /app/
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
