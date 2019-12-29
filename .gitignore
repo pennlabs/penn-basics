@@ -1,6 +1,7 @@
 # Project specific
 env.sh
 /public/js/
+.next
 
 # Labs can't do global .gitignore
 .DS_Store

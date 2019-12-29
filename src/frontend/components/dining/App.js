@@ -17,11 +17,7 @@ class App extends Component {
   }
 
   render() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props
+    const { id } = this.props
 
     const parsedVenueId = Number.isNaN(id) ? null : id
 
@@ -44,15 +40,11 @@ class App extends Component {
 }
 
 App.defaultProps = {
-  match: {},
+  id: '',
 }
 
 App.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
+  id: PropTypes.string,
   dispatchGetFavorites: PropTypes.func.isRequired,
 }
 

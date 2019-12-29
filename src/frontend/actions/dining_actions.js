@@ -22,7 +22,7 @@ export const getVenueInfo = venueId => {
 
     // Make a post request to pull the data
     try {
-      const response = await axios.post('/api/dining/venue_hours', { venueId })
+      const response = await axios.get(`/api/dining/venue_hours${venueId}`)
       let { venueHours } = response.data
 
       let startDate = new Date()
