@@ -36,8 +36,8 @@ const Home = ({ filterList }) => {
     <Weather />,
     <Events />,
     <News />,
-    // <Laundry />,
-    // <Dining />,
+    <Laundry />,
+    <Dining />,
     <Quotes />,
   ]
 

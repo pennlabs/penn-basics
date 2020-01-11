@@ -26,6 +26,7 @@ nextApp.prepare().then(() => {
   const { publicKey, privateKey } = webpush.generateVAPIDKeys()
   webpush.setVapidDetails('mailto:contact@pennlabs.org', publicKey, privateKey)
 
+  // api routing
   app.use('/api/getPublicVapidKey', (_, res) => {
     res.status(200).json({ publicKey })
   })
@@ -33,6 +34,11 @@ nextApp.prepare().then(() => {
   app.use('/api/dining', diningRouter(DB))
   app.use('/api/laundry', laundryRouter())
   app.use('/api/news', newsRouter())
+
+  // client-side routing
+  app.get('/dining/:id', (req, res) => {
+    return nextApp.render(req, res, '/dining', { id: req.params.id })
+  })
 
   app.all('*', (req, res) => {
     return handle(req, res)

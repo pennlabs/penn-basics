@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -22,8 +22,10 @@ class Dining extends Component {
 
     return (
       <BorderedCard>
-        <Link to="/dining" className="link">
-          <Title>Dining</Title>
+        <Link href="/dining">
+          <a>
+            <Title>Dining</Title>
+          </a>
         </Link>
 
         <Subtext>Status of your favorite dining halls</Subtext>

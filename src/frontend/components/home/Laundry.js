@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import {
   BorderedCard,
@@ -29,7 +29,7 @@ class Laundry extends Component {
 
     if (favoritesHome.length === 0) {
       return (
-        <Link to="/laundry" className="link">
+        <Link href="/laundry">
           <h4>Select your favorite Laundry hall</h4>
         </Link>
       )
@@ -39,7 +39,7 @@ class Laundry extends Component {
       const { washers, dryers } = favorite.machines
 
       return (
-        <StyledLink to={`/laundry/${favorite.id}`}>
+        <StyledLink href={`/laundry/${favorite.id}`}>
           <BorderedCard
             key={`${favorite.location}-${favorite.hall_name}`}
             padding="1rem 1rem 0 1rem"
@@ -71,7 +71,7 @@ class Laundry extends Component {
   render() {
     return (
       <BorderedCard>
-        <Link to="/laundry" className="link">
+        <Link href="/laundry">
           <Title>Laundry</Title>
         </Link>
         <Subtext>Status of your favorite halls</Subtext>

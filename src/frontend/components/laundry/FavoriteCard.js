@@ -7,7 +7,7 @@ import { Card, Text, Row, Line, Col, StyledLink } from '../shared'
 const FavoriteCard = ({ favorite }) => {
   const { hallId, locationName } = favorite
   return (
-    <StyledLink to={`/laundry/${hallId}`} key={uuid()}>
+    <StyledLink href={`/laundry/${hallId}`} key={uuid()}>
       <Card padding="0.5rem 1rem" hoverable>
         <Row>
           <Col padding="0">

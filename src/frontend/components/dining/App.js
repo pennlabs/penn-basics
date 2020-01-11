@@ -9,9 +9,7 @@ import DiningVenue from './DiningVenue'
 import { getFavorites } from '../../actions/dining_actions'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     const { dispatchGetFavorites } = this.props
     dispatchGetFavorites()
   }

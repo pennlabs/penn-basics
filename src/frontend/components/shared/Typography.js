@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { MEDIUM_GRAY, LIGHTER_BLUE, DARK_GRAY } from '../../styles/colors'
 

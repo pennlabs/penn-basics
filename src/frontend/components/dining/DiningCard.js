@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 import moment from 'moment'
+import Link from 'next/link'
 
 import { convertDate, pad } from '../../helperFunctions'
 import {
@@ -119,31 +120,33 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
   }
 
   return (
-    <StyledLink to={`/dining/${venueId}`}>
-      <Card
-        padding="0.5rem 1rem"
-        hoverable
-        key={venueId}
-        selected={selected}
-        style={style}
-      >
-        <FlexRow>
-          {image && (
-            <Col backgroundImage={img} width="30%" borderRadius="4px" />
-          )}
-          <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
-            <Content>
-              <Subtitle marginBottom="0">{name}</Subtitle>
-              <CardSubtext
-                venueId={venueId}
-                stateVenueHours={stateVenueHours}
-              />
-            </Content>
-          </Col>
-        </FlexRow>
-      </Card>
-      {showLine && <Line />}
-    </StyledLink>
+    <Link href={`/dining?id=${venueId}`} as={`/dining/${venueId}`}>
+      <a>
+        <Card
+          padding="0.5rem 1rem"
+          hoverable
+          key={venueId}
+          selected={selected}
+          style={style}
+        >
+          <FlexRow>
+            {image && (
+              <Col backgroundImage={img} width="30%" borderRadius="4px" />
+            )}
+            <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
+              <Content>
+                <Subtitle marginBottom="0">{name}</Subtitle>
+                <CardSubtext
+                  venueId={venueId}
+                  stateVenueHours={stateVenueHours}
+                />
+              </Content>
+            </Col>
+          </FlexRow>
+        </Card>
+        {showLine && <Line />}
+      </a>
+    </Link>
   )
 }
 
