@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { Card, Subtitle, Subtext, Col, Circle, Row } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
@@ -58,7 +58,7 @@ class SpaceCard extends Component {
     const outletsLevel = getOutletsLevel(outlets)
 
     return (
-      <StyledLink to={`/studyspaces/${spaceId}`} className="link">
+      <Link href={`/studyspaces?id=${spaceId}`} as={`/studyspaces/${spaceId}`}>
         <Card
           onClick={this.handleClick}
           onKeyPress={this.handleKeyPress}
@@ -92,7 +92,7 @@ class SpaceCard extends Component {
             </Col>
           </Row>
         </Card>
-      </StyledLink>
+      </Link>
     )
   }
 }

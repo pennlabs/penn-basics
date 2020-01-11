@@ -83,9 +83,7 @@ class App extends Component {
       error,
       pending,
       hoveredSpace,
-      match: {
-        params: { id },
-      },
+      id,
       history,
     } = this.props
 
@@ -150,9 +148,9 @@ class App extends Component {
                 mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
                 activeMarker={hoveredSpace}
-                handleClickMarker={spaceId =>
-                  history.push(`/studyspaces/${spaceId}`)
-                }
+                // handleClickMarker={spaceId =>
+                //   history.push(`/studyspaces/${spaceId}`)
+                // }
               />
             )}
           </Col>
