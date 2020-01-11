@@ -40,6 +40,10 @@ nextApp.prepare().then(() => {
     return nextApp.render(req, res, '/dining', { id: req.params.id })
   })
 
+  app.get('/laundry/:id', (req, res) => {
+    return nextApp.render(req, res, '/laundry', { id: req.params.id })
+  })
+
   app.all('*', (req, res) => {
     return handle(req, res)
   })

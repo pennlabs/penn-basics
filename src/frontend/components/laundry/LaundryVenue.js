@@ -42,9 +42,7 @@ const Buttons = s.div`
 `
 
 class LaundryVenue extends Component {
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     const {
       hallURLId,
       hallIntervalID,
