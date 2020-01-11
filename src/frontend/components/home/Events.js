@@ -60,11 +60,8 @@ const Events = () => {
         return (
           <article className="media" key={uuid()}>
             <div className="media-left">
-              <figure className="image is-64x64">
-                <img
-                  src="https://pbs.twimg.com/profile_images/875383884862570496/TN7FoDDx.jpg"
-                  alt="First"
-                />
+              <figure className="image is-32x32">
+                <img src="/img/upenn-logo.png" alt="upenn-logo" />
               </figure>
             </div>
             <div className="spacer-20" />

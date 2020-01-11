@@ -1,6 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { maxWidth, TABLET } from '../../../styles/sizes'
 import { BLACK, DARK_GRAY, WHITE } from '../../../styles/colors'
@@ -39,11 +39,11 @@ const Logo = s.img`
 
 export default () => (
   <>
-    <Link to="/">
+    <Link href="/">
       <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
     </Link>
 
-    <Link to="/">
+    <Link href="/">
       <LogoText>Penn Basics </LogoText>
     </Link>
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import s from 'styled-components'
 import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
 import { WHITE, BORDER } from '../../../styles/colors'
@@ -41,13 +41,13 @@ const LinksDiv = s.div`
 
 const Links = ({ active, zIndex, toggleActive }) => (
   <LinksDiv active={active} zIndex={zIndex}>
-    <Link to="/dining" onClick={() => toggleActive(false)}>
+    <Link href="/dining" onClick={() => toggleActive(false)}>
       Dining
     </Link>
-    <Link to="/laundry" onClick={() => toggleActive(false)}>
+    <Link href="/laundry" onClick={() => toggleActive(false)}>
       Laundry
     </Link>
-    <Link to="/studyspaces" onClick={() => toggleActive(false)}>
+    <Link href="/studyspaces" onClick={() => toggleActive(false)}>
       Studyspaces
     </Link>
   </LinksDiv>

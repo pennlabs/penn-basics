@@ -30,10 +30,12 @@ const News = () => {
     const website = 'https://www.thedp.com/'
     const className = 'col-lg-6 col-md-5 col-sm-12 frontpage-carousel'
     axios
-      .post('/api/news', {
-        cancelToken: source.token,
-        website,
-        className,
+      .get('/api/news', {
+        params: {
+          cancelToken: source.token,
+          website,
+          className,
+        },
       })
       .then(res => {
         setData(res.data)

@@ -36,8 +36,8 @@ const Home = ({ filterList }) => {
     <Weather />,
     <Events />,
     <News />,
-    <Laundry />,
-    <Dining />,
+    // <Laundry />,
+    // <Dining />,
     <Quotes />,
   ]
 
@@ -65,13 +65,13 @@ const Home = ({ filterList }) => {
   )
 }
 
-Home.propTypes = {
-  filterList: [],
-}
+// Home.propTypes = {
+//   filterList: [],
+// }
 
-Home.defaultProps = {
-  filterList: PropTypes.arrayOf(PropTypes.number),
-}
+// Home.defaultProps = {
+//   filterList: PropTypes.arrayOf(PropTypes.number),
+// }
 
 const mapStateToProps = ({ home }) => {
   const { filterList } = home

@@ -1,8 +1,8 @@
 /* globals window */
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import s from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { BLACK } from '../../../styles/colors'
 import Chevron from '../../../../../public/img/chevron-left.svg'
@@ -27,7 +27,11 @@ const Wrapper = s.div`
 `
 
 const Back = () => {
-  const route = window.location.pathname
+  let route = null
+
+  useEffect(() => {
+    route = window.location.pathname
+  })
 
   if (!route || route === '/') return null
 
@@ -36,7 +40,7 @@ const Back = () => {
 
   return (
     <Wrapper>
-      <Link to={to} style={{ color: BLACK }}>
+      <Link href={to} style={{ color: BLACK }}>
         <Chevron style={{ transform: 'scale(1.4)' }} />
       </Link>
     </Wrapper>
