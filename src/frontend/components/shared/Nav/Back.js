@@ -1,6 +1,6 @@
 /* globals window */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
 import Link from 'next/link'
 
@@ -27,11 +27,11 @@ const Wrapper = s.div`
 `
 
 const Back = () => {
-  let route = null
+  const [route, setRoute] = useState(null)
 
   useEffect(() => {
-    route = window.location.pathname
-  })
+    setRoute(window.location.pathname)
+  }, [])
 
   if (!route || route === '/') return null
 
