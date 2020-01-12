@@ -91,7 +91,7 @@ const Header = ({ children }) => (
     <Nav />
     <Feedback />
     <div id="wrapper" style={{ background: SNOW }}>
-      {children}
+      <div id="app"> {children} </div>
     </div>
   </AppWrapper>
 )
