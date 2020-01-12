@@ -31,7 +31,7 @@ const Back = () => {
 
   useEffect(() => {
     setRoute(window.location.pathname)
-  }, [])
+  })
 
   if (!route || route === '/') return null
 
