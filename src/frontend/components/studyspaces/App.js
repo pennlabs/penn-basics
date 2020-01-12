@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Router from 'next/router'
 
 import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
@@ -76,14 +77,7 @@ class App extends Component {
   }
 
   render() {
-    const {
-      filteredSpacesData,
-      error,
-      pending,
-      hoveredSpace,
-      id,
-      history,
-    } = this.props
+    const { filteredSpacesData, error, pending, hoveredSpace, id } = this.props
 
     const parsedSpaceId = null || id
 
@@ -146,9 +140,9 @@ class App extends Component {
                 mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
                 activeMarker={hoveredSpace}
-                // handleClickMarker={spaceId =>
-                //   history.push(`/studyspaces/${spaceId}`)
-                // }
+                handleClickMarker={spaceId =>
+                  Router.push(`/studyspaces?id=${spaceId}`)
+                }
               />
             )}
           </Col>
