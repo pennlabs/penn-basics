@@ -2,6 +2,7 @@
 env.sh
 /public/js/
 .next
+next-env.d.ts
 
 # Labs can't do global .gitignore
 .DS_Store
