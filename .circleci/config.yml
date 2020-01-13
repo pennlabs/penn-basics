@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   docker: circleci/docker@0.5.19
-  deploy: pennlabs/deploy@0.0.3
+  helm-tools: pennlabs/helm-tools@0.1.4
 
 branch-filters: &branch-filters
   filters:
@@ -47,7 +47,7 @@ workflows:
           tag: "$CIRCLE_SHA1,latest"
           context: docker-publish
           <<: *branch-filters
-      - deploy/deploy:
+      - helm-tools/deploy:
           requires:
             - docker/publish
           context: k8s-deploy
