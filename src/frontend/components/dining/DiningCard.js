@@ -5,7 +5,7 @@ import axios from 'axios'
 import moment from 'moment'
 import Link from 'next/link'
 
-import { convertDate, pad } from '../../helperFunctions'
+import { convertDate, pad } from '../../../utils/helperFunctions'
 import {
   StyledLink,
   FlexRow,

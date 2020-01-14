@@ -3,9 +3,9 @@ import { Provider } from 'react-redux'
 import App from 'next/app'
 import withRedux from 'next-redux-wrapper'
 import Router from 'next/router'
-import { initGA, logPageView } from '../src/frontend/analytics/index'
+import { initGA, logPageView } from '../src/utils/analytics'
 
-import { initStore } from '../store'
+import { initStore } from '../src/utils/store'
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

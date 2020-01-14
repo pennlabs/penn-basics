@@ -3,7 +3,7 @@ import axios from 'axios'
 import uuid from 'uuid'
 import moment from 'moment'
 import { BorderedCard, Title, Subtext, NoDataHome } from '../shared'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 

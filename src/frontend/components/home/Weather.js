@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { BorderedCard, Title } from '../shared'
 import Toggle from '../shared/Toggle'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 

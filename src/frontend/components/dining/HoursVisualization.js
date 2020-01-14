@@ -7,7 +7,7 @@ import uuid from 'uuid'
 
 import { ErrorMessage } from '../shared'
 import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
-import { convertDate, pad } from '../../helperFunctions'
+import { convertDate, pad } from '../../../utils/helperFunctions'
 
 const HeaderRow = s.tr`
   background: transparent !important;

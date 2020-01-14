@@ -6,8 +6,8 @@ import {
   getVenueInfoFulfilled,
   updateDiningFavorites,
 } from './action_types'
-import { logEvent } from '../analytics/index'
-import { pad } from '../helperFunctions'
+import { logEvent } from '../../utils/analytics'
+import { pad } from '../../utils/helperFunctions'
 
 const convertDate = dateObj => {
   const month = dateObj.getUTCMonth() + 1

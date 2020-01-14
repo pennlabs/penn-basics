@@ -12,7 +12,7 @@ import {
   Title,
   Subtext,
 } from '../shared'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const NewsContent = s.div`
   margin-left: 1rem;

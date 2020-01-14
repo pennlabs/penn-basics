@@ -7,7 +7,7 @@ import externalLinksData from '../../../server/resources/home/externalLinks.json
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 import { BORDER, HOVER_GRAY } from '../../styles/colors'
 import { BORDER_RADIUS } from '../../styles/sizes'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const ExternalLinkTag = s.a`
   border: 1px solid ${BORDER};

@@ -9,12 +9,12 @@ const PORT = process.env.PORT || 5000
 const bodyParser = require('body-parser')
 const webpush = require('web-push')
 
-const spacesRouter = require('./src/server/routes/spaces')
-const diningRouter = require('./src/server/routes/dining')
-const newsRouter = require('./src/server/routes/news')
-const laundryRouter = require('./src/server/routes/laundry')
+const spacesRouter = require('./routes/spaces')
+const diningRouter = require('./routes/dining')
+const newsRouter = require('./routes/news')
+const laundryRouter = require('./routes/laundry')
 
-const DB = require('./src/server/database/db')
+const DB = require('./database/db')
 
 require('dotenv').config()
 
