@@ -2,22 +2,24 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import App from 'next/app'
 import withRedux from 'next-redux-wrapper'
+import Router from 'next/router'
+import { initGA, logPageView } from '../src/frontend/analytics/index'
 
 import { initStore } from '../store'
 
 class MyApp extends App {
-  // Only uncomment this method if you have blocking data requirements for
-  // every single page in your application. This disables the ability to
-  // perform automatic static optimization, causing every page in your app to
-  // be server-side rendered.
-
   static async getInitialProps({ Component, ctx }) {
-    // calls page's `getInitialProps` and fills `appProps.pageProps`
     return {
       pageProps: Component.getInitialProps
         ? await Component.getInitialProps(ctx)
         : {},
     }
+  }
+
+  componentDidMount() {
+    initGA()
+    logPageView()
+    Router.router.events.on('routeChangeComplete', logPageView)
   }
 
   render() {
