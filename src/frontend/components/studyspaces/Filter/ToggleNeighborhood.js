@@ -11,13 +11,12 @@ import {
   MEDIUM_GRAY,
 } from '../../../styles/colors'
 import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
+// import { maxWidth, TABLET } from '../../../styles/sizes'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
 
-const Wrapper = s.div`
-  float: right;
-`
+const Wrapper = s.div``
 
 const Label = s.span`
   display: inline-block;
@@ -28,12 +27,7 @@ const Label = s.span`
   cursor: pointer;
   opacity: 0.6;
 
-  ${({ active }) =>
-    active &&
-    `
-    opacity: 1;
-    color: ${BLUE} !important;
-  `}
+  ${({ active }) => active && `opacity: 1; color: ${BLUE} !important;`}
 `
 
 const ToggleWrapper = s.div`
@@ -47,7 +41,7 @@ const Bar = s.div`
   width: 100%;
   height: ${HEIGHT}rem;
   border-radius: ${HEIGHT}rem;
-  margin-top: ${(2.5 - HEIGHT) / 2}rem;
+  margin-top: ${-HEIGHT / 2}rem;
   display: inline-block;
   background: ${({ active }) => (active ? LIGHTER_BLUE : FOCUS_GRAY)};
   cursor: pointer;
@@ -58,7 +52,7 @@ const Circle = s.div`
   height: ${HEIGHT + 0.4}rem;
   width: ${HEIGHT + 0.4}rem;
   border-radius: 100%;
-  margin-top: ${(2.5 - HEIGHT) / 2 - 0.2}rem;
+  margin-top: ${-HEIGHT / 2 - 0.2}rem;
   position: absolute;
   background: ${({ active }) => (active ? BLUE : LIGHT_GRAY)};
   margin-left: ${({ active }) => (active ? `${WIDTH - HEIGHT - 0.4}rem` : '0')};

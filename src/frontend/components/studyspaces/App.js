@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
 import {
   Map,
@@ -14,19 +15,27 @@ import {
   ErrorMessage,
   NoDataScroll,
 } from '../shared'
-import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
+import {
+  NAV_HEIGHT,
+  FILTER_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+} from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
 
 import Filter from './Filter'
 import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
+import { SNOW } from '../../styles/colors'
 
 // TODO ghost loaders
+// TODO port this over to hooks
+// TODO map height on mobile
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { googleMapError: null }
+    this.state = { googleMapError: null, isListViewMobile: true }
+    this.toggleView = this.toggleView.bind(this)
   }
 
   componentDidMount() {
@@ -63,31 +72,52 @@ class App extends Component {
     }
   }
 
+  toggleView() {
+    const { isListViewMobile } = this.state
+    this.setState({ isListViewMobile: !isListViewMobile })
+  }
+
   render() {
     const {
       filteredSpacesData,
       error,
       pending,
       hoveredSpace,
-      setActiveSpaceDispatch,
+      match: {
+        params: { id },
+      },
+      history,
     } = this.props
 
-    const { googleMapError } = this.state
+    const parsedSpaceId = null || id
 
+    const { googleMapError, isListViewMobile } = this.state
+
+    // TODO loading spinner
     if (pending || !filteredSpacesData) {
       return <Filter />
     }
 
     return (
       <>
+        <MobileToggleView
+          isListView={isListViewMobile}
+          toggle={this.toggleView}
+        />
+
         <Filter />
 
-        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
+        <Row
+          maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+          style={{ background: SNOW }}
+        >
           <Scrollbar
             padding="0 0 .5rem 0"
-            overflowY="scroll"
-            width="40%"
+            sm={12}
+            md={6}
+            lg={4}
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+            hideOnMobile={!isListViewMobile}
           >
             <ErrorMessage message={error} />
 
@@ -95,7 +125,7 @@ class App extends Component {
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"
                 imageAlt="Empty Studyspaces"
-                text="No study space matches the criteria"
+                text="No study spaces match your criteria"
               />
             )}
 
@@ -111,21 +141,24 @@ class App extends Component {
 
             <PennLabsCredit />
           </Scrollbar>
-          <Col>
+          <Col sm={12} md={6} lg={8} hideOnMobile={isListViewMobile}>
             <ErrorMessage message={googleMapError} />
             {!googleMapError && (
               <Map
                 mapId="map"
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+                mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
-                handleClickMarker={setActiveSpaceDispatch}
                 activeMarker={hoveredSpace}
+                handleClickMarker={spaceId =>
+                  history.push(`/studyspaces/${spaceId}`)
+                }
               />
             )}
           </Col>
         </Row>
 
-        <SpaceModal />
+        <SpaceModal spaceId={parsedSpaceId} />
       </>
     )
   }
@@ -155,9 +188,16 @@ App.defaultProps = {
   pending: false,
   filteredSpacesData: null,
   spacesData: null,
+  match: {},
 }
 
 App.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+  history: PropTypes.object, // eslint-disable-line
   getAllSpacesDataDispatch: PropTypes.func.isRequired,
   setActiveSpaceDispatch: PropTypes.func.isRequired,
   error: PropTypes.string,

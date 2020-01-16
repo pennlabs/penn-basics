@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import {
   BorderedCard,
   Text,
@@ -11,6 +12,7 @@ import {
   Row,
   ColSpace,
   Subtitle,
+  StyledLink,
 } from '../shared'
 import MachineAvailability from '../laundry/MachineAvailability'
 
@@ -37,29 +39,31 @@ class Laundry extends Component {
       const { washers, dryers } = favorite.machines
 
       return (
-        <BorderedCard
-          key={`${favorite.location}-${favorite.hall_name}`}
-          padding="1rem 1rem 0 1rem"
-        >
-          <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
-          <Row>
-            <Col>
-              <Text>Washer</Text>
-              <MachineAvailability
-                displayDetails={false}
-                machineData={washers}
-              />
-            </Col>
-            <ColSpace />
-            <Col>
-              <Text>Dryer</Text>
-              <MachineAvailability
-                displayDetails={false}
-                machineData={dryers}
-              />
-            </Col>
-          </Row>
-        </BorderedCard>
+        <StyledLink to={`/laundry/${favorite.id}`}>
+          <BorderedCard
+            key={`${favorite.location}-${favorite.hall_name}`}
+            padding="1rem 1rem 0 1rem"
+          >
+            <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
+            <Row>
+              <Col>
+                <Text>Washer</Text>
+                <MachineAvailability
+                  displayDetails={false}
+                  machineData={washers}
+                />
+              </Col>
+              <ColSpace />
+              <Col>
+                <Text>Dryer</Text>
+                <MachineAvailability
+                  displayDetails={false}
+                  machineData={dryers}
+                />
+              </Col>
+            </Row>
+          </BorderedCard>
+        </StyledLink>
       )
     })
   }

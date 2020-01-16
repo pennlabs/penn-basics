@@ -7,5 +7,6 @@ module.exports = {
     'import/prefer-default-export': 0,
     'arrow-parens': 0,
     semi: 0,
+    'jsx-a11y/label-has-for': 0,
   },
 }

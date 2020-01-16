@@ -32,14 +32,19 @@ const Nav = ({ favorites, selectedVenueId }) => {
     return nameA.localeCompare(nameB)
   })
 
+  // If a venue is selected, hide the scrollbar on mobile
+  const hideOnMobile = selectedVenueId !== undefined && selectedVenueId !== null
+
   return (
     <Scrollbar
       padding="0 0 .5rem 0"
       background={WHITE}
       overflowY="scroll"
-      width="30%"
+      sm={12}
+      md={4}
       borderRight
       height={`calc(100vh - ${NAV_HEIGHT})`}
+      hideOnMobile={hideOnMobile}
     >
       <Favorites
         favorites={favorites}
@@ -69,16 +74,14 @@ const Nav = ({ favorites, selectedVenueId }) => {
         <Line />
       </Card>
 
-      {retailKeys.map(key => {
-        return (
-          <DiningCard
-            key={uuid()}
-            venueId={key}
-            selected={selectedVenueId === key}
-            isFavorited={favorites.includes(key)}
-          />
-        )
-      })}
+      {retailKeys.map(key => (
+        <DiningCard
+          key={uuid()}
+          venueId={key}
+          selected={selectedVenueId === key}
+          isFavorited={favorites.includes(key)}
+        />
+      ))}
 
       <PennLabsCredit />
     </Scrollbar>

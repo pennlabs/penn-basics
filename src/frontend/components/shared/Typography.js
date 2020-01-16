@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { MEDIUM_GRAY, LIGHTER_BLUE } from '../../styles/colors'
+import { MEDIUM_GRAY, LIGHTER_BLUE, DARK_GRAY } from '../../styles/colors'
 
 export const NavHeader = styled.p`
   padding: 0.5rem 1rem;
@@ -49,4 +50,14 @@ export const Subtitle = styled.h2`
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
   line-height: 1.25;
+`
+
+export const StyledLink = styled(Link)`
+  color: ${DARK_GRAY} !important;
+
+  h1,
+  h2,
+  p {
+    color: ${DARK_GRAY} !important;
+  }
 `

@@ -2,9 +2,11 @@ import React from 'react'
 import s from 'styled-components'
 
 import { WHITE, BLUE, DARK_BLUE } from '../../styles/colors'
+import { maxWidth, PHONE } from '../../styles/sizes'
+import { logEvent } from '../../analytics/index'
 
 const DIAMETER = '3rem'
-const OFFSET = '18px'
+const OFFSET = 18
 const AIRTABLE_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
 
 const FeedbackLink = s.a`
@@ -14,8 +16,8 @@ const FeedbackLink = s.a`
   border-radius: 3rem;
   background-color: ${BLUE};
   position: fixed;
-  bottom: ${OFFSET};
-  right: ${OFFSET};
+  bottom: ${OFFSET}px;
+  right: ${OFFSET}px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(25, 89, 130, .4);
   cursor: pointer;
@@ -24,6 +26,12 @@ const FeedbackLink = s.a`
 
   &:hover {
     background-color: ${DARK_BLUE};
+  }
+
+  // Push closer to corner on mobile
+  ${maxWidth(PHONE)} {
+    bottom: ${OFFSET / 2}px;
+    right: ${OFFSET / 2}px;
   }
 `
 
@@ -34,7 +42,13 @@ const Icon = s.i`
 `
 
 export default () => (
-  <FeedbackLink href={AIRTABLE_LINK} title="Feedback" target="_blank">
+  <FeedbackLink
+    href={AIRTABLE_LINK}
+    title="Feedback"
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={() => logEvent('feeback', 'click from icon')}
+  >
     <Icon className="fa-comment far fa-lg" />
   </FeedbackLink>
 )

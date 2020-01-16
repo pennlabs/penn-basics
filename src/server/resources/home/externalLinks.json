@@ -13,5 +13,10 @@
     "pictureURL": "https://penncoursealert.com/static/pca/PCA_logo.svg",
     "websiteURL": "https://penncoursealert.com/",
     "productName": "Penn Course Alert"
+  },
+  {
+    "pictureURL": "https://penncourseplan.com/static/favicon.ico",
+    "websiteURL": "https://penncourseplan.com/",
+    "productName": "Penn Course Plan"
   }
 ]

@@ -3,9 +3,9 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Row, Col, ColSpace } from '../shared'
+import { Row, Col } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import { maxWidth, PHONE } from '../../styles/sizes'
+import { maxWidth, PHONE, TABLET } from '../../styles/sizes'
 
 import Filter from './Filter/Filter'
 import Greeting from './Greeting'
@@ -19,10 +19,15 @@ import Events from './Events'
 
 const Wrapper = s.div`
   padding-top: 1rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
-  ${maxWidth(PHONE)} {
+  padding-left: calc(2rem + 1.25vw);
+  padding-right: calc(2rem + 1.25vw);
+
+  ${maxWidth(TABLET)} {
     padding: 1rem;
+  }
+
+  ${maxWidth(PHONE)} {
+    padding: 0.5rem;
   }
 `
 
@@ -37,24 +42,26 @@ const Home = ({ filterList }) => {
   ]
 
   return (
-    <Wrapper>
-      <Row>
-        <Col width="70%">
-          <Greeting />
-          {filterList.map(filter => componentList[filter])}
-        </Col>
-        <ColSpace />
+    <>
+      <Wrapper>
+        <Row margin="0.5rem">
+          <Col sm={12} lg={8} margin="0.5rem">
+            <Greeting />
+            {filterList.map(filter => componentList[filter])}
+          </Col>
 
-        {/* Overflow visible so customize this page filter dropdown works */}
-        <Col style={{ overflow: 'visible' }}>
-          <ExternalLinks />
+          {/* Overflow visible so customize this page filter dropdown works */}
+          <Col sm={12} lg={4} style={{ overflow: 'visible' }} margin="0.5rem">
+            <ExternalLinks />
 
-          <Filter />
-        </Col>
-      </Row>
-
-      <PennLabsCredit padding="0 0 1rem 0" />
-    </Wrapper>
+            <Filter />
+          </Col>
+        </Row>
+      </Wrapper>
+      <Wrapper>
+        <PennLabsCredit padding="0 0 1rem 0" />
+      </Wrapper>
+    </>
   )
 }
 

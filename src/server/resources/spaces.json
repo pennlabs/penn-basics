@@ -456,7 +456,7 @@
     }
   },
   {
-    "name": "New College House, 7th Floor",
+    "name": "Lauder College House, 7th Floor",
     "image": "https://s3.amazonaws.com/pennbasics/7th-floor-nch.jpg",
     "imageCredit": {
       "name": "Alec Druggan",
@@ -773,7 +773,7 @@
   {
     "name": "Good Karma Cafe",
     "image": "https://static1.squarespace.com/static/555ab6e6e4b050c3b4188afb/5a961e3fe4966b58570494ae/5a961e408165f59f631da4aa/1519787880941/IMG_2863.JPG",
-    "address": "Wilma Theatre, 265 S Broad St #5659, Philadelphia, PA 19107",
+    "address": "Wilma Theatre, 265 S Broad St, Philadelphia, PA 19107",
     "location": {
       "lat": 39.9447563,
       "lng": -75.1653656
@@ -958,7 +958,7 @@
     "name": "Quorum Drop-In Lounge",
     "description": "On the ground floor of 3675 Market is the Quorum Drop-In Lounge with an Elixr Coffee Bar. The lounge is a colorful, public workspace with wifi, whiteboards, and varied seating areas. Elixr serves up coffees, teas, and a small assortment of baked goods.",
     "tags": ["Off Campus", "Coffee Shop"],
-    "address": "3675 Chestnut St, Philadelphia, PA 19104",
+    "address": "3675 Market St, Philadelphia, PA 19104",
     "image": "https://s3.amazonaws.com/pennbasics/quorum.jpg",
     "outlets": 1,
     "quiet": 3,

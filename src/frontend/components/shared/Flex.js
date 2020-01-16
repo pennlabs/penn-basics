@@ -1,49 +1,85 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import s from 'styled-components'
+import s, { css } from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
-import { maxWidth, PHONE, TABLET, minWidth } from '../../styles/sizes'
+import {
+  maxWidth,
+  PHONE,
+  TABLET,
+  minWidth,
+  MAX_BODY_HEIGHT,
+} from '../../styles/sizes'
 
 const percent = numCols => `${(numCols / 12) * 100}%`
 
-export const Row = s.div`
+export const Row = s.div(
+  ({ maxHeight, overflowY, margin, justifyContent, fullHeight }) => css`
   display: flex;
   flex-direction: row;
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-height: ${({ maxHeight }) => maxHeight || 'none'};
-  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
+  max-height: ${maxHeight || 'none'};
+  overflow-y: ${overflowY || 'hidden'};
 
-  ${({ margin }) =>
-    margin &&
+  ${margin &&
     `
     margin-left: -${margin};
     margin-right: -${margin};
-    width: calc(100% + ${margin} + ${margin});
-  `}
+    width: calc(100% + ${margin} + ${margin});`}
 
-  ${({ justifyContent }) =>
-    justifyContent && `justify-content: ${justifyContent};`}
+  ${justifyContent && `justify-content: ${justifyContent};`}
 
   ${maxWidth(PHONE)} {
     display: block;
+    max-height: none !important;
+    overflow-y: visible;
   }
+  
+  // Allow scrolling on mobile
+  ${minWidth(TABLET)} {
+    ${fullHeight && `height: ${MAX_BODY_HEIGHT};`}
+  }`
+)
+
+export const FlexRow = s(Row)`
+  display: flex !important;
 `
 
-const ColWrapper = s.div`
-  flex: ${({ width }) => (width ? 'none' : 1)};
-  width: ${({ width }) => width || 'auto'};
-  padding: ${({ padding }) => padding || 0};
+const ColWrapper = s.div(
+  ({
+    width,
+    padding,
+    maxHeight,
+    minHeight,
+    height,
+    fullHeight,
+    flex,
+    backgroundImage,
+    background,
+    overflowY,
+    overflowX,
+    borderRadius,
+    borderRight,
+    sm,
+    offsetSm,
+    md,
+    offsetMd,
+    lg,
+    offsetLg,
+    hideOnMobile,
+  }) => css`
+  flex: ${width ? 'none' : 1};
+  width: ${width || 'auto'};
+  padding: ${padding || 0};
   
-  ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
-  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
-  ${({ height }) => height && `height: ${height};`}
+  ${maxHeight && `max-height: ${maxHeight};`}
+  ${minHeight && `min-height: ${minHeight};`}
+  ${height && `height: ${height};`}
 
-  ${({ flex }) => flex && `display: flex;`}
-  ${({ backgroundImage }) =>
-    backgroundImage &&
+  ${flex && `display: flex;`}
+  ${backgroundImage &&
     `
     background-image: url(${backgroundImage});
     background-position: center;
@@ -51,58 +87,40 @@ const ColWrapper = s.div`
     background-repeat: no-repeat;
   `}
   
-  background: ${({ background }) => background || ''};
-  max-height: ${({ maxHeight }) => maxHeight || 'none'};
-  overflow-y: ${({ overflowY }) => overflowY || 'hidden'};
-  overflow-x: ${({ overflowX }) => overflowX || 'visible'};
+  background: ${background || ''};
+  max-height: ${maxHeight || 'none'};
+  overflow-y: ${overflowY || 'hidden'};
+  overflow-x: ${overflowX || 'visible'};
   box-sizing: border-box;
-  border-radius: ${({ borderRadius }) => borderRadius || 0};
-  border-right: ${({ borderRight }) => borderRight && `1px solid ${BORDER}`};
+  border-radius: ${borderRadius || 0};
 
-  ${({ sm }) =>
-    sm &&
-    `
-    width: ${percent(sm)};
-    flex: none;
-  `}
+  ${sm && `width: ${percent(sm)}; flex: none;`}
 
-  ${({ offsetSm }) => offsetSm && `margin-left: ${percent(offsetSm)};`}
+  ${offsetSm && `margin-left: ${percent(offsetSm)};`}
 
   ${minWidth(PHONE)} {
-    ${({ md }) =>
-      md &&
-      `
-      width: ${percent(md)}
-      flex: none;
-    `}
+    ${md && `width: ${percent(md)}; flex: none;`}
+    ${offsetMd && `margin-left: ${percent(offsetMd)};`}
 
-    ${({ offsetMd }) => offsetMd && `margin-left: ${percent(offsetMd)};`}
+    // Only show border right when the column is not full width
+    // On mobile the col will always be full width so this would look odd
+    border-right: ${borderRight && `1px solid ${BORDER}`};
   }
 
   ${minWidth(TABLET)} {
-    ${({ lg }) =>
-      lg &&
-      `
-      width: ${percent(lg)}
-      flex: none;
-    `}
-
-    ${({ offsetLg }) =>
-      offsetLg &&
-      `
-      margin-left: ${percent(offsetLg)};
-    `}
+    ${lg && `width: ${percent(lg)}; flex: none;`}
+    ${offsetLg && `margin-left: ${percent(offsetLg)};`}
+    ${fullHeight && `height: ${MAX_BODY_HEIGHT};`}
   }
-`
+  
+  ${maxWidth(PHONE)} {
+    ${hideOnMobile && 'display: none !important;'}
+  }`
+)
 
-const ColContainer = s.div`
-  ${({ margin }) =>
-    margin &&
-    `
-    margin-left: ${margin};
-    margin-right: ${margin};
-  `}
-`
+const ColContainer = s.div(({ margin }) =>
+  margin ? `margin-left: ${margin}; margin-right: ${margin};` : ``
+)
 
 export const Col = ({ margin, children, ...other }) => (
   <ColWrapper {...other}>

@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import s from 'styled-components'
 import { MobileView, BrowserView } from 'react-device-detect'
 
-import { BLUE, DARK_BLUE } from '../styles/colors'
+import { BLUE, DARK_BLUE, SNOW } from '../styles/colors'
 
 import Nav from './shared/Nav'
 import Home from './home/App'
@@ -17,7 +17,7 @@ import Mobile from './mobile/App'
 import Feedback from './shared/Feedback'
 import Profile from './profile/App'
 
-const App = s.div`
+const AppWrapper = s.div`
   a {
     color: ${BLUE};
 
@@ -34,7 +34,7 @@ const App = s.div`
 `
 
 export default () => (
-  <App>
+  <AppWrapper>
     {/* <MobileView>
       <div id="wrapper">
         <div id="app">
@@ -46,7 +46,7 @@ export default () => (
     {/* <BrowserView> */}
     <Nav />
     <Feedback />
-    <div id="wrapper">
+    <div id="wrapper" style={{ background: SNOW }}>
       <div id="app">
         <Switch>
           <Route exact path="/" component={Home} />
@@ -57,6 +57,7 @@ export default () => (
           <Route exact path="/laundry" component={Laundry} />
           <Route exact path="/laundry/:id" component={Laundry} />
           <Route exact path="/studyspaces" component={StudySpaces} />
+          <Route exact path="/studyspaces/:id" component={StudySpaces} />
           <Route exact path="/reservations" component={Reservations} />
           <Route exact path="/profile" component={Profile} />
           <Route path="*" component={NotFound} />
@@ -64,5 +65,5 @@ export default () => (
       </div>
     </div>
     {/* </BrowserView> */}
-  </App>
+  </AppWrapper>
 )

@@ -1,9 +1,6 @@
 const router = require('express').Router()
 const HttpStatus = require('http-status-codes')
 const webpush = require('web-push')
-const axios = require('axios')
-
-const BASE = 'http://api.pennlabs.org'
 
 const isValidNumericId = id => {
   if (id === null || id === undefined) return false
@@ -19,23 +16,25 @@ module.exports = function laundryRouter() {
 
     // a unique reminderID is used to distinguish between multiple reminders
     // that have the same hallID and machineID
-    const { subscription, machineID, hallID, reminderID } = req.body
+    const {
+      subscription,
+      machineID,
+      hallID,
+      machineType,
+      reminderID,
+    } = req.body
+
+    let { timeRemaining } = req.body
+    timeRemaining =
+      timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
+    // timeRemaining = 2000
 
     if (!isValidNumericId(hallID)) {
       res.status(HttpStatus.BAD_REQUEST).send('Missing hallID')
       return
     }
 
-    // fetch the time remaining using Labs API
-    const axiosResponse = await axios.get(`${BASE}/laundry/hall/${hallID}`)
-    const { data } = axiosResponse
-    const machine = data.machines.details.filter(
-      detail => detail.id === machineID
-    )
-    const { type, time_remaining: timeRemaining } = machine[0]
-    const timeRemainingFormatted =
-      timeRemaining !== 0 ? Number(timeRemaining) * 60 * 1000 : 20000
-    // timeRemainingFormatted = 2000
+    // console.log("---Notification entered to backend---")
 
     // set a timeout that equals to the timeRemaining
     setTimeout(async () => {
@@ -43,14 +42,15 @@ module.exports = function laundryRouter() {
         // use webpush to instruct the service worker to push notification
         await webpush.sendNotification(
           subscription,
-          JSON.stringify({ machineID, hallID, reminderID, type }) // payload received by the service worker
+          JSON.stringify({ machineID, hallID, reminderID, machineType }) // payload received by the service worker
         )
         // respond to frontend until the instruction is received by the service worker
+        // console.log("---Notification sent from backend---")
         res.status(200).json({})
       } catch (err) {
         res.status(200).json({ error: err.message })
       }
-    }, timeRemainingFormatted)
+    }, timeRemaining)
   })
 
   return router

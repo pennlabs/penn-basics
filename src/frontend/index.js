@@ -8,7 +8,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 
 import rootReducer from './reducers/index'
 import App from './components/App'
-import './styles/app.scss'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // Redux testing tool
 

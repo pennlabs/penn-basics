@@ -19,8 +19,8 @@ After a `env.sh` file containing `PORT`, `GOOGLE_KEY`, and `MONGO_URI` values is
 ```
 git clone https://github.com/pennlabs/pennbasics.git
 cd pennbasics
-yarn
-yarn dev
+npm install
+npm run dev
 ```
 
 React application will be available at `localhost:3000` or `PORT`.

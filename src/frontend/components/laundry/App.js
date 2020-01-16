@@ -12,7 +12,6 @@ import Loading from '../shared/Loading'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import Favorites from '../shared/favorites/Favorites'
-import { NAV_HEIGHT } from '../../styles/sizes'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
@@ -41,14 +40,20 @@ class App extends Component {
     } = this.props
 
     const parsedHallId = Number.isNaN(id) ? null : Number(id)
+    const isActiveHall =
+      parsedHallId !== null &&
+      parsedHallId !== undefined &&
+      !Number.isNaN(parsedHallId)
 
     return (
-      <Row maxHeight={`calc(100vh - ${NAV_HEIGHT})`}>
+      <Row fullHeight>
         <Scrollbar
           padding="0 0 .5rem 0"
-          width="20%"
+          sm={12}
+          md={3}
           borderRight
-          height={`calc(100vh - ${NAV_HEIGHT})`}
+          fullHeight
+          hideOnMobile={isActiveHall}
         >
           <Favorites
             favorites={favorites}
@@ -71,16 +76,18 @@ class App extends Component {
               />
             ))
           ) : (
-            <Loading />
+            <Loading padding="40vh 0" />
           )}
 
           <PennLabsCredit />
         </Scrollbar>
 
         <Col
-          width="80%"
+          sm={12}
+          md={9}
           overflowY="auto"
-          maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+          fullHeight
+          hideOnMobile={!isActiveHall}
         >
           <LaundryVenue hallURLId={parsedHallId} />
         </Col>

@@ -29,7 +29,7 @@ const clearFilterState = {
   filterNoiseActive: false,
   filterGroupsActive: false,
   filterOnCampus: false,
-  filterString: null,
+  filterString: '',
 }
 
 const updateFilters = (arr, num) => {

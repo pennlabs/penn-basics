@@ -1,10 +1,8 @@
 import React from 'react'
-import s from 'styled-components'
 import PropTypes from 'prop-types'
 
-const FavoriteIcon = s.i`
-  opacity: 0.75;
-`
+import FavoriteIcon from '../../../../../public/img/heart.svg'
+import { Button } from '../Button'
 
 const FavoriteButton = ({
   isFavorited,
@@ -15,23 +13,21 @@ const FavoriteButton = ({
 }) => {
   if (isFavorited) {
     return (
-      <span // eslint-disable-line
-        className="button is-info"
-        onClick={() => removeFunction(removeParams)}
-      >
-        <FavoriteIcon className="fa fa-heart" />
+      <Button className="is-info" onClick={() => removeFunction(removeParams)}>
+        <FavoriteIcon
+          opacity="0.75"
+          fill="white"
+          style={{ transform: 'scale(0.75)' }}
+        />
         &nbsp; Favorited
-      </span>
+      </Button>
     )
   }
   return (
-    <span // eslint-disable-line
-      className="button"
-      onClick={() => addFunction(addParams)}
-    >
-      <FavoriteIcon className="far fa-heart" />
+    <Button onClick={() => addFunction(addParams)}>
+      <FavoriteIcon opacity="0.75" style={{ transform: 'scale(0.75)' }} />
       &nbsp; Make Favorite
-    </span>
+    </Button>
   )
 }
 
@@ -39,12 +35,13 @@ FavoriteButton.defaultProps = {
   isFavorited: null,
 }
 
+// TODO more precise prop types
 FavoriteButton.propTypes = {
   isFavorited: PropTypes.bool,
   addFunction: PropTypes.func.isRequired,
   removeFunction: PropTypes.func.isRequired,
-  addParams: PropTypes.object, //eslint-disable-line
-  removeParams: PropTypes.object, //eslint-disable-line
+  addParams: PropTypes.object, // eslint-disable-line
+  removeParams: PropTypes.object, // eslint-disable-line
 }
 
 export default FavoriteButton

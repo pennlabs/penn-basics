@@ -19,6 +19,7 @@ import {
   updateHallIntervalID,
   updateReminderIntervalID,
 } from './action_types'
+import { logEvent } from '../analytics/index'
 
 const BASE = 'https://api.pennlabs.org'
 
@@ -186,6 +187,7 @@ export const getFavorites = () => {
 
 export const addFavorite = (hallURLId, location, hallName) => {
   return async dispatch => {
+    logEvent('laundry', 'addFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
@@ -221,6 +223,7 @@ export const addFavorite = (hallURLId, location, hallName) => {
 
 export function removeFavorite(hallURLId) {
   return dispatch => {
+    logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
@@ -419,7 +422,7 @@ export const getReminders = () => {
   }
 }
 
-export const addReminder = (machineID, hallID, hallName) => {
+export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
   return dispatch => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
@@ -443,7 +446,8 @@ export const addReminder = (machineID, hallID, hallName) => {
           subscription,
           machineID,
           hallID,
-          hallName,
+          machineType,
+          timeRemaining,
           reminderID,
         })
       })

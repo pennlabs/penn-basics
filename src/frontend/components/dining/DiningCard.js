@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 import axios from 'axios'
 import moment from 'moment'
 
 import { convertDate, pad } from '../../helperFunctions'
-import { Row, Col, Card, Subtitle, Subtext, Line, Circle } from '../shared'
-import { DARK_GRAY } from '../../styles/colors'
+import {
+  StyledLink,
+  FlexRow,
+  Col,
+  Card,
+  Subtitle,
+  Subtext,
+  Line,
+  Circle,
+} from '../shared'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const StyledLink = s(Link)`
-  h2 {
-    color: ${DARK_GRAY} !important;
-  }
-`
 const Content = s.div`
   width: 100%;
   position: relative;
@@ -61,7 +63,17 @@ const CardSubtext = ({ venueId, stateVenueHours }) => {
   )
 }
 
-const DiningCard = ({ venueId, isFavorited, selected }) => {
+CardSubtext.defaultProps = {
+  venueId: '',
+  stateVenueHours: [],
+}
+
+CardSubtext.propTypes = {
+  venueId: PropTypes.string,
+  stateVenueHours: PropTypes.array, //eslint-disable-line
+}
+
+const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
   // use React Hook to initialize state in a functional component
   const [stateVenueHours, setVenueHours] = useState([])
 
@@ -108,8 +120,14 @@ const DiningCard = ({ venueId, isFavorited, selected }) => {
 
   return (
     <StyledLink to={`/dining/${venueId}`}>
-      <Card padding="0.5rem 1rem" hoverable key={venueId} selected={selected}>
-        <Row>
+      <Card
+        padding="0.5rem 1rem"
+        hoverable
+        key={venueId}
+        selected={selected}
+        style={style}
+      >
+        <FlexRow>
           {image && (
             <Col backgroundImage={img} width="30%" borderRadius="4px" />
           )}
@@ -122,32 +140,26 @@ const DiningCard = ({ venueId, isFavorited, selected }) => {
               />
             </Content>
           </Col>
-        </Row>
+        </FlexRow>
       </Card>
-      <Line />
+      {showLine && <Line />}
     </StyledLink>
   )
 }
 
-CardSubtext.defaultProps = {
-  venueId: '',
-  stateVenueHours: [],
-}
-
-CardSubtext.propTypes = {
-  venueId: PropTypes.string,
-  stateVenueHours: PropTypes.array, //eslint-disable-line
-}
-
 DiningCard.defaultProps = {
+  showLine: true,
   isFavorited: false,
   selected: false,
+  style: {},
 }
 
 DiningCard.propTypes = {
+  showLine: PropTypes.bool,
   venueId: PropTypes.string.isRequired,
   isFavorited: PropTypes.bool,
   selected: PropTypes.bool,
+  style: PropTypes.object, // eslint-disable-line
 }
 
 export default DiningCard

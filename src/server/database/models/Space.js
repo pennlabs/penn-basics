@@ -3,6 +3,7 @@ const mongoose = require('../mongoose-connect')
 const { Schema } = mongoose
 
 const SpaceSchema = new Schema({
+  spaceID: { type: String, index: true },
   name: {
     type: String,
     required: true,

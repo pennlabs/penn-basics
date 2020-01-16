@@ -1,29 +1,16 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
 
-import pjson from '../../../../../package.json'
-import {
-  BLACK,
-  DARK_GRAY,
-  ALLBIRDS_GRAY,
-  BLACK_ALPHA,
-  WHITE,
-} from '../../../styles/colors'
-import {
-  maxWidth,
-  minWidth,
-  TABLET,
-  NAV_HEIGHT,
-  PHONE,
-} from '../../../styles/sizes'
+import { ALLBIRDS_GRAY, BLACK_ALPHA } from '../../../styles/colors'
+import { minWidth, NAV_HEIGHT, PHONE, Z_INDEX } from '../../../styles/sizes'
 import { getUserInfo } from '../../../actions/auth_actions'
 
 import Links from './Links'
 import Menu from './Menu'
-
-const Z_INDEX = 1300
+import Logo from './Logo'
+import Back from './Back'
+import { Shade } from '../Shade'
 
 const NavSpace = s.div`
   width: 100%;
@@ -42,30 +29,7 @@ const Wrapper = s.nav`
   left: 0;
 `
 
-const LogoText = s.h1`
-  font-weight: bold;
-  font-size: 1.4rem;
-  padding: 0.7rem 0.5rem 0rem 0.5rem;
-  color: ${DARK_GRAY};
-
-  &:active,
-  &:focus,
-  &:hover {
-    color: ${BLACK};
-  }
-
-  ${maxWidth(TABLET)} {
-    display: none;
-  }
-`
-
-const Logo = s.img`
-  height: 3.4rem;
-  padding: 0.4rem 0 0.4rem 0rem;
-  width: auto;
-`
-
-const Shade = s.div`
+const StyledShade = s(Shade)`
   position: fixed;
   left: 0;
   top: 0;
@@ -79,61 +43,48 @@ const Shade = s.div`
   }
 `
 
-const BetaTag = s.span`
-  margin-left: 3px;
-  border-radius: 25px;
-  background-color: #60B8F2 !important;
-  color: ${WHITE} !important;
-  margin-top: 15px;
-  box-shadow: 0 0px 8px rgba(25, 89, 130, .4);
-`
-
 // TODO replace imgur jawn with local jawn
 
-class Nav extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { active: false }
+const Nav = ({ dispatchGetUserInfo, userInfo }) => {
+  const [isNewlyMounted, setIsNewlyMounted] = useState(true)
+  const [active, toggleActive] = useState(false)
 
-    const { dispatchGetUserInfo } = this.props
+  const toggle = () => {
+    if (isNewlyMounted) {
+      setIsNewlyMounted(false)
+    }
+    toggleActive(!active)
+  }
+
+  useEffect(() => {
     dispatchGetUserInfo()
-  }
+  }, [])
 
-  render() {
-    const { active } = this.state
-    const { userInfo } = this.props
+  return (
+    <>
+      <Wrapper className="navbar" id="navbar">
+        <Back />
+        <Logo />
 
-    return (
-      <>
-        <Wrapper className="navbar" id="navbar">
-          <Link to="/">
-            <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
-          </Link>
+        <Menu active={active} toggleActive={toggle} zIndex={Z_INDEX} />
 
-          <Link to="/">
-            <LogoText>Penn Basics </LogoText>
-          </Link>
+        <Links
+          active={active}
+          zIndex={Z_INDEX}
+          toggleActive={toggle}
+          userInfo={userInfo}
+        />
+      </Wrapper>
 
-          <BetaTag className="tag is-rounded">{`v${pjson.version}`}</BetaTag>
-
-          <Menu
-            active={active}
-            toggleActive={() => this.setState({ active: !active })}
-            zIndex={Z_INDEX}
-          />
-
-          <Links active={active} zIndex={Z_INDEX} userInfo={userInfo} />
-        </Wrapper>
-        {active && (
-          <Shade
-            zIndex={Z_INDEX}
-            onClick={() => this.setState({ active: !active })}
-          />
-        )}
-        <NavSpace />
-      </>
-    )
-  }
+      <StyledShade
+        show={active}
+        isNewlyMounted={isNewlyMounted}
+        zIndex={Z_INDEX}
+        onClick={toggle}
+      />
+      <NavSpace />
+    </>
+  )
 }
 
 const mapStateToProps = ({ authentication }) => authentication

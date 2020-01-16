@@ -14,7 +14,8 @@ import {
   BLUE,
 } from '../../styles/colors'
 import StatusPill from './StatusPill'
-import { Row, LaundryOverview } from '../shared'
+import { FlexRow, LaundryOverview } from '../shared'
+import BellSVG from '../../../../public/img/bell.svg'
 
 const Table = s.table`
   margin-bottom: 0;
@@ -44,12 +45,13 @@ const BellIcon = s.span`
 const handleReminder = (
   machineID,
   hallID,
-  hallName,
   dispatchAddReminder,
-  reminded
+  reminded,
+  machineType,
+  timeRemaining
 ) => {
   if (!reminded) {
-    dispatchAddReminder(machineID, hallID, hallName)
+    dispatchAddReminder(machineID, hallID, machineType, timeRemaining)
   }
 }
 
@@ -61,7 +63,7 @@ const Bell = ({
   id,
   laundryHallId,
   dispatchAddReminder,
-  hallName,
+  machineType,
 }) => {
   if (!enableReminder || timeRemaining <= 0 || !dispatchAddReminder) {
     return null
@@ -74,13 +76,14 @@ const Bell = ({
           handleReminder(
             id,
             laundryHallId,
-            hallName,
             dispatchAddReminder,
-            reminded
+            reminded,
+            machineType,
+            timeRemaining
           )
         }
       >
-        <i className="far fa-bell" />
+        <BellSVG style={{ transform: 'scale(0.7) translateY(2px)' }} />
       </BellIcon>
     )
   }
@@ -89,7 +92,10 @@ const Bell = ({
   if (reminded) {
     return (
       <RemindedBellIcon className="icon">
-        <i className="fas fa-bell" />
+        <BellSVG
+          style={{ transform: 'scale(0.7) translateY(2px)' }}
+          fill={BLUE}
+        />
       </RemindedBellIcon>
     )
   }
@@ -103,8 +109,8 @@ Bell.defaultProps = {
   reminded: false,
   id: null,
   laundryHallId: null,
-  hallName: null,
   dispatchAddReminder: null,
+  machineType: '',
 }
 
 Bell.propTypes = {
@@ -114,7 +120,7 @@ Bell.propTypes = {
   id: PropTypes.number,
   laundryHallId: PropTypes.number,
   dispatchAddReminder: PropTypes.func,
-  hallName: PropTypes.string,
+  machineType: PropTypes.string,
 }
 
 const MachineAvailability = ({
@@ -123,7 +129,6 @@ const MachineAvailability = ({
   machineType,
   allMachines,
   laundryHallId,
-  hallName,
   reminders,
   dispatchAddReminder,
   enableReminder,
@@ -140,14 +145,15 @@ const MachineAvailability = ({
 
   return (
     <>
-      <Row justifyContent="space-between">
+      <FlexRow margin="0.5rem">
         {[
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
         ].map(([number, title, color, background]) => (
           <LaundryOverview
-            width="30%"
+            sm={4}
+            margin="0.5rem"
             key={title}
             color={color}
             background={background}
@@ -156,7 +162,7 @@ const MachineAvailability = ({
             <p>{title}</p>
           </LaundryOverview>
         ))}
-      </Row>
+      </FlexRow>
 
       {displayDetails && (
         <Table className="table is-fullwidth">
@@ -164,7 +170,7 @@ const MachineAvailability = ({
             <tr>
               <th>#</th>
               <th>Status</th>
-              <th>Minutes left</th>
+              <th>Mins left</th>
               <th />
             </tr>
           </thead>
@@ -191,7 +197,7 @@ const MachineAvailability = ({
                         id={id}
                         laundryHallId={laundryHallId}
                         dispatchAddReminder={dispatchAddReminder}
-                        hallName={hallName}
+                        machineType={machineType}
                       />
                     </td>
                   </tr>
@@ -211,7 +217,6 @@ MachineAvailability.defaultProps = {
   machineType: '',
   allMachines: [],
   laundryHallId: null,
-  hallName: '',
   reminders: [],
   enableReminder: false,
   dispatchAddReminder: null,
@@ -228,7 +233,6 @@ MachineAvailability.propTypes = {
   machineType: PropTypes.string,
   allMachines: PropTypes.array, // eslint-disable-line
   laundryHallId: PropTypes.number,
-  hallName: PropTypes.string,
   reminders: PropTypes.arrayOf(PropTypes.object),
   dispatchAddReminder: PropTypes.func,
   enableReminder: PropTypes.bool,

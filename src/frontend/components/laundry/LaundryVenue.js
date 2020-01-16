@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
+import BellIcon from '../../../../public/img/bell.svg'
 import MachineAvailability from './MachineAvailability'
 import {
   BorderedCard,
@@ -23,6 +24,7 @@ import {
   removeReminder,
 } from '../../actions/laundry_actions'
 import { isValidNumericId } from '../../helperFunctions'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 const MARGIN = '0.5rem'
 
@@ -32,6 +34,11 @@ const Wrapper = s.div`
 
 const Buttons = s.div`
   float: right;
+
+  ${maxWidth(PHONE)} {
+    float: none;
+    width: 100%;
+  }
 `
 
 class LaundryVenue extends Component {
@@ -145,7 +152,6 @@ class LaundryVenue extends Component {
                 machineType="washer"
                 allMachines={machines}
                 laundryHallId={hallURLId}
-                hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
                 enableReminder={enableReminder}
@@ -162,7 +168,6 @@ class LaundryVenue extends Component {
                 machineType="dryer"
                 allMachines={machines}
                 laundryHallId={hallURLId}
-                hallName={hallName}
                 reminders={reminders}
                 dispatchAddReminder={dispatchAddReminder}
                 enableReminder={enableReminder}
@@ -174,7 +179,7 @@ class LaundryVenue extends Component {
         {enableReminder && (
           <Subtext>
             <span>
-              <i className="far fa-bell" />
+              <BellIcon style={{ transform: 'scale(0.7) translateY(10px)' }} />
             </span>
             &nbsp; Click the bell icon to send you a reminder when that machine
             is done running.
@@ -255,8 +260,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(removeFavorite(hallURLId)),
   dispatchGetLaundryHall: (hallId, intervalID) =>
     dispatch(getLaundryHall(hallId, intervalID)),
-  dispatchAddReminder: (machineID, hallID, hallName) =>
-    dispatch(addReminder(machineID, hallID, hallName)),
+  dispatchAddReminder: (machineID, hallID, machineType, timeRemaining) =>
+    dispatch(addReminder(machineID, hallID, machineType, timeRemaining)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
   dispatchGetReminders: () => dispatch(getReminders()),
 })
