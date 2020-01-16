@@ -62,7 +62,7 @@ const Hours = ({ start, end }) => {
           {days.map((str, idx) => (
             <BodyRow key={str} className={idx === todayIdx && 'selected'}>
               <td>{str}</td>
-              <td> {hoursArr.length ? hoursArr[idx] : 'No Available'} </td>
+              <td> {hoursArr.length ? hoursArr[idx] : 'Not Available'} </td>
             </BodyRow>
           ))}
         </tbody>

@@ -658,178 +658,198 @@
     },
     "tags": ["Chinese"],
     "languageTypes": ["English", "Chinese"],
+    "start": ["11:00", "11:00", "11:00", "11:00", "11:00", null, "12:00"],
+    "end": ["20:00", "20:00", "20:00", "20:00", "20:00", null, "20:00"],
     "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Kim%27s%20Oriental%20Food/e0f64133-a55c-41c1-bd78-32bfd699d058",
     "description": "Located behind Pottruck Gym, Kim's is a favorite amongst Penn students and faculty for serving homey and reliable Chinese food.",
     "menu": {
+      "Ready-Made": [
+        {
+          "name": "Beef Brisket with Potato 土豆牛腩",
+          "price": 6.50
+        },
+        {
+          "name": "Pork Feet 滷豬蹄",
+          "price": 6.00
+        },
+        {
+          "name": "Black Bean Ribs 豆豉排骨",
+          "price": 5.75
+        },
+        {
+          "name": "Ginger Chicken 薑汁雞",
+          "price": 5.50
+        }
+      ],
       "General": [
         {
-          "name": ["Veggie Tofu", "蔬菜豆腐"],
+          "name": "Veggie Tofu  蔬菜豆腐",
           "price": 5
         },
         {
-          "name": ["Kung Pao Tofu", "宮保豆腐"],
+          "name": "Kung Pao Tofu  宮保豆腐",
           "price": 5
         },
         {
-          "name": ["Sesame Tofu", "芝麻豆腐"],
+          "name": "Sesame Tofu  芝麻豆腐",
           "price": 5.25
         },
         {
-          "name": ["General Tso Tofu", "左宗豆腐"],
+          "name": "General Tso Tofu  左宗豆腐",
           "price": 5.25
         },
         {
-          "name": ["Roast Pork Lo Mein", "叉燒撈麵"],
+          "name": "Roast Pork Lo Mein 叉燒撈麵",
           "price": 5.25
         },
         {
-          "name": ["Chicken Singapore Noodle", "雞新州米粉"],
+          "name": "Chicken Singapore Noodle  雞新州米粉",
           "price": 5.25
         },
         {
-          "name": ["Broccoli Chicken", "芥蘭雞"],
+          "name": "Broccoli Chicken 芥蘭雞",
           "price": 5.25
         },
         {
-          "name": ["Eggplant Chicken", "茄子雞"],
+          "name": "Eggplant Chicken 茄子雞",
           "price": 5.25
         },
         {
-          "name": ["Curry Chicken", "咖喱雞"],
+          "name": "Curry Chicken 咖喱雞",
           "price": 5.25
         },
         {
-          "name": ["Chicken with Mix Veg.", "素菜雞"],
+          "name": "Chicken with Mix Vegetables 素菜雞",
           "price": 5.25
         },
         {
-          "name": ["Beef Chow Fun", "乾炒牛河"],
+          "name": "Beef Chow Fun 乾炒牛河",
           "price": 5.5
         },
         {
-          "name": ["Pepper Steak", "青椒牛肉"],
+          "name": "Pepper Steak 青椒牛肉",
           "price": 5.5
         },
         {
-          "name": ["Salt Crispy Chicken", "鹽酥雞"],
+          "name": "Salt Crispy Chicken 鹽酥雞",
           "price": 6.0
         },
         {
-          "name": ["Mapo Tofu", "麻婆豆腐"],
+          "name": "Mapo Tofu 麻婆豆腐",
           "price": 5.0
         },
         {
-          "name": ["Kung Pao Chicken", "宮保雞"],
+          "name": "Kung Pao Chicken 宮保雞",
           "price": 5.25
         },
         {
-          "name": ["Sausage Fried Rice", "臘腸炒飯"],
+          "name": "Sausage Fried Rice 臘腸炒飯",
           "price": 6.0
         },
         {
-          "name": ["Szechuan Chicken", "四川雞"],
+          "name": "Szechuan Chicken 四川雞",
           "price": 5.25
         },
         {
-          "name": ["Sausage Freen Pepper and Onion", "青椒臘腸"],
+          "name": "Sausage Freen Pepper and Onion 青椒臘腸",
           "price": 6.0
         },
         {
-          "name": ["Hunan Chicken", "湖南雞"],
+          "name": "Hunan Chicken 湖南雞",
           "price": 5.25
         },
         {
-          "name": ["String Bean with Meet", "四季豆炒肉"],
+          "name": "String Bean with Meet 四季豆炒肉",
           "price": 6.0
         },
         {
-          "name": ["Chicken with Garlic Sauce", "魚香雞"],
+          "name": "Chicken with Garlic Sauce 魚香雞",
           "price": 5.25
         },
         {
-          "name": ["Green Pepper Squid", "青椒魷魚"],
+          "name": "Green Pepper Squid 青椒魷魚",
           "price": 6.5
         },
         {
-          "name": ["Tomato Egg", "番茄炒蛋"],
+          "name": "Tomato Egg 番茄炒蛋",
           "price": 5.5
         },
         {
-          "name": ["Sweet & Sour Fish", "糖醋魚"],
+          "name": "Sweet & Sour Fish 糖醋魚",
           "price": 6.25
         },
         {
-          "name": ["Black Pepper Fish", "黑椒斑斕魚"],
+          "name": "Black Pepper Fish 黑椒斑斕魚",
           "price": 6.25
         }
       ],
       "Teriyaki": [
         {
-          "name": ["Teriyaki Seitan", "鐵板麵筋"],
+          "name": "Teriyaki Seitan 鐵板麵筋",
           "price": 6.0
         },
         {
-          "name": ["Teriyaki Tofu", "鐵板豆腐"],
+          "name": "Teriyaki Tofu 鐵板豆腐",
           "price": 5.75
         },
         {
-          "name": ["Teriyaki Pork", "鐵板豬"],
+          "name": "Teriyaki Pork 鐵板豬",
           "price": 6.0
         },
         {
-          "name": ["Teriyaki Chicken", "鐵板雞"],
+          "name": "Teriyaki Chicken 鐵板雞",
           "price": 6.0
         },
         {
-          "name": ["Teriyaki Squid", "鐵板魷魚"],
+          "name": "Teriyaki Squid 鐵板魷魚",
           "price": 6.5
         },
         {
-          "name": ["Teriyaki Beef", "鐵板牛"],
+          "name": "Teriyaki Beef 鐵板牛",
           "price": 6.25
         },
         {
-          "name": ["Teriyaki Shrimp", "鐵板蝦"],
+          "name": "Teriyaki Shrimp 鐵板蝦",
           "price": 6.25
         }
       ],
       "Mongolian": [
         {
-          "name": ["Mongolian Seitan", "蔥爆麵筋"],
+          "name": "Mongolian Seitan 蔥爆麵筋",
           "price": 6.0
         },
         {
-          "name": ["Mongolian Tofu", "蔥爆豆腐"],
+          "name": "Mongolian Tofu 蔥爆豆腐",
           "price": 5.75
         },
         {
-          "name": ["Mongolian Pork", "蔥爆豬"],
+          "name": "Mongolian Pork 蔥爆豬",
           "price": 6.0
         },
         {
-          "name": ["Mongolian Chicken", "蔥爆雞"],
+          "name": "Mongolian Chicken 蔥爆雞",
           "price": 6.0
         },
         {
-          "name": ["Mongolian Squid", "蔥爆魷魚"],
+          "name": "Mongolian Squid 蔥爆魷魚",
           "price": 6.5
         },
         {
-          "name": ["Mongolian Beef", "蔥爆牛"],
+          "name": "Mongolian Beef 蔥爆牛",
           "price": 6.25
         },
         {
-          "name": ["Mongolian Shrimp", "蔥爆蝦"],
+          "name": "Mongolian Shrimp 蔥爆蝦",
           "price": 6.25
         }
       ],
       "Others": [
         {
-          "name": ["Fried Chicken Leg", "炸雞腿"],
+          "name": "Fried Chicken Leg 炸雞腿",
           "price": 1.5
         },
         {
-          "name": ["Tea Egg", "滷蛋"],
+          "name": "Tea Egg 滷蛋",
           "price": 0.75
         }
       ]
