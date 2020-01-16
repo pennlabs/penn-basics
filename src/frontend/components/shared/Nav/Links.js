@@ -74,6 +74,9 @@ const Links = ({ active, zIndex, userInfo, toggleActive }) => (
     <Link to="/dining" onClick={() => toggleActive(false)}>
       Dining
     </Link>
+    <Link to="/foodtrucks" onClick={() => toggleActive(false)}>
+      Foodtrucks
+    </Link>
     <Link to="/laundry" onClick={() => toggleActive(false)}>
       Laundry
     </Link>
