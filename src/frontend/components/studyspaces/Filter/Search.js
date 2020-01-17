@@ -52,8 +52,8 @@ const SearchComponent = s.input`
   font-size: 1rem;
   font-weight: 400;
   background: transparent;
-  line-height: ${HEIGHT};
-  height: ${HEIGHT};
+  line-height: ${HEIGHT}px;
+  height: ${HEIGHT}px;
   color: ${MEDIUM_GRAY};
   border: 0;
   border-color: transparent;
