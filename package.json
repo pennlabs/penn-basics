@@ -7,6 +7,7 @@
     "start": "webpack -p && node src/server/index.js",
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "seedFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js",
+    "resetFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js --reset",
     "test": "mocha --reporter spec",
     "webpack": "webpack --watch",
     "webpack-prod": "webpack -p",

@@ -79,23 +79,87 @@ function loadFoodTrucksIntoDB(truckArray) {
     )
   ).then(() => {
     console.log('----seeding completed----') // eslint-disable-line
-    process.exit(0)
   })
 }
 
-/*
-// initial test of food truck code
-console.log(new FoodTruck(updateFoodTrucks()[0]))
-*/
+function updateFoodTrucksInDB(truckArray) {
+  return Promise.all(
+    truckArray.map(truck =>
+      FoodTruck.findOne({ name: truck.name }).then(oldTruckData => {
+        if (oldTruckData !== null) {
+          // update old truck
+
+          console.log(`Updating ${oldTruckData.name}`)
+          return FoodTruck.findOneAndUpdate(
+            { name: oldTruckData.name },
+            {
+              $set: {
+                description: truck.description,
+                end: truck.end,
+                image: truck.image,
+                link: truck.link,
+                location: truck.location,
+                menu: truck.menu,
+                payments: truck.payments,
+                start: truck.start,
+                tags: truck.tags,
+                timeUpdated: new Date(),
+              },
+            }
+          )
+            .exec()
+            .then(console.log)
+        } else {
+          // insert a new truck
+          return new FoodTruck(truck).save().then(console.log)
+        }
+        console.log(
+          oldTruckData
+            ? `I found ${oldTruckData.name}`
+            : `No existing truck found for ${truck.name}`
+        )
+      })
+    )
+  ).then(() => {
+    console.log('----seeding completed----') // eslint-disable-line
+  })
+}
 
 // initial try at the insertion pipeline
+async function main() {
+  try {
+    const [
+      _executor, // eslint-disable-line
+      _scriptName, // eslint-disable-line
+      ...settings
+    ] = process.argv
+
+    const reset = settings.includes('--reset')
+
+    if (reset) {
+      await deleteFoodTrucksInDB()
+      const trucksToInsert = updateFoodTrucks()
+      await loadFoodTrucksIntoDB(trucksToInsert)
+    } else {
+      console.log('doing non-resetty things')
+      const trucksToInsert = updateFoodTrucks()
+      await updateFoodTrucksInDB(trucksToInsert)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+  process.exit(0)
+}
+main()
+
+/*
 deleteFoodTrucksInDB()
   .then(() => {
     const trucksToInsert = updateFoodTrucks()
     return loadFoodTrucksIntoDB(trucksToInsert)
   })
   .catch(err => console.error(err)) // eslint-disable-line
-
+*/
 // async function main() {
 //   try {
 //     const trucksToInsert = updateFoodTrucks()
