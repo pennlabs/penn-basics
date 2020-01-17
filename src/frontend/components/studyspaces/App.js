@@ -141,7 +141,10 @@ class App extends Component {
                 markers={filteredSpacesData}
                 activeMarker={hoveredSpace}
                 handleClickMarker={spaceId =>
-                  Router.push(`/studyspaces?id=${spaceId}`)
+                  Router.push(
+                    `/studyspaces?id=${spaceId}`,
+                    `/studyspaces/${spaceId}`
+                  )
                 }
               />
             )}

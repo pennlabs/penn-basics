@@ -35,9 +35,7 @@ const Wrapper = s.div`
 `
 
 class DiningVenue extends Component {
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     const { venueId, dispatchGetVenueInfo } = this.props
 
     if (venueId) {
@@ -51,7 +49,7 @@ class DiningVenue extends Component {
     const previousVenueId = prevProps.venueId
     const currentVenueId = venueId
 
-    if (previousVenueId !== currentVenueId) {
+    if (currentVenueId && previousVenueId !== currentVenueId) {
       dispatchGetVenueInfo(currentVenueId)
     }
   }

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Link from 'next/link'
 
 import { MEDIUM_GRAY, LIGHTER_BLUE, DARK_GRAY } from '../../styles/colors'
 
@@ -52,7 +51,7 @@ export const Subtitle = styled.h2`
   line-height: 1.25;
 `
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.a`
   color: ${DARK_GRAY} !important;
 
   h1,

@@ -145,9 +145,11 @@ export const getFavoritesHomePage = () => dispatch => {
   // Dispatch information from the Promise set
   try {
     Promise.all(responsesSet).then(values => {
-      const dataSet = values.map(value => {
+      const dataSet = values.map((value, idx) => {
         if (!value.error) {
-          return value.data
+          const { data } = value
+          data.id = IdArray[idx]
+          return data
         }
 
         return null

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 
-import { Card, Text, Row, Col, Line } from '../shared'
+import { Card, Text, Row, Col, Line, StyledLink } from '../shared'
 import LaundryCardHeader from './LaundryCardHeader'
 
 const LaundryCard = ({ locationObject, selectedHallId }) => {
@@ -14,14 +14,18 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
   if (halls.length === 1) {
     const { id } = halls[0]
     return (
-      <Link href={`/laundry?id=${id}`} as={`/laundry/${id}`} key={`laundry-hall-${location}-${id}`}>
-        <a>
+      <Link
+        href={`/laundry?id=${id}`}
+        as={`/laundry/${id}`}
+        key={`laundry-hall-${location}-${id}`}
+      >
+        <StyledLink>
           <LaundryCardHeader
             title={location}
             selected={Number(id) === selectedHallId}
           />
           <Line />
-        </a>
+        </StyledLink>
       </Link>
     )
   }
@@ -36,7 +40,11 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
 
       {expanded &&
         halls.map(({ hall_name: hallName, id }) => (
-          <Link href={`/laundry?id=${id}`} as={`/laundry/${id}`} key={`laundry${id}`}>
+          <Link
+            href={`/laundry?id=${id}`}
+            as={`/laundry/${id}`}
+            key={`laundry${id}`}
+          >
             <Card
               padding="0.5rem 1rem"
               hoverable

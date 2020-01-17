@@ -3,13 +3,13 @@ import uuid from 'uuid'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 
-import { Card, Text, Row, Line, Col } from '../shared'
+import { Card, Text, Row, Line, Col, StyledLink } from '../shared'
 
 const FavoriteCard = ({ favorite }) => {
   const { hallId, locationName } = favorite
   return (
     <Link href={`/laundry?id=${hallId}`} as={`/laundry/${hallId}`} key={uuid()}>
-      <a>
+      <StyledLink>
         <Card padding="0.5rem 1rem" hoverable>
           <Row>
             <Col padding="0">
@@ -20,7 +20,7 @@ const FavoriteCard = ({ favorite }) => {
           </Row>
         </Card>
         <Line />
-      </a>
+      </StyledLink>
     </Link>
   )
 }

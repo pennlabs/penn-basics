@@ -41,7 +41,9 @@ const Back = () => {
   return (
     <Wrapper>
       <Link href={to}>
-        <Chevron style={{ transform: 'scale(1.4)', color: BLACK }} />
+        <a>
+          <Chevron style={{ transform: 'scale(1.4)', color: BLACK }} />
+        </a>
       </Link>
     </Wrapper>
   )

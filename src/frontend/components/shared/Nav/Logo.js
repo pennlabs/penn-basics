@@ -40,11 +40,15 @@ const Logo = s.img`
 export default () => (
   <>
     <Link href="/">
-      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+      <a>
+        <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+      </a>
     </Link>
 
     <Link href="/">
-      <LogoText>Penn Basics </LogoText>
+      <a>
+        <LogoText>Penn Basics </LogoText>
+      </a>
     </Link>
 
     <BetaTag className="tag is-rounded">Beta</BetaTag>

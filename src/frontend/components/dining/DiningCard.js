@@ -121,7 +121,7 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
 
   return (
     <Link href={`/dining?id=${venueId}`} as={`/dining/${venueId}`}>
-      <a>
+      <StyledLink>
         <Card
           padding="0.5rem 1rem"
           hoverable
@@ -145,7 +145,7 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
           </FlexRow>
         </Card>
         {showLine && <Line />}
-      </a>
+      </StyledLink>
     </Link>
   )
 }

@@ -12,7 +12,6 @@ import {
   Row,
   ColSpace,
   Subtitle,
-  StyledLink,
 } from '../shared'
 import MachineAvailability from '../laundry/MachineAvailability'
 
@@ -41,31 +40,33 @@ class Laundry extends Component {
       const { washers, dryers } = favorite.machines
 
       return (
-        <StyledLink href={`/laundry/${favorite.id}`} key={`laundryFavorite-${favorite.id}`}>
-          <BorderedCard
-            key={`${favorite.location}-${favorite.hall_name}`}
-            padding="1rem 1rem 0 1rem"
-          >
-            <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
-            <Row>
-              <Col>
-                <Text>Washer</Text>
-                <MachineAvailability
-                  displayDetails={false}
-                  machineData={washers}
-                />
-              </Col>
-              <ColSpace />
-              <Col>
-                <Text>Dryer</Text>
-                <MachineAvailability
-                  displayDetails={false}
-                  machineData={dryers}
-                />
-              </Col>
-            </Row>
-          </BorderedCard>
-        </StyledLink>
+        <BorderedCard
+          key={`laundryFavorite-${favorite.id}`}
+          padding="1rem 1rem 0 1rem"
+        >
+          <Link href={`/laundry/${favorite.id}`} as={`/laundry/${favorite.id}`}>
+            <a>
+              <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
+            </a>
+          </Link>
+          <Row>
+            <Col>
+              <Text>Washer</Text>
+              <MachineAvailability
+                displayDetails={false}
+                machineData={washers}
+              />
+            </Col>
+            <ColSpace />
+            <Col>
+              <Text>Dryer</Text>
+              <MachineAvailability
+                displayDetails={false}
+                machineData={dryers}
+              />
+            </Col>
+          </Row>
+        </BorderedCard>
       )
     })
   }
@@ -74,7 +75,9 @@ class Laundry extends Component {
     return (
       <BorderedCard>
         <Link href="/laundry">
-          <Title>Laundry</Title>
+          <a>
+            <Title>Laundry</Title>
+          </a>
         </Link>
         <Subtext>Status of your favorite halls</Subtext>
 
