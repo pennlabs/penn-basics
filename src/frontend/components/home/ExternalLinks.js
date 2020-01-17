@@ -59,7 +59,7 @@ const ExternalLinks = () => (
 
     {usefulLinksData.map(({ websiteURL, description }, index) => {
       return (
-        <>
+        <p key={websiteURL}>
           <a
             href={websiteURL}
             target="_blank"
@@ -69,7 +69,7 @@ const ExternalLinks = () => (
             {description}
           </a>
           {index === usefulLinksData.length - 1 ? null : <br />}
-        </>
+        </p>
       )
     })}
   </BorderedCard>

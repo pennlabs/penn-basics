@@ -33,12 +33,12 @@ const Wrapper = s.div`
 
 const Home = ({ filterList }) => {
   const componentList = [
-    <Weather />,
-    <Events />,
-    <News />,
-    <Laundry />,
-    <Dining />,
-    <Quotes />,
+    <Weather key="weatherComponent" />,
+    <Events key="eventsComponent" />,
+    <News key="newsComponent" />,
+    <Laundry key="laundryComponent" />,
+    <Dining key="diningComponent" />,
+    <Quotes key="quotesComponent" />,
   ]
 
   return (

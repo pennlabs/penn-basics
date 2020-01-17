@@ -27,10 +27,12 @@ class Laundry extends Component {
   renderFavorites() {
     const { favoritesHome } = this.props
 
-    if (favoritesHome.length === 0) {
+    if (!favoritesHome || favoritesHome.length === 0) {
       return (
         <Link href="/laundry">
-          <h4>Select your favorite Laundry hall</h4>
+          <a>
+            <h4>Select your favorite Laundry hall</h4>
+          </a>
         </Link>
       )
     }
@@ -39,7 +41,7 @@ class Laundry extends Component {
       const { washers, dryers } = favorite.machines
 
       return (
-        <StyledLink href={`/laundry/${favorite.id}`}>
+        <StyledLink href={`/laundry/${favorite.id}`} key={`laundryFavorite-${favorite.id}`}>
           <BorderedCard
             key={`${favorite.location}-${favorite.hall_name}`}
             padding="1rem 1rem 0 1rem"
