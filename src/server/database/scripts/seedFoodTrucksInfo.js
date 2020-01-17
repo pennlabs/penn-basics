@@ -1,5 +1,5 @@
-const trucks = require('../resources/foodtrucks/foodtrucks.json')
-const FoodTruck = require('./models/FoodTruck')
+const trucks = require('../../resources/foodtrucks/foodtrucks.json')
+const FoodTruck = require('../models/FoodTruck')
 
 const { MONGO_URI } = process.env
 if (!MONGO_URI) {

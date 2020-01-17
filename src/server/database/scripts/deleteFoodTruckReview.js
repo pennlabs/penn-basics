@@ -1,4 +1,4 @@
-const { deleteReview } = require('../database/db')
+const { deleteReview } = require('../db')
 
 const { MONGO_URI } = process.env
 if (!MONGO_URI) {

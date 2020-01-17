@@ -1,6 +1,6 @@
 const axios = require('axios').default
-const spaces = require('../resources/spaces.json')
-const Space = require('./models/Space')
+const spaces = require('../../resources/spaces.json')
+const Space = require('../models/Space')
 
 const { MONGO_URI } = process.env
 if (!MONGO_URI) {
@@ -67,7 +67,7 @@ function loadSpacesIntoDB() {
       space => new Space(space).save().then(console.log) // eslint-disable-line
     )
   ).then(() => {
-    console.log("----seeding completed----") // eslint-disable-line
+    console.log('----seeding completed----') // eslint-disable-line
     process.exit(0)
   })
 }
