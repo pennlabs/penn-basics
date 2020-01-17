@@ -41,14 +41,14 @@ const LinksDiv = s.div`
 
 const Links = ({ active, zIndex, toggleActive }) => (
   <LinksDiv active={active} zIndex={zIndex}>
-    <Link href="/dining" onClick={() => toggleActive(false)}>
-      Dining
+    <Link href="/dining">
+      <a onClick={() => toggleActive(false)}> Dining </a>
     </Link>
-    <Link href="/laundry" onClick={() => toggleActive(false)}>
-      Laundry
+    <Link href="/laundry">
+      <a onClick={() => toggleActive(false)}> Laundry </a>
     </Link>
-    <Link href="/studyspaces" onClick={() => toggleActive(false)}>
-      Studyspaces
+    <Link href="/studyspaces">
+      <a onClick={() => toggleActive(false)}> Studyspaces </a>
     </Link>
   </LinksDiv>
 )

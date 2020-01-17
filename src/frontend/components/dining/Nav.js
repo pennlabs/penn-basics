@@ -95,7 +95,7 @@ Nav.defaultProps = {
 
 Nav.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string),
-  selectedVenueId: PropTypes.number,
+  selectedVenueId: PropTypes.string,
 }
 
 const mapStateToProps = ({ dining }) => {
