@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import { Title, Text } from './Typography'
+import { Title, Text, StyledLink } from './Typography'
 import { Button } from './Button'
 import PennLabsCredit from './PennLabsCredit'
 import { NAV_HEIGHT } from '../../styles/sizes'
@@ -37,10 +37,12 @@ const NotFound = ({
 
     <Text>{message}</Text>
 
-    <Link to={url}>
-      <Button style={{ marginTop: '1rem', marginBottom: '2rem' }}>
-        {urlText}
-      </Button>
+    <Link href={url}>
+      <StyledLink>
+        <Button style={{ marginTop: '1rem', marginBottom: '2rem' }}>
+          {urlText}
+        </Button>
+      </StyledLink>
     </Link>
 
     <PennLabsCredit padding="0 0 1rem 0" />
