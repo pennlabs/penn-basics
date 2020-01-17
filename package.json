@@ -63,6 +63,7 @@
   "devDependencies": {
     "@types/node": "^13.1.6",
     "@types/react": "^16.9.17",
+    "@types/styled-components": "^4.4.2",
     "chai": "^4.1.2",
     "concurrently": "^4.1.2",
     "eslint": "^5.16.0",
@@ -73,7 +74,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "mocha": "^4.0.1",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
 }

@@ -25,7 +25,7 @@ const AppWrapper = s.div`
 const Header = ({ children }) => (
   <AppWrapper>
     <Head>
-      <meta charset="utf-8" />
+      <meta charSet="utf-8" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta
         name="viewport"
@@ -105,7 +105,7 @@ const Header = ({ children }) => (
     <Nav />
     <Feedback />
     <div id="wrapper" style={{ background: SNOW }}>
-      <div id="app"> {children} </div>
+      <div id="app">{children}</div>
     </div>
   </AppWrapper>
 )

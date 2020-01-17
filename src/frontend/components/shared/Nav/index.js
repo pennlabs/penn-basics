@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import s from 'styled-components'
 
-import { ALLBIRDS_GRAY, BLACK_ALPHA } from '../../../styles/colors'
-import { minWidth, NAV_HEIGHT, PHONE, Z_INDEX } from '../../../styles/sizes'
+import { BLACK_ALPHA, BORDER, WHITE } from '../../../styles/colors'
+import {
+  minWidth,
+  NAV_HEIGHT,
+  PHONE,
+  Z_INDEX,
+  maxWidth,
+} from '../../../styles/sizes'
 
 import Links from './Links'
 import Menu from './Menu'
@@ -10,14 +16,21 @@ import Logo from './Logo'
 import Back from './Back'
 import { Shade } from '../Shade'
 
+/**
+ * Navbar is fixed position and thus takes up no height as far as other elements
+ * are concerned.
+ *
+ * This is a relative-positioned block which is the same size as the navbar at
+ * top of the page to push content down to the right position.
+ */
 const NavSpace = s.div`
   width: 100%;
-  height: ${NAV_HEIGHT};
+  height: calc(${NAV_HEIGHT});
 `
 
 const Wrapper = s.nav`
   padding: 0 1rem;
-  border-bottom: 1px solid ${ALLBIRDS_GRAY};
+  border-bottom: 1px solid ${BORDER};
   display: flex;
   width: 100%;
   min-height: ${NAV_HEIGHT};
@@ -25,6 +38,13 @@ const Wrapper = s.nav`
   position: fixed;
   top: 0;
   left: 0;
+  background: ${WHITE};
+  display: flex;
+  align-items: center;
+
+  ${maxWidth(PHONE)} {
+    display: block;
+  }
 `
 
 const StyledShade = s(Shade)`
@@ -54,7 +74,7 @@ const Nav = () => {
 
   return (
     <>
-      <Wrapper className="navbar" id="navbar">
+      <Wrapper id="navbar">
         <Back />
         <Logo />
 

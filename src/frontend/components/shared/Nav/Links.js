@@ -2,24 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import s from 'styled-components'
-import { maxWidth, PHONE, NAV_HEIGHT } from '../../../styles/sizes'
-import { WHITE, BORDER } from '../../../styles/colors'
+
+import { maxWidth, PHONE } from '../../../styles/sizes'
 
 const LinksDiv = s.div`
   margin-left: auto;
-  padding-top: 14px;
-
+  
   a {
     margin-left: 1.5rem;
   }
 
   ${maxWidth(PHONE)} {
     width: 100%;
-    background: ${WHITE};
-    position: absolute;
-    top: ${NAV_HEIGHT};
-    left: 0;
-    border-bottom: 1px solid ${BORDER};
     z-index: ${({ zIndex }) => zIndex + 1};
     padding: 0;
     max-height: 0;
