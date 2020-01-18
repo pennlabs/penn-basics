@@ -3,7 +3,7 @@ import s from 'styled-components'
 
 import { WHITE, BLUE, DARK_BLUE } from '../../styles/colors'
 import { maxWidth, PHONE } from '../../styles/sizes'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const DIAMETER = '3rem'
 const OFFSET = 18

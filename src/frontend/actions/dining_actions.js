@@ -1,50 +1,41 @@
 /* global localStorage */
 import axios from 'axios'
+
 import {
   getVenueInfoRequested,
   getVenueInfoRejected,
   getVenueInfoFulfilled,
   updateDiningFavorites,
+  getVenueHoursFulfilled,
 } from './action_types'
-import { logEvent } from '../analytics/index'
-import { pad } from '../helperFunctions'
+import { logEvent } from '../../utils/analytics'
+import venueMapping from '../../server/resources/dining/venue_id_mappings.json'
 
-const convertDate = dateObj => {
-  const month = dateObj.getUTCMonth() + 1
-  const day = dateObj.getUTCDate()
-  const year = dateObj.getUTCFullYear()
-  return `${year}-${pad(month)}-${pad(day)}`
-}
+export const getVenueHours = () => {
+  return dispatch => {
+    const venueIds = Object.values(venueMapping)
+    const responsesSet = venueIds.map(id =>
+      axios.get(`https://api.pennlabs.org/dining/hours/${id}`)
+    )
 
-export const getVenueInfo = venueId => {
-  return async dispatch => {
-    dispatch({ type: getVenueInfoRequested })
-
-    // Make a post request to pull the data
+    // Dispatch information from the Promise set
     try {
-      const response = await axios.post('/api/dining/venue_hours', { venueId })
-      let { venueHours } = response.data
+      Promise.all(responsesSet).then(values => {
+        const dataSet = {}
+        values.forEach((value, idx) => {
+          dataSet[venueIds[idx]] = value.data.cafes[venueIds[idx]].days
+        })
 
-      let startDate = new Date()
-      startDate.setHours(0, 0, 0, 0)
-      startDate = convertDate(startDate)
-
-      // Set the end date to three days from now
-      let endDate = new Date()
-      endDate.setHours(72, 0, 0, 0)
-      endDate = convertDate(endDate)
-      venueHours = venueHours.filter(
-        hour => startDate <= hour.date && hour.date <= endDate
-      )
-      dispatch({
-        type: getVenueInfoFulfilled,
-        venueHours,
+        dispatch({
+          type: getVenueHoursFulfilled,
+          venueHours: dataSet,
+        })
       })
-    } catch (err) {
-      dispatch({
-        type: getVenueInfoRejected,
-        error: err.message,
-      })
+    } catch (error) {
+      // dispatch({
+      //   type: getLaundryHallInfoRejected,
+      //   error: error.message,
+      // })
     }
   }
 }

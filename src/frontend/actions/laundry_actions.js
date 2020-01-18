@@ -2,7 +2,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
-import { isValidNumericId } from '../helperFunctions'
+import { isValidNumericId } from '../../utils/helperFunctions'
 
 import {
   getLaundryHallsDataRequested,
@@ -19,7 +19,7 @@ import {
   updateHallIntervalID,
   updateReminderIntervalID,
 } from './action_types'
-import { logEvent } from '../analytics/index'
+import { logEvent } from '../../utils/analytics'
 
 const BASE = 'https://api.pennlabs.org'
 
@@ -145,9 +145,11 @@ export const getFavoritesHomePage = () => dispatch => {
   // Dispatch information from the Promise set
   try {
     Promise.all(responsesSet).then(values => {
-      const dataSet = values.map(value => {
+      const dataSet = values.map((value, idx) => {
         if (!value.error) {
-          return value.data
+          const { data } = value
+          data.id = IdArray[idx]
+          return data
         }
 
         return null

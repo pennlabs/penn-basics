@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -8,11 +8,18 @@ const greetings = ['Hi There', 'Hey there', 'Howdy']
 const emojis = ['😀', '😛', '😗', '🤠']
 
 const Greeting = ({ userInfo = {} }) => {
+  const [greeting, setGreeting] = useState('')
+  const [emoji, setEmoji] = useState('')
+
   let fullName = userInfo ? userInfo.fullName : ''
   fullName = fullName ? `, ${fullName}` : ''
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)]
-  const emoji = emojis[Math.floor(Math.random() * emojis.length)]
-  return <Text className="title is-4">{`${greeting}${fullName} ${emoji}`}</Text>
+
+  useEffect(() => {
+    setGreeting(greetings[Math.floor(Math.random() * greetings.length)])
+    setEmoji(emojis[Math.floor(Math.random() * emojis.length)])
+  }, [])
+
+  return <Text className="title is-4">{`${greeting} ${fullName} ${emoji}`}</Text>
 }
 
 const mapStateToProps = ({ authentication }) => authentication
@@ -27,7 +34,4 @@ Greeting.propTypes = {
   }),
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(Greeting)
+export default connect(mapStateToProps, null)(Greeting)

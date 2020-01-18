@@ -17,8 +17,7 @@ import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
+  componentDidMount() {
     const {
       dispatchGetLaundryHalls,
       dispatchGetFavorites,
@@ -31,13 +30,7 @@ class App extends Component {
   }
 
   render() {
-    const {
-      laundryHalls,
-      match: {
-        params: { id },
-      },
-      favorites,
-    } = this.props
+    const { laundryHalls, id, favorites } = this.props
 
     const parsedHallId = Number.isNaN(id) ? null : Number(id)
     const isActiveHall =

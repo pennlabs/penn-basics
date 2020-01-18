@@ -5,14 +5,13 @@ import uuid from 'uuid'
 
 import { Card, Scrollbar, Line, NavHeader } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import Favorites from '../shared/favorites/Favorites'
 import DiningCard from './DiningCard'
 import { WHITE, BABY_BLUE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const Nav = ({ favorites, selectedVenueId }) => {
+const Nav = ({ favorites, selectedVenueId, venueHours }) => {
   const keys = Object.keys(venueData)
   const diningKeys = []
   const retailKeys = []
@@ -46,12 +45,22 @@ const Nav = ({ favorites, selectedVenueId }) => {
       height={`calc(100vh - ${NAV_HEIGHT})`}
       hideOnMobile={hideOnMobile}
     >
-      <Favorites
-        favorites={favorites}
-        FavoriteCard={DiningCard}
-        inputName="venueId"
-        keyAttributeName="venueId"
-      />
+      <Card background={BABY_BLUE} padding="0">
+        <NavHeader className="title is-5">Favorites</NavHeader>
+        <Line />
+      </Card>
+
+      {favorites.map(key => {
+        return (
+          <DiningCard
+            key={uuid()}
+            venueId={key}
+            selected={selectedVenueId === key}
+            isFavorited={false}
+            venueHours={venueHours}
+          />
+        )
+      })}
 
       <Card background={BABY_BLUE} padding="0">
         <NavHeader className="title is-5">Dining</NavHeader>
@@ -65,6 +74,7 @@ const Nav = ({ favorites, selectedVenueId }) => {
             venueId={key}
             selected={selectedVenueId === key}
             isFavorited={favorites.includes(key)}
+            venueHours={venueHours}
           />
         )
       })}
@@ -80,6 +90,7 @@ const Nav = ({ favorites, selectedVenueId }) => {
           venueId={key}
           selected={selectedVenueId === key}
           isFavorited={favorites.includes(key)}
+          venueHours={venueHours}
         />
       ))}
 
@@ -99,14 +110,12 @@ Nav.propTypes = {
 }
 
 const mapStateToProps = ({ dining }) => {
-  const { favorites } = dining
+  const { favorites, venueHours } = dining
 
   return {
     favorites,
+    venueHours,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(Nav)
+export default connect(mapStateToProps, null)(Nav)

@@ -52,7 +52,6 @@ const Circle = s.div`
   height: ${HEIGHT + 0.4}rem;
   width: ${HEIGHT + 0.4}rem;
   border-radius: 100%;
-  margin-top: ${-HEIGHT / 2 - 0.2}rem;
   position: absolute;
   background: ${({ active }) => (active ? BLUE : LIGHT_GRAY)};
   margin-left: ${({ active }) => (active ? `${WIDTH - HEIGHT - 0.4}rem` : '0')};
@@ -103,7 +102,4 @@ const mapDispatchToProps = dispatch => ({
   filterOnCampusDispatch: filter => dispatch(setFilterOnCampus(filter)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ToggleNeighborhood)
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)

@@ -4,17 +4,16 @@
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack -p && node src/server/index.js",
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "seedFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js",
     "resetFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js --reset",
     "test": "mocha --reporter spec",
-    "webpack": "webpack --watch",
-    "webpack-prod": "webpack -p",
-    "dev": "source env.sh && concurrently \"npm run webpack\" \"node src/server/index.js\"",
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
-    "lint-fix": "eslint ./src/**/ --fix"
+    "lint-fix": "eslint ./src/**/ --fix",
+    "dev": "source env.sh && concurrently \"node src/server/index.js\"",
+    "build": "next build",
+    "start": "source env.sh NODE_ENV=production node index.js"
   },
   "repository": {
     "type": "git",
@@ -35,12 +34,12 @@
     "axios": "^0.19.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "bulma": "^0.6.1",
     "cheerio": "^1.0.0-rc.3",
-    "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -50,11 +49,13 @@
     "node-sass": "^4.12.0",
     "passport": "^0.4.0",
     "passport-oauth": "^1.0.0",
+    "next": "^9.1.6",
+    "next-redux-wrapper": "^4.0.1",
     "mongoose": "^5.7.5",
     "prop-types": "^15.6.2",
-    "react": "^16.9.0",
+    "react": "^16.12.0",
     "react-device-detect": "^1.7.5",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^5.1.2",
@@ -64,11 +65,12 @@
     "request": "^2.88.0",
     "styled-components": "^4.3.2",
     "uuid": "^3.3.3",
-    "web-push": "^3.3.5",
-    "webpack": "^3.6.0",
-    "workbox-webpack-plugin": "^4.3.1"
+    "web-push": "^3.3.5"
   },
   "devDependencies": {
+    "@types/node": "^13.1.6",
+    "@types/react": "^16.9.17",
+    "@types/styled-components": "^4.4.2",
     "chai": "^4.1.2",
     "concurrently": "^4.1.2",
     "eslint": "^5.16.0",
@@ -79,8 +81,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "mocha": "^4.0.1",
-    "prettier": "^1.18.2",
-    "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.4"
   }
 }

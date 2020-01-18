@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Col } from './Flex'
 import { Subtext } from './Typography'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 import HeartIcon from '../../../../public/img/heart.svg'
 
 const AIRTABLE_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'

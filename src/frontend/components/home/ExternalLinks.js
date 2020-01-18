@@ -7,7 +7,7 @@ import externalLinksData from '../../../server/resources/home/externalLinks.json
 import usefulLinksData from '../../../server/resources/home/usefulLinks.json'
 import { BORDER, HOVER_GRAY } from '../../styles/colors'
 import { BORDER_RADIUS } from '../../styles/sizes'
-import { logEvent } from '../../analytics/index'
+import { logEvent } from '../../../utils/analytics'
 
 const ExternalLinkTag = s.a`
   border: 1px solid ${BORDER};
@@ -59,7 +59,7 @@ const ExternalLinks = () => (
 
     {usefulLinksData.map(({ websiteURL, description }, index) => {
       return (
-        <>
+        <p key={websiteURL}>
           <a
             href={websiteURL}
             target="_blank"
@@ -69,7 +69,7 @@ const ExternalLinks = () => (
             {description}
           </a>
           {index === usefulLinksData.length - 1 ? null : <br />}
-        </>
+        </p>
       )
     })}
   </BorderedCard>

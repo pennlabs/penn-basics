@@ -23,7 +23,7 @@ import {
   addReminder,
   removeReminder,
 } from '../../actions/laundry_actions'
-import { isValidNumericId } from '../../helperFunctions'
+import { isValidNumericId } from '../../../utils/helperFunctions'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 const MARGIN = '0.5rem'
@@ -42,9 +42,7 @@ const Buttons = s.div`
 `
 
 class LaundryVenue extends Component {
-  constructor(props) {
-    super(props)
-
+  componentDidMount() {
     const {
       hallURLId,
       hallIntervalID,

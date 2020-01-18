@@ -4,9 +4,9 @@ const cheerio = require('cheerio')
 
 module.exports = function newsRouter() {
   // can convert this to Labs API
-  router.post('/', (req, response) => {
-    const { website } = req.body
-    let { className } = req.body
+  router.get('/', (req, response) => {
+    const { website } = req.query
+    let { className } = req.query
     request(website, (err, res, html) => {
       if (!err && res.statusCode === 200) {
         const $ = cheerio.load(html)

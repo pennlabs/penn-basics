@@ -1,19 +1,21 @@
 /* globals window */
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
 import { BLACK } from '../../../styles/colors'
 import Chevron from '../../../../../public/img/chevron-left.svg'
 import { minWidth, TABLET } from '../../../styles/sizes'
 
 const Wrapper = s.div`
+  vertical-align: top;
   opacity: 0.5;
   padding-top: 1rem;
   padding-right: 0.75rem;
   margin-left: -0.5rem;
   cursor: pointer;
+  display: inline-block;
 
   &:hover,
   &:focus,
@@ -22,12 +24,17 @@ const Wrapper = s.div`
   }
 
   ${minWidth(TABLET)} {
-      display: none !important;
+    display: none !important;
   }
 `
 
 const Back = () => {
-  const route = window.location.pathname
+  const [route, setRoute] = useState(null)
+
+  useEffect(() => {
+    const { pathname } = window.location
+    setRoute(pathname)
+  })
 
   if (!route || route === '/') return null
 
@@ -36,8 +43,10 @@ const Back = () => {
 
   return (
     <Wrapper>
-      <Link to={to} style={{ color: BLACK }}>
-        <Chevron style={{ transform: 'scale(1.4)' }} />
+      <Link href={to}>
+        <a>
+          <Chevron style={{ transform: 'scale(1.4)', color: BLACK }} />
+        </a>
       </Link>
     </Wrapper>
   )

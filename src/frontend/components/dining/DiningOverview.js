@@ -16,7 +16,7 @@ const DiningOverview = ({ id }) => {
     <>
       <BorderedCard>
         {description && <p style={{ marginBottom: '1rem' }}>{description}</p>}
-        <HoursVisualization id={id} />
+        <HoursVisualization venueId={id} />
       </BorderedCard>
 
       {pennDiningSlug && (

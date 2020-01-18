@@ -113,10 +113,10 @@ function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
 }
 
 /**
- * @param {String} spaceId
+ * @param {String} spaceID
  */
-function getSpace(spaceId) {
-  return Space.findOne({ spaceId })
+function getSpace(spaceID) {
+  return Space.findOne({ spaceID })
 }
 
 function deleteReview(foodtruckName, pennid) {

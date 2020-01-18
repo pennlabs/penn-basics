@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -6,61 +6,46 @@ import { Row, Col } from '../shared'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import Nav from './Nav'
 import DiningVenue from './DiningVenue'
-import { getFavorites } from '../../actions/dining_actions'
+import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-
-    const { dispatchGetFavorites } = this.props
+const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }) => {
+  useEffect(() => {
     dispatchGetFavorites()
-  }
+    dispatchGetVenueHours()
+  }, [])
 
-  render() {
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props
+  const parsedVenueId = Number.isNaN(id) ? null : id
 
-    const parsedVenueId = Number.isNaN(id) ? null : id
+  return (
+    <Row fullHeightDesktop>
+      <Nav selectedVenueId={parsedVenueId} />
 
-    return (
-      <Row fullHeightDesktop>
-        <Nav selectedVenueId={parsedVenueId} />
-
-        <Col
-          sm={12}
-          md={8}
-          overflowY="scroll"
-          maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
-          hideOnMobile={!parsedVenueId}
-        >
-          <DiningVenue venueId={parsedVenueId} />
-        </Col>
-      </Row>
-    )
-  }
+      <Col
+        sm={12}
+        md={8}
+        overflowY="scroll"
+        maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+        hideOnMobile={!parsedVenueId}
+      >
+        <DiningVenue venueId={parsedVenueId} />
+      </Col>
+    </Row>
+  )
 }
 
 App.defaultProps = {
-  match: {},
+  id: '',
 }
 
 App.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
+  id: PropTypes.string,
   dispatchGetFavorites: PropTypes.func.isRequired,
+  dispatchGetVenueHours: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
+  dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App)
+export default connect(null, mapDispatchToProps)(App)

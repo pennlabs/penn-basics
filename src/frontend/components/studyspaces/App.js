@@ -1,8 +1,7 @@
-/* global document */
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Router from 'next/router'
 
 import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
@@ -41,17 +40,17 @@ class App extends Component {
   componentDidMount() {
     const { getAllSpacesDataDispatch } = this.props
     getAllSpacesDataDispatch()
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY
-    if (apiKey) {
-      const tag = document.createElement('script')
-      tag.setAttribute(
-        'src',
-        `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
-      )
-      document.getElementsByTagName('body')[0].appendChild(tag)
-    } else {
-      this.setState({ googleMapError: 'Sorry, Google Map cannot be shown' })
-    }
+    // const apiKey = process.env.GOOGLE_MAPS_API_KEY
+    // if (apiKey) {
+    //   const tag = document.createElement('script')
+    //   tag.setAttribute(
+    //     'src',
+    //     `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
+    //   )
+    //   document.getElementsByTagName('body')[0].appendChild(tag)
+    // } else {
+    //   this.setState({ googleMapError: 'Sorry, Google Map cannot be shown' })
+    // }
   }
 
   componentDidUpdate(prevProps) {
@@ -78,16 +77,7 @@ class App extends Component {
   }
 
   render() {
-    const {
-      filteredSpacesData,
-      error,
-      pending,
-      hoveredSpace,
-      match: {
-        params: { id },
-      },
-      history,
-    } = this.props
+    const { filteredSpacesData, error, pending, hoveredSpace, id } = this.props
 
     const parsedSpaceId = null || id
 
@@ -151,7 +141,10 @@ class App extends Component {
                 markers={filteredSpacesData}
                 activeMarker={hoveredSpace}
                 handleClickMarker={spaceId =>
-                  history.push(`/studyspaces/${spaceId}`)
+                  Router.push(
+                    `/studyspaces?id=${spaceId}`,
+                    `/studyspaces/${spaceId}`
+                  )
                 }
               />
             )}

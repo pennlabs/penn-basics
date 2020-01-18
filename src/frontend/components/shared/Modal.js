@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link, withRouter } from 'react-router-dom'
+import Link from 'next/link'
+import Router from 'next/router'
 
 import { WHITE, LIGHT_GRAY } from '../../styles/colors'
 import {
@@ -116,19 +117,19 @@ class Modal extends Component {
   // Close the modal when the user presses the escape key
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27
-    const { show, history } = this.props
+    const { show } = this.props
 
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      history.push('/studyspaces')
+      Router.push('/studyspaces')
     }
   }
 
   render() {
-    const { show, children, history } = this.props
+    const { show, children } = this.props
     const { isNewlyMounted } = this.state
 
     return (
@@ -136,13 +137,13 @@ class Modal extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => history.push('/studyspaces')}
+        onClick={() => Router.push('/studyspaces')}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <Link to="/studyspaces" className="link">
+          <Link href="/studyspaces">
             <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -161,7 +162,7 @@ Modal.propTypes = {
   children: PropTypes.any.isRequired, // eslint-disable-line
 }
 
-export default withRouter(Modal)
+export default Modal
 
 export const ModalContainer = styled.div`
   padding: 0 ${({ padding = 8.33 }) => padding}vw;

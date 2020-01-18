@@ -5,9 +5,7 @@ const { MONGO_URI } = process.env
 
 if (!MONGO_URI) throw new Error('Missing MONGO_URI in env')
 
-mongoose.connect(MONGO_URI, {
-  useMongoClient: true,
-})
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.connection.on('connected', () => {
   console.log('Successfully connected to database') //eslint-disable-line

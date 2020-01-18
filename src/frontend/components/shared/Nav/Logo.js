@@ -1,8 +1,8 @@
 import React from 'react'
 import s from 'styled-components'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 
-import { maxWidth, TABLET } from '../../../styles/sizes'
+import { maxWidth, TABLET, PHONE } from '../../../styles/sizes'
 import { BLACK, DARK_GRAY, WHITE } from '../../../styles/colors'
 
 const BetaTag = s.span`
@@ -10,15 +10,21 @@ const BetaTag = s.span`
   border-radius: 25px;
   background-color: #60B8F2 !important;
   color: ${WHITE} !important;
-  margin-top: 15px;
   box-shadow: 0 0px 8px rgba(25, 89, 130, .4);
+  transform: translateY(2px);
+
+  ${maxWidth(PHONE)} {
+    transform: translateY(8px);
+  }
 `
 
 const LogoText = s.h1`
   font-weight: bold;
   font-size: 1.4rem;
-  padding: 0.7rem 0.5rem 0rem 0.5rem;
+  padding: 0 0.5rem;
   color: ${DARK_GRAY};
+  display: inline-block;
+  transform: translateY(5px);
 
   &:active,
   &:focus,
@@ -31,22 +37,38 @@ const LogoText = s.h1`
   }
 `
 
+const LOGO_HEIGHT = '2.5rem'
+
 const Logo = s.img`
-  height: 3.4rem;
-  padding: 0.4rem 0 0.4rem 0rem;
+  height: ${LOGO_HEIGHT};
+  padding-right: 0.4rem;
+  padding-top: 0rem;
   width: auto;
+  vertical-align: top;
+`
+
+const Wrapper = s.div`
+  display: inline-block;
+
+  ${maxWidth(PHONE)} {
+    padding-top: 8px;
+  }
 `
 
 export default () => (
-  <>
-    <Link to="/">
-      <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+  <Wrapper>
+    <Link href="/">
+      <a style={{ height: LOGO_HEIGHT }}>
+        <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+      </a>
     </Link>
 
-    <Link to="/">
-      <LogoText>Penn Basics </LogoText>
+    <Link href="/">
+      <a>
+        <LogoText>Penn Basics </LogoText>
+      </a>
     </Link>
 
     <BetaTag className="tag is-rounded">Beta</BetaTag>
-  </>
+  </Wrapper>
 )

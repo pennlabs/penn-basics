@@ -33,12 +33,12 @@ const Wrapper = s.div`
 
 const Home = ({ filterList }) => {
   const componentList = [
-    <Weather />,
-    <Events />,
-    <News />,
-    <Laundry />,
-    <Dining />,
-    <Quotes />,
+    <Weather key="weatherComponent" />,
+    <Events key="eventsComponent" />,
+    <News key="newsComponent" />,
+    <Laundry key="laundryComponent" />,
+    <Dining key="diningComponent" />,
+    <Quotes key="quotesComponent" />,
   ]
 
   return (
@@ -65,13 +65,13 @@ const Home = ({ filterList }) => {
   )
 }
 
-Home.propTypes = {
-  filterList: [],
-}
+// Home.propTypes = {
+//   filterList: [],
+// }
 
-Home.defaultProps = {
-  filterList: PropTypes.arrayOf(PropTypes.number),
-}
+// Home.defaultProps = {
+//   filterList: PropTypes.arrayOf(PropTypes.number),
+// }
 
 const mapStateToProps = ({ home }) => {
   const { filterList } = home
