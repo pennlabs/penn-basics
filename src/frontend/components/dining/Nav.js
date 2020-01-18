@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
@@ -12,80 +12,101 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const Nav = ({ favorites, selectedVenueId }) => {
-  const keys = Object.keys(venueData)
-  const diningKeys = []
-  const retailKeys = []
+class Nav extends Component {
+  // shouldComponentUpdate(nextProps) {
+  //   const { favorites } = this.props
+  //   return favorites !== nextProps.favorites
+  // }
 
-  keys.forEach(key => {
-    const data = venueData[key]
-    if (data.isRetail) {
-      retailKeys.push(key)
-    } else {
-      diningKeys.push(key)
-    }
-  })
+  render() {
+    const { favorites, selectedVenueId, venueHours } = this.props
+    const keys = Object.keys(venueData)
+    const diningKeys = []
+    const retailKeys = []
 
-  diningKeys.sort((keyA, keyB) => {
-    const { name: nameA } = venueData[keyA]
-    const { name: nameB } = venueData[keyB]
-    return nameA.localeCompare(nameB)
-  })
+    keys.forEach(key => {
+      const data = venueData[key]
+      if (data.isRetail) {
+        retailKeys.push(key)
+      } else {
+        diningKeys.push(key)
+      }
+    })
 
-  // If a venue is selected, hide the scrollbar on mobile
-  const hideOnMobile = selectedVenueId !== undefined && selectedVenueId !== null
+    diningKeys.sort((keyA, keyB) => {
+      const { name: nameA } = venueData[keyA]
+      const { name: nameB } = venueData[keyB]
+      return nameA.localeCompare(nameB)
+    })
 
-  return (
-    <Scrollbar
-      padding="0 0 .5rem 0"
-      background={WHITE}
-      overflowY="scroll"
-      sm={12}
-      md={4}
-      borderRight
-      height={`calc(100vh - ${NAV_HEIGHT})`}
-      hideOnMobile={hideOnMobile}
-    >
-      <Favorites
-        favorites={favorites}
-        FavoriteCard={DiningCard}
-        inputName="venueId"
-        keyAttributeName="venueId"
-      />
+    // If a venue is selected, hide the scrollbar on mobile
+    const hideOnMobile =
+      selectedVenueId !== undefined && selectedVenueId !== null
 
-      <Card background={BABY_BLUE} padding="0">
-        <NavHeader className="title is-5">Dining</NavHeader>
-        <Line />
-      </Card>
+    return (
+      <Scrollbar
+        padding="0 0 .5rem 0"
+        background={WHITE}
+        overflowY="scroll"
+        sm={12}
+        md={4}
+        borderRight
+        height={`calc(100vh - ${NAV_HEIGHT})`}
+        hideOnMobile={hideOnMobile}
+      >
+        <Card background={BABY_BLUE} padding="0">
+          <NavHeader className="title is-5">Favorites</NavHeader>
+          <Line />
+        </Card>
 
-      {diningKeys.map(key => {
-        return (
+        {favorites.map(key => {
+          return (
+            <DiningCard
+              key={uuid()}
+              venueId={key}
+              selected={selectedVenueId === key}
+              isFavorited={false}
+              venueHours={venueHours}
+            />
+          )
+        })}
+
+        <Card background={BABY_BLUE} padding="0">
+          <NavHeader className="title is-5">Dining</NavHeader>
+          <Line />
+        </Card>
+
+        {diningKeys.map(key => {
+          return (
+            <DiningCard
+              key={uuid()}
+              venueId={key}
+              selected={selectedVenueId === key}
+              isFavorited={favorites.includes(key)}
+              venueHours={venueHours}
+            />
+          )
+        })}
+
+        <Card background={BABY_BLUE} padding="0">
+          <NavHeader className="title is-5">Retail</NavHeader>
+          <Line />
+        </Card>
+
+        {retailKeys.map(key => (
           <DiningCard
             key={uuid()}
             venueId={key}
             selected={selectedVenueId === key}
             isFavorited={favorites.includes(key)}
+            venueHours={venueHours}
           />
-        )
-      })}
+        ))}
 
-      <Card background={BABY_BLUE} padding="0">
-        <NavHeader className="title is-5">Retail</NavHeader>
-        <Line />
-      </Card>
-
-      {retailKeys.map(key => (
-        <DiningCard
-          key={uuid()}
-          venueId={key}
-          selected={selectedVenueId === key}
-          isFavorited={favorites.includes(key)}
-        />
-      ))}
-
-      <PennLabsCredit />
-    </Scrollbar>
-  )
+        <PennLabsCredit />
+      </Scrollbar>
+    )
+  }
 }
 
 Nav.defaultProps = {
@@ -99,10 +120,11 @@ Nav.propTypes = {
 }
 
 const mapStateToProps = ({ dining }) => {
-  const { favorites } = dining
+  const { favorites, venueHours } = dining
 
   return {
     favorites,
+    venueHours,
   }
 }
 

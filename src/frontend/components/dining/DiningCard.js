@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import s from 'styled-components'
-import axios from 'axios'
 import moment from 'moment'
 import Link from 'next/link'
 
@@ -26,7 +25,7 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-const CardSubtext = ({ venueId, stateVenueHours }) => {
+const CardSubtext = ({ venueId, venueHours }) => {
   const showMealLabels = venueData[venueId].isRetail
     ? venueData[venueId].showMealLabels || false
     : true
@@ -34,7 +33,7 @@ const CardSubtext = ({ venueId, stateVenueHours }) => {
   // get the array of hours that are opened today
   const date = new Date()
   const currTime = `${pad(date.getHours())}:${pad(date.getMinutes())}`
-  const openHours = stateVenueHours.filter(hour => {
+  const openHours = venueHours.filter(hour => {
     return hour.starttime <= currTime && currTime <= hour.endtime
   })
 
@@ -74,41 +73,22 @@ CardSubtext.propTypes = {
   stateVenueHours: PropTypes.array, //eslint-disable-line
 }
 
-const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
-  // use React Hook to initialize state in a functional component
-  const [stateVenueHours, setVenueHours] = useState([])
+const DiningCard = ({
+  venueId,
+  selected,
+  isFavorited,
+  venueHours,
+  showLine,
+  style,
+}) => {
+  if (!venueHours) return null
 
-  // useEffect behaves like componentDidMount/Update/Unmount that takes in a function as
-  // the first argument and an array as a second argument
-  // useEffect will be triggered only if values in the second argument is modified
-  // using an empty array ensures that useEffect is called only once
-  useEffect(() => {
-    const cancelToken = axios.CancelToken
-    const source = cancelToken.source()
-    axios
-      .get(`https://api.pennlabs.org/dining/hours/${venueId}`, {
-        cancelToken: source.token,
-      })
-      .then(response => {
-        let venueHours = response.data.cafes[venueId].days
-        let currDate = moment().format()
-        currDate = currDate.substring(0, currDate.indexOf('T'))
-        venueHours = venueHours.filter(hour => hour.date === currDate)
+  let currDate = moment().format()
+  currDate = currDate.substring(0, currDate.indexOf('T'))
+  let venueHour = venueHours[venueId]
+  venueHour = venueHour.filter(hour => hour.date === currDate)
 
-        if (venueHours) {
-          venueHours = venueHours[0].dayparts
-          setVenueHours(venueHours) // set venueHours in state
-        }
-      })
-      .catch(() => {})
-    return () => {
-      source.cancel()
-    }
-  }, [])
-
-  if (!stateVenueHours) {
-    return null
-  }
+  venueHours = venueHour[0].dayparts
 
   const { name, image } = venueData[venueId]
 
@@ -136,10 +116,7 @@ const DiningCard = ({ venueId, isFavorited, selected, showLine, style }) => {
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
                 <Subtitle marginBottom="0">{name}</Subtitle>
-                <CardSubtext
-                  venueId={venueId}
-                  stateVenueHours={stateVenueHours}
-                />
+                <CardSubtext venueId={venueId} venueHours={venueHours} />
               </Content>
             </Col>
           </FlexRow>

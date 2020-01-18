@@ -9,6 +9,7 @@ export const getVenueInfoRequested = 'GET_VENUE_INFO_REQUESTED'
 export const getVenueInfoRejected = 'GET_VENUE_INFO_REJECTED'
 export const getVenueInfoFulfilled = 'GET_VENUE_INFO_FULFILLED'
 export const updateDiningFavorites = 'UPDATE_DINING_FAVORITES'
+export const getVenueHoursFulfilled = 'GET_VENUE_HOURS_FULFILLED'
 
 // spaces actions
 export const getSpacesDataRequested = 'GET_SPACES_DATA_REQUESTED'

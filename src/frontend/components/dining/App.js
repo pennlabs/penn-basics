@@ -6,12 +6,13 @@ import { Row, Col } from '../shared'
 import { NAV_HEIGHT } from '../../styles/sizes'
 import Nav from './Nav'
 import DiningVenue from './DiningVenue'
-import { getFavorites } from '../../actions/dining_actions'
+import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 
 class App extends Component {
   componentDidMount() {
-    const { dispatchGetFavorites } = this.props
+    const { dispatchGetFavorites, dispatchGetVenueHours } = this.props
     dispatchGetFavorites()
+    dispatchGetVenueHours()
   }
 
   render() {
@@ -48,6 +49,7 @@ App.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
+  dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })
 
 export default connect(

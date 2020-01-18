@@ -4,11 +4,7 @@ import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
-import {
-  getVenueInfo,
-  addFavorite,
-  removeFavorite,
-} from '../../actions/dining_actions'
+import { addFavorite, removeFavorite } from '../../actions/dining_actions'
 import DiningOverview from './DiningOverview'
 import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
@@ -35,25 +31,6 @@ const Wrapper = s.div`
 `
 
 class DiningVenue extends Component {
-  componentDidMount() {
-    const { venueId, dispatchGetVenueInfo } = this.props
-
-    if (venueId) {
-      dispatchGetVenueInfo(venueId)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { venueId, dispatchGetVenueInfo } = this.props
-
-    const previousVenueId = prevProps.venueId
-    const currentVenueId = venueId
-
-    if (currentVenueId && previousVenueId !== currentVenueId) {
-      dispatchGetVenueInfo(currentVenueId)
-    }
-  }
-
   static renderNoVenue() {
     return (
       <NoData
@@ -66,7 +43,6 @@ class DiningVenue extends Component {
 
   render() {
     const {
-      venueHoursPending,
       favorites,
       venueId,
       dispatchAddFavorite,
@@ -84,14 +60,14 @@ class DiningVenue extends Component {
       )
     }
 
-    // If content is still loading
-    if (venueHoursPending) {
-      return (
-        <Wrapper>
-          <Loading padding="40vh 0" />
-        </Wrapper>
-      )
-    }
+    // // If content is still loading
+    // if (venueHoursPending) {
+    //   return (
+    //     <Wrapper>
+    //       <Loading padding="40vh 0" />
+    //     </Wrapper>
+    //   )
+    // }
 
     const { name } = venueData[venueId]
     const isFavorited = favorites.includes(venueId)
@@ -125,13 +101,12 @@ DiningVenue.defaultProps = {
 }
 
 DiningVenue.propTypes = {
-  venueHoursPending: PropTypes.bool.isRequired,
+  // venueHoursPending: PropTypes.bool.isRequired,
   venueHours: PropTypes.array, // eslint-disable-line
   venueId: PropTypes.string,
   favorites: PropTypes.arrayOf(PropTypes.string),
   dispatchAddFavorite: PropTypes.func.isRequired,
   dispatchRemoveFavorite: PropTypes.func.isRequired,
-  dispatchGetVenueInfo: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({ dining }) => {
@@ -145,7 +120,6 @@ const mapStateToProps = ({ dining }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  dispatchGetVenueInfo: venueId => dispatch(getVenueInfo(venueId)),
   dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
   dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
 })

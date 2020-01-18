@@ -124,12 +124,23 @@ const List = ({ venueHours }) => {
   )
 }
 
-const HoursVisualization = ({ venueHours }) => {
+const HoursVisualization = ({ venueHours, venueId }) => {
   if (!venueHours) {
     return <ErrorMessage message="Failed to load hours of operation." />
   }
 
-  return <List venueHours={venueHours} />
+  let startDate = moment().format()
+  startDate = startDate.substring(0, startDate.indexOf('T'))
+  let endDate = moment()
+    .add(2, 'days')
+    .format()
+  endDate = endDate.substring(0, endDate.indexOf('T'))
+  let venueHour = venueHours[venueId]
+  venueHour = venueHour.filter(
+    hour => startDate <= hour.date && hour.date <= endDate
+  )
+
+  return <List venueHours={venueHour} />
 }
 
 List.propTypes = {
