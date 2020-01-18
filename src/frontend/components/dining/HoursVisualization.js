@@ -169,7 +169,4 @@ const mapStateToProps = state => ({
   venueHours: state.dining.venueHours,
 })
 
-export default connect(
-  mapStateToProps,
-  null
-)(HoursVisualization)
+export default connect(mapStateToProps, null)(HoursVisualization)

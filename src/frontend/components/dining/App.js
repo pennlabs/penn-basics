@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -8,34 +8,29 @@ import Nav from './Nav'
 import DiningVenue from './DiningVenue'
 import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 
-class App extends Component {
-  componentDidMount() {
-    const { dispatchGetFavorites, dispatchGetVenueHours } = this.props
+const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }) => {
+  useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }
+  }, [])
 
-  render() {
-    const { id } = this.props
+  const parsedVenueId = Number.isNaN(id) ? null : id
 
-    const parsedVenueId = Number.isNaN(id) ? null : id
+  return (
+    <Row fullHeightDesktop>
+      <Nav selectedVenueId={parsedVenueId} />
 
-    return (
-      <Row fullHeightDesktop>
-        <Nav selectedVenueId={parsedVenueId} />
-
-        <Col
-          sm={12}
-          md={8}
-          overflowY="scroll"
-          maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
-          hideOnMobile={!parsedVenueId}
-        >
-          <DiningVenue venueId={parsedVenueId} />
-        </Col>
-      </Row>
-    )
-  }
+      <Col
+        sm={12}
+        md={8}
+        overflowY="scroll"
+        maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
+        hideOnMobile={!parsedVenueId}
+      >
+        <DiningVenue venueId={parsedVenueId} />
+      </Col>
+    </Row>
+  )
 }
 
 App.defaultProps = {
@@ -45,6 +40,7 @@ App.defaultProps = {
 App.propTypes = {
   id: PropTypes.string,
   dispatchGetFavorites: PropTypes.func.isRequired,
+  dispatchGetVenueHours: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({
@@ -52,7 +48,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(App)
+export default connect(null, mapDispatchToProps)(App)
