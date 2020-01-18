@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import s from 'styled-components'
 
 import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
@@ -10,7 +10,7 @@ import { DARK_GRAY } from '../../styles/colors'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 // import { getNoiseLevel, getOutletsLevel } from './mapper'
 
-const StyledLink = s(Link)`
+const StyledLink = s.a`
   h2 {
     color: ${DARK_GRAY} !important;
   }
@@ -46,48 +46,53 @@ class FoodtruckCard extends Component {
     const { name, open, hours, foodtruckId, overallRating, image } = this.props
 
     return (
-      <StyledLink to={`/foodtrucks/${foodtruckId}`} className="link">
-        <Card padding="0.5rem 0.5rem 0.5rem 1rem" hoverable>
-          <Row>
-            {image && (
-              <Col backgroundImage={image} width="30%" borderRadius="4px" />
-            )}
-            <Col
-              padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
-              onMouseEnter={this.handleMouseEnter}
-            >
-              <Content>
-                <Subtitle marginBottom="0">{name}</Subtitle>
+      <Link
+        href={`/foodtrucks?id=${foodtruckId}`}
+        as={`/foodtrucks/${foodtruckId}`}
+      >
+        <StyledLink>
+          <Card padding="0.5rem 0.5rem 0.5rem 1rem" hoverable>
+            <Row>
+              {image && (
+                <Col backgroundImage={image} width="30%" borderRadius="4px" />
+              )}
+              <Col
+                padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
+                onMouseEnter={this.handleMouseEnter}
+              >
+                <Content>
+                  <Subtitle marginBottom="0">{name}</Subtitle>
 
-                <Subtext marginBottom="0">
-                  {open
-                    ? ` Open: ${hours}`
-                    : ` Closed • Opens at ${hours.substring(
-                        0,
-                        hours.indexOf('am')
-                      )}am`}
-                  {` • ${parseFloat(
-                    Math.round(overallRating * 100) / 100
-                  ).toFixed(2)}`}
-                  &nbsp;
-                  <StarIcon
-                    fill="black"
-                    color="black"
-                    style={{
-                      transform: 'scale(0.7) translateY(10px) translateX(-3px)',
-                    }}
-                    opacity="0.5"
-                  />
-                  {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
-                  {noiseLevel ? ` • ${noiseLevel}` : ''} */}
-                </Subtext>
+                  <Subtext marginBottom="0">
+                    {open
+                      ? ` Open: ${hours}`
+                      : ` Closed • Opens at ${hours.substring(
+                          0,
+                          hours.indexOf('am')
+                        )}am`}
+                    {` • ${parseFloat(
+                      Math.round(overallRating * 100) / 100
+                    ).toFixed(2)}`}
+                    &nbsp;
+                    <StarIcon
+                      fill="black"
+                      color="black"
+                      style={{
+                        transform: 'scale(0.7) translateY(10px) translateX(-3px)',
+                      }}
+                      opacity="0.5"
+                    />
+                    {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
+                    {noiseLevel ? ` • ${noiseLevel}` : ''} */}
+                  </Subtext>
 
-                <Circle open={open} />
-              </Content>
-            </Col>
-          </Row>
-        </Card>
-      </StyledLink>
+                  <Circle open={open} />
+                </Content>
+              </Col>
+            </Row>
+          </Card>
+        </StyledLink>
+      </Link>
     )
   }
 }

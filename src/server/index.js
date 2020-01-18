@@ -74,6 +74,10 @@ nextApp.prepare().then(() => {
     return nextApp.render(req, res, '/studyspaces', { id: req.params.id })
   })
 
+  app.get('/foodtrucks/:id', (req, res) => {
+    return nextApp.render(req, res, '/foodtrucks', { id: req.params.id })
+  })
+
   app.all('*', (req, res) => {
     return handle(req, res)
   })

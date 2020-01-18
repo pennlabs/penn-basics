@@ -1,7 +1,7 @@
 /* global window */
 
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'next/router'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -89,12 +89,12 @@ class FoodtruckModal extends Component {
   handleReviewOnClick() {
     const {
       userInfo: { loggedIn },
-      location,
+      router,
     } = this.props
     if (loggedIn) {
       this.setState({ showForm: true })
     } else {
-      window.location.href = `/api/auth/authenticate?successRedirect=${location.pathname}&failureRedirect=${location.pathname}`
+      window.location.href = `/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`
     }
   }
 
@@ -105,7 +105,7 @@ class FoodtruckModal extends Component {
       infoError,
       foodtruckInfo,
       dispatchUpdateFoodtruckReview,
-      userInfo,
+      userInfo = {},
     } = this.props
 
     const show = Boolean(foodtruckId)
@@ -324,9 +324,7 @@ const mapDispatchToProps = dispatch => ({
     ),
 })
 
-const FoodtruckModalWithRouter = withRouter(FoodtruckModal)
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FoodtruckModalWithRouter)
+)(withRouter(FoodtruckModal))

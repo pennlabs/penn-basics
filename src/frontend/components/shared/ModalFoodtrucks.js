@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
-import { Link, withRouter } from 'react-router-dom'
+import Router from 'next/router'
+import Link from 'next/link'
 
 import { WHITE, LIGHT_GRAY, BLACK_ALPHA } from '../../styles/colors'
 
@@ -171,19 +172,19 @@ class ModalFoodtrucks extends Component {
   // Close the modal when the user presses the escape key
   handleKeyPress(event) {
     const ESCAPE_KEY_CODE = 27
-    const { show, history } = this.props
+    const { show } = this.props
 
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      history.push('/foodtrucks')
+      Router.push('/foodtrucks')
     }
   }
 
   render() {
-    const { show, history, children } = this.props
+    const { show, children } = this.props
     const { isNewlyMounted } = this.state
 
     return (
@@ -191,13 +192,13 @@ class ModalFoodtrucks extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => history.push('/foodtrucks')}
+        onClick={() => Router.push('/foodtrucks')}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <Link to="/foodtrucks" className="link">
+          <Link href="/foodtrucks">
             <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -210,14 +211,9 @@ class ModalFoodtrucks extends Component {
   }
 }
 
-ModalFoodtrucks.defaultProps = {
-  history: {},
-}
-
 ModalFoodtrucks.propTypes = {
   show: PropTypes.bool.isRequired,
   children: PropTypes.any.isRequired, // eslint-disable-line
-  history: PropTypes.object, // eslint-disable-line
 }
 
-export default withRouter(ModalFoodtrucks)
+export default ModalFoodtrucks

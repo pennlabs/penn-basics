@@ -4,7 +4,7 @@ import s from 'styled-components'
 import moment from 'moment'
 
 import { Text } from '../shared'
-import { convertDate } from '../../helperFunctions'
+import { convertDate } from '../../../utils/helperFunctions'
 import { LIGHTER_BLUE } from '../../styles/colors'
 
 const BodyRow = s.tr`

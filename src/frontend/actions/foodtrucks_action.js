@@ -14,7 +14,7 @@ import {
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
   clearFilterFoodtrucksRequested,
 } from './action_types'
-import { convertDate, padHours } from '../helperFunctions'
+import { convertDate, padHours } from '../../utils/helperFunctions'
 
 const isOpen = ({ start, end }, day) => {
   const startTime = padHours(start[day])
@@ -50,6 +50,8 @@ export const getAllFoodtrucksData = () => {
           return 0
         })
 
+        console.log(trucks)
+
         trucks.forEach(foodtruck => {
           // console.log(foodtruck)
           const foodtruckObj = Object.assign({}, foodtruck)
@@ -60,7 +62,7 @@ export const getAllFoodtrucksData = () => {
           const day =
             moment().format('d') === '0' ? 6 : Number(moment().format('d')) - 1
 
-          if (foodtruck.start.length && foodtruck.end.length) {
+          if (foodtruck.start && foodtruck.end && foodtruck.start.length && foodtruck.end.length) {
             foodtruckObj.open = isOpen(foodtruck, day)
             foodtruckObj.hours = `
             ${convertDate(foodtruck.start[day])}

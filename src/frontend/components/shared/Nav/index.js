@@ -10,6 +10,7 @@ import {
   Z_INDEX,
   maxWidth,
 } from '../../../styles/sizes'
+import { getUserInfo } from '../../../actions/auth_actions'
 
 import Links from './Links'
 import Menu from './Menu'
@@ -112,7 +113,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

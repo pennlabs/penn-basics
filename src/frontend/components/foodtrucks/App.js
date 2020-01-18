@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import Router from 'next/router'
 
 import FoodtruckCard from './FoodtruckCard'
 import {
@@ -71,10 +71,7 @@ class App extends Component {
       error,
       pending,
       hoveredFoodtruck,
-      match: {
-        params: { id },
-      },
-      history,
+      id,
     } = this.props
 
     const parsedFoodtruckId = Number.isNaN(id) ? null : id
@@ -127,7 +124,10 @@ class App extends Component {
                 markers={filteredFoodtrucksData}
                 activeMarker={hoveredFoodtruck}
                 handleClickMarker={truckId =>
-                  history.push(`/foodtrucks/${truckId}`)
+                  Router.push(
+                    `/foodtrucks?id=${truckId}`,
+                    `/foodtrucks/${truckId}`
+                  )
                 }
               />
             )}
@@ -164,23 +164,17 @@ App.defaultProps = {
   pending: false,
   filteredFoodtrucksData: null,
   foodtrucksData: null,
-  match: {},
-  history: {},
+  id: '',
 }
 
 App.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
+  id: PropTypes.string,
   dispatchGetAllFoodtrucks: PropTypes.func.isRequired,
   error: PropTypes.string,
   hoveredFoodtruck: PropTypes.string,
   pending: PropTypes.bool,
   filteredFoodtrucksData: FoodtrucksDataPropType,
   foodtrucksData: FoodtrucksDataPropType,
-  history: PropTypes.object, // eslint-disable-line
 }
 
 const mapStateToProps = ({ foodtrucks }) => foodtrucks
@@ -189,7 +183,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetAllFoodtrucks: () => dispatch(getAllFoodtrucksData()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(App))
+export default connect(mapStateToProps, mapDispatchToProps)(App)
