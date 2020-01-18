@@ -111,7 +111,7 @@ const FilterWrapper = s.div`
 const FilterText = s.p`
   display: inline-block;
   color: ${MEDIUM_GRAY};
-  cursor: hand;
+  cursor: pointer;
   opacity: 0.8;
   margin-right: 1rem;
 
