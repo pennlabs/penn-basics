@@ -11,6 +11,11 @@ const BetaTag = s.span`
   background-color: #60B8F2 !important;
   color: ${WHITE} !important;
   box-shadow: 0 0px 8px rgba(25, 89, 130, .4);
+  transform: translateY(2px);
+
+  ${maxWidth(PHONE)} {
+    transform: translateY(8px);
+  }
 `
 
 const LogoText = s.h1`
@@ -18,6 +23,8 @@ const LogoText = s.h1`
   font-size: 1.4rem;
   padding: 0 0.5rem;
   color: ${DARK_GRAY};
+  display: inline-block;
+  transform: translateY(5px);
 
   &:active,
   &:focus,
@@ -35,13 +42,13 @@ const LOGO_HEIGHT = '2.5rem'
 const Logo = s.img`
   height: ${LOGO_HEIGHT};
   padding-right: 0.4rem;
+  padding-top: 0rem;
   width: auto;
+  vertical-align: top;
 `
 
 const Wrapper = s.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: inline-block;
 
   ${maxWidth(PHONE)} {
     padding-top: 8px;
