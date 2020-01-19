@@ -29,7 +29,6 @@ import {
   STUDYSPACE_ROUTE,
 } from '../../constants/routes'
 
-// TODO ghost loaders
 // TODO port this over to hooks
 // TODO map height on mobile
 

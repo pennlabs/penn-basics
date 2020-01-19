@@ -18,6 +18,8 @@ import {
   Z_INDEX,
   NAV_HEIGHT,
   MOBILE_FILTER_HEIGHT,
+  minWidth,
+  FILTER_HEIGHT,
 } from '../../styles/sizes'
 
 export const FilterBtnWrapper = s.a`
@@ -33,6 +35,7 @@ export const FilterBtnWrapper = s.a`
   border-style: solid;
   border-radius: 4px;
   color: ${MEDIUM_GRAY} !important;
+  user-select: none;
 
   :hover {
     background: ${ALLBIRDS_GRAY};
@@ -81,7 +84,11 @@ export const OptionsModalWrapper = s.div`
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
-  left: ${({ left }) => left + 1 || '0'};
+
+  ${minWidth(PHONE)} {
+    left: ${({ left }) => left + 1 || '0'}px;
+    top: calc(${FILTER_HEIGHT} - 0.5rem);    
+  }
 
   ${maxWidth(PHONE)} {
     position: fixed;
