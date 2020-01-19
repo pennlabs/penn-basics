@@ -32,7 +32,10 @@ const Nav = ({ favorites, selectedVenueId, venueHours }) => {
   })
 
   // If a venue is selected, hide the scrollbar on mobile
-  const hideOnMobile = selectedVenueId !== undefined && selectedVenueId !== null
+  const hideOnMobile =
+    selectedVenueId !== undefined &&
+    selectedVenueId !== null &&
+    selectedVenueId !== ''
 
   return (
     <Scrollbar

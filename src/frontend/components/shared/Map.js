@@ -11,13 +11,20 @@ const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 const MapWrapper = styled.div`
   width: 100%;
   flex: 1;
-  height: ${({ height }) => height || '100%'};
+  height: ${({ height }) => height || '100vh'};
 
   ${maxWidth(PHONE)} {
-    height: ${({ mobileHeight, height }) => mobileHeight || height || '100%'};
+    height: ${({ mobileHeight, height }) => mobileHeight || height || '100vh'};
   }
 `
 
+/**
+ * Wrapper on the Google Maps map rendering engine
+ *
+ * @property `height` of the map. NOTE this should not be in `%` terms
+ *                    unless there is a relatively positioned parent above the
+ *                    map. It's generally safer to use `vh`
+ */
 export class Map extends Component {
   constructor(props) {
     super(props)
@@ -33,7 +40,6 @@ export class Map extends Component {
   }
 
   componentDidMount() {
-    console.log('???')
     this.waitForGoogle()
   }
 

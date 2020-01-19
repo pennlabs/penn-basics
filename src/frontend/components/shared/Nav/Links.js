@@ -52,7 +52,7 @@ const StyledLink = s.a`
 
 const AuthLink = withRouter(({ userInfo, router }) => {
   if (!userInfo) return null
-  const { loggedIn } = userInfo
+  const { loggedIn, fullName } = userInfo
 
   if (!loggedIn) {
     const { pathname } = router
@@ -61,14 +61,14 @@ const AuthLink = withRouter(({ userInfo, router }) => {
 
   return (
     <Link href={PROFILE_ROUTE}>
-      <StyledLink style={{ marginLeft: '1.5rem' }}>
+      <StyledLink>
         <UserSVG
           style={{
             transform: 'scale(0.8) translateY(6px)',
             marginRight: '0.5em',
           }}
         />
-        {userInfo.fullName}
+        {fullName}
       </StyledLink>
     </Link>
   )
