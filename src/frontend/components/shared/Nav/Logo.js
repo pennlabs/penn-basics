@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { maxWidth, TABLET, PHONE } from '../../../styles/sizes'
 import { BLACK, DARK_GRAY, WHITE } from '../../../styles/colors'
+import { HOME_ROUTE } from '../../../constants/routes'
 
 const BetaTag = s.span`
   margin-left: 0.5rem;
@@ -57,13 +58,13 @@ const Wrapper = s.div`
 
 export default () => (
   <Wrapper>
-    <Link href="/">
+    <Link href={HOME_ROUTE}>
       <a style={{ height: LOGO_HEIGHT }}>
         <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
       </a>
     </Link>
 
-    <Link href="/">
+    <Link href={HOME_ROUTE}>
       <a>
         <LogoText>Penn Basics </LogoText>
       </a>

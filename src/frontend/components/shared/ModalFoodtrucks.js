@@ -5,6 +5,7 @@ import Router from 'next/router'
 import Link from 'next/link'
 
 import { WHITE, LIGHT_GRAY, BLACK_ALPHA } from '../../styles/colors'
+import { FOODTRUCKS_ROUTE } from '../../constants/routes'
 
 const Z_INDEX = 1305
 const ANIMATION_DURATION = '0.4s'
@@ -179,7 +180,7 @@ class ModalFoodtrucks extends Component {
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      Router.push('/foodtrucks')
+      Router.push(FOODTRUCKS_ROUTE)
     }
   }
 
@@ -192,13 +193,13 @@ class ModalFoodtrucks extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => Router.push('/foodtrucks')}
+        onClick={() => Router.push(FOODTRUCKS_ROUTE)}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <Link href="/foodtrucks">
+          <Link href={FOODTRUCKS_ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>

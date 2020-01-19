@@ -17,10 +17,10 @@ import {
 } from '../shared'
 import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
-
 import Filter from './Filter'
 import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
+import { FOODTRUCK_ROUTE, FOODTRUCK_QUERY_ROUTE } from '../../constants/routes'
 
 // TODO ghost loaders
 
@@ -125,8 +125,8 @@ class App extends Component {
                 activeMarker={hoveredFoodtruck}
                 handleClickMarker={truckId =>
                   Router.push(
-                    `/foodtrucks?id=${truckId}`,
-                    `/foodtrucks/${truckId}`
+                    FOODTRUCK_QUERY_ROUTE(truckId),
+                    FOODTRUCK_ROUTE(truckId)
                   )
                 }
               />

@@ -16,6 +16,7 @@ import {
 import MachineAvailability from '../laundry/MachineAvailability'
 
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
+import { LAUNDRY_ROUTE } from '../../constants/routes'
 
 class Laundry extends Component {
   componentDidMount() {
@@ -28,7 +29,7 @@ class Laundry extends Component {
 
     if (!favoritesHome || favoritesHome.length === 0) {
       return (
-        <Link href="/laundry">
+        <Link href={LAUNDRY_ROUTE}>
           <a>
             <h4>Select your favorite Laundry hall</h4>
           </a>
@@ -74,7 +75,7 @@ class Laundry extends Component {
   render() {
     return (
       <BorderedCard>
-        <Link href="/laundry">
+        <Link href={LAUNDRY_ROUTE}>
           <a>
             <Title>Laundry</Title>
           </a>
@@ -108,7 +109,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetFavoritesHomePage: () => dispatch(getFavoritesHomePage()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Laundry)
+export default connect(mapStateToProps, mapDispatchToProps)(Laundry)
