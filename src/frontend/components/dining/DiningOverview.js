@@ -5,9 +5,7 @@ import { BorderedCard } from '../shared'
 import HoursVisualization from './HoursVisualization'
 import venueData from '../../../server/resources/dining/venue_info.json'
 import { AnchorButton } from '../shared/Button'
-
-const PENN_DINING_BASE_URL =
-  'https://university-of-pennsylvania.cafebonappetit.com/cafe/'
+import { PENN_DINING_BASE_URL } from '../../constants/routes'
 
 const DiningOverview = ({ id }) => {
   const { description, pennDiningSlug } = venueData[id]
@@ -24,7 +22,7 @@ const DiningOverview = ({ id }) => {
           <AnchorButton
             href={`${PENN_DINING_BASE_URL}${pennDiningSlug}`}
             target="_BLANK"
-            className="button is-info is-medium"
+            lg
           >
             View Menu Details
           </AnchorButton>
