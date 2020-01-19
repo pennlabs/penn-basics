@@ -126,8 +126,10 @@ module.exports = function authRouter(DB) {
   )
 
   router.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
+    req.session.destroy(err => {
+      res.clearCookie('connect.sid')
+      res.redirect('/')
+    })
   })
 
   return router
