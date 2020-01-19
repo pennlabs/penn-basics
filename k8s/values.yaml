@@ -2,9 +2,9 @@ deploy_version: 0.1.8
 image_tag: latest
 
 applications:
-  - name: basics
+  - name: react
     image: pennlabs/penn-basics
-    secret: basics
+    secret: penn-basics
     extraEnv:
       - name: PORT
         value: 80
