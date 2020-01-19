@@ -94,6 +94,7 @@ class FoodtruckModal extends Component {
     if (loggedIn) {
       this.setState({ showForm: true })
     } else {
+      console.log(router.pathname)
       window.location.href = `/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`
     }
   }
@@ -105,7 +106,7 @@ class FoodtruckModal extends Component {
       infoError,
       foodtruckInfo,
       dispatchUpdateFoodtruckReview,
-      userInfo = {},
+      userInfo,
     } = this.props
 
     const show = Boolean(foodtruckId)
@@ -124,7 +125,9 @@ class FoodtruckModal extends Component {
       overallRating,
     } = foodtruckInfo || {}
 
-    const { pennid, fullName } = userInfo
+    console.log(userInfo)
+
+    const { pennid, fullName } = userInfo || {}
 
     const { showForm, showReview } = this.state
 
