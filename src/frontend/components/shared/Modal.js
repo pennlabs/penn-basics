@@ -13,6 +13,7 @@ import {
 } from '../../styles/sizes'
 import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
+import { STUDYSPACES_ROUTE } from '../../constants/routes'
 
 const ModalContent = styled.div`
   background: ${WHITE};
@@ -124,7 +125,7 @@ class Modal extends Component {
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      Router.push('/studyspaces')
+      Router.push(STUDYSPACES_ROUTE)
     }
   }
 
@@ -137,13 +138,13 @@ class Modal extends Component {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => Router.push('/studyspaces')}
+        onClick={() => Router.push(STUDYSPACES_ROUTE)}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <Link href="/studyspaces">
+          <Link href={STUDYSPACES_ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>

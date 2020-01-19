@@ -7,6 +7,7 @@ import { BorderedCard, Row, Col, Title, Subtext } from '../shared'
 import DiningCard from '../dining/DiningCard'
 import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 import { BORDER } from '../../styles/colors'
+import { DINING_ROUTE } from '../../constants/routes'
 
 const Dining = ({
   dispatchGetFavorites,
@@ -21,7 +22,7 @@ const Dining = ({
 
   return (
     <BorderedCard>
-      <Link href="/dining">
+      <Link href={DINING_ROUTE}>
         <a>
           <Title>Dining</Title>
         </a>

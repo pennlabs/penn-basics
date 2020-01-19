@@ -7,6 +7,16 @@ import Link from 'next/link'
 import { maxWidth, PHONE } from '../../../styles/sizes'
 import { DARK_GRAY } from '../../../styles/colors'
 import UserSVG from '../../../../../public/img/user.svg'
+import {
+  DINING_ROUTE,
+  FOODTRUCKS_ROUTE,
+  LAUNDRY_ROUTE,
+  STUDYSPACES_ROUTE,
+  getApiAuthRouteWithRedirectParams,
+  PROFILE_ROUTE,
+} from '../../../constants/routes'
+
+const MOBILE_ACTIVE_NAV_HEIGHT = '250px'
 
 const LinksDiv = s.div`
   margin-left: auto;
@@ -32,7 +42,8 @@ const LinksDiv = s.div`
       margin: 1rem;
     }
 
-    ${({ active }) => active && `max-height: 150px; opacity: 1;`}
+    ${({ active }) =>
+      active && `max-height: ${MOBILE_ACTIVE_NAV_HEIGHT}; opacity: 1;`}
   }
 `
 const StyledLink = s.a`
@@ -42,18 +53,14 @@ const StyledLink = s.a`
 const AuthLink = withRouter(({ userInfo, router }) => {
   if (!userInfo) return null
   const { loggedIn } = userInfo
-  console.log(router.pathname)
+
   if (!loggedIn) {
-    return (
-      <a
-        href={`/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`}
-      >
-        Login
-      </a>
-    )
+    const { pathname } = router
+    return <a href={getApiAuthRouteWithRedirectParams(pathname)}>Login</a>
   }
+
   return (
-    <Link href="/profile">
+    <Link href={PROFILE_ROUTE}>
       <StyledLink style={{ marginLeft: '1.5rem' }}>
         <UserSVG
           style={{
@@ -69,16 +76,16 @@ const AuthLink = withRouter(({ userInfo, router }) => {
 
 const Links = ({ active, zIndex, userInfo, toggleActive }) => (
   <LinksDiv active={active} zIndex={zIndex}>
-    <Link href="/dining">
+    <Link href={DINING_ROUTE}>
       <a onClick={() => toggleActive(false)}>Dining</a>
     </Link>
-    <Link href="/foodtrucks">
+    <Link href={FOODTRUCKS_ROUTE}>
       <a onClick={() => toggleActive(false)}> Foodtrucks </a>
     </Link>
-    <Link href="/laundry">
+    <Link href={LAUNDRY_ROUTE}>
       <a onClick={() => toggleActive(false)}>Laundry</a>
     </Link>
-    <Link href="/studyspaces">
+    <Link href={STUDYSPACES_ROUTE}>
       <a onClick={() => toggleActive(false)}>Studyspaces</a>
     </Link>
     <AuthLink userInfo={userInfo} />
@@ -89,15 +96,15 @@ Links.propTypes = {
   active: PropTypes.bool,
   zIndex: PropTypes.number.isRequired,
   toggleActive: PropTypes.func.isRequired,
+  userInfo: PropTypes.shape({
+    loggedIn: PropTypes.bool,
+    fullName: PropTypes.string,
+  }),
 }
 
 Links.defaultProps = {
   active: false,
-}
-
-Links.propTypes = {
-  active: PropTypes.bool,
-  zIndex: PropTypes.number.isRequired,
+  userInfo: null,
 }
 
 export default Links

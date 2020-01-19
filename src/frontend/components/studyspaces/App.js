@@ -20,11 +20,14 @@ import {
   MOBILE_FILTER_HEIGHT,
 } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
-
 import Filter from './Filter'
 import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { SNOW } from '../../styles/colors'
+import {
+  STUDYSPACE_QUERY_ROUTE,
+  STUDYSPACE_ROUTE,
+} from '../../constants/routes'
 
 // TODO ghost loaders
 // TODO port this over to hooks
@@ -142,8 +145,8 @@ class App extends Component {
                 activeMarker={hoveredSpace}
                 handleClickMarker={spaceId =>
                   Router.push(
-                    `/studyspaces?id=${spaceId}`,
-                    `/studyspaces/${spaceId}`
+                    STUDYSPACE_QUERY_ROUTE(spaceId),
+                    STUDYSPACE_ROUTE(spaceId)
                   )
                 }
               />
@@ -181,15 +184,9 @@ App.defaultProps = {
   pending: false,
   filteredSpacesData: null,
   spacesData: null,
-  match: {},
 }
 
 App.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
   history: PropTypes.object, // eslint-disable-line
   getAllSpacesDataDispatch: PropTypes.func.isRequired,
   setActiveSpaceDispatch: PropTypes.func.isRequired,
@@ -198,6 +195,7 @@ App.propTypes = {
   pending: PropTypes.bool,
   filteredSpacesData: SpacesDataPropType,
   spacesData: SpacesDataPropType,
+  id: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = ({ spaces }) => spaces
@@ -208,7 +206,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 // Redux config
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

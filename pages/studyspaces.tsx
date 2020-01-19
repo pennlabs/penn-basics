@@ -4,18 +4,16 @@ import Head from 'next/head'
 
 import App from '../src/frontend/components/studyspaces/App'
 import Header from '../src/frontend/components/header/index'
+import { GOOGLE_MAPS_API_ROUTE } from '../src/frontend/constants/routes'
 
 const Studyspaces = () => {
   const router = useRouter()
   const { id } = router.query
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY
 
   return (
     <Header>
       <Head>
-        <script
-          src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
-        />
+        <script src={GOOGLE_MAPS_API_ROUTE} />
       </Head>
       <App id={id} />
     </Header>
