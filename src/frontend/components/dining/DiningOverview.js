@@ -5,6 +5,7 @@ import { BorderedCard } from '../shared'
 import HoursVisualization from './HoursVisualization'
 import venueData from '../../../server/resources/dining/venue_info.json'
 import { AnchorButton } from '../shared/Button'
+import ExternalLinkIcon from '../../../../public/img/external-link.svg'
 
 const PENN_DINING_BASE_URL =
   'https://university-of-pennsylvania.cafebonappetit.com/cafe/'
@@ -27,6 +28,11 @@ const DiningOverview = ({ id }) => {
             className="button is-info is-medium"
           >
             View Menu Details
+            <ExternalLinkIcon
+              
+              
+              style={{ transform: 'scale(0.75)', marginLeft: '0.2rem' }}
+            />
           </AnchorButton>
         </div>
       )}
