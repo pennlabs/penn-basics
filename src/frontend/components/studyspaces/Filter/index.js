@@ -114,6 +114,7 @@ const FilterText = s.p`
   cursor: pointer;
   opacity: 0.8;
   margin-right: 1rem;
+  user-select: none;
 
   :hover,
   :active,
@@ -208,7 +209,6 @@ class Filter extends Component {
   }
 
   toggleMoreFilters() {
-    console.log('toggle')
     const { showMoreFilters } = this.state
     this.setState({ showMoreFilters: !showMoreFilters })
   }
@@ -362,7 +362,4 @@ const mapDispatchToProps = dispatch => ({
   toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

@@ -32,6 +32,7 @@ const ClearText = s.p`
   color: ${MEDIUM_GRAY};
   cursor: hand;
   opacity: 0.8;
+  user-select: none;
 
   :hover,
   :active,
@@ -223,7 +224,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchClearFoodtrucksFilter: () => dispatch(clearFoodtrucksFilter()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

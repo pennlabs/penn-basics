@@ -10,7 +10,7 @@ import UserSVG from '../../../../../public/img/user.svg'
 import {
   DINING_ROUTE,
   FOODTRUCKS_ROUTE,
-  LAUNDRY_ROUTE,
+  LAUNDRY_HALLS_ROUTE,
   STUDYSPACES_ROUTE,
   getApiAuthRouteWithRedirectParams,
   PROFILE_ROUTE,
@@ -52,7 +52,7 @@ const StyledLink = s.a`
 
 const AuthLink = withRouter(({ userInfo, router }) => {
   if (!userInfo) return null
-  const { loggedIn } = userInfo
+  const { loggedIn, fullName } = userInfo
 
   if (!loggedIn) {
     const { pathname } = router
@@ -61,14 +61,14 @@ const AuthLink = withRouter(({ userInfo, router }) => {
 
   return (
     <Link href={PROFILE_ROUTE}>
-      <StyledLink style={{ marginLeft: '1.5rem' }}>
+      <StyledLink>
         <UserSVG
           style={{
             transform: 'scale(0.8) translateY(6px)',
             marginRight: '0.5em',
           }}
         />
-        {userInfo.fullName}
+        {fullName}
       </StyledLink>
     </Link>
   )
@@ -80,9 +80,9 @@ const Links = ({ active, zIndex, userInfo, toggleActive }) => (
       <a onClick={() => toggleActive(false)}>Dining</a>
     </Link>
     <Link href={FOODTRUCKS_ROUTE}>
-      <a onClick={() => toggleActive(false)}> Foodtrucks </a>
+      <a onClick={() => toggleActive(false)}>Foodtrucks</a>
     </Link>
-    <Link href={LAUNDRY_ROUTE}>
+    <Link href={LAUNDRY_HALLS_ROUTE}>
       <a onClick={() => toggleActive(false)}>Laundry</a>
     </Link>
     <Link href={STUDYSPACES_ROUTE}>

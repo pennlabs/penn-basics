@@ -13,6 +13,7 @@ import {
 } from '../../styles/sizes'
 import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
+import { ESCAPE_KEY_CODE } from '../../constants/misc'
 import { STUDYSPACES_ROUTE } from '../../constants/routes'
 
 const ModalContent = styled.div`
@@ -117,9 +118,7 @@ class Modal extends Component {
 
   // Close the modal when the user presses the escape key
   handleKeyPress(event) {
-    const ESCAPE_KEY_CODE = 27
     const { show } = this.props
-
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
         event.key.toLowerCase() === 'escape') &&

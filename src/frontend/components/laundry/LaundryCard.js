@@ -4,6 +4,10 @@ import Link from 'next/link'
 
 import { Card, Text, Row, Col, Line, StyledLink } from '../shared'
 import LaundryCardHeader from './LaundryCardHeader'
+import {
+  LAUNDRY_HALL_ROUTE,
+  LAUNDRY_HALL_QUERY_ROUTE,
+} from '../../constants/routes'
 
 const LaundryCard = ({ locationObject, selectedHallId }) => {
   const [expanded, setExpanded] = useState(false)
@@ -15,8 +19,8 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
     const { id } = halls[0]
     return (
       <Link
-        href={`/laundry?id=${id}`}
-        as={`/laundry/${id}`}
+        href={LAUNDRY_HALL_QUERY_ROUTE(id)}
+        as={LAUNDRY_HALL_ROUTE(id)}
         key={`laundry-hall-${location}-${id}`}
       >
         <StyledLink>
@@ -41,9 +45,9 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
       {expanded &&
         halls.map(({ hall_name: hallName, id }) => (
           <Link
-            href={`/laundry?id=${id}`}
-            as={`/laundry/${id}`}
-            key={`laundry${id}`}
+            href={LAUNDRY_HALL_QUERY_ROUTE(id)}
+            as={LAUNDRY_HALL_ROUTE(id)}
+            key={`laundry-hall-link-${id}`}
           >
             <Card
               padding="0.5rem 1rem"

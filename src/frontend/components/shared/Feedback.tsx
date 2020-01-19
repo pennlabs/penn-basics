@@ -4,12 +4,15 @@ import s from 'styled-components'
 import { WHITE, BLUE, DARK_BLUE } from '../../styles/colors'
 import { maxWidth, PHONE } from '../../styles/sizes'
 import { logEvent } from '../../../utils/analytics'
+import { FEEDBACK_LINK } from '../../constants/routes'
 
 const DIAMETER = '3rem'
 const OFFSET = 18
-const AIRTABLE_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
 
-const FeedbackLink = s.a`
+/**
+ * Styles push closer to bottom corner on mobile
+ */
+const FeedbackLink = s.a<{}>`
   display: inline-block;
   width: ${DIAMETER};
   height: ${DIAMETER};
@@ -28,22 +31,21 @@ const FeedbackLink = s.a`
     background-color: ${DARK_BLUE};
   }
 
-  // Push closer to corner on mobile
   ${maxWidth(PHONE)} {
     bottom: ${OFFSET / 2}px;
     right: ${OFFSET / 2}px;
   }
 `
 
-const Icon = s.i`
+const Icon = s.i<{}>`
   fontSize: 24px;
   color: ${WHITE};
   line-height: ${DIAMETER};
 `
 
-export default () => (
+export default (): JSX.Element => (
   <FeedbackLink
-    href={AIRTABLE_LINK}
+    href={FEEDBACK_LINK}
     title="Feedback"
     target="_blank"
     rel="noopener noreferrer"

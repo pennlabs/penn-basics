@@ -4,11 +4,19 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 import { Card, Text, Row, Line, Col, StyledLink } from '../shared'
+import {
+  LAUNDRY_HALL_ROUTE,
+  LAUNDRY_HALL_QUERY_ROUTE,
+} from '../../constants/routes'
 
 const FavoriteCard = ({ favorite }) => {
   const { hallId, locationName } = favorite
   return (
-    <Link href={`/laundry?id=${hallId}`} as={`/laundry/${hallId}`} key={uuid()}>
+    <Link
+      href={LAUNDRY_HALL_QUERY_ROUTE(hallId)}
+      as={LAUNDRY_HALL_ROUTE(hallId)}
+      key={uuid()}
+    >
       <StyledLink>
         <Card padding="0.5rem 1rem" hoverable>
           <Row>

@@ -1,9 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import Bars from './Bars'
 
-const Menu = ({ active, toggleActive }) => {
+interface IMenuProps {
+  active: boolean
+  toggleActive: (active: boolean) => void
+}
+
+const Menu = ({ active, toggleActive }: IMenuProps) => {
   const handleKeyPress = event => {
     event.preventDefault()
 
@@ -16,14 +19,8 @@ const Menu = ({ active, toggleActive }) => {
     <Bars
       handleClick={() => toggleActive(!active)}
       onKeyPress={handleKeyPress}
-      tabIndex={0}
     />
   )
-}
-
-Menu.propTypes = {
-  active: PropTypes.bool.isRequired,
-  toggleActive: PropTypes.func.isRequired,
 }
 
 export default Menu

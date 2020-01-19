@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
-    "seedFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js",
-    "resetFoodtrucks": "source env.sh && node src/server/database/seedFoodTrucksInfo.js --reset",
+    "seedFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js",
+    "resetFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js --reset",
     "test": "mocha --reporter spec",
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
@@ -70,6 +70,7 @@
   "devDependencies": {
     "@types/node": "^13.1.6",
     "@types/react": "^16.9.17",
+    "@types/react-redux": "^7.1.6",
     "@types/styled-components": "^4.4.2",
     "chai": "^4.1.2",
     "concurrently": "^4.1.2",
