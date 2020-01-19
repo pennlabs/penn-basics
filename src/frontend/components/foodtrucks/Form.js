@@ -77,6 +77,7 @@ const Form = ({ show, hideFunction, updateReview }) => {
           style={{ marginLeft: '0.5rem' }}
           disabled={!rating || !comment}
           onClick={() => {
+            hideFunction()
             updateReview(rating, comment)
           }}
         >

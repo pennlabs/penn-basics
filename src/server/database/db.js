@@ -154,6 +154,15 @@ function insertUser(userData) {
   return new User(userData).save()
 }
 
+const updateUser = async (pennid, displayName) => {
+  const user = await User.findOneAndUpdate(
+    { pennid },
+    { displayName },
+    { new: true }
+  )
+  return user
+}
+
 module.exports = {
   filterSpaces,
   getSpace,
@@ -163,6 +172,7 @@ module.exports = {
   findAllFoodtrucks,
   insertUser,
   getUser,
+  updateUser,
   updateReview,
   deleteReview,
 }
