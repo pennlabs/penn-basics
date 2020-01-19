@@ -43,17 +43,6 @@ class App extends Component {
   componentDidMount() {
     const { getAllSpacesDataDispatch } = this.props
     getAllSpacesDataDispatch()
-    // const apiKey = process.env.GOOGLE_MAPS_API_KEY
-    // if (apiKey) {
-    //   const tag = document.createElement('script')
-    //   tag.setAttribute(
-    //     'src',
-    //     `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
-    //   )
-    //   document.getElementsByTagName('body')[0].appendChild(tag)
-    // } else {
-    //   this.setState({ googleMapError: 'Sorry, Google Map cannot be shown' })
-    // }
   }
 
   componentDidUpdate(prevProps) {

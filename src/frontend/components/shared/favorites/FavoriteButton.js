@@ -24,7 +24,7 @@ const FavoriteButton = ({
     )
   }
   return (
-    <Button onClick={() => addFunction(addParams)}>
+    <Button isInfo onClick={() => addFunction(addParams)}>
       <FavoriteIcon opacity="0.75" style={{ transform: 'scale(0.75)' }} />
       &nbsp; Make Favorite
     </Button>

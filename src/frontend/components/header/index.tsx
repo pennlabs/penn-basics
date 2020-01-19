@@ -1,12 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import s from 'styled-components'
+import s, { createGlobalStyle } from 'styled-components'
 
 import Nav from '../shared/Nav'
 import Feedback from '../shared/Feedback'
 import { BLUE, DARK_BLUE, SNOW } from '../../styles/colors'
 
-const AppWrapper = s.div`
+const GlobalStyle = createGlobalStyle`
+  html, body {
+    background: ${SNOW};
+  }
+
   a {
     color: ${BLUE};
 
@@ -23,7 +27,7 @@ const AppWrapper = s.div`
 `
 
 const Header = ({ children }) => (
-  <AppWrapper>
+  <>
     <Head>
       <meta charSet="utf-8" />
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -102,12 +106,12 @@ const Header = ({ children }) => (
       <meta name="msapplication-TileColor" content="#5bbad5" />
     </Head>
 
+    <GlobalStyle />
+
     <Nav />
     <Feedback />
-    <div id="wrapper" style={{ background: SNOW }}>
-      <div id="app">{children}</div>
-    </div>
-  </AppWrapper>
+    <div id="app">{children}</div>
+  </>
 )
 
 export default Header

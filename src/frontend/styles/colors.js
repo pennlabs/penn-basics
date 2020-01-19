@@ -23,8 +23,12 @@ export const LIGHT_GREEN = '#e8f9ec'
 export const GREEN = '#3eaa6d'
 export const FOREST = '#3a7553'
 export const RED = '#e25152'
+export const DARK_RED = '#cc4344'
 export const LIGHT_YELLOW = '#fff5dd'
 export const YELLOW = '#ffc520'
 export const MUSTARD = '#efb717'
 export const ORANGE = '#faa432'
 export const PURPLE = '#834fa0'
+
+// Accessibility
+export const OUTLINE = 'rgba(0, 123, 255, 0.25)'
