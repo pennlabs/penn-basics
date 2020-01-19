@@ -37,7 +37,7 @@ const Hours = ({ start, end }) => {
 
   const hoursArr = []
 
-  if (start.length && end.length) {
+  if (start && end && start.length && end.length) {
     days.forEach((_, idx) => {
       if (!start[idx]) {
         hoursArr.push(`Closed`)
