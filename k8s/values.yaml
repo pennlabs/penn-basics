@@ -3,7 +3,7 @@ image_tag: latest
 
 applications:
   - name: basics
-    image: pennlabs/pennbasics
+    image: pennlabs/penn-basics
     secret: basics
     extraEnv:
       - name: PORT
