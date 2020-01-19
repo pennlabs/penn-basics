@@ -3,12 +3,11 @@
 import React, { useEffect, useState } from 'react'
 import s from 'styled-components'
 import Link from 'next/link'
-
-import { BLACK } from '../../../styles/colors'
 import Chevron from '../../../../../public/img/chevron-left.svg'
+import { BLACK } from '../../../styles/colors'
 import { minWidth, TABLET } from '../../../styles/sizes'
 
-const Wrapper = s.div`
+const Wrapper = s.div<{}>`
   vertical-align: top;
   opacity: 0.5;
   padding-top: 1rem;

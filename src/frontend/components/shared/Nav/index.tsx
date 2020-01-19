@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Dispatch } from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -17,6 +17,7 @@ import Menu from './Menu'
 import Logo from './Logo'
 import Back from './Back'
 import { Shade } from '../Shade'
+import { IUserInfo } from '../../../types'
 
 /**
  * Navbar is fixed position and thus takes up no height as far as other elements
@@ -49,7 +50,7 @@ const Wrapper = s.nav`
   }
 `
 
-const StyledShade = s(Shade)`
+const StyledShade = s(Shade)<{ zIndex: number }>`
   position: fixed;
   left: 0;
   top: 0;
@@ -63,9 +64,19 @@ const StyledShade = s(Shade)`
   }
 `
 
-// TODO replace imgur jawn with local jawn
+export interface IOwnProps {}
 
-const Nav = ({ dispatchGetUserInfo, userInfo }) => {
+interface IStateProps {
+  userInfo?: IUserInfo
+}
+
+interface IDispatchProps {
+  dispatchGetUserInfo: () => void
+}
+
+type Props = IStateProps & IDispatchProps & IOwnProps
+
+const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
   const [isNewlyMounted, setIsNewlyMounted] = useState(true)
   const [active, toggleActive] = useState(false)
 
@@ -86,7 +97,7 @@ const Nav = ({ dispatchGetUserInfo, userInfo }) => {
         <Back />
         <Logo />
 
-        <Menu active={active} toggleActive={toggle} zIndex={Z_INDEX} />
+        <Menu active={active} toggleActive={toggle} />
 
         <Links
           active={active}
@@ -109,8 +120,11 @@ const Nav = ({ dispatchGetUserInfo, userInfo }) => {
 
 const mapStateToProps = ({ authentication }) => authentication
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav)
+export default connect<IStateProps, IDispatchProps, IOwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav)

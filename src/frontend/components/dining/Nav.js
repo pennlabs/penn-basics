@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
-import { Card, Scrollbar, Line, NavHeader } from '../shared'
+import { Scrollbar, NavHeaderCard } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import DiningCard from './DiningCard'
-import { WHITE, BABY_BLUE } from '../../styles/colors'
+import { WHITE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
@@ -48,10 +48,7 @@ const Nav = ({ favorites, selectedVenueId, venueHours }) => {
       height={`calc(100vh - ${NAV_HEIGHT})`}
       hideOnMobile={hideOnMobile}
     >
-      <Card background={BABY_BLUE} padding="0">
-        <NavHeader className="title is-5">Favorites</NavHeader>
-        <Line />
-      </Card>
+      <NavHeaderCard title="Favorites" />
 
       {favorites.map(key => {
         return (
@@ -65,10 +62,7 @@ const Nav = ({ favorites, selectedVenueId, venueHours }) => {
         )
       })}
 
-      <Card background={BABY_BLUE} padding="0">
-        <NavHeader className="title is-5">Dining</NavHeader>
-        <Line />
-      </Card>
+      <NavHeaderCard title="Dining" />
 
       {diningKeys.map(key => {
         return (
@@ -82,10 +76,7 @@ const Nav = ({ favorites, selectedVenueId, venueHours }) => {
         )
       })}
 
-      <Card background={BABY_BLUE} padding="0">
-        <NavHeader className="title is-5">Retail</NavHeader>
-        <Line />
-      </Card>
+      <NavHeaderCard title="Retail" />
 
       {retailKeys.map(key => (
         <DiningCard

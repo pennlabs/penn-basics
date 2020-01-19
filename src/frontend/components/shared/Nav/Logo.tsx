@@ -56,7 +56,7 @@ const Wrapper = s.div`
   }
 `
 
-export default () => (
+export default (): JSX.Element => (
   <Wrapper>
     <Link href={HOME_ROUTE}>
       <a style={{ height: LOGO_HEIGHT }}>

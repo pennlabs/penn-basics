@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
-export const ErrorMessage = ({ message = '' }) => {
-  const [visible, setVisibility] = useState(true)
+interface IErrorMessageProps {
+  message?: string
+}
+
+export const ErrorMessage = ({ message = '' }: IErrorMessageProps) => {
+  const [visible, setVisibility] = useState<boolean>(true)
   if (!message || !visible) return null
 
   return (
@@ -16,12 +19,4 @@ export const ErrorMessage = ({ message = '' }) => {
       {message || 'Oops, there was an error'}
     </div>
   )
-}
-
-ErrorMessage.defaultProps = {
-  message: null,
-}
-
-ErrorMessage.propTypes = {
-  message: PropTypes.string,
 }

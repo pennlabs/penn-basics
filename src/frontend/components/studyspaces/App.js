@@ -80,6 +80,10 @@ class App extends Component {
       return <Filter />
     }
 
+    const areFilteredSpacesResults = Boolean(
+      Object.keys(filteredSpacesData).length
+    )
+
     return (
       <>
         <MobileToggleView
@@ -103,7 +107,7 @@ class App extends Component {
           >
             <ErrorMessage message={error} />
 
-            {!Object.keys(filteredSpacesData).length && (
+            {!areFilteredSpacesResults && (
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"
                 imageAlt="Empty Studyspaces"

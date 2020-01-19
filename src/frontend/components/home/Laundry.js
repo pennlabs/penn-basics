@@ -16,7 +16,7 @@ import {
 import MachineAvailability from '../laundry/MachineAvailability'
 
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
-import { LAUNDRY_ROUTE } from '../../constants/routes'
+import { LAUNDRY_HALLS_ROUTE } from '../../constants/routes'
 
 class Laundry extends Component {
   componentDidMount() {
@@ -29,7 +29,7 @@ class Laundry extends Component {
 
     if (!favoritesHome || favoritesHome.length === 0) {
       return (
-        <Link href={LAUNDRY_ROUTE}>
+        <Link href={LAUNDRY_HALLS_ROUTE}>
           <a>
             <h4>Select your favorite Laundry hall</h4>
           </a>
@@ -75,7 +75,7 @@ class Laundry extends Component {
   render() {
     return (
       <BorderedCard>
-        <Link href={LAUNDRY_ROUTE}>
+        <Link href={LAUNDRY_HALLS_ROUTE}>
           <a>
             <Title>Laundry</Title>
           </a>

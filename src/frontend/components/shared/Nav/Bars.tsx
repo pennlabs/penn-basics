@@ -1,7 +1,5 @@
 import React from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
-
 import { minWidth, PHONE } from '../../../styles/sizes'
 import { BLACK } from '../../../styles/colors'
 
@@ -39,17 +37,17 @@ const Bar = s.span`
   }
 `
 
-const Bars = ({ handleClick, onKeyPress }) => (
-  <Wrapper onClick={handleClick} onKeyPress={onKeyPress}>
+interface IBars {
+  handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onKeyPress: (event: React.KeyboardEvent<HTMLDivElement>) => void
+}
+
+const Bars = ({ handleClick, onKeyPress }: IBars) => (
+  <Wrapper onClick={handleClick} onKeyPress={onKeyPress} tabIndex={0}>
     <Bar />
     <Bar />
     <Bar />
   </Wrapper>
 )
-
-Bars.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  onKeyPress: PropTypes.func.isRequired,
-}
 
 export default Bars

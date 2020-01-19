@@ -10,7 +10,7 @@ import UserSVG from '../../../../../public/img/user.svg'
 import {
   DINING_ROUTE,
   FOODTRUCKS_ROUTE,
-  LAUNDRY_ROUTE,
+  LAUNDRY_HALLS_ROUTE,
   STUDYSPACES_ROUTE,
   getApiAuthRouteWithRedirectParams,
   PROFILE_ROUTE,
@@ -80,9 +80,9 @@ const Links = ({ active, zIndex, userInfo, toggleActive }) => (
       <a onClick={() => toggleActive(false)}>Dining</a>
     </Link>
     <Link href={FOODTRUCKS_ROUTE}>
-      <a onClick={() => toggleActive(false)}> Foodtrucks </a>
+      <a onClick={() => toggleActive(false)}>Foodtrucks</a>
     </Link>
-    <Link href={LAUNDRY_ROUTE}>
+    <Link href={LAUNDRY_HALLS_ROUTE}>
       <a onClick={() => toggleActive(false)}>Laundry</a>
     </Link>
     <Link href={STUDYSPACES_ROUTE}>
