@@ -114,10 +114,10 @@ class App extends Component {
             {Object.keys(filteredSpacesData).map(spaceId => {
               const space = filteredSpacesData[spaceId]
               return (
-                <div key={spaceId}>
+                <React.Fragment key={spaceId}>
                   <SpaceCard spaceId={spaceId} {...space} />
                   <Line />
-                </div>
+                </React.Fragment>
               )
             })}
 

@@ -45,6 +45,10 @@ export const Row = s.div(
 
 export const FlexRow = s(Row)`
   display: flex !important;
+
+  ${maxWidth(PHONE)} {
+    display: flex;
+  }
 `
 
 const ColWrapper = s.div(
