@@ -33,6 +33,11 @@ const updateReview = async (foodtruckID, userReview) => {
     { reviews: 1, overallRating: 1 }
   )
 
+  if (!data) {
+    console.error(`Truck not found with id of ${foodtruckID}`)
+    return
+  }
+
   let { overallRating } = data
   if (!overallRating) overallRating = 0.0
 

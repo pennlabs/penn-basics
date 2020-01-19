@@ -126,10 +126,20 @@ module.exports = function authRouter(DB) {
   )
 
   router.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-      res.clearCookie('connect.sid')
-      res.redirect('/')
-    })
+    if (req.user) {
+      const { user } = req
+      req.session.destroy(err => {
+        if (err) {
+          console.error(
+            `Error encounted while attempting to destroy session for user with pennid of ${user.pennid}`
+          )
+          console.error(err)
+        } else {
+          res.clearCookie('connect.sid')
+          res.redirect('/')
+        }
+      })
+    }
   })
 
   return router
