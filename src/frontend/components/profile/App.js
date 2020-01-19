@@ -1,3 +1,5 @@
+/* global window */
+
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import s from 'styled-components'
@@ -5,7 +7,7 @@ import s from 'styled-components'
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
 import { getFavorites } from '../../actions/dining_actions'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
-import { BORDER } from '../../styles/colors'
+import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
 
 const StyledCard = s(Card)`
   padding: 0em;
@@ -14,23 +16,43 @@ const StyledCard = s(Card)`
   margin-top: 0.5em;
 `
 
+const InputField = s.input`
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid ${FOCUS_GRAY};
+  background: transparent;
+  margin-right: 1em;
+  color: ${MEDIUM_GRAY};
+  padding: 0.5em;
+  margin-left: 1em;
+  
+  :focus {
+    outline: none;
+    color: ${DARK_GRAY};
+    border-bottom-color: ${BORDER};
+  }
+`
+
 const App = ({
   dispatchGetDiningFavorites,
   diningFavorites,
   dispatchGetLaundryFavorites,
   laundryFavorites,
+  userInfo = {},
 }) => {
   useEffect(() => {
     dispatchGetDiningFavorites()
     dispatchGetLaundryFavorites()
   }, [])
 
+  const { fullName, displayName } = userInfo
+
   return (
     <div style={{ padding: '1em 5em' }}>
       <Title> Profile </Title>
       <BorderedCard>
         Display Name
-        <input />
+        <InputField value={displayName || fullName} />
       </BorderedCard>
       <Title> Favorites </Title>
       <Row>
@@ -62,9 +84,7 @@ const App = ({
         </Col>
       </Row>
       <Title> Authored Reviews </Title>
-      <BorderedCard>
-        Display Name
-      </BorderedCard>
+      <BorderedCard>Display Name</BorderedCard>
       <a
         href="/api/auth/logout"
         className="button is-info"
@@ -76,13 +96,15 @@ const App = ({
   )
 }
 
-const mapStateToProps = ({ dining, laundry }) => {
+const mapStateToProps = ({ dining, laundry, authentication }) => {
   const { favorites: diningFavorites } = dining
   const { favoritesHome: laundryFavorites } = laundry
+  const { userInfo } = authentication
 
   return {
     diningFavorites,
     laundryFavorites,
+    userInfo,
   }
 }
 
@@ -93,7 +115,4 @@ const mapDispatchToProps = dispatch => ({
   // dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

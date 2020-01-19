@@ -30,6 +30,7 @@ import EditIcon from '../../../../public/img/foodtrucks/edit.svg'
 import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
+import { Button } from '../shared/Button'
 
 const Credit = s.div`
   width: 100%;
@@ -94,6 +95,7 @@ class FoodtruckModal extends Component {
     if (loggedIn) {
       this.setState({ showForm: true })
     } else {
+      console.log(router.pathname)
       window.location.href = `/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`
     }
   }
@@ -105,7 +107,7 @@ class FoodtruckModal extends Component {
       infoError,
       foodtruckInfo,
       dispatchUpdateFoodtruckReview,
-      userInfo = {},
+      userInfo,
     } = this.props
 
     const show = Boolean(foodtruckId)
@@ -124,7 +126,7 @@ class FoodtruckModal extends Component {
       overallRating,
     } = foodtruckInfo || {}
 
-    const { pennid, fullName } = userInfo
+    const { pennid, fullName } = userInfo || {}
 
     const { showForm, showReview } = this.state
 
@@ -135,13 +137,11 @@ class FoodtruckModal extends Component {
             <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
               {!showForm && (
                 <Buttons>
-                  <span // eslint-disable-line
-                    className="button is-info"
+                  <Button // eslint-disable-line
                     onClick={this.handleReviewOnClick}
                   >
-                    <EditIcon fill="none" viewBox="0 -2 30 30" />
-                    &nbsp; Leave a Review
-                  </span>
+                    <EditIcon fill="none" viewBox="0 -2 30 30" /> Leave a Review
+                  </Button>
                 </Buttons>
               )}
               <Title marginBottom="0.5vh">{name}</Title>

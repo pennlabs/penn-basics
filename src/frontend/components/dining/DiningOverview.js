@@ -25,7 +25,7 @@ const DiningOverview = ({ id }) => {
           <AnchorButton
             href={`${PENN_DINING_BASE_URL}${pennDiningSlug}`}
             target="_BLANK"
-            className="button is-info is-medium"
+            lg
           >
             View Menu Details
             <ExternalLinkIcon
