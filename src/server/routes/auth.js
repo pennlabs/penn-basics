@@ -81,7 +81,7 @@ module.exports = function authRouter(DB) {
         pennid: req.user.pennid,
         email: req.user.email,
         fullName: `${req.user.first_name} ${req.user.last_name}`,
-        preferredName: req.user.preferredName,
+        displayName: req.user.displayName,
         expires: req.session.cookie.expires,
         loggedIn: true,
       })
@@ -140,6 +140,13 @@ module.exports = function authRouter(DB) {
         }
       })
     }
+  })
+
+  router.post('/updateUser', (req, res) => {
+    const { pennid, displayName } = req.body
+    DB.updateUser(pennid, displayName).then(user => {
+      res.status(200).json(user)
+    })
   })
 
   return router

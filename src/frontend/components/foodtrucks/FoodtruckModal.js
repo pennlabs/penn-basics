@@ -96,7 +96,7 @@ class FoodtruckModal extends Component {
       this.setState({ showForm: true })
     } else {
       console.log(router.pathname)
-      window.location.href = `/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`
+      window.location.href = `/api/auth/authenticate?successRedirect=${router.asPath}&failureRedirect=${router.asPath}`
     }
   }
 

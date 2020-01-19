@@ -1,13 +1,16 @@
-/* global window */
-
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import s from 'styled-components'
+import { DebounceInput } from 'react-debounce-input'
+import axios from 'axios'
 
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
 import { getFavorites } from '../../actions/dining_actions'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
-import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
+import { getUserInfo } from '../../actions/auth_actions'
+import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY, BLUE } from '../../styles/colors'
+import CheckCircleSVG from '../../../../public/img/check-circle.svg'
+import Loading from '../shared/Loading'
 
 const StyledCard = s(Card)`
   padding: 0em;
@@ -16,7 +19,7 @@ const StyledCard = s(Card)`
   margin-top: 0.5em;
 `
 
-const InputField = s.input`
+const InputField = s(DebounceInput)`
   font-size: 16px;
   font-weight: 400;
   border: 1px solid ${FOCUS_GRAY};
@@ -37,22 +40,62 @@ const App = ({
   dispatchGetDiningFavorites,
   diningFavorites,
   dispatchGetLaundryFavorites,
+  dispatchGetUserInfo,
   laundryFavorites,
-  userInfo = {},
+  userInfo,
 }) => {
   useEffect(() => {
     dispatchGetDiningFavorites()
     dispatchGetLaundryFavorites()
   }, [])
 
-  const { fullName, displayName } = userInfo
+  const { fullName, displayName, pennid } = userInfo || {}
+
+  const [name, setName] = useState(displayName || fullName)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setName(displayName || fullName)
+  }, [fullName, displayName])
+
+  const onChangeName = e => {
+    setName(e.target.value)
+    axios
+      .post('/api/auth/updateUser', { pennid, displayName: e.target.value })
+      .then(resp => {
+        const { status } = resp
+        if (status === 200) {
+          setLoading(false)
+        }
+      })
+  }
 
   return (
     <div style={{ padding: '1em 5em' }}>
       <Title> Profile </Title>
       <BorderedCard>
         Display Name
-        <InputField value={displayName || fullName} />
+        <InputField
+          value={name}
+          onChange={onChangeName}
+          onKeyDown={() => setLoading(true)}
+          debounceTimeout={400}
+        />
+        {loading ? (
+          <Loading
+            displayInLine
+            padding="0"
+            size="1.5rem"
+            translateY="6px"
+            thickness="0.1rem"
+          />
+        ) : null}
+        {!loading ? (
+          <CheckCircleSVG
+            style={{ transform: 'translateY(6px)' }}
+            color={BLUE}
+          />
+        ) : null}
       </BorderedCard>
       <Title> Favorites </Title>
       <Row>
@@ -111,6 +154,7 @@ const mapStateToProps = ({ dining, laundry, authentication }) => {
 const mapDispatchToProps = dispatch => ({
   dispatchGetDiningFavorites: () => dispatch(getFavorites()),
   dispatchGetLaundryFavorites: () => dispatch(getFavoritesHomePage()),
+  dispatchGetUserInfo: () => dispatch(getUserInfo()),
   // dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
   // dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
 })

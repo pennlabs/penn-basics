@@ -18,7 +18,7 @@ module.exports = function foodtrucksRouter(DB) {
     })
   })
 
-  router.post('/:id/review', async (req, res) => {
+  router.post('/:id/review', (req, res) => {
     const foodtruckId = req.params.id
     let { pennid } = req.body
     const { rating, comment, fullName } = req.body

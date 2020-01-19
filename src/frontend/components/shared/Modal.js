@@ -149,7 +149,6 @@ class Modal extends Component {
               <Times>&times;</Times>
             </ModalClose>
           </Link>
-
           {children}
         </ModalContent>
       </Shade>
