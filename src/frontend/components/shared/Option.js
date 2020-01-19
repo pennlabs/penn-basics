@@ -22,6 +22,13 @@ import {
   FILTER_HEIGHT,
 } from '../../styles/sizes'
 
+/**
+ * Button-like component used for filtering
+ *
+ * Appears more condensed on mobile devices
+ *
+ * Button is made active when it is clicked by the user
+ */
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
   cursor: pointer;
@@ -65,6 +72,9 @@ export const FilterBtnWrapper = s.a`
   `}
 `
 
+/**
+ * Shade shown behind filter options when a filter button is active
+ */
 export const OptionsModalBacking = s.div`
   position: fixed;
   left: 0;
@@ -75,6 +85,16 @@ export const OptionsModalBacking = s.div`
   z-index: ${Z_INDEX + 2};
 `
 
+/**
+ * Component housing filter options
+ *
+ * Has a white background and padding
+ *
+ * On desktop devices this is is positioned justified to corresponding
+ * `<FilterBtnWrapper />`
+ *
+ * On mobile devices this is positioned to take up the full width of the screen
+ */
 export const OptionsModalWrapper = s.div`
   position: absolute;
   z-index: ${Z_INDEX + 3};

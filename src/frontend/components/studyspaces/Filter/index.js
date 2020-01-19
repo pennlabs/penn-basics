@@ -32,25 +32,16 @@ import {
   PHONE,
   NAV_HEIGHT,
   MOBILE_FILTER_HEIGHT,
-  TABLET,
-  minWidth,
   Z_INDEX,
   FILTER_HEIGHT,
 } from '../../../styles/sizes'
-import { ModalContainer, Subtitle } from '../../shared'
+import {
+  ModalContainer,
+  Subtitle,
+  withHideAboveTablet,
+  HiddenOnTablet,
+} from '../../shared'
 import Modal from '../../shared/Modal'
-
-const HideOnTablet = s.span`
-  ${maxWidth(TABLET)} {
-    display: none;
-  }
-`
-
-const HideAboveTablet = s.span`
-  ${minWidth(TABLET)} {
-    display: none;
-  }
-`
 
 const FilterWrapper = s.div`
   display: flex;
@@ -137,6 +128,8 @@ const FilterSpace = s.div`
     height: ${MOBILE_FILTER_HEIGHT};
   }
 `
+
+const FilterTextHideAboveTablet = withHideAboveTablet(FilterText)
 
 class Filter extends Component {
   constructor(props) {
@@ -281,9 +274,9 @@ class Filter extends Component {
             active={filterGroupsActive}
           />
 
-          <HideAboveTablet>
-            <FilterText onClick={this.toggleMoreFilters}>More</FilterText>
-          </HideAboveTablet>
+          <FilterTextHideAboveTablet onClick={this.toggleMoreFilters}>
+            More
+          </FilterTextHideAboveTablet>
 
           <FilterText
             onClick={clearSpacesFiltersDispatch}
@@ -292,9 +285,9 @@ class Filter extends Component {
             Clear filters
           </FilterText>
 
-          <HideOnTablet style={{ marginLeft: 'auto' }}>
+          <HiddenOnTablet style={{ marginLeft: 'auto' }}>
             <ToggleNeighborhood />
-          </HideOnTablet>
+          </HiddenOnTablet>
         </FilterWrapper>
 
         <FilterSpace />
