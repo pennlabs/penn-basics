@@ -73,7 +73,7 @@ const App = ({
   return (
     <div style={{ padding: '1em 5em' }}>
       <Title> Profile </Title>
-      <BorderedCard>
+      <BorderedCard style={{ marginBottom: '2rem' }}>
         Display Name
         <InputField
           value={name}
