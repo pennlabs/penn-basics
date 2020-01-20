@@ -273,7 +273,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetReminders: () => dispatch(getReminders()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LaundryVenue)
+export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

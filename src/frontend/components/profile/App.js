@@ -8,9 +8,21 @@ import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
 import { getFavorites } from '../../actions/dining_actions'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
 import { getUserInfo } from '../../actions/auth_actions'
-import { BORDER, FOCUS_GRAY, MEDIUM_GRAY, DARK_GRAY, BLUE } from '../../styles/colors'
+import {
+  BORDER,
+  FOCUS_GRAY,
+  MEDIUM_GRAY,
+  DARK_GRAY,
+  BLUE,
+} from '../../styles/colors'
 import CheckCircleSVG from '../../../../public/img/check-circle.svg'
 import Loading from '../shared/Loading'
+import NotFound from '../shared/NotFound'
+import { getApiAuthRouteWithRedirectParams } from '../../constants/routes'
+
+const Wrapper = s.div`
+  padding: 1rem;
+`
 
 const StyledCard = s(Card)`
   padding: 0em;
@@ -44,6 +56,21 @@ const App = ({
   laundryFavorites,
   userInfo,
 }) => {
+  const { loggedIn } = userInfo || {}
+  if (!loggedIn) {
+    return (
+      <Wrapper>
+        <NotFound
+          title="Oops!"
+          message="Seems like you are not logged in"
+          urlText="Click to login"
+          url={getApiAuthRouteWithRedirectParams('/profile')}
+          linkIsExternal
+        />
+      </Wrapper>
+    )
+  }
+
   useEffect(() => {
     dispatchGetDiningFavorites()
     dispatchGetLaundryFavorites()
