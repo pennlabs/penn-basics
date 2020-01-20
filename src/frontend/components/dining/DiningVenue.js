@@ -95,7 +95,7 @@ DiningVenue.defaultProps = {
 }
 
 DiningVenue.propTypes = {
-  // venueHoursPending: PropTypes.bool.isRequired,
+  venueHoursPending: PropTypes.bool.isRequired,
   venueId: PropTypes.string,
   favorites: PropTypes.arrayOf(PropTypes.string),
   dispatchAddFavorite: PropTypes.func.isRequired,

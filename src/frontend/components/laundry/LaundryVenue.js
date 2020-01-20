@@ -13,6 +13,7 @@ import {
   NoData,
   ErrorMessage,
 } from '../shared'
+import NotFound from '../shared/NotFound'
 
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
@@ -104,6 +105,14 @@ class LaundryVenue extends Component {
 
     if (!isValidNumericId(hallURLId) || !laundryHallInfo) {
       return LaundryVenue.renderNoHall()
+    }
+
+    if (hallURLId < 0 || hallURLId > 52) {
+      return (
+        <Wrapper>
+          <NotFound />
+        </Wrapper>
+      )
     }
 
     const isFavorited = favorites.some(({ hallId }) => hallId === hallURLId)
