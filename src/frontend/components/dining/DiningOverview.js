@@ -29,8 +29,6 @@ const DiningOverview = ({ id }) => {
           >
             View Menu Details
             <ExternalLinkIcon
-              
-              
               style={{ transform: 'scale(0.75)', marginLeft: '0.2rem' }}
             />
           </AnchorButton>

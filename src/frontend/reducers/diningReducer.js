@@ -2,7 +2,6 @@ import {
   getVenueInfoRequested,
   getVenueInfoRejected,
   getVenueInfoFulfilled,
-  getVenueHoursFulfilled,
   updateDiningFavorites,
 } from '../actions/action_types'
 
@@ -36,11 +35,6 @@ const diningReducer = (state = defaultState, action) => {
       return {
         ...state,
         favorites: action.favorites,
-      }
-    case getVenueHoursFulfilled:
-      return {
-        ...state,
-        venueHours: action.venueHours,
       }
     default:
       return state

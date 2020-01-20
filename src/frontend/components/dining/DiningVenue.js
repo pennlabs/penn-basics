@@ -7,7 +7,7 @@ import venueData from '../../../server/resources/dining/venue_info.json'
 import { addFavorite, removeFavorite } from '../../actions/dining_actions'
 import DiningOverview from './DiningOverview'
 import NotFound from '../shared/NotFound'
-// import Loading from '../shared/Loading'
+import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import { NoData } from '../shared'
 import { maxWidth, PHONE } from '../../styles/sizes'
@@ -33,6 +33,7 @@ const Wrapper = s.div`
 const DiningVenue = ({
   favorites,
   venueId,
+  venueHoursPending,
   dispatchAddFavorite,
   dispatchRemoveFavorite,
 }) => {
@@ -55,14 +56,14 @@ const DiningVenue = ({
     )
   }
 
-  // // If content is still loading
-  // if (venueHoursPending) {
-  //   return (
-  //     <Wrapper>
-  //       <Loading padding="40vh 0" />
-  //     </Wrapper>
-  //   )
-  // }
+  // If content is still loading
+  if (venueHoursPending) {
+    return (
+      <Wrapper>
+        <Loading padding="40vh 0" />
+      </Wrapper>
+    )
+  }
 
   const { name } = venueData[venueId]
   const isFavorited = favorites.includes(venueId)

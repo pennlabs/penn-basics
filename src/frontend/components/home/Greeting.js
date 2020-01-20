@@ -12,14 +12,21 @@ const Greeting = ({ userInfo = {} }) => {
   const [emoji, setEmoji] = useState('')
 
   const { fullName, displayName } = userInfo || {}
-  // fullName = fullName ? `, ${fullName}` : ''
+  let displayString = ''
+  if (fullName || displayName) {
+    displayString = `, ${displayName || fullName}`
+  }
 
   useEffect(() => {
     setGreeting(greetings[Math.floor(Math.random() * greetings.length)])
     setEmoji(emojis[Math.floor(Math.random() * emojis.length)])
   }, [])
 
-  return <Text className="title is-4">{`${greeting} ${displayName || fullName} ${emoji}`}</Text>
+  return (
+    <Text className="title is-4">
+      {`${greeting}${displayString}! ${emoji}`}
+    </Text>
+  )
 }
 
 const mapStateToProps = ({ authentication }) => authentication
