@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import s from 'styled-components'
 import { DebounceInput } from 'react-debounce-input'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+import XSVG from '../../../../public/img/x.svg'
 
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
 import { getFavorites } from '../../actions/dining_actions'
@@ -19,6 +21,7 @@ import CheckCircleSVG from '../../../../public/img/check-circle.svg'
 import Loading from '../shared/Loading'
 import NotFound from '../shared/NotFound'
 import { getApiAuthRouteWithRedirectParams } from '../../constants/routes'
+import idVenueObj from '../../../server/resources/dining/id_venue_mappings.json'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -132,7 +135,15 @@ const App = ({
             <StyledCard>
               {diningFavorites.map(id => (
                 <>
-                  <p style={{ padding: '1rem' }}>{id}</p>
+                  <p style={{ padding: '1rem' }}>
+                    {idVenueObj[id]}
+                    <XSVG
+                      style={{
+                        float: 'right',
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </p>
                   <Line />
                 </>
               ))}
@@ -145,7 +156,14 @@ const App = ({
             <StyledCard>
               {laundryFavorites.map(hall => (
                 <>
-                  <p style={{ padding: '1rem' }}>{hall.hall_name}</p>
+                  <p style={{ padding: '1rem' }}>
+                    {hall.hall_name}
+                    <XSVG
+                      style={{
+                        float: 'right',
+                      }}
+                    />
+                  </p>
                   <Line />
                 </>
               ))}
@@ -153,8 +171,10 @@ const App = ({
           </>
         </Col>
       </Row>
-      <Title> Authored Reviews </Title>
-      <BorderedCard>Display Name</BorderedCard>
+      <div style={{ marginTop: '2rem' }}>
+        <Title> Authored Reviews </Title>
+        <BorderedCard>Display Name</BorderedCard>
+      </div>
       <a
         href="/api/auth/logout"
         className="button is-info"
@@ -185,5 +205,10 @@ const mapDispatchToProps = dispatch => ({
   // dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
   // dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
 })
+
+App.propTypes = {
+  dispatchGetDiningFavorites: PropTypes.func.isRequired,
+  dispatchGetLaundryFavorites: PropTypes.func.isRequired,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
