@@ -223,7 +223,7 @@ export const addFavorite = (hallURLId, location, hallName) => {
   }
 }
 
-export function removeFavorite(hallURLId) {
+export const removeFavorite = hallURLId => {
   return dispatch => {
     logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage

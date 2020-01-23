@@ -123,6 +123,189 @@
     "description": "Bui's Lunch Truck is an all-star at quick breakfast and lunches. They serve classic breakfast and lunch options at affordable prices. Make sure to try the Bui sauce on any sandwich you get!"
   },
   {
+    "name": "Fruit Salad",
+    "location": {
+      "lat": 39.9524876,
+      "lng": -75.1923240
+    },
+    "priceTypes": {
+      "Smoothie": ["Small", "Medium", "Large"]
+    },
+    "menu": {
+      "Smoothie": [
+        {
+          "name": "Strawberry & Banana",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Strawberry, Blueberry, Banana",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Strawberry & Pineapple",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Strawberry, Pineapple & Banana",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Mango & Banana",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Mango & Pineapple",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Mango & Strawberry & Pineapple",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Kiwi & Strawberry",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Kiwi & Mango",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Kiwi & Pineapple",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Kiwi, Strawberry & Mango",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Pina Colada",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Pina Colada Berry",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Strawberry Pina Colada",
+          "price": [3.50, 4.00, 4.50]
+        },
+        {
+          "name": "Mango Pina Colada",
+          "price": [3.50, 4.00, 4.50]
+        }
+      ]
+    }
+  },
+  {
+    "name": "NY Gyro Lunch",
+    "location": {
+      "lat": 39.9528610,
+      "lng": -75.1990919
+    },
+    "menu": {
+      "Rice Platters": [
+        {
+          "name": "Chicken with Rice",
+          "price": 5
+        },
+        {
+          "name": "Lamb with Rice",
+          "price": 5
+        },
+        {
+          "name": "Combo with Rice",
+          "price": 5
+        },
+        {
+          "name": "Falafel with Rice",
+          "price": 5
+        },
+        {
+          "name": "Tilapia Fish with Rice",
+          "price": 5
+        }
+      ],
+      "Salad Platters": [
+        {
+          "name": "Chicken with Salad",
+          "price": 5
+        },
+        {
+          "name": "Tilapia Fish with Salad",
+          "price": 5
+        },
+        {
+          "name": "Lamb with Salad",
+          "price": 5
+        },
+        {
+          "name": "Combo Salad",
+          "price": 5
+        }
+      ],
+      "Gryos": [
+        {
+          "name": "Chicken Gyro",
+          "price": 5
+        },
+        {
+          "name": "Lamb Gyro",
+          "price": 5
+        },
+        {
+          "name": "Combo Gyro",
+          "price": 5
+        },
+        {
+          "name": "Fish Gyro",
+          "price": 5
+        },
+        {
+          "name": "Falafel Gyro",
+          "price": 5
+        }
+      ],
+      "Special": [
+        {
+          "name": "Cheeseburger with Drink",
+          "price": 5
+        },
+        {
+          "name": "Double Burger",
+          "price": 6
+        },
+        {
+          "name": "Halal Cheesesteak",
+          "price": 6
+        }
+      ],
+      "Noodles": [
+        {
+          "name": "Hot Spicy Noodles",
+          "price": 3
+        }
+      ],
+      "Vegetarian Cuisine": [
+        {
+          "name": "Mixed Vegetable & Rice with Drink",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Rice or Wraps",
+          "price": 6
+        },
+        {
+          "name": "Vegetable Samosas",
+          "price": 5
+        },
+        {
+          "name": "Halal Kebab Wraps or with Rice",
+          "price": 6
+        }
+      ]
+    }
+  },
+  {
     "name": "George's Food Truck",
     "start": ["7:00", "7:00", "7:00", "7:00", "7:00", "10:00", null],
     "end": ["17:30", "17:30", "17:30", "17:30", "17:30", "19:00", null],

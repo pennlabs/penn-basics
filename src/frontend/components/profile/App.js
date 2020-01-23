@@ -7,8 +7,14 @@ import PropTypes from 'prop-types'
 import XSVG from '../../../../public/img/x.svg'
 
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
-import { getFavorites } from '../../actions/dining_actions'
-import { getFavoritesHomePage } from '../../actions/laundry_actions'
+import {
+  getFavorites,
+  removeFavorite as diningRemoveFavorite,
+} from '../../actions/dining_actions'
+import {
+  getFavoritesHomePage,
+  removeFavorite as laundryRemoveFavorite,
+} from '../../actions/laundry_actions'
 import { getUserInfo } from '../../actions/auth_actions'
 import {
   BORDER,
@@ -53,9 +59,11 @@ const InputField = s(DebounceInput)`
 
 const App = ({
   dispatchGetDiningFavorites,
-  diningFavorites,
   dispatchGetLaundryFavorites,
   dispatchGetUserInfo,
+  dispatchDiningRemoveFavorite,
+  dispatchLaundryRemoveFavorite,
+  diningFavorites,
   laundryFavorites,
   userInfo,
 }) => {
@@ -132,42 +140,52 @@ const App = ({
         <Col>
           <div style={{ marginRight: '0.5em' }}>
             Dining
-            <StyledCard>
-              {diningFavorites.map(id => (
-                <>
-                  <p style={{ padding: '1rem' }}>
-                    {idVenueObj[id]}
-                    <XSVG
-                      style={{
-                        float: 'right',
-                        cursor: 'pointer',
-                      }}
-                    />
-                  </p>
-                  <Line />
-                </>
-              ))}
-            </StyledCard>
+            {diningFavorites && diningFavorites.length ? (
+              <StyledCard>
+                {diningFavorites.map(id => (
+                  <>
+                    <p style={{ padding: '1rem' }}>
+                      {idVenueObj[id]}
+                      <XSVG
+                        style={{
+                          float: 'right',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => dispatchDiningRemoveFavorite(id)}
+                      />
+                    </p>
+                    <Line />
+                  </>
+                ))}
+              </StyledCard>
+            ) : null}
           </div>
         </Col>
         <Col>
           <>
             Laundry
-            <StyledCard>
-              {laundryFavorites.map(hall => (
-                <>
-                  <p style={{ padding: '1rem' }}>
-                    {hall.hall_name}
-                    <XSVG
-                      style={{
-                        float: 'right',
-                      }}
-                    />
-                  </p>
-                  <Line />
-                </>
-              ))}
-            </StyledCard>
+            {laundryFavorites && laundryFavorites.length ? (
+              <StyledCard>
+                {laundryFavorites.map(hall => (
+                  <>
+                    <p style={{ padding: '1rem' }}>
+                      {hall.hall_name}
+                      <XSVG
+                        style={{
+                          float: 'right',
+                          cursor: 'pointer',
+                        }}
+                        onClick={() => {
+                          dispatchLaundryRemoveFavorite(hall.id)
+                          dispatchGetLaundryFavorites()
+                        }}
+                      />
+                    </p>
+                    <Line />
+                  </>
+                ))}
+              </StyledCard>
+            ) : null}
           </>
         </Col>
       </Row>
@@ -202,8 +220,10 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetDiningFavorites: () => dispatch(getFavorites()),
   dispatchGetLaundryFavorites: () => dispatch(getFavoritesHomePage()),
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
-  // dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
-  // dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
+  dispatchDiningRemoveFavorite: venueId =>
+    dispatch(diningRemoveFavorite(venueId)),
+  dispatchLaundryRemoveFavorite: hallId =>
+    dispatch(laundryRemoveFavorite(hallId)),
 })
 
 App.propTypes = {
