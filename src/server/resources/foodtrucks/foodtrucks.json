@@ -111,16 +111,69 @@
     }
   },
   {
+    "name": "Miss Lee's Halal Food",
+    "location": {
+      "lat": 39.950421,
+      "lng": -75.199600
+    },
+    "image": "https://s3.amazonaws.com/penn.basics/miss-lee.JPG"
+  },
+  {
+    "name": "NY Famous Gyro",
+    "location": {
+      "lat": 39.9521912,
+      "lng": -75.1900867
+    },
+    "start": ["9:30", "9:30", "9:30", "9:30", "9:30", null, null],
+    "end": ["17:00", "17:00", "17:00", "17:00", "17:00", null, null]
+  },
+  {
+    "name": "Frita's Foodtruck",
+    "location": {
+      "lat": 39.9519039,
+      "lng": -75.1900428
+    },
+    "image": "https://s3.amazonaws.com/penn.basics/frita.JPG",
+    "start": ["6:45", "6:45", "6:45", "6:45", "6:45", null, null],
+    "end": ["16:00", "16:00", "16:00", "16:00", "16:00", null, null]
+  },
+  {
+    "name": "Noni Cart",
+    "location": {
+      "lat": 39.9518702,
+      "lng": -75.1901491
+    },
+    "start": ["8:30", "8:30", "8:30", "8:30", "8:30", null, null],
+    "end": ["18:00", "18:00", "18:00", "18:00", "15:00", null, null],
+    "image": "https://s3.amazonaws.com/penn.basics/noni-cart.JPG"
+  },
+  {
     "name": "Bui's Lunch Truck",
     "location": {
       "plusCode": "XR22+J7",
-      "lat": 39.951704,
-      "lng": -75.199282
+      "lat": 39.9515207,
+      "lng": -75.1993215
     },
     "tags": ["sandwich"],
     "link": "https://www.facebook.com/BuisLunchTruck/",
     "image": "https://naldacampus.s3.amazonaws.com/listingpictures/Bui%27s%20Lunch%20Truck/16c89b70-0feb-4801-9845-6b9292b286b8",
-    "description": "Bui's Lunch Truck is an all-star at quick breakfast and lunches. They serve classic breakfast and lunch options at affordable prices. Make sure to try the Bui sauce on any sandwich you get!"
+    "description": "Bui's Lunch Truck is an all-star at quick breakfast and lunches. They serve classic breakfast and lunch options at affordable prices. Make sure to try the Bui sauce on any sandwich you get!",
+    "menu": {
+      "Breakfast": [
+        {
+          "name": "Eggs",
+          "price": 3.00
+        },
+        {
+          "name": "Eggs & Cheese",
+          "price": 3.75
+        },
+        {
+          "name": "Ham & Eggs",
+          "price": 4.75
+        }
+      ]
+    }
   },
   {
     "name": "Fruit Salad",

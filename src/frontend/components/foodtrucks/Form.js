@@ -6,9 +6,12 @@ import ReactTooltip from 'react-tooltip'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
 import { Text } from '../shared'
-import { FOCUS_GRAY, BORDER } from '../../styles/colors'
+import { FOCUS_GRAY, BORDER, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
 
 const TextArea = s.textarea`
+  font-size: 1rem;
+  font-weight: 200;
+  color: ${MEDIUM_GRAY};
   resize: none;
   width: 100%;
   height: 10em;
@@ -19,6 +22,7 @@ const TextArea = s.textarea`
   :focus {
     outline: none;
     border: 1px solid ${BORDER};
+    color: ${DARK_GRAY};
   }
 `
 
@@ -87,6 +91,7 @@ const Form = ({ show, hideFunction, updateReview }) => {
       <div>
         <span style={{ fontSize: '80%' }}>
           Show My Name
+          <Switch defaultChecked />
           <InfoIcon
             style={{ transform: 'scale(0.8) translateY(8px) translateX(2px)' }}
             data-tip
