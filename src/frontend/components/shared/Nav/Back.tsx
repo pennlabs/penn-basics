@@ -1,6 +1,7 @@
 /* globals window */
 
 import React, { useEffect, useState } from 'react'
+import { withRouter } from 'next/router'
 import s from 'styled-components'
 import Link from 'next/link'
 import Chevron from '../../../../../public/img/chevron-left.svg'
@@ -27,12 +28,12 @@ const Wrapper = s.div<{}>`
   }
 `
 
-const Back = () => {
+const Back = ({ router }) => {
   const [route, setRoute] = useState(null)
 
   useEffect(() => {
-    const { pathname } = window.location
-    setRoute(pathname)
+    const { asPath } = router
+    setRoute(asPath)
   })
 
   if (!route || route === '/') return null
@@ -51,4 +52,4 @@ const Back = () => {
   )
 }
 
-export default Back
+export default withRouter(Back)
