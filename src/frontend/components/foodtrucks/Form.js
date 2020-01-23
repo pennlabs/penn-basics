@@ -90,10 +90,10 @@ const Form = ({ show, hideFunction, updateReview }) => {
           <InfoIcon
             style={{ transform: 'scale(0.8) translateY(8px) translateX(2px)' }}
             data-tip
-            data-for="infoIcon"
+            data-for="infoIcon1"
           />
           <ReactTooltip
-            id="infoIcon"
+            id="infoIcon1"
             place="right"
             type="dark"
             effect="solid"
