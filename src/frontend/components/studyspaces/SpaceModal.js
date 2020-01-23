@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { clearActiveSpace } from '../../actions/spaces_actions'
 
+import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
   Title,
   Text,

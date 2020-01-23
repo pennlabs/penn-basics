@@ -189,14 +189,10 @@ const App = ({
           </>
         </Col>
       </Row>
-      <div style={{ marginTop: '2rem' }}>
-        <Title> Authored Reviews </Title>
-        <BorderedCard>Display Name</BorderedCard>
-      </div>
       <a
         href="/api/auth/logout"
         className="button is-info"
-        style={{ color: 'white' }}
+        style={{ color: 'white', marginTop: '3rem' }}
       >
         Logout
       </a>

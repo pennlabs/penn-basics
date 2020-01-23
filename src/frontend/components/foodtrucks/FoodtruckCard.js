@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import s from 'styled-components'
 
-import { Card, Subtitle, Subtext, Row, Col, Circle } from '../shared'
+import { Card, Subtitle, Subtext, FlexRow, Col, Circle } from '../shared'
 import { setHoveredFoodtruck } from '../../actions/foodtrucks_action'
 import { DARK_GRAY } from '../../styles/colors'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
@@ -52,7 +52,7 @@ class FoodtruckCard extends Component {
       >
         <StyledLink>
           <Card padding="0.5rem 0.5rem 0.5rem 1rem" hoverable>
-            <Row>
+            <FlexRow>
               {image && (
                 <Col backgroundImage={image} width="30%" borderRadius="4px" />
               )}
@@ -78,7 +78,8 @@ class FoodtruckCard extends Component {
                       fill="black"
                       color="black"
                       style={{
-                        transform: 'scale(0.7) translateY(10px) translateX(-3px)',
+                        transform:
+                          'scale(0.7) translateY(10px) translateX(-3px)',
                       }}
                       opacity="0.5"
                     />
@@ -89,7 +90,7 @@ class FoodtruckCard extends Component {
                   <Circle open={open} />
                 </Content>
               </Col>
-            </Row>
+            </FlexRow>
           </Card>
         </StyledLink>
       </Link>

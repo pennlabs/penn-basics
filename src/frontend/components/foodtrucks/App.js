@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Router from 'next/router'
 
+import MobileToggleView from '../studyspaces/MobileToggleView'
 import FoodtruckCard from './FoodtruckCard'
 import {
   FoodtruckMap,
@@ -13,19 +14,25 @@ import {
   ErrorMessage,
   NoDataScroll,
 } from '../shared'
-import { NAV_HEIGHT, FILTER_HEIGHT } from '../../styles/sizes'
+import {
+  NAV_HEIGHT,
+  FILTER_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+} from '../../styles/sizes'
 import { getAllFoodtrucksData } from '../../actions/foodtrucks_action'
 import Filter from './Filter'
 import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { FOODTRUCK_ROUTE, FOODTRUCK_QUERY_ROUTE } from '../../constants/routes'
+import { SNOW } from '../../styles/colors'
 
 // TODO ghost loaders
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = { googleMapError: null }
+    this.state = { googleMapError: null, isListViewMobile: true }
+    this.toggleView = this.toggleView.bind(this)
   }
 
   componentDidMount() {
@@ -51,6 +58,11 @@ class App extends Component {
     }
   }
 
+  toggleView() {
+    const { isListViewMobile } = this.state
+    this.setState({ isListViewMobile: !isListViewMobile })
+  }
+
   render() {
     const {
       filteredFoodtrucksData,
@@ -62,7 +74,7 @@ class App extends Component {
 
     const parsedFoodtruckId = Number.isNaN(id) ? null : id
 
-    const { googleMapError } = this.state
+    const { googleMapError, isListViewMobile } = this.state
 
     if (pending || !filteredFoodtrucksData) {
       return null
@@ -70,14 +82,24 @@ class App extends Component {
 
     return (
       <>
+        <MobileToggleView
+          isListView={isListViewMobile}
+          toggle={this.toggleView}
+        />
+
         <Filter />
 
-        <Row maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}>
+        <Row
+          maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+          style={{ backgroup: SNOW }}
+        >
           <Scrollbar
             padding="0 0 .5rem 0"
-            overflowY="scroll"
-            width="40%"
+            sm={12}
+            md={6}
+            lg={4}
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+            hideOnMobile={!isListViewMobile}
           >
             <ErrorMessage message={error} />
 
@@ -101,12 +123,13 @@ class App extends Component {
 
             <PennLabsCredit />
           </Scrollbar>
-          <Col>
+          <Col sm={12} md={6} lg={8} hideOnMobile={isListViewMobile}>
             <ErrorMessage message={googleMapError} />
             {!googleMapError && (
               <FoodtruckMap
                 mapId="map"
                 height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+                mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredFoodtrucksData}
                 activeMarker={hoveredFoodtruck}
                 handleClickMarker={truckId =>
