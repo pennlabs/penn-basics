@@ -125,7 +125,93 @@
       "lng": -75.1900867
     },
     "start": ["9:30", "9:30", "9:30", "9:30", "9:30", null, null],
-    "end": ["17:00", "17:00", "17:00", "17:00", "17:00", null, null]
+    "end": ["17:00", "17:00", "17:00", "17:00", "17:00", null, null],
+    "menu": {
+      "Rice Platters": [
+        {
+          "name": "Chicken over Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb over Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish over Rice",
+          "price": 6
+        },
+        {
+          "name": "Falafel over Rice",
+          "price": 6
+        },
+        {
+          "name": "Veggie over Rice",
+          "price": 6
+        }
+      ],
+      "Combo Platters": [
+        {
+          "name": "Chicken & Lamb with Rice",
+          "price": 6
+        },
+        {
+          "name": "Fish & Chicken with Rice",
+          "price": 6
+        },
+        {
+          "name": "Lamb & Falafel with Rice",
+          "price": 6
+        },
+        {
+          "name": "Chicken & Falafel with Rice",
+          "price": 6
+        }
+      ],
+      "Salads": [
+        {
+          "name": "Chicken Salad",
+          "price": 5
+        },
+        {
+          "name": "Lamb Salad",
+          "price": 5
+        },
+        {
+          "name": "Chicken & Lamb Salad",
+          "price": 5
+        },
+        {
+          "name": "Fish Salad",
+          "price": 5
+        },
+        {
+          "name": "Falafel Salad",
+          "price": 5
+        }
+      ],
+      "Sandwiches": [
+        {
+          "name": "Chicken on Pita",
+          "price": 5
+        },
+        {
+          "name": "Lamb Gyro on Pita",
+          "price": 5
+        },
+        {
+          "name": "Chicken & Lamb on Pita",
+          "price": 5
+        },
+        {
+          "name": "Falafel Sandwich",
+          "price": 5
+        },
+        {
+          "name": "Fish Sandwich",
+          "price": 5
+        }
+      ]
+    }
   },
   {
     "name": "Frita's Foodtruck",
@@ -135,7 +221,105 @@
     },
     "image": "https://s3.amazonaws.com/penn.basics/frita.JPG",
     "start": ["6:45", "6:45", "6:45", "6:45", "6:45", null, null],
-    "end": ["16:00", "16:00", "16:00", "16:00", "16:00", null, null]
+    "end": ["16:00", "16:00", "16:00", "16:00", "16:00", null, null],
+    "menu": {
+      "General": [
+        {
+          "name": "Hot Dog",
+          "price": 1.50 
+        },
+        {
+          "name": "Hot Chili Dog",
+          "price": 2.00
+        },
+        {
+          "name": "Cheesesteak Sandwich",
+          "price": 5.50
+        },
+        {
+          "name": "Mushroom Cheesesteak",
+          "price": 6.00
+        },
+        {
+          "name": "Pizza Steak",
+          "price": 6.00
+        },
+        {
+          "name": "Gr. Pepper Steak",
+          "price": 5.50
+        },
+        {
+          "name": "Hamburgers",
+          "price": 3.00
+        },
+        {
+          "name": "BBQ Steak",
+          "price": 5.50
+        },
+        {
+          "name": "Hot Roast Beef",
+          "price": 5.00
+        },
+        {
+          "name": "Sweet Italian Sausage",
+          "price": 4.00
+        },
+        {
+          "name": "Hot Sausage",
+          "price": 3.50
+        },
+        {
+          "name": "Kielbasa",
+          "price": 3.50
+        },
+        {
+          "name": "Meatball Sandwich",
+          "price": 4.00
+        },
+        {
+          "name": "Ham & cheese Hoagie",
+          "price": 5.00
+        },
+        {
+          "name": "Turkey & Cheese Hoagie",
+          "price": 5.00
+        }
+      ],
+      "Breakfast": [
+        {
+          "name": "Eggs Sandwich",
+          "price": 2.50
+        },
+        {
+          "name": "Egg & Cheese Sandwich",
+          "price": 3.00
+        },
+        {
+          "name": "Sausage & Egg",
+          "price": 3.50
+        },
+        {
+          "name": "Bagel",
+          "price": 1.50
+        },
+        {
+          "name": "Muffins",
+          "price": 1.50
+        },
+        {
+          "name": "Pork Roll Egg & Cheese",
+          "price": 4.00
+        },
+        {
+          "name": "Coffee, Tea, Hot Chocolate",
+          "price": 1.50
+        },
+        {
+          "name": "Can Soda",
+          "price": 1.25
+        }
+      ]
+    }
   },
   {
     "name": "Noni Cart",
@@ -145,7 +329,113 @@
     },
     "start": ["8:30", "8:30", "8:30", "8:30", "8:30", null, null],
     "end": ["18:00", "18:00", "18:00", "18:00", "15:00", null, null],
-    "image": "https://s3.amazonaws.com/penn.basics/noni-cart.JPG"
+    "image": "https://s3.amazonaws.com/penn.basics/noni-cart.JPG",
+    "menu": {
+      "All Day Breakfast": [
+        {
+          "name": "Egg & Cheese",
+          "price": 3.00
+        },
+        {
+          "name": "Bacon Egg & Cheese",
+          "price": 3.50
+        },
+        {
+          "name": "Turkey Bacon Egg & Cheese",
+          "price": 3.50
+        },
+        {
+          "name": "Pork Sausage Egg & Cheese",
+          "price": 3.50
+        },
+        {
+          "name": "Turkey Sausage Egg & Cheese",
+          "price": 3.50
+        },
+        {
+          "name": "Beef Hot Sausage Egg & Cheese",
+          "price": 4.00
+        }
+      ],
+      "Lunch": [
+        {
+          "name": "Grilled Beef Hot Dog",
+          "price": 1.50
+        },
+        {
+          "name": "Grilled Beef Hot Sausage",
+          "price": 3.50
+        },
+        {
+          "name": "100% Beef Cheese Burger",
+          "price": 3.00
+        },
+        {
+          "name": "Pork Dumpling/ Gyoza (6)",
+          "price": 3.50
+        },
+        {
+          "name": "Cheese Steak Teriyaki with mushroom & onion",
+          "price": 6.00
+        },
+        {
+          "name": "Bulgogi Steak with mushroom & onion",
+          "price": 6.00
+        },
+        {
+          "name": "Teriyaki Chicken Bánh Mì",
+          "price": 5.50
+        },
+        {
+          "name": "BBQ Pork Bánh Mì",
+          "price": 6.00
+        }
+      ],
+      "Rice Platter": [
+        {
+          "name": "Chicken Teriyaki",
+          "price": 6.00
+        },
+        {
+          "name": "Beef Teriyaki",
+          "price": 6.50
+        },
+        {
+          "name": "Beef Bulgogi",
+          "price": 6.50
+        },
+        {
+          "name": "Shrimp Teriyaki",
+          "price": 6.00
+        },
+        {
+          "name": "BBQ Pork",
+          "price": 6.00
+        },
+        {
+          "name": "Tofu Delights",
+          "price": 5
+        },
+        {
+          "name": "Glazed Sesame Chicken",
+          "price": 6
+        }
+      ],
+      "Beverages": [
+        {
+          "name": "Canned Soda",
+          "price": 1
+        },
+        {
+          "name": "Bottled Water",
+          "price": 1
+        },
+        {
+          "name": "Bottled Soda, Juice & Gatorade",
+          "price": 2
+        }
+      ]
+    }
   },
   {
     "name": "Bui's Lunch Truck",

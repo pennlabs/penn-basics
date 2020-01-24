@@ -151,9 +151,10 @@ class FoodtruckModal extends Component {
                   &nbsp;
                   <StarIcon
                     fill="none"
-                    viewBox="0 0 40 40"
                     opacity="0.7"
-                    transform="translate(0, 12)"
+                    style={{
+                      transform: 'scale(0.7) translateY(10px) translateX(-4px)',
+                    }}
                   />
                 </span>
                 <span style={{ fontSize: '80%' }}>
@@ -161,9 +162,10 @@ class FoodtruckModal extends Component {
                   &nbsp;
                   <CommentIcon
                     fill="none"
-                    viewBox="0 0 40 40"
                     opacity="0.7"
-                    transform="translate(0, 12)"
+                    style={{
+                      transform: 'scale(0.7) translateY(10px) translateX(-4px)',
+                    }}
                   />
                 </span>
               </ModalContainer>
