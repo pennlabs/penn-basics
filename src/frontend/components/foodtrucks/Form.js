@@ -56,6 +56,7 @@ const Rating = ({ rating, setRating }) => (
 const Form = ({ show, hideFunction, updateReview }) => {
   const [rating, setRating] = useState(null)
   const [comment, setComment] = useState(null)
+  const [showName, setShowName] = useState(true)
   if (!show) return null
 
   return (
@@ -71,8 +72,7 @@ const Form = ({ show, hideFunction, updateReview }) => {
         <span style={{ fontSize: '80%' }}>
           Show my name
           <Switch
-            defaultChecked
-            onChange={checked => console.log(checked)}
+            onChange={() => setShowName(!showName)}
             style={{ margin: '0 0.5em' }}
           />
           Keep review anonymous
@@ -112,7 +112,7 @@ const Form = ({ show, hideFunction, updateReview }) => {
           disabled={!rating || !comment}
           onClick={() => {
             hideFunction()
-            updateReview(rating, comment)
+            updateReview(rating, comment, showName)
           }}
         >
           Submit

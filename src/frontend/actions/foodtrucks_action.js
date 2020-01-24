@@ -131,7 +131,8 @@ export const updateFoodtruckReview = (
   pennID,
   fullName,
   rating,
-  comment
+  comment,
+  showName
 ) => {
   return dispatch => {
     dispatch({
@@ -145,6 +146,7 @@ export const updateFoodtruckReview = (
           fullName,
           rating,
           comment,
+          showName,
         })
         .then(res => {
           const { foodtruck } = res.data

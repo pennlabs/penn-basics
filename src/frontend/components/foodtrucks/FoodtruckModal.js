@@ -188,13 +188,14 @@ class FoodtruckModal extends Component {
                   hideFunction={() => {
                     this.setState({ showForm: false })
                   }}
-                  updateReview={(rating, comment) => {
+                  updateReview={(rating, comment, showName) => {
                     dispatchUpdateFoodtruckReview(
                       foodtruckId,
                       pennid,
                       fullName,
                       rating,
-                      comment
+                      comment,
+                      showName
                     )
                   }}
                 />
@@ -319,10 +320,18 @@ const mapDispatchToProps = dispatch => ({
     pennID,
     fullName,
     rating,
-    comment
+    comment,
+    showName
   ) =>
     dispatch(
-      updateFoodtruckReview(foodtruckID, pennID, fullName, rating, comment)
+      updateFoodtruckReview(
+        foodtruckID,
+        pennID,
+        fullName,
+        rating,
+        comment,
+        showName
+      )
     ),
 })
 
