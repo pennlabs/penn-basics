@@ -116,7 +116,69 @@
       "lat": 39.950421,
       "lng": -75.199600
     },
-    "image": "https://s3.amazonaws.com/penn.basics/miss-lee.JPG"
+    "image": "https://s3.amazonaws.com/penn.basics/miss-lee.JPG",
+    "menu": {
+      "Pasta": [
+        {
+          "name": "Chicken Pasta",
+          "price": 6
+        },
+        {
+          "name": "Shrimp Pasta",
+          "price": 7
+        }
+      ],
+      "Lo Mein": [
+        {
+          "name": "Shrimp Lo Mein",
+          "price": 6
+        },
+        {
+          "name": "Shrimp Lo Mein with Soda",
+          "price": 6.5
+        },
+        {
+          "name": "Chicken Lo Mein",
+          "price": 5.5
+        },
+        {
+          "name": "Chicken Lo Mein with Soda",
+          "price": 6
+        }
+      ],
+      "Rice Platter": [
+        {
+          "name": "Shrimp Vegetables Rice",
+          "price": 6.00
+        },
+        {
+          "name": "Chicken Vegetables Rice",
+          "price": 5.50
+        }
+      ],
+      "Others": [
+        {
+          "name": "Hot/ Mild Sausage with Soda",
+          "price": 4.50
+        },
+        {
+          "name": "Cheeseburger with Soda",
+          "price": 4.50
+        },
+        {
+          "name": "2 Hot Dogs with Soda",
+          "price": 4
+        },
+        {
+          "name": "Chicken Gyro with Soda",
+          "price": 5.50
+        },
+        {
+          "name": "Cheesesteak with Soda",
+          "price": 6
+        }
+      ]
+    }
   },
   {
     "name": "NY Famous Gyro",
@@ -461,6 +523,248 @@
         {
           "name": "Ham & Eggs",
           "price": 4.75
+        },
+        {
+          "name": "Pork Bacon & Eggs",
+          "price": 4.75
+        },
+        {
+          "name": "Sausage & Eggs",
+          "price": 4.75
+        },
+        {
+          "name": "Sausage & Roll",
+          "price": 4.50
+        },
+        {
+          "name": "Sausage & Cheese",
+          "price": 4.00
+        },
+        {
+          "name": "Turkey Bacon & Eggs",
+          "price": 5.25
+        },
+        {
+          "name": "Scrapple & Eggs",
+          "price": 5.25
+        },
+        {
+          "name": "Porkroll & Eggs",
+          "price": 5.25
+        },
+        {
+          "name": "Pork Roll",
+          "price": 4.50
+        },
+        {
+          "name": "Pork Roll & Cheese",
+          "price": 5.00
+        },
+        {
+          "name": "Eggs White",
+          "price": 4.00
+        },
+        {
+          "name": "Eggs White & Cheese",
+          "price": 4.75
+        },
+        {
+          "name": "Double Eggs White",
+          "price": 5.00
+        },
+        {
+          "name": "Double Eggs White & Cheese",
+          "price": 5.75
+        },
+        {
+          "name": "Turkey Bacon Eggs White",
+          "price": 5.50
+        },
+        {
+          "name": "Turkey Bacon Eggs White & Cheese",
+          "price": 6.25
+        },
+        {
+          "name": "Double Eggs White & Turkey Bacon",
+          "price": 7
+        }
+      ],
+      "Extra": [
+        {
+          "name": "Onion",
+          "price": 0.50
+        },
+        {
+          "name": "Lettuce",
+          "price": 0.50
+        },
+        {
+          "name": "Tomato",
+          "price": 0.50
+        },
+        {
+          "name": "Cheese",
+          "price": 1.00
+        },
+        {
+          "name": "Ham or Sausage",
+          "price": 1.00
+        },
+        {
+          "name": "Pork Bacon",
+          "price": 1.50
+        },
+        {
+          "name": "Turkey Bacon",
+          "price": 1.50
+        },
+        {
+          "name": "Mushroom",
+          "price": 0.50
+        },
+        {
+          "name": "Spinach",
+          "price": 0.50
+        },
+        {
+          "name": "Pepper",
+          "price": 0.50
+        }
+      ],
+      "Hoagies": [
+        {
+          "name": "Egg Salad",
+          "price": 4.75
+        },
+        {
+          "name": "Cheese Hoagie",
+          "price": 4.75
+        },
+        {
+          "name": "Ham & Cheese",
+          "price": 5.00
+        },
+        {
+          "name": "Turkey & Cheese",
+          "price": 5
+        },
+        {
+          "name": "Tuna Fish",
+          "price": 5
+        },
+        {
+          "name": "B.L.T (Pork Bacon)",
+          "price": 5.50
+        },
+        {
+          "name": "B.L.T (Turkey Bacon)",
+          "price": 6.00
+        }
+      ],
+      "Steaks": [
+        {
+          "name": "Plain Steak",
+          "price": 5.00
+        },
+        {
+          "name": "Cheese Steak",
+          "price": 6.00
+        },
+        {
+          "name": "Chicken Steak",
+          "price": 6
+        },
+        {
+          "name": "Pepper Steak",
+          "price": 6.50
+        },
+        {
+          "name": "Pizza Steak",
+          "price": 6.50
+        },
+        {
+          "name": "Mushroom Steak",
+          "price": 6.50
+        },
+        {
+          "name": "Steak & Eggs",
+          "price": 7.00
+        },
+        {
+          "name": "Steak Eggs & Cheese",
+          "price": 7.75
+        },
+        {
+          "name": "Steak Eggs White & Cheese",
+          "price": 8.50
+        }
+      ],
+      "Sandwiches": [
+        {
+          "name": "Grilled Cheese",
+          "price": "3.75"
+        },
+        {
+          "name": "Egg Salad",
+          "price": 4.00
+        },
+        {
+          "name": "Ham",
+          "price": 4.00
+        },
+        {
+          "name": "Turkey",
+          "price": 4.00
+        },
+        {
+          "name": "Tuna Fish",
+          "price": 4.00
+        },
+        {
+          "name": "B.L.T (Pork Bacon)",
+          "price": 4.00
+        },
+        {
+          "name": "B.L.T (Turkey Bacon)",
+          "price": 4.50
+        }
+      ],
+      "Hamburgers": [
+        {
+          "name": "Hamburger",
+          "price": 3.00
+        },
+        {
+          "name": "Double Hamburger",
+          "price": 4.00
+        },
+        {
+          "name": "Bacon Hamburger",
+          "price": 3.50
+        },
+        {
+          "name": "Pizza Hamburger",
+          "price": 3.25
+        },
+        {
+          "name": "Cheese Burger",
+          "price": 3.50
+        },
+        {
+          "name": "Double Cheeseburger",
+          "price": 4.50
+        },
+        {
+          "name": "Bacon Cheeseburger",
+          "price": 4.00
+        },
+        {
+          "name": "Pizza Cheeseburger",
+          "price": 3.75
+        },
+        {
+          "name": "Hot Sausage",
+          "price": 3.00
         }
       ]
     }
