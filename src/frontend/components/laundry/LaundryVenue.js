@@ -39,6 +39,11 @@ const Buttons = s.div`
   ${maxWidth(PHONE)} {
     float: none;
     width: 100%;
+    margin-bottom: 1rem;
+
+    .button {
+      width: 100%;
+    }
   }
 `
 

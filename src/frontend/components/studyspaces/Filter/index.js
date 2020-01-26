@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn'
-import Search from './Search'
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -40,6 +39,7 @@ import {
   Subtitle,
   withHideAboveTablet,
   HiddenOnTablet,
+  Search,
 } from '../../shared'
 import Modal from '../../shared/Modal'
 
