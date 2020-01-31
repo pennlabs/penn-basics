@@ -130,9 +130,11 @@ module.exports = function authRouter(DB) {
       const { user } = req
       req.session.destroy(err => {
         if (err) {
+          // eslint-disable-next-line
           console.error(
             `Error encounted while attempting to destroy session for user with pennid of ${user.pennid}`
           )
+          // eslint-disable-next-line
           console.error(err)
         } else {
           res.clearCookie('connect.sid')

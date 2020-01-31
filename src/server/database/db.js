@@ -35,7 +35,7 @@ const updateReview = async (foodtruckID, userReview) => {
 
   if (!data) {
     console.error(`Truck not found with id of ${foodtruckID}`)
-    return
+    return data
   }
 
   let { overallRating } = data
@@ -86,6 +86,22 @@ const updateReview = async (foodtruckID, userReview) => {
     { new: true }
   )
   return foodtruck
+}
+
+const updateFoodtruckReveiwScore = async (foodtruckID, pennid, amount) => {
+  return Foodtrucks.updateOne(
+    { foodtruckID, 'reviews.pennid': pennid },
+    // update the located sub-document (the review) by the specified amount
+    { $inc: { 'reviews.$.pennid': amount } }
+  )
+}
+
+function upvoteFoodtruckReview(foodtruckID, pennid) {
+  updateFoodtruckReveiwScore(foodtruckID, pennid, 1)
+}
+
+function downvoteFoodtruckReview(foodtruckID, pennid) {
+  updateFoodtruckReveiwScore(foodtruckID, pennid, -1)
 }
 
 function findAllSpaces() {
@@ -164,5 +180,7 @@ module.exports = {
   insertUser,
   getUser,
   updateReview,
+  upvoteFoodtruckReview,
+  downvoteFoodtruckReview,
   deleteReview,
 }

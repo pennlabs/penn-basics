@@ -19,6 +19,9 @@ module.exports = function foodtrucksRouter(DB) {
   })
 
   router.post('/:id/review', async (req, res) => {
+    if (!req.user) {
+      return res.status(401).send('User must be logged in to update reviews.')
+    }
     const foodtruckId = req.params.id
     let { pennid } = req.body
     const { rating, comment, fullName } = req.body
@@ -32,6 +35,26 @@ module.exports = function foodtrucksRouter(DB) {
       res.status(200).json({
         foodtruck,
       })
+    })
+  })
+
+  router.post('/:id/review/:pennid/upvote', async (req, res) => {
+    if (!req.user) {
+      return res.status(401).send('User must be logged in to upvote reviews.')
+    }
+    const { id: foodtruckId, pennid } = req.params.id
+    DB.upvoteFoodtruckReview(foodtruckId, pennid).then(() => {
+      res.status(200).send()
+    })
+  })
+
+  router.post('/:id/review/:pennid/downvote', async (req, res) => {
+    if (!req.user) {
+      return res.status(401).send('User must be logged in to downvote reviews.')
+    }
+    const { id: foodtruckId, pennid } = req.params.id
+    DB.upvoteFoodtruckReview(foodtruckId, pennid).then(() => {
+      res.status(200).send()
     })
   })
 
