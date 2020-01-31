@@ -10,6 +10,9 @@ import {
 import { logEvent } from '../../utils/analytics'
 import venueMapping from '../../server/resources/dining/venue_id_mappings.json'
 
+/**
+ * Get hours for all dining venues
+ */
 export const getVenueHours = () => {
   return dispatch => {
     dispatch({ type: getVenueInfoRequested })

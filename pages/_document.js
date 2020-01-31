@@ -2,6 +2,7 @@ import Document from 'next/document'
 import React from 'react'
 import { ServerStyleSheet } from 'styled-components'
 
+// Adapted from https://github.com/zeit/next.js/blob/canary/examples/with-styled-components/pages/_document.js
 export default class PennBasicsDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()
