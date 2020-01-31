@@ -141,7 +141,8 @@ class FoodtruckModal extends Component {
                     <Button // eslint-disable-line
                       onClick={this.handleReviewOnClick}
                     >
-                      <EditIcon fill="none" viewBox="0 -2 30 30" /> Leave a Review
+                      <EditIcon fill="none" viewBox="0 -2 30 30" /> Leave a
+                      Review
                     </Button>
                   </Buttons>
                 )}

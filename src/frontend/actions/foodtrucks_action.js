@@ -62,7 +62,12 @@ export const getAllFoodtrucksData = () => {
           const day =
             moment().format('d') === '0' ? 6 : Number(moment().format('d')) - 1
 
-          if (foodtruck.start && foodtruck.end && foodtruck.start.length && foodtruck.end.length) {
+          if (
+            foodtruck.start &&
+            foodtruck.end &&
+            foodtruck.start.length &&
+            foodtruck.end.length
+          ) {
             foodtruckObj.open = isOpen(foodtruck, day)
             foodtruckObj.hours = `
             ${convertDate(foodtruck.start[day])}

@@ -49,7 +49,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(initializeFilterHome(optionsLength)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

@@ -109,7 +109,4 @@ const mapDispatchToProps = dispatch => ({
   filterOnCampusDispatch: filter => dispatch(setFilterOnCampus(filter)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ToggleNeighborhood)
+export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)

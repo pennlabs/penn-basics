@@ -109,10 +109,10 @@ function updateFoodTrucksInDB(truckArray) {
           )
             .exec()
             .then(console.log)
-        } else {
-          // insert a new truck
-          return new FoodTruck(truck).save().then(console.log)
         }
+        // insert a new truck
+        return new FoodTruck(truck).save().then(console.log)
+
         console.log(
           oldTruckData
             ? `I found ${oldTruckData.name}`
