@@ -13,24 +13,25 @@ import { NoData, Title } from '../shared'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 const DiningHeader = s.div`
+  position: relative;
   padding-bottom: 0;
+  margin-bottom: 1rem;
 
   ${maxWidth(PHONE)} {
-    padding: 0.64rem;
+    padding: 1rem;
+    margin-bottom: 0;
   }
 `
 
 const Buttons = s.div`
-  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
 
   ${maxWidth(PHONE)} {
-    float: none;
     width: 100%;
     margin-bottom: 1rem;
-
-    .button {
-      width: 100%;
-    }
+    position: relative;
   }
 `
 
