@@ -9,8 +9,16 @@ import DiningOverview from './DiningOverview'
 import NotFound from '../shared/NotFound'
 import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
-import { NoData } from '../shared'
+import { NoData, Title } from '../shared'
 import { maxWidth, PHONE } from '../../styles/sizes'
+
+const DiningHeader = s.div`
+  padding-bottom: 0;
+
+  ${maxWidth(PHONE)} {
+    padding: 0.64rem;
+  }
+`
 
 const Buttons = s.div`
   float: right;
@@ -28,6 +36,10 @@ const Buttons = s.div`
 
 const Wrapper = s.div`
   padding: 1rem;
+
+  ${maxWidth(PHONE)} {
+    padding: 0;
+  }
 `
 
 const DiningVenue = ({
@@ -70,7 +82,8 @@ const DiningVenue = ({
 
   return (
     <Wrapper>
-      <div style={{ marginBottom: '1rem' }}>
+      <DiningHeader>
+        <Title>{name}</Title>
         <Buttons>
           <FavoriteButton
             isFavorited={isFavorited}
@@ -80,9 +93,7 @@ const DiningVenue = ({
             removeParams={{ venueId }}
           />
         </Buttons>
-
-        <h1 className="title">{name}</h1>
-      </div>
+      </DiningHeader>
 
       <DiningOverview id={venueId} />
     </Wrapper>

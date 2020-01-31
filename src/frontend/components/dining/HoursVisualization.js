@@ -9,6 +9,11 @@ import { ErrorMessage } from '../shared'
 import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
 import { convertDate, pad } from '../../../utils/helperFunctions'
 
+const TableWrapper = s.div`
+  max-width: 100%;
+  overflow-x: auto;
+`
+
 const HeaderRow = s.tr`
   background: transparent !important;
   border-bottom: 3px solid ${BORDER};
@@ -81,46 +86,48 @@ const List = ({ venueHours }) => {
 
   // Else, return the hours in a table
   return (
-    <table className="table is-fullwidth" style={{ marginBottom: 0 }}>
-      <tbody>
-        {formattedVenueHours.map((venueHour, idx) => {
-          const meals = venueHour.dayparts
-          meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
-          return (
-            <React.Fragment key={uuid()}>
-              <HeaderRow>
-                <th style={{ width: '12rem' }}>{venueHour.date}</th>
-                <th>{idx === 0 && 'Meal'}</th>
-                <th>{idx === 0 && 'From'}</th>
-                <th>{idx === 0 && 'To'}</th>
-              </HeaderRow>
-              {meals.length ? (
-                meals.map(meal => (
-                  <BodyRow
-                    key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
-                    className={isRightNow(meal, venueHour.date) && 'selected'}
-                  >
+    <TableWrapper>
+      <table className="table is-fullwidth" style={{ marginBottom: 0 }}>
+        <tbody>
+          {formattedVenueHours.map((venueHour, idx) => {
+            const meals = venueHour.dayparts
+            meals.sort((a, b) => (a.starttime > b.starttime ? 1 : -1))
+            return (
+              <React.Fragment key={uuid()}>
+                <HeaderRow>
+                  <th style={{ width: '12rem' }}>{venueHour.date}</th>
+                  <th>{idx === 0 && 'Meal'}</th>
+                  <th>{idx === 0 && 'From'}</th>
+                  <th>{idx === 0 && 'To'}</th>
+                </HeaderRow>
+                {meals.length ? (
+                  meals.map(meal => (
+                    <BodyRow
+                      key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
+                      className={isRightNow(meal, venueHour.date) && 'selected'}
+                    >
+                      <td style={{ width: '12rem' }} />
+                      <td>{meal.label}</td>
+                      <td>{convertDate(meal.starttime)}</td>
+                      <td>{convertDate(meal.endtime)}</td>
+                    </BodyRow>
+                  ))
+                ) : (
+                  <BodyRow>
                     <td style={{ width: '12rem' }} />
-                    <td>{meal.label}</td>
-                    <td>{convertDate(meal.starttime)}</td>
-                    <td>{convertDate(meal.endtime)}</td>
+                    <td>
+                      <i style={{ color: MEDIUM_GRAY }}>Closed</i>
+                    </td>
+                    <td />
+                    <td />
                   </BodyRow>
-                ))
-              ) : (
-                <BodyRow>
-                  <td style={{ width: '12rem' }} />
-                  <td>
-                    <i style={{ color: MEDIUM_GRAY }}>Closed</i>
-                  </td>
-                  <td />
-                  <td />
-                </BodyRow>
-              )}
-            </React.Fragment>
-          )
-        })}
-      </tbody>
-    </table>
+                )}
+              </React.Fragment>
+            )
+          })}
+        </tbody>
+      </table>
+    </TableWrapper>
   )
 }
 
