@@ -13,6 +13,7 @@ import {
   NoData,
   ErrorMessage,
 } from '../shared'
+import NotFound from '../shared/NotFound'
 
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import {
@@ -38,6 +39,11 @@ const Buttons = s.div`
   ${maxWidth(PHONE)} {
     float: none;
     width: 100%;
+    margin-bottom: 1rem;
+
+    .button {
+      width: 100%;
+    }
   }
 `
 
@@ -104,6 +110,14 @@ class LaundryVenue extends Component {
 
     if (!isValidNumericId(hallURLId) || !laundryHallInfo) {
       return LaundryVenue.renderNoHall()
+    }
+
+    if (hallURLId < 0 || hallURLId > 52) {
+      return (
+        <Wrapper>
+          <NotFound />
+        </Wrapper>
+      )
     }
 
     const isFavorited = favorites.some(({ hallId }) => hallId === hallURLId)
@@ -264,7 +278,4 @@ const mapDispatchToProps = dispatch => ({
   dispatchGetReminders: () => dispatch(getReminders()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LaundryVenue)
+export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

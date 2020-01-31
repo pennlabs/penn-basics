@@ -23,8 +23,8 @@ function getFoodTruck(foodtruckID) {
  * if there exists a review with the input pennid, update the review
  * otherwise, insert a new review
  * 2. update overallRating of the foodtruck
- * @param {*} foodtruckID the id of the foodtruck
- * @param {*} userReview an object contains fields: pennid, rating, comment
+ * @param {String} foodtruckID the id of the foodtruck
+ * @param {Object} userReview an object that contains: pennid, rating, comment, showName
  */
 
 const updateReview = async (foodtruckID, userReview) => {
@@ -42,7 +42,7 @@ const updateReview = async (foodtruckID, userReview) => {
   if (!overallRating) overallRating = 0.0
 
   const { reviews } = data // reviews in the DB
-  const { pennid, rating, comment } = userReview
+  const { pennid, rating, comment, showName } = userReview
   let exist = false
   let newOverallRating
 
@@ -60,6 +60,7 @@ const updateReview = async (foodtruckID, userReview) => {
       // next, update the reviews array
       reviews[i].rating = rating
       reviews[i].comment = comment
+      reviews[i].showName = showName
       reviews[i].timeEdited = moment().format()
 
       break
@@ -170,6 +171,15 @@ function insertUser(userData) {
   return new User(userData).save()
 }
 
+const updateUser = async (pennid, displayName) => {
+  const user = await User.findOneAndUpdate(
+    { pennid },
+    { displayName },
+    { new: true }
+  )
+  return user
+}
+
 module.exports = {
   filterSpaces,
   getSpace,
@@ -179,6 +189,7 @@ module.exports = {
   findAllFoodtrucks,
   insertUser,
   getUser,
+  updateUser,
   updateReview,
   upvoteFoodtruckReview,
   downvoteFoodtruckReview,

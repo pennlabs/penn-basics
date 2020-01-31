@@ -1,6 +1,7 @@
 /* global document */
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
+
 import { BorderedCard, Title } from '../shared'
 import Toggle from '../shared/Toggle'
 import { logEvent } from '../../../utils/analytics'
@@ -21,7 +22,7 @@ const Weather = () => {
     <BorderedCard>
       <Toggle
         filter={isFahrenheit}
-        dispatchFilterAction={toggleIsFahrenheit}
+        filterAction={toggleIsFahrenheit}
         filterOffText="°F"
         filterOnText="°C"
       />

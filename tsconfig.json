@@ -15,11 +15,5 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules"],
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/_app.js",
-    "src/frontend/constants/routes.js"
-  ]
+  "include": ["next-env.d.ts", "custom.d.ts", "**/*.ts", "**/*.tsx"]
 }

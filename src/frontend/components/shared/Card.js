@@ -1,5 +1,17 @@
+import React from 'react'
 import styled from 'styled-components'
-import { WHITE, SHADOW, FOCUS_GRAY, BORDER, PURPLE } from '../../styles/colors'
+import PropTypes from 'prop-types'
+
+import {
+  WHITE,
+  SHADOW,
+  FOCUS_GRAY,
+  BORDER,
+  PURPLE,
+  BABY_BLUE,
+} from '../../styles/colors'
+import { NavHeader } from './Typography'
+import { Line } from './Line'
 
 export const Card = styled.div`
   background: ${({ background }) => background || WHITE};
@@ -24,3 +36,12 @@ export const BorderedCard = styled(Card)`
   border-radius: 4px;
   margin-bottom: 1rem;
 `
+
+export const NavHeaderCard = ({ title }) => (
+  <Card background={BABY_BLUE} padding="0">
+    <NavHeader className="title is-5">{title}</NavHeader>
+    <Line />
+  </Card>
+)
+
+NavHeaderCard.propTypes = { title: PropTypes.string.isRequired }

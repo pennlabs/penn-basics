@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 import FilterBtn from './FilterBtn'
-import Search from './Search'
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -32,25 +31,17 @@ import {
   PHONE,
   NAV_HEIGHT,
   MOBILE_FILTER_HEIGHT,
-  TABLET,
-  minWidth,
   Z_INDEX,
   FILTER_HEIGHT,
 } from '../../../styles/sizes'
-import { ModalContainer, Subtitle } from '../../shared'
+import {
+  ModalContainer,
+  Subtitle,
+  withHideAboveTablet,
+  HiddenOnTablet,
+  Search,
+} from '../../shared'
 import Modal from '../../shared/Modal'
-
-const HideOnTablet = s.span`
-  ${maxWidth(TABLET)} {
-    display: none;
-  }
-`
-
-const HideAboveTablet = s.span`
-  ${minWidth(TABLET)} {
-    display: none;
-  }
-`
 
 const FilterWrapper = s.div`
   display: flex;
@@ -114,6 +105,7 @@ const FilterText = s.p`
   cursor: pointer;
   opacity: 0.8;
   margin-right: 1rem;
+  user-select: none;
 
   :hover,
   :active,
@@ -136,6 +128,8 @@ const FilterSpace = s.div`
     height: ${MOBILE_FILTER_HEIGHT};
   }
 `
+
+const FilterTextHideAboveTablet = withHideAboveTablet(FilterText)
 
 class Filter extends Component {
   constructor(props) {
@@ -208,7 +202,6 @@ class Filter extends Component {
   }
 
   toggleMoreFilters() {
-    console.log('toggle')
     const { showMoreFilters } = this.state
     this.setState({ showMoreFilters: !showMoreFilters })
   }
@@ -281,9 +274,9 @@ class Filter extends Component {
             active={filterGroupsActive}
           />
 
-          <HideAboveTablet>
-            <FilterText onClick={this.toggleMoreFilters}>More</FilterText>
-          </HideAboveTablet>
+          <FilterTextHideAboveTablet onClick={this.toggleMoreFilters}>
+            More
+          </FilterTextHideAboveTablet>
 
           <FilterText
             onClick={clearSpacesFiltersDispatch}
@@ -292,9 +285,9 @@ class Filter extends Component {
             Clear filters
           </FilterText>
 
-          <HideOnTablet style={{ marginLeft: 'auto' }}>
+          <HiddenOnTablet style={{ marginLeft: 'auto' }}>
             <ToggleNeighborhood />
-          </HideOnTablet>
+          </HiddenOnTablet>
         </FilterWrapper>
 
         <FilterSpace />
@@ -362,7 +355,4 @@ const mapDispatchToProps = dispatch => ({
   toggleSpacesGroupsDispatch: () => dispatch(toggleSpacesGroups()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Filter)
+export default connect(mapStateToProps, mapDispatchToProps)(Filter)

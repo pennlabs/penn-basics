@@ -72,9 +72,9 @@ class ToggleNeighborhood extends Component {
   }
 
   render() {
-    const { filterOnCampus } = this.props
+    const { filterOnCampus, style } = this.props
     return (
-      <Wrapper>
+      <Wrapper style={style || {}}>
         <ToggleWrapper>
           <Circle onClick={this.handleClick} active={filterOnCampus} />
           <Bar onClick={this.handleClick} active={filterOnCampus} />
@@ -88,11 +88,13 @@ class ToggleNeighborhood extends Component {
 }
 
 ToggleNeighborhood.propTypes = {
+  style: PropTypes.object, // eslint-disable-line
   filterOnCampus: PropTypes.bool,
   filterOnCampusDispatch: PropTypes.func.isRequired,
 }
 
 ToggleNeighborhood.defaultProps = {
+  style: {},
   filterOnCampus: false,
 }
 

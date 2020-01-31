@@ -6,7 +6,7 @@ import { maxWidth, TABLET, PHONE } from '../../../styles/sizes'
 import { BLACK, DARK_GRAY, WHITE } from '../../../styles/colors'
 import { HOME_ROUTE } from '../../../constants/routes'
 
-const BetaTag = s.span`
+const VersionTag = s.span`
   margin-left: 0.5rem;
   border-radius: 25px;
   background-color: #60B8F2 !important;
@@ -56,7 +56,7 @@ const Wrapper = s.div`
   }
 `
 
-export default () => (
+export default (): JSX.Element => (
   <Wrapper>
     <Link href={HOME_ROUTE}>
       <a style={{ height: LOGO_HEIGHT }}>
@@ -70,6 +70,6 @@ export default () => (
       </a>
     </Link>
 
-    <BetaTag className="tag is-rounded">Beta</BetaTag>
+    <VersionTag className="tag is-rounded">v1.0</VersionTag>
   </Wrapper>
 )

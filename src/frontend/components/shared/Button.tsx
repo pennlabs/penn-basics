@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s, { css } from 'styled-components'
 
 import {
@@ -16,7 +15,16 @@ import {
 } from '../../styles/colors'
 import { SHORT_ANIMATION_DURATION } from '../../styles/sizes'
 
-export const ButtonWrapper = s.button(
+interface IButtonProps {
+  isPrimary?: boolean
+  isSecondary?: boolean
+  isInfo?: boolean
+  isDanger?: boolean
+  lg?: boolean
+  children: React.ReactNode | React.ReactNodeArray
+}
+
+export const ButtonWrapper = s.button<IButtonProps>(
   ({ isSecondary, isInfo, isDanger, lg }) => {
     const background = isSecondary
       ? WHITE
@@ -80,35 +88,12 @@ export const ButtonWrapper = s.button(
   }
 )
 
-export const Button = ({ className, children, ...props }) => (
+export const Button = ({ children, ...props }: IButtonProps) => (
   <ButtonWrapper {...props}>{children}</ButtonWrapper>
 )
 
-Button.defaultProps = {
-  className: '',
-  isInfo: false,
-  isPrimary: false,
-  isSecondary: false,
-  isDanger: false,
-  lg: false,
-}
-
-Button.propTypes = {
-  isPrimary: PropTypes.bool,
-  isSecondary: PropTypes.bool,
-  isInfo: PropTypes.bool,
-  isDanger: PropTypes.bool,
-  className: PropTypes.string,
-  lg: PropTypes.bool,
-  children: PropTypes.node.isRequired,
-}
-
-export const AnchorButton = ({ children, ...rest }) => (
+export const AnchorButton = ({ children, ...rest }: IButtonProps) => (
   <ButtonWrapper as="a" {...rest}>
     {children}
   </ButtonWrapper>
 )
-
-AnchorButton.propTypes = {
-  children: PropTypes.node.isRequired,
-}

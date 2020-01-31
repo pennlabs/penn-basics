@@ -24,13 +24,14 @@ module.exports = function foodtrucksRouter(DB) {
     }
     const foodtruckId = req.params.id
     let { pennid } = req.body
-    const { rating, comment, fullName } = req.body
+    const { rating, comment, fullName, showName } = req.body
     pennid = pennid || req.user.pennid
     DB.updateReview(foodtruckId, {
       pennid: Number(pennid),
       fullName,
       rating: Number(rating),
       comment,
+      showName,
     }).then(foodtruck => {
       res.status(200).json({
         foodtruck,

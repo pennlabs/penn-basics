@@ -15,7 +15,7 @@ const Studyspaces = () => {
       <Head>
         <script src={GOOGLE_MAPS_API_ROUTE} />
       </Head>
-      <App id={id} />
+      <App id={id as string} />
     </Header>
   )
 }

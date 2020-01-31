@@ -96,7 +96,7 @@ class FoodtruckModal extends Component {
       this.setState({ showForm: true })
     } else {
       console.log(router.pathname)
-      window.location.href = `/api/auth/authenticate?successRedirect=${router.pathname}&failureRedirect=${router.pathname}`
+      window.location.href = `/api/auth/authenticate?successRedirect=${router.asPath}&failureRedirect=${router.asPath}`
     }
   }
 
@@ -132,152 +132,155 @@ class FoodtruckModal extends Component {
 
     return (
       <ModalFoodtrucks show={show} toggle={this.toggle}>
-        {foodtruckInfo ? (
-          <>
-            <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
-              {!showForm && (
-                <Buttons>
-                  <Button // eslint-disable-line
-                    onClick={this.handleReviewOnClick}
-                  >
-                    <EditIcon fill="none" viewBox="0 -2 30 30" /> Leave a Review
-                  </Button>
-                </Buttons>
+        <div style={{ minHeight: '80vh' }}>
+          {foodtruckInfo && (
+            <>
+              <ModalContainer padding="5" style={{ marginBottom: '3vh' }}>
+                {!showForm && (
+                  <Buttons>
+                    <Button // eslint-disable-line
+                      onClick={this.handleReviewOnClick}
+                    >
+                      <EditIcon fill="none" viewBox="0 -2 30 30" /> Leave a Review
+                    </Button>
+                  </Buttons>
+                )}
+                <Title marginBottom="0.5vh">{name}</Title>
+                <span style={{ fontSize: '80%' }}>
+                  {parseFloat(Math.round(overallRating * 100) / 100).toFixed(2)}
+                  &nbsp;
+                  <StarIcon
+                    fill="none"
+                    opacity="0.7"
+                    style={{
+                      transform: 'scale(0.7) translateY(10px) translateX(-4px)',
+                    }}
+                  />
+                </span>
+                <span style={{ fontSize: '80%' }}>
+                  {reviews.length}
+                  &nbsp;
+                  <CommentIcon
+                    fill="none"
+                    opacity="0.7"
+                    style={{
+                      transform: 'scale(0.7) translateY(10px) translateX(-4px)',
+                    }}
+                  />
+                </span>
+              </ModalContainer>
+
+              {tags && (
+                <ModalContainer paddingBottom="0.5rem" padding="5">
+                  {tags.map(tag => (
+                    <Tag key={tag}>{tag}</Tag>
+                  ))}
+                </ModalContainer>
               )}
-              <Title marginBottom="0.5vh">{name}</Title>
-              <span style={{ fontSize: '80%' }}>
-                {parseFloat(Math.round(overallRating * 100) / 100).toFixed(2)}
-                &nbsp;
-                <StarIcon
-                  fill="none"
-                  viewBox="0 0 40 40"
-                  opacity="0.7"
-                  transform="translate(0, 12)"
-                />
-              </span>
-              <span style={{ fontSize: '80%' }}>
-                {reviews.length}
-                &nbsp;
-                <CommentIcon
-                  fill="none"
-                  viewBox="0 0 40 40"
-                  opacity="0.7"
-                  transform="translate(0, 12)"
-                />
-              </span>
-            </ModalContainer>
 
-            {tags && (
-              <ModalContainer paddingBottom="0.5rem" padding="5">
-                {tags.map(tag => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </ModalContainer>
-            )}
-
-            <ModalContainer
-              paddingTop="1.5rem"
-              paddingBottom="1rem"
-              padding="5"
-            >
-              <Form
-                show={showForm}
-                hideFunction={() => {
-                  this.setState({ showForm: false })
-                }}
-                updateReview={(rating, comment) => {
-                  dispatchUpdateFoodtruckReview(
-                    foodtruckId,
-                    pennid,
-                    fullName,
-                    rating,
-                    comment
-                  )
-                }}
-              />
-            </ModalContainer>
-
-            {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
-
-            {imageCredit && (
-              <Credit>
-                <Subtext>
-                  {'Image credit: '}
-                  <a href={imageCredit.link}>{imageCredit.name}</a>
-                </Subtext>
-              </Credit>
-            )}
-
-            {description && (
-              <ModalContainer paddingTop="0.5rem" padding="5">
-                <Text>{description}</Text>
-              </ModalContainer>
-            )}
-
-            <ModalContainer
-              background={SNOW}
-              paddingTop="1.5rem"
-              paddingBottom="1rem"
-              padding="5"
-            >
-              <Text>
-                <strong>Address</strong>
-                <InfoIcon
-                  style={{
-                    transform: 'scale(0.8) translateY(8px)',
-                    marginLeft: '0.5rem',
+              <ModalContainer
+                paddingTop="1.5rem"
+                paddingBottom="1rem"
+                padding="5"
+              >
+                <Form
+                  show={showForm}
+                  hideFunction={() => {
+                    this.setState({ showForm: false })
                   }}
-                  data-tip
-                  data-for="infoIcon"
+                  updateReview={(rating, comment, showName) => {
+                    dispatchUpdateFoodtruckReview(
+                      foodtruckId,
+                      pennid,
+                      fullName,
+                      rating,
+                      comment,
+                      showName
+                    )
+                  }}
                 />
-                <ReactTooltip
-                  id="infoIcon"
-                  place="right"
-                  type="dark"
-                  effect="solid"
-                  multiline="true"
-                >
-                  <div> Click on the marker to open Google Maps </div>
-                </ReactTooltip>
-              </Text>
-              <br />
-              <Text>{address}</Text>
-            </ModalContainer>
+              </ModalContainer>
 
-            {location && location.lat && location.lng ? (
-              <FoodtruckMap
-                mapId={name}
-                location={location}
-                showMarker
-                gestureHandling="cooperative"
-                height="50%"
-                handleClickMarker={() => {
-                  window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
-                }}
-              />
-            ) : null}
+              {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
 
-            <ModalContainer padding="5" paddingTop="1.5rem">
-              <Text>
-                <strong> Read Reviews ({reviews.length}) </strong>
-              </Text>
-              <Chevron
-                onClick={() => {
-                  this.setState({ showReview: !showReview })
-                }}
-                expanded={showReview}
-              />
-              <Review show={showReview} reviews={reviews} />
-            </ModalContainer>
+              {imageCredit && (
+                <Credit>
+                  <Subtext>
+                    {'Image credit: '}
+                    <a href={imageCredit.link}>{imageCredit.name}</a>
+                  </Subtext>
+                </Credit>
+              )}
 
-            <ModalContainer paddingTop="1.5rem" padding="5">
-              <Hours start={start} end={end} />
-              <Menu foodtruckInfo={foodtruckInfo} />
-            </ModalContainer>
-          </>
-        ) : (
-          <div />
-        )}
+              {description && (
+                <ModalContainer paddingTop="0.5rem" padding="5">
+                  <Text>{description}</Text>
+                </ModalContainer>
+              )}
+
+              <ModalContainer
+                background={SNOW}
+                paddingTop="1.5rem"
+                paddingBottom="1rem"
+                padding="5"
+              >
+                <Text>
+                  <strong>Address</strong>
+                  <InfoIcon
+                    style={{
+                      transform: 'scale(0.8) translateY(8px)',
+                      marginLeft: '0.5rem',
+                    }}
+                    data-tip
+                    data-for="infoIcon"
+                  />
+                  <ReactTooltip
+                    id="infoIcon"
+                    place="right"
+                    type="dark"
+                    effect="solid"
+                    multiline="true"
+                  >
+                    <div> Click on the marker to open Google Maps </div>
+                  </ReactTooltip>
+                </Text>
+                <br />
+                <Text>{address}</Text>
+              </ModalContainer>
+
+              {location && location.lat && location.lng ? (
+                <FoodtruckMap
+                  mapId={name}
+                  location={location}
+                  showMarker
+                  gestureHandling="cooperative"
+                  height="50vh"
+                  handleClickMarker={() => {
+                    window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                  }}
+                />
+              ) : null}
+
+              <ModalContainer padding="5" paddingTop="1.5rem">
+                <Text>
+                  <strong> Read Reviews ({reviews.length}) </strong>
+                </Text>
+                <Chevron
+                  onClick={() => {
+                    this.setState({ showReview: !showReview })
+                  }}
+                  expanded={showReview}
+                />
+                <Review show={showReview} reviews={reviews} />
+              </ModalContainer>
+
+              <ModalContainer paddingTop="1.5rem" padding="5">
+                <Hours start={start} end={end} />
+                <Menu foodtruckInfo={foodtruckInfo} />
+              </ModalContainer>
+            </>
+          )}
+        </div>
       </ModalFoodtrucks>
     )
   }
@@ -317,10 +320,18 @@ const mapDispatchToProps = dispatch => ({
     pennID,
     fullName,
     rating,
-    comment
+    comment,
+    showName
   ) =>
     dispatch(
-      updateFoodtruckReview(foodtruckID, pennID, fullName, rating, comment)
+      updateFoodtruckReview(
+        foodtruckID,
+        pennID,
+        fullName,
+        rating,
+        comment,
+        showName
+      )
     ),
 })
 

@@ -29,6 +29,7 @@ const NotFound = ({
   title = '404: Content Not Found!',
   url = '/',
   urlText = 'Back to home',
+  linkIsExternal = false,
 }) => (
   <Wrapper>
     <Image src="https://i.imgur.com/PMJ4fDJ.png" alt="not found" />
@@ -37,13 +38,21 @@ const NotFound = ({
 
     <Text>{message}</Text>
 
-    <Link href={url}>
-      <StyledLink>
+    {linkIsExternal ? (
+      <StyledLink href={url}>
         <Button style={{ marginTop: '1rem', marginBottom: '2rem' }}>
           {urlText}
         </Button>
       </StyledLink>
-    </Link>
+    ) : (
+      <Link href={url}>
+        <StyledLink>
+          <Button style={{ marginTop: '1rem', marginBottom: '2rem' }}>
+            {urlText}
+          </Button>
+        </StyledLink>
+      </Link>
+    )}
 
     <PennLabsCredit padding="0 0 1rem 0" />
   </Wrapper>
@@ -55,6 +64,7 @@ NotFound.defaultProps = {
     'It seems like the content you are looking for was either moved or does not exist.',
   urlText: 'Back to home',
   url: '/',
+  linkIsExternal: false,
 }
 
 NotFound.propTypes = {
@@ -62,6 +72,7 @@ NotFound.propTypes = {
   message: PropTypes.string,
   url: PropTypes.string,
   urlText: PropTypes.string,
+  linkIsExternal: PropTypes.bool,
 }
 
 export default NotFound

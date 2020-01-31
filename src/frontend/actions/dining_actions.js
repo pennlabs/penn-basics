@@ -6,13 +6,14 @@ import {
   getVenueInfoRejected,
   getVenueInfoFulfilled,
   updateDiningFavorites,
-  getVenueHoursFulfilled,
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
 import venueMapping from '../../server/resources/dining/venue_id_mappings.json'
 
 export const getVenueHours = () => {
   return dispatch => {
+    dispatch({ type: getVenueInfoRequested })
+
     const venueIds = Object.values(venueMapping)
     const responsesSet = venueIds.map(id =>
       axios.get(`https://api.pennlabs.org/dining/hours/${id}`)
@@ -27,15 +28,15 @@ export const getVenueHours = () => {
         })
 
         dispatch({
-          type: getVenueHoursFulfilled,
+          type: getVenueInfoFulfilled,
           venueHours: dataSet,
         })
       })
     } catch (error) {
-      // dispatch({
-      //   type: getLaundryHallInfoRejected,
-      //   error: error.message,
-      // })
+      dispatch({
+        type: getVenueInfoRejected,
+        error: error.message,
+      })
     }
   }
 }

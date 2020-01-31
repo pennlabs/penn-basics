@@ -10,7 +10,7 @@ import {
   Subtext,
   Col,
   Circle,
-  Row,
+  FlexRow,
   StyledLink,
 } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
@@ -67,7 +67,7 @@ class SpaceCard extends Component {
             padding="0.5rem 0.5rem 0.5rem 1rem"
             hoverable
           >
-            <Row>
+            <FlexRow>
               {image && (
                 <Col backgroundImage={image} width="30%" borderRadius="4px" />
               )}
@@ -92,7 +92,7 @@ class SpaceCard extends Component {
                   <Circle open={open} />
                 </Content>
               </Col>
-            </Row>
+            </FlexRow>
           </Card>
         </StyledLink>
       </Link>

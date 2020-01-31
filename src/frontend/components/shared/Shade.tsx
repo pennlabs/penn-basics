@@ -6,7 +6,12 @@ import { fadeIn, fadeOut } from './Animations'
 
 const Z_INDEX = 1305
 
-export const Shade = styled.div`
+interface IShadeProps {
+  isNewlyMounted: boolean
+  show: boolean
+}
+
+export const Shade = styled.div<IShadeProps>`
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -23,7 +28,7 @@ export const Shade = styled.div`
   text-align: center;
   animation-name: ${({ isNewlyMounted, show }) => {
     if (isNewlyMounted) {
-      return ''
+      return 'none'
     }
     if (show) {
       return fadeIn

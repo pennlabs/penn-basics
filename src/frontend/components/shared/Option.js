@@ -18,8 +18,17 @@ import {
   Z_INDEX,
   NAV_HEIGHT,
   MOBILE_FILTER_HEIGHT,
+  minWidth,
+  FILTER_HEIGHT,
 } from '../../styles/sizes'
 
+/**
+ * Button-like component used for filtering
+ *
+ * Appears more condensed on mobile devices
+ *
+ * Button is made active when it is clicked by the user
+ */
 export const FilterBtnWrapper = s.a`
   margin-right: 1rem;
   cursor: pointer;
@@ -33,6 +42,7 @@ export const FilterBtnWrapper = s.a`
   border-style: solid;
   border-radius: 4px;
   color: ${MEDIUM_GRAY} !important;
+  user-select: none;
 
   :hover {
     background: ${ALLBIRDS_GRAY};
@@ -62,6 +72,9 @@ export const FilterBtnWrapper = s.a`
   `}
 `
 
+/**
+ * Shade shown behind filter options when a filter button is active
+ */
 export const OptionsModalBacking = s.div`
   position: fixed;
   left: 0;
@@ -72,6 +85,16 @@ export const OptionsModalBacking = s.div`
   z-index: ${Z_INDEX + 2};
 `
 
+/**
+ * Component housing filter options
+ *
+ * Has a white background and padding
+ *
+ * On desktop devices this is is positioned justified to corresponding
+ * `<FilterBtnWrapper />`
+ *
+ * On mobile devices this is positioned to take up the full width of the screen
+ */
 export const OptionsModalWrapper = s.div`
   position: absolute;
   z-index: ${Z_INDEX + 3};
@@ -81,7 +104,11 @@ export const OptionsModalWrapper = s.div`
   padding: 1rem calc(1rem + 0.125%);
   border: 1px solid ${BORDER};
   cursor: default;
-  left: ${({ left }) => left + 1 || '0'};
+
+  ${minWidth(PHONE)} {
+    left: ${({ left }) => left + 1 || '0'}px;
+    top: calc(${FILTER_HEIGHT} - 0.5rem);    
+  }
 
   ${maxWidth(PHONE)} {
     position: fixed;

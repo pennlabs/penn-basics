@@ -29,7 +29,6 @@ import {
   STUDYSPACE_ROUTE,
 } from '../../constants/routes'
 
-// TODO ghost loaders
 // TODO port this over to hooks
 // TODO map height on mobile
 
@@ -80,6 +79,10 @@ class App extends Component {
       return <Filter />
     }
 
+    const areFilteredSpacesResults = Boolean(
+      Object.keys(filteredSpacesData).length
+    )
+
     return (
       <>
         <MobileToggleView
@@ -103,7 +106,7 @@ class App extends Component {
           >
             <ErrorMessage message={error} />
 
-            {!Object.keys(filteredSpacesData).length && (
+            {!areFilteredSpacesResults && (
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"
                 imageAlt="Empty Studyspaces"
@@ -114,10 +117,10 @@ class App extends Component {
             {Object.keys(filteredSpacesData).map(spaceId => {
               const space = filteredSpacesData[spaceId]
               return (
-                <div key={spaceId}>
+                <React.Fragment key={spaceId}>
                   <SpaceCard spaceId={spaceId} {...space} />
                   <Line />
-                </div>
+                </React.Fragment>
               )
             })}
 

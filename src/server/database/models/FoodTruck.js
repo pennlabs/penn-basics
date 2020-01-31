@@ -58,6 +58,7 @@ const FoodTruckSchema = new Schema({
       comment: String,
       timeCreated: Date,
       timeEdited: Date,
+      showName: Boolean,
     },
   ],
   timeUpdated: Date,

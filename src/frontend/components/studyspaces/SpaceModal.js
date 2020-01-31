@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import s from 'styled-components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { clearActiveSpace } from '../../actions/spaces_actions'
 
+import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
   Title,
   Text,
@@ -108,7 +108,7 @@ class SpaceModal extends Component {
                   location={location}
                   showMarker
                   gestureHandling="cooperative"
-                  height="50%"
+                  height="50vh"
                   handleClickMarker={() => {
                     window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
                   }}
@@ -154,7 +154,4 @@ const mapDispatchToProps = dispatch => ({
   clearActiveSpaceDispatch: () => dispatch(clearActiveSpace()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SpaceModal)
+export default connect(mapStateToProps, mapDispatchToProps)(SpaceModal)
