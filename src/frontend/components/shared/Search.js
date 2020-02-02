@@ -16,6 +16,7 @@ import { maxWidth, PHONE } from '../../styles/sizes'
 
 const HEIGHT = 42
 const MOBILE_HEIGHT = 29.2
+const MOBILE_WIDTH = 100
 
 const Label = s.label(
   ({ showInput, active }) => css`
@@ -44,6 +45,7 @@ const Label = s.label(
       min-width: ${MOBILE_HEIGHT}px;
       border-radius: ${MOBILE_HEIGHT / 2}px;
       padding: 0 2px;
+      padding-right: ${active ? MOBILE_WIDTH : 0}px;
     }
   `
 )
@@ -72,7 +74,7 @@ const SearchComponent = s.input`
   ${maxWidth(PHONE)} {
     line-height: ${MOBILE_HEIGHT}px;
     height: ${MOBILE_HEIGHT}px;
-    min-width: 200px;
+    width: ${MOBILE_WIDTH}px;
   }
 `
 
