@@ -1,14 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { BorderedCard } from '../shared'
+import { PENN_DINING_URL } from '../../constants/routes'
+import { BorderedCard, AnchorButton, Text } from '../shared'
 import HoursVisualization from './HoursVisualization'
 import venueData from '../../../server/resources/dining/venue_info.json'
-import { AnchorButton } from '../shared/Button'
 import ExternalLinkIcon from '../../../../public/img/external-link.svg'
-
-const PENN_DINING_BASE_URL =
-  'https://university-of-pennsylvania.cafebonappetit.com/cafe/'
 
 const DiningOverview = ({ id }) => {
   const { description, pennDiningSlug } = venueData[id]
@@ -16,14 +13,14 @@ const DiningOverview = ({ id }) => {
   return (
     <>
       <BorderedCard>
-        {description && <p style={{ marginBottom: '1rem' }}>{description}</p>}
+        {description && <Text>{description}</Text>}
         <HoursVisualization venueId={id} />
       </BorderedCard>
 
       {pennDiningSlug && (
         <div style={{ textAlign: 'center' }}>
           <AnchorButton
-            href={`${PENN_DINING_BASE_URL}${pennDiningSlug}`}
+            href={PENN_DINING_URL(pennDiningSlug)}
             target="_BLANK"
             lg
           >

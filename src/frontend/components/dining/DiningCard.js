@@ -25,10 +25,8 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-const CardSubtext = ({ venueId, venueHours }) => {
-  const showMealLabels = venueData[venueId].isRetail
-    ? venueData[venueId].showMealLabels || false
-    : true
+const getOpenHours = venueHours => {
+  if (!venueHours) return null
 
   // get the array of hours that are opened today
   const date = new Date()
@@ -36,6 +34,27 @@ const CardSubtext = ({ venueId, venueHours }) => {
   const openHours = venueHours.filter(hour => {
     return hour.starttime <= currTime && currTime <= hour.endtime
   })
+  return openHours
+}
+
+const CardSubtext = ({ venueId, venueHours }) => {
+  const showMealLabels = venueData[venueId].isRetail
+    ? venueData[venueId].showMealLabels || false
+    : true
+
+  const openHours = getOpenHours(venueHours)
+
+  if (openHours === null || openHours === undefined) {
+    // TODO ghost loader?
+    return (
+      <>
+        <Circle open={false} />
+        <Subtext marginBottom="0" loading>
+          Loading...
+        </Subtext>
+      </>
+    )
+  }
 
   if (openHours.length === 0) {
     return (
@@ -77,6 +96,17 @@ CardSubtext.propTypes = {
   ),
 }
 
+const parseVenueHours = (venueId, venueHours) => {
+  if (!venueHours) return null
+
+  let currDate = moment().format()
+  currDate = currDate.substring(0, currDate.indexOf('T'))
+  let venueHour = venueHours[venueId]
+  venueHour = venueHour.filter(hour => hour.date === currDate)
+
+  return venueHour[0].dayparts
+}
+
 const DiningCard = ({
   venueId,
   selected,
@@ -85,15 +115,7 @@ const DiningCard = ({
   showLine,
   style,
 }) => {
-  if (!venueHours) return null
-
-  let currDate = moment().format()
-  currDate = currDate.substring(0, currDate.indexOf('T'))
-  let venueHour = venueHours[venueId]
-  venueHour = venueHour.filter(hour => hour.date === currDate)
-
-  const venueHoursCopy = venueHour[0].dayparts
-
+  const parsedVenueHours = parseVenueHours(venueId, venueHours)
   const { name, image } = venueData[venueId]
 
   // Images are served through the public folder
@@ -120,7 +142,7 @@ const DiningCard = ({
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
                 <Subtitle marginBottom="0">{name}</Subtitle>
-                <CardSubtext venueId={venueId} venueHours={venueHoursCopy} />
+                <CardSubtext venueId={venueId} venueHours={parsedVenueHours} />
               </Content>
             </Col>
           </FlexRow>

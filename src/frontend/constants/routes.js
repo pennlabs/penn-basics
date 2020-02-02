@@ -24,5 +24,6 @@ export const getApiAuthRouteWithRedirectParams = pathname =>
 const { GOOGLE_MAPS_API_KEY: apiKey } = process.env
 export const GOOGLE_MAPS_API_ROUTE = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`
 export const PENN_DINING_BASE_URL =
-  'https://university-of-pennsylvania.cafebonappetit.com/cafe/'
+  'https://university-of-pennsylvania.cafebonappetit.com/cafe'
 export const FEEDBACK_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
+export const PENN_DINING_URL = slug => `${PENN_DINING_BASE_URL}/${slug}`

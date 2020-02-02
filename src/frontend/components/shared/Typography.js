@@ -1,6 +1,21 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
-import { MEDIUM_GRAY, LIGHTER_BLUE, DARK_GRAY } from '../../styles/colors'
+import {
+  MEDIUM_GRAY,
+  LIGHTER_BLUE,
+  DARK_GRAY,
+  BORDER,
+} from '../../styles/colors'
+
+const ghostLoad = keyframes`
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+`
 
 export const NavHeader = styled.p`
   padding: 0.5rem 1rem;
@@ -27,25 +42,34 @@ export const Tag = styled.p`
   font-size: 80%;
 `
 
-export const Subtext = styled.p`
-  margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
-  padding-top: ${({ paddingTop }) => paddingTop || '0'};
-  line-height: 1.5;
-  width: auto;
-  display: inline-block;
-  font-size: 80%;
-  color: ${MEDIUM_GRAY};
-`
+export const Subtext = styled.p(
+  ({ loading }) => css`
+    margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
+    padding-top: ${({ paddingTop }) => paddingTop || '0'};
+    line-height: 1.5;
+    width: auto;
+    display: inline-block;
+    font-size: 80%;
+    color: ${MEDIUM_GRAY};
+    ${loading &&
+      css`
+        color: transparent !important;
+        background: ${BORDER};
+        border-radius: 4px;
+        animation: ${ghostLoad} 100ms ease;
+      `}
+  `
+)
 
 export const Title = styled.h1`
-  font-size: 150%;
+  font-size: 2rem;
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
   line-height: 1.25;
 `
 
 export const Subtitle = styled.h2`
-  font-size: 125%;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
   line-height: 1.25;
@@ -57,6 +81,6 @@ export const StyledLink = styled.a`
   h1,
   h2,
   p {
-    color: ${DARK_GRAY} !important;
+    color: ${DARK_GRAY};
   }
 `

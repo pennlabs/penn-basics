@@ -70,8 +70,9 @@ const SearchComponent = s.input`
   }
 
   ${maxWidth(PHONE)} {
-    line-height: ${MOBILE_HEIGHT};
-    height: ${MOBILE_HEIGHT};
+    line-height: ${MOBILE_HEIGHT}px;
+    height: ${MOBILE_HEIGHT}px;
+    min-width: 200px;
   }
 `
 

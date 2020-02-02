@@ -11,26 +11,30 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueData from '../../../server/resources/dining/venue_info.json'
 
-const Nav = ({ favorites, selectedVenueId, venueHours }) => {
-  const keys = Object.keys(venueData)
-  const diningKeys = []
-  const retailKeys = []
+/**
+ * Data cleanup which should run once (not at every component build)
+ */
+const diningKeys = []
+const retailKeys = []
 
-  keys.forEach(key => {
-    const data = venueData[key]
-    if (data.isRetail) {
-      retailKeys.push(key)
-    } else {
-      diningKeys.push(key)
-    }
-  })
+const keys = Object.keys(venueData)
 
-  diningKeys.sort((keyA, keyB) => {
-    const { name: nameA } = venueData[keyA]
-    const { name: nameB } = venueData[keyB]
-    return nameA.localeCompare(nameB)
-  })
+keys.forEach(key => {
+  const data = venueData[key]
+  if (data.isRetail) {
+    retailKeys.push(key)
+  } else {
+    diningKeys.push(key)
+  }
+})
 
+diningKeys.sort((keyA, keyB) => {
+  const { name: nameA } = venueData[keyA]
+  const { name: nameB } = venueData[keyB]
+  return nameA.localeCompare(nameB)
+})
+
+const Nav = ({ favorites, selectedVenueId, venueHours, venueHoursPending }) => {
   // If a venue is selected, hide the scrollbar on mobile
   const hideOnMobile =
     selectedVenueId !== undefined &&
@@ -106,11 +110,12 @@ Nav.propTypes = {
 }
 
 const mapStateToProps = ({ dining }) => {
-  const { favorites, venueHours } = dining
+  const { favorites, venueHours, venueHoursPending } = dining
 
   return {
     favorites,
     venueHours,
+    venueHoursPending,
   }
 }
 
