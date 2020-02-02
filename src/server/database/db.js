@@ -180,6 +180,21 @@ const updateUser = async (pennid, displayName) => {
   return user
 }
 
+const getUserReviews = async pennid => {
+  const res = await Foodtrucks.find({ 'reviews.pennid': pennid }).then(
+    trucks => {
+      console.log(
+        `${trucks.length} trucks found with reviews by user with id of ${pennid}`
+      )
+      return trucks.map(truck => {
+        const review = truck.reviews.filter(r => r.pennid === pennid)[0]
+        return review
+      })
+    }
+  )
+  return res
+}
+
 module.exports = {
   filterSpaces,
   getSpace,
@@ -194,4 +209,5 @@ module.exports = {
   upvoteFoodtruckReview,
   downvoteFoodtruckReview,
   deleteReview,
+  getUserReviews,
 }
