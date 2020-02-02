@@ -96,11 +96,13 @@ const Nav = ({ favorites, selectedVenueId, venueHours }) => {
 Nav.defaultProps = {
   favorites: [],
   selectedVenueId: null,
+  venueHours: {},
 }
 
 Nav.propTypes = {
   favorites: PropTypes.arrayOf(PropTypes.string),
   selectedVenueId: PropTypes.string,
+  venueHours: PropTypes.shape({}),
 }
 
 const mapStateToProps = ({ dining }) => {

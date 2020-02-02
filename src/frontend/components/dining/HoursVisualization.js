@@ -143,6 +143,10 @@ const HoursVisualization = ({ venueHours, venueId }) => {
   return <List venueHours={venueHour} />
 }
 
+List.defaultProps = {
+  venueHours: {},
+}
+
 List.propTypes = {
   venueHours: PropTypes.arrayOf(
     PropTypes.shape({
@@ -151,18 +155,16 @@ List.propTypes = {
       open: PropTypes.string,
       close: PropTypes.string,
     })
-  ).isRequired,
+  ),
+}
+
+HoursVisualization.defaultProps = {
+  venueId: '',
 }
 
 HoursVisualization.propTypes = {
-  venueHours: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.string,
-      type: PropTypes.string,
-      open: PropTypes.string,
-      close: PropTypes.string,
-    })
-  ).isRequired,
+  venueHours: PropTypes.shape({}).isRequired,
+  venueId: PropTypes.string,
 }
 
 const mapStateToProps = state => ({

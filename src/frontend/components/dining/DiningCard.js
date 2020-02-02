@@ -66,11 +66,15 @@ const CardSubtext = ({ venueId, venueHours }) => {
 CardSubtext.defaultProps = {
   venueId: '',
   stateVenueHours: [],
+  venueHours: [],
 }
 
 CardSubtext.propTypes = {
   venueId: PropTypes.string,
   stateVenueHours: PropTypes.array, //eslint-disable-line
+  venueHours: PropTypes.arrayOf(
+    PropTypes.shape({ endtime: PropTypes.string, label: PropTypes.string })
+  ),
 }
 
 const DiningCard = ({
@@ -88,7 +92,7 @@ const DiningCard = ({
   let venueHour = venueHours[venueId]
   venueHour = venueHour.filter(hour => hour.date === currDate)
 
-  venueHours = venueHour[0].dayparts
+  const venueHoursCopy = venueHour[0].dayparts
 
   const { name, image } = venueData[venueId]
 
@@ -116,7 +120,7 @@ const DiningCard = ({
             <Col padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}>
               <Content>
                 <Subtitle marginBottom="0">{name}</Subtitle>
-                <CardSubtext venueId={venueId} venueHours={venueHours} />
+                <CardSubtext venueId={venueId} venueHours={venueHoursCopy} />
               </Content>
             </Col>
           </FlexRow>
@@ -132,6 +136,7 @@ DiningCard.defaultProps = {
   isFavorited: false,
   selected: false,
   style: {},
+  venueHours: {},
 }
 
 DiningCard.propTypes = {
@@ -140,6 +145,7 @@ DiningCard.propTypes = {
   isFavorited: PropTypes.bool,
   selected: PropTypes.bool,
   style: PropTypes.object, // eslint-disable-line
+  venueHours: PropTypes.shape(PropTypes.arrayOf({ date: PropTypes.string })),
 }
 
 export default DiningCard

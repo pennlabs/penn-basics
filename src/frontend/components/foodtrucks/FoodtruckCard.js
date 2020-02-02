@@ -130,7 +130,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setHoveredFoodtruck(foodtruckId)),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FoodtruckCard)
+export default connect(mapStateToProps, mapDispatchToProps)(FoodtruckCard)

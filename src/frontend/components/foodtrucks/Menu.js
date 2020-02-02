@@ -13,7 +13,7 @@ const Menu = ({ foodtruckInfo }) => {
 
       <table className="table is-bordered is-fullwidth">
         <tbody>
-          {menu.map((category, index) => (
+          {menu.map(category => (
             <>
               {category.name}
               <br />
@@ -46,6 +46,20 @@ const Menu = ({ foodtruckInfo }) => {
   )
 }
 
-Menu.propTypes = {}
+Menu.defaultProps = {
+  foodtruckInfo: [{ menu: [] }],
+}
+
+Menu.propTypes = {
+  foodtruckInfo: PropTypes.shape({
+    location: PropTypes.string,
+    menu: [
+      PropTypes.shape({
+        items: PropTypes.arrayOf(PropTypes.shape()),
+      }),
+    ],
+    priceTypes: PropTypes.shape(),
+  }),
+}
 
 export default Menu
