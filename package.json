@@ -13,7 +13,7 @@
     "lint-fix": "eslint ./src/**/ --fix",
     "dev": "source env.sh && concurrently \"node src/server/index.js\"",
     "build": "next build",
-    "start": "source env.sh NODE_ENV=production node index.js"
+    "start": "source env.sh && concurrently \"node src/server/index.js\""
   },
   "repository": {
     "type": "git",

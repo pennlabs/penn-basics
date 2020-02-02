@@ -69,7 +69,7 @@ export const Title = styled.h1`
 `
 
 export const Subtitle = styled.h2`
-  font-size: 1.6rem;
+  font-size: 125%;
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
   line-height: 1.25;
