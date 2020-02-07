@@ -1,7 +1,8 @@
-const trucks = require('../../resources/foodtrucks/foodtrucks.json')
-const FoodTruck = require('../models/FoodTruck')
+import trucks from '../../resources/foodtrucks/foodtrucks.json'
+import FoodTruck from '../models/FoodTruck'
 
 const { MONGO_URI } = process.env
+
 if (!MONGO_URI) {
   console.log('Missing MONGO_URI') // eslint-disable-line
   process.exit(1)
@@ -112,12 +113,6 @@ function updateFoodTrucksInDB(truckArray) {
         }
         // insert a new truck
         return new FoodTruck(truck).save().then(console.log)
-
-        console.log(
-          oldTruckData
-            ? `I found ${oldTruckData.name}`
-            : `No existing truck found for ${truck.name}`
-        )
       })
     )
   ).then(() => {
@@ -148,8 +143,10 @@ async function main() {
   } catch (err) {
     console.error(err)
   }
+
   process.exit(0)
 }
+
 main()
 
 /*
@@ -160,6 +157,7 @@ deleteFoodTrucksInDB()
   })
   .catch(err => console.error(err)) // eslint-disable-line
 */
+
 // async function main() {
 //   try {
 //     const trucksToInsert = updateFoodTrucks()

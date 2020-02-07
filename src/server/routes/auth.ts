@@ -1,8 +1,17 @@
-const passport = require('passport')
+import passport from 'passport'
+import { Document } from 'mongoose'
+
+import { Router, Request, Response } from 'express'
+import axios from 'axios'
+import * as DB from '../database/db'
+import { IUser, DoneCallback } from '../types'
+import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
+
 const { OAuth2Strategy } = require('passport-oauth')
-const router = require('express').Router()
-const axios = require('axios').default
+
 require('dotenv').config()
+
+const router = Router()
 
 const providerBaseURL =
   process.env.OAUTH_BASE_URL || 'https://www.provider.com/'
@@ -16,24 +25,30 @@ const callbackURL =
   process.env.OAUTH_CALLBACK_URL ||
   'https://www.pennbasics.com/api/auth/provider/callback'
 
-module.exports = function authRouter(DB) {
-  passport.serializeUser((user, done) => {
+export default function authRouter() {
+  passport.serializeUser((user: IUser, done) => {
     done(null, user.pennid)
   })
 
-  passport.deserializeUser((pennid, done) => {
-    DB.getUser(pennid).then(user => {
+  passport.deserializeUser((pennid: number, done) => {
+    DB.getUser(pennid).then((user: Document | null) => {
       if (user) {
         return done(null, user)
       }
       return done(new Error('User not found'), null)
     })
   })
+
   passport.use(
     'provider',
     new OAuth2Strategy(
       { tokenURL, authorizationURL, clientID, clientSecret, callbackURL },
-      (accessToken, refreshToken, profile, done) => {
+      (
+        accessToken: string,
+        refreshToken: string,
+        profile: any,
+        done: DoneCallback
+      ) => {
         const data = {
           token: accessToken,
         }
@@ -48,19 +63,20 @@ module.exports = function authRouter(DB) {
           .get(introspectURL, { params: data, ...config })
           .then(res => {
             const userData = res.data.user
-            DB.getUser(userData.pennid).then(user => {
+            DB.getUser(userData.pennid).then((user: Document | null) => {
               if (user) {
                 return done(null, user)
               }
+
               return DB.insertUser(userData)
-                .then(newUser => {
+                .then((newUser: Document | null) => {
                   if (newUser) {
                     return done(null, newUser)
                   }
                   console.error("User wasn't returned") // eslint-disable-line
                   return new Error("User wasn't returned")
                 })
-                .catch(err => {
+                .catch((err: Error) => {
                   console.error('Error in creating user') // eslint-disable-line
                   console.error(err) // eslint-disable-line
                   return done(null, false)
@@ -76,24 +92,40 @@ module.exports = function authRouter(DB) {
   )
 
   router.get('/getUserInfo', (req, res) => {
-    if (req.user) {
+    const { user } = req
+
+    if (!user) {
       return res.send({
-        pennid: req.user.pennid,
-        email: req.user.email,
-        fullName: `${req.user.first_name} ${req.user.last_name}`,
-        displayName: req.user.displayName,
-        expires: req.session.cookie.expires,
-        loggedIn: true,
+        loggedIn: false,
       })
     }
+
+    const { pennid, email, first_name, last_name, displayName } = user as IUser
+
+    const { session } = req
+    const expires: any = session && session.cookie && session.cookie.expires
+
     return res.send({
-      loggedIn: false,
+      pennid,
+      email,
+      fullName: `${first_name} ${last_name}`,
+      displayName,
+      expires,
+      loggedIn: true,
     })
   })
 
   router.get('/authenticate', (req, res, next) => {
     const { successRedirect, failureRedirect } = req.query
-    req.session.auth = { successRedirect, failureRedirect }
+    const { session } = req
+
+    if (!session) {
+      return res
+        .status(INTERNAL_SERVER_ERROR)
+        .send({ error: 'Missing session' })
+    }
+
+    session.auth = { successRedirect, failureRedirect }
     const authenticator = passport.authenticate('provider', {
       successRedirect: successRedirect || '/',
       failureRedirect: failureRedirect || '/',
@@ -102,19 +134,28 @@ module.exports = function authRouter(DB) {
     authenticator(req, res, next)
   })
 
-  router.get('/provider/callback', (req, res, next) => {
+  router.get('/provider/callback', (req: Request, res: Response, next) => {
     const { successRedirect, failureRedirect } = req.query
+    const { state, session } = req
+
+    if (!session) {
+      return res
+        .status(INTERNAL_SERVER_ERROR)
+        .send({ error: 'Missing session' })
+    }
+
     const authenticator = passport.authenticate('provider', {
       scope: 'read write introspection',
       successRedirect:
         successRedirect ||
-        req.session.auth.successRedirect ||
-        (req.state ? req.state.successRedirect : null) ||
+        session.auth.successRedirect ||
+        (state && state.successRedirect) ||
+        null ||
         '/',
       failureRedirect:
         failureRedirect ||
-        req.session.auth.failureRedirect ||
-        (req.state ? req.state.failureRedirect : null) ||
+        session.auth.failureRedirect ||
+        (state ? state.failureRedirect : null) ||
         '/',
     })
     return authenticator(req, res, next)
@@ -126,22 +167,34 @@ module.exports = function authRouter(DB) {
   )
 
   router.get('/logout', (req, res) => {
-    if (req.user) {
-      const { user } = req
-      req.session.destroy(err => {
-        if (err) {
-          // eslint-disable-next-line
-          console.error(
-            `Error encounted while attempting to destroy session for user with pennid of ${user.pennid}`
-          )
-          // eslint-disable-next-line
-          console.error(err)
-        } else {
-          res.clearCookie('connect.sid')
-          res.redirect('/')
-        }
-      })
+    const { session } = req
+
+    if (!session) {
+      return res
+        .status(INTERNAL_SERVER_ERROR)
+        .send({ error: 'Missing session' })
     }
+
+    const user = req.user as IUser
+
+    if (!user) {
+      res.redirect('/')
+    }
+
+    session.destroy(err => {
+      if (err) {
+        // eslint-disable-next-line
+        console.error(
+          `Error encounted while attempting to destroy session for user with pennid of ${user.pennid}`
+        )
+        // eslint-disable-next-line
+        console.error(err)
+        res.redirect('/')
+      } else {
+        res.clearCookie('connect.sid')
+        res.redirect('/')
+      }
+    })
   })
 
   router.post('/updateUser', (req, res) => {

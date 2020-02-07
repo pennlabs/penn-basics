@@ -1,4 +1,4 @@
-const mongoose = require('../mongoose-connect')
+import mongoose from '../mongoose-connect'
 
 const { Schema } = mongoose
 
@@ -64,4 +64,4 @@ const FoodTruckSchema = new Schema({
   timeUpdated: Date,
 })
 
-module.exports = mongoose.model('FoodTruck', FoodTruckSchema)
+export default mongoose.model('FoodTruck', FoodTruckSchema)

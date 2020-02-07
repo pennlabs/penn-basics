@@ -1,13 +1,15 @@
-const router = require('express').Router()
-const request = require('request')
-const cheerio = require('cheerio')
+import { Router } from 'express'
+import request, { Response } from 'request'
+import cheerio from 'cheerio'
 
-module.exports = function newsRouter() {
+const router = Router()
+
+export default function newsRouter() {
   // can convert this to Labs API
   router.get('/', (req, response) => {
     const { website } = req.query
     let { className } = req.query
-    request(website, (err, res, html) => {
+    request(website, (err: Error, res: Response, html: string) => {
       if (!err && res.statusCode === 200) {
         const $ = cheerio.load(html)
         className = className.replace(/ /g, '.')

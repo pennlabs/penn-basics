@@ -1,28 +1,37 @@
-const express = require('express')
-const next = require('next')
+import express from 'express'
+import next from 'next'
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 const PORT = process.env.PORT || 5000
 
-const bodyParser = require('body-parser')
-const webpush = require('web-push')
-const passport = require('passport')
-const session = require('express-session')
-const moment = require('moment')
+import bodyParser from 'body-parser'
+import webpush from 'web-push'
+import passport from 'passport'
+import session from 'express-session'
+import moment from 'moment'
 
-const spacesRouter = require('./routes/spaces')
-const diningRouter = require('./routes/dining')
-const newsRouter = require('./routes/news')
-const laundryRouter = require('./routes/laundry')
-const foodtrucksRouter = require('./routes/foodtrucks')
-const authRouter = require('./routes/auth')
-const profileRouter = require('./routes/profile')
-
-const DB = require('./database/db')
+import spacesRouter from './routes/spaces'
+import diningRouter from './routes/dining'
+import newsRouter from './routes/news'
+import laundryRouter from './routes/laundry'
+import foodtrucksRouter from './routes/foodtrucks'
+import authRouter from './routes/auth'
+import profileRouter from './routes/profile'
 
 require('dotenv').config()
+
+declare global {
+  namespace Express {
+    interface Request {
+      state?: {
+        successRedirect?: boolean
+        failureRedirect?: boolean
+      }
+    }
+  }
+}
 
 nextApp.prepare().then(() => {
   const app = express()
@@ -55,13 +64,13 @@ nextApp.prepare().then(() => {
   app.use('/api/getPublicVapidKey', (_, res) => {
     res.status(200).json({ publicKey })
   })
-  app.use('/api/spaces', spacesRouter(DB))
-  app.use('/api/foodtrucks', foodtrucksRouter(DB))
-  app.use('/api/dining', diningRouter(DB))
+  app.use('/api/spaces', spacesRouter())
+  app.use('/api/foodtrucks', foodtrucksRouter())
+  app.use('/api/dining', diningRouter())
   app.use('/api/laundry', laundryRouter())
-  app.use('/api/profile', profileRouter(DB))
+  app.use('/api/profile', profileRouter())
   app.use('/api/news', newsRouter())
-  app.use('/api/auth', authRouter(DB))
+  app.use('/api/auth', authRouter())
 
   // client-side routing
   app.get('/dining/:id', (req, res) => {

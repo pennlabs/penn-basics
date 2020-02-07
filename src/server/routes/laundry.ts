@@ -1,8 +1,10 @@
-const router = require('express').Router()
-const HttpStatus = require('http-status-codes')
-const webpush = require('web-push')
+import { Router, Request, Response } from 'express'
+import HttpStatus from 'http-status-codes'
+import webpush from 'web-push'
 
-const isValidNumericId = id => {
+const router = Router()
+
+const isValidNumericId = (id: number | string | undefined | null): boolean => {
   if (id === null || id === undefined) return false
   const num = Number(id)
   if (Number.isNaN(num)) return false
@@ -10,8 +12,8 @@ const isValidNumericId = id => {
   return true
 }
 
-module.exports = function laundryRouter() {
-  router.post('/reminder/add', async (req, res) => {
+export default function laundryRouter() {
+  router.post('/reminder/add', async (req: Request, res: Response) => {
     // TODO check for bad request (@peter)
 
     // a unique reminderID is used to distinguish between multiple reminders

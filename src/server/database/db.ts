@@ -1,19 +1,26 @@
-require('./mongoose-connect')
-const moment = require('moment')
+import './mongoose-connect'
+import moment from 'moment'
+import { Document } from 'mongoose'
 
-const Space = require('./models/Space')
-const Foodtrucks = require('./models/FoodTruck')
-const User = require('./models/User')
+import Space from './models/Space'
+import Foodtrucks from './models/FoodTruck'
+import User from './models/User'
+import {
+  IFoodTruckUserReview,
+  ISpace,
+  IUser,
+  IFoodTruckDocument,
+} from '../types'
 
 // return all fields except for menu, priceTypes, and reviews
-const findAllFoodtrucks = () => {
+export const findAllFoodtrucks = () => {
   return Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
 }
 
 /**
  * @param {Number} foodtruckID
  */
-function getFoodTruck(foodtruckID) {
+export function getFoodTruck(foodtruckID: string) {
   return Foodtrucks.findOne({ foodtruckID })
 }
 
@@ -27,11 +34,14 @@ function getFoodTruck(foodtruckID) {
  * @param {Object} userReview an object that contains: pennid, rating, comment, showName
  */
 
-const updateReview = async (foodtruckID, userReview) => {
-  const data = await Foodtrucks.findOne(
+export const updateReview = async (
+  foodtruckID: string,
+  userReview: IFoodTruckUserReview
+) => {
+  const data = (await Foodtrucks.findOne(
     { foodtruckID },
     { reviews: 1, overallRating: 1 }
-  )
+  )) as IFoodTruckDocument | null
 
   if (!data) {
     console.error(`Truck not found with id of ${foodtruckID}`)
@@ -73,11 +83,12 @@ const updateReview = async (foodtruckID, userReview) => {
       ((overallRating * reviews.length + rating) * 1.0) / (reviews.length + 1)
 
     // next, update the reviews array
-    reviews.push({
+    const newReview: IFoodTruckUserReview = {
       ...userReview,
       timeCreated: moment().format(),
       timeEdited: moment().format(),
-    })
+    }
+    reviews.push(newReview)
   }
 
   // update the DB
@@ -89,7 +100,11 @@ const updateReview = async (foodtruckID, userReview) => {
   return foodtruck
 }
 
-const updateFoodtruckReveiwScore = async (foodtruckID, pennid, amount) => {
+export const updateFoodtruckReveiwScore = async (
+  foodtruckID: string,
+  pennid: number,
+  amount: number
+) => {
   return Foodtrucks.updateOne(
     { foodtruckID, 'reviews.pennid': pennid },
     // update the located sub-document (the review) by the specified amount
@@ -97,15 +112,15 @@ const updateFoodtruckReveiwScore = async (foodtruckID, pennid, amount) => {
   )
 }
 
-function upvoteFoodtruckReview(foodtruckID, pennid) {
+export function upvoteFoodtruckReview(foodtruckID: string, pennid: number) {
   updateFoodtruckReveiwScore(foodtruckID, pennid, 1)
 }
 
-function downvoteFoodtruckReview(foodtruckID, pennid) {
+export function downvoteFoodtruckReview(foodtruckID: string, pennid: number) {
   updateFoodtruckReveiwScore(foodtruckID, pennid, -1)
 }
 
-function findAllSpaces() {
+export function findAllSpaces() {
   return Space.find()
 }
 
@@ -116,7 +131,13 @@ function findAllSpaces() {
  * @param {number} groupLevel
  * @param {number} hour
  */
-function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
+export function filterSpaces(
+  open: boolean,
+  outletLevel: number,
+  quietLevel: number,
+  groupLevel: number,
+  hour: number
+) {
   if (open) {
     return Space.find({
       start: { $lte: hour },
@@ -137,20 +158,22 @@ function filterSpaces(open, outletLevel, quietLevel, groupLevel, hour) {
 /**
  * @param {String} spaceID
  */
-function getSpace(spaceID) {
+export function getSpace(spaceID: string) {
   return Space.findOne({ spaceID })
 }
 
-function deleteReview(foodtruckName, pennid) {
+export function deleteReview(foodtruckName: string, pennid: number) {
   if (pennid && foodtruckName)
-    return Foodtrucks.findOne({ name: foodtruckName }).then(truck => {
-      if (!truck) throw new Error('Truck not found')
-      const { reviews } = truck
-      const newReviews = reviews.filter(
-        r => r.pennid !== pennid && r.pennID !== pennid
-      )
-      return truck.update({ reviews: newReviews })
-    })
+    return Foodtrucks.findOne({ name: foodtruckName }).then(
+      (truck: Document | null) => {
+        if (!truck) throw new Error('Truck not found')
+        const { reviews } = truck as IFoodTruckDocument
+        const newReviews = reviews.filter(
+          r => r.pennid !== pennid && r.pennid !== pennid
+        )
+        return truck.update({ reviews: newReviews })
+      }
+    )
   return new Error(
     'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
   )
@@ -159,19 +182,19 @@ function deleteReview(foodtruckName, pennid) {
 /**
  * @param {object} space
  */
-function insertSpace(space) {
+export function insertSpace(space: ISpace) {
   return new Space(space).save()
 }
 
-function getUser(pennid) {
+export function getUser(pennid: number) {
   return User.findOne({ pennid })
 }
 
-function insertUser(userData) {
+export function insertUser(userData: IUser) {
   return new User(userData).save()
 }
 
-const updateUser = async (pennid, displayName) => {
+export const updateUser = async (pennid: number, displayName: string) => {
   const user = await User.findOneAndUpdate(
     { pennid },
     { displayName },
@@ -180,34 +203,19 @@ const updateUser = async (pennid, displayName) => {
   return user
 }
 
-const getUserReviews = async pennid => {
+export const getUserReviews = async (pennid: number) => {
   const res = await Foodtrucks.find({ 'reviews.pennid': pennid }).then(
-    trucks => {
+    (trucks: Document[]) => {
       console.log(
         `${trucks.length} trucks found with reviews by user with id of ${pennid}`
       )
-      return trucks.map(truck => {
-        const review = truck.reviews.filter(r => r.pennid === pennid)[0]
+      return (trucks as IFoodTruckDocument[]).map(truck => {
+        const review = truck.reviews.filter(
+          (r: IFoodTruckUserReview) => r.pennid === pennid
+        )[0]
         return review
       })
     }
   )
   return res
-}
-
-module.exports = {
-  filterSpaces,
-  getSpace,
-  getFoodTruck,
-  insertSpace,
-  findAllSpaces,
-  findAllFoodtrucks,
-  insertUser,
-  getUser,
-  updateUser,
-  updateReview,
-  upvoteFoodtruckReview,
-  downvoteFoodtruckReview,
-  deleteReview,
-  getUserReviews,
 }

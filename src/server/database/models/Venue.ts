@@ -1,4 +1,4 @@
-const mongoose = require('../mongoose-connect')
+import mongoose from '../mongoose-connect'
 
 const { Schema } = mongoose
 
@@ -23,4 +23,4 @@ const venueSchema = new Schema({
   },
 })
 
-module.exports = mongoose.model('Venue', venueSchema)
+export default mongoose.model('Venue', venueSchema)

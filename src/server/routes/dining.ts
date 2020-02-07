@@ -1,7 +1,9 @@
-const router = require('express').Router()
-const axios = require('axios')
+import { Router } from 'express'
+import axios from 'axios'
 
-module.exports = function diningRouter() {
+const router = Router()
+
+export default function diningRouter() {
   router.get('/venue_hours/:venueId', (req, res) => {
     const {
       params: { venueId },

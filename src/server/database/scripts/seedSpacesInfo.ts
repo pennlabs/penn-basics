@@ -1,6 +1,6 @@
-const axios = require('axios').default
-const spaces = require('../../resources/spaces.json')
-const Space = require('../models/Space')
+import axios from 'axios'
+import spaces from '../../resources/spaces.json'
+import Space from '../models/Space'
 
 const { MONGO_URI } = process.env
 if (!MONGO_URI) {

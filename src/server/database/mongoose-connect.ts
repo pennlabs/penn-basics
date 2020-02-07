@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 require('dotenv').config()
 
 const { MONGO_URI } = process.env
@@ -21,4 +21,4 @@ mongoose.connection.on('disconnected', () => {
 
 mongoose.Promise = global.Promise
 
-module.exports = mongoose
+export default mongoose
