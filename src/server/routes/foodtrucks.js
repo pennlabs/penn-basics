@@ -7,7 +7,6 @@ module.exports = function foodtrucksRouter(DB) {
    * @param {String} message - The message that you want to display if the user is not logged in.
    */
   const isLoggedInMiddleware = message => {
-    console.log("!!!!")
     const DEFAULT_MESSAGE = 'You must be logged in to perform this action'
     return (req, res, next) => {
       if (!req.user) {

@@ -46,18 +46,20 @@ export const getVenueHours = () => {
 
 export const getFavorites = () => {
   return dispatch => {
-    let favorites = localStorage.getItem('dining_favorites')
-    if (favorites) {
-      favorites = JSON.parse(favorites).sort((a, b) => {
-        return a - b
+    const favoritesString = localStorage.getItem('dining_favorites')
+    let favoritesArray : String[] = []
+    if (favoritesString) {
+      favoritesArray = JSON.parse(favoritesString)
+      favoritesArray = favoritesArray.sort((a, b) => {
+        return Number(a) - Number(b)
       })
     } else {
-      localStorage.setItem('dining_favorites', JSON.stringify([]))
-      favorites = []
+      localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
     }
+
     dispatch({
       type: updateDiningFavorites,
-      favorites,
+      favorites: favoritesArray,
     })
   }
 }
@@ -65,26 +67,26 @@ export const getFavorites = () => {
 export const addFavorite = venueID => {
   return dispatch => {
     logEvent('dining', 'addFavorite')
-    let favorites = localStorage.getItem('dining_favorites')
+    const favorites = localStorage.getItem('dining_favorites')
+    let favoritesArray : String[]
     if (!favorites) {
-      favorites = [venueID]
+      favoritesArray = [venueID]
     } else {
-      favorites = JSON.parse(favorites)
-      favorites.push(venueID)
-      if (!favorites.includes(venueID)) {
-        favorites.push(venueID)
+      favoritesArray = JSON.parse(favorites)
+      if (!favoritesArray.includes(venueID)) {
+        favoritesArray.push(venueID)
       }
 
-      favorites = favorites.sort((a, b) => {
-        return a - b
+      favoritesArray = favoritesArray.sort((a, b) => {
+        return Number(a) - Number(b)
       })
     }
 
-    localStorage.setItem('dining_favorites', JSON.stringify(favorites))
+    localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
 
     dispatch({
       type: updateDiningFavorites,
-      favorites,
+      favorites: favoritesArray,
     })
   }
 }
@@ -93,12 +95,13 @@ export const removeFavorite = venueID => {
   return dispatch => {
     logEvent('dining', 'removeFavorite')
     // favorites is an array of venueIDs
-    let favorites = JSON.parse(localStorage.getItem('dining_favorites'))
-    favorites = favorites.filter(favorite => favorite !== venueID)
-    localStorage.setItem('dining_favorites', JSON.stringify(favorites))
+    let favoritesArray : String[] = JSON.parse(localStorage.getItem('dining_favorites'))
+    console.log(favoritesArray)
+    favoritesArray = favoritesArray.filter(favorite => favorite !== venueID)
+    localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
     dispatch({
       type: updateDiningFavorites,
-      favorites,
+      favorites: favoritesArray,
     })
   }
 }
