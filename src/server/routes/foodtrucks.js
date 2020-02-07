@@ -14,7 +14,7 @@ module.exports = function foodtrucksRouter(DB) {
           message: message || DEFAULT_MESSAGE,
         })
       }
-      return next(req, res)
+      return next()
     }
   }
 
@@ -43,6 +43,10 @@ module.exports = function foodtrucksRouter(DB) {
       let { pennid } = req.body
       const { rating, comment, fullName, showName } = req.body
       pennid = pennid || req.user.pennid
+
+      console.log(
+        `updating review with parameters of rating=${rating}, comment=${comment}, name=${fullName}, showName=${showName}`
+      )
       DB.updateReview(foodtruckId, {
         pennid: Number(pennid),
         fullName,
