@@ -14,7 +14,6 @@ import {
 import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
 import { ESCAPE_KEY_CODE } from '../../constants/misc'
-import { STUDYSPACES_ROUTE } from '../../constants/routes'
 
 const ModalContent = styled.div`
   background: ${WHITE};
@@ -118,32 +117,58 @@ class Modal extends Component {
 
   // Close the modal when the user presses the escape key
   handleKeyPress(event) {
-    const { show } = this.props
+    const { show, ROUTE } = this.props
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
         event.key.toLowerCase() === 'escape') &&
       show
     ) {
-      Router.push(STUDYSPACES_ROUTE)
+      const { toggle } = this.props
+      if (toggle) {
+        toggle()
+      } else {
+        Router.push(ROUTE)
+      }
     }
   }
 
   render() {
-    const { show, children } = this.props
+    const { show, children, toggle, ROUTE } = this.props
     const { isNewlyMounted } = this.state
+
+    if (toggle) {
+      return (
+        <Shade
+          show={show}
+          ref={this.focusRef}
+          tabIndex={show ? 0 : -1}
+          onClick={toggle}
+          isNewlyMounted={isNewlyMounted}
+          onKeyPress={this.handleKeyPress}
+          onKeyDown={this.handleKeyPress}
+        >
+          <ModalContent onClick={noop} show={show}>
+            <ModalClose onClick={toggle} show={show}>
+              <Times>&times;</Times>
+            </ModalClose>
+            {children}
+          </ModalContent>
+        </Shade>
+      )
+    }
 
     return (
       <Shade
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => Router.push(STUDYSPACES_ROUTE)}
+        onClick={() => Router.push(ROUTE)}
         isNewlyMounted={isNewlyMounted}
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
         <ModalContent onClick={noop} show={show}>
-          <Link href={STUDYSPACES_ROUTE}>
+          <Link href={ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -155,10 +180,15 @@ class Modal extends Component {
   }
 }
 
+Modal.defaultProps = {
+  toggle: null,
+}
+
 Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   history: PropTypes.object, // eslint-disable-line
   children: PropTypes.any.isRequired, // eslint-disable-line
+  toggle: PropTypes.any, // eslint-disable-line
 }
 
 export default Modal

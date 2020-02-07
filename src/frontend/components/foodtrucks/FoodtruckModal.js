@@ -20,7 +20,7 @@ import {
   FoodtruckMap,
   Subtext,
 } from '../shared'
-import ModalFoodtrucks from '../shared/ModalFoodtrucks'
+import ModalFoodtrucks from '../shared/Modal'
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
 import Menu from './Menu'
@@ -31,6 +31,7 @@ import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
 import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
 import { Button } from '../shared/Button'
+import { FOODTRUCKS_ROUTE } from '../../constants/routes'
 
 const Credit = s.div`
   width: 100%;
@@ -131,7 +132,7 @@ class FoodtruckModal extends Component {
     const { showForm, showReview } = this.state
 
     return (
-      <ModalFoodtrucks show={show} toggle={this.toggle}>
+      <ModalFoodtrucks show={show} toggle={false} ROUTE={FOODTRUCKS_ROUTE}>
         <div style={{ minHeight: '80vh' }}>
           {foodtruckInfo && (
             <>
