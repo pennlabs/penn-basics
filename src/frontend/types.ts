@@ -5,3 +5,14 @@ export interface IUserInfo {
   displayName: string
   expires: string
 }
+
+export interface IDiningVenue {
+  lat: number
+  lng: number
+  image?: string
+  description: string
+  address: string
+  name: string
+  pennDiningSlug: string
+  isRetail?: boolean
+}

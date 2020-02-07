@@ -88,11 +88,17 @@ export const ButtonWrapper = s.button<IButtonProps>(
   }
 )
 
-export const Button = ({ children, ...props }: IButtonProps) => (
+export const Button = ({
+  children,
+  ...props
+}: IButtonProps): React.ReactElement => (
   <ButtonWrapper {...props}>{children}</ButtonWrapper>
 )
 
-export const AnchorButton = ({ children, ...rest }: IButtonProps) => (
+export const AnchorButton = ({
+  children,
+  ...rest
+}: IButtonProps): React.ReactElement => (
   <ButtonWrapper as="a" {...rest}>
     {children}
   </ButtonWrapper>

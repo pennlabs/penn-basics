@@ -37,7 +37,11 @@ const clearFilterState = {
  * @param filter
  * @returns filteredFoodtrucksData
  */
-const filterFoodtrucks = (foodtrucksData, filterOpen, filterString) => {
+const filterFoodtrucks = (
+  foodtrucksData,
+  filterOpen: boolean,
+  filterString?: string
+) => {
   if (!filterOpen && !filterString) {
     const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
     return filteredFoodtrucksData

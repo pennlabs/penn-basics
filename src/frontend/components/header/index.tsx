@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import s, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 import Nav from '../shared/Nav'
 import Feedback from '../shared/Feedback'
@@ -26,7 +26,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Header = ({ children }) => (
+interface IHeader {
+  children: React.ReactNode | React.ReactNodeArray
+}
+
+const Header = ({ children }: IHeader): React.ReactElement => (
   <>
     <Head>
       <meta charSet="utf-8" />

@@ -4,6 +4,7 @@ import {
   getVenueInfoFulfilled,
   updateDiningFavorites,
 } from '../actions/action_types'
+import { AnyAction } from 'redux'
 
 const defaultState = {
   error: null,
@@ -12,7 +13,7 @@ const defaultState = {
   venueHours: null,
 }
 
-const diningReducer = (state = defaultState, action) => {
+const diningReducer = (state = defaultState, action: AnyAction) => {
   switch (action.type) {
     case getVenueInfoRequested:
       return {

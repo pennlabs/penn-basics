@@ -9,18 +9,20 @@ import DiningCard from './DiningCard'
 import { WHITE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
-import venueData from '../../../server/resources/dining/venue_info.json'
+import venueDataJson from '../../../server/resources/dining/venue_info.json'
+import { IDiningVenue } from '../../types'
 
 /**
  * Data cleanup which should run once (not at every component build)
  */
-const diningKeys = []
-const retailKeys = []
+const diningKeys: string[] = []
+const retailKeys: string[] = []
 
+const venueData = venueDataJson as Record<string, IDiningVenue>
 const keys = Object.keys(venueData)
 
 keys.forEach(key => {
-  const data = venueData[key]
+  const data: IDiningVenue = venueData[key]
   if (data.isRetail) {
     retailKeys.push(key)
   } else {
@@ -34,7 +36,17 @@ diningKeys.sort((keyA, keyB) => {
   return nameA.localeCompare(nameB)
 })
 
-const Nav = ({ favorites, selectedVenueId, venueHours, venueHoursPending }) => {
+interface INav {
+  favorites: any
+  selectedVenueId: string
+  venueHours: any
+}
+
+const Nav = ({
+  favorites,
+  selectedVenueId,
+  venueHours,
+}: INav): React.ReactElement => {
   // If a venue is selected, hide the scrollbar on mobile
   const hideOnMobile =
     selectedVenueId !== undefined &&
@@ -54,7 +66,7 @@ const Nav = ({ favorites, selectedVenueId, venueHours, venueHoursPending }) => {
     >
       <NavHeaderCard title="Favorites" />
 
-      {favorites.map(key => {
+      {favorites.map((key: string) => {
         return (
           <DiningCard
             key={uuid()}

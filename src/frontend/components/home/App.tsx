@@ -1,7 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { Row, Col } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'

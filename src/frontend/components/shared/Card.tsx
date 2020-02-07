@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
 import PropTypes from 'prop-types'
 
 import {
@@ -13,23 +13,40 @@ import {
 import { NavHeader } from './Typography'
 import { Line } from './Line'
 
-export const Card = styled.div`
-  background: ${({ background }) => background || WHITE};
-  padding: ${({ padding }) => padding || '1rem'};
-  box-shadow: ${({ shade }) => (shade ? `0 0 14px 0 ${SHADOW}` : 'none')};
-  opacity: 1;
-  margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
+interface ICard {
+  background?: string
+  padding?: string
+  shade?: string
+  marginBottom?: string
+  selected?: boolean
+  hoverable?: boolean
+}
 
-  ${({ selected }) => selected && `border-left: 6px solid ${PURPLE}`}
+export const Card = styled.div<ICard>(
+  ({
+    background,
+    padding,
+    shade,
+    marginBottom,
+    selected,
+    hoverable,
+  }): FlattenSimpleInterpolation => css`
+    background: ${background || WHITE};
+    padding: ${padding || '1rem'};
+    box-shadow: ${shade ? `0 0 14px 0 ${SHADOW}` : 'none'};
+    opacity: 1;
+    margin-bottom: ${marginBottom || '0'};
 
-  ${({ hoverable }) =>
-    hoverable &&
-    `
+    ${selected && `border-left: 6px solid ${PURPLE}`}
+
+    ${hoverable &&
+      `
     &:hover {
       background: ${FOCUS_GRAY};
     }
   `}
-`
+  `
+)
 
 export const BorderedCard = styled(Card)`
   border: 1px solid ${BORDER};
@@ -37,7 +54,11 @@ export const BorderedCard = styled(Card)`
   margin-bottom: 1rem;
 `
 
-export const NavHeaderCard = ({ title }) => (
+interface NavHeaderCard {
+  title: string
+}
+
+export const NavHeaderCard = ({ title }: NavHeaderCard) => (
   <Card background={BABY_BLUE} padding="0">
     <NavHeader className="title is-5">{title}</NavHeader>
     <Line />
