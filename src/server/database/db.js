@@ -42,7 +42,7 @@ const updateReview = async (foodtruckID, userReview) => {
   if (!overallRating) overallRating = 0.0
 
   const { reviews } = data // reviews in the DB
-  const { pennid, rating, comment, showName } = userReview
+  const { pennid, rating, comment, showName, fullName } = userReview
   let exist = false
   let newOverallRating
 
@@ -62,6 +62,7 @@ const updateReview = async (foodtruckID, userReview) => {
       reviews[i].comment = comment
       reviews[i].showName = showName
       reviews[i].timeEdited = moment().format()
+      reviews[i].fullName = fullName
 
       break
     }

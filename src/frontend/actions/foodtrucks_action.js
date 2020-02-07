@@ -139,6 +139,8 @@ export const updateFoodtruckReview = (
   comment,
   showName
 ) => {
+  console.log("action")
+  console.log(fullName)
   return dispatch => {
     dispatch({
       type: getFoodtruckInfoRequested,

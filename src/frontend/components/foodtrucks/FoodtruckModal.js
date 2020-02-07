@@ -127,7 +127,10 @@ class FoodtruckModal extends Component {
       overallRating,
     } = foodtruckInfo || {}
 
-    const { pennid, fullName } = userInfo || {}
+    const { pennid } = userInfo || {}
+    const userName = (userInfo || {}).displayName || (userInfo || {}).fullName
+
+    console.log(userName)
 
     const { showForm, showReview } = this.state
 
@@ -194,7 +197,7 @@ class FoodtruckModal extends Component {
                     dispatchUpdateFoodtruckReview(
                       foodtruckId,
                       pennid,
-                      fullName,
+                      userName,
                       rating,
                       comment,
                       showName
