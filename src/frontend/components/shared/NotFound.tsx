@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import { Title, Text, StyledLink } from './Typography'
@@ -23,6 +22,14 @@ const Image = s.img`
   margin-bottom: 2rem;
 `
 
+interface INotFoundProps {
+  message: string
+  title: string
+  url: string
+  urlText: string
+  linkIsExternal: boolean
+}
+
 // TODO remove imgur jawn
 const NotFound = ({
   message = 'It seems like the content you are looking for was either moved or does not exist.',
@@ -30,7 +37,7 @@ const NotFound = ({
   url = '/',
   urlText = 'Back to home',
   linkIsExternal = false,
-}) => (
+}: INotFoundProps): React.ReactElement => (
   <Wrapper>
     <Image src="https://i.imgur.com/PMJ4fDJ.png" alt="not found" />
 
@@ -57,22 +64,5 @@ const NotFound = ({
     <PennLabsCredit padding="0 0 1rem 0" />
   </Wrapper>
 )
-
-NotFound.defaultProps = {
-  title: '404: Content not found',
-  message:
-    'It seems like the content you are looking for was either moved or does not exist.',
-  urlText: 'Back to home',
-  url: '/',
-  linkIsExternal: false,
-}
-
-NotFound.propTypes = {
-  title: PropTypes.string,
-  message: PropTypes.string,
-  url: PropTypes.string,
-  urlText: PropTypes.string,
-  linkIsExternal: PropTypes.bool,
-}
 
 export default NotFound

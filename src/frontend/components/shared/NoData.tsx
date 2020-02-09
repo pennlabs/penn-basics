@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import { Row, Col } from './Flex'
@@ -42,7 +41,11 @@ export const NoData = ({
   </div>
 )
 
-export const NoDataHome = ({ image, imageAlt, text }) => (
+export const NoDataHome = ({
+  image,
+  imageAlt,
+  text,
+}: INoDataProps): React.ReactElement => (
   <div
     className="columns is-vcentered"
     style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
@@ -69,7 +72,7 @@ const NoDataScrollWrapper = s.div`
   }
 `
 
-export const NoDataScroll = ({ image, imageAlt, text }) => (
+export const NoDataScroll = ({ image, imageAlt, text }: INoDataProps) => (
   <NoDataScrollWrapper className="columns is-vcentered">
     <Row className="column" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
       <Col offsetSm={1} sm={10} offsetMd={2} md={8} offsetLg={3} lg={6}>
@@ -79,21 +82,3 @@ export const NoDataScroll = ({ image, imageAlt, text }) => (
     </Row>
   </NoDataScrollWrapper>
 )
-
-NoData.propTypes = {
-  image: PropTypes.string.isRequired,
-  imageAlt: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-}
-
-NoDataHome.propTypes = {
-  image: PropTypes.string.isRequired,
-  imageAlt: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-}
-
-NoDataScroll.propTypes = {
-  image: PropTypes.string.isRequired,
-  imageAlt: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-}

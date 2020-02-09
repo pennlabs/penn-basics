@@ -6,9 +6,14 @@ import { Subtext } from './Typography'
 import { logEvent } from '../../../utils/analytics'
 import HeartIcon from '../../../../public/img/heart.svg'
 
+// TODO make this a constant elsewhere
 const AIRTABLE_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
 
-const PennLabsCredit = ({ padding }) => (
+interface IPennLabsCreditProps {
+  padding?: string
+}
+
+const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
   <Col padding={padding || '0 1rem'}>
     <Subtext paddingTop="0.5rem" marginBottom="0">
       Made with
@@ -38,13 +43,5 @@ const PennLabsCredit = ({ padding }) => (
     </Subtext>
   </Col>
 )
-
-PennLabsCredit.defaultProps = {
-  padding: null,
-}
-
-PennLabsCredit.propTypes = {
-  padding: PropTypes.string,
-}
 
 export default PennLabsCredit

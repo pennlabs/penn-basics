@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s, { css, FlattenSimpleInterpolation } from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
@@ -168,6 +167,7 @@ const ColContainer = s.div<IColContainer>(({ margin }) =>
 )
 
 export type ICol = {
+  margin?: string
   children?: React.ReactNode | React.ReactNodeArray
   style?: React.CSSProperties
 } & IColWrapper &
@@ -182,16 +182,6 @@ export const Col = ({ margin, children, ...other }: ICol) => (
     )}
   </ColWrapper>
 )
-
-Col.defaultProps = {
-  margin: null,
-  children: null,
-}
-
-Col.propTypes = {
-  margin: PropTypes.string,
-  children: PropTypes.node,
-}
 
 export const ColSpace = s(Col)`
   flex: none;

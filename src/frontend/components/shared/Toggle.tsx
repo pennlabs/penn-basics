@@ -1,10 +1,11 @@
 import React from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
 import { Switch } from 'antd'
 
 import { BLUE } from '../../styles/colors'
 import 'antd/es/switch/style/index.css'
+
+// TODO move away from antd
 
 // const HEIGHT = 0.875
 // const WIDTH = 2.25
@@ -13,7 +14,11 @@ const Wrapper = s.div`
   float: right;
 `
 
-const Label = s.span`
+interface ILabel {
+  active?: boolean
+}
+
+const Label = s.span<ILabel>`
   display: inline-block;
   margin-bottom: 0;
   margin-left: 0.625rem;
@@ -58,30 +63,28 @@ const Label = s.span`
 //   cursor: pointer;
 // `
 
+interface IToggleProps {
+  filterOffText: string
+  filterOnText: string
+  filterAction: () => void
+}
+
 /**
  * @param {function} dispatchFilterAction: the redux action that toggles the filter
  * @param {boolean} filter: filter in the redux
  * @param {string} filterOffText: text rendered when the filter is off
  * @param {string} filterOnText text rendered when filter is on
  */
-
-const Toggle = ({ filterOffText, filterOnText, filterAction }) => (
+const Toggle = ({
+  filterOffText,
+  filterOnText,
+  filterAction,
+}: IToggleProps) => (
   <Wrapper>
-    <Label> {filterOffText} </Label>
+    <Label>{filterOffText} </Label>
     <Switch onChange={filterAction} />
-    <Label> {filterOnText} </Label>
+    <Label> {filterOnText}</Label>
   </Wrapper>
 )
-
-Toggle.defaultProps = {
-  filterOffText: '',
-  filterOnText: '',
-}
-
-Toggle.propTypes = {
-  filterAction: PropTypes.func.isRequired,
-  filterOffText: PropTypes.string,
-  filterOnText: PropTypes.string,
-}
 
 export default Toggle

@@ -22,7 +22,14 @@ export const NavHeader = styled.p`
   margin-bottom: 0 !important;
 `
 
-export const Text = styled.p`
+interface ITextProps {
+  marginBottom?: string
+  fullWidth?: boolean
+  color?: string
+  medium?: boolean
+}
+
+export const Text = styled.p<ITextProps>`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
   line-height: 1.5;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
@@ -42,7 +49,13 @@ export const Tag = styled.p`
   font-size: 80%;
 `
 
-export const Subtext = styled.p(
+interface ISubtextProps {
+  loading?: boolean
+  marginBottom?: string
+  paddingTop?: string
+}
+
+export const Subtext = styled.p<ISubtextProps>(
   ({ loading }) => css`
     margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
     padding-top: ${({ paddingTop }) => paddingTop || '0'};
@@ -61,14 +74,18 @@ export const Subtext = styled.p(
   `
 )
 
-export const Title = styled.h1`
+interface ITitleProps {
+  marginBottom?: string
+}
+
+export const Title = styled.h1<ITitleProps>`
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
   line-height: 1.25;
 `
 
-export const Subtitle = styled.h2`
+export const Subtitle = styled.h2<ITitleProps>`
   font-size: 125%;
   font-weight: bold;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};

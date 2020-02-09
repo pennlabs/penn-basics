@@ -22,6 +22,7 @@ interface IButtonProps {
   isDanger?: boolean
   lg?: boolean
   children: React.ReactNode | React.ReactNodeArray
+  style?: React.CSSProperties
 }
 
 export const ButtonWrapper = s.button<IButtonProps>(

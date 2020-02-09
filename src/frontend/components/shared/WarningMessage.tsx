@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
-export const WarningMessage = ({ message = '' }) => {
+interface IWarningMessageProps {
+  message?: string
+}
+
+export const WarningMessage = ({ message }: IWarningMessageProps) => {
   const [visible, setVisibility] = useState(true)
   if (!message || !visible) return null
 
@@ -16,12 +19,4 @@ export const WarningMessage = ({ message = '' }) => {
       {message || 'Oops, there was an error'}
     </div>
   )
-}
-
-WarningMessage.defaultProps = {
-  message: null,
-}
-
-WarningMessage.propTypes = {
-  message: PropTypes.string,
 }

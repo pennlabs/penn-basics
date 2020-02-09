@@ -18,8 +18,13 @@ const HEIGHT = 42
 const MOBILE_HEIGHT = 29.2
 const MOBILE_WIDTH = 100
 
+interface ILabel {
+  showInput?: boolean
+  active?: boolean
+}
+
 const Label = s.label(
-  ({ showInput, active }) => css`
+  ({ showInput, active }: ILabel) => css`
     margin-right: 1rem;
     padding: 0 8px;
     height: ${HEIGHT}px;
@@ -91,7 +96,15 @@ const SearchIconStyled = s(SearchIcon)`
 
 const INPUT_ID = 'search-line'
 
-export const Search = ({ filterFunction, filterString }) => {
+interface ISearchProps {
+  filterFunction: (value: any) => void
+  filterString: string
+}
+
+export const Search = ({
+  filterFunction,
+  filterString,
+}: ISearchProps): React.ReactElement => {
   const [showInput, setShowInput] = useState(false)
   const [active, setActive] = useState(false)
   return (
@@ -105,13 +118,14 @@ export const Search = ({ filterFunction, filterString }) => {
         }
       }}
     >
+      {/* TODO port this over to styled components */}
       <SearchIconStyled
         className="fas fa-search"
-        onClick={e => {
+        onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
           e.stopPropagation()
           setShowInput(!showInput)
         }}
-        cursor="pointer"
+        style={{ cursor: 'pointer' }}
       />
       {showInput && (
         <SearchComponent

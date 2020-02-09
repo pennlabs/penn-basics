@@ -22,6 +22,10 @@ import {
   FILTER_HEIGHT,
 } from '../../styles/sizes'
 
+interface IFilterBtnWrapper {
+  active?: boolean
+}
+
 /**
  * Button-like component used for filtering
  *
@@ -29,7 +33,7 @@ import {
  *
  * Button is made active when it is clicked by the user
  */
-export const FilterBtnWrapper = s.a`
+export const FilterBtnWrapper = s.a<IFilterBtnWrapper>`
   margin-right: 1rem;
   cursor: pointer;
   box-sizing: border-box;
@@ -85,6 +89,10 @@ export const OptionsModalBacking = s.div`
   z-index: ${Z_INDEX + 2};
 `
 
+interface OptionsModalWrapper {
+  left?: number
+}
+
 /**
  * Component housing filter options
  *
@@ -95,7 +103,7 @@ export const OptionsModalBacking = s.div`
  *
  * On mobile devices this is positioned to take up the full width of the screen
  */
-export const OptionsModalWrapper = s.div`
+export const OptionsModalWrapper = s.div<OptionsModalWrapper>`
   position: absolute;
   z-index: ${Z_INDEX + 3};
   background: ${WHITE};
@@ -106,7 +114,7 @@ export const OptionsModalWrapper = s.div`
   cursor: default;
 
   ${minWidth(PHONE)} {
-    left: ${({ left }) => left + 1 || '0'}px;
+    left: ${({ left }): number => (left !== undefined ? left + 1 : 0)}px;
     top: calc(${FILTER_HEIGHT} - 0.5rem);    
   }
 
@@ -149,7 +157,11 @@ export const Option = s.div`
   }
 `
 
-export const Circle = s.span`
+interface ICircle {
+  active?: boolean
+}
+
+export const Circle = s.span<ICircle>`
   height: 1rem;
   width: 1rem;
   transform: translateY(0.1rem);
