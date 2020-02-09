@@ -18,6 +18,7 @@ import {
 import { SNOW } from '../../styles/colors'
 import Hours from './Hours'
 import Modal from '../shared/Modal'
+import { STUDYSPACES_ROUTE } from '../../constants/routes'
 
 const Credit = s.div`
   width: 100%;
@@ -28,13 +29,6 @@ const GOOGLE_URL = `https://maps.google.com/maps?q=`
 class SpaceModal extends Component {
   constructor(props) {
     super(props)
-
-    this.toggle = this.toggle.bind(this)
-  }
-
-  toggle() {
-    const { clearActiveSpaceDispatch } = this.props
-    clearActiveSpaceDispatch()
   }
 
   render() {
@@ -55,7 +49,7 @@ class SpaceModal extends Component {
     } = space || {}
 
     return (
-      <Modal show={show} toggle={this.toggle}>
+      <Modal show={show} toggle={false} ROUTE={STUDYSPACES_ROUTE}>
         <div style={{ minHeight: '80vh' }}>
           {space && (
             <>
