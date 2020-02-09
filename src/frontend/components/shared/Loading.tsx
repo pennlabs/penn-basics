@@ -8,8 +8,16 @@ import { BORDER, BLUE } from '../../styles/colors'
 const SIZE = '2.5rem'
 const THICKNESS = '0.25rem'
 const TIMER = '1.25s'
+const DEFAULT_DELAY = 100
 
-const LoadingWrapper = s.div`
+interface ILoadingWrapper {
+  displayInLine?: boolean
+  padding?: string
+  hide?: boolean
+  translateY?: string
+}
+
+const LoadingWrapper = s.div<ILoadingWrapper>`
   width: ${({ displayInLine }) => (displayInLine ? '0' : '100%')};
   padding: ${({ padding }) => padding || '1rem 0'};
   text-align: center;
@@ -25,7 +33,12 @@ const spin = keyframes`
   to { transform: rotate(360deg); }
 `
 
-const LoadingCircle = s.span`
+interface ILoadingCircle {
+  size?: string
+  thickness: string
+}
+
+const LoadingCircle = s.span<ILoadingCircle>`
   display: inline-block;
   width: ${({ size }) => size || SIZE};
   height: ${({ size }) => size || SIZE};
@@ -38,6 +51,12 @@ const LoadingCircle = s.span`
   border-top-color: ${BLUE};
   animation: ${spin} ${TIMER} infinite linear;
 `
+
+type ILoadingProps = ILoadingCircle &
+  ILoadingWrapper & {
+    title?: string
+    delay?: number
+  }
 
 /**
  * @property title string to show below spinner
@@ -52,14 +71,14 @@ const Loading = ({
   size,
   translateY,
   thickness,
-}) => {
+}: ILoadingProps) => {
   const [hidden, toggleHidden] = useState(true)
 
   useEffect(() => {
     if (hidden) {
       const timer = setTimeout(() => {
         toggleHidden(false)
-      }, delay)
+      }, delay || DEFAULT_DELAY)
       return () => clearTimeout(timer)
     }
     return () => {}
@@ -76,16 +95,6 @@ const Loading = ({
       {title && <Subtext>{title}</Subtext>}
     </LoadingWrapper>
   )
-}
-
-Loading.defaultProps = {
-  title: null,
-  delay: 100,
-  padding: undefined,
-  size: undefined,
-  translateY: undefined,
-  thickness: undefined,
-  displayInLine: false,
 }
 
 Loading.propTypes = {

@@ -11,44 +11,69 @@ import {
   clearFilterFoodtrucksRequested,
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
+import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen } from 'src/types'
+import { Action } from 'redux'
 
-const defaultState = {
+interface IFoodTrucksReducerState {
+  pending: boolean
+  infoPending: boolean
+  error?: string
+  infoError?: string
+  foodtrucksData?: Record<TFoodTruckId, IFoodTruckWithOpen> // NOTE excluding menu, priceTypes, and reviews
+  filteredFoodtrucksData?: Record<TFoodTruckId, IFoodTruckWithOpen>
+  foodtruckInfo?: null
+  hoveredFoodtruck?: IFoodTruck // id of the foodtruck hovered on
+  filterOpen: boolean
+  filterString: string
+  filterOpenActive: boolean
+}
+
+type IFoodTrucksAction = {
+  foodtrucksData?: Record<TFoodTruckId, IFoodTruck>
+  error?: string
+  footruckId?: TFoodTruckId
+  filterString?: string
+  filter?: boolean
+} & Action
+
+const defaultState: IFoodTrucksReducerState = {
   pending: false,
   infoPending: false,
-  error: null,
-  infoError: null,
-  foodtrucksData: null, // excluding menu, priceTypes, and reviews
-  filteredFoodtrucksData: null,
-  foodtruckInfo: null,
-  hoveredFoodtruck: null, // id of the foodtruck hovered on
+  error: undefined,
+  infoError: undefined,
+  foodtrucksData: undefined, // excluding menu, priceTypes, and reviews
+  filteredFoodtrucksData: undefined,
+  foodtruckInfo: undefined,
+  hoveredFoodtruck: undefined, // id of the foodtruck hovered on
   filterOpen: false,
   filterString: '',
   filterOpenActive: false,
 }
 
 // Default state where all filters are cleared and none are active
-const clearFilterState = {
-  filterOpen: false,
-  filterString: null,
-}
+// const clearFilterState = {
+//   filterOpen: false,
+//   filterString: null,
+// }
 
 /**
  * @param foodtrucksData
- * @param filter
+ * @param filterOpen
  * @returns filteredFoodtrucksData
  */
 const filterFoodtrucks = (
-  foodtrucksData,
-  filterOpen: boolean,
+  foodtrucksData: Record<TFoodTruckId, IFoodTruckWithOpen> | undefined,
+  filterOpen?: boolean,
   filterString?: string
-) => {
+): Record<TFoodTruckId, IFoodTruck> => {
+  if (!foodtrucksData) return {}
   if (!filterOpen && !filterString) {
     const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
     return filteredFoodtrucksData
   }
 
-  const filteredFoodtrucksData = {}
-  let filteredFoodtrucksIDs = Object.keys(foodtrucksData)
+  const filteredFoodtrucksData: Record<string, IFoodTruck> = {}
+  let filteredFoodtrucksIDs: string[] = Object.keys(foodtrucksData)
 
   if (filterOpen) {
     filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(
@@ -71,7 +96,7 @@ const filterFoodtrucks = (
   return filteredFoodtrucksData
 }
 
-const foodtrucksReducer = (state = defaultState, action) => {
+const foodtrucksReducer = (state = defaultState, action: IFoodTrucksAction) => {
   switch (action.type) {
     case getFoodtrucksDataRequested:
       return {

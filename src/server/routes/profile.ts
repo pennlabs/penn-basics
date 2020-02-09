@@ -3,7 +3,7 @@ import * as DB from '../database/db'
 
 const router = Router()
 
-export default function profileRouter() {
+export default function profileRouter(): Router {
   /**
    * Middleware builder to check if a user is logged in. The resultant middleware prints out a custom message
    * Proper usage is router.get('/your/route', isLoggedInMiddleware, (req, res)=>{/*your handler code/})

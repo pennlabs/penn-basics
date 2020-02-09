@@ -12,7 +12,7 @@ const isValidNumericId = (id: number | string | undefined | null): boolean => {
   return true
 }
 
-export default function laundryRouter() {
+export default function laundryRouter(): Router {
   router.post('/reminder/add', async (req: Request, res: Response) => {
     // TODO check for bad request (@peter)
 

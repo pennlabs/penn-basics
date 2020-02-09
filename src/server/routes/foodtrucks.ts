@@ -1,11 +1,11 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { Document } from 'mongoose'
 import * as DB from '../database/db'
-import { IFoodTruckUserReview } from '../types'
+import { IFoodTruckUserReview } from '../../types'
 
 const router = Router()
 
-export default function foodtrucksRouter() {
+export default function foodtrucksRouter(): Router {
   /**
    * Middleware builder to check if a user is logged in. The resultant middleware prints out a custom message
    * Proper usage is router.get('/your/route', isLoggedInMiddleware, (req, res)=>{/*your handler code/})

@@ -10,7 +10,7 @@ import {
   ISpace,
   IUser,
   IFoodTruckDocument,
-} from '../types'
+} from '../../types'
 
 // return all fields except for menu, priceTypes, and reviews
 export const findAllFoodtrucks = () => {

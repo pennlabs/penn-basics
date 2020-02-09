@@ -1,7 +1,6 @@
 /* global google, document */
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
 import { maxWidth, PHONE } from '../../styles/sizes'
 
@@ -9,7 +8,12 @@ const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
 const RED = '/img/foodtrucks/food-pin-red.png'
 const BLUE = '/img/foodtrucks/food-pin-blue.png'
 
-const MapWrapper = styled.div`
+interface IMapWrapper {
+  height?: string
+  mobileHeight?: string
+}
+
+const MapWrapper = styled.div<IMapWrapper>`
   width: 100%;
   flex: 1;
   height: ${({ height }) => height || '100vh'};
@@ -19,8 +23,33 @@ const MapWrapper = styled.div`
   }
 `
 
-export class FoodtruckMap extends Component {
-  constructor(props) {
+type TMarkerId = number
+
+interface IFoodTruckMapProps {
+  location: {
+    lat: number
+    lng: number
+  }
+  handleClickMarker: () => void
+  height?: string
+  mobileHeight?: string
+  mapId: string
+  gestureHandling?: string
+  markers: Record<TMarkerId, any>
+  showMarker?: boolean
+  activeMarker?: TMarkerId
+}
+
+interface IFoodTruckMapState {
+  markers: Record<TMarkerId, any>
+  map: object
+}
+
+export class FoodtruckMap extends Component<
+  IFoodTruckMapProps,
+  IFoodTruckMapState
+> {
+  constructor(props: IFoodTruckMapProps) {
     super(props)
 
     this.state = {
@@ -37,7 +66,7 @@ export class FoodtruckMap extends Component {
     this.waitForGoogle()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: IFoodTruckMapProps) {
     // Check if the active marker changes
     const { location } = this.props
     if (prevProps.location !== location) {
@@ -214,19 +243,4 @@ FoodtruckMap.defaultProps = {
   showMarker: false,
   activeMarker: null,
   handleClickMarker: null,
-}
-
-FoodtruckMap.propTypes = {
-  location: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-  }),
-  handleClickMarker: PropTypes.func,
-  height: PropTypes.string,
-  mobileHeight: PropTypes.string,
-  mapId: PropTypes.string.isRequired,
-  gestureHandling: PropTypes.string,
-  markers: PropTypes.object, // eslint-disable-line
-  showMarker: PropTypes.bool,
-  activeMarker: PropTypes.string,
 }

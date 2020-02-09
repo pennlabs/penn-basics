@@ -2,7 +2,11 @@ import styled from 'styled-components'
 
 import { GREEN, BORDER } from '../../styles/colors'
 
-export const Circle = styled.div`
+interface ICircle {
+  open?: boolean
+}
+
+export const Circle = styled.div<ICircle>`
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import s, { css } from 'styled-components'
+import s, { css, FlattenSimpleInterpolation } from 'styled-components'
 
 import { BORDER } from '../../styles/colors'
 import {
@@ -11,10 +11,24 @@ import {
   MAX_BODY_HEIGHT,
 } from '../../styles/sizes'
 
-const percent = numCols => `${(numCols / 12) * 100}%`
+const percent = (numCols: number): string => `${(numCols / 12) * 100}%`
 
-export const Row = s.div(
-  ({ maxHeight, overflowY, margin, justifyContent, fullHeight }) => css`
+interface IRow {
+  maxHeight?: string
+  overflowY?: string
+  margin?: string
+  justifyContent?: string
+  fullHeight?: boolean
+}
+
+export const Row = s.div<IRow>(
+  ({
+    maxHeight,
+    overflowY,
+    margin,
+    justifyContent,
+    fullHeight,
+  }): FlattenSimpleInterpolation => css`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -51,7 +65,30 @@ export const FlexRow = s(Row)`
   }
 `
 
-const ColWrapper = s.div(
+interface IColWrapper {
+  width?: string
+  padding?: string
+  maxHeight?: string
+  minHeight?: string
+  height?: string
+  fullHeight?: boolean
+  flex?: boolean
+  backgroundImage?: string
+  background?: string
+  overflowY?: string
+  overflowX?: string
+  borderRadius?: string
+  borderRight?: string
+  sm?: number
+  offsetSm?: number
+  md?: number
+  offsetMd?: number
+  lg?: number
+  offsetLg?: number
+  hideOnMobile?: string
+}
+
+const ColWrapper = s.div<IColWrapper>(
   ({
     width,
     padding,
@@ -122,11 +159,21 @@ const ColWrapper = s.div(
   }`
 )
 
-const ColContainer = s.div(({ margin }) =>
+interface IColContainer {
+  margin?: string
+}
+
+const ColContainer = s.div<IColContainer>(({ margin }) =>
   margin ? `margin-left: ${margin}; margin-right: ${margin};` : ``
 )
 
-export const Col = ({ margin, children, ...other }) => (
+export type ICol = {
+  children?: React.ReactNode | React.ReactNodeArray
+  style?: React.CSSProperties
+} & IColWrapper &
+  IColContainer
+
+export const Col = ({ margin, children, ...other }: ICol) => (
   <ColWrapper {...other}>
     {margin ? (
       <ColContainer margin={margin}>{children}</ColContainer>

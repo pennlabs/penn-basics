@@ -13,7 +13,9 @@ const Wrapper = s.div`
   }
 `
 
-export const ErrorMessage = ({ message = '' }: IErrorMessageProps) => {
+export const ErrorMessage = ({
+  message = '',
+}: IErrorMessageProps): React.ReactElement => {
   const [visible, setVisibility] = useState<boolean>(true)
   if (!message || !visible) return null
 
