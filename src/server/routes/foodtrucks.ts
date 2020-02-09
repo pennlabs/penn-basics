@@ -16,14 +16,14 @@ export default function foodtrucksRouter() {
     return (req: Request, res: Response, next: NextFunction) => {
       if (!req.user) {
         return res.status(401).json({
-          message: message || DEFAULT_MESSAGE,
+          message: message ?? DEFAULT_MESSAGE,
         })
       }
       return next()
     }
   }
 
-  router.get('/all', (_, res) => {
+  router.get('/all', (_, res: Response) => {
     DB.findAllFoodtrucks().then((trucks: Document[]) => {
       res.status(200).json({
         trucks,
@@ -31,7 +31,7 @@ export default function foodtrucksRouter() {
     })
   })
 
-  router.get('/:id', (req, res) => {
+  router.get('/:id', (req: Request, res: Response) => {
     const truckId = req.params.id
     DB.getFoodTruck(truckId).then((truck: Document | null) => {
       res.status(200).json({
