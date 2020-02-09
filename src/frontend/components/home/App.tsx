@@ -30,7 +30,7 @@ const Wrapper = s.div`
   }
 `
 
-const Home = ({ filterList }) => {
+const Home = ({ filterList }: { filterList: number[] }) => {
   const componentList = [
     <Weather key="weatherComponent" />,
     <Events key="eventsComponent" />,
@@ -63,14 +63,6 @@ const Home = ({ filterList }) => {
     </>
   )
 }
-
-// Home.propTypes = {
-//   filterList: [],
-// }
-
-// Home.defaultProps = {
-//   filterList: PropTypes.arrayOf(PropTypes.number),
-// }
 
 const mapStateToProps = ({ home }) => {
   const { filterList } = home

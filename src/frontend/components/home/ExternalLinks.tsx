@@ -29,7 +29,17 @@ const ExternalLinkImg = s.img`
   display: block;
 `
 
-const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
+interface IExternalLinkProps {
+  pictureURL: string
+  websiteURL: string
+  productName: string
+}
+
+const ExternalLink = ({
+  pictureURL,
+  websiteURL,
+  productName,
+}: IExternalLinkProps): React.ReactElement => {
   return (
     <ExternalLinkTag
       href={websiteURL}
@@ -47,7 +57,7 @@ const ExternalLink = ({ pictureURL, websiteURL, productName }) => {
   )
 }
 
-const ExternalLinks = () => (
+const ExternalLinks = (): React.ReactElement => (
   <BorderedCard>
     <Subtitle>More in the Penn Ecosystem</Subtitle>
 
@@ -74,17 +84,5 @@ const ExternalLinks = () => (
     })}
   </BorderedCard>
 )
-
-ExternalLink.defaultProps = {
-  pictureURL: '',
-  websiteURL: '',
-  productName: '',
-}
-
-ExternalLink.propTypes = {
-  pictureURL: PropTypes.string,
-  websiteURL: PropTypes.string,
-  productName: PropTypes.string,
-}
 
 export default ExternalLinks

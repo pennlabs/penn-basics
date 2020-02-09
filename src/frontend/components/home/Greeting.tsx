@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { Text } from '../shared'
+import { IUserInfo } from 'src/frontend/types'
 
 const greetings = ['Hi There', 'Hey there', 'Howdy']
 const emojis = ['😀', '😛', '😗', '🤠']
 
-const Greeting = ({ userInfo = {} }) => {
-  const [greeting, setGreeting] = useState('')
-  const [emoji, setEmoji] = useState('')
+interface IGreetingProps {
+  userInfo: IUserInfo
+}
+
+const Greeting = ({ userInfo }: IGreetingProps): React.ReactElement => {
+  const [greeting, setGreeting] = useState<string>('')
+  const [emoji, setEmoji] = useState<string>('')
 
   const { fullName, displayName } = userInfo || {}
   let displayString = ''
@@ -30,15 +34,5 @@ const Greeting = ({ userInfo = {} }) => {
 }
 
 const mapStateToProps = ({ authentication }) => authentication
-
-Greeting.defaultProps = {
-  userInfo: {},
-}
-
-Greeting.propTypes = {
-  userInfo: PropTypes.shape({
-    fullName: PropTypes.string,
-  }),
-}
 
 export default connect(mapStateToProps, null)(Greeting)

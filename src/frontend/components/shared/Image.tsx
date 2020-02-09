@@ -11,9 +11,12 @@ export const Image = s.img<IImage>`
   margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
 `
 
-interface IImageZoomImg {}
+interface IImageZoomImg {
+  src: string
+  alt: string
+}
 
-const ImageZoomImg = s.img`
+const ImageZoomImg = s.img<IImageZoomImg>`
   transition-duration: 0.7s;
   max-width: 100%;
   &:hover{

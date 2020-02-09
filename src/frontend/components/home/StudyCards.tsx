@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-class StudyCards extends Component {
-  constructor(props) {
+interface IStudyCardsProps {
+  name: string
+  hours: string
+  noise: number
+  groups: number
+  outlets: number
+}
+
+// TODO refactor to functional component
+
+class StudyCards extends Component<IStudyCardsProps> {
+  constructor(props: IStudyCardsProps) {
     super(props)
 
     this.renderNoise = this.renderNoise.bind(this)
@@ -95,22 +104,6 @@ class StudyCards extends Component {
       </article>
     )
   }
-}
-
-StudyCards.defaultProps = {
-  name: 'Huntsman 380 Computer Lab',
-  hours: '24/7',
-  noise: 0,
-  groups: 2,
-  outlets: 1,
-}
-
-StudyCards.propTypes = {
-  name: PropTypes.string,
-  hours: PropTypes.string,
-  noise: PropTypes.number,
-  groups: PropTypes.number,
-  outlets: PropTypes.number,
 }
 
 export default StudyCards

@@ -10,6 +10,8 @@ import {
   OptionText,
 } from '../../shared/Option'
 
+// TODO this is duplicate code
+
 class FilterBtn extends Component {
   constructor(props) {
     super(props)

@@ -7,7 +7,7 @@ import { logEvent } from '../../../utils/analytics'
 
 const GET_EVENTS_ROUTE = 'https://api.pennlabs.org/calendar/'
 
-const getSubtext = ({ length }) => {
+const getSubtext = ({ length }: { length: number }): string | null => {
   switch (length) {
     case 0:
       return null
@@ -18,8 +18,15 @@ const getSubtext = ({ length }) => {
   }
 }
 
-const Events = () => {
-  const [calendarArray, setCalendar] = useState(null)
+interface ICalendarEvent {
+  start: string
+  name: string
+}
+
+const Events = (): React.ReactElement => {
+  const [calendarArray, setCalendar] = useState<ICalendarEvent[] | undefined>(
+    undefined
+  )
 
   useEffect(() => {
     const cancelToken = axios.CancelToken
@@ -29,7 +36,7 @@ const Events = () => {
       .then(res => setCalendar(res.data.calendar))
   }, [])
 
-  if (!calendarArray) return null
+  if (!calendarArray) return <React.Fragment />
 
   return (
     <BorderedCard>

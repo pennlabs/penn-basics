@@ -1,7 +1,7 @@
 /* globals window */
 
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'next/router'
+import { withRouter, Router } from 'next/router'
 import s from 'styled-components'
 import Link from 'next/link'
 import Chevron from '../../../../../public/img/chevron-left.svg'
@@ -28,15 +28,19 @@ const Wrapper = s.div<{}>`
   }
 `
 
-const Back = ({ router }) => {
-  const [route, setRoute] = useState(null)
+interface IBackProps {
+  router: Router
+}
+
+const Back = ({ router }: IBackProps): React.ReactElement => {
+  const [route, setRoute] = useState<string>('')
 
   useEffect(() => {
     const { asPath } = router
     setRoute(asPath)
   })
 
-  if (!route || route === '/') return null
+  if (!route || route === '/') return <React.Fragment />
 
   const lastIdx = route.lastIndexOf('/')
   const to = route.substring(0, lastIdx) || '/'

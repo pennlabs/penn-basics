@@ -22,8 +22,17 @@ const NewsContent = s.div`
   }
 `
 
+interface IDPResponse {
+  picture: string
+  link: string
+  title: string
+  content: string
+  time: string
+}
+
 const News = () => {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState<IDPResponse | undefined>(undefined)
+
   useEffect(() => {
     const cancelToken = axios.CancelToken
     const source = cancelToken.source()

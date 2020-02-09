@@ -10,8 +10,10 @@ export const PHONE = '584px'
 
 export const BORDER_RADIUS = '4px'
 
-export const minWidth = w => `@media screen and (min-width: ${w})`
-export const maxWidth = w => `@media screen and (max-width: ${w})`
+export const minWidth = (w: string): string =>
+  `@media screen and (min-width: ${w})`
+export const maxWidth = (w: string): string =>
+  `@media screen and (max-width: ${w})`
 
 export const LONG_ANIMATION_DURATION = '400ms'
 export const SHORT_ANIMATION_DURATION = '200ms'

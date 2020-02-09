@@ -1,13 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Col } from './Flex'
 import { Subtext } from './Typography'
 import { logEvent } from '../../../utils/analytics'
+import { FEEDBACK_ROUTE } from '../../constants/routes'
 import HeartIcon from '../../../../public/img/heart.svg'
-
-// TODO make this a constant elsewhere
-const AIRTABLE_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
 
 interface IPennLabsCreditProps {
   padding?: string
@@ -33,7 +30,7 @@ const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
       </a>
       &nbsp;
       <a
-        href={AIRTABLE_LINK}
+        href={FEEDBACK_ROUTE}
         target="_BLANK"
         rel="noopener noreferrer"
         onClick={() => logEvent('feeback', 'click from footer')}

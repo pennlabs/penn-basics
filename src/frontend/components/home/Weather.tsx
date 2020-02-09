@@ -21,7 +21,6 @@ const Weather = () => {
   return (
     <BorderedCard>
       <Toggle
-        filter={isFahrenheit}
         filterAction={toggleIsFahrenheit}
         filterOffText="°F"
         filterOnText="°C"
