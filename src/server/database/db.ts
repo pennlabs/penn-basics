@@ -52,7 +52,7 @@ export const updateReview = async (
   if (!overallRating) overallRating = 0.0
 
   const { reviews } = data // reviews in the DB
-  const { pennid, rating, comment, showName } = userReview
+  const { pennid, rating, comment, showName, fullName } = userReview
   let exist = false
   let newOverallRating
 
@@ -72,6 +72,7 @@ export const updateReview = async (
       reviews[i].comment = comment
       reviews[i].showName = showName
       reviews[i].timeEdited = moment().format()
+      reviews[i].fullName = fullName
 
       break
     }

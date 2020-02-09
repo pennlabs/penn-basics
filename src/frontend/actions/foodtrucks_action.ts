@@ -143,6 +143,8 @@ export const updateFoodtruckReview = (
   comment: string,
   showName: boolean
 ) => {
+  console.log("action")
+  console.log(fullName)
   return dispatch => {
     dispatch({
       type: getFoodtruckInfoRequested,
