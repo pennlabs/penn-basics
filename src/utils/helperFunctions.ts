@@ -1,3 +1,5 @@
+import { Response, Request, NextFunction } from 'express'
+
 export const convertDate = (time: string) => {
   if (!time) return 'Closed'
   const colonIdx = time.indexOf(':')
@@ -45,4 +47,21 @@ export const isValidNumericId = (id: number): boolean => {
   if (Number.isNaN(num)) return false
   if (num < 0) return false
   return true
+}
+
+/**
+ * Middleware builder to check if a user is logged in. The resultant middleware prints out a custom message
+ * Proper usage is router.get('/your/route', isLoggedInMiddleware, (req, res)=>{/*your handler code/})
+ * @param {String} message - The message that you want to display if the user is not logged in.
+ */
+export const isLoggedInMiddleware = (message?: string) => {
+  const DEFAULT_MESSAGE = 'You must be logged in to perform this action'
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return res.status(401).json({
+        message: message ?? DEFAULT_MESSAGE,
+      })
+    }
+    return next()
+  }
 }
