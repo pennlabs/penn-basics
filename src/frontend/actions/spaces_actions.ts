@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Dispatch, Action } from 'redux'
 
 import {
   getSpacesDataRequested,
@@ -102,7 +103,7 @@ const isOpen = ({ start, end }, time, day) => {
 
 export function getAllSpacesData() {
   // eslint-disable-line
-  return async dispatch => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getSpacesDataRequested,
     })
@@ -142,7 +143,7 @@ export function getAllSpacesData() {
 }
 
 export function setHoveredSpace(spaceId) {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setHoveredSpaceFulfilled,
       spaceId,
@@ -151,7 +152,7 @@ export function setHoveredSpace(spaceId) {
 }
 
 export function setActiveSpace(spaceId) {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setActiveSpaceFulfilled,
       spaceId,
@@ -160,12 +161,12 @@ export function setActiveSpace(spaceId) {
 }
 
 export function clearActiveSpace() {
-  return dispatch => dispatch({ type: clearActiveSpaceFulfilled })
+  return (dispatch: Dispatch<Action>) => dispatch({ type: clearActiveSpaceFulfilled })
 }
 
 // TODO DOCS / ERROR CHECKING
 export function filterSpacesOpen(filter) {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesOpenRequested,
       filter,
@@ -175,7 +176,7 @@ export function filterSpacesOpen(filter) {
 
 // TODO DOCS / ERROR CHECKING
 export function filterSpacesOutlets(filter) {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesOutletsRequested,
       filter,
@@ -185,7 +186,7 @@ export function filterSpacesOutlets(filter) {
 
 // TODO DOCS / ERROR CHECKING
 export function filterSpacesNoise(filter) {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesNoiseRequested,
       filter,
@@ -195,7 +196,7 @@ export function filterSpacesNoise(filter) {
 
 // TODO DOCS / ERROR CHECKING
 export const filterSpacesGroups = filter => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesGroupsRequested,
       filter,
@@ -204,7 +205,7 @@ export const filterSpacesGroups = filter => {
 }
 
 export const filterOnCampus = filter => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterOnCampusRequested,
       filter,
@@ -217,7 +218,7 @@ export const filterOnCampus = filter => {
  * @param {string} filter filterString from user input
  */
 export const filterSpacesString = filter => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesStringRequested,
       filter,
@@ -226,19 +227,19 @@ export const filterSpacesString = filter => {
 }
 
 export function clearSpacesFilters() {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({ type: clearFilterSpacesRequested })
   }
 }
 
-export const toggleSpacesOpen = () => dispatch =>
+export const toggleSpacesOpen = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_OPEN })
 
-export const toggleSpacesOutlets = () => dispatch =>
+export const toggleSpacesOutlets = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_OUTLETS })
 
-export const toggleSpacesNoise = () => dispatch =>
+export const toggleSpacesNoise = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_NOISE })
 
-export const toggleSpacesGroups = () => dispatch =>
+export const toggleSpacesGroups = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_GROUPS })

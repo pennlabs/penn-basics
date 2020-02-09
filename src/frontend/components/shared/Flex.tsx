@@ -84,7 +84,7 @@ interface IColWrapper {
   offsetMd?: number
   lg?: number
   offsetLg?: number
-  hideOnMobile?: string
+  hideOnMobile?: boolean
 }
 
 const ColWrapper = s.div<IColWrapper>(

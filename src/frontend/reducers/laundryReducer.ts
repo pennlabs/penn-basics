@@ -29,8 +29,60 @@ const defaultState = {
   reminderIntervalID: null,
 }
 
+interface IFavoritesProps {
+  locationName: string
+  hallId: number
+}
+
+interface ILaundryHallInfo {
+  hall_name: string
+  id: number
+  location: string
+}
+
+interface ILaundryHallProps {
+  location: string
+  halls: [ILaundryHallInfo]
+}
+
+interface IDetailProps {
+  id: number
+  status: string
+  time_remaining: number
+  type: string
+}
+
+interface IMachinesProps {
+  dryers: {
+    offline: number
+    open: number
+    out_of_order: number
+    running: number
+    time_remaining: number[] | number
+  }
+  washers: {
+    offline: number
+    open: number
+    out_of_order: number
+    running: number
+    time_remaining: number[] | number
+  }
+  details: IDetailProps[]
+}
+
+interface ILaundryHallInfoProps {
+  hall_name: string
+  location: string
+  machines: IMachinesProps[]
+}
+
 type ILaundryAction = {
   error?: string
+  favorites?: IFavoritesProps
+  laundryHalls?: ILaundryHallProps
+  intervalID?: number
+  laundryHallInfo?: ILaundryHallInfoProps
+  reminders?: []
 } & Action
 
 const laundryReducer = (state = defaultState, action : ILaundryAction) => {

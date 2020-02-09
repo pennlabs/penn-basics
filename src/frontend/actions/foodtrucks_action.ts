@@ -1,5 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
+import { Dispatch, Action } from 'redux'
 
 import {
   getFoodtrucksDataRequested,
@@ -34,7 +35,7 @@ const isOpen = (
 }
 
 export const getAllFoodtrucksData = () => {
-  return async dispatch => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getFoodtrucksDataRequested,
     })
@@ -102,7 +103,7 @@ export const getAllFoodtrucksData = () => {
 }
 
 export const getFoodtruckInfo = id => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getFoodtruckInfoRequested,
     })
@@ -143,9 +144,7 @@ export const updateFoodtruckReview = (
   comment: string,
   showName: boolean
 ) => {
-  console.log("action")
-  console.log(fullName)
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getFoodtruckInfoRequested,
     })
@@ -185,7 +184,7 @@ export const updateFoodtruckReview = (
 }
 
 export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
       footruckId,
@@ -198,7 +197,7 @@ export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => {
  * @param {string} filterString user input string
  */
 export const filterFoodtrucksString = (filterString: string) => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterFoodtrucksStringRequested,
       filterString,
@@ -211,7 +210,7 @@ export const filterFoodtrucksString = (filterString: string) => {
  * @param {boolean} filter
  */
 export const filterFoodtrucksOpen = (filter: boolean) => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterFoodtrucksOpenRequested,
       filter,
@@ -219,8 +218,8 @@ export const filterFoodtrucksOpen = (filter: boolean) => {
   }
 }
 
-export const toggleFoodtrucksOpen = () => dispatch =>
+export const toggleFoodtrucksOpen = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })
 
-export const clearFoodtrucksFilter = () => dispatch =>
+export const clearFoodtrucksFilter = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: clearFilterFoodtrucksRequested })

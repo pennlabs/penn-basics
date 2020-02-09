@@ -67,6 +67,3 @@ export const browserSupportRejected = 'BROWSER_SUPPORT_REJECTED'
 export const getRemindersRejected = 'GET_REMINDERS_REJECTED'
 export const updateReminders = 'UPDATE_REMINDERS'
 export const updateReminderIntervalID = 'UPDATE_REMINDER_INTERVAL_ID'
-
-// misc actions
-export const updateLink = 'UPDATE_LINK'

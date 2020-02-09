@@ -1,10 +1,12 @@
 /* global localStorage */
+import { Dispatch, Action } from 'redux'
+
 import {
   filterHomeCustomizeRequested,
   TOGGLE_FILTER_HOME_CUSTOMIZE,
 } from './action_types'
 
-const updateFilters = (arr, num) => {
+const updateFilters = (arr: number[], num: number) => {
   if (!arr || !arr.length) {
     return [num]
   }
@@ -20,9 +22,11 @@ const updateFilters = (arr, num) => {
   return newArr.sort()
 }
 
-export const initializeFilterHome = optionsLength => {
-  return dispatch => {
-    if (!localStorage.getItem('homeFilter')) {
+export const initializeFilterHome = (optionsLength: number) => {
+  return (dispatch: Dispatch<Action>) => {
+    const homeFilter = localStorage.getItem('homeFilter')
+
+    if (!homeFilter) {
       let filterList : Number[] = []
       for (let i = 0; i < optionsLength; i++) {
         filterList.push(i)
@@ -35,7 +39,7 @@ export const initializeFilterHome = optionsLength => {
     } else {
       dispatch({
         type: filterHomeCustomizeRequested,
-        filterList: JSON.parse(localStorage.getItem('homeFilter')),
+        filterList: JSON.parse(homeFilter),
       })
     }
   }
@@ -43,17 +47,20 @@ export const initializeFilterHome = optionsLength => {
 
 // filterList is the existing list of filters
 // filter is a number/ index
-export const filterHomeCustomize = filter => {
-  return dispatch => {
-    let filterList = JSON.parse(localStorage.getItem('homeFilter'))
-    filterList = updateFilters(filterList, filter)
-    localStorage.setItem('homeFilter', JSON.stringify(filterList))
-    dispatch({
-      type: filterHomeCustomizeRequested,
-      filterList,
-    })
+export const filterHomeCustomize = (filter: number) => {
+  return (dispatch: Dispatch<Action>) => {
+    const homeFilterString = localStorage.getItem('homeFilter')
+    if (homeFilterString) {
+      let filterList = JSON.parse(homeFilterString)
+      filterList = updateFilters(filterList, filter)
+      localStorage.setItem('homeFilter', JSON.stringify(filterList))
+      dispatch({
+        type: filterHomeCustomizeRequested,
+        filterList,
+      }) 
+    }
   }
 }
 
-export const toggleHomeCustomize = () => dispatch =>
+export const toggleHomeCustomize = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_HOME_CUSTOMIZE })

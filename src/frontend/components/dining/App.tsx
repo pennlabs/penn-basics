@@ -32,7 +32,7 @@ const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id } : IAppProps) : 
         md={8}
         overflowY="scroll"
         maxHeight={`calc(100vh - ${NAV_HEIGHT} - 1px)`}
-        hideOnMobile={!parsedVenueId}
+        hideOnMobile={Boolean(!parsedVenueId)}
       >
         <DiningVenue venueId={parsedVenueId} />
       </Col>

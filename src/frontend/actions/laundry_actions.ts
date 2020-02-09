@@ -3,6 +3,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
 import { isValidNumericId } from '../../utils/helperFunctions'
+import { Dispatch, Action } from 'redux'
 
 import {
   getLaundryHallsDataRequested,
@@ -35,7 +36,7 @@ function processLaundryHallsData(idData) {
 }
 
 export function getLaundryHalls() {
-  return async dispatch => {
+  return async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getLaundryHallsDataRequested,
     })
@@ -56,7 +57,7 @@ export function getLaundryHalls() {
   }
 }
 
-const getLaundryHallInterval = async (dispatch, laundryHallId) => {
+const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId) => {
   if (!isValidNumericId(laundryHallId)) {
     dispatch({
       type: getLaundryHallInfoRejected,
@@ -91,7 +92,7 @@ const getLaundryHallInterval = async (dispatch, laundryHallId) => {
 }
 
 export function getLaundryHall(laundryHallId, prevIntervalID) {
-  return async dispatch => {
+  return async (dispatch: Dispatch<Action>) => {
     if (prevIntervalID) {
       clearInterval(prevIntervalID)
       dispatch({
@@ -114,7 +115,7 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
 }
 
 // TODO document....
-export const getFavoritesHomePage = () => dispatch => {
+export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // Get the list of laundry halls from local storage
@@ -169,7 +170,7 @@ export const getFavoritesHomePage = () => dispatch => {
 }
 
 export const getFavorites = () => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     let favorites = localStorage.getItem('laundry_favorites')
     if (favorites) {
       // Read in from localStore, map from strings to numbers
@@ -188,7 +189,7 @@ export const getFavorites = () => {
 }
 
 export const addFavorite = (hallURLId, location, hallName) => {
-  return async dispatch => {
+  return async (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'addFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -224,7 +225,7 @@ export const addFavorite = (hallURLId, location, hallName) => {
 }
 
 export const removeFavorite = hallURLId => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -246,7 +247,7 @@ export const removeFavorite = hallURLId => {
 }
 
 export const checkBrowserCompatability = () => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     try {
       if (!Notification || !Notification.requestPermission()) {
         dispatch({
@@ -315,7 +316,7 @@ const urlBase64ToUint8Array = base64String => {
   return outputArray
 }
 
-const getRemindersInterval = dispatch => {
+const getRemindersInterval = (dispatch: Dispatch<Action>) => {
   if (
     'serviceWorker' in navigator &&
     'PushManager' in window &&
@@ -410,7 +411,7 @@ const getRemindersInterval = dispatch => {
 
 // TODO document this
 export const getReminders = () => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     getRemindersInterval(dispatch)
 
     const intervalID = setInterval(() => {
@@ -425,7 +426,7 @@ export const getReminders = () => {
 }
 
 export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
         // get public vapid key
@@ -463,7 +464,7 @@ export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
 }
 
 export const removeReminder = () => {
-  return dispatch => {
+  return (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready
         .then(registration => {

@@ -1,3 +1,5 @@
+import { Action } from 'redux'
+
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,
@@ -32,7 +34,56 @@ const clearFilterState = {
   filterString: '',
 }
 
-const updateFilters = (arr, num) => {
+interface ISpaceProps {
+  location: {
+    lat: string,
+    lng: string
+  }
+  start: number[]
+  end: number[]
+  tags: string[]
+  _id: string
+  name: string
+  description: string
+  address: string
+  image: string
+  outlets: number
+  quiet: number
+  groups: number
+  spaceID: string
+  open: boolean
+  hours: string
+}
+
+
+type ISpacesAction = {
+  error?: string
+  filter?: boolean | number | string
+  spaces?: Record<string, ISpaceProps>
+  spaceId?: string
+} & Action
+
+interface ISpacesReducerState {
+  pending: boolean
+  filterOpen?: boolean
+  filterString?: string
+  filterOutlets?: number[]
+  filterNoise?: number[]
+  filterGroups?: number[]
+  filterOnCampus?: boolean
+  filterOpenActive?: boolean
+  filterOutletsActive?: boolean
+  filterNoiseActive?: boolean
+  filterGroupsActive?: boolean
+  hoveredSpace?: string
+  activeSpace?: string | undefined | null
+  spacesData?: Record<string, ISpaceProps>
+  filteredSpacesData?: Record<string, ISpaceProps>
+}
+
+const defaultState: ISpacesReducerState = { pending: true }
+
+const updateFilters = (arr: null | number[] | undefined, num: number) => {
   if (!arr || !arr.length) {
     return [num]
   }
@@ -45,7 +96,7 @@ const updateFilters = (arr, num) => {
   return arr
 }
 
-const filterSpaces = state => {
+const filterSpaces = (state: ISpacesReducerState) => {
   const {
     filterOpen,
     filterOutlets,
@@ -53,7 +104,10 @@ const filterSpaces = state => {
     filterGroups,
     filterOnCampus,
     filterString,
+    spacesData,
   } = state
+
+  if (!spacesData) return state
 
   // If there is nothing to filter on, remove all filters and reset the data
   if (
@@ -69,8 +123,8 @@ const filterSpaces = state => {
     return newState
   }
 
-  const filteredSpacesData = {}
-  const { spacesData } = state
+  const filteredSpacesData: Record<string, ISpaceProps>  = {}
+
   let filteredSpaceIDs = Object.keys(spacesData)
 
   if (filterOpen) {
@@ -122,7 +176,8 @@ const filterSpaces = state => {
   return newState
 }
 
-const spacesReducer = (state = { pending: true }, action) => {
+
+const spacesReducer = (state: ISpacesReducerState = defaultState, action: ISpacesAction) => {
   const newState = Object.assign({}, state)
   const {
     filterOutlets,
@@ -134,6 +189,7 @@ const spacesReducer = (state = { pending: true }, action) => {
     filterNoiseActive,
     filterGroupsActive,
   } = newState
+  // TODO: use different names for different filter type
   const { filter, spaces, type } = action
 
   switch (type) {
@@ -157,7 +213,7 @@ const spacesReducer = (state = { pending: true }, action) => {
       }
 
     case setHoveredSpaceFulfilled:
-      newState.hoveredSpace = action.spaceId
+      newState.hoveredSpace = action.spaceId as string
       return newState
 
     case setActiveSpaceFulfilled:
@@ -169,27 +225,27 @@ const spacesReducer = (state = { pending: true }, action) => {
       return newState
 
     case filterSpacesOpenRequested /* TODO FILTERING */:
-      newState.filterOpen = filter
+      newState.filterOpen = Boolean(filter)
       return filterSpaces(newState)
 
     case filterSpacesOutletsRequested /* TODO FILTERING */:
-      newState.filterOutlets = updateFilters(filterOutlets, filter)
+      newState.filterOutlets = updateFilters(filterOutlets, (filter as number))
       return filterSpaces(newState)
 
     case filterSpacesNoiseRequested /* TODO FILTERING */:
-      newState.filterNoise = updateFilters(filterNoise, filter)
+      newState.filterNoise = updateFilters(filterNoise, (filter as number))
       return filterSpaces(newState)
 
     case filterSpacesGroupsRequested /* TODO FILTERING */:
-      newState.filterGroups = updateFilters(filterGroups, filter)
+      newState.filterGroups = updateFilters(filterGroups, (filter as number))
       return filterSpaces(newState)
 
     case filterOnCampusRequested:
-      newState.filterOnCampus = action.filter
+      newState.filterOnCampus = Boolean(action.filter)
       return filterSpaces(newState)
 
     case filterSpacesStringRequested:
-      newState.filterString = action.filter
+      newState.filterString = (action.filter as string)
       return filterSpaces(newState)
 
     case clearFilterSpacesRequested:
