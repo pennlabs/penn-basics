@@ -43,7 +43,7 @@ const Icon = s.i<{}>`
   line-height: ${DIAMETER};
 `
 
-export default (): JSX.Element => (
+const Feedback = (): React.ReactElement => (
   <FeedbackLink
     href={FEEDBACK_LINK}
     title="Feedback"
@@ -54,3 +54,5 @@ export default (): JSX.Element => (
     <Icon className="fa-comment far fa-lg" />
   </FeedbackLink>
 )
+
+export default Feedback

@@ -15,7 +15,11 @@ import { slideIn, slideOut } from './Animations'
 import { Shade } from './Shade'
 import { ESCAPE_KEY_CODE } from '../../constants/misc'
 
-const ModalContent = styled.div`
+interface IModalContent {
+  show?: boolean
+}
+
+const ModalContent = styled.div<IModalContent>`
   background: ${WHITE};
   width: 50%;
   display: inline-block;
@@ -40,7 +44,11 @@ const ModalContent = styled.div`
   }
 `
 
-const ModalClose = styled.div`
+interface IModalClose {
+  show?: boolean
+}
+
+const ModalClose = styled.div<IModalClose>`
   animation-name: ${({ show }) => (show ? slideIn : slideOut)};
   animation-duration: ${LONG_ANIMATION_DURATION};
 
@@ -81,10 +89,25 @@ const Times = styled.span`
 
 // Do not propagate events on the modal content to the modal background
 // This would otherwise cause the modal to close on any click
-const noop = event => event.stopPropagation()
+const noop = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
+  event.stopPropagation()
 
-class Modal extends Component {
-  constructor(props) {
+interface IModalProps {
+  show: boolean
+  history: History
+  children: React.ReactNode | React.ReactNodeArray
+  toggle: () => void
+  ROUTE: string
+}
+
+interface IModalState {
+  isNewlyMounted: boolean
+}
+
+class Modal extends Component<IModalProps, IModalState> {
+  private focusRef: React.RefObject<HTMLDivElement>
+
+  constructor(props: IModalProps) {
     super(props)
 
     this.state = { isNewlyMounted: true }
@@ -96,7 +119,7 @@ class Modal extends Component {
   }
 
   // Avoid animations showing on load
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: IModalProps) {
     const { show } = this.props
     const { isNewlyMounted } = this.state
 
@@ -107,7 +130,9 @@ class Modal extends Component {
 
     // If we are showing the modal, focus on it
     if (show && !prevProps.show) {
-      this.focusRef.current.focus()
+      const { current } = this.focusRef || {}
+      if (!current) return
+      current.focus()
     }
   }
 
@@ -116,7 +141,7 @@ class Modal extends Component {
   }
 
   // Close the modal when the user presses the escape key
-  handleKeyPress(event) {
+  handleKeyPress(event: React.KeyboardEvent) {
     const { show, ROUTE } = this.props
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
@@ -180,20 +205,16 @@ class Modal extends Component {
   }
 }
 
-Modal.defaultProps = {
-  toggle: null,
-}
-
-Modal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  history: PropTypes.object, // eslint-disable-line
-  children: PropTypes.any.isRequired, // eslint-disable-line
-  toggle: PropTypes.any, // eslint-disable-line
-}
-
 export default Modal
 
-export const ModalContainer = styled.div`
+interface IModalContent {
+  padding?: string
+  background?: string
+  paddingTop?: string
+  paddingBottom?: string
+}
+
+export const ModalContainer = styled.div<IModalContent>`
   padding: 0 ${({ padding = 8.33 }) => padding}vw;
   background: ${({ background }) => background || WHITE};
   padding-top: ${({ paddingTop }) => paddingTop || 0};

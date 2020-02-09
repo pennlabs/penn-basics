@@ -4,8 +4,8 @@ import s from 'styled-components'
 import { DebounceInput } from 'react-debounce-input'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import XSVG from '../../../../public/img/x.svg'
 
+import XSVG from '../../../../public/img/x.svg'
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
 import {
   getFavorites,
@@ -130,8 +130,7 @@ const App = ({
         ) : null}
         {!loading ? (
           <CheckCircleSVG
-            style={{ transform: 'translateY(6px)' }}
-            color={BLUE}
+            style={{ transform: 'translateY(6px)', color: BLUE }}
           />
         ) : null}
       </BorderedCard>

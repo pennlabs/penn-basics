@@ -18,7 +18,17 @@ const Text = s.p`
   line-height: 1.15;
 `
 
-export const NoData = ({ image, imageAlt, text }) => (
+interface INoDataProps {
+  image: string
+  imageAlt: string
+  text: string
+}
+
+export const NoData = ({
+  image,
+  imageAlt,
+  text,
+}: INoDataProps): React.ReactElement => (
   <div
     className="columns is-vcentered"
     style={{ height: `calc(100% - ${NAV_HEIGHT}` }}
