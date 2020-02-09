@@ -1,11 +1,11 @@
 import passport from 'passport'
 import { Document } from 'mongoose'
-
 import { Router, Request, Response } from 'express'
 import axios from 'axios'
-import * as DB from '../database/db'
-import { IUser, DoneCallback } from '../types'
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
+
+import * as DB from '../database/db'
+import { IUser, DoneCallback } from '../../types'
 
 const { OAuth2Strategy } = require('passport-oauth')
 
@@ -20,12 +20,13 @@ const introspectURL = `${providerBaseURL}accounts/introspect/`
 const authorizationURL = `${providerBaseURL}accounts/authorize`
 const clientID = process.env.OAUTH_CLIENT_ID || 'keyboard-cat-id'
 const clientSecret = process.env.OAUTH_CLIENT_SECRET || 'keyboard-cat-secret'
-// this is localhost when acting locally
+
+// This is localhost when acting locally
 const callbackURL =
   process.env.OAUTH_CALLBACK_URL ||
   'https://www.pennbasics.com/api/auth/provider/callback'
 
-export default function authRouter() {
+export default function authRouter(): Router {
   passport.serializeUser((user: IUser, done) => {
     done(null, user.pennid)
   })
@@ -45,8 +46,8 @@ export default function authRouter() {
       { tokenURL, authorizationURL, clientID, clientSecret, callbackURL },
       (
         accessToken: string,
-        refreshToken: string,
-        profile: any,
+        _refreshToken: string,
+        _profile: any,
         done: DoneCallback
       ) => {
         const data = {

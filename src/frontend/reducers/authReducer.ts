@@ -1,9 +1,21 @@
 import { getUserInfoFulfilled } from '../actions/action_types'
-import { AnyAction } from 'redux'
+import { Action } from 'redux'
+import { IUserInfo } from '../types'
 
-const defaultState = { userInfo: null }
+interface IAuthReducerState {
+  userInfo?: IUserInfo
+}
 
-const authReducer = (state = defaultState, action: AnyAction) => {
+type IAuthAction = {
+  userInfo: IUserInfo
+} & Action
+
+const defaultState: IAuthReducerState = { userInfo: undefined }
+
+const authReducer = (
+  state = defaultState,
+  action: IAuthAction
+): IAuthReducerState => {
   switch (action.type) {
     case getUserInfoFulfilled:
       return {

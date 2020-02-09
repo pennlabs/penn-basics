@@ -15,8 +15,12 @@ import {
   clearFilterFoodtrucksRequested,
 } from './action_types'
 import { convertDate, padHours } from '../../utils/helperFunctions'
+import { TFoodTruckId } from 'src/types'
 
-const isOpen = ({ start, end }, day) => {
+const isOpen = (
+  { start, end }: { start: string[]; end: string[] },
+  day: number
+) => {
   const startTime = padHours(start[day])
   const endTime = padHours(end[day])
 
@@ -132,12 +136,12 @@ export const getFoodtruckInfo = id => {
 }
 
 export const updateFoodtruckReview = (
-  foodtruckID,
-  pennID,
-  fullName,
-  rating,
-  comment,
-  showName
+  foodtruckID: TFoodTruckId,
+  pennID: string,
+  fullName: string,
+  rating: number,
+  comment: string,
+  showName: boolean
 ) => {
   return dispatch => {
     dispatch({
@@ -178,7 +182,7 @@ export const updateFoodtruckReview = (
   }
 }
 
-export const setHoveredFoodtruck = footruckId => {
+export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => {
   return dispatch => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
@@ -191,7 +195,7 @@ export const setHoveredFoodtruck = footruckId => {
  *
  * @param {string} filterString user input string
  */
-export const filterFoodtrucksString = filterString => {
+export const filterFoodtrucksString = (filterString: string) => {
   return dispatch => {
     dispatch({
       type: filterFoodtrucksStringRequested,
@@ -204,7 +208,7 @@ export const filterFoodtrucksString = filterString => {
  *
  * @param {boolean} filter
  */
-export const filterFoodtrucksOpen = filter => {
+export const filterFoodtrucksOpen = (filter: boolean) => {
   return dispatch => {
     dispatch({
       type: filterFoodtrucksOpenRequested,

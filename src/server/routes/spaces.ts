@@ -2,12 +2,12 @@ import { Router, Request, Response } from 'express'
 import { Document } from 'mongoose'
 
 import * as DB from '../database/db'
-import { ISpace } from '../types'
+import { ISpace } from '../../types'
 import { BAD_REQUEST, OK } from 'http-status-codes'
 
 const router = Router()
 
-export default function spacesRouter() {
+export default function spacesRouter(): Router {
   router.get('/all', (_, res: Response) => {
     DB.findAllSpaces().then((spaces: Document[]) => {
       res.status(200).json({

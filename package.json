@@ -2,7 +2,6 @@
   "name": "pennbasics",
   "version": "1.0.0",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
-  "main": "webpack.config.js",
   "scripts": {
     "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
     "seedFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js",
@@ -11,20 +10,20 @@
     "lint": "eslint ./src/**/",
     "lint-server": "eslint ./src/server",
     "lint-fix": "eslint ./src/**/ --fix",
-    "dev": "source env.sh && concurrently \"ts-node src/server/index.ts\"",
-    "build": "next build",
-    "start": "source env.sh && concurrently \"ts-node src/server/index.ts\""
+    "dev": "source env.sh && nodemon",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "source env.sh && node dist/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pennlabs/pennbasics.git"
+    "url": "git+https://github.com/pennlabs/penn-basics.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pennlabs/pennbasics/issues"
+    "url": "https://github.com/pennlabs/penn-basics/issues"
   },
-  "homepage": "https://github.com/pennlabs/pennbasics#readme",
+  "homepage": "https://pennbasics.com",
   "dependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
@@ -80,13 +79,11 @@
     "@types/passport": "^1.0.2",
     "@types/react": "^16.9.17",
     "@types/react-redux": "^7.1.6",
-    "@types/redux": "^3.6.0",
     "@types/request": "^2.48.4",
     "@types/styled-components": "^4.4.2",
     "@types/uuid": "^3.4.7",
     "@types/web-push": "^3.3.0",
     "chai": "^4.1.2",
-    "concurrently": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.3.0",
@@ -95,6 +92,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "mocha": "^4.0.1",
+    "nodemon": "^2.0.2",
     "passport-oauth": "^1.0.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.6.2",

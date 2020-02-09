@@ -1,4 +1,4 @@
-import mongoose from './database/mongoose-connect'
+import mongoose from './server/database/mongoose-connect'
 
 export interface IUser {
   pennid: number
@@ -23,6 +23,10 @@ export interface ISpace {
 
 export type ISpaceDocument = ISpace & Document
 
+/**
+ * Food trucks
+ */
+
 interface IFoodTruckMenuItem {
   name: string
   prices: number[]
@@ -44,8 +48,10 @@ interface IFoodTruckUserReview {
   showName: boolean
 }
 
+type TFoodTruckId = string
+
 export interface IFoodTruck {
-  foodtruckID: string
+  foodtruckID: TFoodTruckId
   name: string
   payments?: string[]
   start: string[]
@@ -73,3 +79,5 @@ export interface IFoodTruck {
 }
 
 export type IFoodTruckDocument = IFoodTruck & mongoose.Document
+
+export type IFoodTruckWithOpen = IFoodTruck & { open: boolean }
