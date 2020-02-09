@@ -23,11 +23,11 @@ const Image = s.img`
 `
 
 interface INotFoundProps {
-  message: string
-  title: string
-  url: string
-  urlText: string
-  linkIsExternal: boolean
+  message?: string
+  title?: string
+  url?: string
+  urlText?: string
+  linkIsExternal?: boolean
 }
 
 // TODO remove imgur jawn

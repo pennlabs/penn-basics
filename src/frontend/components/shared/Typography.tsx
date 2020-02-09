@@ -56,9 +56,9 @@ interface ISubtextProps {
 }
 
 export const Subtext = styled.p<ISubtextProps>(
-  ({ loading }) => css`
-    margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
-    padding-top: ${({ paddingTop }) => paddingTop || '0'};
+  ({ loading, marginBottom, paddingTop }) => css`
+    margin-bottom: ${ marginBottom || '1rem'};
+    padding-top: ${ paddingTop || '0'};
     line-height: 1.5;
     width: auto;
     display: inline-block;

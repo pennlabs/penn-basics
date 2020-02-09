@@ -1,5 +1,6 @@
 /* global localStorage */
 import axios from 'axios'
+import { Dispatch, Action } from 'redux'
 
 import {
   getVenueInfoRequested,
@@ -9,15 +10,16 @@ import {
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
 import venueMapping from '../../server/resources/dining/venue_id_mappings.json'
+import { IVenueHour } from '../types'
 
 /**
  * Get hours for all dining venues
  */
 export const getVenueHours = () => {
-  return dispatch => {
+  return (dispatch : Dispatch<Action>) => {
     dispatch({ type: getVenueInfoRequested })
 
-    const venueIds = Object.values(venueMapping)
+    const venueIds: number[] = Object.values(venueMapping)
     const responsesSet = venueIds.map(id =>
       axios.get(`https://api.pennlabs.org/dining/hours/${id}`)
     )
@@ -25,7 +27,7 @@ export const getVenueHours = () => {
     // Dispatch information from the Promise set
     try {
       Promise.all(responsesSet).then(values => {
-        const dataSet = {}
+        const dataSet: Record<number, IVenueHour> = {}
         values.forEach((value, idx) => {
           dataSet[venueIds[idx]] = value.data.cafes[venueIds[idx]].days
         })
@@ -45,7 +47,7 @@ export const getVenueHours = () => {
 }
 
 export const getFavorites = () => {
-  return dispatch => {
+  return (dispatch : Dispatch<Action>) => {
     const favoritesString = localStorage.getItem('dining_favorites')
     let favoritesArray : String[] = []
     if (favoritesString) {
@@ -64,8 +66,8 @@ export const getFavorites = () => {
   }
 }
 
-export const addFavorite = venueID => {
-  return dispatch => {
+export const addFavorite = (venueID : string) => {
+  return (dispatch : Dispatch<Action>) => {
     logEvent('dining', 'addFavorite')
     const favorites = localStorage.getItem('dining_favorites')
     let favoritesArray : String[]
@@ -91,12 +93,15 @@ export const addFavorite = venueID => {
   }
 }
 
-export const removeFavorite = venueID => {
-  return dispatch => {
+export const removeFavorite = (venueID : string) => {
+  return (dispatch : Dispatch<Action>) => {
     logEvent('dining', 'removeFavorite')
+    
     // favorites is an array of venueIDs
-    let favoritesArray : String[] = JSON.parse(localStorage.getItem('dining_favorites'))
-    console.log(favoritesArray)
+    const favorites = localStorage.getItem('dining_favorites')
+    let favoritesArray : string[] = []
+    if (favorites) favoritesArray = JSON.parse(favorites)
+
     favoritesArray = favoritesArray.filter(favorite => favorite !== venueID)
     localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
     dispatch({

@@ -5,11 +5,11 @@ import {
 import { Action } from 'redux'
 
 type IHomeAction = {
-  filterList: number[]
+  filterList?: number[]
 } & Action
 
 interface IHomeReducerState {
-  filterList: number[]
+  filterList?: number[]
   filterCustomizeActive: boolean
 }
 
@@ -21,7 +21,7 @@ const defaultState: IHomeReducerState = {
 const homeReducer = (
   state: IHomeReducerState = defaultState,
   action: IHomeAction
-) => {
+) : IHomeReducerState => {
   switch (action.type) {
     case filterHomeCustomizeRequested:
       return {

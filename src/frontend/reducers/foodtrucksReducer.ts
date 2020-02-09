@@ -28,12 +28,27 @@ interface IFoodTrucksReducerState {
   filterOpenActive: boolean
 }
 
+interface ILocation {
+  lat: number
+  lng: number
+}
+
+interface IFoodTruckInfo {
+  location: ILocation
+  payments: null | string
+  start: string|null[]
+  end: string|null[]
+  _id: string
+  name: string
+}
+
 type IFoodTrucksAction = {
   foodtrucksData?: Record<TFoodTruckId, IFoodTruck>
   error?: string
   footruckId?: TFoodTruckId
   filterString?: string
   filter?: boolean
+  foodtruckInfo?: IFoodTruckInfo
 } & Action
 
 const defaultState: IFoodTrucksReducerState = {

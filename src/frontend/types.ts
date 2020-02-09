@@ -16,3 +16,19 @@ export interface IDiningVenue {
   pennDiningSlug: string
   isRetail?: boolean
 }
+
+interface IDaypart {
+  endtime: string
+  hide: string
+  id: string
+  label: string
+  message: string
+  starttime: string
+}
+
+export interface IVenueHour {
+  date: string
+  dayparts: [IDaypart]
+  message: string
+  status: string
+}

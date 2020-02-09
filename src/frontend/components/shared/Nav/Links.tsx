@@ -15,10 +15,11 @@ import {
   getApiAuthRouteWithRedirectParams,
   PROFILE_ROUTE,
 } from '../../../constants/routes'
+import { IUserInfo } from '../../../types'
 
 const MOBILE_ACTIVE_NAV_HEIGHT = '250px'
 
-const LinksDiv = s.div`
+const LinksDiv = s.div<{ zIndex: number, active: boolean }>`
   margin-left: auto;
   
   a {
@@ -50,7 +51,12 @@ const StyledLink = s.a`
   color: ${DARK_GRAY} !important;
 `
 
-const AuthLink = withRouter(({ userInfo, router }) => {
+interface IAuthLinkProps {
+  userInfo: IUserInfo
+  router: any
+}
+
+const AuthLink = withRouter(({ userInfo, router } : IAuthLinkProps) => {
   if (!userInfo) return null
   const { loggedIn, fullName } = userInfo
 
@@ -74,7 +80,14 @@ const AuthLink = withRouter(({ userInfo, router }) => {
   )
 })
 
-const Links = ({ active, zIndex, userInfo, toggleActive }) => (
+interface ILinksProps {
+  active: boolean
+  zIndex: number
+  userInfo: IUserInfo
+  toggleActive: (arg0: boolean) => void
+}
+
+const Links = ({ active, zIndex, userInfo, toggleActive } : ILinksProps) => (
   <LinksDiv active={active} zIndex={zIndex}>
     <Link href={DINING_ROUTE}>
       <a onClick={() => toggleActive(false)}>Dining</a>

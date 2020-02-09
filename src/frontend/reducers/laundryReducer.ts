@@ -1,3 +1,5 @@
+import { Action } from 'redux'
+
 import {
   getLaundryHallsDataRequested,
   getLaundryHallsDataRejected,
@@ -27,7 +29,11 @@ const defaultState = {
   reminderIntervalID: null,
 }
 
-const laundryReducer = (state = defaultState, action) => {
+type ILaundryAction = {
+  error?: string
+} & Action
+
+const laundryReducer = (state = defaultState, action : ILaundryAction) => {
   switch (action.type) {
     case getLaundryHallsDataRequested:
       return {

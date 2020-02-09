@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Dispatch, Action } from 'redux'
 
 import { Row, Col } from '../shared'
 import { NAV_HEIGHT } from '../../styles/sizes'
@@ -8,7 +9,13 @@ import Nav from './Nav'
 import DiningVenue from './DiningVenue'
 import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 
-const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }) => {
+interface IAppProps {
+  dispatchGetFavorites: () => void
+  dispatchGetVenueHours: () => void
+  id: number
+}
+
+const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id } : IAppProps) : React.ReactElement => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
@@ -43,7 +50,7 @@ App.propTypes = {
   dispatchGetVenueHours: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
   dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })

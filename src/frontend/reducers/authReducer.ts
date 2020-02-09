@@ -2,13 +2,13 @@ import { getUserInfoFulfilled } from '../actions/action_types'
 import { Action } from 'redux'
 import { IUserInfo } from '../types'
 
+type IAuthAction = {
+  userInfo?: IUserInfo
+} & Action
+
 interface IAuthReducerState {
   userInfo?: IUserInfo
 }
-
-type IAuthAction = {
-  userInfo: IUserInfo
-} & Action
 
 const defaultState: IAuthReducerState = { userInfo: undefined }
 

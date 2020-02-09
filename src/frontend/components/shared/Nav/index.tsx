@@ -118,13 +118,14 @@ const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
   )
 }
 
-const mapStateToProps = ({ authentication }) => authentication
+
+const mapStateToProps = ({ authentication } : { authentication : IUserInfo }) => authentication
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
 })
 
-export default connect<IStateProps, IDispatchProps, IOwnProps>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Nav)

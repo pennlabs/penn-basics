@@ -6,7 +6,18 @@ import {
 } from '../actions/action_types'
 import { AnyAction } from 'redux'
 
-const defaultState = {
+import { IVenueHour } from '../types'
+
+type TVenueHour = Record<number, IVenueHour>
+
+interface IDiningReducerState {
+  error: string | null
+  favorites: string[]
+  venueHoursPending: boolean
+  venueHours: TVenueHour | null
+}
+
+const defaultState : IDiningReducerState = {
   error: null,
   favorites: [],
   venueHoursPending: true,

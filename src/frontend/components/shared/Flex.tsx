@@ -170,6 +170,7 @@ export type ICol = {
   margin?: string
   children?: React.ReactNode | React.ReactNodeArray
   style?: React.CSSProperties
+  hideOnMobile?: boolean
 } & IColWrapper &
   IColContainer
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { Col } from './Flex'
 import { Subtext } from './Typography'
 import { logEvent } from '../../../utils/analytics'
-import { FEEDBACK_ROUTE } from '../../constants/routes'
+import { FEEDBACK_LINK } from '../../constants/routes'
 import HeartIcon from '../../../../public/img/heart.svg'
 
 interface IPennLabsCreditProps {
@@ -30,7 +30,7 @@ const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
       </a>
       &nbsp;
       <a
-        href={FEEDBACK_ROUTE}
+        href={FEEDBACK_LINK}
         target="_BLANK"
         rel="noopener noreferrer"
         onClick={() => logEvent('feeback', 'click from footer')}
