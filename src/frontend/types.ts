@@ -32,3 +32,14 @@ export interface IVenueHour {
   message: string
   status: string
 }
+
+interface ILaundryHallInfo {
+  hall_name: string
+  id: number
+  location: string
+}
+
+export interface ILaundryHallProps {
+  location: string
+  halls: ILaundryHallInfo[]
+}

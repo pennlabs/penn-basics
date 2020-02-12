@@ -24,7 +24,17 @@ import { logEvent } from '../../utils/analytics'
 
 const BASE = 'https://api.pennlabs.org'
 
-function processLaundryHallsData(idData) {
+interface IHallInfo {
+  hall_name: string
+  id: number
+  location: string
+}
+
+interface IidData {
+  halls: IHallInfo[]
+} 
+
+const processLaundryHallsData = (idData : IidData) => {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
   return Object.keys(groupByLocation).map(locationName => {
     //eslint-disable-line
@@ -35,29 +45,27 @@ function processLaundryHallsData(idData) {
   })
 }
 
-export function getLaundryHalls() {
-  return async (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: getLaundryHallsDataRequested,
-    })
-    try {
-      const idData = await axios.get(`${BASE}/laundry/halls/ids`)
-      const laundryHalls = processLaundryHallsData(idData.data)
+export const getLaundryHalls = () => async (dispatch: Dispatch<Action>) : Promise<void> => {
+  dispatch({
+    type: getLaundryHallsDataRequested,
+  })
+  try {
+    const idData = await axios.get(`${BASE}/laundry/halls/ids`)
+    const laundryHalls = processLaundryHallsData(idData.data)
 
-      dispatch({
-        type: getLaundryHallsDataFulfilled,
-        laundryHalls,
-      })
-    } catch (error) {
-      dispatch({
-        type: getLaundryHallsDataRejected,
-        error: error.message,
-      })
-    }
+    dispatch({
+      type: getLaundryHallsDataFulfilled,
+      laundryHalls,
+    })
+  } catch (error) {
+    dispatch({
+      type: getLaundryHallsDataRejected,
+      error: error.message,
+    })
   }
 }
 
-const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId) => {
+const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId: number) => {
   if (!isValidNumericId(laundryHallId)) {
     dispatch({
       type: getLaundryHallInfoRejected,
@@ -91,7 +99,7 @@ const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId)
   }
 }
 
-export function getLaundryHall(laundryHallId, prevIntervalID) {
+export function getLaundryHall(laundryHallId: number, prevIntervalID: number) {
   return async (dispatch: Dispatch<Action>) => {
     if (prevIntervalID) {
       clearInterval(prevIntervalID)
@@ -114,24 +122,30 @@ export function getLaundryHall(laundryHallId, prevIntervalID) {
   }
 }
 
+interface ILaundryHallInfo {
+  locationName: string
+  hallId: number
+}
+
 // TODO document....
 export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // Get the list of laundry halls from local storage
-  const laundryHalls = JSON.parse(localStorage.getItem('laundry_favorites'))
+  let laundryHallsString = localStorage.getItem('laundry_favorites')
+
+  if (!laundryHallsString) return
+
+  let laundryHalls: ILaundryHallInfo[] = JSON.parse(laundryHallsString)
+  laundryHalls = laundryHalls.splice(0, 3)
 
   // Get the first 3 halls
-  let IdArray = []
+  let IdArray: number[] = []
 
   // Only update IdArray if laundryHalls exist
   if (laundryHalls) {
-    IdArray = laundryHalls.map((hall, index) => {
-      if (index <= 2) {
-        return hall.hallId
-      }
-
-      return null
+    IdArray = laundryHalls.map(hall => {
+      return hall.hallId
     })
   }
 
@@ -147,13 +161,9 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   try {
     Promise.all(responsesSet).then(values => {
       const dataSet = values.map((value, idx) => {
-        if (!value.error) {
-          const { data } = value
-          data.id = IdArray[idx]
-          return data
-        }
-
-        return null
+        const { data } = value
+        data.id = IdArray[idx]
+        return data
       })
 
       dispatch({
@@ -172,14 +182,14 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
 export const getFavorites = () => {
   return (dispatch: Dispatch<Action>) => {
     let favorites = localStorage.getItem('laundry_favorites')
+    let favoritesArray: ILaundryHallInfo[] = []
     if (favorites) {
       // Read in from localStore, map from strings to numbers
-      favorites = JSON.parse(favorites).map(fav =>
-        Object.assign({}, fav, { hallId: Number(fav.hallId) })
-      )
+      favoritesArray = JSON.parse(favorites)
+      favoritesArray = favoritesArray.map(fav => Object.assign({}, fav, { hallId: Number(fav.hallId) }))
     } else {
       localStorage.setItem('laundry_favorites', JSON.stringify([]))
-      favorites = []
+      favoritesArray = []
     }
     dispatch({
       type: updateLaundryFavorites,
@@ -188,15 +198,15 @@ export const getFavorites = () => {
   }
 }
 
-export const addFavorite = (hallURLId, location, hallName) => {
+export const addFavorite = (hallURLId: number, location: string, hallName: string) => {
   return async (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'addFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
 
-    let favoritesArray = []
-    const favoriteLocation = {}
+    let favoritesArray: ILaundryHallInfo[] = []
+    let favoriteLocation: ILaundryHallInfo = { locationName: '', hallId: -1 }
 
     // update fields for favoritesArray
     favoriteLocation.locationName = `${location}: ${hallName}`
@@ -224,13 +234,16 @@ export const addFavorite = (hallURLId, location, hallName) => {
   }
 }
 
-export const removeFavorite = hallURLId => {
+export const removeFavorite = (hallURLId: number) => {
   return (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
-    const favoritesArray = JSON.parse(favoritesString)
+    let favoritesArray: ILaundryHallInfo[] = []
+    if (favoritesString) {
+      favoritesArray = JSON.parse(favoritesString)
+    }
 
     favoritesArray.forEach((favorite, index) => {
       if (favorite.hallId === hallURLId) {
@@ -303,7 +316,7 @@ export const checkBrowserCompatability = () => {
   }
 }
 
-const urlBase64ToUint8Array = base64String => {
+const urlBase64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
 
@@ -314,6 +327,12 @@ const urlBase64ToUint8Array = base64String => {
     outputArray[i] = rawData.charCodeAt(i)
   }
   return outputArray
+}
+
+interface IReminder {
+  machineID: number
+  hallID: number
+  reminderID: string
 }
 
 const getRemindersInterval = (dispatch: Dispatch<Action>) => {
@@ -329,30 +348,36 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
     // value: reminderID
     const dbRequest = indexedDB.open('LocalDB', 1) // opens the first version of LocalDB
 
-    dbRequest.onerror = event => {
+    dbRequest.onerror = (event: Event) => {
       // triggered when request to LocalDB fails
-      dispatch({
-        type: getRemindersRejected,
-        error: event.target.errorCode,
-      })
+      if (event.target) {
+        dispatch({
+          type: getRemindersRejected,
+          error: event.target.errorCode,
+        })
+      }
     }
 
-    dbRequest.onupgradeneeded = event => {
+    dbRequest.onupgradeneeded = (event: Event) => {
       // triggered when there is a change in the DB structure
-      const db = event.target.result
-      db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
+      if (event.target) {
+        const db = event.target.result
+        db.createObjectStore('laundryReminders', { keyPath: 'hallMachineID' })
+      }
     }
 
-    dbRequest.onsuccess = event => {
+    dbRequest.onsuccess = (event: Event) => {
       // triggered when request to LocalDB is successful
+      if (!event.target) return
       const db = event.target.result
       let reminders = localStorage.getItem('laundry_reminders')
+      let remindersArray: IReminder[] = []
       if (reminders) {
         // create a transaction that interacts with the object store
         const transaction = db.transaction(['laundryReminders'], 'readonly')
 
-        reminders = JSON.parse(reminders)
-        const newReminders = []
+        remindersArray = JSON.parse(reminders)
+        const newReminders: IReminder[] = []
 
         transaction.oncomplete = () => {
           localStorage.setItem(
@@ -366,7 +391,8 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
           console.log('---complete updating reminders from localStorage----') // eslint-disable-line
         }
 
-        transaction.onerror = e => {
+        transaction.onerror = (e: Event) => {
+          if (!e.target) return
           dispatch({
             type: getRemindersRejected,
             error: e.target.errorCode,
@@ -376,12 +402,13 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
         // creates a reference to the objectStore
         const objectStore = transaction.objectStore('laundryReminders')
 
-        reminders.forEach(reminder => {
+        remindersArray.forEach(reminder => {
           const storeRequest = objectStore.get(
             `${reminder.hallID}-${reminder.machineID}`
           )
 
-          storeRequest.onsuccess = e => {
+          storeRequest.onsuccess = (e: Event) => {
+            if (!e.target) return
             const { result } = e.target
             if (
               !result ||
@@ -391,7 +418,8 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
             }
           }
 
-          storeRequest.onerror = e => {
+          storeRequest.onerror = (e: Event) => {
+            if (!e.target) return
             dispatch({
               type: getRemindersRejected,
               error: e.target.errorCode,
@@ -425,7 +453,7 @@ export const getReminders = () => {
   }
 }
 
-export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
+export const addReminder = (machineID: number, hallID: number, machineType: string, timeRemaining: number) => {
   return (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
@@ -437,7 +465,11 @@ export const addReminder = (machineID, hallID, machineType, timeRemaining) => {
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
         })
-        const reminders = JSON.parse(localStorage.getItem('laundry_reminders'))
+
+        const remindersString = localStorage.getItem('laundry_reminders')
+        if (!remindersString) return
+
+        const reminders = JSON.parse(remindersString)
         const reminderID = uuidv4()
         reminders.push({ machineID, hallID, reminderID })
         dispatch({
@@ -471,6 +503,7 @@ export const removeReminder = () => {
           return registration.pushManager.getSubscription()
         })
         .then(subscription => {
+          if (!subscription) return
           subscription.unsubscribe().then(async successful => {
             if (successful) {
               dispatch({
