@@ -1,6 +1,5 @@
 import React, { useEffect, Dispatch } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import {
   getLaundryHalls,
@@ -38,8 +37,8 @@ const App = ({
   dispatchCheckBrowser,
   laundryHalls,
   id,
-  favorites
-} : IAppProps) : React.ReactElement => {
+  favorites,
+}: IAppProps): React.ReactElement => {
   useEffect(() => {
     dispatchGetLaundryHalls()
     dispatchGetFavorites()

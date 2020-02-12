@@ -22,7 +22,7 @@ const Favorites = ({
   console.log(favorites)
 
   return (
-    <div>
+    <>
       <Card background={BABY_BLUE} padding="0">
         <NavHeader className="title is-5">Favorites</NavHeader>
         <Line />
@@ -39,7 +39,7 @@ const Favorites = ({
           />
         )
       })}
-    </div>
+    </>
   )
 }
 

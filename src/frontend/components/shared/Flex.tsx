@@ -77,7 +77,7 @@ interface IColWrapper {
   overflowY?: string
   overflowX?: string
   borderRadius?: string
-  borderRight?: string
+  borderRight?: boolean
   sm?: number
   offsetSm?: number
   md?: number
