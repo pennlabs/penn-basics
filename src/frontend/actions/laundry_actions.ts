@@ -348,9 +348,10 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
     // value: reminderID
     const dbRequest = indexedDB.open('LocalDB', 1) // opens the first version of LocalDB
 
-    dbRequest.onerror = (event: Event) => {
+    // TODO: change event 
+    dbRequest.onerror = (event: any) => {
       // triggered when request to LocalDB fails
-      if (event.target) {
+      if (event.target && event.target.errorCode) {
         dispatch({
           type: getRemindersRejected,
           error: event.target.errorCode,
@@ -358,7 +359,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
       }
     }
 
-    dbRequest.onupgradeneeded = (event: Event) => {
+    dbRequest.onupgradeneeded = (event: any) => {
       // triggered when there is a change in the DB structure
       if (event.target) {
         const db = event.target.result
@@ -366,7 +367,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
       }
     }
 
-    dbRequest.onsuccess = (event: Event) => {
+    dbRequest.onsuccess = (event: any) => {
       // triggered when request to LocalDB is successful
       if (!event.target) return
       const db = event.target.result
@@ -391,7 +392,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
           console.log('---complete updating reminders from localStorage----') // eslint-disable-line
         }
 
-        transaction.onerror = (e: Event) => {
+        transaction.onerror = (e: any) => {
           if (!e.target) return
           dispatch({
             type: getRemindersRejected,
@@ -407,7 +408,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
             `${reminder.hallID}-${reminder.machineID}`
           )
 
-          storeRequest.onsuccess = (e: Event) => {
+          storeRequest.onsuccess = (e: any) => {
             if (!e.target) return
             const { result } = e.target
             if (
@@ -418,7 +419,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
             }
           }
 
-          storeRequest.onerror = (e: Event) => {
+          storeRequest.onerror = (e: any) => {
             if (!e.target) return
             dispatch({
               type: getRemindersRejected,

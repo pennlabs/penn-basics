@@ -10,7 +10,7 @@ const Laundry = () => {
 
   return (
     <Header>
-      <App id={id} />
+      <App id={id as string} />
     </Header>
   )
 }
