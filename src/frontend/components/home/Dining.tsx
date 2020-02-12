@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import { BorderedCard, Row, Col, Title, Subtext } from '../shared'
 import DiningCard from '../dining/DiningCard'
@@ -55,17 +54,6 @@ const Dining = ({
       </Row>
     </BorderedCard>
   )
-}
-
-Dining.propTypes = {
-  dispatchGetVenueHours: PropTypes.func.isRequired,
-  dispatchGetFavorites: PropTypes.func.isRequired,
-  favorites: PropTypes.arrayOf(PropTypes.string),
-  // venueHours: PropTypes.object,
-}
-
-Dining.defaultProps = {
-  favorites: [],
 }
 
 const mapStateToProps = ({ dining }) => {
