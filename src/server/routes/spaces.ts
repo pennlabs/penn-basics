@@ -42,6 +42,7 @@ export default function spacesRouter(): Router {
       outlets: req.body.outlets,
       quiet: req.body.quiet,
       groups: req.body.groups,
+      tags: req.body.tags,
     }
 
     const spaceKeys = Object.keys(space)

@@ -2,13 +2,13 @@ import axios from 'axios'
 import spaces from '../../resources/spaces.json'
 import Space from '../models/Space'
 
-const { MONGO_URI } = process.env
+const { MONGO_URI, GOOGLE_MAPS_API_KEY } = process.env
 if (!MONGO_URI) {
   console.log('Missing MONGO_URI') // eslint-disable-line
   process.exit(1)
 }
 
-const GOOGLE_KEY = process.env.GOOGLE_MAPS_API_KEY
+// TODO abstract this out to its own routes file
 const GOOGLE_URL =
   'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
 
@@ -27,7 +27,7 @@ function updateSpaces() {
         .toLowerCase()
 
       const fields = ['formatted_address', 'geometry']
-      const url = `${GOOGLE_URL}?key=${GOOGLE_KEY}&input=${address}&inputtype=textquery&fields=${fields.join(
+      const url = `${GOOGLE_URL}?key=${GOOGLE_MAPS_API_KEY}&input=${address}&inputtype=textquery&fields=${fields.join(
         ','
       )}`
       spaces[spaceIndex].spaceID = name

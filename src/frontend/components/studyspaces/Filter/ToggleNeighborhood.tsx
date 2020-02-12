@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 
 import {
   FOCUS_GRAY,
@@ -11,14 +10,18 @@ import {
   MEDIUM_GRAY,
 } from '../../../styles/colors'
 import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
-// import { maxWidth, TABLET } from '../../../styles/sizes'
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
 
 const Wrapper = s.div``
 
-const Label = s.span`
+interface IActiveProps {
+  active?: boolean
+}
+
+const Label = s.span<IActiveProps>`
   display: inline-block;
   margin-bottom: 0;
   margin-left: 0.625rem;
@@ -36,7 +39,7 @@ const ToggleWrapper = s.div`
   display: inline-block;
 `
 
-const Bar = s.div`
+const Bar = s.div<IActiveProps>`
   transition: all 0.2s ease;
   width: 100%;
   height: ${HEIGHT}rem;
@@ -47,7 +50,7 @@ const Bar = s.div`
   cursor: pointer;
 `
 
-const Circle = s.div`
+const Circle = s.div<IActiveProps>`
   transition: all 0.2s ease;
   height: ${HEIGHT + 0.4}rem;
   width: ${HEIGHT + 0.4}rem;
@@ -59,13 +62,19 @@ const Circle = s.div`
   cursor: pointer;
 `
 
-class ToggleNeighborhood extends Component {
-  constructor(props) {
+interface IToggleNeighborhoodProps {
+  filterOnCampus?: boolean
+  style?: React.CSSProperties
+  filterOnCampusDispatch: (filter: boolean) => void
+}
+
+class ToggleNeighborhood extends React.Component<IToggleNeighborhoodProps, {}> {
+  constructor(props: IToggleNeighborhoodProps) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(e) {
+  handleClick(e: React.MouseEvent<HTMLDivElement | HTMLSpanElement>) {
     const { filterOnCampusDispatch, filterOnCampus } = this.props
     e.stopPropagation()
     filterOnCampusDispatch(!filterOnCampus)
@@ -87,21 +96,12 @@ class ToggleNeighborhood extends Component {
   }
 }
 
-ToggleNeighborhood.propTypes = {
-  style: PropTypes.object, // eslint-disable-line
-  filterOnCampus: PropTypes.bool,
-  filterOnCampusDispatch: PropTypes.func.isRequired,
-}
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => spaces
 
-ToggleNeighborhood.defaultProps = {
-  style: {},
-  filterOnCampus: false,
-}
-
-const mapStateToProps = ({ spaces }) => spaces
-
-const mapDispatchToProps = dispatch => ({
-  filterOnCampusDispatch: filter => dispatch(setFilterOnCampus(filter)),
+// TODO
+const mapDispatchToProps = (dispatch: any) => ({
+  filterOnCampusDispatch: (filter: boolean) =>
+    dispatch(setFilterOnCampus(filter)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)

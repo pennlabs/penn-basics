@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import Router from 'next/router'
 
 import MobileToggleView from './MobileToggleView'
@@ -28,14 +27,34 @@ import {
   STUDYSPACE_QUERY_ROUTE,
   STUDYSPACE_ROUTE,
 } from '../../constants/routes'
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 
 // TODO port this over to hooks
-// TODO map height on mobile
 
-class App extends Component {
-  constructor(props) {
+interface IStudySpacesAppProps {
+  getAllSpacesDataDispatch: () => void
+  setActiveSpaceDispatch: (id: TSpaceId) => void
+  error?: string
+  hoveredSpace?: string
+  pending: boolean
+  id: string
+  spacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
+  filteredSpacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
+}
+
+interface IStudySpacesAppState {
+  isListViewMobile: boolean
+  googleMapError?: string
+}
+
+class StudySpacesApp extends React.Component<
+  IStudySpacesAppProps,
+  IStudySpacesAppState
+> {
+  constructor(props: IStudySpacesAppProps) {
     super(props)
-    this.state = { googleMapError: null, isListViewMobile: true }
+    this.state = { googleMapError: undefined, isListViewMobile: true }
     this.toggleView = this.toggleView.bind(this)
   }
 
@@ -44,7 +63,7 @@ class App extends Component {
     getAllSpacesDataDispatch()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: IStudySpacesAppProps) {
     /**
      * Handle when the user re-navigates to this page, in which case the component updates
      * and the props are wiped BUT the component does not re-mounts
@@ -137,8 +156,8 @@ class App extends Component {
                 activeMarker={hoveredSpace}
                 handleClickMarker={spaceId =>
                   Router.push(
-                    STUDYSPACE_QUERY_ROUTE(spaceId),
-                    STUDYSPACE_ROUTE(spaceId)
+                    STUDYSPACE_QUERY_ROUTE(`${spaceId}`),
+                    STUDYSPACE_ROUTE(`${spaceId}`)
                   )
                 }
               />
@@ -152,50 +171,12 @@ class App extends Component {
   }
 }
 
-const SpacesDataPropType = PropTypes.objectOf(
-  PropTypes.shape({
-    address: PropTypes.string,
-    description: PropTypes.string,
-    end: PropTypes.arrayOf(PropTypes.number),
-    groups: PropTypes.number,
-    hours: PropTypes.string,
-    image: PropTypes.string,
-    name: PropTypes.string,
-    open: PropTypes.bool,
-    outlets: PropTypes.number,
-    quiet: PropTypes.number,
-    start: PropTypes.arrayOf(PropTypes.number),
-    tags: PropTypes.arrayOf(PropTypes.string),
-    _id: PropTypes.string,
-  })
-)
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => spaces
 
-App.defaultProps = {
-  error: null,
-  hoveredSpace: null,
-  pending: false,
-  filteredSpacesData: null,
-  spacesData: null,
-}
-
-App.propTypes = {
-  history: PropTypes.object, // eslint-disable-line
-  getAllSpacesDataDispatch: PropTypes.func.isRequired,
-  setActiveSpaceDispatch: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  hoveredSpace: PropTypes.string,
-  pending: PropTypes.bool,
-  filteredSpacesData: SpacesDataPropType,
-  spacesData: SpacesDataPropType,
-  id: PropTypes.string.isRequired,
-}
-
-const mapStateToProps = ({ spaces }) => spaces
-
-const mapDispatchToProps = dispatch => ({
-  getAllSpacesDataDispatch: id => dispatch(getAllSpacesData(id)),
-  setActiveSpaceDispatch: id => dispatch(setActiveSpace(id)),
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+  getAllSpacesDataDispatch: () => dispatch(getAllSpacesData()),
+  setActiveSpaceDispatch: (id: TSpaceId) => dispatch(setActiveSpace(id)),
 })
 
 // Redux config
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(StudySpacesApp)

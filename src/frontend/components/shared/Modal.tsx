@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -92,12 +91,14 @@ const Times = styled.span`
 const noop = (event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
   event.stopPropagation()
 
+/**
+ * NOTE either `toggle` or `ROUTE` should be defined
+ */
 interface IModalProps {
   show: boolean
-  history: History
   children: React.ReactNode | React.ReactNodeArray
-  toggle: () => void
-  ROUTE: string
+  toggle?: () => void
+  ROUTE?: string // TODO this should not be uppercase
 }
 
 interface IModalState {
@@ -152,7 +153,7 @@ class Modal extends Component<IModalProps, IModalState> {
       if (toggle) {
         toggle()
       } else {
-        Router.push(ROUTE)
+        ROUTE && Router.push(ROUTE)
       }
     }
   }
@@ -161,7 +162,7 @@ class Modal extends Component<IModalProps, IModalState> {
     const { show, children, toggle, ROUTE } = this.props
     const { isNewlyMounted } = this.state
 
-    if (toggle) {
+    if (toggle || !ROUTE) {
       return (
         <Shade
           show={show}

@@ -1,3 +1,5 @@
+// TODO move to a single types file at the root of the repo
+
 export interface IUserInfo {
   pennid: string
   fullName: string

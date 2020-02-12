@@ -19,6 +19,7 @@ import {
   TOGGLE_FILTER_SPACES_NOISE,
   TOGGLE_FILTER_SPACES_GROUPS,
 } from '../actions/action_types'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 
 // Default state where all filters are cleared and none are active
 const clearFilterState = {
@@ -34,42 +35,20 @@ const clearFilterState = {
   filterString: '',
 }
 
-interface ISpaceProps {
-  location: {
-    lat: string,
-    lng: string
-  }
-  start: number[]
-  end: number[]
-  tags: string[]
-  _id: string
-  name: string
-  description: string
-  address: string
-  image: string
-  outlets: number
-  quiet: number
-  groups: number
-  spaceID: string
-  open: boolean
-  hours: string
-}
-
-
 type ISpacesAction = {
   error?: string
   filter?: boolean | number | string
-  spaces?: Record<string, ISpaceProps>
-  spaceId?: string
+  spaces?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
+  spaceId?: TSpaceId
 } & Action
 
-interface ISpacesReducerState {
+export interface ISpacesReducerState {
   pending: boolean
   filterOpen?: boolean
   filterString?: string
-  filterOutlets?: number[]
-  filterNoise?: number[]
-  filterGroups?: number[]
+  filterOutlets: number[]
+  filterNoise: number[]
+  filterGroups: number[]
   filterOnCampus?: boolean
   filterOpenActive?: boolean
   filterOutletsActive?: boolean
@@ -77,11 +56,16 @@ interface ISpacesReducerState {
   filterGroupsActive?: boolean
   hoveredSpace?: string
   activeSpace?: string | undefined | null
-  spacesData?: Record<string, ISpaceProps>
-  filteredSpacesData?: Record<string, ISpaceProps>
+  spacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
+  filteredSpacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
 }
 
-const defaultState: ISpacesReducerState = { pending: true }
+const defaultState: ISpacesReducerState = {
+  pending: true,
+  filterOutlets: [],
+  filterNoise: [],
+  filterGroups: [],
+}
 
 const updateFilters = (arr: null | number[] | undefined, num: number) => {
   if (!arr || !arr.length) {
@@ -123,7 +107,10 @@ const filterSpaces = (state: ISpacesReducerState) => {
     return newState
   }
 
-  const filteredSpacesData: Record<string, ISpaceProps>  = {}
+  const filteredSpacesData: Record<
+    string,
+    ISpaceWithHoursAndOpenAndSpaceId
+  > = {}
 
   let filteredSpaceIDs = Object.keys(spacesData)
 
@@ -176,8 +163,10 @@ const filterSpaces = (state: ISpacesReducerState) => {
   return newState
 }
 
-
-const spacesReducer = (state: ISpacesReducerState = defaultState, action: ISpacesAction) => {
+const spacesReducer = (
+  state: ISpacesReducerState = defaultState,
+  action: ISpacesAction
+) => {
   const newState = Object.assign({}, state)
   const {
     filterOutlets,
@@ -229,15 +218,15 @@ const spacesReducer = (state: ISpacesReducerState = defaultState, action: ISpace
       return filterSpaces(newState)
 
     case filterSpacesOutletsRequested /* TODO FILTERING */:
-      newState.filterOutlets = updateFilters(filterOutlets, (filter as number))
+      newState.filterOutlets = updateFilters(filterOutlets, filter as number)
       return filterSpaces(newState)
 
     case filterSpacesNoiseRequested /* TODO FILTERING */:
-      newState.filterNoise = updateFilters(filterNoise, (filter as number))
+      newState.filterNoise = updateFilters(filterNoise, filter as number)
       return filterSpaces(newState)
 
     case filterSpacesGroupsRequested /* TODO FILTERING */:
-      newState.filterGroups = updateFilters(filterGroups, (filter as number))
+      newState.filterGroups = updateFilters(filterGroups, filter as number)
       return filterSpaces(newState)
 
     case filterOnCampusRequested:
@@ -245,7 +234,7 @@ const spacesReducer = (state: ISpacesReducerState = defaultState, action: ISpace
       return filterSpaces(newState)
 
     case filterSpacesStringRequested:
-      newState.filterString = (action.filter as string)
+      newState.filterString = action.filter as string
       return filterSpaces(newState)
 
     case clearFilterSpacesRequested:

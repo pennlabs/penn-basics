@@ -20,86 +20,12 @@ import {
   TOGGLE_FILTER_SPACES_NOISE,
   TOGGLE_FILTER_SPACES_GROUPS,
 } from './action_types'
-
-/**
- * @param {number} time in MS
- * @returns {number} minutes (between 0 and 59)
- */
-const getMinutes = time => {
-  // If there is a decimal
-  let minutes = ''
-  if (time % 1 !== 0) {
-    minutes = `${Math.round((time % 1) * 60)}`
-  }
-
-  return minutes
-}
-
-/**
- * @param {number} time in MS
- * @returns {string} the passed in time
- */
-const getTime = time => {
-  // Edge case
-  if (time < 0) return ''
-
-  const mins = getMinutes(time)
-  let hours = Math.floor(time)
-  let prefix
-  if (hours < 12) {
-    hours = hours || 12 // Change 0 to 12
-    prefix = 'am'
-  } else {
-    hours = hours === 12 ? hours : hours - 12
-    prefix = 'pm'
-  }
-
-  let timeStr = `${hours}`
-  if (mins) {
-    timeStr += `:${mins}`
-  }
-  timeStr += prefix
-
-  return timeStr
-}
-
-const getHours = ({ start, end }, day) => {
-  const startTime = start[day]
-  const endTime = end[day]
-
-  if (startTime < 0 || endTime < 0) return 'Closed'
-
-  return `
-    ${getTime(startTime)}
-    –
-    ${getTime(endTime)}
-  `
-}
-
-const isOpen = ({ start, end }, time, day) => {
-  const startTime = start[day]
-  const endTime = end[day]
-
-  // If either time is less than 0 then the space is closed
-  if (startTime < 0 || endTime < 0) {
-    return false
-  }
-
-  // If the end time wraps to the next day
-  // For example, Huntsman closes at 2am
-  if (endTime <= startTime) {
-    if (time >= startTime) {
-      // This must be before midnight
-      return time < endTime + 24
-    }
-
-    // If the time is after midnight
-    return time < endTime
-  }
-
-  // If the building closes before midnight
-  return time >= startTime && time < endTime
-}
+import {
+  TSpaceId,
+  ISpaceWithHoursAndOpenAndSpaceId,
+  ISpaceWithSpaceID,
+} from 'src/types'
+import { isOpen, getHours } from '../../utils/helperFunctions'
 
 export function getAllSpacesData() {
   // eslint-disable-line
@@ -113,15 +39,22 @@ export function getAllSpacesData() {
     const time = today.getHours() + today.getMinutes() / 60
 
     try {
+      // TODO abstract this string to a common routes file
       axios.get('/api/spaces/all').then(res => {
-        const formattedSpaces = {}
-        const { spaces } = res.data
+        const formattedSpaces: Record<
+          TSpaceId,
+          ISpaceWithHoursAndOpenAndSpaceId
+        > = {}
+        const spaces: ISpaceWithSpaceID[] = res.data.spaces
 
-        spaces.forEach(space => {
-          const spaceObj = Object.assign({}, space)
-
-          spaceObj.open = isOpen(space, time, day)
-          spaceObj.hours = getHours(space, day)
+        spaces.forEach((space: ISpaceWithSpaceID) => {
+          const spaceObj: ISpaceWithHoursAndOpenAndSpaceId = Object.assign(
+            {
+              open: isOpen(space, time, day),
+              hours: getHours(space, day),
+            },
+            space
+          )
 
           const { spaceID } = spaceObj
 
@@ -142,7 +75,7 @@ export function getAllSpacesData() {
   }
 }
 
-export function setHoveredSpace(spaceId) {
+export function setHoveredSpace(spaceId: TSpaceId) {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setHoveredSpaceFulfilled,
@@ -151,7 +84,7 @@ export function setHoveredSpace(spaceId) {
   }
 }
 
-export function setActiveSpace(spaceId) {
+export function setActiveSpace(spaceId: TSpaceId) {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setActiveSpaceFulfilled,
@@ -161,11 +94,12 @@ export function setActiveSpace(spaceId) {
 }
 
 export function clearActiveSpace() {
-  return (dispatch: Dispatch<Action>) => dispatch({ type: clearActiveSpaceFulfilled })
+  return (dispatch: Dispatch<Action>) =>
+    dispatch({ type: clearActiveSpaceFulfilled })
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesOpen(filter) {
+export function filterSpacesOpen(filter: boolean) {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesOpenRequested,
@@ -175,7 +109,7 @@ export function filterSpacesOpen(filter) {
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesOutlets(filter) {
+export function filterSpacesOutlets(filter: number) {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesOutletsRequested,
@@ -185,7 +119,7 @@ export function filterSpacesOutlets(filter) {
 }
 
 // TODO DOCS / ERROR CHECKING
-export function filterSpacesNoise(filter) {
+export function filterSpacesNoise(filter: number) {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesNoiseRequested,
@@ -195,7 +129,7 @@ export function filterSpacesNoise(filter) {
 }
 
 // TODO DOCS / ERROR CHECKING
-export const filterSpacesGroups = filter => {
+export const filterSpacesGroups = (filter: number) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesGroupsRequested,
@@ -204,7 +138,7 @@ export const filterSpacesGroups = filter => {
   }
 }
 
-export const filterOnCampus = filter => {
+export const filterOnCampus = (filter: boolean) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterOnCampusRequested,
@@ -217,7 +151,7 @@ export const filterOnCampus = filter => {
  *
  * @param {string} filter filterString from user input
  */
-export const filterSpacesString = filter => {
+export const filterSpacesString = (filter: string) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesStringRequested,

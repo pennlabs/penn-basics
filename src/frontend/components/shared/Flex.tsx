@@ -171,6 +171,7 @@ export type ICol = {
   children?: React.ReactNode | React.ReactNodeArray
   style?: React.CSSProperties
   hideOnMobile?: boolean
+  onMouseEnter?: (event: React.MouseEvent<HTMLDivElement>) => void
 } & IColWrapper &
   IColContainer
 

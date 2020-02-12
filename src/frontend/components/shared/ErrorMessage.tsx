@@ -17,7 +17,7 @@ export const ErrorMessage = ({
   message = '',
 }: IErrorMessageProps): React.ReactElement => {
   const [visible, setVisibility] = useState<boolean>(true)
-  if (!message || !visible) return null
+  if (!message || !visible) return <React.Fragment />
 
   return (
     <Wrapper className="notification is-danger">

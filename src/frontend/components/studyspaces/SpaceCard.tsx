@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 import Link from 'next/link'
@@ -15,6 +14,9 @@ import {
 } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
+import { Dispatch } from 'redux'
+import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from 'src/types'
 
 const Content = s.div`
   width: 100%;
@@ -23,8 +25,28 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-class SpaceCard extends Component {
-  constructor(props) {
+// SpaceCard.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   open: PropTypes.bool,
+//   image: PropTypes.string,
+//   outlets: PropTypes.number,
+//   quiet: PropTypes.number,
+//   hours: PropTypes.string.isRequired,
+//   hoveredSpace: PropTypes.string,
+//   spaceId: PropTypes.string.isRequired,
+//   setHoveredSpaceDispatch: PropTypes.func.isRequired,
+//   setActiveSpaceDispatch: PropTypes.func.isRequired,
+// }
+
+type ISpaceCardProps = Partial<ISpaceWithHoursAndOpenAndSpaceId> & {
+  hoveredSpace?: TSpaceId
+  spaceId: TSpaceId
+  setHoveredSpaceDispatch: (id: TSpaceId) => void
+  setActiveSpaceDispatch: (id: TSpaceId) => void
+}
+
+class SpaceCard extends Component<ISpaceCardProps, {}> {
+  constructor(props: ISpaceCardProps) {
     super(props)
 
     this.handleClick = this.handleClick.bind(this)
@@ -32,13 +54,14 @@ class SpaceCard extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
 
-  handleKeyPress(event) {
+  handleKeyPress(event: React.KeyboardEvent): void {
+    // TODO make this a constant / helper function
     if (event.keyCode === 32) {
       this.handleClick()
     }
   }
 
-  handleMouseEnter() {
+  handleMouseEnter(): void {
     const { hoveredSpace, spaceId, setHoveredSpaceDispatch } = this.props
 
     // If there is no change to be made
@@ -47,7 +70,7 @@ class SpaceCard extends Component {
     setHoveredSpaceDispatch(spaceId)
   }
 
-  handleClick() {
+  handleClick(): void {
     const { setActiveSpaceDispatch, spaceId } = this.props
     setActiveSpaceDispatch(spaceId)
   }
@@ -55,8 +78,9 @@ class SpaceCard extends Component {
   render() {
     const { name, open, image, quiet, outlets, hours, spaceId } = this.props
 
-    const noiseLevel = getNoiseLevel(quiet)
-    const outletsLevel = getOutletsLevel(outlets)
+    const noiseLevel: string = quiet === undefined ? '' : getNoiseLevel(quiet)
+    const outletsLevel: string =
+      outlets === undefined ? '' : getOutletsLevel(outlets)
 
     return (
       <Link href={`/studyspaces?id=${spaceId}`} as={`/studyspaces/${spaceId}`}>
@@ -79,7 +103,9 @@ class SpaceCard extends Component {
                   <Subtitle marginBottom="0">{name}</Subtitle>
 
                   <Subtext marginBottom="0">
-                    {open
+                    {!hours
+                      ? ''
+                      : open
                       ? `Open: ${hours}`
                       : `Closed • Opens at ${hours.substring(
                           0,
@@ -100,35 +126,17 @@ class SpaceCard extends Component {
   }
 }
 
-SpaceCard.defaultProps = {
-  open: false,
-  image: '',
-  outlets: -1,
-  quiet: -1,
-  hoveredSpace: null,
-}
-
-SpaceCard.propTypes = {
-  name: PropTypes.string.isRequired,
-  open: PropTypes.bool,
-  image: PropTypes.string,
-  outlets: PropTypes.number,
-  quiet: PropTypes.number,
-  hours: PropTypes.string.isRequired,
-  hoveredSpace: PropTypes.string,
-  spaceId: PropTypes.string.isRequired,
-  setHoveredSpaceDispatch: PropTypes.func.isRequired,
-  setActiveSpaceDispatch: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = ({ spaces }) => {
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => {
   const { hoveredSpace } = spaces
   return { hoveredSpace }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setHoveredSpaceDispatch: spaceId => dispatch(setHoveredSpace(spaceId)),
-  setActiveSpaceDispatch: spaceId => dispatch(setActiveSpace(spaceId)),
+// TODO fix types in redux
+const mapDispatchToProps = (dispatch: (action: any) => Dispatch<TSpaceId>) => ({
+  setHoveredSpaceDispatch: (spaceId: TSpaceId) =>
+    dispatch(setHoveredSpace(spaceId)),
+  setActiveSpaceDispatch: (spaceId: TSpaceId) =>
+    dispatch(setActiveSpace(spaceId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpaceCard)

@@ -1,6 +1,5 @@
-import s, { css } from 'styled-components'
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import s, { css } from 'styled-components'
 
 import {
   BORDER,
@@ -98,7 +97,7 @@ const INPUT_ID = 'search-line'
 
 interface ISearchProps {
   filterFunction: (value: any) => void
-  filterString: string
+  filterString?: string
 }
 
 export const Search = ({
@@ -138,9 +137,4 @@ export const Search = ({
       )}
     </Label>
   )
-}
-
-Search.propTypes = {
-  filterFunction: PropTypes.func.isRequired,
-  filterString: PropTypes.string.isRequired,
 }

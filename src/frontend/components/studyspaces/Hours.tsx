@@ -1,10 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { Text } from '../shared'
-import { getHours } from './mapper'
+import { getHours } from '../../../utils/helperFunctions'
 
-const Hours = ({ start, end }) => {
+interface IHoursProps {
+  start: number[]
+  end: number[]
+}
+
+export const Hours = ({ start, end }: IHoursProps) => {
   const days = [
     'Sunday',
     'Monday',
@@ -41,10 +44,3 @@ const Hours = ({ start, end }) => {
     </div>
   )
 }
-
-Hours.propTypes = {
-  start: PropTypes.arrayOf(PropTypes.number).isRequired,
-  end: PropTypes.arrayOf(PropTypes.number).isRequired,
-}
-
-export default Hours

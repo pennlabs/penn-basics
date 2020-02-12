@@ -3,10 +3,20 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { maxWidth, PHONE } from '../../styles/sizes'
+import { ILocation } from 'src/types'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
 const RED = '/img/foodtrucks/food-pin-red.png'
 const BLUE = '/img/foodtrucks/food-pin-blue.png'
+
+const DEFAULT_LAT = 39.9522
+const DEFAULT_LNG = -75.1932
+const DEFAULT_LOCATION = {
+  lat: DEFAULT_LAT,
+  lng: DEFAULT_LNG,
+}
+
+// TODO USE THE SHARED MAP FOR THIS
 
 interface IMapWrapper {
   height?: string
@@ -23,18 +33,18 @@ const MapWrapper = styled.div<IMapWrapper>`
   }
 `
 
-type TMarkerId = number
+type TMarkerId = number | string
 
 interface IFoodTruckMapProps {
   location: {
     lat: number
     lng: number
   }
-  handleClickMarker: () => void
+  handleClickMarker: (id: TMarkerId) => void
   height?: string
   mobileHeight?: string
   mapId: string
-  gestureHandling?: string
+  gestureHandling?: 'auto' | 'none' | 'cooperative' | 'greedy' | undefined
   markers: Record<TMarkerId, any>
   showMarker?: boolean
   activeMarker?: TMarkerId
@@ -42,7 +52,7 @@ interface IFoodTruckMapProps {
 
 interface IFoodTruckMapState {
   markers: Record<TMarkerId, any>
-  map: object
+  map: any // TODO
 }
 
 export class FoodtruckMap extends Component<
@@ -77,8 +87,12 @@ export class FoodtruckMap extends Component<
     const oldActiveMarker = prevProps.activeMarker
 
     if (activeMarker !== oldActiveMarker) {
-      this.updateMarker(oldActiveMarker, { icon: RED })
-      this.updateMarker(activeMarker, { icon: BLUE })
+      if (oldActiveMarker !== undefined) {
+        this.updateMarker(oldActiveMarker, { icon: RED })
+      }
+      if (activeMarker !== undefined) {
+        this.updateMarker(activeMarker, { icon: BLUE })
+      }
     }
 
     // Check if the data changed and update markers
@@ -94,8 +108,11 @@ export class FoodtruckMap extends Component<
       const { markers: dataMarkers = {} } = this.props // curr markers
       const { markers: mapMarkers = {} } = this.state // old markers
 
-      const dataKeys = Object.keys(dataMarkers)
-      const mapKeys = Object.keys(mapMarkers)
+      // Type massaging
+      const dataKeysUnknown = Object.keys(dataMarkers)
+      const dataKeys = dataKeysUnknown as TMarkerId[]
+      const mapKeysUnknown = Object.keys(mapMarkers)
+      const mapKeys = mapKeysUnknown as TMarkerId[]
 
       mapKeys.forEach(key => {
         if (!dataKeys.includes(key) && key !== SHOW_MARKER_KEY) {
@@ -126,7 +143,7 @@ export class FoodtruckMap extends Component<
     })
   }
 
-  updateMarker(key, { icon = RED }) {
+  updateMarker(key: TMarkerId, { icon = RED }) {
     const { markers } = this.state
     const marker = markers[key]
 
@@ -135,7 +152,7 @@ export class FoodtruckMap extends Component<
     marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
 
-  createMarker(key, { location }) {
+  createMarker(key: TMarkerId, { location }: { location: ILocation }) {
     const { handleClickMarker } = this.props
 
     if (!location) {
@@ -177,12 +194,18 @@ export class FoodtruckMap extends Component<
     const {
       location,
       mapId = 'map',
-      gestureHandling = '',
+      gestureHandling,
       showMarker = false,
     } = this.props
 
-    const map = new google.maps.Map(document.getElementById(mapId), {
-      center: location,
+    const mapDOMNode = document.getElementById(mapId)
+
+    if (!mapDOMNode) {
+      throw new Error(`Could not find map with id "${mapId}"`)
+    }
+
+    const map = new google.maps.Map(mapDOMNode, {
+      center: location || DEFAULT_LOCATION,
       zoom: 15,
       gestureHandling,
       streetViewControl: false, // Disable street view button + orange dude
@@ -224,23 +247,9 @@ export class FoodtruckMap extends Component<
     }
   }
 
-  render() {
+  render(): React.ReactElement {
     const { height, mobileHeight, mapId } = this.props
 
     return <MapWrapper height={height} mobileHeight={mobileHeight} id={mapId} />
   }
-}
-
-FoodtruckMap.defaultProps = {
-  location: {
-    lat: 39.9522,
-    lng: -75.1932,
-  },
-  height: undefined,
-  mobileHeight: undefined,
-  gestureHandling: '',
-  markers: {},
-  showMarker: false,
-  activeMarker: null,
-  handleClickMarker: null,
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s, { css } from 'styled-components'
 
 import { Z_INDEX, minWidth, PHONE } from '../../styles/sizes'
@@ -46,7 +45,11 @@ const ToggleViewWrapper = s.div`
   }
 `
 
-const Button = s.button(
+interface IButtonProps {
+  active?: boolean
+}
+
+const Button = s.button<IButtonProps>(
   ({ active }) => css`
     cursor: pointer;
     background: ${WHITE};
@@ -80,14 +83,24 @@ const Button = s.button(
   `
 )
 
-const Icon = ({ name }) => <i className={`fa fa-${name} fa-fw fa-lg`} />
+// TODO move away from font awesome (we should have no "fa-anythings")
+interface IIconProps {
+  name?: string
+}
 
-Icon.propTypes = { name: PropTypes.string.isRequired }
+const Icon = ({ name }: IIconProps) => (
+  <i className={`fa fa-${name} fa-fw fa-lg`} />
+)
 
 // TODO make this more accessible
 const noop = () => {}
 
-const MobileToggleView = ({ isListView, toggle }) => (
+interface IMobileToggleViewProps {
+  isListView?: boolean
+  toggle?: () => void
+}
+
+const MobileToggleView = ({ isListView, toggle }: IMobileToggleViewProps) => (
   <ToggleViewWrapper>
     <Button
       type="button"
@@ -111,10 +124,5 @@ const MobileToggleView = ({ isListView, toggle }) => (
     </Button>
   </ToggleViewWrapper>
 )
-
-MobileToggleView.propTypes = {
-  isListView: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
-}
 
 export default MobileToggleView

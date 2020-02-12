@@ -1,14 +1,16 @@
 /* global google, document */
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { maxWidth, PHONE } from '../../styles/sizes'
+import { ILocation } from 'src/types'
 
-const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
-const RED = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-const BLUE = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+// Styles
+interface IMapWrapper {
+  height?: string
+  mobileHeight?: string
+}
 
-const MapWrapper = styled.div`
+const MapWrapper = styled.div<IMapWrapper>`
   width: 100%;
   flex: 1;
   height: ${({ height }) => height || '100vh'};
@@ -18,6 +20,31 @@ const MapWrapper = styled.div`
   }
 `
 
+// Interfaces
+type TMarkerId = number | string
+
+interface IMapProps {
+  location?: ILocation
+  handleClickMarker: (id: TMarkerId) => void
+  height?: string
+  mobileHeight?: string
+  mapId: string
+  gestureHandling?: 'auto' | 'none' | 'cooperative' | 'greedy' | undefined
+  markers?: Record<TMarkerId, any> // TODO
+  showMarker?: boolean
+  activeMarker?: TMarkerId
+}
+
+interface IMapState {
+  markers: Record<TMarkerId, any> // TODO
+  map: any // TODO
+}
+
+// Constants
+const SHOW_MARKER_KEY: TMarkerId = -1 // Marker keys which we shouldn't delete
+const RED_ICON = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+const BLUE_ICON = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+
 /**
  * Wrapper on the Google Maps map rendering engine
  *
@@ -25,8 +52,8 @@ const MapWrapper = styled.div`
  *                    unless there is a relatively positioned parent above the
  *                    map. It's generally safer to use `vh`
  */
-export class Map extends Component {
-  constructor(props) {
+export class Map extends React.Component<IMapProps, IMapState> {
+  constructor(props: IMapProps) {
     super(props)
 
     this.state = {
@@ -43,18 +70,22 @@ export class Map extends Component {
     this.waitForGoogle()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: IMapProps) {
     // Check if the active marker changes
     const { activeMarker } = this.props
     const oldActiveMarker = prevProps.activeMarker
 
     if (activeMarker !== oldActiveMarker) {
-      this.updateMarker(oldActiveMarker, { icon: RED })
-      this.updateMarker(activeMarker, { icon: BLUE })
+      if (oldActiveMarker !== undefined) {
+        this.updateMarker(oldActiveMarker, { icon: RED_ICON })
+      }
+      if (activeMarker !== undefined) {
+        this.updateMarker(activeMarker, { icon: BLUE_ICON })
+      }
     }
 
     // Check if the data changed and update markers
-    const { markers } = this.props
+    const { markers = {} } = this.props
 
     if (markers !== prevProps.markers) {
       this.updateMarkers()
@@ -63,14 +94,21 @@ export class Map extends Component {
 
   updateMarkers() {
     return new Promise(resolve => {
-      const { markers: dataMarkers = {} } = this.props
-      const { markers: mapMarkers = {} } = this.state
+      const { markers: dataMarkers } = this.props
+      const { markers: mapMarkers } = this.state
 
-      const dataKeys = Object.keys(dataMarkers)
-      const mapKeys = Object.keys(mapMarkers)
+      if (!dataMarkers || !mapMarkers) {
+        return resolve()
+      }
 
-      mapKeys.forEach(key => {
-        if (!dataKeys[key] && key !== SHOW_MARKER_KEY) {
+      // Some type massaging
+      const dataKeysUnknown: unknown = Object.keys(dataMarkers)
+      const dataKeys = dataKeysUnknown as TMarkerId[]
+      const mapKeysUnknown: unknown = Object.keys(mapMarkers)
+      const mapKeys = mapKeysUnknown as TMarkerId[]
+
+      mapKeys.forEach((key: TMarkerId) => {
+        if (!dataMarkers[key] && key !== SHOW_MARKER_KEY) {
           // Delete the marker on the map and remove it from the object
           const marker = mapMarkers[key]
           marker.setMap(null)
@@ -79,7 +117,7 @@ export class Map extends Component {
       })
 
       dataKeys.forEach(key => {
-        if (!mapKeys[key]) {
+        if (!mapMarkers[key]) {
           // Create a marker new marker and add it to the state
           const marker = this.createMarker(key, dataMarkers[key])
           mapMarkers[key] = marker
@@ -98,7 +136,7 @@ export class Map extends Component {
     })
   }
 
-  updateMarker(key, { icon = RED }) {
+  updateMarker(key: TMarkerId, { icon = RED_ICON }) {
     const { markers } = this.state
     const marker = markers[key]
 
@@ -107,7 +145,10 @@ export class Map extends Component {
     marker.setIcon(icon) // TODO this might not work
   }
 
-  createMarker(key, { location, icon = RED }) {
+  createMarker(
+    key: TMarkerId,
+    { location, icon = RED_ICON }: { location: ILocation; icon?: string }
+  ) {
     const { handleClickMarker } = this.props
 
     if (!location) {
@@ -135,7 +176,7 @@ export class Map extends Component {
     const marker = new google.maps.Marker({
       position: location,
       icon,
-      // icon: {url: RED, scaledSize: new google.maps.Size(20,33)},
+      // icon: {url: RED_ICON, scaledSize: new google.maps.Size(20,33)},
       map,
     })
 
@@ -148,13 +189,22 @@ export class Map extends Component {
 
   initMap() {
     const {
-      location,
+      location = {
+        lat: 39.9522,
+        lng: -75.1932,
+      },
       mapId = 'map',
-      gestureHandling = '',
+      gestureHandling,
       showMarker = false,
     } = this.props
 
-    const map = new google.maps.Map(document.getElementById(mapId), {
+    const mapDOMNode = document.getElementById(mapId)
+
+    if (!mapDOMNode) {
+      throw new Error('Failed to find map with id "' + mapId + '"')
+    }
+
+    const map = new google.maps.Map(mapDOMNode, {
       center: location,
       zoom: 15,
       gestureHandling,
@@ -202,33 +252,4 @@ export class Map extends Component {
 
     return <MapWrapper height={height} mobileHeight={mobileHeight} id={mapId} />
   }
-}
-
-Map.defaultProps = {
-  location: {
-    lat: 39.9522,
-    lng: -75.1932,
-  },
-  height: undefined,
-  mobileHeight: undefined,
-  gestureHandling: '',
-  markers: {},
-  showMarker: false,
-  activeMarker: null,
-  handleClickMarker: null,
-}
-
-Map.propTypes = {
-  location: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-  }),
-  handleClickMarker: PropTypes.func,
-  height: PropTypes.string,
-  mobileHeight: PropTypes.string,
-  mapId: PropTypes.string.isRequired,
-  gestureHandling: PropTypes.string,
-  markers: PropTypes.object, // eslint-disable-line
-  showMarker: PropTypes.bool,
-  activeMarker: PropTypes.string,
 }

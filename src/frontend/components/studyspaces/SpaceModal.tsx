@@ -1,9 +1,8 @@
 /* global window */
-
-import React, { Component } from 'react'
+import React from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 
 import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
@@ -16,9 +15,11 @@ import {
   Subtext,
 } from '../shared'
 import { SNOW } from '../../styles/colors'
-import Hours from './Hours'
+import { Hours } from './Hours'
 import Modal from '../shared/Modal'
 import { STUDYSPACES_ROUTE } from '../../constants/routes'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types'
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 const Credit = s.div`
   width: 100%;
@@ -26,117 +27,107 @@ const Credit = s.div`
 `
 const GOOGLE_URL = `https://maps.google.com/maps?q=`
 
-class SpaceModal extends Component {
-  constructor(props) {
-    super(props)
+interface ISpaceModalProps {
+  spaceId: string
+  clearActiveSpaceDispatch: () => void
+  spacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
+  location?: {
+    lat: number
+    lng: number
   }
+}
 
-  render() {
-    const { spaceId, spacesData } = this.props
-    const space = spacesData[spaceId]
-    const show = Boolean(spaceId)
+const SpaceModal = (props: ISpaceModalProps): React.ReactElement => {
+  const { spaceId, spacesData } = props
+  const space = spacesData && spacesData[spaceId]
+  const show = Boolean(spaceId)
 
-    const {
-      name,
-      image,
-      description,
-      address,
-      location,
-      imageCredit,
-      start,
-      end,
-      tags,
-    } = space || {}
+  const {
+    name,
+    image,
+    description,
+    address,
+    location,
+    imageCredit,
+    start,
+    end,
+    tags,
+  } = space || {}
 
-    return (
-      <Modal show={show} toggle={false} ROUTE={STUDYSPACES_ROUTE}>
-        <div style={{ minHeight: '80vh' }}>
-          {space && (
-            <>
-              <ModalContainer>
-                <Title marginBottom="2.5vh">{name}</Title>
+  return (
+    <Modal show={show} ROUTE={STUDYSPACES_ROUTE}>
+      <div style={{ minHeight: '80vh' }}>
+        {space && (
+          <>
+            <ModalContainer>
+              <Title marginBottom="2.5vh">{name}</Title>
+            </ModalContainer>
+
+            {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
+
+            {imageCredit && (
+              <Credit>
+                <Subtext>
+                  {'Image credit: '}
+                  <a href={imageCredit.link}>
+                    {imageCredit.name || imageCredit.link}
+                  </a>
+                </Subtext>
+              </Credit>
+            )}
+
+            {description && (
+              <ModalContainer paddingTop="0.5rem">
+                <Text>{description}</Text>
               </ModalContainer>
+            )}
 
-              {image && <Image src={image} alt={name} marginBottom="2.5vh" />}
-
-              {imageCredit && (
-                <Credit>
-                  <Subtext>
-                    {'Image credit: '}
-                    <a href={imageCredit.link}>
-                      {imageCredit.name || imageCredit.link}
-                    </a>
-                  </Subtext>
-                </Credit>
-              )}
-
-              {description && (
-                <ModalContainer paddingTop="0.5rem">
-                  <Text>{description}</Text>
-                </ModalContainer>
-              )}
-
-              {tags && (
-                <ModalContainer paddingBottom="0.5rem">
-                  {tags.map(tag => (
-                    <Tag key={tag}>{tag}</Tag>
-                  ))}
-                </ModalContainer>
-              )}
-
-              <ModalContainer
-                background={SNOW}
-                paddingTop="1.5rem"
-                paddingBottom="1rem"
-              >
-                <Text>
-                  <strong>Address</strong>
-                </Text>
-                <br />
-                <Text>{address}</Text>
+            {tags && (
+              <ModalContainer paddingBottom="0.5rem">
+                {tags.map(tag => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
               </ModalContainer>
+            )}
 
-              {location && location.lat && location.lng ? (
-                <Map
-                  mapId={name}
-                  location={location}
-                  showMarker
-                  gestureHandling="cooperative"
-                  height="50vh"
-                  handleClickMarker={() => {
-                    window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
-                  }}
-                />
-              ) : null}
+            <ModalContainer
+              background={SNOW}
+              paddingTop="1.5rem"
+              paddingBottom="1rem"
+            >
+              <Text>
+                <strong>Address</strong>
+              </Text>
+              <br />
+              <Text>{address}</Text>
+            </ModalContainer>
 
+            {location && location.lat && location.lng && name ? (
+              <Map
+                mapId={name}
+                location={location}
+                showMarker
+                gestureHandling="cooperative"
+                height="50vh"
+                handleClickMarker={() => {
+                  window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                }}
+              />
+            ) : null}
+
+            {start && end && (
               <ModalContainer paddingTop="1.5rem">
                 <Hours start={start} end={end} />
               </ModalContainer>
-            </>
-          )}
-        </div>
-      </Modal>
-    )
-  }
+            )}
+          </>
+        )}
+      </div>
+    </Modal>
+  )
 }
 
-SpaceModal.defaultProps = {
-  location: null,
-  spaceId: null,
-  spacesData: {},
-}
-
-SpaceModal.propTypes = {
-  spaceId: PropTypes.string,
-  clearActiveSpaceDispatch: PropTypes.func.isRequired,
-  spacesData: PropTypes.object, // eslint-disable-line
-  location: PropTypes.shape({
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-  }),
-}
-
-const mapStateToProps = ({ spaces }) => {
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => {
   const { spacesData, activeSpace } = spaces
   return {
     spacesData,
@@ -144,7 +135,8 @@ const mapStateToProps = ({ spaces }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+// TOOD clean this up
+const mapDispatchToProps = (dispatch: (_arg: any) => Dispatch<any>) => ({
   clearActiveSpaceDispatch: () => dispatch(clearActiveSpace()),
 })
 
