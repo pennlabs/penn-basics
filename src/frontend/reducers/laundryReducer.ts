@@ -16,6 +16,8 @@ import {
   updateReminderIntervalID,
 } from '../actions/action_types'
 
+import { ILaundryHallProps } from '../types'
+
 const defaultState = {
   pending: true,
   error: null,
@@ -32,17 +34,6 @@ const defaultState = {
 interface IFavoritesProps {
   locationName: string
   hallId: number
-}
-
-interface ILaundryHallInfo {
-  hall_name: string
-  id: number
-  location: string
-}
-
-interface ILaundryHallProps {
-  location: string
-  halls: [ILaundryHallInfo]
 }
 
 interface IDetailProps {
