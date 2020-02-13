@@ -18,6 +18,7 @@ interface IRow {
   margin?: string
   justifyContent?: string
   fullHeight?: boolean
+  fullHeightDesktop?: boolean
 }
 
 export const Row = s.div<IRow>(

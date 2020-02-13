@@ -1,5 +1,6 @@
 // TODO move to a single types file at the root of the repo
 
+// Profile Interfaces
 export interface IUserInfo {
   pennid: string
   fullName: string
@@ -8,18 +9,8 @@ export interface IUserInfo {
   expires: string
 }
 
-export interface IDiningVenue {
-  lat: number
-  lng: number
-  image?: string
-  description: string
-  address: string
-  name: string
-  pennDiningSlug: string
-  isRetail?: boolean
-}
-
-interface IDaypart {
+// Dining Interfaces
+export interface IDaypart {
   endtime: string
   hide: string
   id: string
@@ -30,11 +21,35 @@ interface IDaypart {
 
 export interface IVenueHour {
   date: string
-  dayparts: [IDaypart]
+  dayparts: IDaypart[]
   message: string
   status: string
 }
 
+type TVenueHour = Record<string, IVenueHour>
+
+export interface IDiningReducerState {
+  error: string | null
+  favorites: string[]
+  venueHoursPending: boolean
+  venueHours: TVenueHour | null
+}
+
+export interface IVenueData {
+  lat: number
+  lng: number
+  image: string
+  description: string
+  address: string
+  name: string
+  pennDiningSlug: string
+  isRetail?: boolean
+  showMealLabels?: boolean
+}
+
+export type TVenueData = Record<string, IVenueData>
+
+// Laundry interfaces
 interface ILaundryHallInfo {
   hall_name: string
   id: number
@@ -45,3 +60,4 @@ export interface ILaundryHallProps {
   location: string
   halls: ILaundryHallInfo[]
 }
+

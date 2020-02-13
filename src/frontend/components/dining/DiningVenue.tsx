@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
-import venueData from '../../../server/resources/dining/venue_info.json'
+import data from '../../../server/resources/dining/venue_info.json'
 import { addFavorite, removeFavorite } from '../../actions/dining_actions'
 import DiningOverview from './DiningOverview'
 import NotFound from '../shared/NotFound'
@@ -11,6 +10,9 @@ import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import { NoData, Title } from '../shared'
 import { maxWidth, PHONE } from '../../styles/sizes'
+import { IDiningReducerState, TVenueData } from '../../types'
+
+const venueData = data as TVenueData
 
 const DiningHeader = s.div`
   position: relative;
@@ -43,13 +45,21 @@ const Wrapper = s.div`
   }
 `
 
+interface IDiningVenueProps {
+  favorites: string[]
+  venueId: string
+  venueHoursPending: boolean
+  dispatchAddFavorite: ({ venueId }: { venueId: string }) => void
+  dispatchRemoveFavorite: ({ venueId }: { venueId: string }) => void
+}
+
 const DiningVenue = ({
   favorites,
   venueId,
   venueHoursPending,
   dispatchAddFavorite,
   dispatchRemoveFavorite,
-}) => {
+} : IDiningVenueProps) => {
   if (!venueId) {
     return (
       <NoData
@@ -101,20 +111,7 @@ const DiningVenue = ({
   )
 }
 
-DiningVenue.defaultProps = {
-  venueId: null,
-  favorites: [],
-}
-
-DiningVenue.propTypes = {
-  venueHoursPending: PropTypes.bool.isRequired,
-  venueId: PropTypes.string,
-  favorites: PropTypes.arrayOf(PropTypes.string),
-  dispatchAddFavorite: PropTypes.func.isRequired,
-  dispatchRemoveFavorite: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = ({ dining }) => {
+const mapStateToProps = ({ dining } : { dining: IDiningReducerState }) => {
   const { venueHoursPending, favorites } = dining
 
   return {
@@ -123,9 +120,9 @@ const mapStateToProps = ({ dining }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  dispatchAddFavorite: ({ venueId }) => dispatch(addFavorite(venueId)),
-  dispatchRemoveFavorite: ({ venueId }) => dispatch(removeFavorite(venueId)),
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+  dispatchAddFavorite: ({ venueId }: { venueId: string }) => dispatch(addFavorite(venueId)),
+  dispatchRemoveFavorite: ({ venueId }: { venueId: string }) => dispatch(removeFavorite(venueId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue)

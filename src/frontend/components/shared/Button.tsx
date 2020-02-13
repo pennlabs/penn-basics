@@ -23,6 +23,10 @@ interface IButtonProps {
   lg?: boolean
   children: React.ReactNode | React.ReactNodeArray
   style?: React.CSSProperties
+  href?: string
+  target?: string
+  className?: string
+  onClick?: () => void
 }
 
 export const ButtonWrapper = s.button<IButtonProps>(

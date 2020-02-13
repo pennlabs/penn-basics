@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuid from 'uuid'
 
@@ -9,8 +8,8 @@ import DiningCard from './DiningCard'
 import { WHITE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
-import venueDataJson from '../../../server/resources/dining/venue_info.json'
-import { IDiningVenue } from '../../types'
+import venueDataJSON from '../../../server/resources/dining/venue_info.json'
+import { TVenueData, IVenueData, IDiningReducerState } from '../../types'
 
 /**
  * Data cleanup which should run once (not at every component build)
@@ -18,11 +17,11 @@ import { IDiningVenue } from '../../types'
 const diningKeys: string[] = []
 const retailKeys: string[] = []
 
-const venueData = venueDataJson as Record<string, IDiningVenue>
+const venueData = venueDataJSON as TVenueData
 const keys = Object.keys(venueData)
 
 keys.forEach(key => {
-  const data: IDiningVenue = venueData[key]
+  const data: IVenueData = venueData[key]
   if (data.isRetail) {
     retailKeys.push(key)
   } else {
@@ -37,9 +36,9 @@ diningKeys.sort((keyA, keyB) => {
 })
 
 interface INav {
-  favorites: any
+  favorites?: any
   selectedVenueId: string
-  venueHours: any
+  venueHours?: any
 }
 
 const Nav = ({
@@ -109,19 +108,7 @@ const Nav = ({
   )
 }
 
-Nav.defaultProps = {
-  favorites: [],
-  selectedVenueId: null,
-  venueHours: {},
-}
-
-Nav.propTypes = {
-  favorites: PropTypes.arrayOf(PropTypes.string),
-  selectedVenueId: PropTypes.string,
-  venueHours: PropTypes.shape({}),
-}
-
-const mapStateToProps = ({ dining }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   const { favorites, venueHours, venueHoursPending } = dining
 
   return {

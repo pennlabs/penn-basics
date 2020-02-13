@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 import moment from 'moment'
@@ -8,6 +7,8 @@ import uuid from 'uuid'
 import { ErrorMessage } from '../shared'
 import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
 import { convertDate, pad } from '../../../utils/helperFunctions'
+
+import { IDiningReducerState, IDaypart, IVenueHour } from '../../types'
 
 const TableWrapper = s.div`
   max-width: 100%;
@@ -19,7 +20,11 @@ const HeaderRow = s.tr`
   border-bottom: 3px solid ${BORDER};
 `
 
-const BodyRow = s.tr`
+interface IBodyRowProps {
+  className?: string
+}
+
+const BodyRow = s.tr<IBodyRowProps>`
   border-bottom: 0;
 
   td {
@@ -48,7 +53,7 @@ const week = [
   'Saturday',
 ]
 
-const getDay = date => {
+const getDay = (date: Date | string) => {
   const obj = moment(date)
   const dayNum = obj.day()
   const today = moment().day()
@@ -59,7 +64,7 @@ const getDay = date => {
   return week[dayNum]
 }
 
-const isRightNow = (meal, date) => {
+const isRightNow = (meal: IDaypart, date: string) => {
   if (!meal) {
     return false
   }
@@ -73,7 +78,7 @@ const isRightNow = (meal, date) => {
   return today === date && starttime <= currTime && currTime <= endtime
 }
 
-const List = ({ venueHours }) => {
+const List = ({ venueHours }: { venueHours: IVenueHour[] }) => {
   if (!venueHours || !venueHours.length) {
     return null
   }
@@ -104,7 +109,7 @@ const List = ({ venueHours }) => {
                   meals.map(meal => (
                     <BodyRow
                       key={`${meal.label}-${meal.starttime}-${meal.endtime}`}
-                      className={isRightNow(meal, venueHour.date) && 'selected'}
+                      className={isRightNow(meal, venueHour.date) ? 'selected' : ''}
                     >
                       <td style={{ width: '12rem' }} />
                       <td>{meal.label}</td>
@@ -131,7 +136,12 @@ const List = ({ venueHours }) => {
   )
 }
 
-const HoursVisualization = ({ venueHours, venueId }) => {
+interface IHoursVisualizationProps {
+  venueId: string
+  venueHours?: Record<string, IVenueHour[]>
+}
+
+const HoursVisualization = ({ venueHours, venueId }: IHoursVisualizationProps) => {
   if (!venueHours) {
     return <ErrorMessage message="Failed to load hours of operation." />
   }
@@ -150,32 +160,13 @@ const HoursVisualization = ({ venueHours, venueId }) => {
   return <List venueHours={venueHour} />
 }
 
-List.defaultProps = {
-  venueHours: {},
-}
 
-List.propTypes = {
-  venueHours: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.string,
-      type: PropTypes.string,
-      open: PropTypes.string,
-      close: PropTypes.string,
-    })
-  ),
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+  const { venueHours } = dining
+  
+  return {
+    venueHours
+  }
 }
-
-HoursVisualization.defaultProps = {
-  venueId: '',
-}
-
-HoursVisualization.propTypes = {
-  venueHours: PropTypes.shape({}).isRequired,
-  venueId: PropTypes.string,
-}
-
-const mapStateToProps = state => ({
-  venueHours: state.dining.venueHours,
-})
 
 export default connect(mapStateToProps, null)(HoursVisualization)

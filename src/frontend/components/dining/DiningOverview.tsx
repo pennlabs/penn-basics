@@ -1,15 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { PENN_DINING_URL } from '../../constants/routes'
 import { BorderedCard, AnchorButton, Text } from '../shared'
 import HoursVisualization from './HoursVisualization'
-import venueData from '../../../server/resources/dining/venue_info.json'
+import data from '../../../server/resources/dining/venue_info.json'
 import ExternalLinkIcon from '../../../../public/img/external-link.svg'
+import { TVenueData } from '../../types'
 
-const DiningOverview = ({ id }) => {
+const venueData = data as TVenueData
+
+const DiningOverview = ({ id }: { id: string }) => {
   const { description, pennDiningSlug } = venueData[id]
-
   return (
     <>
       <BorderedCard>
@@ -33,10 +34,6 @@ const DiningOverview = ({ id }) => {
       )}
     </>
   )
-}
-
-DiningOverview.propTypes = {
-  id: PropTypes.string.isRequired,
 }
 
 export default DiningOverview

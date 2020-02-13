@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import s, { keyframes } from 'styled-components'
 
 import { Subtext } from './index'
@@ -35,7 +34,7 @@ const spin = keyframes`
 
 interface ILoadingCircle {
   size?: string
-  thickness: string
+  thickness?: string
 }
 
 const LoadingCircle = s.span<ILoadingCircle>`
@@ -95,16 +94,6 @@ const Loading = ({
       {title && <Subtext>{title}</Subtext>}
     </LoadingWrapper>
   )
-}
-
-Loading.propTypes = {
-  title: PropTypes.string,
-  delay: PropTypes.number,
-  padding: PropTypes.string,
-  size: PropTypes.string,
-  translateY: PropTypes.string,
-  thickness: PropTypes.string,
-  displayInLine: PropTypes.bool,
 }
 
 export default Loading

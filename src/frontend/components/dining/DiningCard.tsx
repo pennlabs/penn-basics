@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 import moment from 'moment'
 import Link from 'next/link'
@@ -15,8 +14,10 @@ import {
   Line,
   Circle,
 } from '../shared'
+import { IVenueHour, IDaypart, TVenueData } from '../../types'
+import venueDataJSON from '../../../server/resources/dining/venue_info.json'
 
-import venueData from '../../../server/resources/dining/venue_info.json'
+const venueData = venueDataJSON as TVenueData
 
 const Content = s.div`
   width: 100%;
@@ -25,7 +26,7 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-const getOpenHours = venueHours => {
+const getOpenHours = (venueHours: IDaypart[]) => {
   if (!venueHours) return null
 
   // get the array of hours that are opened today
@@ -37,9 +38,11 @@ const getOpenHours = venueHours => {
   return openHours
 }
 
-const CardSubtext = ({ venueId, venueHours }) => {
-  const showMealLabels = venueData[venueId].isRetail
-    ? venueData[venueId].showMealLabels || false
+type TVenueHours = Record<string, IVenueHour[]>
+
+const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDaypart[] }) => {
+  const showMealLabels = venueData[Number(venueId)].isRetail
+    ? venueData[Number(venueId)].showMealLabels || false
     : true
 
   const openHours = getOpenHours(venueHours)
@@ -82,22 +85,8 @@ const CardSubtext = ({ venueId, venueHours }) => {
   )
 }
 
-CardSubtext.defaultProps = {
-  venueId: '',
-  stateVenueHours: [],
-  venueHours: [],
-}
-
-CardSubtext.propTypes = {
-  venueId: PropTypes.string,
-  stateVenueHours: PropTypes.array, //eslint-disable-line
-  venueHours: PropTypes.arrayOf(
-    PropTypes.shape({ endtime: PropTypes.string, label: PropTypes.string })
-  ),
-}
-
-const parseVenueHours = (venueId, venueHours) => {
-  if (!venueHours) return null
+const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
+  if (!venueHours) return []
 
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))
@@ -107,6 +96,15 @@ const parseVenueHours = (venueId, venueHours) => {
   return venueHour[0].dayparts
 }
 
+interface IDiningCardProps {
+  venueId: string
+  selected: boolean
+  isFavorited: boolean
+  venueHours: TVenueHours
+  showLine?: boolean
+  style?: {}
+}
+
 const DiningCard = ({
   venueId,
   selected,
@@ -114,7 +112,7 @@ const DiningCard = ({
   venueHours,
   showLine,
   style,
-}) => {
+}: IDiningCardProps) => {
   const parsedVenueHours = parseVenueHours(venueId, venueHours)
   const { name, image } = venueData[venueId]
 
@@ -151,23 +149,6 @@ const DiningCard = ({
       </StyledLink>
     </Link>
   )
-}
-
-DiningCard.defaultProps = {
-  showLine: true,
-  isFavorited: false,
-  selected: false,
-  style: {},
-  venueHours: {},
-}
-
-DiningCard.propTypes = {
-  showLine: PropTypes.bool,
-  venueId: PropTypes.string.isRequired,
-  isFavorited: PropTypes.bool,
-  selected: PropTypes.bool,
-  style: PropTypes.object, // eslint-disable-line
-  venueHours: PropTypes.shape(PropTypes.arrayOf({ date: PropTypes.string })),
 }
 
 export default DiningCard
