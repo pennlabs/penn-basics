@@ -30,7 +30,7 @@ const App = ({
   dispatchCheckBrowser,
   laundryHalls,
   id,
-  favorites,
+  favorites = [],
 }: IAppProps): React.ReactElement => {
   useEffect(() => {
     dispatchGetLaundryHalls()
@@ -43,6 +43,9 @@ const App = ({
     parsedHallId !== null &&
     parsedHallId !== undefined &&
     !Number.isNaN(parsedHallId)
+
+  console.log('favorites')
+  console.log(favorites)
 
   return (
     <Row fullHeight>

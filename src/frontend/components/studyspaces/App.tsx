@@ -35,7 +35,7 @@ import {
 interface IStudySpacesAppProps {
   getAllSpacesDataDispatch: () => void
   setActiveSpaceDispatch: (id: TSpaceId) => void
-  error: string
+  error?: string
   hoveredSpace?: string
   pending: boolean
   id: string
@@ -123,8 +123,8 @@ class StudySpacesApp extends React.Component<
             height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
             hideOnMobile={!isListViewMobile}
           >
-            <ErrorMessage message={error} />
-
+            {error && <ErrorMessage message={error} />}
+            
             {!areFilteredSpacesResults && (
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"

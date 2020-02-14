@@ -173,14 +173,14 @@ export const getFavorites = () => (dispatch: Dispatch<Action>) => {
     if (favorites) {
       // Read in from localStore, map from strings to numbers
       favoritesArray = JSON.parse(favorites)
-      favoritesArray = favoritesArray.map(fav => Object.assign({}, fav, { hallId: Number(fav.hallId) }))
+      // favoritesArray = favoritesArray.map(fav => Object.assign({}, fav, { hallId: Number(fav.hallId) }))
     } else {
       localStorage.setItem('laundry_favorites', JSON.stringify([]))
       favoritesArray = []
     }
     dispatch({
       type: updateLaundryFavorites,
-      favorites,
+      favorites: favoritesArray,
     })
   }
 
