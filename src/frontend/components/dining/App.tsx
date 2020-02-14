@@ -17,7 +17,7 @@ const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }: IAppProps): Re
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [])
+  }, [dispatchGetFavorites, dispatchGetVenueHours])
 
   return (
     <Row fullHeightDesktop>

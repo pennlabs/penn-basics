@@ -15,8 +15,7 @@ import { IVenueHour } from '../types'
 /**
  * Get hours for all dining venues
  */
-export const getVenueHours = () => {
-  return (dispatch: Dispatch<Action>) => {
+export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
     dispatch({ type: getVenueInfoRequested })
 
     const venueIds: number[] = Object.values(venueMapping)
@@ -46,17 +45,13 @@ export const getVenueHours = () => {
       })
     }
   }
-}
 
-export const getFavorites = () => {
-  return (dispatch : Dispatch<Action>) => {
+export const getFavorites = () => (dispatch: Dispatch<Action>) => {
     const favoritesString = localStorage.getItem('dining_favorites')
-    let favoritesArray : String[] = []
+    let favoritesArray: string[] = []
     if (favoritesString) {
       favoritesArray = JSON.parse(favoritesString)
-      favoritesArray = favoritesArray.sort((a, b) => {
-        return Number(a) - Number(b)
-      })
+      favoritesArray = favoritesArray.sort((a, b) => Number(a) - Number(b))
     } else {
       localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
     }
@@ -66,13 +61,11 @@ export const getFavorites = () => {
       favorites: favoritesArray,
     })
   }
-}
 
-export const addFavorite = (venueID : string) => {
-  return (dispatch : Dispatch<Action>) => {
+export const addFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => {
     logEvent('dining', 'addFavorite')
     const favorites = localStorage.getItem('dining_favorites')
-    let favoritesArray : String[]
+    let favoritesArray: string[]
     if (!favorites) {
       favoritesArray = [venueID]
     } else {
@@ -81,9 +74,7 @@ export const addFavorite = (venueID : string) => {
         favoritesArray.push(venueID)
       }
 
-      favoritesArray = favoritesArray.sort((a, b) => {
-        return Number(a) - Number(b)
-      })
+      favoritesArray = favoritesArray.sort((a, b) => Number(a) - Number(b))
     }
 
     localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
@@ -93,16 +84,14 @@ export const addFavorite = (venueID : string) => {
       favorites: favoritesArray,
     })
   }
-}
 
-export const removeFavorite = (venueID : string) => {
-  return (dispatch : Dispatch<Action>) => {
+export const removeFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => {
     logEvent('dining', 'removeFavorite')
-    
+
     // favorites is an array of venueIDs
     const favorites = localStorage.getItem('dining_favorites')
-    let favoritesArray : string[] = []
-    if (favorites) favoritesArray = JSON.parse(favorites)
+    let favoritesArray: string[] = []
+    if (favorites) {favoritesArray = JSON.parse(favorites)}
 
     favoritesArray = favoritesArray.filter(favorite => favorite !== venueID)
     localStorage.setItem('dining_favorites', JSON.stringify(favoritesArray))
@@ -111,4 +100,3 @@ export const removeFavorite = (venueID : string) => {
       favorites: favoritesArray,
     })
   }
-}

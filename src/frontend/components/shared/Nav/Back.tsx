@@ -38,9 +38,9 @@ const Back = ({ router }: IBackProps): React.ReactElement => {
   useEffect(() => {
     const { asPath } = router
     setRoute(asPath)
-  })
+  }, [router])
 
-  if (!route || route === '/') return <React.Fragment />
+  if (!route || route === '/') {return <React.Fragment />}
 
   const lastIdx = route.lastIndexOf('/')
   const to = route.substring(0, lastIdx) || '/'

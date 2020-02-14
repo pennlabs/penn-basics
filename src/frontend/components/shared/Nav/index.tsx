@@ -89,7 +89,7 @@ const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
 
   useEffect(() => {
     dispatchGetUserInfo()
-  }, [])
+  }, [dispatchGetUserInfo])
 
   return (
     <>
@@ -119,7 +119,7 @@ const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
 }
 
 
-const mapStateToProps = ({ authentication } : { authentication : IUserInfo }) => authentication
+const mapStateToProps = ({ authentication }: { authentication: IUserInfo }) => authentication
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   dispatchGetUserInfo: () => dispatch(getUserInfo()),

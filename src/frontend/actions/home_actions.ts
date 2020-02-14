@@ -22,12 +22,11 @@ const updateFilters = (arr: number[], num: number) => {
   return newArr.sort()
 }
 
-export const initializeFilterHome = (optionsLength: number) => {
-  return (dispatch: Dispatch<Action>) => {
+export const initializeFilterHome = (optionsLength: number) => (dispatch: Dispatch<Action>) => {
     const homeFilter = localStorage.getItem('homeFilter')
 
     if (!homeFilter) {
-      let filterList : Number[] = []
+      const filterList: number[] = []
       for (let i = 0; i < optionsLength; i++) {
         filterList.push(i)
       }
@@ -43,12 +42,10 @@ export const initializeFilterHome = (optionsLength: number) => {
       })
     }
   }
-}
 
 // filterList is the existing list of filters
 // filter is a number/ index
-export const filterHomeCustomize = (filter: number) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterHomeCustomize = (filter: number) => (dispatch: Dispatch<Action>) => {
     const homeFilterString = localStorage.getItem('homeFilter')
     if (homeFilterString) {
       let filterList = JSON.parse(homeFilterString)
@@ -57,10 +54,9 @@ export const filterHomeCustomize = (filter: number) => {
       dispatch({
         type: filterHomeCustomizeRequested,
         filterList,
-      }) 
+      })
     }
   }
-}
 
 export const toggleHomeCustomize = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_HOME_CUSTOMIZE })

@@ -36,7 +36,7 @@ const App = ({
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
     dispatchCheckBrowser()
-  }, [])
+  }, [dispatchCheckBrowser, dispatchGetFavorites, dispatchGetLaundryHalls])
 
   const parsedHallId = Number.isNaN(Number(id)) ? -1 : Number(id)
   const isActiveHall =

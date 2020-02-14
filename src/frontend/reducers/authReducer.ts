@@ -1,6 +1,6 @@
-import { getUserInfoFulfilled } from '../actions/action_types'
 import { Action } from 'redux'
 import { IUser, IAuthReducerState } from '../../types'
+import { getUserInfoFulfilled } from '../actions/action_types'
 
 type IAuthAction = {
   userInfo?: IUser

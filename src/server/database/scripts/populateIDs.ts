@@ -1,5 +1,5 @@
-import uuid from 'uuid/v1'
 import fs from 'fs'
+import uuid from 'uuid/v1'
 
 const filename =
   'C:\\Users\\pdhil\\Documents\\Code\\PennLabs\\pennbasics\\src\\server\\resources\\foodtrucks\\foodtrucks.json'

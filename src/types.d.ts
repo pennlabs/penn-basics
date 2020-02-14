@@ -122,7 +122,7 @@ interface IFoodTruckBase {
   tags: string[]
   link?: string
   languageTypes?: [string]
-  
+
   overallRating: number
   image: string
   description?: string

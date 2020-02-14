@@ -5,10 +5,10 @@ import webpush from 'web-push'
 const router = Router()
 
 const isValidNumericId = (id: number | string | undefined | null): boolean => {
-  if (id === null || id === undefined) return false
+  if (id === null || id === undefined) {return false}
   const num = Number(id)
-  if (Number.isNaN(num)) return false
-  if (num < 0) return false
+  if (Number.isNaN(num)) {return false}
+  if (num < 0) {return false}
   return true
 }
 

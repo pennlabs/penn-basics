@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
 import {
@@ -27,8 +29,6 @@ import {
   STUDYSPACE_QUERY_ROUTE,
   STUDYSPACE_ROUTE,
 } from '../../constants/routes'
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 
 // TODO port this over to hooks
 

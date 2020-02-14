@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express'
 
 export const convertDate = (time: string) => {
-  if (!time) return 'Closed'
+  if (!time) {return 'Closed'}
   const colonIdx = time.indexOf(':')
   const hour = parseInt(time.substring(0, colonIdx), 10)
   const minute = parseInt(time.substring(colonIdx + 1), 10)
@@ -23,12 +23,10 @@ export const convertDate = (time: string) => {
  * @param number
  * @returns the nubmer as a string
  */
-export const pad = (number: number): string => {
-  return number < 10 ? `0${number}` : `${number}`
-}
+export const pad = (number: number): string => number < 10 ? `0${number}` : `${number}`
 
 export const padHours = (hourString: string): string => {
-  if (!hourString) return ''
+  if (!hourString) {return ''}
   const colonIdx = hourString.indexOf(':')
   const hour = parseInt(hourString.substring(0, colonIdx), 10)
   const remaining = hourString.substring(colonIdx)
@@ -42,10 +40,10 @@ export const padHours = (hourString: string): string => {
  * @param id
  */
 export const isValidNumericId = (id: number): boolean => {
-  if (id === null || id === undefined) return false
+  if (id === null || id === undefined) {return false}
   const num = Number(id)
-  if (Number.isNaN(num)) return false
-  if (num < 0) return false
+  if (Number.isNaN(num)) {return false}
+  if (num < 0) {return false}
   return true
 }
 
@@ -90,7 +88,7 @@ export const getMinutes = (time: number): string => {
  */
 export const getTime = (time: number): string => {
   // Edge case
-  if (time < 0) return ''
+  if (time < 0) {return ''}
 
   const mins = getMinutes(time)
   let hours = Math.floor(time)
@@ -119,7 +117,7 @@ export const getHours = (
   const startTime = start[day]
   const endTime = end[day]
 
-  if (startTime < 0 || endTime < 0) return 'Closed'
+  if (startTime < 0 || endTime < 0) {return 'Closed'}
 
   return `${getTime(startTime)} – ${getTime(endTime)}`
 }

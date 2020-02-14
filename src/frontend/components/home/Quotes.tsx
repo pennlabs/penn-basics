@@ -21,7 +21,7 @@ const Quotes = () => {
       <p className="has-text-centered">{`"${quote}"`}</p>
       <Author className="has-text-right">
         &#8212;
-        {` `}
+        {' '}
         {author}
       </Author>
     </div>

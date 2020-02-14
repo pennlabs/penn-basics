@@ -65,8 +65,7 @@ const Nav = ({
     >
       <NavHeaderCard title="Favorites" />
 
-      {favorites.map((key: string) => {
-        return (
+      {favorites.map((key: string) => (
           <DiningCard
             key={uuid()}
             venueId={key}
@@ -74,13 +73,11 @@ const Nav = ({
             isFavorited={false}
             venueHours={venueHours}
           />
-        )
-      })}
+        ))}
 
       <NavHeaderCard title="Dining" />
 
-      {diningKeys.map(key => {
-        return (
+      {diningKeys.map(key => (
           <DiningCard
             key={uuid()}
             venueId={key}
@@ -88,8 +85,7 @@ const Nav = ({
             isFavorited={favorites.includes(key)}
             venueHours={venueHours}
           />
-        )
-      })}
+        ))}
 
       <NavHeaderCard title="Retail" />
 

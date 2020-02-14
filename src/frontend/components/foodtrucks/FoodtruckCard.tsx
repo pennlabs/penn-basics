@@ -46,7 +46,7 @@ const FoodtruckCard = ({
 }: IFoodtruckCardProps) => {
   const handleMouseEnter = () => {
     // If there is no change to be made
-    if (hoveredFoodtruck && hoveredFoodtruck === foodtruckId) return
+    if (hoveredFoodtruck && hoveredFoodtruck === foodtruckId) {return}
 
     dispatchSetHoveredFoodtruck(foodtruckId)
   }

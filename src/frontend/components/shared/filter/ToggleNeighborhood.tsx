@@ -2,6 +2,7 @@ import React from 'react'
 import s from 'styled-components'
 import { connect } from 'react-redux'
 
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import {
   FOCUS_GRAY,
   LIGHT_GRAY,
@@ -10,7 +11,6 @@ import {
   MEDIUM_GRAY,
 } from '../../../styles/colors'
 import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25

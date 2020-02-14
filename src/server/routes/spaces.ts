@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express'
 import { Document } from 'mongoose'
 
+import { BAD_REQUEST, OK } from 'http-status-codes'
 import * as DB from '../database/db'
 import { ISpace } from '../../types'
-import { BAD_REQUEST, OK } from 'http-status-codes'
 
 const router = Router()
 
@@ -50,7 +50,7 @@ export default function spacesRouter(): Router {
     try {
       spaceKeys.forEach((key: string) => {
         if (
-          typeof ((space as Record<string, any>)[key] as any) === 'undefined' ||
+          typeof ((space as Record<string, any>)[key]) === 'undefined' ||
           (space as Record<string, any>)[key] === ''
         ) {
           throw Error()

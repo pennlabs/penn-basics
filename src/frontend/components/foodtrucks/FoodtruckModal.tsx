@@ -70,7 +70,7 @@ const Chevron = s.span<IChevronProps>`
     `}
 `
 
-const GOOGLE_URL = `https://maps.google.com/maps?q=`
+const GOOGLE_URL = 'https://maps.google.com/maps?q='
 
 interface IFoodtruckModalProps {
   foodtruckId: string
@@ -100,8 +100,8 @@ const FoodtruckModal = ({
   const [showReview, setShowReview] = useState(false)
 
   useEffect(() => {
-    if (foodtruckId) dispatchGetFoodtruckInfo(foodtruckId)
-  }, [foodtruckId])
+    if (foodtruckId) {dispatchGetFoodtruckInfo(foodtruckId)}
+  }, [dispatchGetFoodtruckInfo, foodtruckId])
 
   const handleReviewOnClick = () => {
     if (loggedIn) {

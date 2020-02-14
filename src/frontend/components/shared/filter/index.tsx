@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 // TODO decouple index of option and value in database
 
 // import styles
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -48,7 +49,6 @@ import {
 import Modal from '../Modal'
 
 // import types
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 interface IFilterWrapperProps {
   active?: boolean

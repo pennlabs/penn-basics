@@ -73,25 +73,15 @@ nextApp.prepare().then(() => {
   app.use('/api/auth', authRouter())
 
   // client-side routing
-  app.get('/dining/:id', (req, res) => {
-    return nextApp.render(req, res, '/dining', { id: req.params.id })
-  })
+  app.get('/dining/:id', (req, res) => nextApp.render(req, res, '/dining', { id: req.params.id }))
 
-  app.get('/laundry/:id', (req, res) => {
-    return nextApp.render(req, res, '/laundry', { id: req.params.id })
-  })
+  app.get('/laundry/:id', (req, res) => nextApp.render(req, res, '/laundry', { id: req.params.id }))
 
-  app.get('/studyspaces/:id', (req, res) => {
-    return nextApp.render(req, res, '/studyspaces', { id: req.params.id })
-  })
+  app.get('/studyspaces/:id', (req, res) => nextApp.render(req, res, '/studyspaces', { id: req.params.id }))
 
-  app.get('/foodtrucks/:id', (req, res) => {
-    return nextApp.render(req, res, '/foodtrucks', { id: req.params.id })
-  })
+  app.get('/foodtrucks/:id', (req, res) => nextApp.render(req, res, '/foodtrucks', { id: req.params.id }))
 
-  app.all('*', (req, res) => {
-    return handle(req, res)
-  })
+  app.all('*', (req, res) => handle(req, res))
 
   app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`) // eslint-disable-line no-console

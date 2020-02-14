@@ -25,7 +25,7 @@ interface IReviewProps {
 }
 
 const Review = ({ show, reviews }: IReviewProps): React.ReactElement => {
-  if (!show) return <React.Fragment />
+  if (!show) {return <React.Fragment />}
 
   return (
     <>

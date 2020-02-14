@@ -56,8 +56,8 @@ interface IAuthLinkProps {
   router: any
 }
 
-const AuthLink = withRouter(({ userInfo, router } : IAuthLinkProps) => {
-  if (!userInfo) return null
+const AuthLink = withRouter(({ userInfo, router }: IAuthLinkProps) => {
+  if (!userInfo) {return null}
   const { loggedIn, fullName } = userInfo
 
   if (!loggedIn) {
@@ -87,7 +87,7 @@ interface ILinksProps {
   toggleActive: (arg0: boolean) => void
 }
 
-const Links = ({ active, zIndex, userInfo, toggleActive } : ILinksProps) => (
+const Links = ({ active, zIndex, userInfo, toggleActive }: ILinksProps) => (
   <LinksDiv active={active} zIndex={zIndex}>
     <Link href={DINING_ROUTE}>
       <a onClick={() => toggleActive(false)}>Dining</a>

@@ -13,9 +13,7 @@ import {
 } from '../../types'
 
 // return all fields except for menu, priceTypes, and reviews
-export const findAllFoodtrucks = () => {
-  return Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
-}
+export const findAllFoodtrucks = () => Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
 
 /**
  * @param {Number} foodtruckID
@@ -49,7 +47,7 @@ export const updateReview = async (
   }
 
   let { overallRating } = data
-  if (!overallRating) overallRating = 0.0
+  if (!overallRating) {overallRating = 0.0}
 
   const { reviews } = data // reviews in the DB
   const { pennid, rating, comment, showName, fullName } = userReview
@@ -105,13 +103,11 @@ export const updateFoodtruckReveiwScore = async (
   foodtruckID: string,
   pennid: number,
   amount: number
-) => {
-  return Foodtrucks.updateOne(
+) => Foodtrucks.updateOne(
     { foodtruckID, 'reviews.pennid': pennid },
     // update the located sub-document (the review) by the specified amount
     { $inc: { 'reviews.$.pennid': amount } }
   )
-}
 
 export function upvoteFoodtruckReview(foodtruckID: string, pennid: number) {
   updateFoodtruckReveiwScore(foodtruckID, pennid, 1)
@@ -165,16 +161,16 @@ export function getSpace(spaceID: string) {
 
 export function deleteReview(foodtruckName: string, pennid: number) {
   if (pennid && foodtruckName)
-    return Foodtrucks.findOne({ name: foodtruckName }).then(
+    {return Foodtrucks.findOne({ name: foodtruckName }).then(
       (truck: Document | null) => {
-        if (!truck) throw new Error('Truck not found')
+        if (!truck) {throw new Error('Truck not found')}
         const { reviews } = truck as IFoodTruckDocument
         const newReviews = reviews.filter(
           r => r.pennid !== pennid && r.pennid !== pennid
         )
         return truck.update({ reviews: newReviews })
       }
-    )
+    )}
   return new Error(
     'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
   )

@@ -1,5 +1,6 @@
 import { Action } from 'redux'
 
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,
@@ -19,7 +20,6 @@ import {
   TOGGLE_FILTER_SPACES_NOISE,
   TOGGLE_FILTER_SPACES_GROUPS,
 } from '../actions/action_types'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 
 // Default state where all filters are cleared and none are active
 const clearFilterState = {
@@ -91,7 +91,7 @@ const filterSpaces = (state: ISpacesReducerState) => {
     spacesData,
   } = state
 
-  if (!spacesData) return state
+  if (!spacesData) {return state}
 
   // If there is nothing to filter on, remove all filters and reset the data
   if (

@@ -26,7 +26,7 @@ const Dining = ({
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [])
+  }, [dispatchGetFavorites, dispatchGetVenueHours])
 
   if (!venueHours) return <React.Fragment />
 
