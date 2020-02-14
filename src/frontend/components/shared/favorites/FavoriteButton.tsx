@@ -3,19 +3,25 @@ import React from 'react'
 import FavoriteIcon from '../../../../../public/img/heart.svg'
 import { Button } from '../Button'
 
-interface IAddFunctionInput {
-  venueId?: string
-  hallURLId?: number
-  location?: string
-  hallName?: string
-}
+type IAddFunctionProps = Record<string, any>
+type IRemoveFunctionProps = Record<string, any>
 
 interface IFavoriteButtonProps {
   isFavorited: boolean
-  addFunction: ({ venueId, hallURLId, location, hallName }: IAddFunctionInput) => void
-  removeFunction: ({ venueId, hallURLId } : { venueId?: string, hallURLId?: number }) => void
-  addParams: { venueId?: string, hallURLId?: number, location?: string, hallName?: string}
-  removeParams: { venueId?: string, hallURLId?: number }
+  addFunction: (props: IAddFunctionProps) => void
+  removeFunction: (props: IRemoveFunctionProps) => void
+
+  /**
+   * These are passed as props to the addFunction when the button is clicked
+   * and is not yet favorited
+   */
+  addParams: IAddFunctionProps
+
+  /**
+   * These are passed as props to the removeFunction when the button is clicked
+   * and is already favorited
+   */
+  removeParams: IRemoveFunctionProps
 }
 
 const FavoriteButton = ({
@@ -31,7 +37,7 @@ const FavoriteButton = ({
         <FavoriteIcon
           // opacity="0.75"
           // fill="white"
-          style={{ transform: 'scale(0.75)', opacity: '0.75', fill:'white' }}
+          style={{ transform: 'scale(0.75)', opacity: '0.75', fill: 'white' }}
         />
         &nbsp; Favorited
       </Button>

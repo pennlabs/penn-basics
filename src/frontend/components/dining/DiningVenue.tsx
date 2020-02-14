@@ -59,7 +59,7 @@ const DiningVenue = ({
   venueHoursPending,
   dispatchAddFavorite,
   dispatchRemoveFavorite,
-} : IDiningVenueProps) => {
+}: IDiningVenueProps) => {
   if (!venueId) {
     return (
       <NoData
@@ -98,8 +98,12 @@ const DiningVenue = ({
         <Buttons>
           <FavoriteButton
             isFavorited={isFavorited}
-            addFunction={dispatchAddFavorite}
-            removeFunction={dispatchRemoveFavorite}
+            addFunction={props =>
+              dispatchAddFavorite(props as { venueId: string })
+            }
+            removeFunction={props =>
+              dispatchRemoveFavorite(props as { venueId: string })
+            }
             addParams={{ venueId }}
             removeParams={{ venueId }}
           />
@@ -111,7 +115,7 @@ const DiningVenue = ({
   )
 }
 
-const mapStateToProps = ({ dining } : { dining: IDiningReducerState }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   const { venueHoursPending, favorites } = dining
 
   return {
@@ -121,8 +125,10 @@ const mapStateToProps = ({ dining } : { dining: IDiningReducerState }) => {
 }
 
 const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchAddFavorite: ({ venueId }: { venueId: string }) => dispatch(addFavorite(venueId)),
-  dispatchRemoveFavorite: ({ venueId }: { venueId: string }) => dispatch(removeFavorite(venueId)),
+  dispatchAddFavorite: ({ venueId }: { venueId: string }) =>
+    dispatch(addFavorite(venueId)),
+  dispatchRemoveFavorite: ({ venueId }: { venueId: string }) =>
+    dispatch(removeFavorite(venueId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiningVenue)
