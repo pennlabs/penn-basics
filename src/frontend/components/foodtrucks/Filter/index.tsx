@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // TODO decouple index of option and value in database
 
-import FilterBtn from './FilterBtn'
+import FilterBtn from '../../shared/filter/FilterBtn'
 import { Search } from '../../shared'
 import {
   WHITE,
@@ -30,7 +29,13 @@ import {
   FILTER_HEIGHT,
 } from '../../../styles/sizes'
 
-const FilterWrapper = s.div`
+import { IFoodTrucksReducerState } from '../../../../types'
+
+interface IFilterWrapperProps {
+  active?: boolean
+}
+
+const FilterWrapper = s.div<IFilterWrapperProps>`
   display: flex;
   align-items: center;
   width: 100%;
@@ -116,14 +121,25 @@ const FilterSpace = s.div`
   }
 `
 
-class Filter extends Component {
-  constructor(props) {
+interface IFilterProps {
+  dispatchFilterFoodtrucksOpen: (open: boolean) => void
+  dispatchClearFoodtrucksFilter: () => void // Remove filters
+
+  dispatchToggleFoodtrucksOpen: () => void
+  dispatchFilterFoodtrucksString: (str: string) => void
+ 
+  filterOpen?: boolean
+  
+
+  filterOpenActive?: boolean
+  filterString?: string
+}
+
+class Filter extends Component<IFilterProps> {
+  constructor(props: IFilterProps) {
     super(props)
 
     this.handleClickOpen = this.handleClickOpen.bind(this)
-    this.handleClickOutlets = this.handleClickOutlets.bind(this)
-    this.handleClickNoiseLevel = this.handleClickNoiseLevel.bind(this)
-    this.handleClickGroups = this.handleClickGroups.bind(this)
     this.handleInputString = this.handleInputString.bind(this)
   }
 
@@ -144,41 +160,11 @@ class Filter extends Component {
   }
 
   /**
-   * Handle when the user clicks to filter by outlets level
-   *
-   * @param num: index in the array of options
-   */
-  handleClickOutlets(num) {
-    const { filterSpacesOutletsDispatch } = this.props
-    filterSpacesOutletsDispatch(num)
-  }
-
-  /**
-   * Handle when the user clicks to filter by noise level
-   *
-   * @param num: index in the array of options
-   */
-  handleClickNoiseLevel(num) {
-    const { filterSpacesNoiseDispatch } = this.props
-    filterSpacesNoiseDispatch(num)
-  }
-
-  /**
-   * Handle when the user clicks to filter by group` size
-   *
-   * @param num: index in the array of options
-   */
-  handleClickGroups(num) {
-    const { filterSpacesGroupsDispatch } = this.props
-    filterSpacesGroupsDispatch(num)
-  }
-
-  /**
    *
    * @param {string} filterString input from user
    */
 
-  handleInputString(filterString) {
+  handleInputString(filterString: string) {
     const { dispatchFilterFoodtrucksString } = this.props
     dispatchFilterFoodtrucksString(filterString)
   }
@@ -186,18 +172,7 @@ class Filter extends Component {
   render() {
     const {
       dispatchClearFoodtrucksFilter,
-      toggleSpacesOutletsDispatch,
-      toggleSpacesNoiseDispatch,
-      toggleSpacesGroupsDispatch,
-
       filterOpenActive,
-      filterOutletsActive,
-      filterNoiseActive,
-      filterGroupsActive,
-
-      filterOutlets,
-      filterNoise,
-      filterGroups,
       filterString,
     } = this.props
 
@@ -214,38 +189,7 @@ class Filter extends Component {
           <FilterBtn
             text="Open"
             onClick={this.handleClickOpen}
-            active={filterOpenActive}
-          />
-
-          <FilterBtn
-            text="Outlets"
-            onClick={toggleSpacesOutletsDispatch}
-            onClickOption={this.handleClickOutlets}
-            options={['No outlets', 'Few outlets', 'Many outlets']}
-            activeOptions={filterOutlets}
-            active={filterOutletsActive}
-          />
-
-          <FilterBtn
-            text="Noise level"
-            onClick={toggleSpacesNoiseDispatch}
-            onClickOption={this.handleClickNoiseLevel}
-            options={['Talkative', 'Quiet', 'Silent']}
-            activeOptions={filterNoise}
-            active={filterNoiseActive}
-          />
-
-          <FilterBtn
-            text="Groups"
-            onClick={toggleSpacesGroupsDispatch}
-            onClickOption={this.handleClickGroups}
-            options={[
-              'No groups',
-              'Good for small groups',
-              'Good for large groups',
-            ]}
-            activeOptions={filterGroups}
-            active={filterGroupsActive}
+            active={Boolean(filterOpenActive)}
           />
 
           <FilterText
@@ -262,45 +206,12 @@ class Filter extends Component {
   }
 }
 
-Filter.defaultProps = {
-  filterOpen: false,
-  filterOutlets: [],
-  filterNoise: [],
-  filterGroups: [],
-  filterString: null,
-}
+const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }) => foodtrucks
 
-Filter.propTypes = {
-  dispatchFilterFoodtrucksOpen: PropTypes.func.isRequired,
-  filterSpacesOutletsDispatch: PropTypes.func.isRequired,
-  filterSpacesNoiseDispatch: PropTypes.func.isRequired,
-  filterSpacesGroupsDispatch: PropTypes.func.isRequired,
-  dispatchClearFoodtrucksFilter: PropTypes.func.isRequired,
-  dispatchFilterFoodtrucksString: PropTypes.func.isRequired,
-  filterOpen: PropTypes.bool,
-
-  dispatchToggleFoodtrucksOpen: PropTypes.func.isRequired,
-  toggleSpacesOutletsDispatch: PropTypes.func.isRequired,
-  toggleSpacesNoiseDispatch: PropTypes.func.isRequired,
-  toggleSpacesGroupsDispatch: PropTypes.func.isRequired,
-
-  filterOpenActive: PropTypes.bool.isRequired,
-  filterOutletsActive: PropTypes.bool.isRequired,
-  filterNoiseActive: PropTypes.bool.isRequired,
-  filterGroupsActive: PropTypes.bool.isRequired,
-
-  filterOutlets: PropTypes.arrayOf(PropTypes.number),
-  filterNoise: PropTypes.arrayOf(PropTypes.number),
-  filterGroups: PropTypes.arrayOf(PropTypes.number),
-  filterString: PropTypes.string,
-}
-
-const mapStateToProps = ({ foodtrucks }) => foodtrucks
-
-const mapDispatchToProps = dispatch => ({
-  dispatchFilterFoodtrucksString: filterString =>
+const mapDispatchToProps = (dispatch: any) => ({
+  dispatchFilterFoodtrucksString: (filterString: string) =>
     dispatch(filterFoodtrucksString(filterString)),
-  dispatchFilterFoodtrucksOpen: filter =>
+  dispatchFilterFoodtrucksOpen: (filter: boolean) =>
     dispatch(filterFoodtrucksOpen(filter)),
   dispatchToggleFoodtrucksOpen: () => dispatch(toggleFoodtrucksOpen()),
   dispatchClearFoodtrucksFilter: () => dispatch(clearFoodtrucksFilter()),

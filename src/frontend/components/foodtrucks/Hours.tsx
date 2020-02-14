@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 import moment from 'moment'
 
@@ -24,7 +23,12 @@ const BodyRow = s.tr`
 const todayIdx =
   moment().format('d') === '0' ? 6 : Number(moment().format('d')) - 1
 
-const Hours = ({ start, end }) => {
+interface IHoursProps {
+  start: string[]
+  end: string[]
+}
+
+const Hours = ({ start, end }: IHoursProps) => {
   const days = [
     'Monday',
     'Tuesday',
@@ -35,7 +39,7 @@ const Hours = ({ start, end }) => {
     'Sunday',
   ]
 
-  const hoursArr = []
+  const hoursArr: string[] = []
 
   if (start && end && start.length && end.length) {
     days.forEach((_, idx) => {
@@ -60,7 +64,7 @@ const Hours = ({ start, end }) => {
       <table className="table is-bordered is-fullwidth">
         <tbody>
           {days.map((str, idx) => (
-            <BodyRow key={str} className={idx === todayIdx && 'selected'}>
+            <BodyRow key={str} className={idx === todayIdx ? 'selected': ''}>
               <td>{str}</td>
               <td> {hoursArr.length ? hoursArr[idx] : 'Not Available'} </td>
             </BodyRow>
@@ -69,11 +73,6 @@ const Hours = ({ start, end }) => {
       </table>
     </div>
   )
-}
-
-Hours.propTypes = {
-  start: PropTypes.arrayOf(PropTypes.number).isRequired,
-  end: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default Hours

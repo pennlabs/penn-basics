@@ -19,7 +19,7 @@ import {
   MOBILE_FILTER_HEIGHT,
 } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
-import Filter from './Filter'
+import Filter from '../shared/filter'
 import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { SNOW } from '../../styles/colors'
@@ -35,7 +35,7 @@ import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
 interface IStudySpacesAppProps {
   getAllSpacesDataDispatch: () => void
   setActiveSpaceDispatch: (id: TSpaceId) => void
-  error?: string
+  error: string
   hoveredSpace?: string
   pending: boolean
   id: string
@@ -45,7 +45,7 @@ interface IStudySpacesAppProps {
 
 interface IStudySpacesAppState {
   isListViewMobile: boolean
-  googleMapError?: string
+  googleMapError: string
 }
 
 class StudySpacesApp extends React.Component<
@@ -54,7 +54,7 @@ class StudySpacesApp extends React.Component<
 > {
   constructor(props: IStudySpacesAppProps) {
     super(props)
-    this.state = { googleMapError: undefined, isListViewMobile: true }
+    this.state = { googleMapError: '', isListViewMobile: true }
     this.toggleView = this.toggleView.bind(this)
   }
 

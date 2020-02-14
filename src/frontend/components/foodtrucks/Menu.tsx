@@ -1,9 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Text } from '../shared'
+import { IFormattedFoodtruck } from '../../../types'
 
-const Menu = ({ foodtruckInfo }) => {
+const Menu = ({ foodtruckInfo }: { foodtruckInfo: IFormattedFoodtruck }) => {
   const { menu, priceTypes } = foodtruckInfo
   return (
     <div>
@@ -30,7 +30,7 @@ const Menu = ({ foodtruckInfo }) => {
                   <td style={{ fontSize: '80%' }}>{item.name}</td>
                   {item.prices.map(price => (
                     <td style={{ fontSize: '80%' }}>
-                      ${parseFloat(Math.round(price * 100) / 100).toFixed(2)}
+                      ${(Math.round(price * 100) / 100).toFixed(2)}
                     </td>
                   ))}
                 </tr>
@@ -44,22 +44,6 @@ const Menu = ({ foodtruckInfo }) => {
       </table>
     </div>
   )
-}
-
-Menu.defaultProps = {
-  foodtruckInfo: [{ menu: [] }],
-}
-
-Menu.propTypes = {
-  foodtruckInfo: PropTypes.shape({
-    location: PropTypes.string,
-    menu: [
-      PropTypes.shape({
-        items: PropTypes.arrayOf(PropTypes.shape()),
-      }),
-    ],
-    priceTypes: PropTypes.shape(),
-  }),
 }
 
 export default Menu

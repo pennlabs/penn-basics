@@ -16,7 +16,7 @@ import {
   clearFilterFoodtrucksRequested,
 } from './action_types'
 import { convertDate, padHours } from '../../utils/helperFunctions'
-import { TFoodTruckId } from 'src/types'
+import { TFoodTruckId, IFoodTruck, IFormattedFoodtruckAction } from 'src/types'
 
 const isOpen = (
   { start, end }: { start: string[]; end: string[] },
@@ -42,8 +42,8 @@ export const getAllFoodtrucksData = () => {
 
     try {
       axios.get('/api/foodtrucks/all').then(res => {
-        const formattedData = {}
-        const { trucks } = res.data
+        const formattedData: Record<string, IFormattedFoodtruckAction> = {}
+        const { trucks }: { trucks: IFoodTruck[] } = res.data
 
         trucks.sort((a, b) => {
           if (a.name < b.name) {
@@ -55,11 +55,9 @@ export const getAllFoodtrucksData = () => {
           return 0
         })
 
-        console.log(trucks)
-
         trucks.forEach(foodtruck => {
-          // console.log(foodtruck)
-          const foodtruckObj = Object.assign({}, foodtruck)
+          const foodtruckObj: IFormattedFoodtruckAction =
+            Object.assign({ open: false, hours: '' }, foodtruck)
 
           // Sunday: 0, Monday: 1
           // but in DB, we store [monday, tuesday, ...]
@@ -96,49 +94,49 @@ export const getAllFoodtrucksData = () => {
     } catch (error) {
       dispatch({
         type: getFoodtrucksDataRejected,
-        error: error.message || 'There was an error pulling studyspaces data',
+        error: error.message || 'There was an error pulling foodtrucks data',
       })
     }
   }
 }
 
-export const getFoodtruckInfo = id => {
-  return (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: getFoodtruckInfoRequested,
-    })
+type TFormattedPriceTypes = Record<string, string[]>
 
-    try {
-      axios.get(`/api/foodtrucks/${id}`).then(res => {
-        const { trucks: truck } = res.data
-        const formattedPriceTypes = {}
-        const { priceTypes = [] } = truck
-        priceTypes.forEach(priceType => {
-          formattedPriceTypes[priceType.name] = priceType.options
-        })
+export const getFoodtruckInfo = (id: string) => (dispatch: Dispatch<Action>) => {
+  dispatch({
+    type: getFoodtruckInfoRequested,
+  })
 
-        dispatch({
-          type: getFoodtruckInfoFulfilled,
-          foodtruckInfo: {
-            ...truck,
-            priceTypes: formattedPriceTypes,
-          },
-        })
+  try {
+    axios.get(`/api/foodtrucks/${id}`).then(res => {
+      const { trucks: truck }: { trucks: IFoodTruck } = res.data
+      const formattedPriceTypes: TFormattedPriceTypes = {}
+      const { priceTypes = [] } = truck
+      priceTypes.forEach(priceType => {
+        formattedPriceTypes[priceType.name] = priceType.options
       })
-    } catch (err) {
+
       dispatch({
-        type: getFoodtruckInfoRejected,
-        error:
-          err.message ||
-          'There was an error pulling relavant information about the foodtruck',
+        type: getFoodtruckInfoFulfilled,
+        foodtruckInfo: {
+          ...truck,
+          priceTypes: formattedPriceTypes,
+        },
       })
-    }
+    })
+  } catch (err) {
+    dispatch({
+      type: getFoodtruckInfoRejected,
+      error:
+        err.message ||
+        'There was an error pulling relavant information about the foodtruck',
+    })
   }
 }
 
 export const updateFoodtruckReview = (
   foodtruckID: TFoodTruckId,
-  pennID: string,
+  pennID: number,
   fullName: string,
   rating: number,
   comment: string,
@@ -159,8 +157,8 @@ export const updateFoodtruckReview = (
           showName,
         })
         .then(res => {
-          const { foodtruck } = res.data
-          const formattedPriceTypes = {}
+          const { foodtruck }: { foodtruck: IFoodTruck } = res.data
+          const formattedPriceTypes: TFormattedPriceTypes = {}
           const { priceTypes = [] } = foodtruck
           priceTypes.forEach(priceType => {
             formattedPriceTypes[priceType.name] = priceType.options

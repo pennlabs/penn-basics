@@ -6,6 +6,8 @@ export interface IUser {
   first_name: string
   last_name: string
   displayName: string
+  loggedIn: boolean
+  fullName: string
 }
 
 export interface ILocation {
@@ -90,7 +92,7 @@ interface IFoodTruckUserReview {
 
 type TFoodTruckId = string
 
-export interface IFoodTruck {
+interface IFoodTruckBase {
   foodtruckID: TFoodTruckId
   name: string
   payments?: string[]
@@ -104,18 +106,31 @@ export interface IFoodTruck {
   tags: string[]
   link?: string
   languageTypes?: [string]
+  
+  overallRating: number
+  image: string
+  description?: string
+  menu: IFoodTruckMenu[]
+  reviews: IFoodTruckReview[]
+  timeUpdated?: string
+}
+
+export type IFoodTruck = IFoodTruckBase & {
   priceTypes: [
     {
       name: string
       options: string[]
     }
   ]
-  overallRating?: number
-  image?: string
-  description?: string
-  menu: IMenu[]
-  reviews: IFoodTruckReview[]
-  timeUpdated?: string
+}
+
+export type IFormattedFoodtruckAction = IFoodTruckBase & {
+  open: boolean
+  hours: string
+}
+
+export type IFormattedFoodtruck = IFormattedFoodtruckAction & {
+  priceTypes: Record<string, string[]>
 }
 
 export type IFoodTruckDocument = IFoodTruck & mongoose.Document
@@ -123,3 +138,17 @@ export type IFoodTruckDocument = IFoodTruck & mongoose.Document
 export type IFoodTruckWithOpen = IFoodTruck & { open: boolean }
 
 export type TDispatchFunction = (dispatch: Dispatch<Action>) => { type: string }
+
+export interface IFoodTrucksReducerState {
+  pending: boolean
+  infoPending: boolean
+  error: string
+  infoError?: string
+  foodtrucksData?: Record<TFoodTruckId, IFoodTruckWithOpen> // NOTE excluding menu, priceTypes, and reviews
+  filteredFoodtrucksData: Record<TFoodTruckId, IFormattedFoodtruck>
+  foodtruckInfo: IFormattedFoodtruck
+  hoveredFoodtruck: string // id of the foodtruck hovered on
+  filterOpen: boolean
+  filterString: string
+  filterOpenActive: boolean
+}

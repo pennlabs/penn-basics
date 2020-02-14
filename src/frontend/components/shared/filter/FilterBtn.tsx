@@ -7,7 +7,7 @@ import {
   Option,
   Circle,
   OptionText,
-} from '../../shared/Option'
+} from '../Option'
 import { noop } from '../../../../utils/helperFunctions'
 
 const ESCAPE_KEY_CODE = 27

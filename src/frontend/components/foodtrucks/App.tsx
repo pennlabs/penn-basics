@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import Router from 'next/router'
 
 import MobileToggleView from '../studyspaces/MobileToggleView'
@@ -25,170 +24,127 @@ import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { FOODTRUCK_ROUTE, FOODTRUCK_QUERY_ROUTE } from '../../constants/routes'
 import { SNOW } from '../../styles/colors'
+import { IFoodTrucksReducerState, IFormattedFoodtruck } from '../../../types'
 
 // TODO ghost loaders
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { googleMapError: null, isListViewMobile: true }
-    this.toggleView = this.toggleView.bind(this)
+interface IAppProps {
+  dispatchGetAllFoodtrucks: () => void
+  filteredFoodtrucksData: Record<string, IFormattedFoodtruck>
+  pending: boolean
+  error: string
+  hoveredFoodtruck: string
+  id: string
+}
+
+const App = ({
+  dispatchGetAllFoodtrucks,
+  filteredFoodtrucksData,
+  error,
+  pending,
+  hoveredFoodtruck,
+  id,
+}: IAppProps): React.ReactElement => {
+  const [googleMapError] = useState('')
+  const [isListViewMobile, setListView] = useState(true)
+
+  const toggleView = () => {
+    setListView(!isListViewMobile)
   }
 
-  componentDidMount() {
-    const { dispatchGetAllFoodtrucks } = this.props
+  useEffect(() => {
     dispatchGetAllFoodtrucks()
+  }, [])
+
+  if (pending || !filteredFoodtrucksData) {
+    return <React.Fragment />
   }
 
-  componentDidUpdate(prevProps) {
-    /**
-     * Handle when the user re-navigates to this page, in which case the component updates
-     * and the props are wiped BUT the component does not re-mounts
-     *
-     * We solve this by checking if the new props lack necessary data, but the old props
-     * did have that data. If this is the case, we request the data again.
-     */
-    const {
-      foodtrucksData: currentFoodtrucksData,
-      dispatchGetAllFoodtrucks,
-    } = this.props
-    const { foodtrucksData: prevFoodtrucksData } = prevProps
-    if (!currentFoodtrucksData && prevFoodtrucksData) {
-      dispatchGetAllFoodtrucks()
-    }
-  }
+  return (
+    <>
+      <MobileToggleView isListView={isListViewMobile} toggle={toggleView}/>
 
-  toggleView() {
-    const { isListViewMobile } = this.state
-    this.setState({ isListViewMobile: !isListViewMobile })
-  }
+      <Filter />
 
-  render() {
-    const {
-      filteredFoodtrucksData,
-      error,
-      pending,
-      hoveredFoodtruck,
-      id,
-    } = this.props
-
-    const parsedFoodtruckId = Number.isNaN(id) ? null : id
-
-    const { googleMapError, isListViewMobile } = this.state
-
-    if (pending || !filteredFoodtrucksData) {
-      return null
-    }
-
-    return (
-      <>
-        <MobileToggleView
-          isListView={isListViewMobile}
-          toggle={this.toggleView}
-        />
-
-        <Filter />
-
-        <Row
-          maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-          style={{ backgroup: SNOW }}
+      <Row
+        maxHeight={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+        style={{ background: SNOW }}
+      >
+        <Scrollbar
+          padding="0 0 .5rem 0"
+          sm={12}
+          md={6}
+          lg={4}
+          height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+          hideOnMobile={!isListViewMobile}
         >
-          <Scrollbar
-            padding="0 0 .5rem 0"
-            sm={12}
-            md={6}
-            lg={4}
-            height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-            hideOnMobile={!isListViewMobile}
-          >
-            <ErrorMessage message={error} />
+          <ErrorMessage message={error} />
 
-            {!Object.keys(filteredFoodtrucksData).length && (
-              <NoDataScroll
-                image="/img/empty-foodtruck.svg"
-                imageAlt="Empty Foodtrucks"
-                text="No foodtruck matches the criteria"
-              />
-            )}
+          {!Object.keys(filteredFoodtrucksData).length && (
+            <NoDataScroll
+              image="/img/empty-foodtruck.svg"
+              imageAlt="Empty Foodtrucks"
+              text="No foodtruck matches the criteria"
+            />
+          )}
 
-            {Object.keys(filteredFoodtrucksData).map(foodtruckId => {
-              const foodtruck = filteredFoodtrucksData[foodtruckId]
-              return (
-                <div key={foodtruckId}>
-                  <FoodtruckCard foodtruckId={foodtruckId} {...foodtruck} />
-                  <Line />
-                </div>
-              )
-            })}
+          {Object.keys(filteredFoodtrucksData).map(foodtruckId => {
+            const foodtruck = filteredFoodtrucksData[foodtruckId]
+            const { name, open, hours, overallRating, image } = foodtruck
+            return (
+              <div key={foodtruckId}>
+                <FoodtruckCard
+                  foodtruckId={foodtruckId}
+                  name={name}
+                  open={open}
+                  hours={hours}
+                  overallRating={overallRating}
+                  image={image}
+                />
+                <Line />
+              </div>
+            )
+          })}
 
-            <PennLabsCredit />
-          </Scrollbar>
-          <Col sm={12} md={6} lg={8} hideOnMobile={isListViewMobile}>
-            <ErrorMessage message={googleMapError} />
-            {!googleMapError && (
-              <FoodtruckMap
-                mapId="map"
-                height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
-                mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
-                markers={filteredFoodtrucksData}
-                activeMarker={hoveredFoodtruck}
-                handleClickMarker={truckId =>
-                  Router.push(
-                    FOODTRUCK_QUERY_ROUTE(truckId),
-                    FOODTRUCK_ROUTE(truckId)
-                  )
-                }
-              />
-            )}
-          </Col>
-        </Row>
+          <PennLabsCredit />
+        </Scrollbar>
+        <Col sm={12} md={6} lg={8} hideOnMobile={isListViewMobile}>
+          <ErrorMessage message={googleMapError} />
+          {!googleMapError && (
+            <FoodtruckMap
+              mapId="map"
+              height={`calc(100vh - ${NAV_HEIGHT} - ${FILTER_HEIGHT})`}
+              mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
+              markers={filteredFoodtrucksData}
+              activeMarker={hoveredFoodtruck}
+              handleClickMarker={truckId =>
+                Router.push(
+                  FOODTRUCK_QUERY_ROUTE(`${truckId}`),
+                  FOODTRUCK_ROUTE(`${truckId}`)
+                )
+              }
+            />
+          )}
+        </Col>
+      </Row>
 
-        <FoodtruckModal foodtruckId={parsedFoodtruckId} />
-      </>
-    )
+      <FoodtruckModal foodtruckId={id} />
+    </>
+  )
+}
+
+const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState } ) => {
+  const { filteredFoodtrucksData, pending, error, hoveredFoodtruck } = foodtrucks
+  
+  return {
+    filteredFoodtrucksData,
+    pending,
+    error,
+    hoveredFoodtruck
   }
 }
 
-const FoodtrucksDataPropType = PropTypes.objectOf(
-  PropTypes.shape({
-    address: PropTypes.string,
-    description: PropTypes.string,
-    end: PropTypes.arrayOf(PropTypes.number),
-    groups: PropTypes.number,
-    hours: PropTypes.string,
-    image: PropTypes.string,
-    name: PropTypes.string,
-    open: PropTypes.bool,
-    outlets: PropTypes.number,
-    quiet: PropTypes.number,
-    start: PropTypes.arrayOf(PropTypes.number),
-    tags: PropTypes.arrayOf(PropTypes.string),
-    _id: PropTypes.string,
-  })
-)
-
-App.defaultProps = {
-  error: null,
-  hoveredFoodtruck: null,
-  pending: false,
-  filteredFoodtrucksData: null,
-  foodtrucksData: null,
-  id: '',
-}
-
-App.propTypes = {
-  id: PropTypes.string,
-  dispatchGetAllFoodtrucks: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  hoveredFoodtruck: PropTypes.string,
-  pending: PropTypes.bool,
-  filteredFoodtrucksData: FoodtrucksDataPropType,
-  foodtrucksData: FoodtrucksDataPropType,
-}
-
-const mapStateToProps = ({ foodtrucks }) => foodtrucks
-
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetAllFoodtrucks: () => dispatch(getAllFoodtrucksData()),
 })
 

@@ -33,10 +33,10 @@ const MapWrapper = styled.div<IMapWrapper>`
   }
 `
 
-type TMarkerId = number | string
+type TMarkerId = string | number
 
 interface IFoodTruckMapProps {
-  location: {
+  location?: {
     lat: number
     lng: number
   }
@@ -45,7 +45,7 @@ interface IFoodTruckMapProps {
   mobileHeight?: string
   mapId: string
   gestureHandling?: 'auto' | 'none' | 'cooperative' | 'greedy' | undefined
-  markers: Record<TMarkerId, any>
+  markers?: Record<TMarkerId, any>
   showMarker?: boolean
   activeMarker?: TMarkerId
 }
@@ -152,7 +152,7 @@ export class FoodtruckMap extends Component<
     marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
 
-  createMarker(key: TMarkerId, { location }: { location: ILocation }) {
+  createMarker(key: TMarkerId, { location }: { location?: ILocation }) {
     const { handleClickMarker } = this.props
 
     if (!location) {

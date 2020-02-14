@@ -11,22 +11,8 @@ import {
   clearFilterFoodtrucksRequested,
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
-import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen } from 'src/types'
+import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen, IFoodTrucksReducerState, IFormattedFoodtruck } from 'src/types'
 import { Action } from 'redux'
-
-interface IFoodTrucksReducerState {
-  pending: boolean
-  infoPending: boolean
-  error?: string
-  infoError?: string
-  foodtrucksData?: Record<TFoodTruckId, IFoodTruckWithOpen> // NOTE excluding menu, priceTypes, and reviews
-  filteredFoodtrucksData?: Record<TFoodTruckId, IFoodTruckWithOpen>
-  foodtruckInfo?: null
-  hoveredFoodtruck?: IFoodTruck // id of the foodtruck hovered on
-  filterOpen: boolean
-  filterString: string
-  filterOpenActive: boolean
-}
 
 interface ILocation {
   lat: number
@@ -51,15 +37,39 @@ type IFoodTrucksAction = {
   foodtruckInfo?: IFoodTruckInfo
 } & Action
 
+const defaultFoodtruckInfo: IFormattedFoodtruck = {
+  foodtruckID: '',
+  name: '',
+  payments: [],
+  start: [],
+  end: [],
+  location: {
+    plusCode: '',
+    lat: -1,
+    lng: -1,
+  },
+  tags: [],
+  link: '',
+  priceTypes: {},
+  overallRating: 0,
+  image: '',
+  description: '',
+  menu: [],
+  reviews: [],
+  timeUpdated: '',
+  open: false,
+  hours: ''
+}
+
 const defaultState: IFoodTrucksReducerState = {
   pending: false,
   infoPending: false,
-  error: undefined,
+  error: '',
   infoError: undefined,
   foodtrucksData: undefined, // excluding menu, priceTypes, and reviews
-  filteredFoodtrucksData: undefined,
-  foodtruckInfo: undefined,
-  hoveredFoodtruck: undefined, // id of the foodtruck hovered on
+  filteredFoodtrucksData: {},
+  foodtruckInfo: defaultFoodtruckInfo,
+  hoveredFoodtruck: '', // id of the foodtruck hovered on
   filterOpen: false,
   filterString: '',
   filterOpenActive: false,

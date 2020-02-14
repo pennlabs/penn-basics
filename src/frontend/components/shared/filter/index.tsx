@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 // TODO decouple index of option and value in database
 
-import FilterBtn from './FilterBtn'
+// import styles
 import {
   WHITE,
   ALLBIRDS_GRAY,
@@ -12,6 +12,16 @@ import {
   DARK_GRAY,
   WHITE_ALPHA,
 } from '../../../styles/colors'
+import {
+  maxWidth,
+  PHONE,
+  NAV_HEIGHT,
+  MOBILE_FILTER_HEIGHT,
+  Z_INDEX,
+  FILTER_HEIGHT,
+} from '../../../styles/sizes'
+
+// import Redux actions
 import {
   filterSpacesOpen,
   filterSpacesOutlets,
@@ -24,23 +34,20 @@ import {
   toggleSpacesNoise,
   toggleSpacesGroups,
 } from '../../../actions/spaces_actions'
+
+// import Components
+import FilterBtn from './FilterBtn'
 import ToggleNeighborhood from './ToggleNeighborhood'
-import {
-  maxWidth,
-  PHONE,
-  NAV_HEIGHT,
-  MOBILE_FILTER_HEIGHT,
-  Z_INDEX,
-  FILTER_HEIGHT,
-} from '../../../styles/sizes'
 import {
   ModalContainer,
   Subtitle,
   withHideAboveTablet,
   HiddenOnTablet,
   Search,
-} from '../../shared'
-import Modal from '../../shared/Modal'
+} from '..'
+import Modal from '../Modal'
+
+// import types
 import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 interface IFilterWrapperProps {

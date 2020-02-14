@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import { Switch } from 'antd'
 import 'antd/es/switch/style/index.css'
@@ -34,7 +33,12 @@ const Buttons = s.div`
 
 const array = [1, 2, 3, 4, 5]
 
-const Rating = ({ rating, setRating }) => (
+interface IRatingProps {
+  rating: number
+  setRating: (index: number) => void
+}
+
+const Rating = ({ rating, setRating }: IRatingProps) => (
   <div>
     {array.map(index => (
       <span // eslint-disable-line
@@ -44,18 +48,22 @@ const Rating = ({ rating, setRating }) => (
         }}
       >
         <StarIcon
-          color="#ffc520"
-          fill={rating && index <= rating ? '#ffc520' : 'none'}
-          viewBox="0 0 25 25"
+          style={{ color: '#ffc520', fill: rating && index <= rating ? '#ffc520' : 'none', transform: 'scale(0.8)' }}
         />
       </span>
     ))}
   </div>
 )
 
-const Form = ({ show, hideFunction, updateReview }) => {
-  const [rating, setRating] = useState(null)
-  const [comment, setComment] = useState(null)
+interface IFormProps {
+  show: boolean
+  hideFunction: () => void
+  updateReview: (rating: number, comment: string, showName: boolean) => void
+}
+
+const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
   const [showName, setShowName] = useState(true)
   if (!show) return null
 
@@ -86,7 +94,7 @@ const Form = ({ show, hideFunction, updateReview }) => {
             place="right"
             type="dark"
             effect="solid"
-            multiline="true"
+            multiline={true}
           >
             <div style={{ width: '200px' }}>
               Please note that every submitted review will be associated with
@@ -100,13 +108,13 @@ const Form = ({ show, hideFunction, updateReview }) => {
           className="button is-light"
           onClick={() => {
             hideFunction()
-            setRating(null)
-            setComment(null)
+            setRating(0)
+            setComment('')
           }}
         >
           Cancel
         </span>
-        <span // eslint-disable-line
+        <button // eslint-disable-line
           className="button is-success is-light"
           style={{ marginLeft: '0.5rem' }}
           disabled={!rating || !comment}
@@ -116,29 +124,10 @@ const Form = ({ show, hideFunction, updateReview }) => {
           }}
         >
           Submit
-        </span>
+        </button>
       </Buttons>
     </div>
   )
-}
-
-Form.defaultProps = {
-  show: false,
-}
-
-Form.propTypes = {
-  show: PropTypes.bool,
-  hideFunction: PropTypes.func.isRequired,
-  updateReview: PropTypes.func.isRequired,
-}
-
-Rating.defaultProps = {
-  rating: null,
-}
-
-Rating.propTypes = {
-  rating: Number,
-  setRating: PropTypes.func.isRequired,
 }
 
 export default Form

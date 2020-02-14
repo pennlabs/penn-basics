@@ -4,7 +4,7 @@ import s from 'styled-components'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 interface IErrorMessageProps {
-  message?: string
+  message: string
 }
 
 const Wrapper = s.div`
