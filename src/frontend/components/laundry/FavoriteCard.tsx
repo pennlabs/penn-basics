@@ -1,6 +1,5 @@
 import React from 'react'
 import uuid from 'uuid'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 import { Card, Text, Row, Line, Col, StyledLink } from '../shared'
@@ -8,13 +7,14 @@ import {
   LAUNDRY_HALL_ROUTE,
   LAUNDRY_HALL_QUERY_ROUTE,
 } from '../../constants/routes'
+import { IFavorite } from '../../../types'
 
-const FavoriteCard = ({ favorite }) => {
+const FavoriteCard = ({ favorite }: { favorite: IFavorite }) => {
   const { hallId, locationName } = favorite
   return (
     <Link
-      href={LAUNDRY_HALL_QUERY_ROUTE(hallId)}
-      as={LAUNDRY_HALL_ROUTE(hallId)}
+      href={LAUNDRY_HALL_QUERY_ROUTE(`${hallId}`)}
+      as={LAUNDRY_HALL_ROUTE(`${hallId}`)}
       key={uuid()}
     >
       <StyledLink>
@@ -31,17 +31,6 @@ const FavoriteCard = ({ favorite }) => {
       </StyledLink>
     </Link>
   )
-}
-
-FavoriteCard.defaultProps = {
-  favorite: null,
-}
-
-FavoriteCard.propTypes = {
-  favorite: PropTypes.shape({
-    hallId: PropTypes.number,
-    locationName: PropTypes.string,
-  }),
 }
 
 export default FavoriteCard

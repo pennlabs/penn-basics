@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import BellIcon from '../../../../public/img/bell.svg'
@@ -26,6 +25,7 @@ import {
 } from '../../actions/laundry_actions'
 import { isValidNumericId } from '../../../utils/helperFunctions'
 import { maxWidth, PHONE } from '../../styles/sizes'
+import { IFavorite, ILaundryHallInfo, ILaundryReducerState, IReminder } from '../../../types'
 
 const MARGIN = '0.5rem'
 
@@ -47,7 +47,34 @@ const Buttons = s.div`
   }
 `
 
-class LaundryVenue extends Component {
+interface IAddFavoriteInput {
+  hallURLId: number
+  location: string
+  hallName: string
+}
+
+interface IRemoveFavoriteInput {
+  hallURLId: number
+}
+
+interface ILaundryVenueProps {
+  hallURLId: number
+  hallIntervalID: number
+  dispatchGetLaundryHall: (hallId: number, intervalID: number) => void
+  dispatchGetReminders: () => void
+  reminderIntervalID: number
+  error: string
+  browserError: string
+  laundryHallInfo: ILaundryHallInfo
+  favorites: IFavorite[]
+  reminders: IReminder[]
+  dispatchAddFavorite: ({ hallURLId, location, hallName }: IAddFavoriteInput) => void
+  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) => void
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+  dispatchRemoveReminder: () => void
+}
+
+class LaundryVenue extends Component<ILaundryVenueProps> {
   componentDidMount() {
     const {
       hallURLId,
@@ -64,7 +91,7 @@ class LaundryVenue extends Component {
     dispatchGetReminders()
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ILaundryVenueProps) {
     const { dispatchGetLaundryHall, hallURLId, hallIntervalID } = this.props
 
     if (!isValidNumericId(hallURLId)) return
@@ -202,44 +229,7 @@ class LaundryVenue extends Component {
   }
 }
 
-LaundryVenue.defaultProps = {
-  error: null,
-  browserError: null,
-  laundryHallInfo: null,
-  hallURLId: null,
-  reminders: [],
-  favorites: [],
-  hallIntervalID: null,
-  reminderIntervalID: null,
-}
-
-LaundryVenue.propTypes = {
-  error: PropTypes.string,
-  browserError: PropTypes.string,
-  dispatchAddReminder: PropTypes.func.isRequired,
-  dispatchRemoveReminder: PropTypes.func.isRequired,
-  reminders: PropTypes.arrayOf(PropTypes.object),
-  dispatchGetReminders: PropTypes.func.isRequired,
-  hallIntervalID: PropTypes.number,
-  reminderIntervalID: PropTypes.number,
-  laundryHallInfo: PropTypes.shape({
-    hall_name: PropTypes.string,
-    location: PropTypes.string,
-    machines: PropTypes.object,
-  }),
-  hallURLId: PropTypes.number,
-  dispatchAddFavorite: PropTypes.func.isRequired,
-  dispatchRemoveFavorite: PropTypes.func.isRequired,
-  dispatchGetLaundryHall: PropTypes.func.isRequired,
-  favorites: PropTypes.arrayOf(
-    PropTypes.shape({
-      locationName: PropTypes.string,
-      hallId: PropTypes.number,
-    })
-  ),
-}
-
-const mapStateToProps = ({ laundry }) => {
+const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
   const {
     error,
     browserError,
@@ -265,14 +255,14 @@ const mapStateToProps = ({ laundry }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  dispatchAddFavorite: ({ hallURLId, location, hallName }) =>
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+  dispatchAddFavorite: ({ hallURLId, location, hallName }: IAddFavoriteInput) =>
     dispatch(addFavorite(hallURLId, location, hallName)),
-  dispatchRemoveFavorite: ({ hallURLId }) =>
+  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) =>
     dispatch(removeFavorite(hallURLId)),
-  dispatchGetLaundryHall: (hallId, intervalID) =>
+  dispatchGetLaundryHall: (hallId: number, intervalID: number) =>
     dispatch(getLaundryHall(hallId, intervalID)),
-  dispatchAddReminder: (machineID, hallID, machineType, timeRemaining) =>
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>
     dispatch(addReminder(machineID, hallID, machineType, timeRemaining)),
   dispatchRemoveReminder: () => dispatch(removeReminder()),
   dispatchGetReminders: () => dispatch(getReminders()),

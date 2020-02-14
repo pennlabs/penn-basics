@@ -1,4 +1,4 @@
-import React, { useEffect, Dispatch } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import {
@@ -10,25 +10,18 @@ import { Card, Row, Col, Scrollbar, NavHeader, Line } from '../shared'
 import Loading from '../shared/Loading'
 import { BABY_BLUE } from '../../styles/colors'
 import PennLabsCredit from '../shared/PennLabsCredit'
-import Favorites from '../shared/favorites/Favorites'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
-import { ILaundryHallProps } from '../../types'
-import { Action } from 'redux'
-
-interface ILaundryHallInfo {
-  locationName: string
-  hallId: number
-}
+import { ILaundryReducerState, IFavorite, ILaundryHall } from '../../../types'
 
 interface IAppProps {
   dispatchGetLaundryHalls: () => void
   dispatchGetFavorites: () => void
   dispatchCheckBrowser: () => void
-  laundryHalls: ILaundryHallProps
+  laundryHalls: ILaundryHall[]
   id: undefined | string
-  favorites: ILaundryHallInfo[]
+  favorites: IFavorite[]
 }
 
 const App = ({
@@ -45,7 +38,7 @@ const App = ({
     dispatchCheckBrowser()
   }, [])
 
-  const parsedHallId = Number.isNaN(Number(id)) ? null : Number(id)
+  const parsedHallId = Number.isNaN(Number(id)) ? -1 : Number(id)
   const isActiveHall =
     parsedHallId !== null &&
     parsedHallId !== undefined &&
@@ -61,12 +54,20 @@ const App = ({
         fullHeight
         hideOnMobile={isActiveHall}
       >
-        <Favorites
-          favorites={favorites}
-          FavoriteCard={FavoriteCard}
-          inputName="favorite"
-          keyAttributeName="hallId"
-        />
+
+        {favorites && favorites.length && (
+          <>
+            <Card background={BABY_BLUE} padding="0">
+              <NavHeader className="title is-5">Favorites</NavHeader>
+              <Line />
+            </Card>
+
+            {favorites.map(favorite => (
+              <FavoriteCard favorite={favorite} />
+              )
+            )}
+          </>
+        )}
 
         <Card background={BABY_BLUE} padding="0">
           <NavHeader className="title is-5">Laundry Halls</NavHeader>
@@ -101,12 +102,12 @@ const App = ({
   )
 }
 
-const mapStateToProps = ({ laundry }) => {
+const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState } ) => {
   const { laundryHalls, favorites } = laundry
   return { laundryHalls, favorites }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
   dispatchGetFavorites: () => dispatch(getFavorites()),
   dispatchCheckBrowser: () => dispatch(checkBrowserCompatability()),

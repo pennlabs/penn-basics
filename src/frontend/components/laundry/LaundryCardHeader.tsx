@@ -1,12 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import { Card, Row, Col, Text } from '../shared'
 import { DARK_GRAY, LIGHT_GRAY } from '../../styles/colors'
 
 interface IChevronProps {
-  expanded: boolean
+  expanded?: boolean
 }
 
 const Chevron = s.span<IChevronProps>`
@@ -30,7 +29,14 @@ const Chevron = s.span<IChevronProps>`
     `}
 `
 
-const LaundryCardHeader = ({ title, hasDropdown, expanded, selected }) => (
+interface ILaundryCardHeaderProps {
+  title: string
+  hasDropdown?: boolean
+  expanded?: boolean
+  selected?: boolean
+}
+
+const LaundryCardHeader = ({ title, hasDropdown, expanded, selected }: ILaundryCardHeaderProps) => (
   <Card padding="0.5rem 1rem" hoverable selected={selected}>
     <Row>
       <Col padding="0" style={{ overflowX: 'visible' }}>
@@ -50,18 +56,5 @@ const LaundryCardHeader = ({ title, hasDropdown, expanded, selected }) => (
     </Row>
   </Card>
 )
-
-LaundryCardHeader.propTypes = {
-  title: PropTypes.string.isRequired,
-  hasDropdown: PropTypes.bool,
-  expanded: PropTypes.bool,
-  selected: PropTypes.bool,
-}
-
-LaundryCardHeader.defaultProps = {
-  hasDropdown: false,
-  expanded: false,
-  selected: false,
-}
 
 export default LaundryCardHeader

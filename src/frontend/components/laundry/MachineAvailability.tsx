@@ -16,6 +16,8 @@ import StatusPill from './StatusPill'
 import { FlexRow, LaundryOverview } from '../shared'
 import BellSVG from '../../../../public/img/bell.svg'
 
+import { IMachineInfo, ILaundryHallDetail, IReminder } from '../../../types'
+
 const Table = s.table`
   margin-bottom: 0;
 `
@@ -42,12 +44,12 @@ const BellIcon = s.span`
   }
 `
 const handleReminder = (
-  machineID,
-  hallID,
-  dispatchAddReminder,
-  reminded,
-  machineType,
-  timeRemaining
+  machineID: number,
+  hallID: number,
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void,
+  reminded: boolean,
+  machineType: string,
+  timeRemaining: number,
 ) => {
   if (!reminded) {
     dispatchAddReminder(machineID, hallID, machineType, timeRemaining)
@@ -60,7 +62,7 @@ interface IBellProps {
   reminded: boolean
   id: number
   laundryHallId: number
-  dispatchAddReminder: () => void
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
   machineType: string
 }
 
@@ -113,12 +115,12 @@ const Bell = ({
 
 interface IMachineAvailabilityProps {
   displayDetails: boolean
-  machineData
+  machineData: IMachineInfo
   machineType: string
-  allMachines
-  laundryHallId
-  reminders
-  dispatchAddReminder
+  allMachines: ILaundryHallDetail[]
+  laundryHallId: number
+  reminders: IReminder[]
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
   enableReminder: boolean
 }
 
@@ -154,8 +156,8 @@ const MachineAvailability = ({
             sm={4}
             margin="0.5rem"
             key={title}
-            color={color}
-            background={background}
+            color={`${color}`}
+            background={`${background}`}
           >
             <h1>{number}</h1>
             <p>{title}</p>

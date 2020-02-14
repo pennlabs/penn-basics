@@ -21,20 +21,15 @@ import {
   updateReminderIntervalID,
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
+import { IReminder, ILaundryHallGeneralInfo, IFavorite } from '../../types'
 
 const BASE = 'https://api.pennlabs.org'
 
-interface IHallInfo {
-  hall_name: string
-  id: number
-  location: string
-}
-
 interface IidData {
-  halls: IHallInfo[]
+  halls: ILaundryHallGeneralInfo[]
 } 
 
-const processLaundryHallsData = (idData : IidData) => {
+const processLaundryHallsData = (idData: IidData) => {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
   return Object.keys(groupByLocation).map(locationName => {
     //eslint-disable-line
@@ -122,11 +117,6 @@ export function getLaundryHall(laundryHallId: number, prevIntervalID: number) {
   }
 }
 
-interface ILaundryHallInfo {
-  locationName: string
-  hallId: number
-}
-
 // TODO document....
 export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   dispatch({ type: getLaundryHallInfoRequested })
@@ -136,7 +126,7 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
 
   if (!laundryHallsString) return
 
-  let laundryHalls: ILaundryHallInfo[] = JSON.parse(laundryHallsString)
+  let laundryHalls: IFavorite[] = JSON.parse(laundryHallsString)
   laundryHalls = laundryHalls.splice(0, 3)
 
   // Get the first 3 halls
@@ -168,7 +158,7 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
 
       dispatch({
         type: getFavoritesHome,
-        favorites: dataSet,
+        favoritesHome: dataSet,
       })
     })
   } catch (error) {
@@ -182,7 +172,7 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
 export const getFavorites = () => {
   return (dispatch: Dispatch<Action>) => {
     let favorites = localStorage.getItem('laundry_favorites')
-    let favoritesArray: ILaundryHallInfo[] = []
+    let favoritesArray: IFavorite[] = []
     if (favorites) {
       // Read in from localStore, map from strings to numbers
       favoritesArray = JSON.parse(favorites)
@@ -205,8 +195,8 @@ export const addFavorite = (hallURLId: number, location: string, hallName: strin
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
 
-    let favoritesArray: ILaundryHallInfo[] = []
-    let favoriteLocation: ILaundryHallInfo = { locationName: '', hallId: -1 }
+    let favoritesArray: IFavorite[] = []
+    let favoriteLocation: IFavorite = { locationName: '', hallId: -1 }
 
     // update fields for favoritesArray
     favoriteLocation.locationName = `${location}: ${hallName}`
@@ -240,7 +230,7 @@ export const removeFavorite = (hallURLId: number) => {
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
-    let favoritesArray: ILaundryHallInfo[] = []
+    let favoritesArray: IFavorite[] = []
     if (favoritesString) {
       favoritesArray = JSON.parse(favoritesString)
     }
@@ -327,12 +317,6 @@ const urlBase64ToUint8Array = (base64String: string) => {
     outputArray[i] = rawData.charCodeAt(i)
   }
   return outputArray
-}
-
-interface IReminder {
-  machineID: number
-  hallID: number
-  reminderID: string
 }
 
 const getRemindersInterval = (dispatch: Dispatch<Action>) => {
@@ -454,7 +438,12 @@ export const getReminders = () => {
   }
 }
 
-export const addReminder = (machineID: number, hallID: number, machineType: string, timeRemaining: number) => {
+export const addReminder = (
+  machineID: number,
+  hallID: number,
+  machineType: string,
+  timeRemaining: number
+) => {
   return (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready.then(async registration => {

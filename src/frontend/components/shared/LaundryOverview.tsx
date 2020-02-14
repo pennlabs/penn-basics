@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 import { Col, ICol } from './Flex'
 
@@ -45,9 +44,3 @@ export const LaundryOverview = ({
     </Wrapper>
   </Col>
 )
-
-LaundryOverview.propTypes = {
-  color: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-}

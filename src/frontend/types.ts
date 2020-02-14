@@ -49,15 +49,3 @@ export interface IVenueData {
 
 export type TVenueData = Record<string, IVenueData>
 
-// Laundry interfaces
-interface ILaundryHallInfo {
-  hall_name: string
-  id: number
-  location: string
-}
-
-export interface ILaundryHallProps {
-  location: string
-  halls: ILaundryHallInfo[]
-}
-

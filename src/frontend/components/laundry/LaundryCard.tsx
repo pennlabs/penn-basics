@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 
 import { Card, Text, Row, Col, Line, StyledLink } from '../shared'
@@ -8,8 +7,14 @@ import {
   LAUNDRY_HALL_ROUTE,
   LAUNDRY_HALL_QUERY_ROUTE,
 } from '../../constants/routes'
+import { ILaundryHall } from '../../../types'
 
-const LaundryCard = ({ locationObject, selectedHallId }) => {
+interface ILaundryCardProps {
+  locationObject: ILaundryHall
+  selectedHallId: number
+}
+
+const LaundryCard = ({ locationObject, selectedHallId }: ILaundryCardProps) => {
   const [expanded, setExpanded] = useState(false)
 
   const { halls, location } = locationObject
@@ -19,8 +24,8 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
     const { id } = halls[0]
     return (
       <Link
-        href={LAUNDRY_HALL_QUERY_ROUTE(id)}
-        as={LAUNDRY_HALL_ROUTE(id)}
+        href={LAUNDRY_HALL_QUERY_ROUTE(`${id}`)}
+        as={LAUNDRY_HALL_ROUTE(`${id}`)}
         key={`laundry-hall-${location}-${id}`}
       >
         <StyledLink>
@@ -45,8 +50,8 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
       {expanded &&
         halls.map(({ hall_name: hallName, id }) => (
           <Link
-            href={LAUNDRY_HALL_QUERY_ROUTE(id)}
-            as={LAUNDRY_HALL_ROUTE(id)}
+            href={LAUNDRY_HALL_QUERY_ROUTE(`${id}`)}
+            as={LAUNDRY_HALL_ROUTE(`${id}`)}
             key={`laundry-hall-link-${id}`}
           >
             <Card
@@ -66,25 +71,6 @@ const LaundryCard = ({ locationObject, selectedHallId }) => {
       <Line />
     </>
   )
-}
-
-LaundryCard.defaultProps = {
-  locationObject: {},
-  selectedHallId: null,
-}
-
-LaundryCard.propTypes = {
-  selectedHallId: PropTypes.number,
-  locationObject: PropTypes.shape({
-    location: PropTypes.string,
-    halls: PropTypes.arrayOf(
-      PropTypes.shape({
-        hall_name: PropTypes.string,
-        id: PropTypes.number,
-        location: PropTypes.string,
-      })
-    ),
-  }),
 }
 
 export default LaundryCard

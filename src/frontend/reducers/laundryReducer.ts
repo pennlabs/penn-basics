@@ -16,64 +16,56 @@ import {
   updateReminderIntervalID,
 } from '../actions/action_types'
 
-import { ILaundryHallProps } from '../types'
+import {
+  ILaundryHall,
+  ILaundryHallInfo,
+  IFavorite,
+  ILaundryReducerState,
+  IFavoriteHome,
+  IReminder
+} from '../../types'
 
 const defaultState: ILaundryReducerState = {
   pending: true,
-  error: null,
-  browserError: null,
-  laundryHalls: null,
-  laundryHallInfo: null,
+  error: '',
+  browserError: '',
+  laundryHalls: [],
+  laundryHallInfo: {
+    hall_name: '',
+    location: '',
+    machines: {
+      details: [],
+      dryers: {
+        offline: -1,
+        open: -1,
+        out_of_order: -1,
+        running: -1,
+        time_remaining: []
+      },
+      washers: {
+        offline: -1,
+        open: -1,
+        out_of_order: -1,
+        running: -1,
+        time_remaining: []
+      }
+    }
+  },
   favorites: [],
   favoritesHome: [],
   reminders: [],
-  hallIntervalID: null,
-  reminderIntervalID: null,
-}
-
-interface IFavoritesProps {
-  locationName: string
-  hallId: number
-}
-
-interface IDetailProps {
-  id: number
-  status: string
-  time_remaining: number
-  type: string
-}
-
-interface IMachinesProps {
-  dryers: {
-    offline: number
-    open: number
-    out_of_order: number
-    running: number
-    time_remaining: number[] | number
-  }
-  washers: {
-    offline: number
-    open: number
-    out_of_order: number
-    running: number
-    time_remaining: number[] | number
-  }
-  details: IDetailProps[]
-}
-
-interface ILaundryHallInfoProps {
-  hall_name: string
-  location: string
-  machines: IMachinesProps[]
+  hallIntervalID: -1,
+  reminderIntervalID: -1,
 }
 
 type ILaundryAction = {
   error?: string
-  favorites?: IFavoritesProps
-  laundryHalls?: ILaundryHallProps
+  favorites?: IFavorite[]
+  favoritesHome?: IFavoriteHome[]
+  laundryHalls?: ILaundryHall[]
   intervalID?: number
-  laundryHallInfo?: ILaundryHallInfoProps
-  reminders?: []
+  laundryHallInfo?: ILaundryHallInfo
+  reminders?: IReminder[]
 } & Action
 
 const laundryReducer = (state = defaultState, action: ILaundryAction) => {
@@ -120,7 +112,7 @@ const laundryReducer = (state = defaultState, action: ILaundryAction) => {
     case getFavoritesHome:
       return {
         ...state,
-        favoritesHome: action.favorites,
+        favoritesHome: action.favoritesHome,
       }
     case browserSupportRejected:
       return {

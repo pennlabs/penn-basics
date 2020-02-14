@@ -3,12 +3,19 @@ import React from 'react'
 import FavoriteIcon from '../../../../../public/img/heart.svg'
 import { Button } from '../Button'
 
+interface IAddFunctionInput {
+  venueId?: string
+  hallURLId?: number
+  location?: string
+  hallName?: string
+}
+
 interface IFavoriteButtonProps {
   isFavorited: boolean
-  addFunction: ({ venueId } : { venueId: string }) => void
-  removeFunction: ({ venueId } : { venueId: string }) => void
-  addParams: { venueId: string}
-  removeParams: { venueId: string }
+  addFunction: ({ venueId, hallURLId, location, hallName }: IAddFunctionInput) => void
+  removeFunction: ({ venueId, hallURLId } : { venueId?: string, hallURLId?: number }) => void
+  addParams: { venueId?: string, hallURLId?: number, location?: string, hallName?: string}
+  removeParams: { venueId?: string, hallURLId?: number }
 }
 
 const FavoriteButton = ({
