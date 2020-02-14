@@ -5,7 +5,11 @@ import s from 'styled-components'
 import { Card, Row, Col, Text } from '../shared'
 import { DARK_GRAY, LIGHT_GRAY } from '../../styles/colors'
 
-const Chevron = s.span`
+interface IChevronProps {
+  expanded: boolean
+}
+
+const Chevron = s.span<IChevronProps>`
   position: absolute;
   right: 0;
   margin: 6px;

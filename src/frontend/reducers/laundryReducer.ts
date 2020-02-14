@@ -18,7 +18,7 @@ import {
 
 import { ILaundryHallProps } from '../types'
 
-const defaultState = {
+const defaultState: ILaundryReducerState = {
   pending: true,
   error: null,
   browserError: null,
@@ -76,7 +76,7 @@ type ILaundryAction = {
   reminders?: []
 } & Action
 
-const laundryReducer = (state = defaultState, action : ILaundryAction) => {
+const laundryReducer = (state = defaultState, action: ILaundryAction) => {
   switch (action.type) {
     case getLaundryHallsDataRequested:
       return {

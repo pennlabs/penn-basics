@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import s from 'styled-components'
 
 import {
@@ -11,16 +10,20 @@ import {
   LIGHT_YELLOW,
 } from '../../styles/colors'
 
-const colorMap = {
+const colorMap: Record<string, string[]> = {
   'Ready to start': [GREEN, LIGHT_GREEN],
-  Available: [GREEN, LIGHT_GREEN],
+  'Available': [GREEN, LIGHT_GREEN],
   'In use': [MUSTARD, LIGHT_YELLOW],
   'Almost done': [MUSTARD, LIGHT_YELLOW],
   'End of cycle': [GREEN, LIGHT_GREEN],
   'Not online': [MEDIUM_GRAY, FOCUS_GRAY],
 }
 
-const Pill = s.span`
+interface IPillProps {
+  background: string
+}
+
+const Pill = s.span<IPillProps>`
   background: ${({ background }) => background};
   color: ${({ color }) => color};
   padding: 0.2rem 0.5rem;
@@ -28,17 +31,13 @@ const Pill = s.span`
   font-weight: 500;
 `
 
-const StatusPill = ({ status }) => {
+const StatusPill = ({ status }: { status: string }) => {
   const [color, background] = colorMap[status] || colorMap['Not online']
   return (
     <Pill background={background} color={color}>
       {status}
     </Pill>
   )
-}
-
-StatusPill.propTypes = {
-  status: PropTypes.string.isRequired,
 }
 
 export default StatusPill

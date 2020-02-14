@@ -1,6 +1,5 @@
 import React from 'react'
 import s from 'styled-components'
-import PropTypes from 'prop-types'
 
 // TODO split this into components
 
@@ -55,7 +54,16 @@ const handleReminder = (
   }
 }
 
-// TODO add prop types and use the linter
+interface IBellProps {
+  enableReminder: boolean
+  timeRemaining: number
+  reminded: boolean
+  id: number
+  laundryHallId: number
+  dispatchAddReminder: () => void
+  machineType: string
+}
+
 const Bell = ({
   enableReminder,
   timeRemaining,
@@ -64,7 +72,7 @@ const Bell = ({
   laundryHallId,
   dispatchAddReminder,
   machineType,
-}) => {
+}: IBellProps) => {
   if (!enableReminder || timeRemaining <= 0 || !dispatchAddReminder) {
     return null
   }
@@ -103,24 +111,15 @@ const Bell = ({
   return null
 }
 
-Bell.defaultProps = {
-  enableReminder: false,
-  timeRemaining: 0,
-  reminded: false,
-  id: null,
-  laundryHallId: null,
-  dispatchAddReminder: null,
-  machineType: '',
-}
-
-Bell.propTypes = {
-  enableReminder: PropTypes.bool,
-  timeRemaining: PropTypes.number,
-  reminded: PropTypes.bool,
-  id: PropTypes.number,
-  laundryHallId: PropTypes.number,
-  dispatchAddReminder: PropTypes.func,
-  machineType: PropTypes.string,
+interface IMachineAvailabilityProps {
+  displayDetails: boolean
+  machineData
+  machineType: string
+  allMachines
+  laundryHallId
+  reminders
+  dispatchAddReminder
+  enableReminder: boolean
 }
 
 const MachineAvailability = ({
@@ -132,7 +131,7 @@ const MachineAvailability = ({
   reminders,
   dispatchAddReminder,
   enableReminder,
-}) => {
+}: IMachineAvailabilityProps) => {
   const tableMachines = allMachines.filter(
     machine => machine.type === machineType
   )
@@ -209,33 +208,6 @@ const MachineAvailability = ({
       )}
     </>
   )
-}
-
-MachineAvailability.defaultProps = {
-  displayDetails: false,
-  machineData: {},
-  machineType: '',
-  allMachines: [],
-  laundryHallId: null,
-  reminders: [],
-  enableReminder: false,
-  dispatchAddReminder: null,
-}
-
-MachineAvailability.propTypes = {
-  displayDetails: PropTypes.bool,
-  machineData: PropTypes.shape({
-    open: PropTypes.number,
-    running: PropTypes.number,
-    out_of_order: PropTypes.number,
-    offline: PropTypes.number,
-  }),
-  machineType: PropTypes.string,
-  allMachines: PropTypes.array, // eslint-disable-line
-  laundryHallId: PropTypes.number,
-  reminders: PropTypes.arrayOf(PropTypes.object),
-  dispatchAddReminder: PropTypes.func,
-  enableReminder: PropTypes.bool,
 }
 
 export default MachineAvailability
