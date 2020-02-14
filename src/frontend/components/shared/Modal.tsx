@@ -132,7 +132,7 @@ class Modal extends Component<IModalProps, IModalState> {
     // If we are showing the modal, focus on it
     if (show && !prevProps.show) {
       const { current } = this.focusRef || {}
-      if (!current) return
+      if (!current) {return}
       current.focus()
     }
   }

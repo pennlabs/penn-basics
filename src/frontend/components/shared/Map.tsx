@@ -1,8 +1,8 @@
 /* global google, document */
 import React from 'react'
 import styled from 'styled-components'
-import { maxWidth, PHONE } from '../../styles/sizes'
 import { ILocation } from 'src/types'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 // Styles
 interface IMapWrapper {
@@ -140,7 +140,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
     const { markers } = this.state
     const marker = markers[key]
 
-    if (!marker) return
+    if (!marker) {return}
 
     marker.setIcon(icon) // TODO this might not work
   }

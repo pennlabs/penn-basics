@@ -65,7 +65,7 @@ const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [showName, setShowName] = useState(true)
-  if (!show) return null
+  if (!show) {return null}
 
   return (
     <div style={{ marginBottom: '3rem' }}>

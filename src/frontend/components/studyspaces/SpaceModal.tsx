@@ -4,6 +4,7 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
   Title,
@@ -19,13 +20,12 @@ import { Hours } from './Hours'
 import Modal from '../shared/Modal'
 import { STUDYSPACES_ROUTE } from '../../constants/routes'
 import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types'
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 
 const Credit = s.div`
   width: 100%;
   padding: 0 1rem;
 `
-const GOOGLE_URL = `https://maps.google.com/maps?q=`
+const GOOGLE_URL = 'https://maps.google.com/maps?q='
 
 interface ISpaceModalProps {
   spaceId: string

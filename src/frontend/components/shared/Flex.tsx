@@ -119,7 +119,7 @@ const ColWrapper = s.div<IColWrapper>(
   ${minHeight && `min-height: ${minHeight};`}
   ${height && `height: ${height};`}
 
-  ${flex && `display: flex;`}
+  ${flex && 'display: flex;'}
   ${backgroundImage &&
     `
     background-image: url(${backgroundImage});
@@ -164,7 +164,7 @@ interface IColContainer {
 }
 
 const ColContainer = s.div<IColContainer>(({ margin }) =>
-  margin ? `margin-left: ${margin}; margin-right: ${margin};` : ``
+  margin ? `margin-left: ${margin}; margin-right: ${margin};` : ''
 )
 
 export type ICol = {

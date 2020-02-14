@@ -1,3 +1,5 @@
+import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen, IFoodTrucksReducerState, IFormattedFoodtruck } from 'src/types'
+import { Action } from 'redux'
 import {
   getFoodtrucksDataRequested,
   getFoodtrucksDataFulfilled,
@@ -11,8 +13,6 @@ import {
   clearFilterFoodtrucksRequested,
   TOGGLE_FILTER_FOODTRUCKS_OPEN,
 } from '../actions/action_types'
-import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen, IFoodTrucksReducerState, IFormattedFoodtruck } from 'src/types'
-import { Action } from 'redux'
 
 interface ILocation {
   lat: number
@@ -91,7 +91,7 @@ const filterFoodtrucks = (
   filterOpen?: boolean,
   filterString?: string
 ): Record<TFoodTruckId, IFoodTruck> => {
-  if (!foodtrucksData) return {}
+  if (!foodtrucksData) {return {}}
   if (!filterOpen && !filterString) {
     const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
     return filteredFoodtrucksData

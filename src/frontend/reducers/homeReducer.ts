@@ -1,8 +1,8 @@
+import { Action } from 'redux'
 import {
   filterHomeCustomizeRequested,
   TOGGLE_FILTER_HOME_CUSTOMIZE,
 } from '../actions/action_types'
-import { Action } from 'redux'
 
 type IHomeAction = {
   filterList?: number[]
@@ -21,7 +21,7 @@ const defaultState: IHomeReducerState = {
 const homeReducer = (
   state: IHomeReducerState = defaultState,
   action: IHomeAction
-) : IHomeReducerState => {
+): IHomeReducerState => {
   switch (action.type) {
     case filterHomeCustomizeRequested:
       return {

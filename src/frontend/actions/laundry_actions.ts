@@ -2,8 +2,8 @@
 import axios from 'axios'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
-import { isValidNumericId } from '../../utils/helperFunctions'
 import { Dispatch, Action } from 'redux'
+import { isValidNumericId } from '../../utils/helperFunctions'
 
 import {
   getLaundryHallsDataRequested,
@@ -27,20 +27,20 @@ const BASE = 'https://api.pennlabs.org'
 
 interface IidData {
   halls: ILaundryHallGeneralInfo[]
-} 
+}
 
 const processLaundryHallsData = (idData: IidData) => {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
-  return Object.keys(groupByLocation).map(locationName => {
+  return Object.keys(groupByLocation).map(locationName =>
     //eslint-disable-line
-    return {
+     ({
       location: locationName,
       halls: groupByLocation[locationName],
-    }
-  })
+    })
+  )
 }
 
-export const getLaundryHalls = () => async (dispatch: Dispatch<Action>) : Promise<void> => {
+export const getLaundryHalls = () => async (dispatch: Dispatch<Action>): Promise<void> => {
   dispatch({
     type: getLaundryHallsDataRequested,
   })
@@ -122,9 +122,9 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // Get the list of laundry halls from local storage
-  let laundryHallsString = localStorage.getItem('laundry_favorites')
+  const laundryHallsString = localStorage.getItem('laundry_favorites')
 
-  if (!laundryHallsString) return
+  if (!laundryHallsString) {return}
 
   let laundryHalls: IFavorite[] = JSON.parse(laundryHallsString)
   laundryHalls = laundryHalls.splice(0, 3)
@@ -134,9 +134,7 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
 
   // Only update IdArray if laundryHalls exist
   if (laundryHalls) {
-    IdArray = laundryHalls.map(hall => {
-      return hall.hallId
-    })
+    IdArray = laundryHalls.map(hall => hall.hallId)
   }
 
   // Remove the null Id in the array
@@ -169,9 +167,8 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   }
 }
 
-export const getFavorites = () => {
-  return (dispatch: Dispatch<Action>) => {
-    let favorites = localStorage.getItem('laundry_favorites')
+export const getFavorites = () => (dispatch: Dispatch<Action>) => {
+    const favorites = localStorage.getItem('laundry_favorites')
     let favoritesArray: IFavorite[] = []
     if (favorites) {
       // Read in from localStore, map from strings to numbers
@@ -186,17 +183,15 @@ export const getFavorites = () => {
       favorites,
     })
   }
-}
 
-export const addFavorite = (hallURLId: number, location: string, hallName: string) => {
-  return async (dispatch: Dispatch<Action>) => {
+export const addFavorite = (hallURLId: number, location: string, hallName: string) => async (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'addFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
     const favoritesString = localStorage.getItem('laundry_favorites')
 
     let favoritesArray: IFavorite[] = []
-    let favoriteLocation: IFavorite = { locationName: '', hallId: -1 }
+    const favoriteLocation: IFavorite = { locationName: '', hallId: -1 }
 
     // update fields for favoritesArray
     favoriteLocation.locationName = `${location}: ${hallName}`
@@ -222,10 +217,8 @@ export const addFavorite = (hallURLId: number, location: string, hallName: strin
       favorites: favoritesArray,
     })
   }
-}
 
-export const removeFavorite = (hallURLId: number) => {
-  return (dispatch: Dispatch<Action>) => {
+export const removeFavorite = (hallURLId: number) => (dispatch: Dispatch<Action>) => {
     logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -247,10 +240,8 @@ export const removeFavorite = (hallURLId: number) => {
       favorites: favoritesArray,
     })
   }
-}
 
-export const checkBrowserCompatability = () => {
-  return (dispatch: Dispatch<Action>) => {
+export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>) => {
     try {
       if (!Notification || !Notification.requestPermission()) {
         dispatch({
@@ -304,7 +295,6 @@ export const checkBrowserCompatability = () => {
       })
     }
   }
-}
 
 const urlBase64ToUint8Array = (base64String: string) => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
@@ -332,7 +322,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
     // value: reminderID
     const dbRequest = indexedDB.open('LocalDB', 1) // opens the first version of LocalDB
 
-    // TODO: change event 
+    // TODO: change event
     dbRequest.onerror = (event: any) => {
       // triggered when request to LocalDB fails
       if (event.target && event.target.errorCode) {
@@ -353,9 +343,9 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
 
     dbRequest.onsuccess = (event: any) => {
       // triggered when request to LocalDB is successful
-      if (!event.target) return
+      if (!event.target) {return}
       const db = event.target.result
-      let reminders = localStorage.getItem('laundry_reminders')
+      const reminders = localStorage.getItem('laundry_reminders')
       let remindersArray: IReminder[] = []
       if (reminders) {
         // create a transaction that interacts with the object store
@@ -377,7 +367,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
         }
 
         transaction.onerror = (e: any) => {
-          if (!e.target) return
+          if (!e.target) {return}
           dispatch({
             type: getRemindersRejected,
             error: e.target.errorCode,
@@ -393,7 +383,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
           )
 
           storeRequest.onsuccess = (e: any) => {
-            if (!e.target) return
+            if (!e.target) {return}
             const { result } = e.target
             if (
               !result ||
@@ -404,7 +394,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
           }
 
           storeRequest.onerror = (e: any) => {
-            if (!e.target) return
+            if (!e.target) {return}
             dispatch({
               type: getRemindersRejected,
               error: e.target.errorCode,
@@ -423,8 +413,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
 }
 
 // TODO document this
-export const getReminders = () => {
-  return (dispatch: Dispatch<Action>) => {
+export const getReminders = () => (dispatch: Dispatch<Action>) => {
     getRemindersInterval(dispatch)
 
     const intervalID = setInterval(() => {
@@ -436,15 +425,13 @@ export const getReminders = () => {
       intervalID,
     })
   }
-}
 
 export const addReminder = (
   machineID: number,
   hallID: number,
   machineType: string,
   timeRemaining: number
-) => {
-  return (dispatch: Dispatch<Action>) => {
+) => (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
         // get public vapid key
@@ -457,7 +444,7 @@ export const addReminder = (
         })
 
         const remindersString = localStorage.getItem('laundry_reminders')
-        if (!remindersString) return
+        if (!remindersString) {return}
 
         const reminders = JSON.parse(remindersString)
         const reminderID = uuidv4()
@@ -483,17 +470,13 @@ export const addReminder = (
       })
     }
   }
-}
 
-export const removeReminder = () => {
-  return (dispatch: Dispatch<Action>) => {
+export const removeReminder = () => (dispatch: Dispatch<Action>) => {
     try {
       navigator.serviceWorker.ready
-        .then(registration => {
-          return registration.pushManager.getSubscription()
-        })
+        .then(registration => registration.pushManager.getSubscription())
         .then(subscription => {
-          if (!subscription) return
+          if (!subscription) {return}
           subscription.unsubscribe().then(async successful => {
             if (successful) {
               dispatch({
@@ -511,4 +494,3 @@ export const removeReminder = () => {
       })
     }
   }
-}

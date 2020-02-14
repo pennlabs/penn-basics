@@ -1,5 +1,5 @@
-import { getUserInfoFulfilled } from '../actions/action_types'
 import { Action } from 'redux'
+import { getUserInfoFulfilled } from '../actions/action_types'
 import { IUserInfo } from '../types'
 
 type IAuthAction = {

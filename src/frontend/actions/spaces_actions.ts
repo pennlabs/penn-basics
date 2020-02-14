@@ -2,6 +2,11 @@ import axios from 'axios'
 import { Dispatch, Action } from 'redux'
 
 import {
+  TSpaceId,
+  ISpaceWithHoursAndOpenAndSpaceId,
+  ISpaceWithSpaceID,
+} from 'src/types'
+import {
   getSpacesDataRequested,
   getSpacesDataRejected,
   getSpacesDataFulfilled,
@@ -20,11 +25,6 @@ import {
   TOGGLE_FILTER_SPACES_NOISE,
   TOGGLE_FILTER_SPACES_GROUPS,
 } from './action_types'
-import {
-  TSpaceId,
-  ISpaceWithHoursAndOpenAndSpaceId,
-  ISpaceWithSpaceID,
-} from 'src/types'
 import { isOpen, getHours } from '../../utils/helperFunctions'
 
 export function getAllSpacesData() {
@@ -129,36 +129,30 @@ export function filterSpacesNoise(filter: number) {
 }
 
 // TODO DOCS / ERROR CHECKING
-export const filterSpacesGroups = (filter: number) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterSpacesGroups = (filter: number) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesGroupsRequested,
       filter,
     })
   }
-}
 
-export const filterOnCampus = (filter: boolean) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterOnCampus = (filter: boolean) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterOnCampusRequested,
       filter,
     })
   }
-}
 
 /**
  *
  * @param {string} filter filterString from user input
  */
-export const filterSpacesString = (filter: string) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterSpacesString = (filter: string) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterSpacesStringRequested,
       filter,
     })
   }
-}
 
 export function clearSpacesFilters() {
   return (dispatch: Dispatch<Action>) => {

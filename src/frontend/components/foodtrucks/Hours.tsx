@@ -44,7 +44,7 @@ const Hours = ({ start, end }: IHoursProps) => {
   if (start && end && start.length && end.length) {
     days.forEach((_, idx) => {
       if (!start[idx]) {
-        hoursArr.push(`Closed`)
+        hoursArr.push('Closed')
       } else {
         hoursArr.push(`
           ${convertDate(start[idx])}

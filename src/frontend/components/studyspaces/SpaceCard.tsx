@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import s from 'styled-components'
 import Link from 'next/link'
 
+import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
+import { Dispatch } from 'redux'
+import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from 'src/types'
 import {
   Card,
   Subtitle,
@@ -14,9 +17,6 @@ import {
 } from '../shared'
 import { setHoveredSpace, setActiveSpace } from '../../actions/spaces_actions'
 import { getNoiseLevel, getOutletsLevel } from './mapper'
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
-import { Dispatch } from 'redux'
-import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from 'src/types'
 
 const Content = s.div`
   width: 100%;
@@ -65,7 +65,7 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
     const { hoveredSpace, spaceId, setHoveredSpaceDispatch } = this.props
 
     // If there is no change to be made
-    if (hoveredSpace === spaceId) return
+    if (hoveredSpace === spaceId) {return}
 
     setHoveredSpaceDispatch(spaceId)
   }

@@ -38,8 +38,7 @@ const ExternalLink = ({
   pictureURL,
   websiteURL,
   productName,
-}: IExternalLinkProps): React.ReactElement => {
-  return (
+}: IExternalLinkProps): React.ReactElement => (
     <ExternalLinkTag
       href={websiteURL}
       target="_blank"
@@ -54,20 +53,16 @@ const ExternalLink = ({
       </FlexRow>
     </ExternalLinkTag>
   )
-}
 
 const ExternalLinks = (): React.ReactElement => (
   <BorderedCard>
     <Subtitle>More in the Penn Ecosystem</Subtitle>
 
-    {externalLinksData.map(data => {
-      return <ExternalLink key={data.productName} {...data} />
-    })}
+    {externalLinksData.map(data => <ExternalLink key={data.productName} {...data} />)}
 
     <Line margin="0.5rem 0" />
 
-    {usefulLinksData.map(({ websiteURL, description }, index) => {
-      return (
+    {usefulLinksData.map(({ websiteURL, description }, index) => (
         <p key={websiteURL}>
           <a
             href={websiteURL}
@@ -79,8 +74,7 @@ const ExternalLinks = (): React.ReactElement => (
           </a>
           {index === usefulLinksData.length - 1 ? null : <br />}
         </p>
-      )
-    })}
+      ))}
   </BorderedCard>
 )
 

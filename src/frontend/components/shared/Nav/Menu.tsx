@@ -7,7 +7,7 @@ interface IMenuProps {
 }
 
 const Menu = ({ active, toggleActive }: IMenuProps) => {
-  const handleKeyPress = (event : React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     event.preventDefault()
 
     if (event.keyCode === 32) {

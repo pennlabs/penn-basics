@@ -36,7 +36,7 @@ const Events = (): React.ReactElement => {
       .then(res => setCalendar(res.data.calendar))
   }, [])
 
-  if (!calendarArray) return <React.Fragment />
+  if (!calendarArray) {return <React.Fragment />}
 
   return (
     <BorderedCard>

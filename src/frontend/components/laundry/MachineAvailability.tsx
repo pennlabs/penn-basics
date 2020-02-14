@@ -46,7 +46,7 @@ const BellIcon = s.span`
 const handleReminder = (
   machineID: number,
   hallID: number,
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void,
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void,
   reminded: boolean,
   machineType: string,
   timeRemaining: number,
@@ -62,7 +62,7 @@ interface IBellProps {
   reminded: boolean
   id: number
   laundryHallId: number
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
   machineType: string
 }
 
@@ -120,7 +120,7 @@ interface IMachineAvailabilityProps {
   allMachines: ILaundryHallDetail[]
   laundryHallId: number
   reminders: IReminder[]
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
   enableReminder: boolean
 }
 

@@ -69,7 +69,7 @@ class FilterBtn extends React.Component<IFilterBtnProps, {}> {
 
   handleKeyPress(event: React.KeyboardEvent) {
     const { active } = this.props
-    if (!active) return
+    if (!active) {return}
 
     const { key, keyCode } = event
     const isEscapeEvent =
@@ -108,7 +108,7 @@ class FilterBtn extends React.Component<IFilterBtnProps, {}> {
       activeOptions = [],
     } = this.props
 
-    if (!this.areOptions() || !active) return null
+    if (!this.areOptions() || !active) {return null}
     const { offsetLeft = 0 } = this.focusRef.current || {}
 
     return (

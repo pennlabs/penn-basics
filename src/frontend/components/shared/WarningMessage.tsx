@@ -6,7 +6,7 @@ interface IWarningMessageProps {
 
 export const WarningMessage = ({ message }: IWarningMessageProps) => {
   const [visible, setVisibility] = useState(true)
-  if (!message || !visible) return null
+  if (!message || !visible) {return null}
 
   return (
     <div className="notification is-warning">

@@ -85,7 +85,7 @@ const App = ({
   useEffect(() => {
     dispatchGetDiningFavorites()
     dispatchGetLaundryFavorites()
-  }, [])
+  }, [dispatchGetDiningFavorites, dispatchGetLaundryFavorites])
 
   const { fullName, displayName, pennid } = userInfo || {}
 

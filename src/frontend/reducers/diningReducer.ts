@@ -1,14 +1,14 @@
+import { AnyAction } from 'redux'
 import {
   getVenueInfoRequested,
   getVenueInfoRejected,
   getVenueInfoFulfilled,
   updateDiningFavorites,
 } from '../actions/action_types'
-import { AnyAction } from 'redux'
 
 import { IDiningReducerState } from '../types'
 
-const defaultState : IDiningReducerState = {
+const defaultState: IDiningReducerState = {
   error: null,
   favorites: [],
   venueHoursPending: true,

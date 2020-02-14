@@ -54,7 +54,7 @@ const App = ({
 
   useEffect(() => {
     dispatchGetAllFoodtrucks()
-  }, [])
+  }, [dispatchGetAllFoodtrucks])
 
   if (pending || !filteredFoodtrucksData) {
     return <React.Fragment />
@@ -135,7 +135,7 @@ const App = ({
 
 const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState } ) => {
   const { filteredFoodtrucksData, pending, error, hoveredFoodtruck } = foodtrucks
-  
+
   return {
     filteredFoodtrucksData,
     pending,

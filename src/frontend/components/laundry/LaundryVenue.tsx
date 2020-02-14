@@ -70,7 +70,7 @@ interface ILaundryVenueProps {
   reminders: IReminder[]
   dispatchAddFavorite: ({ hallURLId, location, hallName }: IAddFavoriteInput) => void
   dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) => void
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
   dispatchRemoveReminder: () => void
 }
 
@@ -94,7 +94,7 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
   componentDidUpdate(prevProps: ILaundryVenueProps) {
     const { dispatchGetLaundryHall, hallURLId, hallIntervalID } = this.props
 
-    if (!isValidNumericId(hallURLId)) return
+    if (!isValidNumericId(hallURLId)) {return}
 
     const prevHallURLId = prevProps.hallURLId
 

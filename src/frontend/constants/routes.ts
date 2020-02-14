@@ -28,7 +28,7 @@ export const LAUNDRY_HALL_QUERY_ROUTE = (id: string): string =>
   `${LAUNDRY_HALLS_ROUTE}?id=${id}`
 
 // Backend
-export const API_AUTH_ROUTE = `/api/auth/authenticate`
+export const API_AUTH_ROUTE = '/api/auth/authenticate'
 export const getApiAuthRouteWithRedirectParams = (pathname: string): string =>
   `${API_AUTH_ROUTE}?successRedirect=${pathname}&failureRedirect=${pathname}`
 

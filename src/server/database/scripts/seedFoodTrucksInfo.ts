@@ -41,12 +41,10 @@ function updateFoodTrucks() {
       }
     })
 
-    const newPriceTypes = Object.entries(priceTypes).map(([smName, types]) => {
-      return {
+    const newPriceTypes = Object.entries(priceTypes).map(([smName, types]) => ({
         name: smName,
         options: types,
-      }
-    })
+      }))
 
     return {
       ...truck,

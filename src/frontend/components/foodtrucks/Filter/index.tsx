@@ -127,9 +127,9 @@ interface IFilterProps {
 
   dispatchToggleFoodtrucksOpen: () => void
   dispatchFilterFoodtrucksString: (str: string) => void
- 
+
   filterOpen?: boolean
-  
+
 
   filterOpenActive?: boolean
   filterString?: string

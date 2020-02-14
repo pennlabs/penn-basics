@@ -2,6 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import { Dispatch, Action } from 'redux'
 
+import { TFoodTruckId, IFoodTruck, IFormattedFoodtruckAction } from 'src/types'
 import {
   getFoodtrucksDataRequested,
   getFoodtrucksDataRejected,
@@ -16,7 +17,6 @@ import {
   clearFilterFoodtrucksRequested,
 } from './action_types'
 import { convertDate, padHours } from '../../utils/helperFunctions'
-import { TFoodTruckId, IFoodTruck, IFormattedFoodtruckAction } from 'src/types'
 
 const isOpen = (
   { start, end }: { start: string[]; end: string[] },
@@ -34,8 +34,7 @@ const isOpen = (
   return startTime <= currTime && currTime <= endTime
 }
 
-export const getAllFoodtrucksData = () => {
-  return async (dispatch: Dispatch<Action>) => {
+export const getAllFoodtrucksData = () => async (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getFoodtrucksDataRequested,
     })
@@ -98,7 +97,6 @@ export const getAllFoodtrucksData = () => {
       })
     }
   }
-}
 
 type TFormattedPriceTypes = Record<string, string[]>
 
@@ -141,8 +139,7 @@ export const updateFoodtruckReview = (
   rating: number,
   comment: string,
   showName: boolean
-) => {
-  return (dispatch: Dispatch<Action>) => {
+) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: getFoodtruckInfoRequested,
     })
@@ -179,42 +176,35 @@ export const updateFoodtruckReview = (
       })
     }
   }
-}
 
-export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => {
-  return (dispatch: Dispatch<Action>) => {
+export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
       footruckId,
     })
   }
-}
 
 /**
  *
  * @param {string} filterString user input string
  */
-export const filterFoodtrucksString = (filterString: string) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterFoodtrucksString = (filterString: string) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterFoodtrucksStringRequested,
       filterString,
     })
   }
-}
 
 /**
  *
  * @param {boolean} filter
  */
-export const filterFoodtrucksOpen = (filter: boolean) => {
-  return (dispatch: Dispatch<Action>) => {
+export const filterFoodtrucksOpen = (filter: boolean) => (dispatch: Dispatch<Action>) => {
     dispatch({
       type: filterFoodtrucksOpenRequested,
       filter,
     })
   }
-}
 
 export const toggleFoodtrucksOpen = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })

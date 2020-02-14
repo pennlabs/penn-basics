@@ -58,8 +58,8 @@ const getDay = (date: Date | string) => {
   const dayNum = obj.day()
   const today = moment().day()
 
-  if (today === dayNum) return 'Today'
-  if (dayNum === (today + 1) % 7) return 'Tomorrow'
+  if (today === dayNum) {return 'Today'}
+  if (dayNum === (today + 1) % 7) {return 'Tomorrow'}
 
   return week[dayNum]
 }
@@ -83,11 +83,9 @@ const List = ({ venueHours }: { venueHours: IVenueHour[] }) => {
     return null
   }
 
-  const formattedVenueHours = venueHours.map(venueHour => {
-    return Object.assign({}, venueHour, {
+  const formattedVenueHours = venueHours.map(venueHour => Object.assign({}, venueHour, {
       date: getDay(venueHour.date),
-    })
-  })
+    }))
 
   // Else, return the hours in a table
   return (
@@ -163,7 +161,7 @@ const HoursVisualization = ({ venueHours, venueId }: IHoursVisualizationProps) =
 
 const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   const { venueHours } = dining
-  
+
   return {
     venueHours
   }

@@ -12,11 +12,9 @@ export default function profileRouter(): Router {
     async (req: Request, res: Response) => {
       const pennid: number =
         req.body ?? (req.user && (req.user as Record<string, number>).pennid)
-      return DB.getUserReviews(pennid).then(reviews => {
-        return res.status(200).json({
+      return DB.getUserReviews(pennid).then(reviews => res.status(200).json({
           reviews,
-        })
-      })
+        }))
     }
   )
 

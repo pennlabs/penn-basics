@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { Text } from '../shared'
 import { IUserInfo } from 'src/frontend/types'
+import { Text } from '../shared'
 
 const greetings = ['Hi There', 'Hey there', 'Howdy']
 const emojis = ['😀', '😛', '😗', '🤠']

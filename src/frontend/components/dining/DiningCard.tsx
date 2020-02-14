@@ -27,14 +27,12 @@ const Content = s.div`
 `
 
 const getOpenHours = (venueHours: IDaypart[]) => {
-  if (!venueHours) return null
+  if (!venueHours) {return null}
 
   // get the array of hours that are opened today
   const date = new Date()
   const currTime = `${pad(date.getHours())}:${pad(date.getMinutes())}`
-  const openHours = venueHours.filter(hour => {
-    return hour.starttime <= currTime && currTime <= hour.endtime
-  })
+  const openHours = venueHours.filter(hour => hour.starttime <= currTime && currTime <= hour.endtime)
   return openHours
 }
 
@@ -86,7 +84,7 @@ const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDa
 }
 
 const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
-  if (!venueHours) return []
+  if (!venueHours) {return []}
 
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))

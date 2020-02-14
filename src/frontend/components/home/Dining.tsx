@@ -17,7 +17,7 @@ const Dining = ({
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [])
+  }, [dispatchGetFavorites, dispatchGetVenueHours])
 
   return (
     <BorderedCard>

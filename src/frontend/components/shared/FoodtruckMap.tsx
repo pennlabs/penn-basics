@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { maxWidth, PHONE } from '../../styles/sizes'
 import { ILocation } from 'src/types'
+import { maxWidth, PHONE } from '../../styles/sizes'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete
 const RED = '/img/foodtrucks/food-pin-red.png'
@@ -147,7 +147,7 @@ export class FoodtruckMap extends Component<
     const { markers } = this.state
     const marker = markers[key]
 
-    if (!marker) return
+    if (!marker) {return}
 
     marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
