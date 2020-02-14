@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { Query } from 'mongoose'
+
 import spaces from '../../resources/spaces.json'
 import Space from '../models/Space'
 
@@ -12,13 +14,11 @@ if (!MONGO_URI) {
 const GOOGLE_URL =
   'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
 
-function deleteSpacesInDB() {
-  return Space.find().remove()
-}
+const deleteSpacesInDB = (): Query<any> => Space.find().remove()
 
-function updateSpaces() {
-  return Promise.all(
-    spaces.map((space, spaceIndex) => {
+const updateSpaces = (): Promise<any> =>
+  Promise.all(
+    spaces.map(async (space, spaceIndex) => {
       const { address } = space
       let { name } = space
       name = name
@@ -32,37 +32,34 @@ function updateSpaces() {
       )}`
       spaces[spaceIndex].spaceID = name
       if (address) {
-        return axios
-          .get(url)
-          .then(gRes => {
-            const { candidates } = gRes.data
-            if (!candidates || candidates.length < 1) {
-              // TODO: Address when the request returned erroneous failure or empty candidate result list
-              throw new Error(
-                'Something went wrong with Google api. Either no results or the request failed.'
-              )
-            }
-            const { location } = candidates[0].geometry
-            spaces[spaceIndex] = { ...space, location }
-            return spaces[spaceIndex]
-          })
-          .catch(err => {
-            // eslint-disable-next-line
-            console.error(
-              `Encountered the following error when querying Google api on on study space ${spaceIndex}: \n\t${err}`
+        try {
+          const gRes = await axios.get(url)
+          const { candidates } = gRes.data
+          if (!candidates || candidates.length < 1) {
+            // TODO: Address when the request returned erroneous failure or empty candidate result list
+            throw new Error(
+              'Something went wrong with Google api. Either no results or the request failed.'
             )
-            return space // don't change the space if there's an error
-          })
+          }
+          const { location } = candidates[0].geometry
+          spaces[spaceIndex] = { ...space, location }
+          return spaces[spaceIndex]
+        } catch (err) {
+          // eslint-disable-next-line
+          console.error(
+            `Encountered the following error when querying Google api on on study space ${spaceIndex}: \n\t${err}`
+          )
+          return space // don't change the space if there's an error
+        }
       }
       return new Promise(resolve => {
         resolve(space)
       })
     })
   )
-}
 
-function loadSpacesIntoDB() {
-  return Promise.all(
+const loadSpacesIntoDB = (): Promise<void> =>
+  Promise.all(
     spaces.map(
       space => new Space(space).save().then(console.log) // eslint-disable-line
     )
@@ -70,7 +67,6 @@ function loadSpacesIntoDB() {
     console.log('----seeding completed----') // eslint-disable-line
     process.exit(0)
   })
-}
 
 updateSpaces()
   .then(deleteSpacesInDB)

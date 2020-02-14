@@ -1,6 +1,6 @@
 import './mongoose-connect'
 import moment from 'moment'
-import { Document } from 'mongoose'
+import { Document, Query } from 'mongoose'
 
 import Space from './models/Space'
 import Foodtrucks from './models/FoodTruck'
@@ -13,14 +13,15 @@ import {
 } from '../../types'
 
 // return all fields except for menu, priceTypes, and reviews
-export const findAllFoodtrucks = () => Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
+export const findAllFoodtrucks = async (): Promise<Document[]> =>
+  await Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
 
 /**
  * @param {Number} foodtruckID
  */
-export function getFoodTruck(foodtruckID: string) {
-  return Foodtrucks.findOne({ foodtruckID })
-}
+export const getFoodTruck = async (
+  foodtruckID: string
+): Promise<Document | null> => await Foodtrucks.findOne({ foodtruckID })
 
 /**
  *
@@ -47,7 +48,9 @@ export const updateReview = async (
   }
 
   let { overallRating } = data
-  if (!overallRating) {overallRating = 0.0}
+  if (!overallRating) {
+    overallRating = 0.0
+  }
 
   const { reviews } = data // reviews in the DB
   const { pennid, rating, comment, showName, fullName } = userReview
@@ -99,27 +102,32 @@ export const updateReview = async (
   return foodtruck
 }
 
-export const updateFoodtruckReveiwScore = async (
+export const updateFoodtruckReveiwScore = (
   foodtruckID: string,
   pennid: number,
   amount: number
-) => Foodtrucks.updateOne(
+): Query<any> =>
+  Foodtrucks.updateOne(
     { foodtruckID, 'reviews.pennid': pennid },
     // update the located sub-document (the review) by the specified amount
     { $inc: { 'reviews.$.pennid': amount } }
   )
 
-export function upvoteFoodtruckReview(foodtruckID: string, pennid: number) {
+export const upvoteFoodtruckReview = (
+  foodtruckID: string,
+  pennid: number
+): void => {
   updateFoodtruckReveiwScore(foodtruckID, pennid, 1)
 }
 
-export function downvoteFoodtruckReview(foodtruckID: string, pennid: number) {
+export const downvoteFoodtruckReview = (
+  foodtruckID: string,
+  pennid: number
+): void => {
   updateFoodtruckReveiwScore(foodtruckID, pennid, -1)
 }
 
-export function findAllSpaces() {
-  return Space.find()
-}
+export const findAllSpaces = (): Query<Document[]> => Space.find()
 
 /**
  * @param {boolean} open
@@ -128,13 +136,13 @@ export function findAllSpaces() {
  * @param {number} groupLevel
  * @param {number} hour
  */
-export function filterSpaces(
+export const filterSpaces = (
   open: boolean,
   outletLevel: number,
   quietLevel: number,
   groupLevel: number,
   hour: number
-) {
+): Query<Document[]> => {
   if (open) {
     return Space.find({
       start: { $lte: hour },
@@ -155,43 +163,49 @@ export function filterSpaces(
 /**
  * @param {String} spaceID
  */
-export function getSpace(spaceID: string) {
-  return Space.findOne({ spaceID })
-}
+export const getSpace = async (spaceID: string): Promise<Document | null> =>
+  await Space.findOne({ spaceID })
 
-export function deleteReview(foodtruckName: string, pennid: number) {
-  if (pennid && foodtruckName)
-    {return Foodtrucks.findOne({ name: foodtruckName }).then(
-      (truck: Document | null) => {
-        if (!truck) {throw new Error('Truck not found')}
-        const { reviews } = truck as IFoodTruckDocument
-        const newReviews = reviews.filter(
-          r => r.pennid !== pennid && r.pennid !== pennid
-        )
-        return truck.update({ reviews: newReviews })
-      }
-    )}
-  return new Error(
-    'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
+export const deleteReview = async (
+  foodtruckName: string,
+  pennid: number
+): Promise<Query<any>> => {
+  if (!pennid || !foodtruckName) {
+    Promise.reject(
+      'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
+    )
+  }
+
+  const truck = await Foodtrucks.findOne({ name: foodtruckName })
+
+  if (!truck) {
+    return Promise.reject('Truck not found')
+  }
+
+  const { reviews } = truck as IFoodTruckDocument
+  const newReviews = reviews.filter(
+    r => r.pennid !== pennid && r.pennid !== pennid
   )
+
+  return truck.update({ reviews: newReviews })
 }
 
 /**
  * @param {object} space
  */
-export function insertSpace(space: ISpace) {
-  return new Space(space).save()
-}
+export const insertSpace = async (space: ISpace): Promise<Document> =>
+  await new Space(space).save()
 
-export function getUser(pennid: number) {
-  return User.findOne({ pennid })
-}
+export const getUser = async (pennid: number): Promise<Document | null> =>
+  await User.findOne({ pennid })
 
-export function insertUser(userData: IUser) {
-  return new User(userData).save()
-}
+export const insertUser = (userData: IUser): Promise<Document> =>
+  new User(userData).save()
 
-export const updateUser = async (pennid: number, displayName: string) => {
+export const updateUser = async (
+  pennid: number,
+  displayName: string
+): Promise<Document | null> => {
   const user = await User.findOneAndUpdate(
     { pennid },
     { displayName },
@@ -200,19 +214,17 @@ export const updateUser = async (pennid: number, displayName: string) => {
   return user
 }
 
-export const getUserReviews = async (pennid: number) => {
-  const res = await Foodtrucks.find({ 'reviews.pennid': pennid }).then(
-    (trucks: Document[]) => {
-      console.log(
-        `${trucks.length} trucks found with reviews by user with id of ${pennid}`
-      )
-      return (trucks as IFoodTruckDocument[]).map(truck => {
-        const review = truck.reviews.filter(
-          (r: IFoodTruckUserReview) => r.pennid === pennid
-        )[0]
-        return review
-      })
-    }
-  )
-  return res
+export const getUserReviews = async (
+  pennid: number
+): Promise<IFoodTruckUserReview[]> => {
+  const trucks = await Foodtrucks.find({ 'reviews.pennid': pennid })
+
+  const reviews: IFoodTruckUserReview[] = trucks.map(truck => {
+    const review = (truck as IFoodTruckDocument).reviews.filter(
+      (r: IFoodTruckUserReview) => r.pennid === pennid
+    )[0]
+    return review
+  })
+
+  return reviews
 }
