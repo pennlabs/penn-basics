@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 
@@ -18,15 +17,19 @@ import MachineAvailability from '../laundry/MachineAvailability'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
 import { LAUNDRY_HALLS_ROUTE } from '../../constants/routes'
 
-class Laundry extends Component {
-  componentDidMount() {
-    const { dispatchGetFavoritesHomePage } = this.props
+import { ILaundryReducerState, IFavoriteHome } from '../../../types'
+
+interface ILaundryProps {
+  dispatchGetFavoritesHomePage: () => void
+  favoritesHome: IFavoriteHome[]
+}
+
+const Laundry = ({ dispatchGetFavoritesHomePage, favoritesHome }: ILaundryProps) => {
+  useEffect(() => {
     dispatchGetFavoritesHomePage()
-  }
+  }, [])
 
-  renderFavorites() {
-    const { favoritesHome } = this.props
-
+  const renderFavorites = () => {
     if (!favoritesHome || favoritesHome.length === 0) {
       return (
         <Link href={LAUNDRY_HALLS_ROUTE}>
@@ -72,40 +75,29 @@ class Laundry extends Component {
     })
   }
 
-  render() {
-    return (
-      <BorderedCard>
-        <Link href={LAUNDRY_HALLS_ROUTE}>
-          <a>
-            <Title>Laundry</Title>
-          </a>
-        </Link>
-        <Subtext>Status of your favorite halls</Subtext>
+  return (
+    <BorderedCard>
+      <Link href={LAUNDRY_HALLS_ROUTE}>
+        <a>
+          <Title>Laundry</Title>
+        </a>
+      </Link>
+      <Subtext>Status of your favorite halls</Subtext>
 
-        <br />
-        {this.renderFavorites()}
-      </BorderedCard>
-    )
-  }
+      <br />
+      {renderFavorites()}
+    </BorderedCard>
+  )
 }
 
-Laundry.defaultProps = {
-  favoritesHome: [],
-}
-
-Laundry.propTypes = {
-  favoritesHome: PropTypes.array, // eslint-disable-line
-  dispatchGetFavoritesHomePage: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = ({ laundry }) => {
+const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
   const { favoritesHome } = laundry
   return {
     favoritesHome,
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetFavoritesHomePage: () => dispatch(getFavoritesHomePage()),
 })
 

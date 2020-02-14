@@ -1,21 +1,27 @@
 import { getUserInfoFulfilled } from '../actions/action_types'
 import { Action } from 'redux'
-import { IUserInfo } from '../types'
+import { IUser, IAuthReducerState } from '../../types'
 
 type IAuthAction = {
-  userInfo?: IUserInfo
+  userInfo?: IUser
 } & Action
 
-interface IAuthReducerState {
-  userInfo?: IUserInfo
+const defaultState: IAuthReducerState = {
+  userInfo: {
+    pennid: -1,
+    email: '',
+    first_name: '',
+    last_name: '',
+    displayName: '',
+    loggedIn: false,
+    fullName: ''
+  }
 }
-
-const defaultState: IAuthReducerState = { userInfo: undefined }
 
 const authReducer = (
   state = defaultState,
   action: IAuthAction
-): IAuthReducerState => {
+) => {
   switch (action.type) {
     case getUserInfoFulfilled:
       return {

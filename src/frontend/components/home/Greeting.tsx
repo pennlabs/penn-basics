@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import { Text } from '../shared'
-import { IUserInfo } from 'src/frontend/types'
+
+import { IUser, IAuthReducerState } from '../../../types'
 
 const greetings = ['Hi There', 'Hey there', 'Howdy']
 const emojis = ['😀', '😛', '😗', '🤠']
 
 interface IGreetingProps {
-  userInfo: IUserInfo
+  userInfo: IUser
 }
 
 const Greeting = ({ userInfo }: IGreetingProps): React.ReactElement => {
@@ -33,6 +34,12 @@ const Greeting = ({ userInfo }: IGreetingProps): React.ReactElement => {
   )
 }
 
-const mapStateToProps = ({ authentication }) => authentication
+const mapStateToProps = ({ authentication }: { authentication: IAuthReducerState }) => {
+  const { userInfo } = authentication
 
-export default connect(mapStateToProps, null)(Greeting)
+  return {
+    userInfo
+  }
+}
+
+export default connect(mapStateToProps)(Greeting)

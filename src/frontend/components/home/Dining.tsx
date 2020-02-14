@@ -8,16 +8,29 @@ import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 import { BORDER } from '../../styles/colors'
 import { DINING_ROUTE } from '../../constants/routes'
 
+import { IDiningReducerState, IVenueHour } from '../../types'
+
+interface IDining {
+  dispatchGetFavorites: () => void
+  dispatchGetVenueHours: () => void
+  favorites: string[]
+  venueHours: Record<string, IVenueHour[]>
+}
+
 const Dining = ({
   dispatchGetFavorites,
   dispatchGetVenueHours,
   favorites,
   venueHours,
-}) => {
+}: IDining) => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
   }, [])
+
+  if (!venueHours) return <React.Fragment />
+
+  console.log(venueHours)
 
   return (
     <BorderedCard>
@@ -56,8 +69,11 @@ const Dining = ({
   )
 }
 
-const mapStateToProps = ({ dining }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   const { favorites, venueHours } = dining
+
+  console.log('dining component')
+  console.log(venueHours)
 
   return {
     favorites,
@@ -65,7 +81,7 @@ const mapStateToProps = ({ dining }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
   dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })

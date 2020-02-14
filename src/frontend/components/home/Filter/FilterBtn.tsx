@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import {
   FilterBtnWrapper,
@@ -12,8 +11,20 @@ import {
 
 // TODO this is duplicate code
 
-class FilterBtn extends Component {
-  constructor(props) {
+interface IFilterBtnProps {
+  text: string
+  active: boolean
+  onClick: () => void
+  options: string[] // if there are more than a boolean number of options
+  onClickOption: (optionIdx: number) => void
+  activeOptions?: number[]
+  initialize: (optionsLength: number) => void
+}
+
+class FilterBtn extends Component<IFilterBtnProps> {
+  private focusRef: React.RefObject<HTMLAnchorElement>
+
+  constructor(props: IFilterBtnProps) {
     super(props)
 
     this.focusRef = React.createRef()
@@ -30,16 +41,19 @@ class FilterBtn extends Component {
     initialize(options.length)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: IFilterBtnProps) {
     const { active } = this.props
 
     // If we are showing the modal, focus on it
     if (active && !prevProps.active) {
-      this.focusRef.current.focus()
+      const { current } = this.focusRef
+      if (current) {
+        current.focus()
+      }
     }
   }
 
-  handleKeyPress(event) {
+  handleKeyPress(event: React.KeyboardEvent) {
     const ESCAPE_KEY_CODE = 27
     const { active } = this.props
 
@@ -54,7 +68,7 @@ class FilterBtn extends Component {
     }
   }
 
-  handleOptionKeyPress(event, idx) {
+  handleOptionKeyPress(event: React.KeyboardEvent, idx: number) {
     const SPACE_KEY_CODE = 32
     const { onClickOption } = this.props
 
@@ -83,7 +97,7 @@ class FilterBtn extends Component {
     } = this.props
 
     if (!this.areOptions() || !active) return null
-    const { offsetLeft } = this.focusRef.current
+    const { offsetLeft } = this.focusRef.current || {}
 
     return (
       <>
@@ -108,7 +122,7 @@ class FilterBtn extends Component {
                 onKeyPress={e => this.handleOptionKeyPress(e, idx)}
               >
                 <Circle active={isActiveOption} />
-                <OptionText active={isActiveOption}>{o}</OptionText>
+                <OptionText>{o}</OptionText>
               </Option>
             )
           })}
@@ -133,7 +147,7 @@ class FilterBtn extends Component {
         <FilterBtnWrapper
           tabIndex={0}
           active={active || areActiveOptions}
-          options={areOptions}
+          // options={areOptions}
           onClick={onClick}
           ref={this.focusRef}
           onKeyPress={this.handleKeyPress}
@@ -145,24 +159,6 @@ class FilterBtn extends Component {
       </>
     )
   }
-}
-
-FilterBtn.defaultProps = {
-  options: null,
-  onClick: () => {},
-  onClickOption: () => {},
-  active: false,
-  activeOptions: [],
-}
-
-FilterBtn.propTypes = {
-  text: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string),
-  onClick: PropTypes.func,
-  onClickOption: PropTypes.func,
-  initialize: PropTypes.func.isRequired,
-  active: PropTypes.bool,
-  activeOptions: PropTypes.arrayOf(PropTypes.number),
 }
 
 export default FilterBtn

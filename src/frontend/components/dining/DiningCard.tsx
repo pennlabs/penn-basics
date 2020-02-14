@@ -86,20 +86,23 @@ const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDa
 }
 
 const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
-  if (!venueHours) return []
+  if (!venueHours || !venueId) return []
 
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))
-  let venueHour = venueHours[venueId]
-  venueHour = venueHour.filter(hour => hour.date === currDate)
+  let venueHour: IVenueHour[] = []
+  console.log(venueHours)
+  if (venueHours[venueId]) {
+    venueHour = venueHour.filter(hour => hour.date === currDate)
+  }
 
   return venueHour[0].dayparts
 }
 
 interface IDiningCardProps {
   venueId: string
-  selected: boolean
-  isFavorited: boolean
+  selected?: boolean
+  isFavorited?: boolean
   venueHours: TVenueHours
   showLine?: boolean
   style?: {}

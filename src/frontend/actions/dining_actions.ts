@@ -16,7 +16,7 @@ import { IVenueHour } from '../types'
  * Get hours for all dining venues
  */
 export const getVenueHours = () => {
-  return (dispatch : Dispatch<Action>) => {
+  return (dispatch: Dispatch<Action>) => {
     dispatch({ type: getVenueInfoRequested })
 
     const venueIds: number[] = Object.values(venueMapping)
@@ -31,6 +31,8 @@ export const getVenueHours = () => {
         values.forEach((value, idx) => {
           dataSet[venueIds[idx]] = value.data.cafes[venueIds[idx]].days
         })
+
+        console.log(dataSet)
 
         dispatch({
           type: getVenueInfoFulfilled,

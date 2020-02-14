@@ -26,13 +26,13 @@ export interface IVenueHour {
   status: string
 }
 
-type TVenueHour = Record<string, IVenueHour>
+export type TVenueHour = Record<string, IVenueHour[]>
 
 export interface IDiningReducerState {
   error: string | null
   favorites: string[]
   venueHoursPending: boolean
-  venueHours: TVenueHour | null
+  venueHours: TVenueHour
 }
 
 export interface IVenueData {
