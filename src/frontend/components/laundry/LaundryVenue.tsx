@@ -25,7 +25,12 @@ import {
 } from '../../actions/laundry_actions'
 import { isValidNumericId } from '../../../utils/helperFunctions'
 import { maxWidth, PHONE } from '../../styles/sizes'
-import { IFavorite, ILaundryHallInfo, ILaundryReducerState, IReminder } from '../../../types'
+import {
+  IFavorite,
+  ILaundryHallInfo,
+  ILaundryReducerState,
+  IReminder,
+} from '../../../types'
 
 const MARGIN = '0.5rem'
 
@@ -57,25 +62,55 @@ interface IRemoveFavoriteInput {
   hallURLId: number
 }
 
-interface ILaundryVenueProps {
-  hallURLId: number
-  hallIntervalID: number
+interface ILaundryVenueDispatchProps {
   dispatchGetLaundryHall: (hallId: number, intervalID: number) => void
   dispatchGetReminders: () => void
+  dispatchAddFavorite: ({
+    hallURLId,
+    location,
+    hallName,
+  }: IAddFavoriteInput) => void
+  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) => void
+  dispatchAddReminder: (
+    machineID: number,
+    hallID: number,
+    machineType: string,
+    timeRemaining: number
+  ) => void
+  dispatchRemoveReminder: () => void
+}
+
+interface ILaundryVenueReduxProps {
+  hallIntervalID: number
   reminderIntervalID: number
   error: string
   browserError: string
   laundryHallInfo: ILaundryHallInfo
   favorites: IFavorite[]
   reminders: IReminder[]
-  dispatchAddFavorite: ({ hallURLId, location, hallName }: IAddFavoriteInput) => void
-  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) => void
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
-  dispatchRemoveReminder: () => void
 }
 
+interface ILaundryVenueOwnProps {
+  hallURLId: number
+}
+
+type ILaundryVenueProps = ILaundryVenueReduxProps &
+  ILaundryVenueDispatchProps &
+  ILaundryVenueOwnProps
+
 class LaundryVenue extends Component<ILaundryVenueProps> {
-  componentDidMount() {
+  static renderNoHall(): React.ReactElement {
+    // TODO store image locally
+    return (
+      <NoData
+        image="/img/laundry.png"
+        imageAlt="Laundry machine"
+        text="Select a laundry hall to see information"
+      />
+    )
+  }
+
+  componentDidMount(): void {
     const {
       hallURLId,
       hallIntervalID,
@@ -91,10 +126,12 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
     dispatchGetReminders()
   }
 
-  componentDidUpdate(prevProps: ILaundryVenueProps) {
+  componentDidUpdate(prevProps: ILaundryVenueProps): void {
     const { dispatchGetLaundryHall, hallURLId, hallIntervalID } = this.props
 
-    if (!isValidNumericId(hallURLId)) {return}
+    if (!isValidNumericId(hallURLId)) {
+      return
+    }
 
     const prevHallURLId = prevProps.hallURLId
 
@@ -103,25 +140,14 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     // clear the interval when another component is rendered
     const { hallIntervalID, reminderIntervalID } = this.props
     clearInterval(hallIntervalID)
     clearInterval(reminderIntervalID)
   }
 
-  static renderNoHall() {
-    // TODO store image locally
-    return (
-      <NoData
-        image="/img/laundry.png"
-        imageAlt="Laundry machine"
-        text="Select a laundry hall to see information"
-      />
-    )
-  }
-
-  render() {
+  render(): React.ReactElement {
     const {
       error,
       browserError,
@@ -162,8 +188,12 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
           <Buttons>
             <FavoriteButton
               isFavorited={isFavorited}
-              addFunction={dispatchAddFavorite}
-              removeFunction={dispatchRemoveFavorite}
+              addFunction={(props): void =>
+                dispatchAddFavorite(props as IAddFavoriteInput)
+              }
+              removeFunction={(props): void =>
+                dispatchRemoveFavorite(props as IRemoveFavoriteInput)
+              }
               addParams={{ hallURLId, location, hallName }}
               removeParams={{ hallURLId }}
             />
@@ -171,7 +201,7 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
               <span // eslint-disable-line
                 className="button"
                 style={{ marginLeft: '0.5rem' }}
-                onClick={() => dispatchRemoveReminder()}
+                onClick={(): void => dispatchRemoveReminder()}
               >
                 Remove Reminders
               </span>
@@ -229,13 +259,17 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
   }
 }
 
-const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
+const mapStateToProps = ({
+  laundry,
+}: {
+  laundry: ILaundryReducerState
+}): ILaundryVenueReduxProps => {
   const {
     error,
     browserError,
     laundryHallInfo,
-    pending,
-    laundryHalls,
+    // pending,
+    // laundryHalls,
     favorites,
     reminders,
     hallIntervalID,
@@ -246,8 +280,8 @@ const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
     error,
     browserError,
     laundryHallInfo,
-    pending,
-    laundryHalls,
+    // pending,
+    // laundryHalls,
     favorites,
     reminders,
     hallIntervalID,
@@ -255,17 +289,28 @@ const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchAddFavorite: ({ hallURLId, location, hallName }: IAddFavoriteInput) =>
+const mapDispatchToProps = (
+  dispatch: (action: any) => any
+): ILaundryVenueDispatchProps => ({
+  dispatchAddFavorite: ({
+    hallURLId,
+    location,
+    hallName,
+  }: IAddFavoriteInput): void =>
     dispatch(addFavorite(hallURLId, location, hallName)),
-  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput) =>
+  dispatchRemoveFavorite: ({ hallURLId }: IRemoveFavoriteInput): void =>
     dispatch(removeFavorite(hallURLId)),
-  dispatchGetLaundryHall: (hallId: number, intervalID: number) =>
+  dispatchGetLaundryHall: (hallId: number, intervalID: number): void =>
     dispatch(getLaundryHall(hallId, intervalID)),
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>
+  dispatchAddReminder: (
+    machineID: number,
+    hallID: number,
+    machineType: string,
+    timeRemaining: number
+  ): void =>
     dispatch(addReminder(machineID, hallID, machineType, timeRemaining)),
-  dispatchRemoveReminder: () => dispatch(removeReminder()),
-  dispatchGetReminders: () => dispatch(getReminders()),
+  dispatchRemoveReminder: (): void => dispatch(removeReminder()),
+  dispatchGetReminders: (): void => dispatch(getReminders()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaundryVenue)

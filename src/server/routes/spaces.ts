@@ -7,7 +7,7 @@ import { ISpace } from '../../types'
 
 const router = Router()
 
-export default function spacesRouter(): Router {
+export default (): Router => {
   router.get('/all', (_, res: Response) => {
     DB.findAllSpaces().then((spaces: Document[]) => {
       res.status(200).json({
@@ -50,7 +50,7 @@ export default function spacesRouter(): Router {
     try {
       spaceKeys.forEach((key: string) => {
         if (
-          typeof ((space as Record<string, any>)[key]) === 'undefined' ||
+          typeof (space as Record<string, any>)[key] === 'undefined' ||
           (space as Record<string, any>)[key] === ''
         ) {
           throw Error()

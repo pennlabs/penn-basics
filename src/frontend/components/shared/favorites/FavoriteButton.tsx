@@ -30,10 +30,13 @@ const FavoriteButton = ({
   removeFunction,
   addParams,
   removeParams,
-}: IFavoriteButtonProps) => {
+}: IFavoriteButtonProps): React.ReactElement => {
   if (isFavorited) {
     return (
-      <Button className="is-info" onClick={() => removeFunction(removeParams)}>
+      <Button
+        className="is-info"
+        onClick={(): void => removeFunction(removeParams)}
+      >
         <FavoriteIcon
           // opacity="0.75"
           // fill="white"
@@ -44,7 +47,7 @@ const FavoriteButton = ({
     )
   }
   return (
-    <Button isInfo onClick={() => addFunction(addParams)}>
+    <Button isInfo onClick={(): void => addFunction(addParams)}>
       <FavoriteIcon style={{ transform: 'scale(0.75)', opacity: '0.75' }} />
       &nbsp; Make Favorite
     </Button>
