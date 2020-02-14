@@ -4,21 +4,18 @@ import {
   TOGGLE_FILTER_HOME_CUSTOMIZE,
 } from '../actions/action_types'
 
+import { IHomeReducerState } from '../../types'
+
 type IHomeAction = {
   filterList?: number[]
 } & Action
-
-interface IHomeReducerState {
-  filterList?: number[]
-  filterCustomizeActive: boolean
-}
 
 const defaultState: IHomeReducerState = {
   filterList: [],
   filterCustomizeActive: false,
 }
 
-const homeReducer = (
+const HomeReducer = (
   state: IHomeReducerState = defaultState,
   action: IHomeAction
 ): IHomeReducerState => {
@@ -38,4 +35,4 @@ const homeReducer = (
   }
 }
 
-export default homeReducer
+export default HomeReducer

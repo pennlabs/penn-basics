@@ -6,15 +6,18 @@ import { Row, Col } from '../shared'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { maxWidth, PHONE, TABLET } from '../../styles/sizes'
 
+// import Components
 import Filter from './Filter/Filter'
 import Greeting from './Greeting'
 import Weather from './Weather'
 import News from './News'
-import Dining from './Dining'
+// import Dining from './Dining'
 import Laundry from './Laundry'
 import ExternalLinks from './ExternalLinks'
 import Quotes from './Quotes'
 import Events from './Events'
+
+import { IHomeReducerState } from '../../../types'
 
 const Wrapper = s.div`
   padding-top: 1rem;
@@ -30,13 +33,13 @@ const Wrapper = s.div`
   }
 `
 
-const Home = ({ filterList }: { filterList: number[] }) => {
+const Home = ({ filterList }: { filterList?: number[] }) => {
   const componentList = [
     <Weather key="weatherComponent" />,
     <Events key="eventsComponent" />,
     <News key="newsComponent" />,
     <Laundry key="laundryComponent" />,
-    <Dining key="diningComponent" />,
+    // <Dining key="diningComponent" />,
     <Quotes key="quotesComponent" />,
   ]
 
@@ -46,7 +49,7 @@ const Home = ({ filterList }: { filterList: number[] }) => {
         <Row margin="0.5rem">
           <Col sm={12} lg={8} margin="0.5rem">
             <Greeting />
-            {filterList.map(filter => componentList[filter])}
+            {filterList && filterList.map(filter => componentList[filter])}
           </Col>
 
           {/* Overflow visible so customize this page filter dropdown works */}
@@ -64,7 +67,7 @@ const Home = ({ filterList }: { filterList: number[] }) => {
   )
 }
 
-const mapStateToProps = ({ home }) => {
+const mapStateToProps = ({ home }: { home: IHomeReducerState }) => {
   const { filterList } = home
   return { filterList }
 }

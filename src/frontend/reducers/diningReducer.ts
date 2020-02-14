@@ -12,7 +12,7 @@ const defaultState: IDiningReducerState = {
   error: null,
   favorites: [],
   venueHoursPending: true,
-  venueHours: null,
+  venueHours: {},
 }
 
 const diningReducer = (state = defaultState, action: AnyAction) => {

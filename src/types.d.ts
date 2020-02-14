@@ -1,5 +1,17 @@
 import mongoose from './server/database/mongoose-connect'
 
+/**
+ * Home Reducer
+ */
+
+export interface IHomeReducerState {
+  filterList?: number[]
+  filterCustomizeActive: boolean
+}
+
+/**
+ * Authentication Reducer
+ */
 export interface IUser {
   pennid: number
   email: string
@@ -8,6 +20,10 @@ export interface IUser {
   displayName: string
   loggedIn: boolean
   fullName: string
+}
+
+export interface IAuthReducerState {
+  userInfo: IUser
 }
 
 export interface ILocation {

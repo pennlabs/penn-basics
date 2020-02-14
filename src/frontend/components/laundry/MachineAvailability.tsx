@@ -113,15 +113,17 @@ const Bell = ({
   return null
 }
 
+type TAddReminder = (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+
 interface IMachineAvailabilityProps {
   displayDetails: boolean
   machineData: IMachineInfo
-  machineType: string
-  allMachines: ILaundryHallDetail[]
-  laundryHallId: number
-  reminders: IReminder[]
-  dispatchAddReminder: (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
-  enableReminder: boolean
+  machineType?: string
+  allMachines?: ILaundryHallDetail[]
+  laundryHallId?: number
+  reminders?: IReminder[]
+  dispatchAddReminder?: TAddReminder
+  enableReminder?: boolean
 }
 
 const MachineAvailability = ({
@@ -134,9 +136,14 @@ const MachineAvailability = ({
   dispatchAddReminder,
   enableReminder,
 }: IMachineAvailabilityProps) => {
-  const tableMachines = allMachines.filter(
-    machine => machine.type === machineType
-  )
+  let tableMachines: ILaundryHallDetail[] = []
+
+  if (allMachines) {
+    tableMachines = allMachines.filter(
+      machine => machine.type === machineType
+    )
+  }
+
   const {
     open = 0,
     running = 0,
@@ -178,11 +185,15 @@ const MachineAvailability = ({
           <tbody>
             {tableMachines.map(
               ({ status, time_remaining: timeRemaining, id }) => {
-                const reminded = reminders.some(
-                  reminder =>
-                    reminder.machineID === id &&
-                    reminder.hallID === laundryHallId
-                )
+                let reminded = false
+                if (reminders) {
+                  reminded = reminders.some(
+                    reminder =>
+                      reminder.machineID === id &&
+                      reminder.hallID === laundryHallId
+                  )
+                }
+
                 return (
                   <tr key={id}>
                     <td>{id}</td>
@@ -192,13 +203,13 @@ const MachineAvailability = ({
                     <td>{status === 'Not online' ? '-' : timeRemaining}</td>
                     <td>
                       <Bell
-                        enableReminder={enableReminder}
+                        enableReminder={enableReminder as boolean}
                         timeRemaining={timeRemaining}
                         reminded={reminded}
                         id={id}
-                        laundryHallId={laundryHallId}
-                        dispatchAddReminder={dispatchAddReminder}
-                        machineType={machineType}
+                        laundryHallId={laundryHallId as number}
+                        dispatchAddReminder={dispatchAddReminder as TAddReminder}
+                        machineType={machineType as string}
                       />
                     </td>
                   </tr>

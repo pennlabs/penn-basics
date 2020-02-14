@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import FilterButton from './FilterBtn'
@@ -9,13 +8,23 @@ import {
   initializeFilterHome,
 } from '../../../actions/home_actions'
 
+import { IHomeReducerState } from '../../../../types'
+
+interface IFilterProps {
+  dispatchFilterHomeCustomize: (filter: number) => void
+  dispatchToggleHomeCustomize: () => void
+  dispatchInitializeFilterHome: (optionsLength: number) => void
+  filterCustomizeActive: boolean
+  filterList?: number[]
+}
+
 const Filter = ({
   dispatchFilterHomeCustomize,
   dispatchToggleHomeCustomize,
   dispatchInitializeFilterHome,
   filterCustomizeActive,
   filterList,
-}) => (
+}: IFilterProps) => (
   <FilterButton
     text="Customize this page"
     onClick={dispatchToggleHomeCustomize}
@@ -27,25 +36,12 @@ const Filter = ({
   />
 )
 
-Filter.defaultProps = {
-  filterList: [],
-  filterCustomizeActive: false,
-}
+const mapStateToProps = ({ home }: { home: IHomeReducerState }) => home
 
-Filter.propTypes = {
-  dispatchFilterHomeCustomize: PropTypes.func.isRequired,
-  dispatchToggleHomeCustomize: PropTypes.func.isRequired,
-  dispatchInitializeFilterHome: PropTypes.func.isRequired,
-  filterCustomizeActive: PropTypes.bool,
-  filterList: PropTypes.arrayOf(PropTypes.number),
-}
-
-const mapStateToProps = ({ home }) => home
-
-const mapDispatchToProps = dispatch => ({
-  dispatchFilterHomeCustomize: filter => dispatch(filterHomeCustomize(filter)),
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+  dispatchFilterHomeCustomize: (filter: number) => dispatch(filterHomeCustomize(filter)),
   dispatchToggleHomeCustomize: () => dispatch(toggleHomeCustomize()),
-  dispatchInitializeFilterHome: optionsLength =>
+  dispatchInitializeFilterHome: (optionsLength: number) =>
     dispatch(initializeFilterHome(optionsLength)),
 })
 

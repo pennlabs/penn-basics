@@ -31,6 +31,8 @@ export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
           dataSet[venueIds[idx]] = value.data.cafes[venueIds[idx]].days
         })
 
+        console.log(dataSet)
+
         dispatch({
           type: getVenueInfoFulfilled,
           venueHours: dataSet,
