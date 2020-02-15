@@ -64,7 +64,9 @@
     "request": "^2.88.0",
     "styled-components": "^4.3.2",
     "uuid": "^3.3.3",
-    "web-push": "^3.3.5"
+    "web-push": "^3.3.5",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.16",
@@ -99,8 +101,6 @@
     "mocha": "^4.0.1",
     "nodemon": "^2.0.2",
     "passport-oauth": "^1.0.0",
-    "prettier": "^1.19.1",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.7.4"
+    "prettier": "^1.19.1"
   }
 }
