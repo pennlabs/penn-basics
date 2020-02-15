@@ -9,9 +9,13 @@ COPY package*.json /app/
 COPY package-lock.json /app/
 
 # Install project dependencies
-RUN npm install --production=true
+ENV NODE_ENV "production"
+
+RUN npm install
 
 # Copy project files
 COPY . /app/
 
-CMD ["npm", "start"]
+RUN npm run build
+
+CMD ["npm", "run", "start"]

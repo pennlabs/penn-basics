@@ -1,4 +1,4 @@
 {
-  "presets" : ["@babel/preset-react", "@babel/preset-env"],
-  "plugins": ["babel-plugin-styled-components"]
+  "presets" : ["next/babel"],
+  "plugins": [["styled-components", { "ssr": true }], "inline-react-svg"]
 }

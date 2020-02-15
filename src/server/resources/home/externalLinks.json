@@ -1,21 +1,21 @@
 [
   {
-    "pictureURL": "https://raw.githubusercontent.com/pennlabs/clubs/master/static/img/peoplelogo.png",
+    "pictureURL": "/img/logos/clubs-logo.svg",
     "websiteURL": "https://pennclubs.com/",
     "productName": "Penn Clubs"
   },
   {
-    "pictureURL": "https://raw.githubusercontent.com/pennlabs/pennlabs.org/master/static/img/PCR.png",
+    "pictureURL": "/img/logos/pcr-logo.svg",
     "websiteURL": "https://penncoursereview.com/",
     "productName": "Penn Course Review"
   },
   {
-    "pictureURL": "https://penncoursealert.com/static/pca/PCA_logo.svg",
+    "pictureURL": "/img/logos/pca-logo.svg",
     "websiteURL": "https://penncoursealert.com/",
     "productName": "Penn Course Alert"
   },
   {
-    "pictureURL": "https://penncourseplan.com/static/favicon.ico",
+    "pictureURL": "/img/logos/pcp-logo.svg",
     "websiteURL": "https://penncourseplan.com/",
     "productName": "Penn Course Plan"
   }
