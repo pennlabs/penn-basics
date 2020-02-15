@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import s from 'styled-components'
 import { DebounceInput } from 'react-debounce-input'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 
 import XSVG from '../../../../public/img/x.svg'
 import { Title, BorderedCard, Card, Row, Col, Line } from '../shared'
@@ -27,7 +26,13 @@ import CheckCircleSVG from '../../../../public/img/check-circle.svg'
 import Loading from '../shared/Loading'
 import NotFound from '../shared/NotFound'
 import { getApiAuthRouteWithRedirectParams } from '../../constants/routes'
-import idVenueObj from '../../../server/resources/dining/id_venue_mappings.json'
+import IDVenueJSON from '../../../server/resources/dining/id_venue_mappings.json'
+
+const IDVenueData = IDVenueJSON as Record<string, string>
+
+import { IAuthReducerState, IUser } from '../../../types/authentication'
+import { IDiningReducerState, IFavorite as IDiningFavorite } from '../../../types/dining'
+import { ILaundryReducerState, IFavoriteHome as ILaundryFavorite } from '../../../types/laundry'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -57,16 +62,25 @@ const InputField = s(DebounceInput)`
   }
 `
 
+interface IAppProps {
+  dispatchGetDiningFavorites: () => void
+  dispatchGetLaundryFavorites: () => void
+  dispatchDiningRemoveFavorite: (venueId: string) => void
+  dispatchLaundryRemoveFavorite: (hallId: number) => void
+  diningFavorites: IDiningFavorite[]
+  laundryFavorites: ILaundryFavorite[]
+  userInfo: IUser
+}
+
 const App = ({
   dispatchGetDiningFavorites,
   dispatchGetLaundryFavorites,
-  dispatchGetUserInfo,
   dispatchDiningRemoveFavorite,
   dispatchLaundryRemoveFavorite,
   diningFavorites,
   laundryFavorites,
   userInfo,
-}) => {
+}: IAppProps) => {
   const { loggedIn } = userInfo || {}
   if (!loggedIn) {
     return (
@@ -96,7 +110,7 @@ const App = ({
     setName(displayName || fullName)
   }, [fullName, displayName])
 
-  const onChangeName = e => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
     axios
       .post('/api/auth/updateUser', { pennid, displayName: e.target.value })
@@ -144,7 +158,7 @@ const App = ({
                 {diningFavorites.map(id => (
                   <>
                     <p style={{ padding: '1rem' }}>
-                      {idVenueObj[id]}
+                      {IDVenueData[id]}
                       <XSVG
                         style={{
                           float: 'right',
@@ -175,7 +189,7 @@ const App = ({
                           cursor: 'pointer',
                         }}
                         onClick={() => {
-                          dispatchLaundryRemoveFavorite(hall.id)
+                          dispatchLaundryRemoveFavorite(Number(hall.id))
                           dispatchGetLaundryFavorites()
                         }}
                       />
@@ -199,7 +213,13 @@ const App = ({
   )
 }
 
-const mapStateToProps = ({ dining, laundry, authentication }) => {
+interface IStateToProps {
+  dining: IDiningReducerState
+  laundry: ILaundryReducerState
+  authentication: IAuthReducerState
+}
+
+const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps) => {
   const { favorites: diningFavorites } = dining
   const { favoritesHome: laundryFavorites } = laundry
   const { userInfo } = authentication
@@ -211,19 +231,14 @@ const mapStateToProps = ({ dining, laundry, authentication }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetDiningFavorites: () => dispatch(getFavorites()),
   dispatchGetLaundryFavorites: () => dispatch(getFavoritesHomePage()),
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
-  dispatchDiningRemoveFavorite: venueId =>
+  dispatchDiningRemoveFavorite: (venueId: string) =>
     dispatch(diningRemoveFavorite(venueId)),
-  dispatchLaundryRemoveFavorite: hallId =>
+  dispatchLaundryRemoveFavorite: (hallId: number) =>
     dispatch(laundryRemoveFavorite(hallId)),
 })
-
-App.propTypes = {
-  dispatchGetDiningFavorites: PropTypes.func.isRequired,
-  dispatchGetLaundryFavorites: PropTypes.func.isRequired,
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
