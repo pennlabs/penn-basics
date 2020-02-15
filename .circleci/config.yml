@@ -30,10 +30,10 @@ jobs:
           paths:
             - ./node_modules
             - ~/.cache/npm
-      - run:
-          name: Lint
-          command: |
-            npm run lint
+      # - run:
+      #     name: Lint
+      #     command: |
+      #       npm run lint
 
 workflows:
   version: 2
