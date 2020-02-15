@@ -9,11 +9,12 @@ import { GOOGLE_MAPS_API_ROUTE } from '../src/frontend/constants/routes'
 const Studyspaces = () => {
   const router = useRouter()
   const { id } = router.query
+  const { GOOGLE_MAPS_API_KEY } = process.env
 
   return (
     <Header>
       <Head>
-        <script src={GOOGLE_MAPS_API_ROUTE} />
+        <script src={GOOGLE_MAPS_API_ROUTE(`${GOOGLE_MAPS_API_KEY}`)} />
       </Head>
       <App id={id as string} />
     </Header>

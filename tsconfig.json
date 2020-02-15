@@ -21,6 +21,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "exclude": ["dist", ".next", "out", "next.config.js"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": ["dist", ".next", "out"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/server/database/scripts/seedFoodTrucksInfo.js", "next.config.js"]
 }

@@ -8,12 +8,20 @@ export interface ILocation {
 
 export interface ISpace {
   name: string
+  description: string
+  tags: string[]
   address: string
 
   /**
    * URL to an image of the studyspace
    */
   image?: string
+  outlets: number
+  quiet: number
+  groups: number
+  start: number[]
+  end: number[]
+  location?: ILocation
 
   /**
    * Attribution for who created this image / where it came from
@@ -29,17 +37,6 @@ export interface ISpace {
      */
     name?: string
   }
-  description: string
-  start: number[]
-  end: number[]
-  outlets: number
-  quiet: number
-  groups: number
-  tags: string[]
-  location?: {
-    lat: number
-    lng: number
-  }
 }
 
 export type ISpaceWithSpaceID = ISpace & { spaceID: TSpaceId }
@@ -50,4 +47,10 @@ export type ISpaceWithHoursAndOpenAndSpaceId = ISpace & {
   open: boolean
   hours: string
   spaceID: TSpaceId
+}
+
+export type ISpaceORHoursAndOpenAndSpaceId = ISpace & {
+  open?: boolean
+  hours?: string
+  spaceID?: TSpaceId
 }

@@ -13,7 +13,7 @@ function deleteFoodTrucksInDB() {
 }
 
 function updateFoodTrucks() {
-  return trucks.map(truck => {
+  return trucks.map((truck) => {
     const { menu = [], priceTypes = [] } = truck
     let { name: foodtruckName } = truck
     foodtruckName = foodtruckName

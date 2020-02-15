@@ -1,4 +1,5 @@
 // Foodtrucks Interfaces
+import { Dispatch, Action } from 'redux'
 
 import mongoose from '../server/database/mongoose-connect'
 
@@ -25,6 +26,25 @@ export interface IFoodTruckUserReview {
 
 export type TFoodTruckId = string
 
+export interface IFoodTruckData {
+  name: string
+  payments?: string[]
+  start: (string|null)[]
+  end: (string|null)[]
+  location?: {
+    plusCode: string
+    lat: number
+    lng: number
+  }
+  tags: string[]
+  menu: Record<string, IFoodTruckMenuItem[]>
+  link?: string
+  languageTypes?: [string]
+
+  image?: string
+  description?: string
+}
+
 interface IFoodTruckBase {
   foodtruckID: TFoodTruckId
   name: string
@@ -44,7 +64,7 @@ interface IFoodTruckBase {
   image: string
   description?: string
   menu: IFoodTruckMenu[]
-  reviews: IFoodTruckReview[]
+  reviews: IFoodTruckUserReview[]
   timeUpdated?: string
 }
 

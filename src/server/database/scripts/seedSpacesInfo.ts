@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { Query } from 'mongoose'
 
-import spaces from '../../resources/spaces.json'
+import spacesJSON from '../../resources/spaces.json'
 import Space from '../models/Space'
+
+import { ISpaceORHoursAndOpenAndSpaceId } from '../../../types/studyspaces'
+
+const spaces = spacesJSON as ISpaceORHoursAndOpenAndSpaceId[]
 
 const { MONGO_URI, GOOGLE_MAPS_API_KEY } = process.env
 if (!MONGO_URI) {

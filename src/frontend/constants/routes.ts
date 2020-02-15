@@ -1,9 +1,3 @@
-const { GOOGLE_MAPS_API_KEY } = process.env
-
-if (!GOOGLE_MAPS_API_KEY) {
-  throw new Error('Missing GOOGLE_MAPS_API_KEY in env')
-}
-
 // Frontend
 export const HOME_ROUTE = '/'
 export const PROFILE_ROUTE = '/profile'
@@ -33,7 +27,7 @@ export const getApiAuthRouteWithRedirectParams = (pathname: string): string =>
   `${API_AUTH_ROUTE}?successRedirect=${pathname}&failureRedirect=${pathname}`
 
 // External
-export const GOOGLE_MAPS_API_ROUTE = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`
+export const GOOGLE_MAPS_API_ROUTE = (GOOGLE_MAPS_API_KEY: string) => `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`
 export const PENN_DINING_BASE_URL =
   'https://university-of-pennsylvania.cafebonappetit.com/cafe'
 export const FEEDBACK_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'

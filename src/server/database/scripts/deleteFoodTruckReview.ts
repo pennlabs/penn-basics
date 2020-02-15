@@ -8,12 +8,8 @@ if (!MONGO_URI) {
 
 async function main() {
   try {
-    const [
-      _executor, // eslint-disable-line
-      _scriptName, // eslint-disable-line
-      foodTruckName,
-      pennid,
-    ] = process.argv
+    const foodTruckName = process.argv[2]
+    const pennid = process.argv[3]
 
     const res = await deleteReview(foodTruckName, Number(pennid))
     console.log(res) // eslint-disable-line
