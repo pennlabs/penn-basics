@@ -10,7 +10,7 @@ import {
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
 import venueMapping from '../../server/resources/dining/venue_id_mappings.json'
-import { IVenueHour } from '../types'
+import { TVenueHours, IFavorite } from '../../types/dining'
 
 /**
  * Get hours for all dining venues
@@ -26,12 +26,10 @@ export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
     // Dispatch information from the Promise set
     try {
       Promise.all(responsesSet).then(values => {
-        const dataSet: Record<number, IVenueHour> = {}
+        const dataSet: TVenueHours = {}
         values.forEach((value, idx) => {
           dataSet[venueIds[idx]] = value.data.cafes[venueIds[idx]].days
         })
-
-        console.log(dataSet)
 
         dispatch({
           type: getVenueInfoFulfilled,
@@ -48,7 +46,7 @@ export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
 
 export const getFavorites = () => (dispatch: Dispatch<Action>) => {
     const favoritesString = localStorage.getItem('dining_favorites')
-    let favoritesArray: string[] = []
+    let favoritesArray: IFavorite[] = []
     if (favoritesString) {
       favoritesArray = JSON.parse(favoritesString)
       favoritesArray = favoritesArray.sort((a, b) => Number(a) - Number(b))
@@ -65,7 +63,7 @@ export const getFavorites = () => (dispatch: Dispatch<Action>) => {
 export const addFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => {
     logEvent('dining', 'addFavorite')
     const favorites = localStorage.getItem('dining_favorites')
-    let favoritesArray: string[]
+    let favoritesArray: IFavorite[]
     if (!favorites) {
       favoritesArray = [venueID]
     } else {
@@ -90,7 +88,7 @@ export const removeFavorite = (venueID: string) => (dispatch: Dispatch<Action>) 
 
     // favorites is an array of venueIDs
     const favorites = localStorage.getItem('dining_favorites')
-    let favoritesArray: string[] = []
+    let favoritesArray: IFavorite[] = []
     if (favorites) {favoritesArray = JSON.parse(favorites)}
 
     favoritesArray = favoritesArray.filter(favorite => favorite !== venueID)

@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import { Dispatch, Action } from 'redux'
 
-import { TFoodTruckId, IFoodTruck, IFormattedFoodtruckAction } from 'src/types'
+import { TFoodTruckId, IFoodTruck, IFormattedFoodtruckAction } from '../../types/foodtrucks'
 import {
   getFoodtrucksDataRequested,
   getFoodtrucksDataRejected,

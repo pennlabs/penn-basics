@@ -29,7 +29,7 @@ import {
   FILTER_HEIGHT,
 } from '../../../styles/sizes'
 
-import { IFoodTrucksReducerState } from '../../../../types'
+import { IFoodTrucksReducerState } from '../../../../types/foodtrucks'
 
 interface IFilterWrapperProps {
   active?: boolean

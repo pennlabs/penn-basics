@@ -30,7 +30,8 @@ import {
   ILaundryHallInfo,
   ILaundryReducerState,
   IReminder,
-} from '../../../types'
+} from '../../../types/laundry'
+import Loading from '../shared/Loading'
 
 const MARGIN = '0.5rem'
 
@@ -88,6 +89,7 @@ interface ILaundryVenueReduxProps {
   laundryHallInfo: ILaundryHallInfo
   favorites: IFavorite[]
   reminders: IReminder[]
+  pending: boolean
 }
 
 interface ILaundryVenueOwnProps {
@@ -149,6 +151,7 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
 
   render(): React.ReactElement {
     const {
+      pending,
       error,
       browserError,
       laundryHallInfo,
@@ -171,6 +174,10 @@ class LaundryVenue extends Component<ILaundryVenueProps> {
           <NotFound />
         </Wrapper>
       )
+    }
+
+    if (pending) {
+      return <Loading />
     }
 
     const isFavorited = favorites.some(({ hallId }) => hallId === hallURLId)
@@ -268,7 +275,7 @@ const mapStateToProps = ({
     error,
     browserError,
     laundryHallInfo,
-    // pending,
+    pending,
     // laundryHalls,
     favorites,
     reminders,
@@ -280,7 +287,7 @@ const mapStateToProps = ({
     error,
     browserError,
     laundryHallInfo,
-    // pending,
+    pending,
     // laundryHalls,
     favorites,
     reminders,

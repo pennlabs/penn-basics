@@ -23,7 +23,7 @@ import {
   ILaundryReducerState,
   IFavoriteHome,
   IReminder
-} from '../../types'
+} from '../../types/laundry'
 
 const defaultState: ILaundryReducerState = {
   pending: true,

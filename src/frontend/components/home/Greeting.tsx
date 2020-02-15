@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Text } from '../shared'
 
-import { IUser, IAuthReducerState } from '../../../types'
+import { IUser, IAuthReducerState } from '../../../types/authentication'
 
 const greetings = ['Hi There', 'Hey there', 'Howdy']
 const emojis = ['😀', '😛', '😗', '🤠']

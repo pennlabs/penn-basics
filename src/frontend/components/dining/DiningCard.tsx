@@ -14,7 +14,7 @@ import {
   Line,
   Circle,
 } from '../shared'
-import { IVenueHour, IDaypart, TVenueData } from '../../types'
+import { IVenueHour, IDaypart, TVenueData, TVenueHours } from '../../../types/dining'
 import venueDataJSON from '../../../server/resources/dining/venue_info.json'
 
 const venueData = venueDataJSON as TVenueData
@@ -35,8 +35,6 @@ const getOpenHours = (venueHours: IDaypart[]) => {
   const openHours = venueHours.filter(hour => hour.starttime <= currTime && currTime <= hour.endtime)
   return openHours
 }
-
-type TVenueHours = Record<string, IVenueHour[]>
 
 const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDaypart[] }) => {
   const showMealLabels = venueData[Number(venueId)].isRetail
@@ -84,15 +82,12 @@ const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDa
 }
 
 const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
-  if (!venueHours) {return []}
+  if (!venueHours) return []
 
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))
-  let venueHour: IVenueHour[] = []
-  console.log(venueHours)
-  if (venueHours[venueId]) {
-    venueHour = venueHour.filter(hour => hour.date === currDate)
-  }
+  let venueHour: IVenueHour[] = venueHours[venueId]
+  venueHour = venueHour.filter(hour => hour.date === currDate)
 
   return venueHour[0].dayparts
 }

@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+import { Action } from 'redux'
 import {
   getVenueInfoRequested,
   getVenueInfoRejected,
@@ -6,16 +6,22 @@ import {
   updateDiningFavorites,
 } from '../actions/action_types'
 
-import { IDiningReducerState } from '../types'
+import { IDiningReducerState, TVenueHours, IFavorite } from '../../types/dining'
 
 const defaultState: IDiningReducerState = {
-  error: null,
+  error: '',
   favorites: [],
   venueHoursPending: true,
   venueHours: {},
 }
 
-const diningReducer = (state = defaultState, action: AnyAction) => {
+type IDiningAction = {
+  error?: string
+  venueHours?: TVenueHours
+  favorites?: IFavorite[]
+} & Action
+
+const diningReducer = (state = defaultState, action: IDiningAction) => {
   switch (action.type) {
     case getVenueInfoRequested:
       return {

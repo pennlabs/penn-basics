@@ -19,7 +19,7 @@ import { SNOW } from '../../styles/colors'
 import { Hours } from './Hours'
 import Modal from '../shared/Modal'
 import { STUDYSPACES_ROUTE } from '../../constants/routes'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types/studyspaces'
 
 const Credit = s.div`
   width: 100%;

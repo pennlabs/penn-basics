@@ -7,7 +7,7 @@ import {
   LAUNDRY_HALL_ROUTE,
   LAUNDRY_HALL_QUERY_ROUTE,
 } from '../../constants/routes'
-import { ILaundryHall } from '../../../types'
+import { ILaundryHall } from '../../../types/laundry'
 
 interface ILaundryCardProps {
   locationObject: ILaundryHall

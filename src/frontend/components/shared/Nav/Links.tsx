@@ -15,7 +15,7 @@ import {
   getApiAuthRouteWithRedirectParams,
   PROFILE_ROUTE,
 } from '../../../constants/routes'
-import { IUserInfo } from '../../../types'
+import { IUserInfo } from '../../../../types/profile'
 
 const MOBILE_ACTIVE_NAV_HEIGHT = '250px'
 

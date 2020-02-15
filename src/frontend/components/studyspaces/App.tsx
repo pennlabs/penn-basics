@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 
 import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types/studyspaces'
 import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
 import {

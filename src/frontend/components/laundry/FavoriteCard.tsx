@@ -7,7 +7,7 @@ import {
   LAUNDRY_HALL_ROUTE,
   LAUNDRY_HALL_QUERY_ROUTE,
 } from '../../constants/routes'
-import { IFavorite } from '../../../types'
+import { IFavorite } from '../../../types/laundry'
 
 const FavoriteCard = ({ favorite }: { favorite: IFavorite }) => {
   const { hallId, locationName } = favorite

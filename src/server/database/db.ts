@@ -5,12 +5,9 @@ import { Document, Query } from 'mongoose'
 import Space from './models/Space'
 import Foodtrucks from './models/FoodTruck'
 import User from './models/User'
-import {
-  IFoodTruckUserReview,
-  ISpace,
-  IUser,
-  IFoodTruckDocument,
-} from '../../types'
+import { IUser } from '../../types/authentication'
+import { IFoodTruckUserReview, IFoodTruckDocument } from '../../types/foodtrucks'
+import { ISpace } from '../../types/studyspaces'
 
 // return all fields except for menu, priceTypes, and reviews
 export const findAllFoodtrucks = async (): Promise<Document[]> =>

@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import { Dispatch } from 'redux'
-import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from 'src/types'
+import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from '../../../types/studyspaces'
 import {
   Card,
   Subtitle,

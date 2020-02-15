@@ -5,7 +5,7 @@ import {
   TSpaceId,
   ISpaceWithHoursAndOpenAndSpaceId,
   ISpaceWithSpaceID,
-} from 'src/types'
+} from '../../types/studyspaces'
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,

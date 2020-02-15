@@ -8,7 +8,7 @@ import {
   initializeFilterHome,
 } from '../../../actions/home_actions'
 
-import { IHomeReducerState } from '../../../../types'
+import { IHomeReducerState } from '../../../../types/home'
 
 interface IFilterProps {
   dispatchFilterHomeCustomize: (filter: number) => void

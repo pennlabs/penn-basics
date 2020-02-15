@@ -5,7 +5,7 @@ import { BorderedCard, AnchorButton, Text } from '../shared'
 import HoursVisualization from './HoursVisualization'
 import data from '../../../server/resources/dining/venue_info.json'
 import ExternalLinkIcon from '../../../../public/img/external-link.svg'
-import { TVenueData } from '../../types'
+import { TVenueData } from '../../../types/dining'
 
 const venueData = data as TVenueData
 

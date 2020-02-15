@@ -10,7 +10,7 @@ import Loading from '../shared/Loading'
 import FavoriteButton from '../shared/favorites/FavoriteButton'
 import { NoData, Title } from '../shared'
 import { maxWidth, PHONE } from '../../styles/sizes'
-import { IDiningReducerState, TVenueData } from '../../types'
+import { IDiningReducerState, TVenueData, IFavorite } from '../../../types/dining'
 
 const venueData = data as TVenueData
 
@@ -46,7 +46,7 @@ const Wrapper = s.div`
 `
 
 interface IDiningVenueProps {
-  favorites: string[]
+  favorites: IFavorite[]
   venueId: string
   venueHoursPending: boolean
   dispatchAddFavorite: ({ venueId }: { venueId: string }) => void

@@ -16,7 +16,7 @@ import StatusPill from './StatusPill'
 import { FlexRow, LaundryOverview } from '../shared'
 import BellSVG from '../../../../public/img/bell.svg'
 
-import { IMachineInfo, ILaundryHallDetail, IReminder } from '../../../types'
+import { IMachineInfo, ILaundryHallDetail, IReminder } from '../../../types/laundry'
 
 const Table = s.table`
   margin-bottom: 0;

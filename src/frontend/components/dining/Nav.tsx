@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import uuid from 'uuid'
 
 import { Scrollbar, NavHeaderCard } from '../shared'
@@ -9,7 +8,13 @@ import { WHITE } from '../../styles/colors'
 import { NAV_HEIGHT } from '../../styles/sizes'
 
 import venueDataJSON from '../../../server/resources/dining/venue_info.json'
-import { TVenueData, IVenueData, IDiningReducerState } from '../../types'
+import {
+  TVenueData,
+  IVenueData,
+  TVenueHours,
+  IFavorite
+} from '../../../types/dining'
+import Loading from '../shared/Loading'
 
 /**
  * Data cleanup which should run once (not at every component build)
@@ -36,21 +41,25 @@ diningKeys.sort((keyA, keyB) => {
 })
 
 interface INav {
-  favorites?: any
+  favorites: IFavorite[]
   selectedVenueId: string
-  venueHours?: any
+  venueHours: TVenueHours
+  pending: boolean
 }
 
 const Nav = ({
   favorites,
   selectedVenueId,
   venueHours,
+  pending
 }: INav): React.ReactElement => {
   // If a venue is selected, hide the scrollbar on mobile
   const hideOnMobile =
     selectedVenueId !== undefined &&
     selectedVenueId !== null &&
     selectedVenueId !== ''
+
+  if (pending) return <Loading padding="40vh 0" />
 
   return (
     <Scrollbar
@@ -65,7 +74,7 @@ const Nav = ({
     >
       <NavHeaderCard title="Favorites" />
 
-      {favorites.map((key: string) => (
+      {favorites && favorites.map((key: string) => (
           <DiningCard
             key={uuid()}
             venueId={key}
@@ -104,14 +113,4 @@ const Nav = ({
   )
 }
 
-const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
-  const { favorites, venueHours, venueHoursPending } = dining
-
-  return {
-    favorites,
-    venueHours,
-    venueHoursPending,
-  }
-}
-
-export default connect(mapStateToProps, null)(Nav)
+export default Nav

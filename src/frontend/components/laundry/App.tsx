@@ -13,7 +13,7 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
-import { ILaundryReducerState, IFavorite, ILaundryHall } from '../../../types'
+import { ILaundryReducerState, IFavorite, ILaundryHall } from '../../../types/laundry'
 
 interface IAppProps {
   dispatchGetLaundryHalls: () => void

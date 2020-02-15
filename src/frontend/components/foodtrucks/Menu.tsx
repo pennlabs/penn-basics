@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Text } from '../shared'
-import { IFormattedFoodtruck } from '../../../types'
+import { IFormattedFoodtruck } from '../../../types/foodtrucks'
 
 const Menu = ({ foodtruckInfo }: { foodtruckInfo: IFormattedFoodtruck }) => {
   const { menu, priceTypes } = foodtruckInfo

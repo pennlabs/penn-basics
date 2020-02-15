@@ -1,4 +1,10 @@
-import { IFoodTruck, TFoodTruckId, IFoodTruckWithOpen, IFoodTrucksReducerState, IFormattedFoodtruck } from 'src/types'
+import {
+  IFoodTruck,
+  TFoodTruckId,
+  IFoodTruckWithOpen,
+  IFoodTrucksReducerState,
+  IFormattedFoodtruck
+} from '../../types/foodtrucks'
 import { Action } from 'redux'
 import {
   getFoodtrucksDataRequested,

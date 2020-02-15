@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
 import { Document } from 'mongoose'
 import * as DB from '../database/db'
-import { IFoodTruckUserReview } from '../../types'
+import { IFoodTruckUserReview } from '../../types/foodtrucks'
 import { isLoggedInMiddleware } from '../../utils/helperFunctions'
 
 const router = Router()

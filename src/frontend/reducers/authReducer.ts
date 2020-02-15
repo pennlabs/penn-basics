@@ -1,5 +1,5 @@
 import { Action } from 'redux'
-import { IUser, IAuthReducerState } from '../../types'
+import { IUser, IAuthReducerState } from '../../types/authentication'
 import { getUserInfoFulfilled } from '../actions/action_types'
 
 type IAuthAction = {

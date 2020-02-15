@@ -17,7 +17,7 @@ import ExternalLinks from './ExternalLinks'
 import Quotes from './Quotes'
 import Events from './Events'
 
-import { IHomeReducerState } from '../../../types'
+import { IHomeReducerState } from '../../../types/home'
 
 const Wrapper = s.div`
   padding-top: 1rem;

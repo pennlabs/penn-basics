@@ -17,7 +17,7 @@ import Menu from './Menu'
 import Logo from './Logo'
 import Back from './Back'
 import { Shade } from '../Shade'
-import { IUserInfo } from '../../../types'
+import { IUserInfo } from '../../../../types/profile'
 
 /**
  * Navbar is fixed position and thus takes up no height as far as other elements

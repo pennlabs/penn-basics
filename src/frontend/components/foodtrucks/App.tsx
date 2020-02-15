@@ -24,7 +24,7 @@ import FoodtruckModal from './FoodtruckModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { FOODTRUCK_ROUTE, FOODTRUCK_QUERY_ROUTE } from '../../constants/routes'
 import { SNOW } from '../../styles/colors'
-import { IFoodTrucksReducerState, IFormattedFoodtruck } from '../../../types'
+import { IFoodTrucksReducerState, IFormattedFoodtruck } from '../../../types/foodtrucks'
 
 // TODO ghost loaders
 

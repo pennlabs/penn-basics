@@ -21,7 +21,7 @@ import {
   updateReminderIntervalID,
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
-import { IReminder, ILaundryHallGeneralInfo, IFavorite } from '../../types'
+import { IReminder, ILaundryHallGeneralInfo, IFavorite } from '../../types/laundry'
 
 const BASE = 'https://api.pennlabs.org'
 
@@ -72,9 +72,6 @@ const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId:
   // TODO why is this being reused??? should be separate actions
   // TODO why is this called interval????
   // Document this...
-  dispatch({
-    type: getLaundryHallInfoRequested,
-  })
 
   try {
     const axiosResponse = await axios.get(
@@ -103,6 +100,10 @@ export function getLaundryHall(laundryHallId: number, prevIntervalID: number) {
         intervalID: null,
       })
     }
+
+    dispatch({
+      type: getLaundryHallInfoRequested,
+    })
 
     getLaundryHallInterval(dispatch, laundryHallId)
 

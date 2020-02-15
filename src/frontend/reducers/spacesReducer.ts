@@ -1,6 +1,6 @@
 import { Action } from 'redux'
 
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from 'src/types'
+import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../types/studyspaces'
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,

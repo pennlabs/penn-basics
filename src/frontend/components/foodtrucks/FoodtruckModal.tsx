@@ -39,7 +39,8 @@ import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
 
 // import constants
 import { FOODTRUCKS_ROUTE } from '../../constants/routes'
-import { IFormattedFoodtruck, IUser, IFoodTrucksReducerState } from '../../../types'
+import { IFormattedFoodtruck, IFoodTrucksReducerState } from '../../../types/foodtrucks'
+import { IUser } from '../../../types/authentication'
 
 const Buttons = s.div`
   float: right;

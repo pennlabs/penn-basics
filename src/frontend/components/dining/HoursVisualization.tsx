@@ -8,7 +8,7 @@ import { ErrorMessage } from '../shared'
 import { LIGHTER_BLUE, BORDER, MEDIUM_GRAY } from '../../styles/colors'
 import { convertDate, pad } from '../../../utils/helperFunctions'
 
-import { IDiningReducerState, IDaypart, IVenueHour } from '../../types'
+import { IDiningReducerState, IDaypart, IVenueHour, TVenueHours } from '../../../types/dining'
 
 const TableWrapper = s.div`
   max-width: 100%;
@@ -136,7 +136,7 @@ const List = ({ venueHours }: { venueHours: IVenueHour[] }) => {
 
 interface IHoursVisualizationProps {
   venueId: string
-  venueHours?: Record<string, IVenueHour[]>
+  venueHours?: TVenueHours
 }
 
 const HoursVisualization = ({ venueHours, venueId }: IHoursVisualizationProps) => {

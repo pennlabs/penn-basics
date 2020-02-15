@@ -1,7 +1,7 @@
 /* global google, document */
 import React from 'react'
 import styled from 'styled-components'
-import { ILocation } from 'src/types'
+import { ILocation } from '../../../types/studyspaces'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 // Styles

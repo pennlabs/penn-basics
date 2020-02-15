@@ -7,7 +7,7 @@ import { Card, Subtitle, Subtext, FlexRow, Col, Circle } from '../shared'
 import { setHoveredFoodtruck } from '../../actions/foodtrucks_action'
 import { DARK_GRAY } from '../../styles/colors'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
-import { IFoodTrucksReducerState } from '../../../types'
+import { IFoodTrucksReducerState } from '../../../types/foodtrucks'
 // import { getNoiseLevel, getOutletsLevel } from './mapper'
 
 const StyledLink = s.a`

@@ -8,7 +8,7 @@ import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 import { BORDER } from '../../styles/colors'
 import { DINING_ROUTE } from '../../constants/routes'
 
-import { IDiningReducerState, IVenueHour } from '../../types'
+import { IDiningReducerState, IVenueHour } from '../../../types/dining'
 
 interface IDining {
   dispatchGetFavorites: () => void

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { ILocation } from 'src/types'
+import { ILocation } from '../../../types/studyspaces'
 import { maxWidth, PHONE } from '../../styles/sizes'
 
 const SHOW_MARKER_KEY = -1 // Marker keys which we shouldn't delete

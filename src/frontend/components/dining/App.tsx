@@ -6,22 +6,38 @@ import { NAV_HEIGHT } from '../../styles/sizes'
 import Nav from './Nav'
 import DiningVenue from './DiningVenue'
 import { getFavorites, getVenueHours } from '../../actions/dining_actions'
+import { IDiningReducerState, IFavorite, TVenueHours } from '../../../types/dining'
 
 interface IAppProps {
   dispatchGetFavorites: () => void
   dispatchGetVenueHours: () => void
   id: string
+  favorites: IFavorite[],
+  venueHours: TVenueHours,
+  venueHoursPending: boolean,
 }
 
-const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }: IAppProps): React.ReactElement => {
+const App = ({
+  dispatchGetFavorites,
+  dispatchGetVenueHours,
+  id,
+  favorites,
+  venueHours,
+  venueHoursPending,
+}: IAppProps): React.ReactElement => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [dispatchGetFavorites, dispatchGetVenueHours])
+  }, [])
 
   return (
     <Row fullHeightDesktop>
-      <Nav selectedVenueId={id} />
+      <Nav
+        selectedVenueId={id}
+        favorites={favorites}
+        venueHours={venueHours}
+        pending={venueHoursPending}
+      />
 
       <Col
         sm={12}
@@ -36,9 +52,19 @@ const App = ({ dispatchGetFavorites, dispatchGetVenueHours, id }: IAppProps): Re
   )
 }
 
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+  const { favorites, venueHours, venueHoursPending } = dining
+
+  return {
+    favorites,
+    venueHours,
+    venueHoursPending,
+  }
+}
+
 const mapDispatchToProps = (dispatch: (action: any) => any) => ({
   dispatchGetFavorites: () => dispatch(getFavorites()),
   dispatchGetVenueHours: () => dispatch(getVenueHours()),
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

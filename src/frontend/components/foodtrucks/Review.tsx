@@ -3,7 +3,7 @@ import moment from 'moment'
 
 import { Line } from '../shared'
 import StarIcon from '../../../../public/img/foodtrucks/star.svg'
-import { IFoodTruckUserReview } from '../../../types'
+import { IFoodTruckUserReview } from '../../../types/foodtrucks'
 
 const array = [1, 2, 3, 4, 5]
 

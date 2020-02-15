@@ -17,7 +17,7 @@ import MachineAvailability from '../laundry/MachineAvailability'
 import { getFavoritesHomePage } from '../../actions/laundry_actions'
 import { LAUNDRY_HALLS_ROUTE } from '../../constants/routes'
 
-import { ILaundryReducerState, IFavoriteHome } from '../../../types'
+import { ILaundryReducerState, IFavoriteHome } from '../../../types/laundry'
 
 interface ILaundryProps {
   dispatchGetFavoritesHomePage: () => void

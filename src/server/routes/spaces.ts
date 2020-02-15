@@ -3,7 +3,7 @@ import { Document } from 'mongoose'
 
 import { BAD_REQUEST, OK } from 'http-status-codes'
 import * as DB from '../database/db'
-import { ISpace } from '../../types'
+import { ISpace } from '../../types/studyspaces'
 
 const router = Router()
 

@@ -5,7 +5,7 @@ import axios from 'axios'
 import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
 
 import * as DB from '../database/db'
-import { IUser, DoneCallback } from '../../types'
+import { IUser, DoneCallback } from '../../types/authentication'
 
 const { OAuth2Strategy } = require('passport-oauth')
 

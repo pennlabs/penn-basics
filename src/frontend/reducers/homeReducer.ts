@@ -4,7 +4,7 @@ import {
   TOGGLE_FILTER_HOME_CUSTOMIZE,
 } from '../actions/action_types'
 
-import { IHomeReducerState } from '../../types'
+import { IHomeReducerState } from '../../types/home'
 
 type IHomeAction = {
   filterList?: number[]
