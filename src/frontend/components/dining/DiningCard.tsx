@@ -82,8 +82,6 @@ const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDa
 }
 
 const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
-  if (!venueHours) return []
-
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))
   let venueHour: IVenueHour[] = venueHours[venueId]

@@ -8,13 +8,14 @@ import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 import { BORDER } from '../../styles/colors'
 import { DINING_ROUTE } from '../../constants/routes'
 
-import { IDiningReducerState, IVenueHour } from '../../../types/dining'
+import { IDiningReducerState, TVenueHours, IFavorite } from '../../../types/dining'
 
 interface IDining {
   dispatchGetFavorites: () => void
   dispatchGetVenueHours: () => void
-  favorites: string[]
-  venueHours: Record<string, IVenueHour[]>
+  favorites: IFavorite[]
+  venueHours: TVenueHours
+  venueHoursPending: boolean
 }
 
 const Dining = ({
@@ -22,15 +23,14 @@ const Dining = ({
   dispatchGetVenueHours,
   favorites,
   venueHours,
+  venueHoursPending
 }: IDining) => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [dispatchGetFavorites, dispatchGetVenueHours])
+  }, [])
 
-  if (!venueHours) return <React.Fragment />
-
-  console.log(venueHours)
+  if (venueHoursPending || !favorites) return <React.Fragment />
 
   return (
     <BorderedCard>
@@ -70,14 +70,12 @@ const Dining = ({
 }
 
 const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
-  const { favorites, venueHours } = dining
-
-  console.log('dining component')
-  console.log(venueHours)
+  const { favorites, venueHours, venueHoursPending } = dining
 
   return {
     favorites,
     venueHours,
+    venueHoursPending
   }
 }
 

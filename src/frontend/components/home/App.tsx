@@ -11,7 +11,7 @@ import Filter from './Filter/Filter'
 import Greeting from './Greeting'
 import Weather from './Weather'
 import News from './News'
-// import Dining from './Dining'
+import Dining from './Dining'
 import Laundry from './Laundry'
 import ExternalLinks from './ExternalLinks'
 import Quotes from './Quotes'
@@ -39,7 +39,7 @@ const Home = ({ filterList }: { filterList?: number[] }) => {
     <Events key="eventsComponent" />,
     <News key="newsComponent" />,
     <Laundry key="laundryComponent" />,
-    // <Dining key="diningComponent" />,
+    <Dining key="diningComponent" />,
     <Quotes key="quotesComponent" />,
   ]
 
