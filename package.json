@@ -11,7 +11,7 @@
     "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix",
     "dev": "source env.sh && nodemon",
     "build": "next build",
-    "start": "source env.sh && ts-node --project tsconfig.server.json src/server/index.ts"
+    "start": "ts-node --project tsconfig.server.json src/server/index.ts"
   },
   "repository": {
     "type": "git",
