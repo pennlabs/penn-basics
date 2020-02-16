@@ -42,7 +42,9 @@ const App = ({
   const isActiveHall =
     parsedHallId !== undefined &&
     !Number.isNaN(parsedHallId) &&
-    (parsedHallId < -1)
+    (parsedHallId > -1)
+  
+  console.log(isActiveHall)
 
   return (
     <Row fullHeight>
@@ -54,20 +56,14 @@ const App = ({
         fullHeight
         hideOnMobile={isActiveHall}
       >
+        <Card background={BABY_BLUE} padding="0">
+          <NavHeader className="title is-5">Favorites</NavHeader>
+          <Line />
+        </Card>
 
-        {favorites && favorites.length && (
-          <>
-            <Card background={BABY_BLUE} padding="0">
-              <NavHeader className="title is-5">Favorites</NavHeader>
-              <Line />
-            </Card>
-
-            {favorites.map(favorite => (
-              <FavoriteCard favorite={favorite} />
-              )
-            )}
-          </>
-        )}
+        {favorites && favorites.map(favorite => (
+          <FavoriteCard favorite={favorite} />
+        ))}
 
         <Card background={BABY_BLUE} padding="0">
           <NavHeader className="title is-5">Laundry Halls</NavHeader>
