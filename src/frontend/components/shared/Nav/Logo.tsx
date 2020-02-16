@@ -40,7 +40,7 @@ const LogoText = s.h1`
 
 const LOGO_HEIGHT = '2.5rem'
 
-const Logo = s.img`
+const LogoImg = s.img`
   height: ${LOGO_HEIGHT};
   padding-right: 0.4rem;
   padding-top: 0rem;
@@ -56,11 +56,11 @@ const Wrapper = s.div`
   }
 `
 
-export default (): JSX.Element => (
+const Logo = (): JSX.Element => (
   <Wrapper>
     <Link href={HOME_ROUTE}>
       <a style={{ height: LOGO_HEIGHT }}>
-        <Logo src="https://i.imgur.com/JhifMZc.png" alt="logo" />
+        <LogoImg src="https://i.imgur.com/JhifMZc.png" alt="logo" />
       </a>
     </Link>
 
@@ -73,3 +73,5 @@ export default (): JSX.Element => (
     <VersionTag className="tag is-rounded">v1.0</VersionTag>
   </Wrapper>
 )
+
+export default Logo

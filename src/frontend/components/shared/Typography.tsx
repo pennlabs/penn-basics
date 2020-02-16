@@ -30,12 +30,12 @@ interface ITextProps {
 }
 
 export const Text = styled.p<ITextProps>`
-  margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
+  margin-bottom: ${({ marginBottom }): string => marginBottom || '1rem'};
   line-height: 1.5;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  width: ${({ fullWidth }): string => (fullWidth ? '100%' : 'auto')};
   display: inline-block;
-  ${({ color }) => color && `color: ${color} !important;`}
-  ${({ medium }) => medium && 'font-weight: 500;'}
+  ${({ color }): string => (color && `color: ${color} !important;`) || ''}
+  ${({ medium }): string => (medium && 'font-weight: 500;') || ''}
 `
 
 export const Tag = styled.p`
@@ -57,8 +57,8 @@ interface ISubtextProps {
 
 export const Subtext = styled.p<ISubtextProps>(
   ({ loading, marginBottom, paddingTop }) => css`
-    margin-bottom: ${ marginBottom || '1rem'};
-    padding-top: ${ paddingTop || '0'};
+    margin-bottom: ${marginBottom || '1rem'};
+    padding-top: ${paddingTop || '0'};
     line-height: 1.5;
     width: auto;
     display: inline-block;
@@ -81,14 +81,14 @@ interface ITitleProps {
 export const Title = styled.h1<ITitleProps>`
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
+  margin-bottom: ${({ marginBottom }): string => marginBottom || '0.5rem'};
   line-height: 1.25;
 `
 
 export const Subtitle = styled.h2<ITitleProps>`
   font-size: 125%;
   font-weight: bold;
-  margin-bottom: ${({ marginBottom }) => marginBottom || '0.5rem'};
+  margin-bottom: ${({ marginBottom }): string => marginBottom || '0.5rem'};
   line-height: 1.25;
 `
 

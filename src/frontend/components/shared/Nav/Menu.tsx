@@ -6,8 +6,8 @@ interface IMenuProps {
   toggleActive: (active: boolean) => void
 }
 
-const Menu = ({ active, toggleActive }: IMenuProps) => {
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+const Menu = ({ active, toggleActive }: IMenuProps): React.ReactElement => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>): void => {
     event.preventDefault()
 
     if (event.keyCode === 32) {
@@ -17,7 +17,7 @@ const Menu = ({ active, toggleActive }: IMenuProps) => {
 
   return (
     <Bars
-      handleClick={() => toggleActive(!active)}
+      handleClick={(): void => toggleActive(!active)}
       onKeyPress={handleKeyPress}
     />
   )

@@ -1,5 +1,3 @@
-/* globals window */
-
 import React, { useEffect, useState } from 'react'
 import { withRouter, Router } from 'next/router'
 import s from 'styled-components'
@@ -40,7 +38,9 @@ const Back = ({ router }: IBackProps): React.ReactElement => {
     setRoute(asPath)
   }, [router])
 
-  if (!route || route === '/') {return <React.Fragment />}
+  if (!route || route === '/') {
+    return <React.Fragment />
+  }
 
   const lastIdx = route.lastIndexOf('/')
   const to = route.substring(0, lastIdx) || '/'

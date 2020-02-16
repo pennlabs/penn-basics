@@ -11,5 +11,5 @@ export const Line = styled.div<ILine>`
   height: 1px;
   background: ${BORDER};
   opacity: 0.5;
-  ${({ margin }) => margin && `margin: ${margin};`}
+  ${({ margin }): string => (margin ? `margin: ${margin};` : '')}
 `

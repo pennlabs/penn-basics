@@ -57,14 +57,14 @@ const StyledShade = s(Shade)<{ zIndex: number }>`
   height: 100vh;
   width: 100vw;
   background: ${BLACK_ALPHA(0.5)};
-  z-index: ${({ zIndex }) => zIndex - 1};
+  z-index: ${({ zIndex }): number => zIndex - 1};
 
   ${minWidth(PHONE)} {
     display: none;
   }
 `
 
-export interface IOwnProps {}
+interface IOwnProps {}
 
 interface IStateProps {
   userInfo?: IUserInfo
@@ -76,11 +76,11 @@ interface IDispatchProps {
 
 type Props = IStateProps & IDispatchProps & IOwnProps
 
-const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
+const Nav = ({ dispatchGetUserInfo, userInfo }: Props): React.ReactElement => {
   const [isNewlyMounted, setIsNewlyMounted] = useState(true)
   const [active, toggleActive] = useState(false)
 
-  const toggle = () => {
+  const toggle = (): void => {
     if (isNewlyMounted) {
       setIsNewlyMounted(false)
     }
@@ -118,14 +118,11 @@ const Nav = ({ dispatchGetUserInfo, userInfo }: Props) => {
   )
 }
 
-
-const mapStateToProps = ({ authentication }: { authentication: IUserInfo }) => authentication
+const mapStateToProps = ({ authentication }: { authentication: IUserInfo }) =>
+  authentication
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
   dispatchGetUserInfo: () => dispatch(getUserInfo()),
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav)
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

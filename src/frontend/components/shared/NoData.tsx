@@ -72,7 +72,11 @@ const NoDataScrollWrapper = s.div`
   }
 `
 
-export const NoDataScroll = ({ image, imageAlt, text }: INoDataProps) => (
+export const NoDataScroll = ({
+  image,
+  imageAlt,
+  text,
+}: INoDataProps): React.ReactElement => (
   <NoDataScrollWrapper className="columns is-vcentered">
     <Row className="column" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
       <Col offsetSm={1} sm={10} offsetMd={2} md={8} offsetLg={3} lg={6}>

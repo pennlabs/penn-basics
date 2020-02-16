@@ -4,7 +4,6 @@ import s from 'styled-components'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import { clearActiveSpace } from '../../actions/spaces_actions'
 import {
   Title,
@@ -19,7 +18,10 @@ import { SNOW } from '../../styles/colors'
 import { Hours } from './Hours'
 import Modal from '../shared/Modal'
 import { STUDYSPACES_ROUTE } from '../../constants/routes'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types/studyspaces'
+import {
+  TSpaceId,
+  ISpaceWithHoursAndOpenAndSpaceId,
+} from '../../../types/studyspaces'
 
 const Credit = s.div`
   width: 100%;
@@ -109,7 +111,7 @@ const SpaceModal = (props: ISpaceModalProps): React.ReactElement => {
                 showMarker
                 gestureHandling="cooperative"
                 height="50vh"
-                handleClickMarker={() => {
+                handleClickMarker={(): void => {
                   window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
                 }}
               />

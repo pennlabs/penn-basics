@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import s from 'styled-components'
 import Link from 'next/link'
-
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import { Dispatch } from 'redux'
-import { ISpaceWithHoursAndOpenAndSpaceId, TSpaceId } from '../../../types/studyspaces'
+
+import { ISpacesReducerState } from '../../../types/studyspaces'
+import {
+  ISpaceWithHoursAndOpenAndSpaceId,
+  TSpaceId,
+} from '../../../types/studyspaces'
 import {
   Card,
   Subtitle,
@@ -25,19 +28,6 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-// SpaceCard.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   open: PropTypes.bool,
-//   image: PropTypes.string,
-//   outlets: PropTypes.number,
-//   quiet: PropTypes.number,
-//   hours: PropTypes.string.isRequired,
-//   hoveredSpace: PropTypes.string,
-//   spaceId: PropTypes.string.isRequired,
-//   setHoveredSpaceDispatch: PropTypes.func.isRequired,
-//   setActiveSpaceDispatch: PropTypes.func.isRequired,
-// }
-
 type ISpaceCardProps = Partial<ISpaceWithHoursAndOpenAndSpaceId> & {
   hoveredSpace?: TSpaceId
   spaceId: TSpaceId
@@ -45,13 +35,10 @@ type ISpaceCardProps = Partial<ISpaceWithHoursAndOpenAndSpaceId> & {
   setActiveSpaceDispatch: (id: TSpaceId) => void
 }
 
+// TODO make this a functional component
 class SpaceCard extends Component<ISpaceCardProps, {}> {
   constructor(props: ISpaceCardProps) {
     super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-    this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.handleMouseEnter = this.handleMouseEnter.bind(this)
   }
 
   handleKeyPress(event: React.KeyboardEvent): void {
@@ -65,7 +52,9 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
     const { hoveredSpace, spaceId, setHoveredSpaceDispatch } = this.props
 
     // If there is no change to be made
-    if (hoveredSpace === spaceId) {return}
+    if (hoveredSpace === spaceId) {
+      return
+    }
 
     setHoveredSpaceDispatch(spaceId)
   }
@@ -86,8 +75,8 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
       <Link href={`/studyspaces?id=${spaceId}`} as={`/studyspaces/${spaceId}`}>
         <StyledLink>
           <Card
-            onClick={this.handleClick}
-            onKeyPress={this.handleKeyPress}
+            onClick={(): void => this.handleClick()}
+            onKeyPress={(e): void => this.handleKeyPress(e)}
             padding="0.5rem 0.5rem 0.5rem 1rem"
             hoverable
           >
@@ -97,7 +86,7 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
               )}
               <Col
                 padding={image ? '0.5rem 0 0.5rem 1rem' : '0'}
-                onMouseEnter={this.handleMouseEnter}
+                onMouseEnter={(): void => this.handleMouseEnter()}
               >
                 <Content>
                   <Subtitle marginBottom="0">{name}</Subtitle>

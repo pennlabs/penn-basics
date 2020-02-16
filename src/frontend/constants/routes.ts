@@ -27,9 +27,12 @@ export const getApiAuthRouteWithRedirectParams = (pathname: string): string =>
   `${API_AUTH_ROUTE}?successRedirect=${pathname}&failureRedirect=${pathname}`
 
 // External
-export const GOOGLE_MAPS_API_ROUTE = (GOOGLE_MAPS_API_KEY: string) => `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`
+export const GOOGLE_MAPS_API_ROUTE = (GOOGLE_MAPS_API_KEY: string): string =>
+  `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`
 export const PENN_DINING_BASE_URL =
   'https://university-of-pennsylvania.cafebonappetit.com/cafe'
 export const FEEDBACK_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
 export const PENN_DINING_URL = (slug: string): string =>
   `${PENN_DINING_BASE_URL}/${slug}`
+export const DEFAULT_OAUTH_CALLBACK_URL =
+  'https://www.pennbasics.com/api/auth/provider/callback'

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { Keyframes } from 'styled-components'
 
 import { BLACK_ALPHA } from '../../styles/colors'
 import { LONG_ANIMATION_DURATION } from '../../styles/sizes'
@@ -26,7 +26,7 @@ export const Shade = styled.div<IShadeProps>`
   background: ${BLACK_ALPHA(0.5)};
   z-index: ${Z_INDEX};
   text-align: center;
-  animation-name: ${({ isNewlyMounted, show }) => {
+  animation-name: ${({ isNewlyMounted, show }): Keyframes | string => {
     if (isNewlyMounted) {
       return 'none'
     }
@@ -37,6 +37,6 @@ export const Shade = styled.div<IShadeProps>`
     return fadeOut
   }};
   animation-duration: ${LONG_ANIMATION_DURATION};
-  max-height: ${({ show }) => (show ? '100vh' : '0vh')};
-  opacity: ${({ show }) => (show ? '1' : '0')};
+  max-height: ${({ show }): string => (show ? '100vh' : '0vh')};
+  opacity: ${({ show }): string => (show ? '1' : '0')};
 `

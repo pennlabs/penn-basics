@@ -63,9 +63,9 @@ export const FilterBtnWrapper = s.a<IFilterBtnWrapper>`
     font-size: 80%;
   }
 
-  ${({ active }) =>
-    active &&
-    `
+  ${({ active }): string =>
+    (active &&
+      `
     background: ${BLUE} !important;
     color: ${WHITE} !important;
 
@@ -73,7 +73,8 @@ export const FilterBtnWrapper = s.a<IFilterBtnWrapper>`
     :focus {
       background: ${DARK_BLUE} !important;
     }
-  `}
+  `) ||
+    ''}
 `
 
 /**
@@ -170,8 +171,8 @@ export const Circle = s.span<ICircle>`
   display: inline-block;
   margin-right: 0.5rem;
 
-  ${({ active }) =>
-    active && `background: ${BLUE}; border: 2px solid ${DARK_BLUE};`}
+  ${({ active }): string =>
+    (active && `background: ${BLUE}; border: 2px solid ${DARK_BLUE};`) || ''}
 `
 
 export const OptionText = s.span`

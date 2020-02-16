@@ -2,8 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../../types/studyspaces'
+import { ISpacesReducerState } from '../../../types/studyspaces'
+import {
+  TSpaceId,
+  ISpaceWithHoursAndOpenAndSpaceId,
+} from '../../../types/studyspaces'
 import MobileToggleView from './MobileToggleView'
 import SpaceCard from './SpaceCard'
 import {
@@ -55,15 +58,14 @@ class StudySpacesApp extends React.Component<
   constructor(props: IStudySpacesAppProps) {
     super(props)
     this.state = { googleMapError: '', isListViewMobile: true }
-    this.toggleView = this.toggleView.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { getAllSpacesDataDispatch } = this.props
     getAllSpacesDataDispatch()
   }
 
-  componentDidUpdate(prevProps: IStudySpacesAppProps) {
+  componentDidUpdate(prevProps: IStudySpacesAppProps): void {
     /**
      * Handle when the user re-navigates to this page, in which case the component updates
      * and the props are wiped BUT the component does not re-mounts
@@ -81,12 +83,12 @@ class StudySpacesApp extends React.Component<
     }
   }
 
-  toggleView() {
+  toggleView(): void {
     const { isListViewMobile } = this.state
     this.setState({ isListViewMobile: !isListViewMobile })
   }
 
-  render() {
+  render(): React.ReactElement {
     const { filteredSpacesData, error, pending, hoveredSpace, id } = this.props
 
     const parsedSpaceId = null || id
@@ -106,7 +108,7 @@ class StudySpacesApp extends React.Component<
       <>
         <MobileToggleView
           isListView={isListViewMobile}
-          toggle={this.toggleView}
+          toggle={(): void => this.toggleView()}
         />
 
         <Filter />

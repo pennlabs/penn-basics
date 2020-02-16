@@ -111,7 +111,7 @@ export const Search = ({
       htmlFor={INPUT_ID}
       showInput={showInput}
       active={active}
-      onClick={() => {
+      onClick={(): void => {
         if (!showInput) {
           setShowInput(true)
         }
@@ -120,7 +120,7 @@ export const Search = ({
       {/* TODO port this over to styled components */}
       <SearchIconStyled
         className="fas fa-search"
-        onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+        onClick={(e: React.MouseEvent<Element, MouseEvent>): void => {
           e.stopPropagation()
           setShowInput(!showInput)
         }}
@@ -129,9 +129,9 @@ export const Search = ({
       {showInput && (
         <SearchComponent
           id={INPUT_ID}
-          onFocus={() => setActive(true)}
-          onBlur={() => setActive(false)}
-          onChange={e => filterFunction(e.target.value)}
+          onFocus={(): void => setActive(true)}
+          onBlur={(): void => setActive(false)}
+          onChange={(e): void => filterFunction(e.target.value)}
           value={filterString}
         />
       )}

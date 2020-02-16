@@ -25,12 +25,8 @@ const Label = s.span<ILabel>`
   margin-right: 0.625em;
   transition: all 0.2 ease;
 
-  ${({ active }) =>
-    active &&
-    `
-    opacity: 1;
-    color: ${BLUE} !important;
-  `}
+  ${({ active }): string =>
+    (active && `opacity: 1; color: ${BLUE} !important;`) || ''}
 `
 
 // const ToggleWrapper = s.div`
@@ -79,7 +75,7 @@ const Toggle = ({
   filterOffText,
   filterOnText,
   filterAction,
-}: IToggleProps) => (
+}: IToggleProps): React.ReactElement => (
   <Wrapper>
     <Label>{filterOffText} </Label>
     <Switch onChange={filterAction} />

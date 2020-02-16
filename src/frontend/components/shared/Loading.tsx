@@ -17,14 +17,14 @@ interface ILoadingWrapper {
 }
 
 const LoadingWrapper = s.div<ILoadingWrapper>`
-  width: ${({ displayInLine }) => (displayInLine ? '0' : '100%')};
-  padding: ${({ padding }) => padding || '1rem 0'};
+  width: ${({ displayInLine }): string => (displayInLine ? '0' : '100%')};
+  padding: ${({ padding }): string => padding || '1rem 0'};
   text-align: center;
   transition: opacity 0.5s ease;
-  opacity: ${({ hide }) => (hide ? '0' : '1')};
-  display: ${({ displayInLine }) =>
+  opacity: ${({ hide }): string => (hide ? '0' : '1')};
+  display: ${({ displayInLine }): string =>
     displayInLine ? 'inline-block' : 'block'} ;
-  transform: ${({ translateY }) => `translateY(${translateY})`}
+  transform: ${({ translateY }): string => `translateY(${translateY})`}
 `
 
 const spin = keyframes`
@@ -39,10 +39,10 @@ interface ILoadingCircle {
 
 const LoadingCircle = s.span<ILoadingCircle>`
   display: inline-block;
-  width: ${({ size }) => size || SIZE};
-  height: ${({ size }) => size || SIZE};
+  width: ${({ size }): string => size || SIZE};
+  height: ${({ size }): string => size || SIZE};
   border-radius: 50%;
-  border-width: ${({ thickness }) => thickness || THICKNESS};
+  border-width: ${({ thickness }): string => thickness || THICKNESS};
   border-style: solid;
   border-right-color: ${BORDER};
   border-left-color: ${BLUE};
@@ -70,7 +70,7 @@ const Loading = ({
   size,
   translateY,
   thickness,
-}: ILoadingProps) => {
+}: ILoadingProps): React.ReactElement => {
   const [hidden, toggleHidden] = useState(true)
 
   useEffect(() => {
@@ -78,9 +78,11 @@ const Loading = ({
       const timer = setTimeout(() => {
         toggleHidden(false)
       }, delay || DEFAULT_DELAY)
-      return () => clearTimeout(timer)
+      return (): void => clearTimeout(timer)
     }
-    return () => {}
+
+    // No cleanup needed if there is no timeout
+    return (): void => undefined
   })
 
   return (

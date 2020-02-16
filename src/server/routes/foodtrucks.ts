@@ -6,7 +6,7 @@ import { isLoggedInMiddleware } from '../../utils/helperFunctions'
 
 const router = Router()
 
-export default function foodtrucksRouter(): Router {
+const foodtrucksRouter = (): Router => {
   router.get('/all', (_, res: Response) => {
     DB.findAllFoodtrucks().then((trucks: Document[]) => {
       res.status(200).json({
@@ -41,10 +41,9 @@ export default function foodtrucksRouter(): Router {
         showName,
       }
 
-      DB.updateReview(foodtruckId, newReview).then(foodtruck => {
-        res.status(200).json({
-          foodtruck,
-        })
+      const foodtruck = await DB.updateReview(foodtruckId, newReview)
+      res.status(200).json({
+        foodtruck,
       })
     }
   )
@@ -73,3 +72,5 @@ export default function foodtrucksRouter(): Router {
 
   return router
 }
+
+export default foodtrucksRouter

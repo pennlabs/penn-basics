@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const router = Router()
 
-export default function diningRouter(): Router {
+const diningRouter = (): Router => {
   router.get('/venue_hours/:venueId', (req, res) => {
     const {
       params: { venueId },
@@ -19,3 +19,5 @@ export default function diningRouter(): Router {
 
   return router
 }
+
+export default diningRouter

@@ -42,7 +42,7 @@ interface IBars {
   onKeyPress: (event: React.KeyboardEvent<HTMLDivElement>) => void
 }
 
-const Bars = ({ handleClick, onKeyPress }: IBars) => (
+const Bars = ({ handleClick, onKeyPress }: IBars): React.ReactElement => (
   <Wrapper onClick={handleClick} onKeyPress={onKeyPress} tabIndex={0}>
     <Bar />
     <Bar />

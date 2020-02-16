@@ -6,6 +6,7 @@ import { INTERNAL_SERVER_ERROR } from 'http-status-codes'
 
 import * as DB from '../database/db'
 import { IUser, DoneCallback } from '../../types/authentication'
+import { DEFAULT_OAUTH_CALLBACK_URL } from '../../frontend/constants/routes'
 
 const { OAuth2Strategy } = require('passport-oauth')
 
@@ -13,8 +14,7 @@ require('dotenv').config()
 
 const router = Router()
 
-const providerBaseURL =
-  process.env.OAUTH_BASE_URL || 'https://www.provider.com/'
+const providerBaseURL = process.env.OAUTH_BASE_URL
 const tokenURL = `${providerBaseURL}accounts/token/`
 const introspectURL = `${providerBaseURL}accounts/introspect/`
 const authorizationURL = `${providerBaseURL}accounts/authorize`
@@ -22,11 +22,9 @@ const clientID = process.env.OAUTH_CLIENT_ID || 'keyboard-cat-id'
 const clientSecret = process.env.OAUTH_CLIENT_SECRET || 'keyboard-cat-secret'
 
 // This is localhost when acting locally
-const callbackURL =
-  process.env.OAUTH_CALLBACK_URL ||
-  'https://www.pennbasics.com/api/auth/provider/callback'
+const callbackURL = process.env.OAUTH_CALLBACK_URL || DEFAULT_OAUTH_CALLBACK_URL
 
-export default function authRouter(): Router {
+export const authRouter = (): Router => {
   passport.serializeUser((user: IUser, done) => {
     done(null, user.pennid)
   })

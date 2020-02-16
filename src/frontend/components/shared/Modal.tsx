@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { Keyframes } from 'styled-components'
 import Link from 'next/link'
 import Router from 'next/router'
 
@@ -22,7 +22,7 @@ const ModalContent = styled.div<IModalContent>`
   background: ${WHITE};
   width: 50%;
   display: inline-block;
-  margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
+  margin-top: ${({ show }): string => (show ? 'calc(1rem + 5vh)' : '100vh')};
   margin-bottom: calc(1rem + 5vh);
   box-sizing: border-box;
   padding: 10.41vh 0;
@@ -30,7 +30,7 @@ const ModalContent = styled.div<IModalContent>`
   text-align: left;
   position: relative;
 
-  animation-name: ${({ show }) => (show ? slideIn : slideOut)};
+  animation-name: ${({ show }): Keyframes => (show ? slideIn : slideOut)};
   animation-duration: ${LONG_ANIMATION_DURATION};
 
   @media screen and (max-width: 1024px) {
@@ -48,10 +48,10 @@ interface IModalClose {
 }
 
 const ModalClose = styled.div<IModalClose>`
-  animation-name: ${({ show }) => (show ? slideIn : slideOut)};
+  animation-name: ${({ show }): Keyframes => (show ? slideIn : slideOut)};
   animation-duration: ${LONG_ANIMATION_DURATION};
 
-  margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
+  margin-top: ${({ show }): string => (show ? 'calc(1rem + 5vh)' : '100vh')};
 
   position: fixed;
   top: 1rem;
@@ -110,17 +110,12 @@ class Modal extends Component<IModalProps, IModalState> {
 
   constructor(props: IModalProps) {
     super(props)
-
     this.state = { isNewlyMounted: true }
-
     this.focusRef = React.createRef()
-
-    this.makeNotNewlyMounted = this.makeNotNewlyMounted.bind(this)
-    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   // Avoid animations showing on load
-  componentDidUpdate(prevProps: IModalProps) {
+  componentDidUpdate(prevProps: IModalProps): void {
     const { show } = this.props
     const { isNewlyMounted } = this.state
 
@@ -132,17 +127,19 @@ class Modal extends Component<IModalProps, IModalState> {
     // If we are showing the modal, focus on it
     if (show && !prevProps.show) {
       const { current } = this.focusRef || {}
-      if (!current) {return}
+      if (!current) {
+        return
+      }
       current.focus()
     }
   }
 
-  makeNotNewlyMounted() {
+  makeNotNewlyMounted(): void {
     this.setState({ isNewlyMounted: false })
   }
 
   // Close the modal when the user presses the escape key
-  handleKeyPress(event: React.KeyboardEvent) {
+  handleKeyPress(event: React.KeyboardEvent): void {
     const { show, ROUTE } = this.props
     if (
       (event.keyCode === ESCAPE_KEY_CODE ||
@@ -152,13 +149,13 @@ class Modal extends Component<IModalProps, IModalState> {
       const { toggle } = this.props
       if (toggle) {
         toggle()
-      } else {
-        ROUTE && Router.push(ROUTE)
+      } else if (ROUTE) {
+        Router.push(ROUTE)
       }
     }
   }
 
-  render() {
+  render(): React.ReactElement {
     const { show, children, toggle, ROUTE } = this.props
     const { isNewlyMounted } = this.state
 
@@ -170,8 +167,8 @@ class Modal extends Component<IModalProps, IModalState> {
           tabIndex={show ? 0 : -1}
           onClick={toggle}
           isNewlyMounted={isNewlyMounted}
-          onKeyPress={this.handleKeyPress}
-          onKeyDown={this.handleKeyPress}
+          onKeyPress={(e): void => this.handleKeyPress(e)}
+          onKeyDown={(e): void => this.handleKeyPress(e)}
         >
           <ModalContent onClick={noop} show={show}>
             <ModalClose onClick={toggle} show={show}>
@@ -188,10 +185,12 @@ class Modal extends Component<IModalProps, IModalState> {
         show={show}
         ref={this.focusRef}
         tabIndex={show ? 0 : -1}
-        onClick={() => Router.push(ROUTE)}
+        onClick={(): void => {
+          Router.push(ROUTE)
+        }}
         isNewlyMounted={isNewlyMounted}
-        onKeyPress={this.handleKeyPress}
-        onKeyDown={this.handleKeyPress}
+        onKeyPress={(e): void => this.handleKeyPress(e)}
+        onKeyDown={(e): void => this.handleKeyPress(e)}
       >
         <ModalContent onClick={noop} show={show}>
           <Link href={ROUTE}>
@@ -216,8 +215,8 @@ interface IModalContent {
 }
 
 export const ModalContainer = styled.div<IModalContent>`
-  padding: 0 ${({ padding = 8.33 }) => padding}vw;
-  background: ${({ background }) => background || WHITE};
-  padding-top: ${({ paddingTop }) => paddingTop || 0};
-  padding-bottom: ${({ paddingBottom }) => paddingBottom || 0};
+  padding: 0 ${({ padding }): string => padding || '8.33vw'};
+  background: ${({ background }): string => background || WHITE};
+  padding-top: ${({ paddingTop }): string => paddingTop || '0'};
+  padding-bottom: ${({ paddingBottom }): string => paddingBottom || '0'};
 `

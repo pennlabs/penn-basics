@@ -10,7 +10,9 @@ interface IPennLabsCreditProps {
   padding?: string
 }
 
-const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
+const PennLabsCredit = ({
+  padding,
+}: IPennLabsCreditProps): React.ReactElement => (
   <Col padding={padding || '0 1rem'}>
     <Subtext paddingTop="0.5rem" marginBottom="0">
       Made with
@@ -24,7 +26,7 @@ const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
         href="https://pennlabs.org"
         target="_BLANK"
         rel="noopener noreferrer"
-        onClick={() => logEvent('external links', 'penn labs')}
+        onClick={(): void => logEvent('external links', 'penn labs')}
       >
         Penn Labs.
       </a>
@@ -33,7 +35,7 @@ const PennLabsCredit = ({ padding }: IPennLabsCreditProps) => (
         href={FEEDBACK_LINK}
         target="_BLANK"
         rel="noopener noreferrer"
-        onClick={() => logEvent('feeback', 'click from footer')}
+        onClick={(): void => logEvent('feeback', 'click from footer')}
       >
         Feedback.
       </a>

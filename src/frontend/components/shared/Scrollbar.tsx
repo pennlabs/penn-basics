@@ -26,8 +26,9 @@ export const Scrollbar = s(Col)`
     }
   }
   
-  ${({ fullHeight }) => fullHeight && `height: ${MAX_BODY_HEIGHT};`}
-  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
+  ${({ fullHeight }): string =>
+    (fullHeight && `height: ${MAX_BODY_HEIGHT};`) || ''}
+  ${({ minHeight }): string => (minHeight && `min-height: ${minHeight};`) || ''}
 
   // Make full height on mobile
   ${maxWidth(PHONE)} {
