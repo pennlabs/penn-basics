@@ -4,8 +4,7 @@ import ReactTooltip from 'react-tooltip'
 import { Switch } from 'antd'
 import 'antd/es/switch/style/index.css'
 
-import StarIcon from '../../../../public/img/foodtrucks/star.svg'
-import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
+import { StarIcon, InfoIcon } from '../shared/SVG'
 import { Text } from '../shared'
 import { FOCUS_GRAY, BORDER, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
 

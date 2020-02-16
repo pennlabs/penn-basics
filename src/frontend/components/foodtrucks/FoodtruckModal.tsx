@@ -31,10 +31,7 @@ import {
 } from '../shared'
 
 // import SVG
-import EditIcon from '../../../../public/img/foodtrucks/edit.svg'
-import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
-import StarIcon from '../../../../public/img/foodtrucks/star.svg'
-import MapSVG from '../../../../public/img/foodtrucks/map.svg'
+import { EditIcon, CommentIcon, StarIcon, MapIcon } from '../shared/SVG'
 
 // import constants
 import { FOODTRUCKS_ROUTE } from '../../constants/routes'
@@ -222,7 +219,7 @@ const FoodtruckModal = ({
                       window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
                     }
                   }}>
-                  <MapSVG style={{ transform: 'scale(0.8)', marginRight: '5px' }} />
+                  <MapIcon style={{ transform: 'scale(0.8)', marginRight: '5px' }} />
                   Get Directions
                 </button>
               </Text>
