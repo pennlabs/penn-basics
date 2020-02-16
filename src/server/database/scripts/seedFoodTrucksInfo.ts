@@ -1,19 +1,38 @@
 import trucks from '../../resources/foodtrucks/foodtrucks.json'
 import FoodTruck from '../models/FoodTruck'
+import {
+  IFoodTruckRaw,
+  PriceType,
+  OperatingHoursFormat,
+} from '../../../types/foodtrucks'
 
 const { MONGO_URI } = process.env
 
 if (!MONGO_URI) {
-  console.log('Missing MONGO_URI') // eslint-disable-line
+  console.log('Missing MONGO_URI')
   process.exit(1)
 }
+console.log(trucks)
+const deleteFoodTrucksInDB = (): Promise<void> =>
+  FoodTruck.find()
+    .remove()
+    .exec()
+    .then(res => {
+      console.log('Food trucks deleted.')
+      if (res) {
+        console.log('Food truck deletion message:')
+        console.log(res)
+      }
+    })
+    .catch(err => {
+      console.error('Error encountered deleting food trucks.')
+      if (err) {
+        console.error(err)
+      }
+    })
 
-function deleteFoodTrucksInDB() {
-  return FoodTruck.find().remove()
-}
-
-function updateFoodTrucks() {
-  return trucks.map((truck) => {
+const updateFoodTrucks = (): IFoodTruckRaw[] => {
+  const ret: IFoodTruckRaw[] = trucks.map(truck => {
     const { menu = [], priceTypes = [] } = truck
     let { name: foodtruckName } = truck
     foodtruckName = foodtruckName
@@ -23,7 +42,7 @@ function updateFoodTrucks() {
 
     const newMenu = Object.entries(menu).map(([smName, submenu]) => {
       // const options = priceTypes ? priceTypes[smName] : null
-      const items = submenu.map(item => {
+      const items = submenu.map((item: Record<string, any>) => {
         const { price, name } = item
 
         const newItem = {
@@ -41,56 +60,68 @@ function updateFoodTrucks() {
       }
     })
 
-    const newPriceTypes = Object.entries(priceTypes).map(([smName, types]) => ({
-        name: smName,
-        options: types,
-      }))
+    const newPriceTypes: PriceType[] = Object.entries(priceTypes).map(
+      ([smName, types]) => {
+        const pt: PriceType = {
+          name: smName,
+        }
+        if (types) {
+          pt.options = types
+        }
+        return pt
+      }
+    )
 
-    return {
+    const { start, end } = truck
+    const unknown: OperatingHoursFormat[] = [
+      'unknown',
+      'unknown',
+      'unknown',
+      'unknown',
+      'unknown',
+      'unknown',
+      'unknown',
+    ]
+
+    const truckToReturn: IFoodTruckRaw = {
       ...truck,
       menu: newMenu,
+      start: start ?? unknown,
+      end: end ?? unknown,
       foodtruckID: foodtruckName,
       priceTypes: newPriceTypes,
-      overallRating: 0,
       timeUpdated: new Date(),
     }
+
+    return truckToReturn
   })
+
+  return ret
 }
 
-// function loadFoodTrucksIntoDB(truckArray) {
-//   return Promise.all(
-//     truckArray.map(truck => {
-//       return FoodTruck.findOneAndUpdate(
-//         { name: truck.name },
-//         { ...truck }
-//       ).then(console.log) // eslint-disable-line
-//     })
-//   ).then(() => {
-//     console.log('----foodtrucks seeding completed----') // eslint-disable-line
-//     process.exit(0)
-//   })
-// }
-
-function loadFoodTrucksIntoDB(truckArray) {
-  return Promise.all(
+/**
+ *
+ * @param truckArray - Array of completed trucks to use
+ */
+const loadFoodTrucksIntoDB = (truckArray: IFoodTruckRaw[]): Promise<void> =>
+  Promise.all(
     truckArray.map(
       truck => new FoodTruck(truck).save().then(console.log) // eslint-disable-line
     )
   ).then(() => {
-    console.log('----seeding completed----') // eslint-disable-line
+    console.log('----food truck seeding completed----') // eslint-disable-line
   })
-}
 
-function updateFoodTrucksInDB(truckArray) {
-  return Promise.all(
+const updateFoodTrucksInDB = (truckArray: IFoodTruckRaw[]): Promise<void> =>
+  Promise.all(
     truckArray.map(truck =>
       FoodTruck.findOne({ name: truck.name }).then(oldTruckData => {
         if (oldTruckData !== null) {
           // update old truck
 
-          console.log(`Updating ${oldTruckData.name}`)
+          console.log(`Updating ${oldTruckData.get(name)}`)
           return FoodTruck.findOneAndUpdate(
-            { name: oldTruckData.name },
+            { name: oldTruckData.get(name) },
             {
               $set: {
                 description: truck.description,
@@ -116,13 +147,12 @@ function updateFoodTrucksInDB(truckArray) {
   ).then(() => {
     console.log('----seeding completed----') // eslint-disable-line
   })
-}
 
 // initial try at the insertion pipeline
-async function main() {
+const main = async (): Promise<void> => {
   try {
     const [
-      _executor, // eslint-disable-line
+      _executor, //eslint-disable-line
       _scriptName, // eslint-disable-line
       ...settings
     ] = process.argv
@@ -146,23 +176,3 @@ async function main() {
 }
 
 main()
-
-/*
-deleteFoodTrucksInDB()
-  .then(() => {
-    const trucksToInsert = updateFoodTrucks()
-    return loadFoodTrucksIntoDB(trucksToInsert)
-  })
-  .catch(err => console.error(err)) // eslint-disable-line
-*/
-
-// async function main() {
-//   try {
-//     const trucksToInsert = updateFoodTrucks()
-//     await loadFoodTrucksIntoDB(trucksToInsert)
-//   } catch (err) {
-//     console.error(err) // eslint-disable-line
-//   }
-// }
-
-// main()

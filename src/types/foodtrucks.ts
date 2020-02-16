@@ -26,17 +26,21 @@ export interface IFoodTruckUserReview {
 
 export type TFoodTruckId = string
 
+type TimeOfDay = string
+
+export type OperatingHoursFormat = TimeOfDay | 'unknown' | null
+
 export interface IFoodTruckData {
   name: string
   payments?: string[]
-  start: (string|null)[]
-  end: (string|null)[]
+  start: OperatingHoursFormat[]
+  end: OperatingHoursFormat[]
   location?: {
     plusCode: string
     lat: number
     lng: number
   }
-  tags: string[]
+  tags?: string[]
   menu: Record<string, IFoodTruckMenuItem[]>
   link?: string
   languageTypes?: [string]
@@ -45,18 +49,18 @@ export interface IFoodTruckData {
   description?: string
 }
 
-interface IFoodTruckBase {
+export interface IFoodTruckBase {
   foodtruckID: TFoodTruckId
   name: string
   payments?: string[]
-  start: string[]
-  end: string[]
+  start: OperatingHoursFormat[]
+  end: OperatingHoursFormat[]
   location?: {
-    plusCode: string
+    plusCode?: string
     lat: number
     lng: number
   }
-  tags: string[]
+  tags?: string[]
   link?: string
   languageTypes?: [string]
 
@@ -66,6 +70,33 @@ interface IFoodTruckBase {
   menu: IFoodTruckMenu[]
   reviews: IFoodTruckUserReview[]
   timeUpdated?: string
+}
+
+export interface PriceType {
+  name: string
+  options?: string[]
+}
+
+export interface IFoodTruckRaw {
+  foodtruckID?: TFoodTruckId
+  name: string
+  payments?: string[]
+  start?: OperatingHoursFormat[]
+  end?: OperatingHoursFormat[]
+  location?: {
+    plusCode?: string
+    lat: number
+    lng: number
+  }
+  tags?: string[]
+  link?: string
+  languageTypes?: string[]
+  priceTypes?: PriceType[]
+
+  image?: string
+  description?: string
+  menu: IFoodTruckMenu[]
+  timeUpdated?: Date
 }
 
 export type IFoodTruck = IFoodTruckBase & {
