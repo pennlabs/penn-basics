@@ -3,6 +3,7 @@
     "name": "Ahmad Gyro King",
     "payments": [
       "Cash",
+      "Credit Card",
       "Square",
       "Visa",
       "MasterCard",
@@ -1687,7 +1688,13 @@
   },
   {
     "name": "New York Famous Halal",
-    "payments": ["Cash", "Venmo", "MasterCard", "American Express"],
+    "payments": [
+      "Cash",
+      "Credit Card",
+      "Venmo",
+      "MasterCard",
+      "American Express"
+    ],
     "start": ["9:00", "9:00", "9:00", "9:00", "9:00", "9:00", "9:00"],
     "end": ["19:30", "19:30", "19:30", "19:30", "19:30", "19:30", "19:30"],
     "location": {
@@ -1959,6 +1966,7 @@
     "name": "Troy Halal Station",
     "payments": [
       "Cash",
+      "Credit Card",
       "Venmo",
       "Square",
       "Visa",
