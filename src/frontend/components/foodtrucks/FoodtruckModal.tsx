@@ -31,7 +31,7 @@ import {
 } from '../shared'
 
 // import SVG
-import { EditIcon, CommentIcon, StarIcon, MapIcon } from '../shared/SVG'
+import { EditIcon, CommentIcon, StarIcon, MapIcon } from '../shared/Icons'
 
 // import constants
 import { FOODTRUCKS_ROUTE } from '../../constants/routes'

@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 import { Switch } from 'antd'
 import 'antd/es/switch/style/index.css'
 
-import { StarIcon, InfoIcon } from '../shared/SVG'
+import { StarIcon, InfoIcon } from '../shared/Icons'
 import { Text } from '../shared'
 import { FOCUS_GRAY, BORDER, MEDIUM_GRAY, DARK_GRAY } from '../../styles/colors'
 
