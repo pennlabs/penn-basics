@@ -113,7 +113,7 @@ const Bell = ({
   return null
 }
 
-type TAddReminder = (machineID: number, hallID: number, machineType: string, timeRemaining: number) =>void
+type TAddReminder = (machineID: number, hallID: number, machineType: string, timeRemaining: number) => void
 
 interface IMachineAvailabilityProps {
   displayDetails: boolean

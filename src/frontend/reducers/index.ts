@@ -6,11 +6,13 @@ import homeReducer from './homeReducer'
 import foodtrucksReducer from './foodtrucksReducer'
 import authReducer from './authReducer'
 
-export default combineReducers({
+const reducers = {
   dining: diningReducer,
   spaces: spacesReducer,
   laundry: laundryReducer,
   home: homeReducer,
   foodtrucks: foodtrucksReducer,
   authentication: authReducer,
-})
+}
+
+export default combineReducers(reducers)

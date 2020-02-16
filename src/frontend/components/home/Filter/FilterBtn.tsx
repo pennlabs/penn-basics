@@ -96,7 +96,7 @@ class FilterBtn extends Component<IFilterBtnProps> {
       activeOptions = [],
     } = this.props
 
-    if (!this.areOptions() || !active) return null
+    if (!this.areOptions() || !active) {return null}
     const { offsetLeft } = this.focusRef.current || {}
 
     return (

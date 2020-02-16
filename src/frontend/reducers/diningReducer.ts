@@ -1,4 +1,4 @@
-import { Action } from 'redux'
+import { Action, Reducer } from 'redux'
 import {
   getVenueInfoRequested,
   getVenueInfoRejected,

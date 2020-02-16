@@ -1,5 +1,5 @@
 {
-  "name": "pennbasics",
+  "name": "penn-basics",
   "version": "1.0.0",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "scripts": {
@@ -7,8 +7,9 @@
     "seedFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js",
     "resetFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js --reset",
     "test": "mocha --reporter spec",
-    "lint": "eslint 'src/**/*.{ts,js,tsx,jsx}'",
-    "lint-fix": "eslint 'src/**/*.{ts,js,tsx,jsx}' --fix",
+    "lint": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}'",
+    "lint:fix": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}' --fix",
+    "format": "prettier --write 'src/**/*.{js,jsx,json,md,ts,tsx}'",
     "dev": "source env.sh && nodemon",
     "build": "next build",
     "start": "ts-node --project tsconfig.server.json src/server/index.ts"
@@ -17,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/pennlabs/penn-basics.git"
   },
-  "author": "",
+  "author": "Penn Labs <info@pennlabs.org>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pennlabs/penn-basics/issues"
@@ -98,6 +99,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": "^4.2.3",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
   }

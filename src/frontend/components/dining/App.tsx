@@ -28,7 +28,7 @@ const App = ({
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [])
+  }, [dispatchGetFavorites, dispatchGetVenueHours])
 
   return (
     <Row fullHeightDesktop>

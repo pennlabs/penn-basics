@@ -88,19 +88,22 @@ interface IIconProps {
   name?: string
 }
 
-const Icon = ({ name }: IIconProps) => (
+const Icon = ({ name }: IIconProps): React.ReactElement => (
   <i className={`fa fa-${name} fa-fw fa-lg`} />
 )
 
 // TODO make this more accessible
-const noop = () => {}
+const noop = (): void => undefined
 
 interface IMobileToggleViewProps {
   isListView?: boolean
   toggle?: () => void
 }
 
-const MobileToggleView = ({ isListView, toggle }: IMobileToggleViewProps) => (
+const MobileToggleView = ({
+  isListView,
+  toggle,
+}: IMobileToggleViewProps): React.ReactElement => (
   <ToggleViewWrapper>
     <Button
       type="button"
@@ -108,7 +111,6 @@ const MobileToggleView = ({ isListView, toggle }: IMobileToggleViewProps) => (
       tabIndex={0}
       active={isListView}
       onClick={isListView ? noop : toggle}
-      onKeyPress={() => 'TODO'}
     >
       <Icon name="list" />
     </Button>
@@ -118,7 +120,6 @@ const MobileToggleView = ({ isListView, toggle }: IMobileToggleViewProps) => (
       tabIndex={0}
       active={!isListView}
       onClick={isListView ? toggle : noop}
-      onKeyPress={() => 'TODO'}
     >
       <Icon name="map-pin" />
     </Button>

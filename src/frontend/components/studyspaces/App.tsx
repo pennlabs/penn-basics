@@ -124,7 +124,7 @@ class StudySpacesApp extends React.Component<
             hideOnMobile={!isListViewMobile}
           >
             {error && <ErrorMessage message={error} />}
-            
+
             {!areFilteredSpacesResults && (
               <NoDataScroll
                 image="/img/studyspace-empty-state.svg"

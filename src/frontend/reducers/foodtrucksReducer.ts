@@ -1,3 +1,4 @@
+import { Action } from 'redux'
 import {
   IFoodTruck,
   TFoodTruckId,
@@ -5,7 +6,6 @@ import {
   IFoodTrucksReducerState,
   IFormattedFoodtruck
 } from '../../types/foodtrucks'
-import { Action } from 'redux'
 import {
   getFoodtrucksDataRequested,
   getFoodtrucksDataFulfilled,

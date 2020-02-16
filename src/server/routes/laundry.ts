@@ -47,20 +47,27 @@ export default (): Router => {
       // console.log("---Notification entered to backend---")
 
       // set a timeout that equals to the timeRemaining
-      setTimeout(async (): Promise<void> => {
-        try {
-          // use webpush to instruct the service worker to push notification
-          await webpush.sendNotification(
-            subscription,
-            JSON.stringify({ machineID, hallID, reminderID, machineType }) // payload received by the service worker
-          )
-          // respond to frontend until the instruction is received by the service worker
-          // console.log("---Notification sent from backend---")
-          res.status(200).json({})
-        } catch (err) {
-          res.status(200).json({ error: err.message })
-        }
-      }, timeRemaining)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          try {
+            // use webpush to instruct the service worker to push notification
+            webpush
+              .sendNotification(
+                subscription,
+                JSON.stringify({ machineID, hallID, reminderID, machineType }) // payload received by the service worker
+              )
+              .then(() => {
+                // respond to frontend until the instruction is received by the service worker
+                // console.log("---Notification sent from backend---")
+                res.status(200).json({})
+                resolve()
+              })
+          } catch (err) {
+            res.status(200).json({ error: err.message })
+            reject()
+          }
+        }, timeRemaining)
+      })
     }
   )
 

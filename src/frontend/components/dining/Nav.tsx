@@ -59,7 +59,7 @@ const Nav = ({
     selectedVenueId !== null &&
     selectedVenueId !== ''
 
-  if (pending) return <Loading padding="40vh 0" />
+  if (pending) {return <Loading padding="40vh 0" />}
 
   return (
     <Scrollbar

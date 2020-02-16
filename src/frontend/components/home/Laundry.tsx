@@ -27,7 +27,7 @@ interface ILaundryProps {
 const Laundry = ({ dispatchGetFavoritesHomePage, favoritesHome }: ILaundryProps) => {
   useEffect(() => {
     dispatchGetFavoritesHomePage()
-  }, [])
+  }, [dispatchGetFavoritesHomePage])
 
   const renderFavorites = () => {
     if (!favoritesHome || favoritesHome.length === 0) {

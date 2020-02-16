@@ -28,9 +28,9 @@ const Dining = ({
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
-  }, [])
+  }, [dispatchGetFavorites, dispatchGetVenueHours])
 
-  if (venueHoursPending || !favorites) return <React.Fragment />
+  if (venueHoursPending || !favorites) {return <React.Fragment />}
 
   return (
     <BorderedCard>

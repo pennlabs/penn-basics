@@ -1,6 +1,10 @@
 import { Action } from 'redux'
 
-import { TSpaceId, ISpaceWithHoursAndOpenAndSpaceId } from '../../types/studyspaces'
+import {
+  TSpaceId,
+  ISpaceWithHoursAndOpenAndSpaceId,
+  ISpacesReducerState,
+} from '../../types/studyspaces'
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,
@@ -23,10 +27,10 @@ import {
 
 // Default state where all filters are cleared and none are active
 const clearFilterState = {
-  filterOpen: null,
-  filterOutlets: null,
-  filterNoise: null,
-  filterGroups: null,
+  filterOpen: undefined,
+  filterOutlets: undefined,
+  filterNoise: undefined,
+  filterGroups: undefined,
   filterOpenActive: false,
   filterOutletsActive: false,
   filterNoiseActive: false,
@@ -42,24 +46,6 @@ type ISpacesAction = {
   spaceId?: TSpaceId
 } & Action
 
-export interface ISpacesReducerState {
-  pending: boolean
-  filterOpen?: boolean
-  filterString?: string
-  filterOutlets: number[]
-  filterNoise: number[]
-  filterGroups: number[]
-  filterOnCampus?: boolean
-  filterOpenActive?: boolean
-  filterOutletsActive?: boolean
-  filterNoiseActive?: boolean
-  filterGroupsActive?: boolean
-  hoveredSpace?: string
-  activeSpace?: string | undefined | null
-  spacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
-  filteredSpacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
-}
-
 const defaultState: ISpacesReducerState = {
   pending: true,
   filterOutlets: [],
@@ -67,7 +53,10 @@ const defaultState: ISpacesReducerState = {
   filterGroups: [],
 }
 
-const updateFilters = (arr: null | number[] | undefined, num: number) => {
+const updateFilters = (
+  arr: null | number[] | undefined,
+  num: number
+): number[] => {
   if (!arr || !arr.length) {
     return [num]
   }
@@ -80,7 +69,7 @@ const updateFilters = (arr: null | number[] | undefined, num: number) => {
   return arr
 }
 
-const filterSpaces = (state: ISpacesReducerState) => {
+const filterSpaces = (state: ISpacesReducerState): ISpacesReducerState => {
   const {
     filterOpen,
     filterOutlets,
@@ -91,7 +80,9 @@ const filterSpaces = (state: ISpacesReducerState) => {
     spacesData,
   } = state
 
-  if (!spacesData) {return state}
+  if (!spacesData) {
+    return state
+  }
 
   // If there is nothing to filter on, remove all filters and reset the data
   if (
@@ -166,7 +157,7 @@ const filterSpaces = (state: ISpacesReducerState) => {
 const spacesReducer = (
   state: ISpacesReducerState = defaultState,
   action: ISpacesAction
-) => {
+): ISpacesReducerState => {
   const newState = Object.assign({}, state)
   const {
     filterOutlets,
