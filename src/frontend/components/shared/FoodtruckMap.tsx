@@ -40,7 +40,7 @@ interface IFoodTruckMapProps {
     lat: number
     lng: number
   }
-  handleClickMarker: (id: TMarkerId) => void
+  handleClickMarker?: (id: TMarkerId) => void
   height?: string
   mobileHeight?: string
   mapId: string

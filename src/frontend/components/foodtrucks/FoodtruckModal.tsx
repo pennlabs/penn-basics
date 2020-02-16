@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import { withRouter, SingletonRouter } from 'next/router'
 import s from 'styled-components'
 import { connect } from 'react-redux'
-import ReactTooltip from 'react-tooltip'
 
 // import Redux actions
 import {
@@ -32,10 +31,7 @@ import {
 } from '../shared'
 
 // import SVG
-import EditIcon from '../../../../public/img/foodtrucks/edit.svg'
-import CommentIcon from '../../../../public/img/foodtrucks/message-circle.svg'
-import StarIcon from '../../../../public/img/foodtrucks/star.svg'
-import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
+import { EditIcon, CommentIcon, StarIcon, MapIcon } from '../shared/Icons'
 
 // import constants
 import { FOODTRUCKS_ROUTE } from '../../constants/routes'
@@ -215,23 +211,17 @@ const FoodtruckModal = ({
               padding="5"
             >
               <Text>
-                <InfoIcon
-                  style={{
-                    transform: 'scale(0.8) translateY(8px)',
-                    marginLeft: '0.5rem',
-                  }}
-                  data-tip
-                  data-for="infoIcon"
-                />
-                <ReactTooltip
-                  id="infoIcon"
-                  place="right"
-                  type="dark"
-                  effect="solid"
-                  multiline={true}
-                >
-                  <div> Click on the marker to open Google Maps </div>
-                </ReactTooltip>
+                <button
+                  className="button is-primary is-light"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => {
+                    if (location) {
+                      window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
+                    }
+                  }}>
+                  <MapIcon style={{ transform: 'scale(0.8)', marginRight: '5px' }} />
+                  Get Directions
+                </button>
               </Text>
               <br />
             </ModalContainer>
@@ -243,9 +233,6 @@ const FoodtruckModal = ({
                 showMarker
                 gestureHandling="cooperative"
                 height="50vh"
-                handleClickMarker={() => {
-                  window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
-                }}
               />
             ) : null}
 

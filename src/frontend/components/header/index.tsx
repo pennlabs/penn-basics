@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 import Nav from '../shared/Nav'
 import Feedback from '../shared/Feedback'
 import { BLUE, DARK_BLUE, SNOW } from '../../styles/colors'
+import { GOOGLE_MAPS_API_ROUTE } from '../../../frontend/constants/routes'
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -28,9 +29,10 @@ const GlobalStyle = createGlobalStyle`
 
 interface IHeader {
   children: React.ReactNode | React.ReactNodeArray
+  GOOGLE_MAPS_API_KEY?: string
 }
 
-const Header = ({ children }: IHeader): React.ReactElement => (
+const Header = ({ children, GOOGLE_MAPS_API_KEY }: IHeader): React.ReactElement => (
   <>
     <Head>
       <meta charSet="utf-8" />
@@ -108,6 +110,7 @@ const Header = ({ children }: IHeader): React.ReactElement => (
 
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="msapplication-TileColor" content="#5bbad5" />
+      {GOOGLE_MAPS_API_KEY && <script src={GOOGLE_MAPS_API_ROUTE(`${GOOGLE_MAPS_API_KEY}`)} />}
     </Head>
 
     <GlobalStyle />
