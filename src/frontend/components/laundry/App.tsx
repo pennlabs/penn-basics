@@ -40,12 +40,9 @@ const App = ({
 
   const parsedHallId = Number.isNaN(Number(id)) ? -1 : Number(id)
   const isActiveHall =
-    parsedHallId !== null &&
     parsedHallId !== undefined &&
-    !Number.isNaN(parsedHallId)
-
-  console.log('favorites')
-  console.log(favorites)
+    !Number.isNaN(parsedHallId) &&
+    (parsedHallId < -1)
 
   return (
     <Row fullHeight>
