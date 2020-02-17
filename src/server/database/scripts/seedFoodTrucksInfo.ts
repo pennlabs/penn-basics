@@ -151,13 +151,7 @@ const updateFoodTrucksInDB = (truckArray: IFoodTruckRaw[]): Promise<void> =>
 // initial try at the insertion pipeline
 const main = async (): Promise<void> => {
   try {
-    const [
-      _executor, //eslint-disable-line
-      _scriptName, // eslint-disable-line
-      ...settings
-    ] = process.argv
-
-    const reset = settings.includes('--reset')
+    const reset = process.argv.slice(2).includes('--reset')
 
     if (reset) {
       await deleteFoodTrucksInDB()

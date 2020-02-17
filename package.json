@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Application built to allow University of Pennsylvania students to access information and services on one platform.",
   "scripts": {
-    "seedSpaces": "source env.sh && node src/server/database/seedSpacesInfo.js",
-    "seedFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js",
-    "resetFoodtrucks": "source env.sh && node src/server/database/scripts/seedFoodTrucksInfo.js --reset",
+    "seedSpaces": "source env.sh && ts-node --project tsconfig.server.json src/server/database/seedSpacesInfo.ts",
+    "seedFoodtrucks": "source env.sh && ts-node --project tsconfig.server.json src/server/database/scripts/seedFoodTrucksInfo.ts",
+    "resetFoodtrucks": "source env.sh && ts-node --project tsconfig.server.json src/server/database/scripts/seedFoodTrucksInfo.ts --reset",
     "test": "mocha --reporter spec",
     "lint": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}'",
     "lint:fix": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}' --fix",
