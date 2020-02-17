@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Modal from '../../shared/Modal'
 
 import {
   FilterBtnWrapper,
@@ -85,7 +86,7 @@ class FilterBtn extends Component {
     if (!this.areOptions() || !active) return null
     const { offsetLeft } = this.focusRef.current
 
-    return (
+    {/*return (
       <>
         <OptionsModalBacking onClick={onClick} />
 
@@ -114,6 +115,30 @@ class FilterBtn extends Component {
           })}
         </OptionsModalWrapper>
       </>
+    )*/}
+
+    return (
+      <Modal>
+        {options.map((o, idx) => {
+          const isActiveOption = Boolean(
+            activeOptions && activeOptions.includes(idx)
+          )
+
+          return (
+            <Option
+              key={o}
+              onClick={() => onClickOption(idx)}
+              role="option"
+              tabIndex={0}
+              aria-selected={isActiveOption}
+              onKeyPress={e => this.handleOptionKeyPress(e, idx)}
+            >
+              <Circle active={isActiveOption} />
+              <OptionText active={isActiveOption}>{o}</OptionText>
+            </Option>
+          )
+        })}
+      </Modal>
     )
   }
 
