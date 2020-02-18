@@ -99,6 +99,7 @@ interface IModalProps {
   children: React.ReactNode | React.ReactNodeArray
   toggle?: () => void
   ROUTE?: string // TODO this should not be uppercase
+  isHome?: boolean // Percent
 }
 
 interface IModalState {
@@ -162,6 +163,9 @@ class Modal extends Component<IModalProps, IModalState> {
     const { show, children, toggle, ROUTE } = this.props
     const { isNewlyMounted } = this.state
 
+    const widthStyle = this.props.isHome ?
+      {"width": "10%"} : {};
+
     if (toggle || !ROUTE) {
       return (
         <Shade
@@ -173,7 +177,7 @@ class Modal extends Component<IModalProps, IModalState> {
           onKeyPress={this.handleKeyPress}
           onKeyDown={this.handleKeyPress}
         >
-          <ModalContent onClick={noop} show={show}>
+          <ModalContent style={widthStyle} onClick={noop} show={show}>
             <ModalClose onClick={toggle} show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -193,7 +197,7 @@ class Modal extends Component<IModalProps, IModalState> {
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
-        <ModalContent onClick={noop} show={show}>
+        <ModalContent style={widthStyle} onClick={noop} show={show}>
           <Link href={ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>

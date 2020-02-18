@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 
+import s from 'styled-components'
+
 import {
   FilterBtnWrapper,
-  OptionsModalBacking,
-  OptionsModalWrapper,
-  Option,
+  //OptionsModalBacking,
+  //OptionsModalWrapper,
+  //Option,
   Circle,
   OptionText,
 } from '../../shared/Option'
+
+import Modal from '../../shared/Modal'
 
 // TODO this is duplicate code
 
@@ -87,6 +91,8 @@ class FilterBtn extends Component<IFilterBtnProps> {
     return Boolean(activeOptions && activeOptions.length < options.length)
   }
 
+
+
   renderModal() {
     const {
       onClick,
@@ -96,24 +102,26 @@ class FilterBtn extends Component<IFilterBtnProps> {
       activeOptions = [],
     } = this.props
 
-    if (!this.areOptions() || !active) return null
-    const { offsetLeft } = this.focusRef.current || {}
+    const ModalOption = s.div`
+      border-radius: 4px;
+      padding: 0.2rem 0.4rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+
+      :active,
+      :hover,
+    `
 
     return (
       <>
-        <OptionsModalBacking onClick={onClick} />
-
-        <OptionsModalWrapper
-          onClick={e => e.stopPropagation()}
-          left={offsetLeft}
-        >
+        <Modal show={active} toggle={onClick} isHome={true}>
           {options.map((o, idx) => {
             const isActiveOption = Boolean(
               activeOptions && activeOptions.includes(idx)
             )
 
             return (
-              <Option
+              <ModalOption
                 key={o}
                 onClick={() => onClickOption(idx)}
                 role="option"
@@ -123,10 +131,10 @@ class FilterBtn extends Component<IFilterBtnProps> {
               >
                 <Circle active={isActiveOption} />
                 <OptionText>{o}</OptionText>
-              </Option>
+              </ModalOption>
             )
           })}
-        </OptionsModalWrapper>
+        </Modal>
       </>
     )
   }
