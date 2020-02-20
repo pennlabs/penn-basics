@@ -18,13 +18,13 @@ interface IFilterProps {
   filterList?: number[]
 }
 
-const Filter = ({
+const Filter: React.FC<IFilterProps> = ({
   dispatchFilterHomeCustomize,
   dispatchToggleHomeCustomize,
   dispatchInitializeFilterHome,
   filterCustomizeActive,
   filterList,
-}: IFilterProps) => (
+}) => (
   <FilterButton
     text="Customize this page"
     onClick={dispatchToggleHomeCustomize}
@@ -39,9 +39,9 @@ const Filter = ({
 const mapStateToProps = ({ home }: { home: IHomeReducerState }) => home
 
 const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchFilterHomeCustomize: (filter: number) => dispatch(filterHomeCustomize(filter)),
-  dispatchToggleHomeCustomize: () => dispatch(toggleHomeCustomize()),
-  dispatchInitializeFilterHome: (optionsLength: number) =>
+  dispatchFilterHomeCustomize: (filter: number): void => dispatch(filterHomeCustomize(filter)),
+  dispatchToggleHomeCustomize: (): void => dispatch(toggleHomeCustomize()),
+  dispatchInitializeFilterHome: (optionsLength: number): void =>
     dispatch(initializeFilterHome(optionsLength)),
 })
 
