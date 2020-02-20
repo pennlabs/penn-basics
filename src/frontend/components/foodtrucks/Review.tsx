@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 
 import { Line } from '../shared'
-import StarIcon from '../../../../public/img/foodtrucks/star.svg'
+import { StarIcon } from '../shared/Icons'
 import { IFoodTruckUserReview } from '../../../types/foodtrucks'
 
 const array = [1, 2, 3, 4, 5]

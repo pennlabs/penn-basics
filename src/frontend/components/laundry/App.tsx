@@ -48,12 +48,11 @@ const App: React.FC<IAppProps> = ({
 
   const parsedHallId = Number.isNaN(Number(id)) ? -1 : Number(id)
   const isActiveHall =
-    parsedHallId !== null &&
     parsedHallId !== undefined &&
-    !Number.isNaN(parsedHallId)
-
-  console.log('favorites')
-  console.log(favorites)
+    !Number.isNaN(parsedHallId) &&
+    (parsedHallId > -1)
+  
+  console.log(isActiveHall)
 
   return (
     <Row fullHeight>
@@ -65,6 +64,10 @@ const App: React.FC<IAppProps> = ({
         fullHeight
         hideOnMobile={isActiveHall}
       >
+        <Card background={BABY_BLUE} padding="0">
+          <NavHeader className="title is-5">Favorites</NavHeader>
+          <Line />
+        </Card>
 
         {favorites && favorites.length && (
           <>

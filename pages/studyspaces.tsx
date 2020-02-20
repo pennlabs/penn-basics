@@ -13,9 +13,11 @@ const Studyspaces = (): React.ReactElement => {
 
   return (
     <Header>
-      <Head>
-        <script src={GOOGLE_MAPS_API_ROUTE(`${GOOGLE_MAPS_API_KEY}`)} />
-      </Head>
+      {(typeof google === 'undefined') && (
+        <Head>
+          <script src={GOOGLE_MAPS_API_ROUTE(`${GOOGLE_MAPS_API_KEY}`)} />
+        </Head>
+      )}
       <App id={id as string} />
     </Header>
   )
