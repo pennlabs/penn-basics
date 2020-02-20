@@ -60,7 +60,7 @@ export const getLaundryHalls = () => async (dispatch: Dispatch<Action>): Promise
   }
 }
 
-const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId: number) => {
+const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId: number): Promise<void> => {
   if (!isValidNumericId(laundryHallId)) {
     dispatch({
       type: getLaundryHallInfoRejected,
@@ -91,35 +91,33 @@ const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId:
   }
 }
 
-export function getLaundryHall(laundryHallId: number, prevIntervalID: number) {
-  return async (dispatch: Dispatch<Action>) => {
-    if (prevIntervalID) {
-      clearInterval(prevIntervalID)
-      dispatch({
-        type: updateHallIntervalID,
-        intervalID: null,
-      })
-    }
-
-    dispatch({
-      type: getLaundryHallInfoRequested,
-    })
-
-    getLaundryHallInterval(dispatch, laundryHallId)
-
-    const intervalID = setInterval(() => {
-      getLaundryHallInterval(dispatch, laundryHallId)
-    }, 5 * 1000)
-
+export const getLaundryHall = (laundryHallId: number, prevIntervalID: number) => (dispatch: Dispatch<Action>): void => {
+  if (prevIntervalID) {
+    clearInterval(prevIntervalID)
     dispatch({
       type: updateHallIntervalID,
-      intervalID,
+      intervalID: null,
     })
   }
+
+  dispatch({
+    type: getLaundryHallInfoRequested,
+  })
+
+  getLaundryHallInterval(dispatch, laundryHallId)
+
+  const intervalID = setInterval(() => {
+    getLaundryHallInterval(dispatch, laundryHallId)
+  }, 5 * 1000)
+
+  dispatch({
+    type: updateHallIntervalID,
+    intervalID,
+  })
 }
 
 // TODO document....
-export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
+export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>): void => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // Get the list of laundry halls from local storage
@@ -168,7 +166,7 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>) => {
   }
 }
 
-export const getFavorites = () => (dispatch: Dispatch<Action>) => {
+export const getFavorites = () => (dispatch: Dispatch<Action>): void => {
     const favorites = localStorage.getItem('laundry_favorites')
     let favoritesArray: IFavorite[] = []
     if (favorites) {
@@ -185,7 +183,7 @@ export const getFavorites = () => (dispatch: Dispatch<Action>) => {
     })
   }
 
-export const addFavorite = (hallURLId: number, location: string, hallName: string) => async (dispatch: Dispatch<Action>) => {
+export const addFavorite = (hallURLId: number, location: string, hallName: string) => (dispatch: Dispatch<Action>): void => {
     logEvent('laundry', 'addFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -219,7 +217,7 @@ export const addFavorite = (hallURLId: number, location: string, hallName: strin
     })
   }
 
-export const removeFavorite = (hallURLId: number) => (dispatch: Dispatch<Action>) => {
+export const removeFavorite = (hallURLId: number) => (dispatch: Dispatch<Action>): void => {
     logEvent('laundry', 'removeFavorite')
     // favoritesString is the raw data taken from localStorage
     // therefore is in string format
@@ -242,7 +240,7 @@ export const removeFavorite = (hallURLId: number) => (dispatch: Dispatch<Action>
     })
   }
 
-export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>) => {
+export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>): void => {
     try {
       if (!Notification || !Notification.requestPermission()) {
         dispatch({
@@ -297,7 +295,7 @@ export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>) => {
     }
   }
 
-const urlBase64ToUint8Array = (base64String: string) => {
+const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
   const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
 
@@ -310,7 +308,7 @@ const urlBase64ToUint8Array = (base64String: string) => {
   return outputArray
 }
 
-const getRemindersInterval = (dispatch: Dispatch<Action>) => {
+const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
   if (
     'serviceWorker' in navigator &&
     'PushManager' in window &&
@@ -414,7 +412,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>) => {
 }
 
 // TODO document this
-export const getReminders = () => (dispatch: Dispatch<Action>) => {
+export const getReminders = () => (dispatch: Dispatch<Action>): void => {
     getRemindersInterval(dispatch)
 
     const intervalID = setInterval(() => {
@@ -432,7 +430,7 @@ export const addReminder = (
   hallID: number,
   machineType: string,
   timeRemaining: number
-) => (dispatch: Dispatch<Action>) => {
+) => (dispatch: Dispatch<Action>): void => {
     try {
       navigator.serviceWorker.ready.then(async registration => {
         // get public vapid key
@@ -472,13 +470,13 @@ export const addReminder = (
     }
   }
 
-export const removeReminder = () => (dispatch: Dispatch<Action>) => {
+export const removeReminder = () => (dispatch: Dispatch<Action>): void => {
     try {
       navigator.serviceWorker.ready
         .then(registration => registration.pushManager.getSubscription())
         .then(subscription => {
           if (!subscription) {return}
-          subscription.unsubscribe().then(async successful => {
+          subscription.unsubscribe().then(successful => {
             if (successful) {
               dispatch({
                 type: updateReminders,

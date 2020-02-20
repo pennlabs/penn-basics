@@ -4,7 +4,7 @@ import cheerio from 'cheerio'
 
 const router = Router()
 
-export default function newsRouter(): Router {
+export default (): Router => {
   // can convert this to Labs API
   router.get('/', (req, response) => {
     const { website } = req.query

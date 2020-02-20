@@ -6,7 +6,7 @@ import {
   TOGGLE_FILTER_HOME_CUSTOMIZE,
 } from './action_types'
 
-const updateFilters = (arr: number[], num: number) => {
+const updateFilters = (arr: number[], num: number): number[] => {
   if (!arr || !arr.length) {
     return [num]
   }
@@ -22,7 +22,7 @@ const updateFilters = (arr: number[], num: number) => {
   return newArr.sort()
 }
 
-export const initializeFilterHome = (optionsLength: number) => (dispatch: Dispatch<Action>) => {
+export const initializeFilterHome = (optionsLength: number) => (dispatch: Dispatch<Action>): void => {
     const homeFilter = localStorage.getItem('homeFilter')
 
     if (!homeFilter) {
@@ -45,7 +45,7 @@ export const initializeFilterHome = (optionsLength: number) => (dispatch: Dispat
 
 // filterList is the existing list of filters
 // filter is a number/ index
-export const filterHomeCustomize = (filter: number) => (dispatch: Dispatch<Action>) => {
+export const filterHomeCustomize = (filter: number) => (dispatch: Dispatch<Action>): void => {
     const homeFilterString = localStorage.getItem('homeFilter')
     if (homeFilterString) {
       let filterList = JSON.parse(homeFilterString)
@@ -58,5 +58,6 @@ export const filterHomeCustomize = (filter: number) => (dispatch: Dispatch<Actio
     }
   }
 
-export const toggleHomeCustomize = () => (dispatch: Dispatch<Action>) =>
+export const toggleHomeCustomize = () => (dispatch: Dispatch<Action>): void => {
   dispatch({ type: TOGGLE_FILTER_HOME_CUSTOMIZE })
+}

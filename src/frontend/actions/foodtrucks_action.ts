@@ -21,7 +21,7 @@ import { convertDate, padHours } from '../../utils/helperFunctions'
 const isOpen = (
   { start, end }: { start: string[]; end: string[] },
   day: number
-) => {
+): boolean => {
   const startTime = padHours(start[day])
   const endTime = padHours(end[day])
 
@@ -34,7 +34,7 @@ const isOpen = (
   return startTime <= currTime && currTime <= endTime
 }
 
-export const getAllFoodtrucksData = () => async (dispatch: Dispatch<Action>) => {
+export const getAllFoodtrucksData = () => (dispatch: Dispatch<Action>): void => {
     dispatch({
       type: getFoodtrucksDataRequested,
     })
@@ -100,7 +100,7 @@ export const getAllFoodtrucksData = () => async (dispatch: Dispatch<Action>) => 
 
 type TFormattedPriceTypes = Record<string, string[]>
 
-export const getFoodtruckInfo = (id: string) => (dispatch: Dispatch<Action>) => {
+export const getFoodtruckInfo = (id: string) => (dispatch: Dispatch<Action>): void => {
   dispatch({
     type: getFoodtruckInfoRequested,
   })
@@ -139,7 +139,7 @@ export const updateFoodtruckReview = (
   rating: number,
   comment: string,
   showName: boolean
-) => (dispatch: Dispatch<Action>) => {
+) => (dispatch: Dispatch<Action>): void => {
     dispatch({
       type: getFoodtruckInfoRequested,
     })
@@ -177,7 +177,7 @@ export const updateFoodtruckReview = (
     }
   }
 
-export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => (dispatch: Dispatch<Action>) => {
+export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => (dispatch: Dispatch<Action>): void => {
     dispatch({
       type: setHoveredFoodtruckFulfilled,
       footruckId,
@@ -188,7 +188,7 @@ export const setHoveredFoodtruck = (footruckId: TFoodTruckId) => (dispatch: Disp
  *
  * @param {string} filterString user input string
  */
-export const filterFoodtrucksString = (filterString: string) => (dispatch: Dispatch<Action>) => {
+export const filterFoodtrucksString = (filterString: string) => (dispatch: Dispatch<Action>): void => {
     dispatch({
       type: filterFoodtrucksStringRequested,
       filterString,
@@ -199,15 +199,17 @@ export const filterFoodtrucksString = (filterString: string) => (dispatch: Dispa
  *
  * @param {boolean} filter
  */
-export const filterFoodtrucksOpen = (filter: boolean) => (dispatch: Dispatch<Action>) => {
+export const filterFoodtrucksOpen = (filter: boolean) => (dispatch: Dispatch<Action>): void => {
     dispatch({
       type: filterFoodtrucksOpenRequested,
       filter,
     })
   }
 
-export const toggleFoodtrucksOpen = () => (dispatch: Dispatch<Action>) =>
+export const toggleFoodtrucksOpen = () => (dispatch: Dispatch<Action>): void => {
   dispatch({ type: TOGGLE_FILTER_FOODTRUCKS_OPEN })
+}
 
-export const clearFoodtrucksFilter = () => (dispatch: Dispatch<Action>) =>
+export const clearFoodtrucksFilter = () => (dispatch: Dispatch<Action>): void => {
   dispatch({ type: clearFilterFoodtrucksRequested })
+}

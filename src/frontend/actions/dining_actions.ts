@@ -15,7 +15,7 @@ import { TVenueHours, IFavorite } from '../../types/dining'
 /**
  * Get hours for all dining venues
  */
-export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
+export const getVenueHours = () => (dispatch: Dispatch<Action>): void => {
     dispatch({ type: getVenueInfoRequested })
 
     const venueIds: number[] = Object.values(venueMapping)
@@ -44,7 +44,7 @@ export const getVenueHours = () => (dispatch: Dispatch<Action>) => {
     }
   }
 
-export const getFavorites = () => (dispatch: Dispatch<Action>) => {
+export const getFavorites = () => (dispatch: Dispatch<Action>): void => {
     const favoritesString = localStorage.getItem('dining_favorites')
     let favoritesArray: IFavorite[] = []
     if (favoritesString) {
@@ -60,7 +60,7 @@ export const getFavorites = () => (dispatch: Dispatch<Action>) => {
     })
   }
 
-export const addFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => {
+export const addFavorite = (venueID: string) => (dispatch: Dispatch<Action>): void => {
     logEvent('dining', 'addFavorite')
     const favorites = localStorage.getItem('dining_favorites')
     let favoritesArray: IFavorite[]
@@ -83,7 +83,7 @@ export const addFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => 
     })
   }
 
-export const removeFavorite = (venueID: string) => (dispatch: Dispatch<Action>) => {
+export const removeFavorite = (venueID: string) => (dispatch: Dispatch<Action>): void => {
     logEvent('dining', 'removeFavorite')
 
     // favorites is an array of venueIDs
