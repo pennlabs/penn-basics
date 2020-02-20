@@ -33,7 +33,11 @@ const Wrapper = s.div`
   }
 `
 
-const Home = ({ filterList }: { filterList?: number[] }) => {
+interface IHomeProps {
+  filterList?: number[]
+}
+
+const Home: React.FC<IHomeProps> = ({ filterList }) => {
   const componentList = [
     <Weather key="weatherComponent" />,
     <Events key="eventsComponent" />,

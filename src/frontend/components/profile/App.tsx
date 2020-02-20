@@ -72,7 +72,7 @@ interface IAppProps {
   userInfo: IUser
 }
 
-const App = ({
+const App: React.FC<IAppProps> = ({
   dispatchGetDiningFavorites,
   dispatchGetLaundryFavorites,
   dispatchDiningRemoveFavorite,
@@ -80,7 +80,7 @@ const App = ({
   diningFavorites,
   laundryFavorites,
   userInfo,
-}: IAppProps) => {
+}) => {
   const { loggedIn } = userInfo || {}
   if (!loggedIn) {
     return (
@@ -96,21 +96,21 @@ const App = ({
     )
   }
 
-  useEffect(() => {
-    dispatchGetDiningFavorites()
-    dispatchGetLaundryFavorites()
-  }, [dispatchGetDiningFavorites, dispatchGetLaundryFavorites])
-
   const { fullName, displayName, pennid } = userInfo || {}
 
   const [name, setName] = useState(displayName || fullName)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    dispatchGetDiningFavorites()
+    dispatchGetLaundryFavorites()
+  }, [dispatchGetDiningFavorites, dispatchGetLaundryFavorites])
+
+  useEffect(() => {
     setName(displayName || fullName)
   }, [fullName, displayName])
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setName(e.target.value)
     axios
       .post('/api/auth/updateUser', { pennid, displayName: e.target.value })
@@ -130,7 +130,7 @@ const App = ({
         <InputField
           value={name}
           onChange={onChangeName}
-          onKeyDown={() => setLoading(true)}
+          onKeyDown={(): void => setLoading(true)}
           debounceTimeout={400}
         />
         {loading ? (
@@ -164,7 +164,7 @@ const App = ({
                           float: 'right',
                           cursor: 'pointer',
                         }}
-                        onClick={() => dispatchDiningRemoveFavorite(id)}
+                        onClick={(): void => dispatchDiningRemoveFavorite(id)}
                       />
                     </p>
                     <Line />
@@ -188,7 +188,7 @@ const App = ({
                           float: 'right',
                           cursor: 'pointer',
                         }}
-                        onClick={() => {
+                        onClick={(): void => {
                           dispatchLaundryRemoveFavorite(Number(hall.id))
                           dispatchGetLaundryFavorites()
                         }}

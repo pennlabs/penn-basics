@@ -10,7 +10,7 @@ import { DINING_ROUTE } from '../../constants/routes'
 
 import { IDiningReducerState, TVenueHours, IFavorite } from '../../../types/dining'
 
-interface IDining {
+interface IDiningProps {
   dispatchGetFavorites: () => void
   dispatchGetVenueHours: () => void
   favorites: IFavorite[]
@@ -18,13 +18,13 @@ interface IDining {
   venueHoursPending: boolean
 }
 
-const Dining = ({
+const Dining: React.FC<IDiningProps> = ({
   dispatchGetFavorites,
   dispatchGetVenueHours,
   favorites,
   venueHours,
   venueHoursPending
-}: IDining) => {
+}) => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()

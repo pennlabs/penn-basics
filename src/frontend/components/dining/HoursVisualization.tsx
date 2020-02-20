@@ -53,7 +53,7 @@ const week = [
   'Saturday',
 ]
 
-const getDay = (date: Date | string) => {
+const getDay = (date: Date | string): string => {
   const obj = moment(date)
   const dayNum = obj.day()
   const today = moment().day()

@@ -62,13 +62,13 @@ const Chevron = s.span<IChevronProps>`
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 
-  ${({ expanded }) =>
-    expanded &&
+  ${({ expanded }): string =>
+    expanded ?
     `
     margin: 4px 10px 0px 10px;
     -webkit-transform: rotate(-135deg);
     transform: rotate(-135deg);
-    `}
+    ` : ''}
 `
 
 const GOOGLE_URL = 'https://maps.google.com/maps?q='
@@ -89,14 +89,14 @@ interface IFoodtruckModalProps {
   router: SingletonRouter
 }
 
-const FoodtruckModal = ({
+const FoodtruckModal: React.FC<IFoodtruckModalProps> = ({
   foodtruckId,
   dispatchGetFoodtruckInfo,
   foodtruckInfo,
   dispatchUpdateFoodtruckReview,
   userInfo,
   router,
-}: IFoodtruckModalProps): React.ReactElement => {
+}: IFoodtruckModalProps) => {
   const [showForm, setShowForm] = useState(false)
   const [showReview, setShowReview] = useState(false)
 
@@ -104,7 +104,7 @@ const FoodtruckModal = ({
     if (foodtruckId) {dispatchGetFoodtruckInfo(foodtruckId)}
   }, [dispatchGetFoodtruckInfo, foodtruckId])
 
-  const handleReviewOnClick = () => {
+  const handleReviewOnClick = (): void => {
     if (loggedIn) {
       setShowForm(true)
     } else {
@@ -184,10 +184,10 @@ const FoodtruckModal = ({
             >
               <Form
                 show={showForm}
-                hideFunction={() => {
+                hideFunction={(): void => {
                   setShowForm(false)
                 }}
-                updateReview={(rating, comment, showName) => {
+                updateReview={(rating, comment, showName): void => {
                   dispatchUpdateFoodtruckReview(
                     foodtruckId,
                     pennid,
@@ -243,7 +243,7 @@ const FoodtruckModal = ({
                 showMarker
                 gestureHandling="cooperative"
                 height="50vh"
-                handleClickMarker={() => {
+                handleClickMarker={(): void => {
                   window.open(`${GOOGLE_URL}${location.lat},${location.lng}`)
                 }}
               />
@@ -254,7 +254,7 @@ const FoodtruckModal = ({
                 <strong> Read Reviews ({reviews.length}) </strong>
               </Text>
               <Chevron
-                onClick={() => {
+                onClick={(): void => {
                   setShowReview(!showReview)
                 }}
                 expanded={showReview}

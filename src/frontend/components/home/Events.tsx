@@ -23,7 +23,7 @@ interface ICalendarEvent {
   name: string
 }
 
-const Events = (): React.ReactElement => {
+const Events: React.FC = () => {
   const [calendarArray, setCalendar] = useState<ICalendarEvent[] | undefined>(
     undefined
   )
@@ -45,7 +45,7 @@ const Events = (): React.ReactElement => {
           href="https://almanac.upenn.edu/penn-academic-calendar"
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => logEvent('external links', 'penn academic calendar')}
+          onClick={(): void => logEvent('external links', 'penn academic calendar')}
         >
           University Calendar
         </a>

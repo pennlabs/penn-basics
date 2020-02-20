@@ -7,13 +7,17 @@ import { IFoodTruckUserReview } from '../../../types/foodtrucks'
 
 const array = [1, 2, 3, 4, 5]
 
-const Rating = ({ rating }: { rating: number }) => (
+interface IRatingProps {
+  rating: number
+}
+
+const Rating: React.FC<IRatingProps> = ({ rating }) => (
   <span>
     {array.map(index => (
       <StarIcon
-        color="#ffc520"
+        key={`rating-icon-${index}`}
         fill={rating && index <= rating ? '#ffc520' : 'none'}
-        style={{ transform: 'scale(0.7) translateY(9px)' }}
+        style={{ transform: 'scale(0.7) translateY(9px)', color: '#ffc520' }}
       />
     ))}
   </span>
@@ -24,13 +28,13 @@ interface IReviewProps {
   reviews: IFoodTruckUserReview[]
 }
 
-const Review = ({ show, reviews }: IReviewProps): React.ReactElement => {
+const Review: React.FC<IReviewProps> = ({ show, reviews }) => {
   if (!show) {return <React.Fragment />}
 
   return (
     <>
-      {reviews.map(({ rating, fullName, comment, timeEdited, showName }) => (
-        <div style={{ fontSize: '90%' }}>
+      {reviews.map(({ rating, fullName, comment, timeEdited, showName }, idx) => (
+        <div style={{ fontSize: '90%' }} key={`review-div-${idx}`}>
           <div style={{ marginBottom: '1em' }}>
             <strong style={{ marginRight: '0.3em' }}>
               {' '}

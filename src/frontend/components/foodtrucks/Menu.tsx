@@ -3,7 +3,11 @@ import React from 'react'
 import { Text } from '../shared'
 import { IFormattedFoodtruck } from '../../../types/foodtrucks'
 
-const Menu = ({ foodtruckInfo }: { foodtruckInfo: IFormattedFoodtruck }) => {
+interface IMenuProps {
+  foodtruckInfo: IFormattedFoodtruck
+}
+
+const Menu: React.FC<IMenuProps> = ({ foodtruckInfo }) => {
   const { menu, priceTypes } = foodtruckInfo
   return (
     <div>

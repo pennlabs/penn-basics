@@ -38,12 +38,12 @@ interface IRatingProps {
   setRating: (index: number) => void
 }
 
-const Rating = ({ rating, setRating }: IRatingProps) => (
+const Rating: React.FC<IRatingProps> = ({ rating, setRating }) => (
   <div>
     {array.map(index => (
       <span // eslint-disable-line
         style={{ marginRight: '0.5em', cursor: 'pointer' }}
-        onClick={() => {
+        onClick={(): void => {
           setRating(index)
         }}
       >
@@ -61,7 +61,7 @@ interface IFormProps {
   updateReview: (rating: number, comment: string, showName: boolean) => void
 }
 
-const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
+const Form: React.FC<IFormProps> = ({ show, hideFunction, updateReview }) => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [showName, setShowName] = useState(true)
@@ -75,12 +75,12 @@ const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
       <br />
       <Rating rating={rating} setRating={setRating} />
       <br />
-      <TextArea onChange={e => setComment(e.target.value)} />
+      <TextArea onChange={(e): void => setComment(e.target.value)} />
       <div>
         <span style={{ fontSize: '80%' }}>
           Show my name
           <Switch
-            onChange={() => setShowName(!showName)}
+            onChange={(): void => setShowName(!showName)}
             style={{ margin: '0 0.5em' }}
           />
           Keep review anonymous
@@ -106,7 +106,7 @@ const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
       <Buttons>
         <span // eslint-disable-line
           className="button is-light"
-          onClick={() => {
+          onClick={(): void => {
             hideFunction()
             setRating(0)
             setComment('')
@@ -118,7 +118,7 @@ const Form = ({ show, hideFunction, updateReview }: IFormProps) => {
           className="button is-success is-light"
           style={{ marginLeft: '0.5rem' }}
           disabled={!rating || !comment}
-          onClick={() => {
+          onClick={(): void => {
             hideFunction()
             updateReview(rating, comment, showName)
           }}

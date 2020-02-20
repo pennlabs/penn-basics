@@ -37,18 +37,18 @@ interface IAppProps {
   id: string
 }
 
-const App = ({
+const App: React.FC<IAppProps> = ({
   dispatchGetAllFoodtrucks,
   filteredFoodtrucksData,
   error,
   pending,
   hoveredFoodtruck,
   id,
-}: IAppProps): React.ReactElement => {
+}) => {
   const [googleMapError] = useState('')
   const [isListViewMobile, setListView] = useState(true)
 
-  const toggleView = () => {
+  const toggleView = (): void => {
     setListView(!isListViewMobile)
   }
 

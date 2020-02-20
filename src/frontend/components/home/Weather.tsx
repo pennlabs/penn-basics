@@ -8,7 +8,7 @@ import { logEvent } from '../../../utils/analytics'
 
 const TEMP_BASE = 'https://forecast7.com/en/39d95n75d17/philadelphia/'
 
-const Weather = () => {
+const Weather = (): React.ReactElement => {
   const [isFahrenheit, setIsFahrenheit] = useState(false)
   useEffect(() => {
     const tag = document.createElement('script')
@@ -16,7 +16,7 @@ const Weather = () => {
     document.getElementsByTagName('body')[0].appendChild(tag)
   }, [isFahrenheit])
 
-  const toggleIsFahrenheit = () => setIsFahrenheit(!isFahrenheit)
+  const toggleIsFahrenheit = (): void => setIsFahrenheit(!isFahrenheit)
 
   return (
     <BorderedCard>
@@ -37,7 +37,7 @@ const Weather = () => {
         data-highcolor=""
         data-lowcolor=""
         style={{ transition: 'height 0.5s ease' }}
-        onClick={() => logEvent('external links', 'temperature widget')}
+        onClick={(): void => logEvent('external links', 'temperature widget')}
       >
         Weather in Philly
       </a>

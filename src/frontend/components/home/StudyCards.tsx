@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 interface IStudyCardsProps {
   name: string
@@ -8,20 +8,8 @@ interface IStudyCardsProps {
   outlets: number
 }
 
-// TODO refactor to functional component
-
-class StudyCards extends Component<IStudyCardsProps> {
-  constructor(props: IStudyCardsProps) {
-    super(props)
-
-    this.renderNoise = this.renderNoise.bind(this)
-    this.renderGroups = this.renderGroups.bind(this)
-    this.renderOutlets = this.renderOutlets.bind(this)
-  }
-
-  renderNoise() {
-    const { noise } = this.props
-
+const StudyCards: React.FC<IStudyCardsProps> = ({ name, hours, noise, groups, outlets }) => {
+  const renderNoise = (): React.ReactElement => {
     if (noise === 0) {
       return <span className="tag tag-is-blue">Silent</span>
     }
@@ -33,9 +21,7 @@ class StudyCards extends Component<IStudyCardsProps> {
     return <span className="tag tag-is-green">Loud</span>
   }
 
-  renderGroups() {
-    const { groups } = this.props
-
+  const renderGroups = (): React.ReactElement => {
     if (groups === 0) {
       return <span className="tag is-info">No</span>
     }
@@ -47,9 +33,7 @@ class StudyCards extends Component<IStudyCardsProps> {
     return <span className="tag tag-is-green">Yes</span>
   }
 
-  renderOutlets() {
-    const { outlets } = this.props
-
+  const renderOutlets = (): React.ReactElement => {
     if (outlets === 0) {
       return <span className="tag is-info">None</span>
     }
@@ -61,49 +45,43 @@ class StudyCards extends Component<IStudyCardsProps> {
     return <span className="tag tag-is-green">Plenty</span>
   }
 
-  render() {
-    const { name, hours } = this.props
+  return (
+    <article className="media">
+      <div className="media-content">
+        <div className="content">
+          <p className="is-size-6">
+            <strong>{name}</strong>
+            <br />
+            <small>
+              Hours:
+              {hours}
+            </small>
 
-    return (
-      <article className="media">
-        <div className="media-content">
-          <div className="content">
-            <p className="is-size-6">
-              <strong>{name}</strong>
+            <br />
 
-              <br />
+            <small>
+              Noise Level:
+              {renderNoise()}
+            </small>
 
-              <small>
-                Hours:
-                {hours}
-              </small>
+            <br />
 
-              <br />
+            <small>
+              Good for groups:
+              {renderGroups()}
+            </small>
 
-              <small>
-                Noise Level:
-                {this.renderNoise()}
-              </small>
+            <br />
 
-              <br />
-
-              <small>
-                Good for groups:
-                {this.renderGroups()}
-              </small>
-
-              <br />
-
-              <small>
-                Outlets:
-                {this.renderOutlets()}
-              </small>
-            </p>
-          </div>
+            <small>
+              Outlets:
+              {renderOutlets()}
+            </small>
+          </p>
         </div>
-      </article>
-    )
-  }
+      </div>
+    </article>
+  )
 }
 
 export default StudyCards

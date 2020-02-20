@@ -28,7 +28,7 @@ interface IHoursProps {
   end: string[]
 }
 
-const Hours = ({ start, end }: IHoursProps) => {
+const Hours: React.FC<IHoursProps> = ({ start, end }) => {
   const days = [
     'Monday',
     'Tuesday',

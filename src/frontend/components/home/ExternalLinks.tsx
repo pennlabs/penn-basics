@@ -34,16 +34,16 @@ interface IExternalLinkProps {
   productName: string
 }
 
-const ExternalLink = ({
+const ExternalLink: React.FC<IExternalLinkProps> = ({
   pictureURL,
   websiteURL,
   productName,
-}: IExternalLinkProps): React.ReactElement => (
+}) => (
     <ExternalLinkTag
       href={websiteURL}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => logEvent('external links', productName)}
+      onClick={(): void => logEvent('external links', productName)}
     >
       <FlexRow>
         <Col width="2rem">
@@ -68,7 +68,7 @@ const ExternalLinks = (): React.ReactElement => (
             href={websiteURL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent('external links', description)}
+            onClick={(): void => logEvent('external links', description)}
           >
             {description}
           </a>

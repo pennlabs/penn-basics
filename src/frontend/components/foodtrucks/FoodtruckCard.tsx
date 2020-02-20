@@ -34,7 +34,7 @@ interface IFoodtruckCardProps {
   image: string
 }
 
-const FoodtruckCard = ({
+const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   hoveredFoodtruck,
   foodtruckId,
   dispatchSetHoveredFoodtruck,
@@ -43,8 +43,8 @@ const FoodtruckCard = ({
   hours,
   overallRating,
   image
-}: IFoodtruckCardProps) => {
-  const handleMouseEnter = () => {
+}) => {
+  const handleMouseEnter = (): void => {
     // If there is no change to be made
     if (hoveredFoodtruck && hoveredFoodtruck === foodtruckId) {return}
 

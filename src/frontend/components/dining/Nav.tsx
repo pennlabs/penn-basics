@@ -40,19 +40,19 @@ diningKeys.sort((keyA, keyB) => {
   return nameA.localeCompare(nameB)
 })
 
-interface INav {
+interface INavProps {
   favorites: IFavorite[]
   selectedVenueId: string
   venueHours: TVenueHours
   pending: boolean
 }
 
-const Nav = ({
+const Nav: React.FC<INavProps> = ({
   favorites,
   selectedVenueId,
   venueHours,
   pending
-}: INav): React.ReactElement => {
+}) => {
   // If a venue is selected, hide the scrollbar on mobile
   const hideOnMobile =
     selectedVenueId !== undefined &&

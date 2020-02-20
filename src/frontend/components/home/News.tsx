@@ -30,7 +30,7 @@ interface IDPResponse {
   time: string
 }
 
-const News = () => {
+const News = (): React.ReactElement => {
   const [data, setData] = useState<IDPResponse | undefined>(undefined)
 
   useEffect(() => {
@@ -49,13 +49,13 @@ const News = () => {
       .then(res => {
         setData(res.data)
       })
-    return () => {
+    return (): void => {
       source.cancel()
     }
   }, [])
 
   if (!data) {
-    return null
+    return <React.Fragment />
   }
 
   const { picture, link, title, content, time } = data
@@ -70,7 +70,7 @@ const News = () => {
             href="https://www.thedp.com/"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent('external links', 'the dp')}
+            onClick={(): void => logEvent('external links', 'the dp')}
           >
             The Daily Pennsylvanian
           </a>
@@ -82,7 +82,7 @@ const News = () => {
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => logEvent('external links', 'the dp headline')}
+            onClick={(): void => logEvent('external links', 'the dp headline')}
           >
             <ImageZoom src={picture} alt="First" />
           </a>
@@ -94,7 +94,7 @@ const News = () => {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => logEvent('external links', 'the dp headline')}
+                onClick={(): void => logEvent('external links', 'the dp headline')}
               >
                 {title}
               </a>

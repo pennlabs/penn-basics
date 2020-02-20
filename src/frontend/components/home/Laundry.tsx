@@ -24,12 +24,12 @@ interface ILaundryProps {
   favoritesHome: IFavoriteHome[]
 }
 
-const Laundry = ({ dispatchGetFavoritesHomePage, favoritesHome }: ILaundryProps) => {
+const Laundry: React.FC<ILaundryProps> = ({ dispatchGetFavoritesHomePage, favoritesHome }) => {
   useEffect(() => {
     dispatchGetFavoritesHomePage()
-  }, [dispatchGetFavoritesHomePage])
+  }, []) // eslint-disable-line
 
-  const renderFavorites = () => {
+  const renderFavorites = (): React.ReactElement => {
     if (!favoritesHome || favoritesHome.length === 0) {
       return (
         <Link href={LAUNDRY_HALLS_ROUTE}>
@@ -40,39 +40,42 @@ const Laundry = ({ dispatchGetFavoritesHomePage, favoritesHome }: ILaundryProps)
       )
     }
 
-    return favoritesHome.map(favorite => {
-      const { washers, dryers } = favorite.machines
+    return (
+      <>
+        {favoritesHome.map(favorite => {
+        const { washers, dryers } = favorite.machines
 
-      return (
-        <BorderedCard
-          key={`laundryFavorite-${favorite.id}`}
-          padding="1rem 1rem 0 1rem"
-        >
-          <Link href={`/laundry/${favorite.id}`} as={`/laundry/${favorite.id}`}>
-            <a>
-              <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
-            </a>
-          </Link>
-          <Row>
-            <Col>
-              <Text>Washer</Text>
-              <MachineAvailability
-                displayDetails={false}
-                machineData={washers}
-              />
-            </Col>
-            <ColSpace />
-            <Col>
-              <Text>Dryer</Text>
-              <MachineAvailability
-                displayDetails={false}
-                machineData={dryers}
-              />
-            </Col>
-          </Row>
-        </BorderedCard>
-      )
-    })
+        return (
+          <BorderedCard
+            key={`laundryFavorite-${favorite.id}`}
+            padding="1rem 1rem 0 1rem"
+          >
+            <Link href={`/laundry/${favorite.id}`} as={`/laundry/${favorite.id}`}>
+              <a>
+                <Subtitle>{`${favorite.location}: ${favorite.hall_name}`}</Subtitle>
+              </a>
+            </Link>
+            <Row>
+              <Col>
+                <Text>Washer</Text>
+                <MachineAvailability
+                  displayDetails={false}
+                  machineData={washers}
+                />
+              </Col>
+              <ColSpace />
+              <Col>
+                <Text>Dryer</Text>
+                <MachineAvailability
+                  displayDetails={false}
+                  machineData={dryers}
+                />
+              </Col>
+            </Row>
+          </BorderedCard>
+        )})}
+      </>
+    )
   }
 
   return (

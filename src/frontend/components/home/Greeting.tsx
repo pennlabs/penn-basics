@@ -12,7 +12,7 @@ interface IGreetingProps {
   userInfo: IUser
 }
 
-const Greeting = ({ userInfo }: IGreetingProps): React.ReactElement => {
+const Greeting: React.FC<IGreetingProps> = ({ userInfo }) => {
   const [greeting, setGreeting] = useState<string>('')
   const [emoji, setEmoji] = useState<string>('')
 

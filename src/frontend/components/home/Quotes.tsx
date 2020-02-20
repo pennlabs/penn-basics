@@ -8,7 +8,7 @@ const Author = s.p`
   font-style: italic;
 `
 
-const Quotes = () => {
+const Quotes = (): React.ReactElement => {
   const index = Math.floor(Math.random() * quotes.length)
   const quoteObj = quotes[index]
   const { quote, author } = quoteObj
