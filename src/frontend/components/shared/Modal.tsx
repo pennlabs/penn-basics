@@ -16,11 +16,12 @@ import { ESCAPE_KEY_CODE } from '../../constants/misc'
 
 interface IModalContent {
   show?: boolean
+  isHome?: boolean
 }
 
 const ModalContent = styled.div<IModalContent>`
   background: ${WHITE};
-  width: 50%;
+  width: ${({ isHome }) => (isHome ? '10%' : '50%')};
   display: inline-block;
   margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
   margin-bottom: calc(1rem + 5vh);
@@ -163,8 +164,6 @@ class Modal extends Component<IModalProps, IModalState> {
     const { show, children, toggle, ROUTE } = this.props
     const { isNewlyMounted } = this.state
 
-    const widthStyle = this.props.isHome ?
-      {"width": "10%"} : {};
 
     if (toggle || !ROUTE) {
       return (
@@ -177,7 +176,7 @@ class Modal extends Component<IModalProps, IModalState> {
           onKeyPress={this.handleKeyPress}
           onKeyDown={this.handleKeyPress}
         >
-          <ModalContent style={widthStyle} onClick={noop} show={show}>
+          <ModalContent onClick={noop} show={show} isHome={this.props.isHome}>
             <ModalClose onClick={toggle} show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -197,7 +196,7 @@ class Modal extends Component<IModalProps, IModalState> {
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
-        <ModalContent style={widthStyle} onClick={noop} show={show}>
+        <ModalContent  onClick={noop} show={show} isHome={this.props.isHome}>
           <Link href={ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>
