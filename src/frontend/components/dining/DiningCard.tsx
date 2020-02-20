@@ -26,8 +26,10 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-const getOpenHours = (venueHours: IDaypart[]) => {
-  if (!venueHours) {return null}
+const getOpenHours = (venueHours: IDaypart[]): IDaypart[] | null => {
+  if (!venueHours) {
+    return null
+  }
 
   // get the array of hours that are opened today
   const date = new Date()
@@ -36,7 +38,12 @@ const getOpenHours = (venueHours: IDaypart[]) => {
   return openHours
 }
 
-const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDaypart[] }) => {
+interface ICardSubtextProps {
+  venueId: string
+  venueHours: IDaypart[]
+}
+
+const CardSubtext: React.FC<ICardSubtextProps> = ({ venueId, venueHours }) => {
   const showMealLabels = venueData[Number(venueId)].isRetail
     ? venueData[Number(venueId)].showMealLabels || false
     : true
@@ -81,7 +88,7 @@ const CardSubtext = ({ venueId, venueHours }: { venueId: string, venueHours: IDa
   )
 }
 
-const parseVenueHours = (venueId: string, venueHours: TVenueHours) => {
+const parseVenueHours = (venueId: string, venueHours: TVenueHours): IDaypart[] => {
   let currDate = moment().format()
   currDate = currDate.substring(0, currDate.indexOf('T'))
   let venueHour: IVenueHour[] = venueHours[venueId]
@@ -99,14 +106,14 @@ interface IDiningCardProps {
   style?: {}
 }
 
-const DiningCard = ({
+const DiningCard: React.FC<IDiningCardProps> = ({
   venueId,
   selected,
   isFavorited,
   venueHours,
   showLine,
   style,
-}: IDiningCardProps) => {
+}) => {
   const parsedVenueHours = parseVenueHours(venueId, venueHours)
   const { name, image } = venueData[venueId]
 
@@ -114,7 +121,7 @@ const DiningCard = ({
   const img = `/img/venue_images/${image}`
 
   if (isFavorited) {
-    return null
+    return <React.Fragment />
   }
 
   return (

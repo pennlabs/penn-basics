@@ -17,14 +17,14 @@ interface IAppProps {
   venueHoursPending: boolean,
 }
 
-const App = ({
+const App: React.FC<IAppProps> = ({
   dispatchGetFavorites,
   dispatchGetVenueHours,
   id,
   favorites,
   venueHours,
   venueHoursPending,
-}: IAppProps): React.ReactElement => {
+}) => {
   useEffect(() => {
     dispatchGetFavorites()
     dispatchGetVenueHours()
@@ -63,8 +63,8 @@ const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
 }
 
 const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetFavorites: () => dispatch(getFavorites()),
-  dispatchGetVenueHours: () => dispatch(getVenueHours()),
+  dispatchGetFavorites: (): void => dispatch(getFavorites()),
+  dispatchGetVenueHours: (): void => dispatch(getVenueHours()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

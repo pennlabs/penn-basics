@@ -53,7 +53,7 @@ interface IDiningVenueProps {
   dispatchRemoveFavorite: ({ venueId }: { venueId: string }) => void
 }
 
-const DiningVenue = ({
+const DiningVenue: React.FC<IDiningVenueProps> = ({
   favorites,
   venueId,
   venueHoursPending,

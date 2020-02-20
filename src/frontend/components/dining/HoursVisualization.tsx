@@ -64,7 +64,7 @@ const getDay = (date: Date | string) => {
   return week[dayNum]
 }
 
-const isRightNow = (meal: IDaypart, date: string) => {
+const isRightNow = (meal: IDaypart, date: string): boolean => {
   if (!meal) {
     return false
   }
@@ -78,7 +78,11 @@ const isRightNow = (meal: IDaypart, date: string) => {
   return today === date && starttime <= currTime && currTime <= endtime
 }
 
-const List = ({ venueHours }: { venueHours: IVenueHour[] }) => {
+interface IListProps {
+  venueHours: IVenueHour[]
+}
+
+const List: React.FC<IListProps> = ({ venueHours }) => {
   if (!venueHours || !venueHours.length) {
     return null
   }
@@ -139,7 +143,7 @@ interface IHoursVisualizationProps {
   venueHours?: TVenueHours
 }
 
-const HoursVisualization = ({ venueHours, venueId }: IHoursVisualizationProps) => {
+const HoursVisualization: React.FC<IHoursVisualizationProps> = ({ venueHours, venueId }) => {
   if (!venueHours) {
     return <ErrorMessage message="Failed to load hours of operation." />
   }
@@ -167,4 +171,4 @@ const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   }
 }
 
-export default connect(mapStateToProps, null)(HoursVisualization)
+export default connect(mapStateToProps)(HoursVisualization)

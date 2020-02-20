@@ -9,7 +9,11 @@ import { TVenueData } from '../../../types/dining'
 
 const venueData = data as TVenueData
 
-const DiningOverview = ({ id }: { id: string }) => {
+interface IDiningOverviewProps {
+  id: string
+}
+
+const DiningOverview: React.FC<IDiningOverviewProps> = ({ id }) => {
   const { description, pennDiningSlug } = venueData[id]
   return (
     <>
