@@ -14,5 +14,5 @@ export const Circle = styled.div<ICircle>`
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background: ${({ open }) => (open ? GREEN : BORDER)};
+  background: ${({ open }): string => (open ? GREEN : BORDER)};
 `

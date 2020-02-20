@@ -24,7 +24,7 @@ export const ErrorMessage = ({
       <button
         className="delete"
         type="button"
-        onClick={() => setVisibility(false)}
+        onClick={(): void => setVisibility(false)}
       />
 
       {message || 'Oops, there was an error'}

@@ -37,12 +37,12 @@ const Bar = s.span`
   }
 `
 
-interface IBars {
+interface IBarsProps {
   handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   onKeyPress: (event: React.KeyboardEvent<HTMLDivElement>) => void
 }
 
-const Bars = ({ handleClick, onKeyPress }: IBars): React.ReactElement => (
+const Bars: React.FC<IBarsProps> = ({ handleClick, onKeyPress }) => (
   <Wrapper onClick={handleClick} onKeyPress={onKeyPress} tabIndex={0}>
     <Bar />
     <Bar />

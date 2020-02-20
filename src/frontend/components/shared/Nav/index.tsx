@@ -17,7 +17,7 @@ import Menu from './Menu'
 import Logo from './Logo'
 import Back from './Back'
 import { Shade } from '../Shade'
-import { IUserInfo } from '../../../../types/profile'
+import { IAuthReducerState, IUser } from '../../../../types/authentication'
 
 /**
  * Navbar is fixed position and thus takes up no height as far as other elements
@@ -67,7 +67,7 @@ const StyledShade = s(Shade)<{ zIndex: number }>`
 interface IOwnProps {}
 
 interface IStateProps {
-  userInfo?: IUserInfo
+  userInfo?: IUser
 }
 
 interface IDispatchProps {
@@ -118,11 +118,16 @@ const Nav = ({ dispatchGetUserInfo, userInfo }: Props): React.ReactElement => {
   )
 }
 
-const mapStateToProps = ({ authentication }: { authentication: IUserInfo }) =>
-  authentication
+const mapStateToProps = ({ authentication }: { authentication: IAuthReducerState }): IStateProps => {
+  const { userInfo } = authentication
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  dispatchGetUserInfo: () => dispatch(getUserInfo()),
+  return {
+    userInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>): IDispatchProps => ({
+  dispatchGetUserInfo: (): void => dispatch(getUserInfo()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav)

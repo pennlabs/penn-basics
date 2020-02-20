@@ -1,6 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
-import { Col, ICol } from './Flex'
+import { Col, IColProps } from './Flex'
 
 interface IWrapper {
   background?: string
@@ -11,10 +11,10 @@ const Wrapper = s.div<IWrapper>`
   border-radius: 4px;
   padding: 0.5rem 0;
   width: 100%;
-  background: ${({ background }) => background};
+  background: ${({ background }): string|undefined => background};
 
   h1, p {
-    color: ${({ color }) => color};
+    color: ${({ color }): string|undefined => color};
     text-align: center;
   }
 
@@ -30,14 +30,14 @@ const Wrapper = s.div<IWrapper>`
   }
 `
 
-type TLaundryOverview = ICol & IWrapper
+type ILaundryOverviewProps = IColProps & IWrapper
 
-export const LaundryOverview = ({
+export const LaundryOverview: React.FC<ILaundryOverviewProps> = ({
   color,
   children,
   background,
   ...rest
-}: TLaundryOverview) => (
+}) => (
   <Col {...rest} style={{ marginBottom: '1rem' }}>
     <Wrapper color={color} background={background}>
       {children}

@@ -167,7 +167,7 @@ const ColContainer = s.div<IColContainer>(({ margin }) =>
   margin ? `margin-left: ${margin}; margin-right: ${margin};` : ''
 )
 
-export type ICol = {
+export type IColProps = {
   margin?: string
   children?: React.ReactNode | React.ReactNodeArray
   style?: React.CSSProperties
@@ -176,7 +176,7 @@ export type ICol = {
 } & IColWrapper &
   IColContainer
 
-export const Col = ({ margin, children, ...other }: ICol) => (
+export const Col: React.FC<IColProps> = ({ margin, children, ...other }) => (
   <ColWrapper {...other}>
     {margin ? (
       <ColContainer margin={margin}>{children}</ColContainer>
@@ -188,7 +188,7 @@ export const Col = ({ margin, children, ...other }: ICol) => (
 
 export const ColSpace = s(Col)`
   flex: none;
-  width: ${({ width }) => width || '1rem'};
+  width: ${({ width }): string => width || '1rem'};
 
   ${maxWidth(PHONE)} {
     display: none;

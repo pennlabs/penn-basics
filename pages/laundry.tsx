@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import App from '../src/frontend/components/laundry/App'
 import Header from '../src/frontend/components/header/index'
 
-const Laundry = () => {
+const Laundry = (): React.ReactElement => {
   const router = useRouter()
   const { id } = router.query
 

@@ -54,11 +54,11 @@ export const BorderedCard = styled(Card)`
   margin-bottom: 1rem;
 `
 
-interface NavHeaderCard {
+interface INavHeaderCardProps {
   title: string
 }
 
-export const NavHeaderCard = ({ title }: NavHeaderCard) => (
+export const NavHeaderCard: React.FC<INavHeaderCardProps> = ({ title }) => (
   <Card background={BABY_BLUE} padding="0">
     <NavHeader className="title is-5">{title}</NavHeader>
     <Line />

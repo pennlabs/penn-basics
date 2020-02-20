@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { withRouter } from 'next/router'
 import s from 'styled-components'
 import Link from 'next/link'
@@ -15,7 +14,7 @@ import {
   getApiAuthRouteWithRedirectParams,
   PROFILE_ROUTE,
 } from '../../../constants/routes'
-import { IUserInfo } from '../../../../types/profile'
+import { IUser } from '../../../../types/authentication'
 
 const MOBILE_ACTIVE_NAV_HEIGHT = '250px'
 
@@ -52,7 +51,7 @@ const StyledLink = s.a`
 `
 
 interface IAuthLinkProps {
-  userInfo: IUserInfo
+  userInfo?: IUser
   router: any
 }
 
@@ -85,7 +84,7 @@ const AuthLink = withRouter(({ userInfo, router }: IAuthLinkProps) => {
 interface ILinksProps {
   active: boolean
   zIndex: number
-  userInfo: IUserInfo
+  userInfo?: IUser
   toggleActive: (arg0: boolean) => void
 }
 
@@ -111,20 +110,5 @@ const Links = ({
     <AuthLink userInfo={userInfo} />
   </LinksDiv>
 )
-
-Links.propTypes = {
-  active: PropTypes.bool,
-  zIndex: PropTypes.number.isRequired,
-  toggleActive: PropTypes.func.isRequired,
-  userInfo: PropTypes.shape({
-    loggedIn: PropTypes.bool,
-    fullName: PropTypes.string,
-  }),
-}
-
-Links.defaultProps = {
-  active: false,
-  userInfo: null,
-}
 
 export default Links

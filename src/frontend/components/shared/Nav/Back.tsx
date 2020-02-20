@@ -30,7 +30,7 @@ interface IBackProps {
   router: Router
 }
 
-const Back = ({ router }: IBackProps): React.ReactElement => {
+const Back: React.FC<IBackProps> = ({ router }) => {
   const [route, setRoute] = useState<string>('')
 
   useEffect(() => {

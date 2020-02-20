@@ -8,7 +8,7 @@ interface IImage {
 export const Image = s.img<IImage>`
   width: 100%;
   display: block;
-  margin-bottom: ${({ marginBottom }) => marginBottom || '1rem'};
+  margin-bottom: ${({ marginBottom }): string => marginBottom || '1rem'};
 `
 
 interface IImageZoomImg {
@@ -27,7 +27,7 @@ const ImageZoomImg = s.img<IImageZoomImg>`
   }
 `
 
-export const ImageZoom = (props: IImageZoomImg) => (
+export const ImageZoom: React.FC<IImageZoomImg> = props => (
   <div style={{ overflow: 'hidden', width: '100%' }}>
     <ImageZoomImg {...props} />
   </div>

@@ -49,7 +49,7 @@ const Feedback = (): React.ReactElement => (
     title="Feedback"
     target="_blank"
     rel="noopener noreferrer"
-    onClick={() => logEvent('feeback', 'click from icon')}
+    onClick={(): void => logEvent('feeback', 'click from icon')}
   >
     <Icon className="fa-comment far fa-lg" />
   </FeedbackLink>
