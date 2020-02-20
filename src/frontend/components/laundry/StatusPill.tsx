@@ -24,14 +24,18 @@ interface IPillProps {
 }
 
 const Pill = s.span<IPillProps>`
-  background: ${({ background }) => background};
-  color: ${({ color }) => color};
+  background: ${({ background }): string => background};
+  color: ${({ color }): string|undefined => color};
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-weight: 500;
 `
 
-const StatusPill = ({ status }: { status: string }) => {
+interface IStatusPillProps {
+  status: string
+}
+
+const StatusPill: React.FC<IStatusPillProps> = ({ status }) => {
   const [color, background] = colorMap[status] || colorMap['Not online']
   return (
     <Pill background={background} color={color}>

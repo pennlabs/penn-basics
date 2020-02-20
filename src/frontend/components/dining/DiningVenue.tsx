@@ -45,13 +45,21 @@ const Wrapper = s.div`
   }
 `
 
-interface IDiningVenueProps {
-  favorites: IFavorite[]
-  venueId: string
+interface IDiningVenueStateProps {
   venueHoursPending: boolean
+  favorites: IFavorite[]
+}
+
+interface IDiningVenueDispatchProps {
   dispatchAddFavorite: ({ venueId }: { venueId: string }) => void
   dispatchRemoveFavorite: ({ venueId }: { venueId: string }) => void
 }
+
+interface IDiningVenueOwnProps {
+  venueId: string
+}
+
+type IDiningVenueProps = IDiningVenueOwnProps & IDiningVenueStateProps & IDiningVenueDispatchProps
 
 const DiningVenue: React.FC<IDiningVenueProps> = ({
   favorites,
@@ -59,7 +67,7 @@ const DiningVenue: React.FC<IDiningVenueProps> = ({
   venueHoursPending,
   dispatchAddFavorite,
   dispatchRemoveFavorite,
-}: IDiningVenueProps) => {
+}) => {
   if (!venueId) {
     return (
       <NoData
@@ -98,10 +106,10 @@ const DiningVenue: React.FC<IDiningVenueProps> = ({
         <Buttons>
           <FavoriteButton
             isFavorited={isFavorited}
-            addFunction={props =>
+            addFunction={(props): void =>
               dispatchAddFavorite(props as { venueId: string })
             }
-            removeFunction={props =>
+            removeFunction={(props): void =>
               dispatchRemoveFavorite(props as { venueId: string })
             }
             addParams={{ venueId }}
@@ -115,7 +123,7 @@ const DiningVenue: React.FC<IDiningVenueProps> = ({
   )
 }
 
-const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }): IDiningVenueStateProps => {
   const { venueHoursPending, favorites } = dining
 
   return {
@@ -124,10 +132,10 @@ const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchAddFavorite: ({ venueId }: { venueId: string }) =>
+const mapDispatchToProps = (dispatch: (action: any) => any): IDiningVenueDispatchProps => ({
+  dispatchAddFavorite: ({ venueId }: { venueId: string }): void =>
     dispatch(addFavorite(venueId)),
-  dispatchRemoveFavorite: ({ venueId }: { venueId: string }) =>
+  dispatchRemoveFavorite: ({ venueId }: { venueId: string }): void =>
     dispatch(removeFavorite(venueId)),
 })
 

@@ -8,7 +8,7 @@ interface IMenuProps {
 }
 
 const Menu: React.FC<IMenuProps> = ({ foodtruckInfo }) => {
-  const { menu, priceTypes } = foodtruckInfo
+  const { menu, priceTypes, foodtruckID } = foodtruckInfo
   return (
     <div>
       <Text fullWidth>
@@ -25,18 +25,23 @@ const Menu: React.FC<IMenuProps> = ({ foodtruckInfo }) => {
               <tr>
                 {priceTypes[category.name] ? <th> </th> : null}
                 {priceTypes[category.name] &&
-                  priceTypes[category.name].map(type => (
-                    <th style={{ fontSize: '80%' }}> {type} </th>
+                  priceTypes[category.name].map((type, idx) => (
+                    <th
+                      style={{ fontSize: '80%' }}
+                      key={`category-${foodtruckID}-header-${idx}`}
+                    >
+                      {type}
+                    </th>
                   ))}
               </tr>
-              {category.items.map(item => (
-                <tr>
+              {category.items.map((item, idx) => (
+                <tr key={`category-${foodtruckID}-row-${idx}`}>
                   <td style={{ fontSize: '80%' }}>{item.name}</td>
-                  {item.prices.map(price => (
-                    <td style={{ fontSize: '80%' }}>
-                      ${(Math.round(price * 100) / 100).toFixed(2)}
-                    </td>
-                  ))}
+                    {item.prices.map((price, priceIdx) => (
+                      <td style={{ fontSize: '80%' }} key={`category-${foodtruckID}-price-${priceIdx}`}>
+                        ${(Math.round(price * 100) / 100).toFixed(2)}
+                      </td>
+                    ))}
                 </tr>
               ))}
               <br />

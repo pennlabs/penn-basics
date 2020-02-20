@@ -28,14 +28,22 @@ import { IFoodTrucksReducerState, IFormattedFoodtruck } from '../../../types/foo
 
 // TODO ghost loaders
 
-interface IAppProps {
-  dispatchGetAllFoodtrucks: () => void
+interface IAppStateProps {
   filteredFoodtrucksData: Record<string, IFormattedFoodtruck>
   pending: boolean
   error: string
   hoveredFoodtruck: string
+}
+
+interface IAppDispatchProps {
+  dispatchGetAllFoodtrucks: () => void
+}
+
+interface IAppOwnProps {
   id: string
 }
+
+type IAppProps = IAppOwnProps & IAppStateProps & IAppDispatchProps
 
 const App: React.FC<IAppProps> = ({
   dispatchGetAllFoodtrucks,
@@ -117,7 +125,7 @@ const App: React.FC<IAppProps> = ({
               mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
               markers={filteredFoodtrucksData}
               activeMarker={hoveredFoodtruck}
-              handleClickMarker={truckId =>
+              handleClickMarker={(truckId): Promise<boolean> =>
                 Router.push(
                   FOODTRUCK_QUERY_ROUTE(`${truckId}`),
                   FOODTRUCK_ROUTE(`${truckId}`)
@@ -133,7 +141,7 @@ const App: React.FC<IAppProps> = ({
   )
 }
 
-const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState } ) => {
+const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }): IAppStateProps => {
   const { filteredFoodtrucksData, pending, error, hoveredFoodtruck } = foodtrucks
 
   return {
@@ -144,8 +152,8 @@ const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetAllFoodtrucks: () => dispatch(getAllFoodtrucksData()),
+const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+  dispatchGetAllFoodtrucks: (): void => dispatch(getAllFoodtrucksData()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

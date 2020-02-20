@@ -23,16 +23,24 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-interface IFoodtruckCardProps {
+interface IFoodtruckCardStateProps {
   hoveredFoodtruck?: string
-  foodtruckId: string
+}
+
+interface IFoodtruckCardDispatchProps {
   dispatchSetHoveredFoodtruck: (foodtruckId: string) => void
+}
+
+interface IFoodtruckCardOwnProps {
+  foodtruckId: string
   name: string
   open: boolean
   hours: string
   overallRating: number
   image: string
 }
+
+type IFoodtruckCardProps = IFoodtruckCardOwnProps & IFoodtruckCardStateProps & IFoodtruckCardDispatchProps
 
 const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   hoveredFoodtruck,
@@ -102,13 +110,13 @@ const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   )
 }
 
-const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }) => {
+const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }): IFoodtruckCardStateProps => {
   const { hoveredFoodtruck } = foodtrucks
   return { hoveredFoodtruck }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchSetHoveredFoodtruck: (foodtruckId: string) =>
+const mapDispatchToProps = (dispatch: (action: any) => any): IFoodtruckCardDispatchProps => ({
+  dispatchSetHoveredFoodtruck: (foodtruckId: string): void =>
     dispatch(setHoveredFoodtruck(foodtruckId)),
 })
 

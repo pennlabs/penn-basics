@@ -10,13 +10,18 @@ import { DINING_ROUTE } from '../../constants/routes'
 
 import { IDiningReducerState, TVenueHours, IFavorite } from '../../../types/dining'
 
-interface IDiningProps {
-  dispatchGetFavorites: () => void
-  dispatchGetVenueHours: () => void
+interface IDiningStateProps {
   favorites: IFavorite[]
   venueHours: TVenueHours
   venueHoursPending: boolean
 }
+
+interface IDiningDispatchProps {
+  dispatchGetFavorites: () => void
+  dispatchGetVenueHours: () => void
+}
+
+type IDiningProps = IDiningStateProps & IDiningDispatchProps
 
 const Dining: React.FC<IDiningProps> = ({
   dispatchGetFavorites,
@@ -69,7 +74,7 @@ const Dining: React.FC<IDiningProps> = ({
   )
 }
 
-const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }): IDiningStateProps => {
   const { favorites, venueHours, venueHoursPending } = dining
 
   return {
@@ -79,9 +84,9 @@ const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetFavorites: () => dispatch(getFavorites()),
-  dispatchGetVenueHours: () => dispatch(getVenueHours()),
+const mapDispatchToProps = (dispatch: (action: any) => any): IDiningDispatchProps => ({
+  dispatchGetFavorites: (): void => dispatch(getFavorites()),
+  dispatchGetVenueHours: (): void => dispatch(getVenueHours()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dining)

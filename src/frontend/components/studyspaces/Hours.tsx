@@ -7,7 +7,7 @@ interface IHoursProps {
   end: number[]
 }
 
-export const Hours = ({ start, end }: IHoursProps) => {
+export const Hours: React.FC<IHoursProps> = ({ start, end }) => {
   const days = [
     'Sunday',
     'Monday',

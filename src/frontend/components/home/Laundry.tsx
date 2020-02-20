@@ -19,10 +19,15 @@ import { LAUNDRY_HALLS_ROUTE } from '../../constants/routes'
 
 import { ILaundryReducerState, IFavoriteHome } from '../../../types/laundry'
 
-interface ILaundryProps {
-  dispatchGetFavoritesHomePage: () => void
+interface ILaundryStateProps {
   favoritesHome: IFavoriteHome[]
 }
+
+interface ILaundryDispatchProps {
+  dispatchGetFavoritesHomePage: () => void
+}
+
+type ILaundryProps = ILaundryStateProps & ILaundryDispatchProps
 
 const Laundry: React.FC<ILaundryProps> = ({ dispatchGetFavoritesHomePage, favoritesHome }) => {
   useEffect(() => {
@@ -93,15 +98,15 @@ const Laundry: React.FC<ILaundryProps> = ({ dispatchGetFavoritesHomePage, favori
   )
 }
 
-const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }) => {
+const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }): ILaundryStateProps => {
   const { favoritesHome } = laundry
   return {
     favoritesHome,
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetFavoritesHomePage: () => dispatch(getFavoritesHomePage()),
+const mapDispatchToProps = (dispatch: (action: any) => any): ILaundryDispatchProps => ({
+  dispatchGetFavoritesHomePage: (): void => dispatch(getFavoritesHomePage()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Laundry)

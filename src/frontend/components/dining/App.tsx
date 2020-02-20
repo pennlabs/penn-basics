@@ -8,14 +8,23 @@ import DiningVenue from './DiningVenue'
 import { getFavorites, getVenueHours } from '../../actions/dining_actions'
 import { IDiningReducerState, IFavorite, TVenueHours } from '../../../types/dining'
 
-interface IAppProps {
+
+interface IAppStateProps {
+  favorites: IFavorite[]
+  venueHours: TVenueHours
+  venueHoursPending: boolean
+}
+
+interface IAppDispatchProps {
   dispatchGetFavorites: () => void
   dispatchGetVenueHours: () => void
-  id: string
-  favorites: IFavorite[],
-  venueHours: TVenueHours,
-  venueHoursPending: boolean,
 }
+
+interface IAppOwnProps {
+  id: string
+}
+
+type IAppProps = IAppOwnProps & IAppStateProps & IAppDispatchProps
 
 const App: React.FC<IAppProps> = ({
   dispatchGetFavorites,
@@ -52,7 +61,7 @@ const App: React.FC<IAppProps> = ({
   )
 }
 
-const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }): IAppStateProps => {
   const { favorites, venueHours, venueHoursPending } = dining
 
   return {
@@ -62,7 +71,7 @@ const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
   dispatchGetFavorites: (): void => dispatch(getFavorites()),
   dispatchGetVenueHours: (): void => dispatch(getVenueHours()),
 })

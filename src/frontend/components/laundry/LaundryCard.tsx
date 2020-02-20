@@ -14,7 +14,7 @@ interface ILaundryCardProps {
   selectedHallId: number
 }
 
-const LaundryCard = ({ locationObject, selectedHallId }: ILaundryCardProps) => {
+const LaundryCard: React.FC<ILaundryCardProps> = ({ locationObject, selectedHallId }) => {
   const [expanded, setExpanded] = useState(false)
 
   const { halls, location } = locationObject
@@ -41,8 +41,8 @@ const LaundryCard = ({ locationObject, selectedHallId }: ILaundryCardProps) => {
 
   return (
     <>
-      <div // eslint-disable-line
-        onClick={() => setExpanded(!expanded)}
+      <div
+        onClick={(): void => setExpanded(!expanded)}
       >
         <LaundryCardHeader title={location} hasDropdown expanded={expanded} />
       </div>

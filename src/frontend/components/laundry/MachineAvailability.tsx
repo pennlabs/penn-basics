@@ -50,7 +50,7 @@ const handleReminder = (
   reminded: boolean,
   machineType: string,
   timeRemaining: number,
-) => {
+): void => {
   if (!reminded) {
     dispatchAddReminder(machineID, hallID, machineType, timeRemaining)
   }
@@ -66,7 +66,7 @@ interface IBellProps {
   machineType: string
 }
 
-const Bell = ({
+const Bell: React.FC<IBellProps> = ({
   enableReminder,
   timeRemaining,
   reminded,
@@ -74,7 +74,7 @@ const Bell = ({
   laundryHallId,
   dispatchAddReminder,
   machineType,
-}: IBellProps) => {
+}) => {
   if (!enableReminder || timeRemaining <= 0 || !dispatchAddReminder) {
     return null
   }
@@ -82,7 +82,7 @@ const Bell = ({
     return (
       <BellIcon
         className="icon"
-        onClick={() =>
+        onClick={(): void =>
           handleReminder(
             id,
             laundryHallId,
@@ -126,7 +126,7 @@ interface IMachineAvailabilityProps {
   enableReminder?: boolean
 }
 
-const MachineAvailability = ({
+const MachineAvailability: React.FC<IMachineAvailabilityProps> = ({
   displayDetails,
   machineData,
   machineType,
@@ -135,7 +135,7 @@ const MachineAvailability = ({
   reminders,
   dispatchAddReminder,
   enableReminder,
-}: IMachineAvailabilityProps) => {
+}) => {
   let tableMachines: ILaundryHallDetail[] = []
 
   if (allMachines) {
@@ -158,7 +158,7 @@ const MachineAvailability = ({
           [open, 'Available', GREEN, LIGHT_GREEN],
           [running, 'Busy', MUSTARD, LIGHT_YELLOW],
           [outOfOrder + offline, 'Broken', MEDIUM_GRAY, FOCUS_GRAY],
-        ].map(([number, title, color, background]) => (
+        ].map(([machinesNumber, title, color, background]) => (
           <LaundryOverview
             sm={4}
             margin="0.5rem"
@@ -166,7 +166,7 @@ const MachineAvailability = ({
             color={`${color}`}
             background={`${background}`}
           >
-            <h1>{number}</h1>
+            <h1>{machinesNumber}</h1>
             <p>{title}</p>
           </LaundryOverview>
         ))}

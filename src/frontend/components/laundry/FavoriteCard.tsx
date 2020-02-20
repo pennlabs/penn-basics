@@ -9,7 +9,11 @@ import {
 } from '../../constants/routes'
 import { IFavorite } from '../../../types/laundry'
 
-const FavoriteCard = ({ favorite }: { favorite: IFavorite }) => {
+interface IFavoriteCardProps {
+  favorite: IFavorite
+}
+
+const FavoriteCard: React.FC<IFavoriteCardProps> = ({ favorite }) => {
   const { hallId, locationName } = favorite
   return (
     <Link

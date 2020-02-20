@@ -14,7 +14,6 @@ import {
   getFavoritesHomePage,
   removeFavorite as laundryRemoveFavorite,
 } from '../../actions/laundry_actions'
-import { getUserInfo } from '../../actions/auth_actions'
 import {
   BORDER,
   FOCUS_GRAY,
@@ -62,15 +61,20 @@ const InputField = s(DebounceInput)`
   }
 `
 
-interface IAppProps {
-  dispatchGetDiningFavorites: () => void
-  dispatchGetLaundryFavorites: () => void
-  dispatchDiningRemoveFavorite: (venueId: string) => void
-  dispatchLaundryRemoveFavorite: (hallId: number) => void
+interface IAppStateProps {
   diningFavorites: IDiningFavorite[]
   laundryFavorites: ILaundryFavorite[]
   userInfo: IUser
 }
+
+interface IAppDispatchProps {
+  dispatchGetDiningFavorites: () => void
+  dispatchGetLaundryFavorites: () => void
+  dispatchDiningRemoveFavorite: (venueId: string) => void
+  dispatchLaundryRemoveFavorite: (hallId: number) => void
+}
+
+type IAppProps = IAppStateProps & IAppDispatchProps
 
 const App: React.FC<IAppProps> = ({
   dispatchGetDiningFavorites,
@@ -219,7 +223,7 @@ interface IStateToProps {
   authentication: IAuthReducerState
 }
 
-const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps) => {
+const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps): IAppStateProps => {
   const { favorites: diningFavorites } = dining
   const { favoritesHome: laundryFavorites } = laundry
   const { userInfo } = authentication
@@ -231,13 +235,12 @@ const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps) => 
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetDiningFavorites: () => dispatch(getFavorites()),
-  dispatchGetLaundryFavorites: () => dispatch(getFavoritesHomePage()),
-  dispatchGetUserInfo: () => dispatch(getUserInfo()),
-  dispatchDiningRemoveFavorite: (venueId: string) =>
+const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+  dispatchGetDiningFavorites: (): void => dispatch(getFavorites()),
+  dispatchGetLaundryFavorites: (): void => dispatch(getFavoritesHomePage()),
+  dispatchDiningRemoveFavorite: (venueId: string): void =>
     dispatch(diningRemoveFavorite(venueId)),
-  dispatchLaundryRemoveFavorite: (hallId: number) =>
+  dispatchLaundryRemoveFavorite: (hallId: number): void =>
     dispatch(laundryRemoveFavorite(hallId)),
 })
 

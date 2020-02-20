@@ -1,4 +1,4 @@
-export function getNoiseLevel(quiet: number): string {
+export const getNoiseLevel = (quiet: number): string => {
   const map: Record<number, string> = {
     0: 'Talkative',
     1: 'Quiet',
@@ -8,7 +8,7 @@ export function getNoiseLevel(quiet: number): string {
   return map[quiet]
 }
 
-export function getOutletsLevel(outlets: number): string {
+export const getOutletsLevel = (outlets: number): string => {
   const map: Record<number, string> = {
     0: 'No outlets',
     1: 'Few outlets',
@@ -18,7 +18,7 @@ export function getOutletsLevel(outlets: number): string {
   return map[outlets]
 }
 
-export function getGroupLevel(groups: number) {
+export const getGroupLevel = (groups: number): string => {
   const map: Record<number, string> = {
     0: 'No groups',
     1: 'Small groups',

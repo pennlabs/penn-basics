@@ -40,7 +40,7 @@ import InfoIcon from '../../../../public/img/foodtrucks/info.svg'
 // import constants
 import { FOODTRUCKS_ROUTE } from '../../constants/routes'
 import { IFormattedFoodtruck, IFoodTrucksReducerState } from '../../../types/foodtrucks'
-import { IUser } from '../../../types/authentication'
+import { IUser, IAuthReducerState } from '../../../types/authentication'
 
 const Buttons = s.div`
   float: right;
@@ -73,10 +73,13 @@ const Chevron = s.span<IChevronProps>`
 
 const GOOGLE_URL = 'https://maps.google.com/maps?q='
 
-interface IFoodtruckModalProps {
-  foodtruckId: string
-  dispatchGetFoodtruckInfo: (id: string) => void
+interface IFoodtruckModalStateProps {
   foodtruckInfo: IFormattedFoodtruck
+  userInfo: IUser
+}
+
+interface IFoodtruckModalDispatchProps {
+  dispatchGetFoodtruckInfo: (id: string) => void
   dispatchUpdateFoodtruckReview: (
     foodtruckID: string,
     pennID: number,
@@ -85,9 +88,14 @@ interface IFoodtruckModalProps {
     comment: string,
     showName: boolean,
   ) => void
-  userInfo: IUser
+}
+
+interface IFoodtruckModalOwnProps {
+  foodtruckId: string
   router: SingletonRouter
 }
+
+type IFoodtruckModalProps = IFoodtruckModalStateProps & IFoodtruckModalDispatchProps & IFoodtruckModalOwnProps
 
 const FoodtruckModal: React.FC<IFoodtruckModalProps> = ({
   foodtruckId,
@@ -273,24 +281,18 @@ const FoodtruckModal: React.FC<IFoodtruckModalProps> = ({
   )
 }
 
-interface IStateProps {
-  foodtrucks: IFoodTrucksReducerState
-  authentication: { userInfo: IUser }
-}
-
-const mapStateToProps = ({ foodtrucks, authentication }: IStateProps) => {
-  const { infoPending, infoError, foodtruckInfo } = foodtrucks
+const mapStateToProps = ({ foodtrucks, authentication }: { foodtrucks: IFoodTrucksReducerState, authentication: IAuthReducerState }): IFoodtruckModalStateProps => {
+  const { foodtruckInfo } = foodtrucks
   const { userInfo } = authentication
+
   return {
-    infoPending,
-    infoError,
     foodtruckInfo,
     userInfo,
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any ) => ({
-  dispatchGetFoodtruckInfo: (id: string) => dispatch(getFoodtruckInfo(id)),
+const mapDispatchToProps = (dispatch: (action: any) => any ): IFoodtruckModalDispatchProps => ({
+  dispatchGetFoodtruckInfo: (id: string): void => dispatch(getFoodtruckInfo(id)),
   dispatchUpdateFoodtruckReview: (
     foodtruckID: string,
     pennID: number,
@@ -298,7 +300,7 @@ const mapDispatchToProps = (dispatch: (action: any) => any ) => ({
     rating: number,
     comment: string,
     showName: boolean,
-  ) =>
+  ): void =>
     dispatch(
       updateFoodtruckReview(
         foodtruckID,

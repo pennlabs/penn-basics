@@ -33,9 +33,11 @@ const Wrapper = s.div`
   }
 `
 
-interface IHomeProps {
+interface IAppStateProps {
   filterList?: number[]
 }
+
+type IHomeProps = IAppStateProps
 
 const Home: React.FC<IHomeProps> = ({ filterList }) => {
   const componentList = [
@@ -71,7 +73,7 @@ const Home: React.FC<IHomeProps> = ({ filterList }) => {
   )
 }
 
-const mapStateToProps = ({ home }: { home: IHomeReducerState }) => {
+const mapStateToProps = ({ home }: { home: IHomeReducerState }): IAppStateProps => {
   const { filterList } = home
   return { filterList }
 }

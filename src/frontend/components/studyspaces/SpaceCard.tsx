@@ -28,12 +28,20 @@ const Content = s.div`
   padding-right: 0.5rem;
 `
 
-type ISpaceCardProps = Partial<ISpaceWithHoursAndOpenAndSpaceId> & {
+interface ISpaceCardStateProps {
   hoveredSpace?: TSpaceId
-  spaceId: TSpaceId
-  setHoveredSpaceDispatch: (id: TSpaceId) => void
-  setActiveSpaceDispatch: (id: TSpaceId) => void
 }
+
+interface ISpaceCardDispatchProps {
+  setHoveredSpaceDispatch: (id: TSpaceId) => Dispatch<string>
+  setActiveSpaceDispatch: (id: TSpaceId) => Dispatch<string>
+}
+
+type ISpaceCardOwnProps = Partial<ISpaceWithHoursAndOpenAndSpaceId> & {
+  spaceId: TSpaceId
+}
+
+type ISpaceCardProps = ISpaceCardStateProps & ISpaceCardDispatchProps & ISpaceCardOwnProps
 
 // TODO make this a functional component
 class SpaceCard extends Component<ISpaceCardProps, {}> {
@@ -64,7 +72,7 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
     setActiveSpaceDispatch(spaceId)
   }
 
-  render() {
+  render(): React.ReactElement {
     const { name, open, image, quiet, outlets, hours, spaceId } = this.props
 
     const noiseLevel: string = quiet === undefined ? '' : getNoiseLevel(quiet)
@@ -115,16 +123,16 @@ class SpaceCard extends Component<ISpaceCardProps, {}> {
   }
 }
 
-const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => {
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }): ISpaceCardStateProps => {
   const { hoveredSpace } = spaces
   return { hoveredSpace }
 }
 
 // TODO fix types in redux
-const mapDispatchToProps = (dispatch: (action: any) => Dispatch<TSpaceId>) => ({
-  setHoveredSpaceDispatch: (spaceId: TSpaceId) =>
+const mapDispatchToProps = (dispatch: (action: any) => Dispatch<TSpaceId>): ISpaceCardDispatchProps => ({
+  setHoveredSpaceDispatch: (spaceId: TSpaceId): Dispatch<string> =>
     dispatch(setHoveredSpace(spaceId)),
-  setActiveSpaceDispatch: (spaceId: TSpaceId) =>
+  setActiveSpaceDispatch: (spaceId: TSpaceId): Dispatch<string> =>
     dispatch(setActiveSpace(spaceId)),
 })
 

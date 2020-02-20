@@ -21,6 +21,7 @@ import { STUDYSPACES_ROUTE } from '../../constants/routes'
 import {
   TSpaceId,
   ISpaceWithHoursAndOpenAndSpaceId,
+  ISpacesReducerState
 } from '../../../types/studyspaces'
 
 const Credit = s.div`
@@ -29,15 +30,23 @@ const Credit = s.div`
 `
 const GOOGLE_URL = 'https://maps.google.com/maps?q='
 
-interface ISpaceModalProps {
-  spaceId: string
-  clearActiveSpaceDispatch: () => void
+interface ISpaceModalStateToProps {
   spacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
+}
+
+interface ISpaceModalDispatchToProps {
+  clearActiveSpaceDispatch: () => Dispatch<any>
+}
+
+interface ISpaceModalOwnProps {
+  spaceId: string
   location?: {
     lat: number
     lng: number
   }
 }
+
+type ISpaceModalProps = ISpaceModalStateToProps & ISpaceModalDispatchToProps & ISpaceModalOwnProps
 
 const SpaceModal = (props: ISpaceModalProps): React.ReactElement => {
   const { spaceId, spacesData } = props
@@ -129,17 +138,16 @@ const SpaceModal = (props: ISpaceModalProps): React.ReactElement => {
   )
 }
 
-const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => {
-  const { spacesData, activeSpace } = spaces
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }): ISpaceModalStateToProps => {
+  const { spacesData } = spaces
   return {
-    spacesData,
-    activeSpace,
+    spacesData
   }
 }
 
 // TOOD clean this up
-const mapDispatchToProps = (dispatch: (_arg: any) => Dispatch<any>) => ({
-  clearActiveSpaceDispatch: () => dispatch(clearActiveSpace()),
+const mapDispatchToProps = (dispatch: (_arg: any) => Dispatch<any>): ISpaceModalDispatchToProps => ({
+  clearActiveSpaceDispatch: (): Dispatch<any> => dispatch(clearActiveSpace()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpaceModal)

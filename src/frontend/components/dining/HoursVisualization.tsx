@@ -138,10 +138,15 @@ const List: React.FC<IListProps> = ({ venueHours }) => {
   )
 }
 
-interface IHoursVisualizationProps {
-  venueId: string
+interface IHoursVisualizationStateProps {
   venueHours?: TVenueHours
 }
+
+interface IHoursVisualizationOwnProps {
+  venueId: string
+}
+
+type IHoursVisualizationProps = IHoursVisualizationStateProps & IHoursVisualizationOwnProps
 
 const HoursVisualization: React.FC<IHoursVisualizationProps> = ({ venueHours, venueId }) => {
   if (!venueHours) {
@@ -162,8 +167,7 @@ const HoursVisualization: React.FC<IHoursVisualizationProps> = ({ venueHours, ve
   return <List venueHours={venueHour} />
 }
 
-
-const mapStateToProps = ({ dining }: { dining: IDiningReducerState }) => {
+const mapStateToProps = ({ dining }: { dining: IDiningReducerState }): IHoursVisualizationStateProps => {
   const { venueHours } = dining
 
   return {

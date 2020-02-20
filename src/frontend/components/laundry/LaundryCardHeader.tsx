@@ -20,13 +20,13 @@ const Chevron = s.span<IChevronProps>`
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 
-  ${({ expanded }) =>
-    expanded &&
+  ${({ expanded }): string =>
+    expanded ?
     `
     margin: 9px 6px 3px 6px;
     -webkit-transform: rotate(-135deg);
     transform: rotate(-135deg);
-    `}
+    `: ''}
 `
 
 interface ILaundryCardHeaderProps {
@@ -36,7 +36,7 @@ interface ILaundryCardHeaderProps {
   selected?: boolean
 }
 
-const LaundryCardHeader = ({ title, hasDropdown, expanded, selected }: ILaundryCardHeaderProps) => (
+const LaundryCardHeader: React.FC<ILaundryCardHeaderProps> = ({ title, hasDropdown, expanded, selected }) => (
   <Card padding="0.5rem 1rem" hoverable selected={selected}>
     <Row>
       <Col padding="0" style={{ overflowX: 'visible' }}>

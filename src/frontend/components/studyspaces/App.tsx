@@ -35,16 +35,24 @@ import {
 
 // TODO port this over to hooks
 
-interface IStudySpacesAppProps {
-  getAllSpacesDataDispatch: () => void
-  setActiveSpaceDispatch: (id: TSpaceId) => void
+interface IAppStateProps {
   error?: string
   hoveredSpace?: string
   pending: boolean
-  id: string
   spacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
   filteredSpacesData?: Record<TSpaceId, ISpaceWithHoursAndOpenAndSpaceId>
 }
+
+interface IAppDispatchProps {
+  getAllSpacesDataDispatch: () => void
+  setActiveSpaceDispatch: (id: TSpaceId) => void
+}
+
+interface IStudySpacesAppOwnProps {
+  id: string
+}
+
+type IStudySpacesAppProps = IAppStateProps & IAppDispatchProps & IStudySpacesAppOwnProps
 
 interface IStudySpacesAppState {
   isListViewMobile: boolean
@@ -156,7 +164,7 @@ class StudySpacesApp extends React.Component<
                 mobileHeight={`calc(100vh - ${NAV_HEIGHT} - ${MOBILE_FILTER_HEIGHT})`}
                 markers={filteredSpacesData}
                 activeMarker={hoveredSpace}
-                handleClickMarker={spaceId =>
+                handleClickMarker={(spaceId): Promise<boolean> =>
                   Router.push(
                     STUDYSPACE_QUERY_ROUTE(`${spaceId}`),
                     STUDYSPACE_ROUTE(`${spaceId}`)
@@ -173,11 +181,11 @@ class StudySpacesApp extends React.Component<
   }
 }
 
-const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => spaces
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }): IAppStateProps => spaces
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  getAllSpacesDataDispatch: () => dispatch(getAllSpacesData()),
-  setActiveSpaceDispatch: (id: TSpaceId) => dispatch(setActiveSpace(id)),
+const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+  getAllSpacesDataDispatch: (): void => dispatch(getAllSpacesData()),
+  setActiveSpaceDispatch: (id: TSpaceId): void => dispatch(setActiveSpace(id)),
 })
 
 // Redux config

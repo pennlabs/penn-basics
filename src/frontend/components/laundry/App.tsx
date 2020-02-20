@@ -15,23 +15,31 @@ import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
 import { ILaundryReducerState, IFavorite, ILaundryHall } from '../../../types/laundry'
 
-interface IAppProps {
-  dispatchGetLaundryHalls: () => void
-  dispatchGetFavorites: () => void
-  dispatchCheckBrowser: () => void
+interface IAppStateProps {
   laundryHalls: ILaundryHall[]
-  id: undefined | string
   favorites: IFavorite[]
 }
 
-const App = ({
+interface IAppDispatchProps {
+  dispatchGetLaundryHalls: () => void
+  dispatchGetFavorites: () => void
+  dispatchCheckBrowser: () => void
+}
+
+interface IAppOwnProps {
+  id: undefined | string
+}
+
+type IAppProps = IAppStateProps & IAppDispatchProps & IAppOwnProps
+
+const App: React.FC<IAppProps> = ({
   dispatchGetLaundryHalls,
   dispatchGetFavorites,
   dispatchCheckBrowser,
   laundryHalls,
   id,
   favorites = [],
-}: IAppProps): React.ReactElement => {
+}) => {
   useEffect(() => {
     dispatchGetLaundryHalls()
     dispatchGetFavorites()
@@ -65,8 +73,8 @@ const App = ({
               <Line />
             </Card>
 
-            {favorites.map(favorite => (
-              <FavoriteCard favorite={favorite} />
+            {favorites.map((favorite, idx) => (
+              <FavoriteCard key={`favorite-dining-card-${idx}`} favorite={favorite} />
               )
             )}
           </>
@@ -105,15 +113,15 @@ const App = ({
   )
 }
 
-const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState } ) => {
+const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }): IAppStateProps  => {
   const { laundryHalls, favorites } = laundry
   return { laundryHalls, favorites }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchGetLaundryHalls: () => dispatch(getLaundryHalls()),
-  dispatchGetFavorites: () => dispatch(getFavorites()),
-  dispatchCheckBrowser: () => dispatch(checkBrowserCompatability()),
+const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+  dispatchGetLaundryHalls: (): void => dispatch(getLaundryHalls()),
+  dispatchGetFavorites: (): void => dispatch(getFavorites()),
+  dispatchCheckBrowser: (): void => dispatch(checkBrowserCompatability()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
