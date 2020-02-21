@@ -24,7 +24,7 @@ const clientSecret = process.env.OAUTH_CLIENT_SECRET || 'keyboard-cat-secret'
 // This is localhost when acting locally
 const callbackURL = process.env.OAUTH_CALLBACK_URL || DEFAULT_OAUTH_CALLBACK_URL
 
-export const authRouter = (): Router => {
+const authRouter = (): Router => {
   passport.serializeUser((user: IUser, done) => {
     done(null, user.pennid)
   })
@@ -205,3 +205,5 @@ export const authRouter = (): Router => {
 
   return router
 }
+
+export default authRouter
