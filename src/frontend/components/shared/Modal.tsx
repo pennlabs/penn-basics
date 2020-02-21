@@ -21,7 +21,7 @@ interface IModalContent {
 
 const ModalContent = styled.div<IModalContent>`
   background: ${WHITE};
-  width: ${({ isThin }) => (isThin ? '10%' : '50%')};
+  width: ${({ isThin }) => (isThin ? '30%' : '50%')};
   display: inline-block;
   margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
   margin-bottom: calc(1rem + 5vh);

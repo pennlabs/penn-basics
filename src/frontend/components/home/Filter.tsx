@@ -10,10 +10,11 @@ import {
 
 import {
   FilterBtnWrapper,
+  Option,
   Circle,
   OptionText,
 } from '../shared/Option'
-import Modal from '../shared/Modal'
+import Modal, { ModalContainer } from '../shared/Modal'
 
 import { IHomeReducerState } from '../../../types/home'
 
@@ -78,11 +79,10 @@ const Filter = ({
     }
   }
 
-  const ModalOption = s.div`
-    border-radius: 4px;
-    padding: 0.2rem 0.4rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+  const ModalTitle = s.div`
+    font-size: 1.2rem;
+    padding: 1rem;
+    text-align: center;
   `
 
   return (
@@ -99,26 +99,31 @@ const Filter = ({
       </FilterBtnWrapper>
 
       <Modal show={filterCustomizeActive} toggle={onClick} isThin>
-        {options.map((o, idx) => {
-          const isActiveOption = Boolean(
-            activeOptions && activeOptions.includes(idx)
-          )
 
-          return (
-            <ModalOption
-              key={o}
-              onClick={() => onClickOption(idx)}
-              role="option"
-              tabIndex={0}
-              aria-selected={isActiveOption}
-              onKeyPress={e => handleOptionKeyPress(e, idx)}
-            >
-              <Circle active={isActiveOption} />
-              <OptionText>{o}</OptionText>
-            </ModalOption>
-          )
-        })}
+        <ModalContainer>
+          <ModalTitle>Select what to see on your homepage</ModalTitle>
+            {options.map((o, idx) => {
+              const isActiveOption = Boolean(
+                activeOptions && activeOptions.includes(idx)
+              )
+
+              return (
+                <Option
+                  key={o}
+                  onClick={() => onClickOption(idx)}
+                  role="option"
+                  tabIndex={0}
+                  aria-selected={isActiveOption}
+                  onKeyPress={e => handleOptionKeyPress(e, idx)}
+                >
+                  <Circle active={isActiveOption} />
+                  <OptionText>{o}</OptionText>
+                </Option>
+              )
+            })}
+        </ModalContainer>
       </Modal>
+
     </>
   )
 }
