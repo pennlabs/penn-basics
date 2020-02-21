@@ -163,8 +163,11 @@ export function clearSpacesFilters() {
 export const toggleSpacesOpen = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_OPEN })
 
-export const toggleSpacesOutlets = () => (dispatch: Dispatch<Action>) =>
+export const toggleSpacesOutlets = () => (dispatch: Dispatch<Action>) => {
+  console.log("im here")
   dispatch({ type: TOGGLE_FILTER_SPACES_OUTLETS })
+}
+  
 
 export const toggleSpacesNoise = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_NOISE })

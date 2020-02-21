@@ -244,6 +244,7 @@ const spacesReducer = (
       return Object.assign(newState, { filterOpenActive: !filterOpenActive })
 
     case TOGGLE_FILTER_SPACES_OUTLETS:
+      console.log(!filterOutletsActive)
       return Object.assign(newState, {
         filterOutletsActive: !filterOutletsActive,
       })
