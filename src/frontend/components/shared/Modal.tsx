@@ -16,12 +16,12 @@ import { ESCAPE_KEY_CODE } from '../../constants/misc'
 
 interface IModalContent {
   show?: boolean
-  isHome?: boolean
+  isThin?: boolean
 }
 
 const ModalContent = styled.div<IModalContent>`
   background: ${WHITE};
-  width: ${({ isHome }) => (isHome ? '10%' : '50%')};
+  width: ${({ isThin }) => (isThin ? '10%' : '50%')};
   display: inline-block;
   margin-top: ${({ show }) => (show ? 'calc(1rem + 5vh)' : '100vh')};
   margin-bottom: calc(1rem + 5vh);
@@ -100,7 +100,7 @@ interface IModalProps {
   children: React.ReactNode | React.ReactNodeArray
   toggle?: () => void
   ROUTE?: string // TODO this should not be uppercase
-  isHome?: boolean // Percent
+  isThin?: boolean // Percent
 }
 
 interface IModalState {
@@ -161,7 +161,7 @@ class Modal extends Component<IModalProps, IModalState> {
   }
 
   render() {
-    const { show, children, toggle, ROUTE } = this.props
+    const { show, children, toggle, isThin, ROUTE } = this.props
     const { isNewlyMounted } = this.state
 
 
@@ -176,7 +176,7 @@ class Modal extends Component<IModalProps, IModalState> {
           onKeyPress={this.handleKeyPress}
           onKeyDown={this.handleKeyPress}
         >
-          <ModalContent onClick={noop} show={show} isHome={this.props.isHome}>
+          <ModalContent onClick={noop} show={show} isThin={isThin}>
             <ModalClose onClick={toggle} show={show}>
               <Times>&times;</Times>
             </ModalClose>
@@ -196,7 +196,7 @@ class Modal extends Component<IModalProps, IModalState> {
         onKeyPress={this.handleKeyPress}
         onKeyDown={this.handleKeyPress}
       >
-        <ModalContent  onClick={noop} show={show} isHome={this.props.isHome}>
+        <ModalContent  onClick={noop} show={show} isThin={isThin}>
           <Link href={ROUTE}>
             <ModalClose show={show}>
               <Times>&times;</Times>

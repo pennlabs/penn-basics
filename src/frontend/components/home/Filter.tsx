@@ -83,9 +83,6 @@ const Filter = ({
     padding: 0.2rem 0.4rem;
     margin-left: 1rem;
     margin-right: 1rem;
-
-    :active,
-    :hover,
   `
 
   return (
@@ -101,7 +98,7 @@ const Filter = ({
         Customize this page
       </FilterBtnWrapper>
 
-      <Modal show={filterCustomizeActive} toggle={onClick} isHome={true}>
+      <Modal show={filterCustomizeActive} toggle={onClick} isThin>
         {options.map((o, idx) => {
           const isActiveOption = Boolean(
             activeOptions && activeOptions.includes(idx)
