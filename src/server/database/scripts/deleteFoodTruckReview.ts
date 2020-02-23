@@ -6,7 +6,7 @@ if (!MONGO_URI) {
   process.exit(1)
 }
 
-async function main() {
+const main = async (): Promise<void> => {
   try {
     const foodTruckName = process.argv[2]
     const pennid = process.argv[3]

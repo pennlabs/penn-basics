@@ -23,6 +23,12 @@ import profileRouter from './routes/profile'
 require('dotenv').config()
 
 declare global {
+  /*
+  This is a very specific instance where we need to modify the Express types, and so we need to edit the namespace.
+  This is usually not something that's advised, but because we need to carry state across different functions,
+    this is the most reliable way to do it.
+  */
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       state?: {
@@ -73,13 +79,21 @@ nextApp.prepare().then(() => {
   app.use('/api/auth', authRouter())
 
   // client-side routing
-  app.get('/dining/:id', (req, res) => nextApp.render(req, res, '/dining', { id: req.params.id }))
+  app.get('/dining/:id', (req, res) =>
+    nextApp.render(req, res, '/dining', { id: req.params.id })
+  )
 
-  app.get('/laundry/:id', (req, res) => nextApp.render(req, res, '/laundry', { id: req.params.id }))
+  app.get('/laundry/:id', (req, res) =>
+    nextApp.render(req, res, '/laundry', { id: req.params.id })
+  )
 
-  app.get('/studyspaces/:id', (req, res) => nextApp.render(req, res, '/studyspaces', { id: req.params.id }))
+  app.get('/studyspaces/:id', (req, res) =>
+    nextApp.render(req, res, '/studyspaces', { id: req.params.id })
+  )
 
-  app.get('/foodtrucks/:id', (req, res) => nextApp.render(req, res, '/foodtrucks', { id: req.params.id }))
+  app.get('/foodtrucks/:id', (req, res) =>
+    nextApp.render(req, res, '/foodtrucks', { id: req.params.id })
+  )
 
   app.all('*', (req, res) => handle(req, res))
 

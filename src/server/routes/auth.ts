@@ -18,11 +18,11 @@ const providerBaseURL = process.env.OAUTH_BASE_URL
 const tokenURL = `${providerBaseURL}accounts/token/`
 const introspectURL = `${providerBaseURL}accounts/introspect/`
 const authorizationURL = `${providerBaseURL}accounts/authorize`
-const clientID = process.env.OAUTH_CLIENT_ID || 'keyboard-cat-id'
-const clientSecret = process.env.OAUTH_CLIENT_SECRET || 'keyboard-cat-secret'
+const clientID = process.env.OAUTH_CLIENT_ID ?? 'keyboard-cat-id'
+const clientSecret = process.env.OAUTH_CLIENT_SECRET ?? 'keyboard-cat-secret'
 
 // This is localhost when acting locally
-const callbackURL = process.env.OAUTH_CALLBACK_URL || DEFAULT_OAUTH_CALLBACK_URL
+const callbackURL = process.env.OAUTH_CALLBACK_URL ?? DEFAULT_OAUTH_CALLBACK_URL
 
 const authRouter = (): Router => {
   passport.serializeUser((user: IUser, done) => {
@@ -126,8 +126,8 @@ const authRouter = (): Router => {
 
     session.auth = { successRedirect, failureRedirect }
     const authenticator = passport.authenticate('provider', {
-      successRedirect: successRedirect || '/',
-      failureRedirect: failureRedirect || '/',
+      successRedirect: successRedirect ?? '/',
+      failureRedirect: failureRedirect ?? '/',
       scope: 'read write introspection',
     })
     authenticator(req, res, next)
@@ -146,15 +146,14 @@ const authRouter = (): Router => {
     const authenticator = passport.authenticate('provider', {
       scope: 'read write introspection',
       successRedirect:
-        successRedirect ||
-        session.auth.successRedirect ||
-        (state && state.successRedirect) ||
-        null ||
+        successRedirect ??
+        session?.auth?.successRedirect ??
+        state?.successRedirect ??
         '/',
       failureRedirect:
-        failureRedirect ||
-        session.auth.failureRedirect ||
-        (state ? state.failureRedirect : null) ||
+        failureRedirect ??
+        session?.auth?.failureRedirect ??
+        state?.failureRedirect ??
         '/',
     })
     return authenticator(req, res, next)
