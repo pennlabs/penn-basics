@@ -7,7 +7,7 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 import { maxWidth, PHONE, TABLET } from '../../styles/sizes'
 
 // import Components
-import Filter from './Filter/Filter'
+import Filter from './Filter'
 import Greeting from './Greeting'
 import Weather from './Weather'
 import News from './News'
