@@ -52,11 +52,11 @@ const SpacesFilter: React.FC<IFilterProps> = ({
   dispatchFilterSpaces,
 
   toggleSpacesOpenDispatch,
-  clearSpacesFiltersDispatch,
   toggleSpacesOutletsDispatch,
-
   toggleSpacesNoiseDispatch,
   toggleSpacesGroupsDispatch,
+
+  clearSpacesFiltersDispatch,
 
   filterOpenActive,
   filterOutletsActive,
@@ -70,7 +70,6 @@ const SpacesFilter: React.FC<IFilterProps> = ({
   filterOpen,
   filterOnCampus
 }) => {
-  console.log(filterOutlets)
   const filterButtons: IFilterButton[] = [
     {
       text: 'Outlets',
@@ -105,24 +104,25 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     }
   ]
 
+  // input params for the Search Component
   const searchParams = {
     filterFunction: (str: string) =>
       dispatchFilterSpaces({ filterKey: filterSpacesStringRequested, filterValue: str }),
     filterString
   }
 
+  // input parameters for the FilterOpenButton
   const openButtonParams = {
     onClick: (): void => {
       toggleSpacesOpenDispatch()
       dispatchFilterSpaces({ filterKey: filterSpacesOpenRequested, filterValue: !filterOpen })
-      // filterSpacesOpenDispatch(!filterOpen)
     },
     active: Boolean(filterOpenActive)
   }
 
   const clearFilterOnClick = clearSpacesFiltersDispatch
 
-  const toggleNeighborHoodParams = {
+  const toggleNeighborhoodParams = {
     filterOnCampusDispatch: (filter: boolean) =>
       dispatchFilterSpaces({ filterKey: filterOnCampusRequested, filterValue: filter }),
     filterOnCampus
@@ -135,7 +135,7 @@ const SpacesFilter: React.FC<IFilterProps> = ({
       openButtonParams={openButtonParams}
       clearFilterOnClick={clearFilterOnClick}
       anyFilterModalActive={filterOutletsActive || filterNoiseActive || filterGroupsActive}
-      toggleNeighborHoodParams={toggleNeighborHoodParams}
+      toggleNeighborhoodParams={toggleNeighborhoodParams}
     />
   )
 }

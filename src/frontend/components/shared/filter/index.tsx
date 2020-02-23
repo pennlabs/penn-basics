@@ -34,7 +34,6 @@ import Modal from '../Modal'
 import { IFilterButton } from '../../../../types/filter'
 
 // import types
-
 interface IFilterWrapperProps {
   active?: boolean
 }
@@ -139,7 +138,7 @@ interface IFilterProps {
   }
   clearFilterOnClick: () => void
   anyFilterModalActive: boolean | undefined
-  toggleNeighborHoodParams: {
+  toggleNeighborhoodParams: {
     filterOnCampus?: boolean
     filterOnCampusDispatch: (filter: boolean) => void
   }
@@ -151,13 +150,7 @@ const Filter: React.FC<IFilterProps> = ({
   openButtonParams,
   clearFilterOnClick,
   anyFilterModalActive,
-  toggleNeighborHoodParams
-  // filterSpacesOpenDispatch,
-  // filterOpenActive,
-  // filterOutletsActive,
-  // filterNoiseActive,
-  // filterGroupsActive,
-  // filterOpen
+  toggleNeighborhoodParams
 }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false)
 
@@ -188,7 +181,7 @@ const Filter: React.FC<IFilterProps> = ({
         </FilterText>
 
         <HiddenOnTablet style={{ marginLeft: 'auto' }}>
-          <ToggleNeighborhood {...toggleNeighborHoodParams} />
+          <ToggleNeighborhood {...toggleNeighborhoodParams} />
         </HiddenOnTablet>
       </FilterWrapper>
 
@@ -197,7 +190,7 @@ const Filter: React.FC<IFilterProps> = ({
       <Modal show={showMoreFilters} toggle={toggleMoreFilters}>
         <ModalContainer>
           <Subtitle>More Filters</Subtitle>
-          <ToggleNeighborhood {...toggleNeighborHoodParams} />
+          <ToggleNeighborhood {...toggleNeighborhoodParams} />
         </ModalContainer>
       </Modal>
     </>
