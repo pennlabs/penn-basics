@@ -1,14 +1,13 @@
 import { Router, Request, Response } from 'express'
-import { Document } from 'mongoose'
 import * as DB from '../database/db'
-import { IFoodTruckUserReview } from '../../types/foodtrucks'
+import { IFoodTruckUserReview, IFoodTruck } from '../../types/foodtrucks'
 import { isLoggedInMiddleware } from '../../utils/helperFunctions'
 
 const router = Router()
 
 const foodtrucksRouter = (): Router => {
   router.get('/all', (_, res: Response) => {
-    DB.findAllFoodtrucks().then((trucks: Document[]) => {
+    DB.findAllFoodtrucks().then((trucks: IFoodTruck[]) => {
       res.status(200).json({
         trucks,
       })
@@ -17,7 +16,7 @@ const foodtrucksRouter = (): Router => {
 
   router.get('/:id', (req: Request, res: Response) => {
     const truckId = req.params.id
-    DB.getFoodTruck(truckId).then((truck: Document | null) => {
+    DB.getFoodTruck(truckId).then((truck: IFoodTruck) => {
       res.status(200).json({
         trucks: truck,
       })

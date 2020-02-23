@@ -15,6 +15,9 @@ require('dotenv').config()
 const router = Router()
 
 const providerBaseURL = process.env.OAUTH_BASE_URL
+if (!providerBaseURL) {
+  console.error('No OAUTH_BASE_URL found in environment config')
+}
 const tokenURL = `${providerBaseURL}accounts/token/`
 const introspectURL = `${providerBaseURL}accounts/introspect/`
 const authorizationURL = `${providerBaseURL}accounts/authorize`

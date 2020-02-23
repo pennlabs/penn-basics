@@ -10,20 +10,38 @@ import {
   IFoodTruckUserReview,
   IFoodTruckDocument,
   IFoodTruckUserReviewDocument,
+  IFoodTruck,
 } from '../../types/foodtrucks'
 import { ISpace } from '../../types/studyspaces'
 import FoodTruckReview from './models/FoodTruckReview'
 
 // return all fields except for menu, priceTypes, and reviews
-export const findAllFoodtrucks = async (): Promise<Document[]> =>
-  await Foodtrucks.find({}, { menu: 0, priceTypes: 0, reviews: 0 })
+export const findAllFoodtrucks = async (): Promise<IFoodTruck[]> =>
+  (await Foodtrucks.find(
+    {},
+    { menu: 0, priceTypes: 0, reviews: 0 }
+  )) as IFoodTruckDocument[]
 
 /**
  * @param {Number} foodtruckID
  */
 export const getFoodTruck = async (
   foodtruckID: string
-): Promise<Document | null> => await Foodtrucks.findOne({ foodtruckID })
+): Promise<IFoodTruck> => {
+  const truck = (await Foodtrucks.findOne({
+    foodtruckID,
+  })) as IFoodTruckDocument
+
+  if (!truck) {
+    return Promise.reject('No food truck with that id found')
+  }
+
+  const reviews = (await FoodTruckReview.find({
+    foodtruckID,
+  })) as IFoodTruckUserReviewDocument[]
+
+  return { ...truck, reviews: reviews ?? [] }
+}
 
 export const updateReview = async (
   foodtruckID: string,
