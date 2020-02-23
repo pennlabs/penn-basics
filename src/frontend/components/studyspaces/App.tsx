@@ -21,7 +21,7 @@ import {
   MOBILE_FILTER_HEIGHT,
 } from '../../styles/sizes'
 import { getAllSpacesData, setActiveSpace } from '../../actions/spaces_actions'
-import Filter from '../shared/filter'
+import Filter from './Filter'
 import SpaceModal from './SpaceModal'
 import PennLabsCredit from '../shared/PennLabsCredit'
 import { SNOW } from '../../styles/colors'

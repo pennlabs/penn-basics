@@ -1,8 +1,6 @@
 import React from 'react'
 import s from 'styled-components'
-import { connect } from 'react-redux'
 
-import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import {
   FOCUS_GRAY,
   LIGHT_GRAY,
@@ -10,7 +8,6 @@ import {
   BLUE,
   MEDIUM_GRAY,
 } from '../../../styles/colors'
-import { filterOnCampus as setFilterOnCampus } from '../../../actions/spaces_actions'
 
 const HEIGHT = 0.875
 const WIDTH = 2.25
@@ -96,12 +93,4 @@ class ToggleNeighborhood extends React.Component<IToggleNeighborhoodProps, {}> {
   }
 }
 
-const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => spaces
-
-// TODO
-const mapDispatchToProps = (dispatch: any) => ({
-  filterOnCampusDispatch: (filter: boolean) =>
-    dispatch(setFilterOnCampus(filter)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ToggleNeighborhood)
+export default ToggleNeighborhood

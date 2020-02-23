@@ -6,17 +6,12 @@ import {
   ISpaceWithHoursAndOpenAndSpaceId,
   ISpaceWithSpaceID,
 } from '../../types/studyspaces'
+import { IFilterInputProps } from '../../types/filter'
 import {
   getSpacesDataRequested,
   getSpacesDataRejected,
   getSpacesDataFulfilled,
   setHoveredSpaceFulfilled,
-  filterSpacesOpenRequested,
-  filterSpacesOutletsRequested,
-  filterSpacesNoiseRequested,
-  filterSpacesGroupsRequested,
-  filterSpacesStringRequested,
-  filterOnCampusRequested,
   setActiveSpaceFulfilled,
   clearActiveSpaceFulfilled,
   clearFilterSpacesRequested,
@@ -75,7 +70,7 @@ export function getAllSpacesData() {
   }
 }
 
-export function setHoveredSpace(spaceId: TSpaceId) {
+export const setHoveredSpace = (spaceId: TSpaceId) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setHoveredSpaceFulfilled,
@@ -84,7 +79,7 @@ export function setHoveredSpace(spaceId: TSpaceId) {
   }
 }
 
-export function setActiveSpace(spaceId: TSpaceId) {
+export const setActiveSpace = (spaceId: TSpaceId) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: setActiveSpaceFulfilled,
@@ -93,66 +88,22 @@ export function setActiveSpace(spaceId: TSpaceId) {
   }
 }
 
-export function clearActiveSpace() {
+export const clearActiveSpace = () => {
   return (dispatch: Dispatch<Action>) =>
     dispatch({ type: clearActiveSpaceFulfilled })
 }
 
-// TODO DOCS / ERROR CHECKING
-export function filterSpacesOpen(filter: boolean) {
-  return (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterSpacesOpenRequested,
-      filter,
-    })
-  }
-}
-
-// TODO DOCS / ERROR CHECKING
-export function filterSpacesOutlets(filter: number) {
-  return (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterSpacesOutletsRequested,
-      filter,
-    })
-  }
-}
-
-// TODO DOCS / ERROR CHECKING
-export function filterSpacesNoise(filter: number) {
-  return (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterSpacesNoiseRequested,
-      filter,
-    })
-  }
-}
-
-// TODO DOCS / ERROR CHECKING
-export const filterSpacesGroups = (filter: number) => (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterSpacesGroupsRequested,
-      filter,
-    })
-  }
-
-export const filterOnCampus = (filter: boolean) => (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterOnCampusRequested,
-      filter,
-    })
-  }
-
 /**
- *
- * @param {string} filter filterString from user input
+ * Generic filter function that takes in the type and filter value and dispatch the action
+ * @param type string
+ * @param filter number | string | boolean
  */
-export const filterSpacesString = (filter: string) => (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: filterSpacesStringRequested,
-      filter,
-    })
-  }
+export const filterSpaces = ({ filterKey, filterValue }: IFilterInputProps) => (dispatch: Dispatch<Action>) => {
+  dispatch({
+    type: filterKey,
+    filter: filterValue,
+  })
+}
 
 export function clearSpacesFilters() {
   return (dispatch: Dispatch<Action>) => {
@@ -164,10 +115,8 @@ export const toggleSpacesOpen = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_OPEN })
 
 export const toggleSpacesOutlets = () => (dispatch: Dispatch<Action>) => {
-  console.log("im here")
   dispatch({ type: TOGGLE_FILTER_SPACES_OUTLETS })
 }
-  
 
 export const toggleSpacesNoise = () => (dispatch: Dispatch<Action>) =>
   dispatch({ type: TOGGLE_FILTER_SPACES_NOISE })

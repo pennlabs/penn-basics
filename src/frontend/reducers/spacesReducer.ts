@@ -76,8 +76,10 @@ const updateFilters = (arr: null | number[] | undefined, num: number) => {
     return arr.filter(item => item !== num)
   }
 
-  arr.push(num)
-  return arr
+  // create a copy of the array
+  const newArr = arr.slice()
+  newArr.push(num)
+  return newArr
 }
 
 const filterSpaces = (state: ISpacesReducerState) => {

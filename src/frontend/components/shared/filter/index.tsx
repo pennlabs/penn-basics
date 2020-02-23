@@ -31,6 +31,7 @@ import {
   Search,
 } from '..'
 import Modal from '../Modal'
+import { IFilterButton } from '../../../../types/filter'
 
 // import types
 
@@ -126,28 +127,31 @@ const FilterSpace = s.div`
 
 const FilterTextHideAboveTablet = withHideAboveTablet(FilterText)
 
-interface IFilterButton {
-  text: string
-  onClick: () => void
-  onClickOption: (filter: number) => void
-  options: string[]
-  activeOptions: number[]
-  active: boolean
-}
-
 interface IFilterProps {
   filterButtons: IFilterButton[]
   searchParams: {
     filterString?: string
-    filterSpacesStringDispatch: (str: string) => void
+    filterFunction: (str: string) => void
+  }
+  openButtonParams: {
+    onClick: () => void
+    active: boolean
+  }
+  clearFilterOnClick: () => void
+  anyFilterModalActive: boolean | undefined
+  toggleNeighborHoodParams: {
+    filterOnCampus?: boolean
+    filterOnCampusDispatch: (filter: boolean) => void
   }
 }
 
 const Filter: React.FC<IFilterProps> = ({
   filterButtons,
   searchParams,
-  openButtonParams
-
+  openButtonParams,
+  clearFilterOnClick,
+  anyFilterModalActive,
+  toggleNeighborHoodParams
   // filterSpacesOpenDispatch,
   // filterOpenActive,
   // filterOutletsActive,
@@ -160,10 +164,6 @@ const Filter: React.FC<IFilterProps> = ({
   const toggleMoreFilters = (): void => {
     setShowMoreFilters(!showMoreFilters)
   }
-
-  const anyFilterModalActive =
-      filterOutletsActive || filterNoiseActive || filterGroupsActive
-
 
   return (
     <>
@@ -181,14 +181,14 @@ const Filter: React.FC<IFilterProps> = ({
         </FilterTextHideAboveTablet>
 
         <FilterText
-          onClick={clearSpacesFiltersDispatch}
+          onClick={clearFilterOnClick}
           style={{ marginRight: 0 }}
         >
           Clear filters
         </FilterText>
 
         <HiddenOnTablet style={{ marginLeft: 'auto' }}>
-          <ToggleNeighborhood />
+          <ToggleNeighborhood {...toggleNeighborHoodParams} />
         </HiddenOnTablet>
       </FilterWrapper>
 
@@ -197,7 +197,7 @@ const Filter: React.FC<IFilterProps> = ({
       <Modal show={showMoreFilters} toggle={toggleMoreFilters}>
         <ModalContainer>
           <Subtitle>More Filters</Subtitle>
-          <ToggleNeighborhood />
+          <ToggleNeighborhood {...toggleNeighborHoodParams} />
         </ModalContainer>
       </Modal>
     </>

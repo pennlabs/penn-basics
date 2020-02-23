@@ -3,66 +3,60 @@ import { connect } from 'react-redux'
 
 import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import Filter from '../shared/filter'
+import { IFilterInputProps, IFilterButton } from '../../../types/filter'
 
 // import Redux actions
 import {
-  filterSpacesOpen,
-  filterSpacesOutlets,
-  filterSpacesNoise,
-  filterSpacesGroups,
-  filterSpacesString,
+  filterSpaces,
   clearSpacesFilters,
   toggleSpacesOpen,
   toggleSpacesOutlets,
   toggleSpacesNoise,
   toggleSpacesGroups,
 } from '../../actions/spaces_actions'
+import {
+  filterSpacesOpenRequested,
+  filterSpacesOutletsRequested,
+  filterSpacesNoiseRequested,
+  filterSpacesGroupsRequested,
+  filterSpacesStringRequested,
+  filterOnCampusRequested
+} from '../../actions/action_types'
 
-interface IFilterProps {
-  filterSpacesOpenDispatch: (open: boolean) => void
-  filterSpacesOutletsDispatch: (num: number) => void
-  filterSpacesNoiseDispatch: (num: number) => void
-  filterSpacesGroupsDispatch: (num: number) => void
-  clearSpacesFiltersDispatch: () => void // Remove filters
-  filterSpacesStringDispatch: (str: string) => void
-  filterOpen?: boolean
 
-  toggleSpacesOpenDispatch: () => void
-  toggleSpacesOutletsDispatch: () => void
-  toggleSpacesNoiseDispatch: () => void
-  toggleSpacesGroupsDispatch: () => void
-
+interface IFilterStateProps {
   filterOpenActive?: boolean
   filterOutletsActive?: boolean
   filterNoiseActive?: boolean
   filterGroupsActive?: boolean
-
+  filterOpen?: boolean
   filterOutlets: number[]
   filterNoise: number[]
   filterGroups: number[]
   filterString?: string
+  filterOnCampus?: boolean
 }
 
-interface IFilterButton {
-  text: string
-  onClick: () => void
-  onClickOption: (filter: number) => void
-  options: string[]
-  activeOptions: number[]
-  active: boolean
+interface IFilterDispatchProps {
+  clearSpacesFiltersDispatch: () => void // Remove filters
+  dispatchFilterSpaces: (inputParams: IFilterInputProps) => void
+  toggleSpacesOpenDispatch: () => void
+  toggleSpacesOutletsDispatch: () => void
+  toggleSpacesNoiseDispatch: () => void
+  toggleSpacesGroupsDispatch: () => void
 }
+
+type IFilterProps = IFilterStateProps & IFilterDispatchProps
 
 const SpacesFilter: React.FC<IFilterProps> = ({
-  filterSpacesOpenDispatch,
+  dispatchFilterSpaces,
+
   toggleSpacesOpenDispatch,
   clearSpacesFiltersDispatch,
-  filterSpacesStringDispatch,
   toggleSpacesOutletsDispatch,
-  filterSpacesOutletsDispatch,
+
   toggleSpacesNoiseDispatch,
-  filterSpacesNoiseDispatch,
   toggleSpacesGroupsDispatch,
-  filterSpacesGroupsDispatch,
 
   filterOpenActive,
   filterOutletsActive,
@@ -74,25 +68,24 @@ const SpacesFilter: React.FC<IFilterProps> = ({
   filterGroups,
   filterNoise,
   filterOpen,
+  filterOnCampus
 }) => {
-  const searchParams = {
-    filterFunction: filterSpacesStringDispatch,
-    filterString
-  }
-
+  console.log(filterOutlets)
   const filterButtons: IFilterButton[] = [
     {
       text: 'Outlets',
+      active: Boolean(filterOutletsActive),
       onClick: toggleSpacesOutletsDispatch,
-      onClickOption: filterSpacesOutletsDispatch,
       options: ['No outlets', 'Few outlets', 'Many outlets'],
-      activeOptions: filterOutlets,
-      active: Boolean(filterOutletsActive)
+      onClickOption: (num: number) =>
+        dispatchFilterSpaces({ filterKey: filterSpacesOutletsRequested, filterValue: num }),
+      activeOptions: filterOutlets
     },
     {
       text: 'Noise level',
       onClick: toggleSpacesNoiseDispatch,
-      onClickOption: filterSpacesNoiseDispatch,
+      onClickOption: (num: number) =>
+        dispatchFilterSpaces({ filterKey: filterSpacesNoiseRequested, filterValue: num }),
       options: ['Talkative', 'Quiet', 'Silent'],
       activeOptions: filterNoise,
       active: Boolean(filterNoiseActive)
@@ -100,7 +93,8 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     {
       text: 'Groups',
       onClick: toggleSpacesGroupsDispatch,
-      onClickOption: filterSpacesGroupsDispatch,
+      onClickOption: (num: number) =>
+        dispatchFilterSpaces({ filterKey: filterSpacesGroupsRequested, filterValue: num }),
       options: [
         'No groups',
         'Good for small groups',
@@ -111,37 +105,73 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     }
   ]
 
-  const handleClickOpen = (): void => {
-    toggleSpacesOpenDispatch()
-    filterSpacesOpenDispatch(!filterOpen)
+  const searchParams = {
+    filterFunction: (str: string) =>
+      dispatchFilterSpaces({ filterKey: filterSpacesStringRequested, filterValue: str }),
+    filterString
   }
 
   const openButtonParams = {
-    onClick: handleClickOpen,
+    onClick: (): void => {
+      toggleSpacesOpenDispatch()
+      dispatchFilterSpaces({ filterKey: filterSpacesOpenRequested, filterValue: !filterOpen })
+      // filterSpacesOpenDispatch(!filterOpen)
+    },
     active: Boolean(filterOpenActive)
   }
 
+  const clearFilterOnClick = clearSpacesFiltersDispatch
+
+  const toggleNeighborHoodParams = {
+    filterOnCampusDispatch: (filter: boolean) =>
+      dispatchFilterSpaces({ filterKey: filterOnCampusRequested, filterValue: filter }),
+    filterOnCampus
+  }
+
   return (
-    <Filter filterButtons={filterButtons} searchParams={searchParams} openButtonParams={openButtonParams} />
+    <Filter
+      filterButtons={filterButtons}
+      searchParams={searchParams}
+      openButtonParams={openButtonParams}
+      clearFilterOnClick={clearFilterOnClick}
+      anyFilterModalActive={filterOutletsActive || filterNoiseActive || filterGroupsActive}
+      toggleNeighborHoodParams={toggleNeighborHoodParams}
+    />
   )
 }
 
-const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => spaces
+const mapStateToProps = ({ spaces }: { spaces: ISpacesReducerState }) => {
+  const {
+    filterOpenActive,
+    filterOutletsActive,
+    filterNoiseActive,
+    filterGroupsActive,
+    filterOpen,
+    filterOutlets,
+    filterNoise,
+    filterGroups,
+    filterString,
+    filterOnCampus
+  } = spaces
+
+  return {
+    filterOpenActive,
+    filterOutletsActive,
+    filterNoiseActive,
+    filterGroupsActive,
+    filterOpen,
+    filterOutlets,
+    filterNoise,
+    filterGroups,
+    filterString,
+    filterOnCampus
+  }
+}
 
 const mapDispatchToProps = (dispatch: any) => ({
   clearSpacesFiltersDispatch: (): void => dispatch(clearSpacesFilters()),
-
-  filterSpacesOpenDispatch: (filter: boolean): void =>
-    dispatch(filterSpacesOpen(filter)),
-  filterSpacesOutletsDispatch: (filters: number): void =>
-    dispatch(filterSpacesOutlets(filters)),
-  filterSpacesNoiseDispatch: (filters: number): void =>
-    dispatch(filterSpacesNoise(filters)),
-  filterSpacesGroupsDispatch: (filters: number): void =>
-    dispatch(filterSpacesGroups(filters)),
-  filterSpacesStringDispatch: (filterString: string): void =>
-    dispatch(filterSpacesString(filterString)),
-
+  dispatchFilterSpaces: (inputParams: IFilterInputProps): void =>
+    dispatch(filterSpaces(inputParams)),
   toggleSpacesOpenDispatch: (): void => dispatch(toggleSpacesOpen()),
   toggleSpacesOutletsDispatch: (): void => dispatch(toggleSpacesOutlets()),
   toggleSpacesNoiseDispatch: (): void => dispatch(toggleSpacesNoise()),

@@ -145,7 +145,6 @@ class FilterBtn extends React.Component<IFilterBtnProps, {}> {
 
   render() {
     const { onClick, active } = this.props
-    console.log(this.props)
 
     const areActiveOptions = this.areActiveOptions()
 
