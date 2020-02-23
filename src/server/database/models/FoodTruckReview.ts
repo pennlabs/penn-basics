@@ -7,6 +7,7 @@ const ReviewSchema = new Schema({
   pennid: { type: Number, required: true },
   fullName: String,
   rating: Number,
+  votes: [{ pennid: Number, isUpvote: Boolean }],
   upvoteScore: Number,
   comment: String,
   timeCreated: Date,

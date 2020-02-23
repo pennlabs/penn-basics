@@ -6,8 +6,13 @@ import Space from './models/Space'
 import Foodtrucks from './models/FoodTruck'
 import User from './models/User'
 import { IUser } from '../../types/authentication'
-import { IFoodTruckUserReview, IFoodTruckDocument } from '../../types/foodtrucks'
+import {
+  IFoodTruckUserReview,
+  IFoodTruckDocument,
+  IFoodTruckUserReviewDocument,
+} from '../../types/foodtrucks'
 import { ISpace } from '../../types/studyspaces'
+import FoodTruckReview from './models/FoodTruckReview'
 
 // return all fields except for menu, priceTypes, and reviews
 export const findAllFoodtrucks = async (): Promise<Document[]> =>
@@ -20,109 +25,93 @@ export const getFoodTruck = async (
   foodtruckID: string
 ): Promise<Document | null> => await Foodtrucks.findOne({ foodtruckID })
 
-/**
- *
- * 1. look at the reviews in the DB with the foodtruckId and
- * if there exists a review with the input pennid, update the review
- * otherwise, insert a new review
- * 2. update overallRating of the foodtruck
- * @param {String} foodtruckID the id of the foodtruck
- * @param {Object} userReview an object that contains: pennid, rating, comment, showName
- */
-
 export const updateReview = async (
   foodtruckID: string,
   userReview: IFoodTruckUserReview
-) => {
-  const data = (await Foodtrucks.findOne(
-    { foodtruckID },
-    { reviews: 1, overallRating: 1 }
-  )) as IFoodTruckDocument | null
+): Promise<IFoodTruckUserReviewDocument> => {
+  const data = (await FoodTruckReview.findOne({
+    foodtruckID,
+    pennid: userReview.pennid,
+  })) as IFoodTruckUserReviewDocument | null
 
   if (!data) {
-    console.error(`Truck not found with id of ${foodtruckID}`)
-    return data
-  }
-
-  let { overallRating } = data
-  if (!overallRating) {
-    overallRating = 0.0
-  }
-
-  const { reviews } = data // reviews in the DB
-  const { pennid, rating, comment, showName, fullName } = userReview
-  let exist = false
-  let newOverallRating
-
-  for (let i = 0; i < reviews.length; i += 1) {
-    // eslint-disable-line
-    if (reviews[i].pennid === pennid) {
-      exist = true
-      // first, compute the new overall rating
-      // becareful of no rating initially
-      let ratingSum = overallRating * reviews.length
-      ratingSum -= reviews[i].rating
-      ratingSum += rating
-      newOverallRating = (ratingSum * 1.0) / reviews.length
-
-      // next, update the reviews array
-      reviews[i].rating = rating
-      reviews[i].comment = comment
-      reviews[i].showName = showName
-      reviews[i].timeEdited = moment().format()
-      reviews[i].fullName = fullName
-
-      break
-    }
-  }
-
-  if (!exist) {
-    // first, compute the new overall rating
-    newOverallRating =
-      ((overallRating * reviews.length + rating) * 1.0) / (reviews.length + 1)
-
-    // next, update the reviews array
-    const newReview: IFoodTruckUserReview = {
+    return new FoodTruckReview({
       ...userReview,
-      timeCreated: moment().format(),
-      timeEdited: moment().format(),
-    }
-    reviews.push(newReview)
+      foodtruckID,
+    }).save() as Promise<IFoodTruckUserReviewDocument>
   }
 
-  // update the DB
-  const foodtruck = Foodtrucks.findOneAndUpdate(
-    { foodtruckID },
-    { overallRating: newOverallRating, reviews },
+  const review = FoodTruckReview.findOneAndUpdate(
+    { foodtruckID, pennid: userReview.pennid },
+    { ...userReview, foodtruckID },
     { new: true }
-  )
-  return foodtruck
+  ).exec() as Promise<IFoodTruckUserReviewDocument>
+
+  updateFoodTruckScore(foodtruckID)
+
+  return review
 }
 
-export const updateFoodtruckReveiwScore = (
+const updateFoodTruckScore = async (foodtruckID: string): Promise<any> => {
+  const allReviews = (await FoodTruckReview.find({
+    foodtruckID,
+  })) as IFoodTruckUserReviewDocument[]
+
+  // compute average score
+  const overallScore =
+    // sum all reviews' scores
+    allReviews.reduce(
+      (lastSum, rev) => (rev.rating >= 0 ? lastSum + rev.rating : lastSum),
+      0
+    ) /
+    // divide by the length
+    allReviews.length
+
+  return Foodtrucks.updateOne({ foodtruckID }, { overallScore }).exec()
+}
+
+export const updateFoodtruckReviewScore = async (
   foodtruckID: string,
-  pennid: number,
-  amount: number
-): Query<any> =>
-  Foodtrucks.updateOne(
-    { foodtruckID, 'reviews.pennid': pennid },
-    // update the located sub-document (the review) by the specified amount
-    { $inc: { 'reviews.$.pennid': amount } }
-  )
+  reviewerId: number,
+  voterId: number,
+  isUpvote: boolean
+): Promise<IFoodTruckUserReviewDocument> => {
+  const data = (await FoodTruckReview.findOne({
+    foodtruckID,
+    pennid: reviewerId,
+  })) as IFoodTruckUserReviewDocument | null
+  if (!data) {
+    return Promise.reject('The review does not exist')
+  }
+  const votes = data.votes.map(userVote => {
+    if (userVote.pennid === voterId) {
+      return userVote
+    }
+    return { ...userVote, isUpvote }
+  })
+
+  return FoodTruckReview.findOneAndUpdate(
+    {
+      foodtruckID,
+      pennid: reviewerId,
+    },
+    { votes }
+  ).exec() as Promise<IFoodTruckUserReviewDocument>
+}
 
 export const upvoteFoodtruckReview = (
   foodtruckID: string,
-  pennid: number
-): void => {
-  updateFoodtruckReveiwScore(foodtruckID, pennid, 1)
-}
+  reviewerId: number,
+  voterId: number
+): Promise<IFoodTruckUserReviewDocument> =>
+  updateFoodtruckReviewScore(foodtruckID, reviewerId, voterId, true)
 
 export const downvoteFoodtruckReview = (
   foodtruckID: string,
-  pennid: number
-): void => {
-  updateFoodtruckReveiwScore(foodtruckID, pennid, -1)
-}
+  reviewerId: number,
+  voterId: number
+): Promise<IFoodTruckUserReviewDocument> =>
+  updateFoodtruckReviewScore(foodtruckID, reviewerId, voterId, false)
 
 export const findAllSpaces = (): Query<Document[]> => Space.find()
 
@@ -164,27 +153,32 @@ export const getSpace = async (spaceID: string): Promise<Document | null> =>
   await Space.findOne({ spaceID })
 
 export const deleteReview = async (
-  foodtruckName: string,
+  foodtruckID: string,
   pennid: number
-): Promise<Query<any>> => {
-  if (!pennid || !foodtruckName) {
-    Promise.reject(
-      'Both pennid (of the user whose review is to be  deleted) and name (of a foodtruck) are required.'
+): Promise<{ message: string }> => {
+  if (!pennid || !foodtruckID) {
+    return Promise.reject(
+      'Both pennid (of the user whose review is to be  deleted) and id (of a foodtruck) are required.'
     )
   }
 
-  const truck = await Foodtrucks.findOne({ name: foodtruckName })
+  const res = await FoodTruckReview.deleteOne({
+    foodtruckID,
+    pennid,
+  })
 
-  if (!truck) {
-    return Promise.reject('Truck not found')
+  if (res.deletedCount) {
+    if (res.deletedCount > 1) {
+      return Promise.reject('Erroneously deleted duplicates')
+    } else if (res.deletedCount === 0) {
+      return Promise.reject('The food truck did not exist')
+    } else {
+      updateFoodTruckScore(foodtruckID)
+
+      return { message: 'The truck has been deleted' }
+    }
   }
-
-  const { reviews } = truck as IFoodTruckDocument
-  const newReviews = reviews.filter(
-    r => r.pennid !== pennid && r.pennid !== pennid
-  )
-
-  return truck.update({ reviews: newReviews })
+  return Promise.reject('Cannot confirm deletion')
 }
 
 /**

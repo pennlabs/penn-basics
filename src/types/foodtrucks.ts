@@ -13,10 +13,16 @@ interface IFoodTruckMenu {
   items: IFoodTruckMenuItem[]
 }
 
+interface ReviewVote {
+  pennid: number
+  isUpvote: true
+}
+
 export interface IFoodTruckUserReview {
   pennid: number
   fullName: string
   rating: number
+  votes: ReviewVote[]
   upvoteScore?: number
   comment: string
   timeCreated?: string
@@ -118,6 +124,9 @@ export type IFormattedFoodtruck = IFormattedFoodtruckAction & {
 }
 
 export type IFoodTruckDocument = IFoodTruck & mongoose.Document
+
+export type IFoodTruckUserReviewDocument = IFoodTruckUserReview &
+  mongoose.Document
 
 export type IFoodTruckWithOpen = IFoodTruck & { open: boolean }
 
