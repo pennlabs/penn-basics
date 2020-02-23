@@ -29,7 +29,7 @@ const foodtrucksRouter = (): Router => {
     isLoggedInMiddleware('User must be logged in to create or update reviews.'),
     async (req, res) => {
       const foodtruckId = req.params.id
-      const { rating, comment, fullName, showName } = req.body
+      const { rating, comment, fullName, showName, votes } = req.body
       const pennid: number =
         req.body.pennid ?? (req.user as Record<string, number>).pennid
 
@@ -39,6 +39,7 @@ const foodtrucksRouter = (): Router => {
         rating: Number(rating),
         comment,
         showName,
+        votes,
       }
 
       const foodtruck = await DB.updateReview(foodtruckId, newReview)

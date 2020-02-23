@@ -34,16 +34,23 @@ export const updateReview = async (
     pennid: userReview.pennid,
   })) as IFoodTruckUserReviewDocument | null
 
+  const now = moment().format()
+
   if (!data) {
     return new FoodTruckReview({
       ...userReview,
+      votes: [],
       foodtruckID,
+      timeEdited: now,
+      timeCreated: now,
     }).save() as Promise<IFoodTruckUserReviewDocument>
   }
 
+  const { comment, rating, fullName, showName } = userReview
+
   const review = FoodTruckReview.findOneAndUpdate(
     { foodtruckID, pennid: userReview.pennid },
-    { ...userReview, foodtruckID },
+    { comment, rating, fullName, showName, timeEdited: now },
     { new: true }
   ).exec() as Promise<IFoodTruckUserReviewDocument>
 
