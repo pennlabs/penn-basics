@@ -233,14 +233,9 @@ export const updateUser = async (
 export const getUserReviews = async (
   pennid: number
 ): Promise<IFoodTruckUserReview[]> => {
-  const trucks = await Foodtrucks.find({ 'reviews.pennid': pennid })
+  const reviews = (await FoodTruckReview.find({
+    pennid,
+  })) as IFoodTruckUserReviewDocument[]
 
-  const reviews: IFoodTruckUserReview[] = trucks.map(truck => {
-    const review = (truck as IFoodTruckDocument).reviews.filter(
-      (r: IFoodTruckUserReview) => r.pennid === pennid
-    )[0]
-    return review
-  })
-
-  return reviews
+  return reviews ?? []
 }
