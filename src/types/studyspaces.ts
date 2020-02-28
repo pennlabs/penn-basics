@@ -57,18 +57,19 @@ export type ISpaceORHoursAndOpenAndSpaceId = ISpace & {
 
 export interface ISpacesReducerState {
   pending: boolean
+  error?: string
   filterOpen?: boolean
   filterString?: string
-  filterOutlets: number[]
-  filterNoise: number[]
-  filterGroups: number[]
+  filterOutlets?: number[]
+  filterNoise?: number[]
+  filterGroups?: number[]
   filterOnCampus?: boolean
   filterOpenActive?: boolean
   filterOutletsActive?: boolean
   filterNoiseActive?: boolean
   filterGroupsActive?: boolean
   hoveredSpace?: string
-  activeSpace?: string | undefined | null
+  activeSpace?: string
   spacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
   filteredSpacesData?: Record<string, ISpaceWithHoursAndOpenAndSpaceId>
 }

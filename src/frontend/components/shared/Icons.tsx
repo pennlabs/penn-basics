@@ -1,4 +1,3 @@
-// import EditIcon from '../../../../../public/img/foodtrucks/edit.svg'
 import EditSVG from '../../../../public/img/icons/edit.svg'
 import CommentSVG from '../../../../public/img/icons/message-circle.svg'
 import StarSVG from '../../../../public/img/icons/star.svg'

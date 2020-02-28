@@ -30,8 +30,14 @@ import IDVenueJSON from '../../../server/resources/dining/id_venue_mappings.json
 const IDVenueData = IDVenueJSON as Record<string, string>
 
 import { IAuthReducerState, IUser } from '../../../types/authentication'
-import { IDiningReducerState, IFavorite as IDiningFavorite } from '../../../types/dining'
-import { ILaundryReducerState, IFavoriteHome as ILaundryFavorite } from '../../../types/laundry'
+import {
+  IDiningReducerState,
+  IFavorite as IDiningFavorite,
+} from '../../../types/dining'
+import {
+  ILaundryReducerState,
+  IFavoriteHome as ILaundryFavorite,
+} from '../../../types/laundry'
 
 const Wrapper = s.div`
   padding: 1rem;
@@ -86,6 +92,27 @@ const App: React.FC<IAppProps> = ({
   userInfo,
 }) => {
   const { loggedIn } = userInfo || {}
+
+  const { fullName, displayName, pennid } = userInfo || {}
+
+  const [name, setName] = useState<string>(displayName || fullName)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (!loggedIn) {
+      return
+    }
+    dispatchGetDiningFavorites()
+    dispatchGetLaundryFavorites()
+  }, [dispatchGetDiningFavorites, dispatchGetLaundryFavorites, loggedIn])
+
+  useEffect(() => {
+    if (!displayName && !fullName) {
+      return
+    }
+    setName(displayName || fullName)
+  }, [fullName, displayName])
+
   if (!loggedIn) {
     return (
       <Wrapper>
@@ -99,20 +126,6 @@ const App: React.FC<IAppProps> = ({
       </Wrapper>
     )
   }
-
-  const { fullName, displayName, pennid } = userInfo || {}
-
-  const [name, setName] = useState(displayName || fullName)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    dispatchGetDiningFavorites()
-    dispatchGetLaundryFavorites()
-  }, [dispatchGetDiningFavorites, dispatchGetLaundryFavorites])
-
-  useEffect(() => {
-    setName(displayName || fullName)
-  }, [fullName, displayName])
 
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setName(e.target.value)
@@ -223,7 +236,11 @@ interface IStateToProps {
   authentication: IAuthReducerState
 }
 
-const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps): IAppStateProps => {
+const mapStateToProps = ({
+  dining,
+  laundry,
+  authentication,
+}: IStateToProps): IAppStateProps => {
   const { favorites: diningFavorites } = dining
   const { favoritesHome: laundryFavorites } = laundry
   const { userInfo } = authentication
@@ -235,7 +252,9 @@ const mapStateToProps = ({ dining, laundry, authentication }: IStateToProps): IA
   }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: (action: any) => any
+): IAppDispatchProps => ({
   dispatchGetDiningFavorites: (): void => dispatch(getFavorites()),
   dispatchGetLaundryFavorites: (): void => dispatch(getFavoritesHomePage()),
   dispatchDiningRemoveFavorite: (venueId: string): void =>

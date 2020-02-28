@@ -13,7 +13,11 @@ import PennLabsCredit from '../shared/PennLabsCredit'
 import LaundryCard from './LaundryCard'
 import LaundryVenue from './LaundryVenue'
 import FavoriteCard from './FavoriteCard'
-import { ILaundryReducerState, IFavorite, ILaundryHall } from '../../../types/laundry'
+import {
+  ILaundryReducerState,
+  IFavorite,
+  ILaundryHall,
+} from '../../../types/laundry'
 
 interface IAppStateProps {
   laundryHalls: ILaundryHall[]
@@ -50,8 +54,8 @@ const App: React.FC<IAppProps> = ({
   const isActiveHall =
     parsedHallId !== undefined &&
     !Number.isNaN(parsedHallId) &&
-    (parsedHallId > -1)
-  
+    parsedHallId > -1
+
   console.log(isActiveHall)
 
   return (
@@ -77,9 +81,11 @@ const App: React.FC<IAppProps> = ({
             </Card>
 
             {favorites.map((favorite, idx) => (
-              <FavoriteCard key={`favorite-dining-card-${idx}`} favorite={favorite} />
-              )
-            )}
+              <FavoriteCard
+                key={`favorite-dining-card-${idx}`}
+                favorite={favorite}
+              />
+            ))}
           </>
         )}
 
@@ -116,12 +122,18 @@ const App: React.FC<IAppProps> = ({
   )
 }
 
-const mapStateToProps = ({ laundry }: { laundry: ILaundryReducerState }): IAppStateProps  => {
+const mapStateToProps = ({
+  laundry,
+}: {
+  laundry: ILaundryReducerState
+}): IAppStateProps => {
   const { laundryHalls, favorites } = laundry
   return { laundryHalls, favorites }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any): IAppDispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: (action: any) => any
+): IAppDispatchProps => ({
   dispatchGetLaundryHalls: (): void => dispatch(getLaundryHalls()),
   dispatchGetFavorites: (): void => dispatch(getFavorites()),
   dispatchCheckBrowser: (): void => dispatch(checkBrowserCompatability()),

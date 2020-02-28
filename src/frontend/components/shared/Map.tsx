@@ -13,10 +13,11 @@ interface IMapWrapper {
 const MapWrapper = styled.div<IMapWrapper>`
   width: 100%;
   flex: 1;
-  height: ${({ height }) => height || '100vh'};
+  height: ${({ height }): string => height || '100vh'};
 
   ${maxWidth(PHONE)} {
-    height: ${({ mobileHeight, height }) => mobileHeight || height || '100vh'};
+    height: ${({ mobileHeight, height }): string =>
+      mobileHeight || height || '100vh'};
   }
 `
 
@@ -60,17 +61,13 @@ export class Map extends React.Component<IMapProps, IMapState> {
       map: null,
       markers: {},
     }
-
-    this.waitForGoogle = this.waitForGoogle.bind(this)
-    this.createMarker = this.createMarker.bind(this)
-    this.updateMarkers = this.updateMarkers.bind(this)
   }
 
-  componentDidMount() {
+  public componentDidMount(): void {
     this.waitForGoogle()
   }
 
-  componentDidUpdate(prevProps: IMapProps) {
+  public componentDidUpdate(prevProps: IMapProps): void {
     // Check if the active marker changes
     const { activeMarker } = this.props
     const oldActiveMarker = prevProps.activeMarker
@@ -92,7 +89,13 @@ export class Map extends React.Component<IMapProps, IMapState> {
     }
   }
 
-  updateMarkers() {
+  public render(): React.ReactElement {
+    const { height, mobileHeight, mapId } = this.props
+
+    return <MapWrapper height={height} mobileHeight={mobileHeight} id={mapId} />
+  }
+
+  private updateMarkers(): Promise<void> {
     return new Promise(resolve => {
       const { markers: dataMarkers } = this.props
       const { markers: mapMarkers } = this.state
@@ -130,25 +133,27 @@ export class Map extends React.Component<IMapProps, IMapState> {
           markers: mapMarkers,
         },
         () => {
-          resolve(true)
+          resolve()
         }
       )
     })
   }
 
-  updateMarker(key: TMarkerId, { icon = RED_ICON }) {
+  private updateMarker(key: TMarkerId, { icon = RED_ICON }): void {
     const { markers } = this.state
     const marker = markers[key]
 
-    if (!marker) {return}
+    if (!marker) {
+      return
+    }
 
     marker.setIcon(icon) // TODO this might not work
   }
 
-  createMarker(
+  private createMarker(
     key: TMarkerId,
     { location, icon = RED_ICON }: { location: ILocation; icon?: string }
-  ) {
+  ): google.maps.Marker | null {
     const { handleClickMarker } = this.props
 
     if (!location) {
@@ -187,7 +192,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
     return marker
   }
 
-  initMap() {
+  private initMap(): void {
     const {
       location = {
         lat: 39.9522,
@@ -238,18 +243,12 @@ export class Map extends React.Component<IMapProps, IMapState> {
     )
   }
 
-  waitForGoogle() {
+  private waitForGoogle(): void {
     if (typeof google !== 'undefined') {
       this.initMap()
     } else {
       // Check again if google is defined
-      setTimeout(this.waitForGoogle, 125)
+      setTimeout(() => this.waitForGoogle(), 125)
     }
-  }
-
-  render() {
-    const { height, mobileHeight, mapId } = this.props
-
-    return <MapWrapper height={height} mobileHeight={mobileHeight} id={mapId} />
   }
 }

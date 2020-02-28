@@ -9,7 +9,7 @@
     "test": "mocha --reporter spec",
     "lint": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}'",
     "lint:fix": "eslint '{src,pages}/**/*.{ts,js,tsx,jsx}' --fix",
-    "format": "prettier --write 'src/**/*.{js,jsx,json,md,ts,tsx}'",
+    "format": "prettier --write '{src,pages}/**/*.{js,jsx,json,md,ts,tsx}'",
     "dev": "source env.sh && nodemon",
     "build": "next build",
     "start": "ts-node --project tsconfig.server.json src/server/index.ts"

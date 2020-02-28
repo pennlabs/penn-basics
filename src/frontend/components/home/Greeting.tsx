@@ -34,11 +34,15 @@ const Greeting: React.FC<IGreetingProps> = ({ userInfo }) => {
   )
 }
 
-const mapStateToProps = ({ authentication }: { authentication: IAuthReducerState }) => {
+const mapStateToProps = ({
+  authentication,
+}: {
+  authentication: IAuthReducerState
+}): IGreetingProps => {
   const { userInfo } = authentication
 
   return {
-    userInfo
+    userInfo,
   }
 }
 

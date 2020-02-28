@@ -36,10 +36,15 @@ const Filter: React.FC<IFilterProps> = ({
   />
 )
 
-const mapStateToProps = ({ home }: { home: IHomeReducerState }) => home
+const mapStateToProps = ({
+  home,
+}: {
+  home: IHomeReducerState
+}): IHomeReducerState => home
 
 const mapDispatchToProps = (dispatch: (action: any) => any) => ({
-  dispatchFilterHomeCustomize: (filter: number): void => dispatch(filterHomeCustomize(filter)),
+  dispatchFilterHomeCustomize: (filter: number): void =>
+    dispatch(filterHomeCustomize(filter)),
   dispatchToggleHomeCustomize: (): void => dispatch(toggleHomeCustomize()),
   dispatchInitializeFilterHome: (optionsLength: number): void =>
     dispatch(initializeFilterHome(optionsLength)),

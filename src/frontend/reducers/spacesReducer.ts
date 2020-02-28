@@ -93,9 +93,9 @@ const filterSpaces = (state: ISpacesReducerState): ISpacesReducerState => {
     !filterOnCampus &&
     !filterString
   ) {
-    const newState = Object.assign(state, {})
-    newState.filteredSpacesData = state.spacesData
-    return newState
+    const noFilterState = Object.assign(state, {})
+    noFilterState.filteredSpacesData = state.spacesData
+    return noFilterState
   }
 
   const filteredSpacesData: Record<
@@ -201,7 +201,7 @@ const spacesReducer = (
       return newState
 
     case clearActiveSpaceFulfilled:
-      newState.activeSpace = null
+      newState.activeSpace = undefined
       return newState
 
     case filterSpacesOpenRequested /* TODO FILTERING */:
@@ -250,10 +250,10 @@ const spacesReducer = (
     default:
       return {
         pending: true,
-        spacesData: null,
-        filteredSpacesData: null,
-        hoveredSpace: null,
-        activeSpace: null,
+        spacesData: undefined,
+        filteredSpacesData: undefined,
+        hoveredSpace: undefined,
+        activeSpace: undefined,
         ...clearFilterState,
       }
   }

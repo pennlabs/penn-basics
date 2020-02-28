@@ -7,6 +7,5 @@
     "isolatedModules": false,
     "noEmit": false
   },
-  "include": ["server/**/*.ts", "next.config.js"]
+  "include": ["pages/**/*.ts", "next.config.js"]
 }
-

@@ -7,7 +7,7 @@ import { initGA, logPageView } from '../src/utils/analytics'
 
 import { initStore } from '../src/utils/store'
 
-class MyApp extends App {
+class PennBasicsApp extends App {
   static async getInitialProps({ Component, ctx }) {
     return {
       pageProps: Component.getInitialProps
@@ -16,13 +16,18 @@ class MyApp extends App {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     initGA()
     logPageView()
+    if (!Router || !Router.router) {
+      return
+    }
+
     Router.router.events.on('routeChangeComplete', logPageView)
   }
 
-  render() {
+  render(): React.ReactElement {
+    // TODO where does the store come from?
     const { Component, pageProps, store } = this.props
     return (
       <Provider store={store}>
@@ -32,4 +37,4 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(initStore)(MyApp)
+export default withRedux(initStore)(PennBasicsApp)

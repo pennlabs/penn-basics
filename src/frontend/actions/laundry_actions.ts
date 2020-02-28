@@ -21,26 +21,29 @@ import {
   updateReminderIntervalID,
 } from './action_types'
 import { logEvent } from '../../utils/analytics'
-import { IReminder, ILaundryHallGeneralInfo, IFavorite } from '../../types/laundry'
+import {
+  IReminder,
+  ILaundryHallGeneralInfo,
+  IFavorite,
+} from '../../types/laundry'
 
 const BASE = 'https://api.pennlabs.org'
 
-interface IidData {
+interface IIdData {
   halls: ILaundryHallGeneralInfo[]
 }
 
-const processLaundryHallsData = (idData: IidData) => {
+const processLaundryHallsData = (idData: IIdData) => {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
-  return Object.keys(groupByLocation).map(locationName =>
-    //eslint-disable-line
-     ({
-      location: locationName,
-      halls: groupByLocation[locationName],
-    })
-  )
+  return Object.keys(groupByLocation).map(locationName => ({
+    location: locationName,
+    halls: groupByLocation[locationName],
+  }))
 }
 
-export const getLaundryHalls = () => async (dispatch: Dispatch<Action>): Promise<void> => {
+export const getLaundryHalls = () => async (
+  dispatch: Dispatch<Action>
+): Promise<void> => {
   dispatch({
     type: getLaundryHallsDataRequested,
   })
@@ -60,7 +63,10 @@ export const getLaundryHalls = () => async (dispatch: Dispatch<Action>): Promise
   }
 }
 
-const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId: number): Promise<void> => {
+const getLaundryHallInterval = async (
+  dispatch: Dispatch<Action>,
+  laundryHallId: number
+): Promise<void> => {
   if (!isValidNumericId(laundryHallId)) {
     dispatch({
       type: getLaundryHallInfoRejected,
@@ -91,7 +97,10 @@ const getLaundryHallInterval = async (dispatch: Dispatch<Action>, laundryHallId:
   }
 }
 
-export const getLaundryHall = (laundryHallId: number, prevIntervalID: number) => (dispatch: Dispatch<Action>): void => {
+export const getLaundryHall = (
+  laundryHallId: number,
+  prevIntervalID: number
+) => (dispatch: Dispatch<Action>): void => {
   if (prevIntervalID) {
     clearInterval(prevIntervalID)
     dispatch({
@@ -117,13 +126,17 @@ export const getLaundryHall = (laundryHallId: number, prevIntervalID: number) =>
 }
 
 // TODO document....
-export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>): void => {
+export const getFavoritesHomePage = () => (
+  dispatch: Dispatch<Action>
+): void => {
   dispatch({ type: getLaundryHallInfoRequested })
 
   // Get the list of laundry halls from local storage
   const laundryHallsString = localStorage.getItem('laundry_favorites')
 
-  if (!laundryHallsString) {return}
+  if (!laundryHallsString) {
+    return
+  }
 
   let laundryHalls: IFavorite[] = JSON.parse(laundryHallsString)
   laundryHalls = laundryHalls.splice(0, 3)
@@ -167,88 +180,97 @@ export const getFavoritesHomePage = () => (dispatch: Dispatch<Action>): void => 
 }
 
 export const getFavorites = () => (dispatch: Dispatch<Action>): void => {
-    const favorites = localStorage.getItem('laundry_favorites')
-    let favoritesArray: IFavorite[] = []
-    if (favorites) {
-      // Read in from localStore, map from strings to numbers
-      favoritesArray = JSON.parse(favorites)
-      // favoritesArray = favoritesArray.map(fav => Object.assign({}, fav, { hallId: Number(fav.hallId) }))
+  const favorites = localStorage.getItem('laundry_favorites')
+  let favoritesArray: IFavorite[] = []
+  if (favorites) {
+    // Read in from localStore, map from strings to numbers
+    favoritesArray = JSON.parse(favorites)
+    // favoritesArray = favoritesArray.map(fav => Object.assign({}, fav, { hallId: Number(fav.hallId) }))
+  } else {
+    localStorage.setItem('laundry_favorites', JSON.stringify([]))
+    favoritesArray = []
+  }
+  dispatch({
+    type: updateLaundryFavorites,
+    favorites: favoritesArray,
+  })
+}
+
+export const addFavorite = (
+  hallURLId: number,
+  location: string,
+  hallName: string
+) => (dispatch: Dispatch<Action>): void => {
+  logEvent('laundry', 'addFavorite')
+  // favoritesString is the raw data taken from localStorage
+  // therefore is in string format
+  const favoritesString = localStorage.getItem('laundry_favorites')
+
+  let favoritesArray: IFavorite[] = []
+  const favoriteLocation: IFavorite = { locationName: '', hallId: -1 }
+
+  // update fields for favoritesArray
+  favoriteLocation.locationName = `${location}: ${hallName}`
+  favoriteLocation.hallId = hallURLId
+
+  if (!favoritesString) {
+    favoritesArray = [favoriteLocation]
+  } else {
+    favoritesArray = JSON.parse(favoritesString)
+    if (
+      !favoritesArray.some(
+        favorite => favorite.hallId === favoriteLocation.hallId
+      )
+    ) {
+      favoritesArray.push(favoriteLocation)
+    }
+  }
+
+  localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
+
+  dispatch({
+    type: updateLaundryFavorites,
+    favorites: favoritesArray,
+  })
+}
+
+export const removeFavorite = (hallURLId: number) => (
+  dispatch: Dispatch<Action>
+): void => {
+  logEvent('laundry', 'removeFavorite')
+  // favoritesString is the raw data taken from localStorage
+  // therefore is in string format
+  const favoritesString = localStorage.getItem('laundry_favorites')
+  let favoritesArray: IFavorite[] = []
+  if (favoritesString) {
+    favoritesArray = JSON.parse(favoritesString)
+  }
+
+  favoritesArray.forEach((favorite, index) => {
+    if (favorite.hallId === hallURLId) {
+      favoritesArray.splice(index, 1)
+    }
+  })
+
+  localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
+  dispatch({
+    type: updateLaundryFavorites,
+    favorites: favoritesArray,
+  })
+}
+
+export const checkBrowserCompatability = () => (
+  dispatch: Dispatch<Action>
+): void => {
+  try {
+    if (!Notification) {
+      dispatch({
+        type: browserSupportRejected,
+        error: 'Notifications is not supported for your browser',
+      })
     } else {
-      localStorage.setItem('laundry_favorites', JSON.stringify([]))
-      favoritesArray = []
-    }
-    dispatch({
-      type: updateLaundryFavorites,
-      favorites: favoritesArray,
-    })
-  }
-
-export const addFavorite = (hallURLId: number, location: string, hallName: string) => (dispatch: Dispatch<Action>): void => {
-    logEvent('laundry', 'addFavorite')
-    // favoritesString is the raw data taken from localStorage
-    // therefore is in string format
-    const favoritesString = localStorage.getItem('laundry_favorites')
-
-    let favoritesArray: IFavorite[] = []
-    const favoriteLocation: IFavorite = { locationName: '', hallId: -1 }
-
-    // update fields for favoritesArray
-    favoriteLocation.locationName = `${location}: ${hallName}`
-    favoriteLocation.hallId = hallURLId
-
-    if (!favoritesString) {
-      favoritesArray = [favoriteLocation]
-    } else {
-      favoritesArray = JSON.parse(favoritesString)
-      if (
-        !favoritesArray.some(
-          favorite => favorite.hallId === favoriteLocation.hallId
-        )
-      ) {
-        favoritesArray.push(favoriteLocation)
-      }
-    }
-
-    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
-
-    dispatch({
-      type: updateLaundryFavorites,
-      favorites: favoritesArray,
-    })
-  }
-
-export const removeFavorite = (hallURLId: number) => (dispatch: Dispatch<Action>): void => {
-    logEvent('laundry', 'removeFavorite')
-    // favoritesString is the raw data taken from localStorage
-    // therefore is in string format
-    const favoritesString = localStorage.getItem('laundry_favorites')
-    let favoritesArray: IFavorite[] = []
-    if (favoritesString) {
-      favoritesArray = JSON.parse(favoritesString)
-    }
-
-    favoritesArray.forEach((favorite, index) => {
-      if (favorite.hallId === hallURLId) {
-        favoritesArray.splice(index, 1)
-      }
-    })
-
-    localStorage.setItem('laundry_favorites', JSON.stringify(favoritesArray))
-    dispatch({
-      type: updateLaundryFavorites,
-      favorites: favoritesArray,
-    })
-  }
-
-export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>): void => {
-    try {
-      if (!Notification || !Notification.requestPermission()) {
-        dispatch({
-          type: browserSupportRejected,
-          error: 'Notifications is not supported for your browser',
-        })
-      } else {
-        Notification.requestPermission().then(permission => {
+      Notification.requestPermission()
+        .then(permission => {
           if (permission !== 'granted') {
             dispatch({
               type: browserSupportRejected,
@@ -256,44 +278,48 @@ export const checkBrowserCompatability = () => (dispatch: Dispatch<Action>): voi
             })
           }
         })
-      }
+        .catch(() => {
+          dispatch({
+            type: browserSupportRejected,
+            error: 'Notifications blocked by browser',
+          })
+        })
+    }
 
-      if (!('serviceWorker' in navigator) || !window.indexedDB) {
-        dispatch({
-          type: browserSupportRejected,
-          error:
-            'Laundry reminder is currently not supported for your browser. Please consider upgrading to the latest version!',
-        })
-      } else {
-        navigator.serviceWorker.register('/sw.js')
-        navigator.serviceWorker.ready.then(async registration => {
-          // serviceWorker can only subscribe once
-          // --> need to clear the previous subscription first
-          await registration.pushManager
-            .getSubscription()
-            .then(subscription => {
-              if (subscription) {
-                subscription.unsubscribe()
-              }
-            })
-          await registration.update()
-        })
-      }
-
-      if (!('PushManager' in window)) {
-        dispatch({
-          type: browserSupportRejected,
-          error:
-            'Laundry reminder is not supported for your browser. Please consider switching to Chrome or Firefox!',
-        })
-      }
-    } catch (err) {
+    if (!('serviceWorker' in navigator) || !window.indexedDB) {
       dispatch({
         type: browserSupportRejected,
-        error: err.message || 'Sorry, an error occurred.',
+        error:
+          'Laundry reminder is currently not supported for your browser. Please consider upgrading to the latest version!',
+      })
+    } else {
+      navigator.serviceWorker.register('/sw.js')
+      navigator.serviceWorker.ready.then(async registration => {
+        // serviceWorker can only subscribe once
+        // --> need to clear the previous subscription first
+        await registration.pushManager.getSubscription().then(subscription => {
+          if (subscription) {
+            subscription.unsubscribe()
+          }
+        })
+        await registration.update()
       })
     }
+
+    if (!('PushManager' in window)) {
+      dispatch({
+        type: browserSupportRejected,
+        error:
+          'Laundry reminder is not supported for your browser. Please consider switching to Chrome or Firefox!',
+      })
+    }
+  } catch (err) {
+    dispatch({
+      type: browserSupportRejected,
+      error: err.message || 'Sorry, an error occurred.',
+    })
   }
+}
 
 const urlBase64ToUint8Array = (base64String: string): Uint8Array => {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
@@ -322,7 +348,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
     const dbRequest = indexedDB.open('LocalDB', 1) // opens the first version of LocalDB
 
     // TODO: change event
-    dbRequest.onerror = (event: any) => {
+    dbRequest.onerror = (event: any): void => {
       // triggered when request to LocalDB fails
       if (event.target && event.target.errorCode) {
         dispatch({
@@ -332,7 +358,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
       }
     }
 
-    dbRequest.onupgradeneeded = (event: any) => {
+    dbRequest.onupgradeneeded = (event: any): void => {
       // triggered when there is a change in the DB structure
       if (event.target) {
         const db = event.target.result
@@ -340,9 +366,11 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
       }
     }
 
-    dbRequest.onsuccess = (event: any) => {
+    dbRequest.onsuccess = (event: any): void => {
       // triggered when request to LocalDB is successful
-      if (!event.target) {return}
+      if (!event.target) {
+        return
+      }
       const db = event.target.result
       const reminders = localStorage.getItem('laundry_reminders')
       let remindersArray: IReminder[] = []
@@ -353,7 +381,7 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
         remindersArray = JSON.parse(reminders)
         const newReminders: IReminder[] = []
 
-        transaction.oncomplete = () => {
+        transaction.oncomplete = (): void => {
           localStorage.setItem(
             'laundry_reminders',
             JSON.stringify(newReminders)
@@ -365,8 +393,11 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
           console.log('---complete updating reminders from localStorage----') // eslint-disable-line
         }
 
-        transaction.onerror = (e: any) => {
-          if (!e.target) {return}
+        transaction.onerror = (e: any): void => {
+          if (!e.target) {
+            return
+          }
+
           dispatch({
             type: getRemindersRejected,
             error: e.target.errorCode,
@@ -381,8 +412,11 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
             `${reminder.hallID}-${reminder.machineID}`
           )
 
-          storeRequest.onsuccess = (e: any) => {
-            if (!e.target) {return}
+          storeRequest.onsuccess = (e: any): void => {
+            if (!e.target) {
+              return
+            }
+
             const { result } = e.target
             if (
               !result ||
@@ -392,8 +426,11 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
             }
           }
 
-          storeRequest.onerror = (e: any) => {
-            if (!e.target) {return}
+          storeRequest.onerror = (e: any): void => {
+            if (!e.target) {
+              return
+            }
+
             dispatch({
               type: getRemindersRejected,
               error: e.target.errorCode,
@@ -413,17 +450,17 @@ const getRemindersInterval = (dispatch: Dispatch<Action>): void => {
 
 // TODO document this
 export const getReminders = () => (dispatch: Dispatch<Action>): void => {
+  getRemindersInterval(dispatch)
+
+  const intervalID = setInterval(() => {
     getRemindersInterval(dispatch)
+  }, 5 * 1000)
 
-    const intervalID = setInterval(() => {
-      getRemindersInterval(dispatch)
-    }, 5 * 1000)
-
-    dispatch({
-      type: updateReminderIntervalID,
-      intervalID,
-    })
-  }
+  dispatch({
+    type: updateReminderIntervalID,
+    intervalID,
+  })
+}
 
 export const addReminder = (
   machineID: number,
@@ -431,65 +468,69 @@ export const addReminder = (
   machineType: string,
   timeRemaining: number
 ) => (dispatch: Dispatch<Action>): void => {
-    try {
-      navigator.serviceWorker.ready.then(async registration => {
-        // get public vapid key
-        const resp = await axios.get('/api/getPublicVapidKey')
-        const { publicKey: publicVapidKey } = resp.data
+  try {
+    navigator.serviceWorker.ready.then(async registration => {
+      // get public vapid key
+      const resp = await axios.get('/api/getPublicVapidKey')
+      const { publicKey: publicVapidKey } = resp.data
 
-        const subscription = await registration.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
-        })
-
-        const remindersString = localStorage.getItem('laundry_reminders')
-        if (!remindersString) {return}
-
-        const reminders = JSON.parse(remindersString)
-        const reminderID = uuidv4()
-        reminders.push({ machineID, hallID, reminderID })
-        dispatch({
-          type: updateReminders,
-          reminders,
-        })
-        localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
-        axios.post('/api/laundry/reminder/add', {
-          subscription,
-          machineID,
-          hallID,
-          machineType,
-          timeRemaining,
-          reminderID,
-        })
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
       })
-    } catch (err) {
+
+      const remindersString = localStorage.getItem('laundry_reminders')
+      if (!remindersString) {
+        return
+      }
+
+      const reminders = JSON.parse(remindersString)
+      const reminderID = uuidv4()
+      reminders.push({ machineID, hallID, reminderID })
       dispatch({
-        type: getRemindersRejected,
-        error: 'Error: fail to set reminder',
+        type: updateReminders,
+        reminders,
       })
-    }
+      localStorage.setItem('laundry_reminders', JSON.stringify(reminders))
+      axios.post('/api/laundry/reminder/add', {
+        subscription,
+        machineID,
+        hallID,
+        machineType,
+        timeRemaining,
+        reminderID,
+      })
+    })
+  } catch (err) {
+    dispatch({
+      type: getRemindersRejected,
+      error: 'Error: fail to set reminder',
+    })
   }
+}
 
 export const removeReminder = () => (dispatch: Dispatch<Action>): void => {
-    try {
-      navigator.serviceWorker.ready
-        .then(registration => registration.pushManager.getSubscription())
-        .then(subscription => {
-          if (!subscription) {return}
-          subscription.unsubscribe().then(successful => {
-            if (successful) {
-              dispatch({
-                type: updateReminders,
-                reminders: [],
-              })
-              localStorage.setItem('laundry_reminders', JSON.stringify([]))
-            }
-          })
+  try {
+    navigator.serviceWorker.ready
+      .then(registration => registration.pushManager.getSubscription())
+      .then(subscription => {
+        if (!subscription) {
+          return
+        }
+        subscription.unsubscribe().then(successful => {
+          if (successful) {
+            dispatch({
+              type: updateReminders,
+              reminders: [],
+            })
+            localStorage.setItem('laundry_reminders', JSON.stringify([]))
+          }
         })
-    } catch (err) {
-      dispatch({
-        type: getRemindersRejected,
-        error: 'Error: fail to remove reminder',
       })
-    }
+  } catch (err) {
+    dispatch({
+      type: getRemindersRejected,
+      error: 'Error: fail to remove reminder',
+    })
   }
+}
