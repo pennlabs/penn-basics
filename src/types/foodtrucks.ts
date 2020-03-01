@@ -13,9 +13,9 @@ interface IFoodTruckMenu {
   items: IFoodTruckMenuItem[]
 }
 
-interface ReviewVote {
+export interface ReviewVote {
   pennid: number
-  isUpvote: true
+  isUpvote: boolean
 }
 
 export interface IFoodTruckUserReview {

@@ -11,6 +11,7 @@ import {
   IFoodTruckDocument,
   IFoodTruckUserReviewDocument,
   IFoodTruck,
+  ReviewVote,
 } from '../../types/foodtrucks'
 import { ISpace } from '../../types/studyspaces'
 import FoodTruckReview from './models/FoodTruckReview'
@@ -108,7 +109,7 @@ export const updateFoodtruckReviewScore = async (
   if (!data) {
     return Promise.reject('The review does not exist')
   }
-  const votes = data.votes.map(userVote => {
+  const votes: ReviewVote[] = data.votes.map(userVote => {
     if (userVote.pennid === voterId) {
       return userVote
     }
@@ -137,6 +138,35 @@ export const downvoteFoodtruckReview = (
   voterId: number
 ): Promise<IFoodTruckUserReviewDocument> =>
   updateFoodtruckReviewScore(foodtruckID, reviewerId, voterId, false)
+
+export const removeFoodTruckReviewScore = async (
+  foodtruckID: string,
+  reviewerId: number,
+  voterId: number
+): Promise<IFoodTruckUserReviewDocument> => {
+  const data = (await FoodTruckReview.findOne({
+    foodtruckID,
+    pennid: reviewerId,
+  })) as IFoodTruckUserReviewDocument | null
+  if (!data) {
+    return Promise.reject('The review does not exist')
+  }
+  const votes: ReviewVote[] = data.votes.filter(
+    userVote => userVote.pennid !== voterId
+  )
+
+  if (data.votes.length === votes.length) {
+    return Promise.reject('This user has not voted on this requested review')
+  }
+
+  return FoodTruckReview.findOneAndUpdate(
+    {
+      foodtruckID,
+      pennid: reviewerId,
+    },
+    { votes }
+  ).exec() as Promise<IFoodTruckUserReviewDocument>
+}
 
 export const findAllSpaces = (): Query<Document[]> => Space.find()
 
