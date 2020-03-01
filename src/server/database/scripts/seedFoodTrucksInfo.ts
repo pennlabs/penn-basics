@@ -4,6 +4,7 @@ import {
   IFoodTruckRaw,
   PriceType,
   OperatingHoursFormat,
+  IFoodTruckDocument,
 } from '../../../types/foodtrucks'
 
 const { MONGO_URI } = process.env
@@ -12,7 +13,7 @@ if (!MONGO_URI) {
   console.log('Missing MONGO_URI')
   process.exit(1)
 }
-console.log(trucks)
+
 const deleteFoodTrucksInDB = (): Promise<void> =>
   FoodTruck.find()
     .remove()
@@ -119,9 +120,10 @@ const updateFoodTrucksInDB = (truckArray: IFoodTruckRaw[]): Promise<void> =>
         if (oldTruckData !== null) {
           // update old truck
 
-          console.log(`Updating ${oldTruckData.get(name)}`)
+          const oldTruckDataRef = oldTruckData as IFoodTruckDocument
+          console.log(`Updating ${oldTruckDataRef.name}`)
           return FoodTruck.findOneAndUpdate(
-            { name: oldTruckData.get(name) },
+            { name: oldTruckDataRef.name },
             {
               $set: {
                 description: truck.description,
