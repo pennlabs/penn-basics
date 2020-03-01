@@ -40,7 +40,9 @@ interface IFoodtruckCardOwnProps {
   image: string
 }
 
-type IFoodtruckCardProps = IFoodtruckCardOwnProps & IFoodtruckCardStateProps & IFoodtruckCardDispatchProps
+type IFoodtruckCardProps = IFoodtruckCardOwnProps &
+  IFoodtruckCardStateProps &
+  IFoodtruckCardDispatchProps
 
 const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   hoveredFoodtruck,
@@ -50,11 +52,13 @@ const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   open,
   hours,
   overallRating,
-  image
+  image,
 }) => {
   const handleMouseEnter = (): void => {
     // If there is no change to be made
-    if (hoveredFoodtruck && hoveredFoodtruck === foodtruckId) {return}
+    if (hoveredFoodtruck && hoveredFoodtruck === foodtruckId) {
+      return
+    }
 
     dispatchSetHoveredFoodtruck(foodtruckId)
   }
@@ -80,20 +84,21 @@ const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
                 <Subtext marginBottom="0">
                   {open
                     ? ` Open: ${hours}`
+                    : String(hours).includes('null') ||
+                      String(hours).includes('NaN')
+                    ? 'Closed today'
                     : ` Closed • Opens at ${hours.substring(
                         0,
                         hours.indexOf('am')
                       )}am`}
-                  {` • ${
-                    (Math.round(overallRating * 100) / 100).toFixed(2)}`}
+                  {` • ${(Math.round(overallRating * 100) / 100).toFixed(2)}`}
                   &nbsp;
                   <StarIcon
                     style={{
-                      transform:
-                        'scale(0.7) translateY(10px) translateX(-3px)',
+                      transform: 'scale(0.7) translateY(10px) translateX(-3px)',
                       color: 'black',
                       fill: 'black',
-                      opacity: '0.5'
+                      opacity: '0.5',
                     }}
                   />
                   {/* {outletsLevel ? ` • ${outletsLevel}` : ''}
@@ -110,12 +115,18 @@ const FoodtruckCard: React.FC<IFoodtruckCardProps> = ({
   )
 }
 
-const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }): IFoodtruckCardStateProps => {
+const mapStateToProps = ({
+  foodtrucks,
+}: {
+  foodtrucks: IFoodTrucksReducerState
+}): IFoodtruckCardStateProps => {
   const { hoveredFoodtruck } = foodtrucks
   return { hoveredFoodtruck }
 }
 
-const mapDispatchToProps = (dispatch: (action: any) => any): IFoodtruckCardDispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: (action: any) => any
+): IFoodtruckCardDispatchProps => ({
   dispatchSetHoveredFoodtruck: (foodtruckId: string): void =>
     dispatch(setHoveredFoodtruck(foodtruckId)),
 })
