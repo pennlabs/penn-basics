@@ -26,10 +26,11 @@ interface IMapWrapper {
 const MapWrapper = styled.div<IMapWrapper>`
   width: 100%;
   flex: 1;
-  height: ${({ height }) => height || '100vh'};
+  height: ${({ height }): string => height ?? '100vh'};
 
   ${maxWidth(PHONE)} {
-    height: ${({ mobileHeight, height }) => mobileHeight || height || '100vh'};
+    height: ${({ mobileHeight, height }): string =>
+      mobileHeight ?? height ?? '100vh'};
   }
 `
 
@@ -72,11 +73,11 @@ export class FoodtruckMap extends Component<
     this.updateMarkers = this.updateMarkers.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.waitForGoogle()
   }
 
-  componentDidUpdate(prevProps: IFoodTruckMapProps) {
+  componentDidUpdate(prevProps: IFoodTruckMapProps): void {
     // Check if the active marker changes
     const { location } = this.props
     if (prevProps.location !== location) {
@@ -103,8 +104,8 @@ export class FoodtruckMap extends Component<
     }
   }
 
-  updateMarkers() {
-    return new Promise(resolve => {
+  updateMarkers = (): Promise<any> =>
+    new Promise(resolve => {
       const { markers: dataMarkers = {} } = this.props // curr markers
       const { markers: mapMarkers = {} } = this.state // old markers
 
@@ -141,18 +142,22 @@ export class FoodtruckMap extends Component<
         }
       )
     })
-  }
 
-  updateMarker(key: TMarkerId, { icon = RED }) {
+  updateMarker(key: TMarkerId, { icon = RED }): void {
     const { markers } = this.state
     const marker = markers[key]
 
-    if (!marker) {return}
+    if (!marker) {
+      return
+    }
 
     marker.setIcon({ url: icon, scaledSize: new google.maps.Size(20, 34) })
   }
 
-  createMarker(key: TMarkerId, { location }: { location?: ILocation }) {
+  createMarker = (
+    key: TMarkerId,
+    { location }: { location?: ILocation }
+  ): google.maps.Marker | null => {
     const { handleClickMarker } = this.props
 
     if (!location) {
@@ -190,7 +195,7 @@ export class FoodtruckMap extends Component<
     return marker
   }
 
-  initMap() {
+  initMap(): void {
     const {
       location,
       mapId = 'map',
@@ -238,7 +243,7 @@ export class FoodtruckMap extends Component<
     )
   }
 
-  waitForGoogle() {
+  waitForGoogle = (): void => {
     if (typeof google !== 'undefined') {
       this.initMap()
     } else {

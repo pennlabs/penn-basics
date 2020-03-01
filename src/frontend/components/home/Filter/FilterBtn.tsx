@@ -36,12 +36,12 @@ class FilterBtn extends Component<IFilterBtnProps> {
     this.renderModal = this.renderModal.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { initialize, options } = this.props
     initialize(options.length)
   }
 
-  componentDidUpdate(prevProps: IFilterBtnProps) {
+  componentDidUpdate(prevProps: IFilterBtnProps): void {
     const { active } = this.props
 
     // If we are showing the modal, focus on it
@@ -53,7 +53,7 @@ class FilterBtn extends Component<IFilterBtnProps> {
     }
   }
 
-  handleKeyPress(event: React.KeyboardEvent) {
+  handleKeyPress = (event: React.KeyboardEvent): void => {
     const ESCAPE_KEY_CODE = 27
     const { active } = this.props
 
@@ -68,7 +68,7 @@ class FilterBtn extends Component<IFilterBtnProps> {
     }
   }
 
-  handleOptionKeyPress(event: React.KeyboardEvent, idx: number) {
+  handleOptionKeyPress = (event: React.KeyboardEvent, idx: number): void => {
     const SPACE_KEY_CODE = 32
     const { onClickOption } = this.props
 
@@ -77,17 +77,17 @@ class FilterBtn extends Component<IFilterBtnProps> {
     }
   }
 
-  areOptions() {
+  areOptions = (): boolean => {
     const { options } = this.props
     return Boolean(options && options.length)
   }
 
-  areActiveOptions() {
+  areActiveOptions = (): boolean => {
     const { activeOptions, options } = this.props
     return Boolean(activeOptions && activeOptions.length < options.length)
   }
 
-  renderModal() {
+  renderModal = (): JSX.Element | null => {
     const {
       onClick,
       onClickOption,
@@ -96,7 +96,9 @@ class FilterBtn extends Component<IFilterBtnProps> {
       activeOptions = [],
     } = this.props
 
-    if (!this.areOptions() || !active) {return null}
+    if (!this.areOptions() || !active) {
+      return null
+    }
     const { offsetLeft } = this.focusRef.current || {}
 
     return (

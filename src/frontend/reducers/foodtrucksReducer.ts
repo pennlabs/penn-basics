@@ -4,7 +4,7 @@ import {
   TFoodTruckId,
   IFoodTruckWithOpen,
   IFoodTrucksReducerState,
-  IFormattedFoodtruck
+  IFormattedFoodtruck,
 } from '../../types/foodtrucks'
 import {
   getFoodtrucksDataRequested,
@@ -28,8 +28,8 @@ interface ILocation {
 interface IFoodTruckInfo {
   location: ILocation
   payments: null | string
-  start: string|null[]
-  end: string|null[]
+  start: string | null[]
+  end: string | null[]
   _id: string
   name: string
 }
@@ -64,7 +64,7 @@ const defaultFoodtruckInfo: IFormattedFoodtruck = {
   reviews: [],
   timeUpdated: '',
   open: false,
-  hours: ''
+  hours: '',
 }
 
 const defaultState: IFoodTrucksReducerState = {
@@ -97,10 +97,12 @@ const filterFoodtrucks = (
   filterOpen?: boolean,
   filterString?: string
 ): Record<TFoodTruckId, IFoodTruck> => {
-  if (!foodtrucksData) {return {}}
+  if (!foodtrucksData) {
+    return {}
+  }
   if (!filterOpen && !filterString) {
-    const filteredFoodtrucksData = Object.assign({}, foodtrucksData)
-    return filteredFoodtrucksData
+    const foodtrucksDataCopy = Object.assign({}, foodtrucksData)
+    return foodtrucksDataCopy
   }
 
   const filteredFoodtrucksData: Record<string, IFoodTruck> = {}
@@ -127,7 +129,10 @@ const filterFoodtrucks = (
   return filteredFoodtrucksData
 }
 
-const foodtrucksReducer = (state = defaultState, action: IFoodTrucksAction) => {
+const foodtrucksReducer = (
+  state = defaultState,
+  action: IFoodTrucksAction
+): any => {
   switch (action.type) {
     case getFoodtrucksDataRequested:
       return {

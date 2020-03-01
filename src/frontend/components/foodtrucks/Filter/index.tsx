@@ -130,7 +130,6 @@ interface IFilterProps {
 
   filterOpen?: boolean
 
-
   filterOpenActive?: boolean
   filterString?: string
 }
@@ -148,7 +147,7 @@ class Filter extends Component<IFilterProps> {
    * NOTE there is no parameter as this is a binary filter: either show all
    * studyspaces or only show spaces which are open
    */
-  handleClickOpen() {
+  handleClickOpen = (): void => {
     const {
       dispatchFilterFoodtrucksOpen,
       filterOpen,
@@ -164,12 +163,12 @@ class Filter extends Component<IFilterProps> {
    * @param {string} filterString input from user
    */
 
-  handleInputString(filterString: string) {
+  handleInputString = (filterString: string): void => {
     const { dispatchFilterFoodtrucksString } = this.props
     dispatchFilterFoodtrucksString(filterString)
   }
 
-  render() {
+  render(): JSX.Element {
     const {
       dispatchClearFoodtrucksFilter,
       filterOpenActive,
@@ -206,15 +205,19 @@ class Filter extends Component<IFilterProps> {
   }
 }
 
-const mapStateToProps = ({ foodtrucks }: { foodtrucks: IFoodTrucksReducerState }) => foodtrucks
+const mapStateToProps = ({
+  foodtrucks,
+}: {
+  foodtrucks: IFoodTrucksReducerState
+}): IFoodTrucksReducerState => foodtrucks
 
-const mapDispatchToProps = (dispatch: any) => ({
-  dispatchFilterFoodtrucksString: (filterString: string) =>
+const mapDispatchToProps = (dispatch: any): any => ({
+  dispatchFilterFoodtrucksString: (filterString: string): any =>
     dispatch(filterFoodtrucksString(filterString)),
-  dispatchFilterFoodtrucksOpen: (filter: boolean) =>
+  dispatchFilterFoodtrucksOpen: (filter: boolean): void =>
     dispatch(filterFoodtrucksOpen(filter)),
-  dispatchToggleFoodtrucksOpen: () => dispatch(toggleFoodtrucksOpen()),
-  dispatchClearFoodtrucksFilter: () => dispatch(clearFoodtrucksFilter()),
+  dispatchToggleFoodtrucksOpen: (): void => dispatch(toggleFoodtrucksOpen()),
+  dispatchClearFoodtrucksFilter: (): void => dispatch(clearFoodtrucksFilter()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
