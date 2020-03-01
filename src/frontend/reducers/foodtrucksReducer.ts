@@ -39,7 +39,7 @@ type IFoodTrucksAction = {
   error?: string
   footruckId?: TFoodTruckId
   filterString?: string
-  filter?: boolean
+  filter?: boolean| string
   foodtruckInfo?: IFoodTruckInfo
 } & Action
 
@@ -95,7 +95,7 @@ const defaultState: IFoodTrucksReducerState = {
 const filterFoodtrucks = (
   foodtrucksData: Record<TFoodTruckId, IFoodTruckWithOpen> | undefined,
   filterOpen?: boolean,
-  filterString?: string
+  filterString?: string | boolean
 ): Record<TFoodTruckId, IFoodTruck> => {
   if (!foodtrucksData) {return {}}
   if (!filterOpen && !filterString) {
@@ -113,6 +113,7 @@ const filterFoodtrucks = (
   }
 
   if (filterString) {
+    console.log('filtering')
     filteredFoodtrucksIDs = filteredFoodtrucksIDs.filter(id =>
       foodtrucksData[id].name
         .toLowerCase()
@@ -170,13 +171,15 @@ const foodtrucksReducer = (state = defaultState, action: IFoodTrucksAction) => {
         infoError: action.error,
       }
     case filterFoodtrucksStringRequested:
+      console.log('fitler string')
+      console.log(action)
       return {
         ...state,
-        filterString: action.filterString,
+        filterString: action.filter,
         filteredFoodtrucksData: filterFoodtrucks(
           state.foodtrucksData,
           state.filterOpen,
-          action.filterString
+          action.filter
         ),
       }
     case filterFoodtrucksOpenRequested:

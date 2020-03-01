@@ -138,7 +138,7 @@ interface IFilterProps {
   }
   clearFilterOnClick: () => void
   anyFilterModalActive: boolean | undefined
-  toggleNeighborhoodParams: {
+  toggleNeighborhoodParams?: {
     filterOnCampus?: boolean
     filterOnCampusDispatch: (filter: boolean) => void
   }

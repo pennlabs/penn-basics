@@ -62,7 +62,7 @@ const Circle = s.div<IActiveProps>`
 interface IToggleNeighborhoodProps {
   filterOnCampus?: boolean
   style?: React.CSSProperties
-  filterOnCampusDispatch: (filter: boolean) => void
+  filterOnCampusDispatch?: (filter: boolean) => void
 }
 
 class ToggleNeighborhood extends React.Component<IToggleNeighborhoodProps, {}> {
@@ -74,7 +74,7 @@ class ToggleNeighborhood extends React.Component<IToggleNeighborhoodProps, {}> {
   handleClick(e: React.MouseEvent<HTMLDivElement | HTMLSpanElement>) {
     const { filterOnCampusDispatch, filterOnCampus } = this.props
     e.stopPropagation()
-    filterOnCampusDispatch(!filterOnCampus)
+    if (filterOnCampusDispatch) filterOnCampusDispatch(!filterOnCampus)
   }
 
   render() {
