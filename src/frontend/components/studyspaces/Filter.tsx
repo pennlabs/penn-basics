@@ -3,16 +3,13 @@ import { connect } from 'react-redux'
 
 import { ISpacesReducerState } from 'src/frontend/reducers/spacesReducer'
 import Filter from '../shared/filter'
-import { IFilterInputProps, IFilterButton } from '../../../types/filter'
+import { IFilterInputProps, IFilterButton, IToggleProps } from '../../../types/filter'
 
 // import Redux actions
 import {
   filterSpaces,
   clearSpacesFilters,
-  toggleSpacesOpen,
-  toggleSpacesOutlets,
-  toggleSpacesNoise,
-  toggleSpacesGroups,
+  toggleSpaces,
 } from '../../actions/spaces_actions'
 import {
   filterSpacesOpenRequested,
@@ -20,7 +17,11 @@ import {
   filterSpacesNoiseRequested,
   filterSpacesGroupsRequested,
   filterSpacesStringRequested,
-  filterOnCampusRequested
+  filterOnCampusRequested,
+  TOGGLE_FILTER_SPACES_OPEN,
+  TOGGLE_FILTER_SPACES_OUTLETS,
+  TOGGLE_FILTER_SPACES_NOISE,
+  TOGGLE_FILTER_SPACES_GROUPS
 } from '../../actions/action_types'
 
 
@@ -40,21 +41,14 @@ interface IFilterStateProps {
 interface IFilterDispatchProps {
   clearSpacesFiltersDispatch: () => void // Remove filters
   dispatchFilterSpaces: (inputParams: IFilterInputProps) => void
-  toggleSpacesOpenDispatch: () => void
-  toggleSpacesOutletsDispatch: () => void
-  toggleSpacesNoiseDispatch: () => void
-  toggleSpacesGroupsDispatch: () => void
+  dispatchToggleSpaces: (toggleParams: IToggleProps) => void
 }
 
 type IFilterProps = IFilterStateProps & IFilterDispatchProps
 
 const SpacesFilter: React.FC<IFilterProps> = ({
   dispatchFilterSpaces,
-
-  toggleSpacesOpenDispatch,
-  toggleSpacesOutletsDispatch,
-  toggleSpacesNoiseDispatch,
-  toggleSpacesGroupsDispatch,
+  dispatchToggleSpaces,
 
   clearSpacesFiltersDispatch,
 
@@ -74,7 +68,7 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     {
       text: 'Outlets',
       active: Boolean(filterOutletsActive),
-      onClick: toggleSpacesOutletsDispatch,
+      onClick: () => dispatchToggleSpaces({ toggleType: TOGGLE_FILTER_SPACES_OUTLETS }),
       options: ['No outlets', 'Few outlets', 'Many outlets'],
       onClickOption: (num: number) =>
         dispatchFilterSpaces({ filterKey: filterSpacesOutletsRequested, filterValue: num }),
@@ -82,7 +76,7 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     },
     {
       text: 'Noise level',
-      onClick: toggleSpacesNoiseDispatch,
+      onClick: () => dispatchToggleSpaces({ toggleType: TOGGLE_FILTER_SPACES_NOISE }),
       onClickOption: (num: number) =>
         dispatchFilterSpaces({ filterKey: filterSpacesNoiseRequested, filterValue: num }),
       options: ['Talkative', 'Quiet', 'Silent'],
@@ -91,7 +85,7 @@ const SpacesFilter: React.FC<IFilterProps> = ({
     },
     {
       text: 'Groups',
-      onClick: toggleSpacesGroupsDispatch,
+      onClick: () => dispatchToggleSpaces({ toggleType: TOGGLE_FILTER_SPACES_GROUPS }),
       onClickOption: (num: number) =>
         dispatchFilterSpaces({ filterKey: filterSpacesGroupsRequested, filterValue: num }),
       options: [
@@ -114,7 +108,7 @@ const SpacesFilter: React.FC<IFilterProps> = ({
   // input parameters for the FilterOpenButton
   const openButtonParams = {
     onClick: (): void => {
-      toggleSpacesOpenDispatch()
+      dispatchToggleSpaces({ toggleType: TOGGLE_FILTER_SPACES_OPEN })
       dispatchFilterSpaces({ filterKey: filterSpacesOpenRequested, filterValue: !filterOpen })
     },
     active: Boolean(filterOpenActive)
@@ -172,10 +166,7 @@ const mapDispatchToProps = (dispatch: any) => ({
   clearSpacesFiltersDispatch: (): void => dispatch(clearSpacesFilters()),
   dispatchFilterSpaces: (inputParams: IFilterInputProps): void =>
     dispatch(filterSpaces(inputParams)),
-  toggleSpacesOpenDispatch: (): void => dispatch(toggleSpacesOpen()),
-  toggleSpacesOutletsDispatch: (): void => dispatch(toggleSpacesOutlets()),
-  toggleSpacesNoiseDispatch: (): void => dispatch(toggleSpacesNoise()),
-  toggleSpacesGroupsDispatch: (): void => dispatch(toggleSpacesGroups()),
+  dispatchToggleSpaces: ({ toggleType }: IToggleProps): void => dispatch(toggleSpaces({ toggleType })),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpacesFilter)

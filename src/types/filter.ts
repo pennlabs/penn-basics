@@ -4,6 +4,10 @@ export interface IFilterInputProps {
   filterValue: boolean|string|number
 }
 
+export interface IToggleProps {
+  toggleType: string
+}
+
 export interface IFilterButton {
   text: string
   onClick: () => void
