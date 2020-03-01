@@ -7,6 +7,10 @@ import { initGA, logPageView } from '../src/utils/analytics'
 
 import { initStore } from '../src/utils/store'
 
+interface StoreProvider {
+  store: any
+}
+
 class PennBasicsApp extends App {
   static async getInitialProps({
     Component,
@@ -36,7 +40,8 @@ class PennBasicsApp extends App {
 
   render(): React.ReactElement {
     // TODO where does the store come from?
-    const { Component, pageProps, store } = this.props
+    const { Component, pageProps } = this.props
+    const store = ((this.props as Record<string, any>) as StoreProvider).store
     return (
       <Provider store={store}>
         <Component {...pageProps} />
