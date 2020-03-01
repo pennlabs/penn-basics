@@ -14,14 +14,16 @@ const defaultState: IAuthReducerState = {
     last_name: '',
     displayName: '',
     loggedIn: false,
-    fullName: ''
-  }
+    fullName: '',
+  },
 }
 
 const authReducer = (
   state = defaultState,
   action: IAuthAction
-) => {
+): {
+  userInfo: IUser | undefined
+} => {
   switch (action.type) {
     case getUserInfoFulfilled:
       return {

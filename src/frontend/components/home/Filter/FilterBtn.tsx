@@ -106,7 +106,7 @@ class FilterBtn extends Component<IFilterBtnProps> {
         <OptionsModalBacking onClick={onClick} />
 
         <OptionsModalWrapper
-          onClick={e => e.stopPropagation()}
+          onClick={(e): any => e.stopPropagation()}
           left={offsetLeft}
         >
           {options.map((o, idx) => {
@@ -117,11 +117,11 @@ class FilterBtn extends Component<IFilterBtnProps> {
             return (
               <Option
                 key={o}
-                onClick={() => onClickOption(idx)}
+                onClick={(): void => onClickOption(idx)}
                 role="option"
                 tabIndex={0}
                 aria-selected={isActiveOption}
-                onKeyPress={e => this.handleOptionKeyPress(e, idx)}
+                onKeyPress={(e): void => this.handleOptionKeyPress(e, idx)}
               >
                 <Circle active={isActiveOption} />
                 <OptionText>{o}</OptionText>
@@ -133,7 +133,7 @@ class FilterBtn extends Component<IFilterBtnProps> {
     )
   }
 
-  render() {
+  render(): JSX.Element {
     const { text, onClick, options, active, activeOptions = [] } = this.props
 
     const areOptions = options && options.length

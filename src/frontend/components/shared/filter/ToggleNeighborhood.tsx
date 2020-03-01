@@ -113,8 +113,12 @@ const mapStateToProps = ({
 }): ISpacesReducerState => spaces
 
 // TODO
-const mapDispatchToProps = (dispatch: any) => ({
-  filterOnCampusDispatch: (filter: boolean) =>
+const mapDispatchToProps = (
+  dispatch: any
+): {
+  filterOnCampusDispatch: (filter: boolean) => any
+} => ({
+  filterOnCampusDispatch: (filter: boolean): any =>
     dispatch(setFilterOnCampus(filter)),
 })
 

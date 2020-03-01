@@ -8,7 +8,15 @@ import { initGA, logPageView } from '../src/utils/analytics'
 import { initStore } from '../src/utils/store'
 
 class PennBasicsApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({
+    Component,
+    ctx,
+  }: {
+    Component: any
+    ctx: any
+  }): Promise<{
+    pageProps: any
+  }> {
     return {
       pageProps: Component.getInitialProps
         ? await Component.getInitialProps(ctx)

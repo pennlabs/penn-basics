@@ -22,7 +22,7 @@ import {
   IFavorite,
   ILaundryReducerState,
   IFavoriteHome,
-  IReminder
+  IReminder,
 } from '../../types/laundry'
 
 const defaultState: ILaundryReducerState = {
@@ -40,16 +40,16 @@ const defaultState: ILaundryReducerState = {
         open: -1,
         out_of_order: -1,
         running: -1,
-        time_remaining: []
+        time_remaining: [],
       },
       washers: {
         offline: -1,
         open: -1,
         out_of_order: -1,
         running: -1,
-        time_remaining: []
-      }
-    }
+        time_remaining: [],
+      },
+    },
   },
   favorites: [],
   favoritesHome: [],
@@ -68,7 +68,7 @@ type ILaundryAction = {
   reminders?: IReminder[]
 } & Action
 
-const laundryReducer = (state = defaultState, action: ILaundryAction) => {
+const laundryReducer = (state = defaultState, action: ILaundryAction): any => {
   switch (action.type) {
     case getLaundryHallsDataRequested:
       return {

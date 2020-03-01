@@ -33,7 +33,9 @@ interface IIdData {
   halls: ILaundryHallGeneralInfo[]
 }
 
-const processLaundryHallsData = (idData: IIdData) => {
+const processLaundryHallsData = (
+  idData: IIdData
+): (IIdData & { location?: string })[] => {
   const groupByLocation = _.groupBy(idData.halls, obj => obj.location)
   return Object.keys(groupByLocation).map(locationName => ({
     location: locationName,

@@ -50,7 +50,7 @@ const FilterWrapper = s.div<IFilterWrapperProps>`
 
   ${maxWidth(PHONE)} {
     overflow-x: -moz-scrollbars-none;
-    ${({ active }) => active && `height: calc(100vh - ${NAV_HEIGHT});`}
+    ${({ active }): any => active && `height: calc(100vh - ${NAV_HEIGHT});`}
 
     // Scroll horizontally but hide the scrollbar from view
     overflow-x: scroll;

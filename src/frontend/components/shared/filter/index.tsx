@@ -350,7 +350,20 @@ const mapStateToProps = ({
   spaces: ISpacesReducerState
 }): ISpacesReducerState => spaces
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (
+  dispatch: any
+): {
+  clearSpacesFiltersDispatch: () => void
+  filterSpacesOpenDispatch: (filter: boolean) => void
+  filterSpacesOutletsDispatch: (filters: number) => void
+  filterSpacesNoiseDispatch: (filters: number) => void
+  filterSpacesGroupsDispatch: (filters: number) => void
+  filterSpacesStringDispatch: (filterString: string) => void
+  toggleSpacesOpenDispatch: () => void
+  toggleSpacesOutletsDispatch: () => void
+  toggleSpacesNoiseDispatch: () => void
+  toggleSpacesGroupsDispatch: () => void
+} => ({
   clearSpacesFiltersDispatch: (): void => dispatch(clearSpacesFilters()),
 
   filterSpacesOpenDispatch: (filter: boolean): void =>

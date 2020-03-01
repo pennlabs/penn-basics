@@ -42,7 +42,13 @@ const mapStateToProps = ({
   home: IHomeReducerState
 }): IHomeReducerState => home
 
-const mapDispatchToProps = (dispatch: (action: any) => any) => ({
+const mapDispatchToProps = (
+  dispatch: (action: any) => any
+): {
+  dispatchFilterHomeCustomize: (filter: number) => void
+  dispatchToggleHomeCustomize: () => void
+  dispatchInitializeFilterHome: (optionsLength: number) => void
+} => ({
   dispatchFilterHomeCustomize: (filter: number): void =>
     dispatch(filterHomeCustomize(filter)),
   dispatchToggleHomeCustomize: (): void => dispatch(toggleHomeCustomize()),

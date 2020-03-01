@@ -21,7 +21,15 @@ type IDiningAction = {
   favorites?: IFavorite[]
 } & Action
 
-const diningReducer = (state = defaultState, action: IDiningAction) => {
+const diningReducer = (
+  state = defaultState,
+  action: IDiningAction
+): {
+  favorites?: IFavorite[]
+  venueHoursPending?: boolean
+  error?: string
+  venueHours?: {} | TVenueHours
+} => {
   switch (action.type) {
     case getVenueInfoRequested:
       return {
