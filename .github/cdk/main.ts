@@ -1,4 +1,3 @@
-// import dedent from 'ts-dedent';
 import { Construct } from "constructs";
 import { App, Stack, Workflow } from "cdkactions";
 import { DeployJob, DockerPublishJob } from "@pennlabs/kraken";
