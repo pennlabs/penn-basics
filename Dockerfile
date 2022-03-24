@@ -1,6 +1,6 @@
 FROM node:10-buster
 
-MAINTAINER Penn Labs
+LABEL maintainer="Penn Labs"
 
 WORKDIR /app/
 
