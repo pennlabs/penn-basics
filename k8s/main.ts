@@ -21,9 +21,5 @@ export class MyChart extends PennLabsChart {
 }
 
 const app = new App();
-
-process.env.RELEASE_NAME = "penn-basics"; // todo remove
-process.env.GIT_SHA = "c257c5b875c179dbf108f85779c379830a2fc2a8"; // todo remove
-
-new MyChart(app, 'penn-basics');
+new MyChart(app, process.env.RELEASE_NAME ?? 'penn-basics');
 app.synth();
