@@ -41,6 +41,7 @@ jobs:
 
           # get repo name (by removing owner/organization)
           RELEASE_NAME=${REPOSITORY#*/}
+          export RELEASE_NAME
 
           # Export RELEASE_NAME as an output
           echo "::set-output name=RELEASE_NAME::$RELEASE_NAME"
