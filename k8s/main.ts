@@ -3,8 +3,8 @@ import { PennLabsChart, ReactApplication } from '@pennlabs/kittyhawk';
 import { App } from 'cdk8s';
 
 export class MyChart extends PennLabsChart {
-  constructor(scope: Construct, id: string) {
-    super(scope, id);
+  constructor(scope: Construct) {
+    super(scope);
 
     const image = 'pennlabs/penn-basics';
     const secret = 'penn-basics';
@@ -21,5 +21,5 @@ export class MyChart extends PennLabsChart {
 }
 
 const app = new App();
-new MyChart(app, 'abc');
+new MyChart(app);
 app.synth();
