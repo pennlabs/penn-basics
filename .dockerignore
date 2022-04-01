@@ -12,3 +12,6 @@ Dockerfile
 .gitignore
 .gitmodules
 **/*.md
+
+# kube
+k8s
