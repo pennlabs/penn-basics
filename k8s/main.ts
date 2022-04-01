@@ -21,5 +21,5 @@ export class MyChart extends PennLabsChart {
 }
 
 const app = new App();
-new MyChart(app, process.env.RELEASE_NAME ?? 'penn-basics');
+new MyChart(app, 'abc');
 app.synth();
