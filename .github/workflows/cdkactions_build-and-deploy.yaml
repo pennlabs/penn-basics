@@ -51,6 +51,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       - name: Deploy
+        if: steps.synth.outcome == 'success'
         run: |-
           aws eks --region us-east-1 update-kubeconfig --name production --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/kubectl
 
@@ -77,6 +78,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: synth
         name: Synth cdk8s manifests
+        if: steps.pr.outputs.pull_request_number
         run: |-
           cd k8s
           yarn install --frozen-lockfile
@@ -94,6 +96,7 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       - name: Deploy
+        if: steps.synth.outcome == 'success'
         run: |-
           aws eks --region us-east-1 update-kubeconfig --name production --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/kubectl
 
