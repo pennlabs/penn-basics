@@ -5,7 +5,7 @@ on: push
 jobs:
   react:
     name: React
-    uses: pennlabs/shared-actions/.github/workflows/react.yml@main
+    uses: pennlabs/shared-actions/.github/workflows/react.yaml@main
     with:
       projectName: penn-basics
       imageName: pennlabs/penn-basics
@@ -15,7 +15,7 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   deployment:
     name: Deploy
-    uses: pennlabs/shared-actions/.github/workflows/deployment.yml@main
+    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@main
     secrets:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       GH_AWS_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
