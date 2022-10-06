@@ -3,65 +3,22 @@
 name: Build and Deploy
 on: push
 jobs:
-  publish-publish:
-    name: Publish publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-      - name: Cache Docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: buildx-publish-publish
-      - uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build/Publish
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: ${{ github.ref == 'refs/heads/master' }}
-          cache-from: type=local,src=/tmp/.buildx-cache,type=registry,ref=pennlabs/penn-basics:latest
-          cache-to: type=local,dest=/tmp/.buildx-cache
-          tags: pennlabs/penn-basics:latest,pennlabs/penn-basics:${{ github.sha }}
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v2
-      - id: synth
-        name: Synth cdk8s manifests
-        run: |-
-          cd k8s
-          yarn install --frozen-lockfile
-
-          # get repo name (by removing owner/organization)
-          export RELEASE_NAME=${REPOSITORY#*/}
-
-          # Export RELEASE_NAME as an output
-          echo "::set-output name=RELEASE_NAME::$RELEASE_NAME"
-
-          yarn build
-        env:
-          GIT_SHA: ${{ github.sha }}
-          REPOSITORY: ${{ github.repository }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      - name: Deploy
-        run: |-
-          aws eks --region us-east-1 update-kubeconfig --name production --role-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/kubectl
-
-          # get repo name from synth step
-          RELEASE_NAME=${{ steps.synth.outputs.RELEASE_NAME }}
-
-          # Deploy
-          kubectl apply -f k8s/dist/ -l app.kubernetes.io/component=certificate
-          kubectl apply -f k8s/dist/ --prune -l app.kubernetes.io/part-of=$RELEASE_NAME
-        env:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.GH_AWS_SECRET_ACCESS_KEY }}
-    needs: publish-publish
+  react:
+    name: React
+    uses: pennlabs/shared-actions/.github/workflows/react.yml@main
+    with:
+      projectName: penn-basics
+      imageName: pennlabs/penn-basics
+      path: frontend
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  deployment:
+    name: Deploy
+    uses: pennlabs/shared-actions/.github/workflows/deployment.yml@main
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      GH_AWS_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
+      GH_AWS_SECRET_ACCESS_KEY: ${{ secrets.GH_AWS_SECRET_ACCESS_KEY }}
+    needs:
+      - react
