@@ -5,7 +5,7 @@ jobs:
     name: React
     uses: pennlabs/shared-actions/.github/workflows/react.yaml@main
     with:
-      imageName: pennlabs/penn-basics
+      imageName: penn-basics
       path: .
       githubRef: ${{ github.ref }}
       skipReactCheck: true
