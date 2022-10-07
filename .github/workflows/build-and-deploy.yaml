@@ -9,6 +9,7 @@ jobs:
     with:
       projectName: penn-basics
       imageName: pennlabs/penn-basics
+      skipReactCheck: true
       path: .
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
