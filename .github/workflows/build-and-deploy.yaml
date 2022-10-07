@@ -9,14 +9,16 @@ jobs:
     with:
       projectName: penn-basics
       imageName: pennlabs/penn-basics
-      skipReactCheck: true
       path: .
+      githubRef: ${{ github.ref }}
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   deployment:
     name: Deploy
     uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@main
+    with:
+      githubRef: ${{ github.ref }}
     secrets:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       GH_AWS_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
