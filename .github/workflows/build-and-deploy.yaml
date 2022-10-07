@@ -7,7 +7,6 @@ jobs:
     name: React
     uses: pennlabs/shared-actions/.github/workflows/react.yaml@main
     with:
-      projectName: penn-basics
       imageName: pennlabs/penn-basics
       path: .
       githubRef: ${{ github.ref }}
