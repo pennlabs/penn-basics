@@ -10,6 +10,7 @@ jobs:
       imageName: pennlabs/penn-basics
       path: .
       githubRef: ${{ github.ref }}
+      skipReactCheck: true
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
