@@ -4,6 +4,7 @@ on: push
 
 jobs:
   frontend-check:
+    if: false
     name: "Frontend Check"
     uses: pennlabs/shared-actions/.github/workflows/react-check.yaml@v0.1.1g
     with:
