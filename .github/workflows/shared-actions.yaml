@@ -32,7 +32,7 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     
-    needs: frontend-check
+    # needs: frontend-check
 
   deploy:
     name: "Deploy"
