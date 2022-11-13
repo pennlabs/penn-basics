@@ -7,7 +7,7 @@ jobs:
     name: "Frontend Check"
     uses: pennlabs/shared-actions/.github/workflows/react-check.yaml@v0.1.1g
     with:
-      projectName: ocwp
+      projectName: "penn-basics"
       path: .
       flake: true
       black: true
@@ -15,7 +15,7 @@ jobs:
   publish:
     uses: pennlabs/shared-actions/.github/workflows/docker-publish.yaml@v0.1.1g
     with:
-      imageName: "ocwp"
+      imageName: "penn-basics"
       githubRef: ${{ github.ref }}
       gitSha: ${{ github.sha }}
 
