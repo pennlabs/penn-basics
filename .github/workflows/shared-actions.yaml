@@ -1,4 +1,4 @@
-name: validate-and-docker-push
+name: Test, Build, and Deploy
 
 on: push
 
