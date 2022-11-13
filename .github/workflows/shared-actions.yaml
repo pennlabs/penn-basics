@@ -6,12 +6,12 @@ jobs:
   frontend-check:
     if: false
     name: "Frontend Check"
-    uses: pennlabs/shared-actions/.github/workflows/react-check.yaml@v0.1.1h
+    uses: pennlabs/shared-actions/.github/workflows/react-check.yaml@v0.1.1i
     with:
       path: .
   
   publish:
-    uses: pennlabs/shared-actions/.github/workflows/docker-publish.yaml@v0.1.1h
+    uses: pennlabs/shared-actions/.github/workflows/docker-publish.yaml@v0.1.1i
     with:
       # Inputs
       imageName: "penn-basics"
@@ -37,7 +37,7 @@ jobs:
 
   deploy:
     name: "Deploy"
-    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@v0.1.1h
+    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@v0.1.1i
 
     with:
       githubRef: ${{ github.ref }}
