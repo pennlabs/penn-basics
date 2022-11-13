@@ -1,0 +1,52 @@
+name: validate-and-docker-push
+
+on: push
+
+jobs:
+  frontend-check:
+    name: "Frontend Check"
+    uses: pennlabs/shared-actions/.github/workflows/react-check.yaml@v0.1.1g
+    with:
+      projectName: ocwp
+      path: .
+      flake: true
+      black: true
+  
+  publish:
+    uses: pennlabs/shared-actions/.github/workflows/docker-publish.yaml@v0.1.1g
+    with:
+      imageName: "ocwp"
+      githubRef: ${{ github.ref }}
+      gitSha: ${{ github.sha }}
+
+      # Optional finetuning inputs
+      
+      # Path to the docker context
+      path: .
+      
+      # Path to the dockerfile (relative to `path`)
+      dockerfile: Dockerfile
+      
+      # If enabled, will cache_from the latest version of the docker image.
+      cache: False
+    
+    secrets: 
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    
+    needs: frontend-check
+
+  deploy:
+    name: "Deploy"
+    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@v0.1.1g
+
+    with:
+      githubRef: ${{ github.ref }}
+      gitSha: ${{ github.sha }}
+
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      GH_AWS_ACCESS_KEY_ID: ${{ secrets.GH_AWS_ACCESS_KEY_ID }}
+      GH_AWS_SECRET_ACCESS_KEY: ${{ secrets.GH_AWS_SECRET_ACCESS_KEY }}
+    
+    needs: publish
