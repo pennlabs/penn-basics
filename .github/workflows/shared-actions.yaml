@@ -23,7 +23,7 @@ jobs:
       # Path to the docker context
       path: .
       
-      # Path to the dockerfile (relative to `path`)
+      # Path to the dockerfile (relative to `path` variable)
       dockerfile: Dockerfile
       
       # If enabled, will cache_from the latest version of the docker image.
