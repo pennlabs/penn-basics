@@ -30,6 +30,6 @@ export const getApiAuthRouteWithRedirectParams = (pathname: string): string =>
 export const GOOGLE_MAPS_API_ROUTE = (GOOGLE_MAPS_API_KEY: string) => `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`
 export const PENN_DINING_BASE_URL =
   'https://university-of-pennsylvania.cafebonappetit.com/cafe'
-export const FEEDBACK_LINK = 'https://airtable.com/shrE9ZdgiSY0DfDxV'
+export const FEEDBACK_LINK = 'https://airtable.com/appFRa4NQvNMEbWsA/shrchDhKNp5d8SOvZ'
 export const PENN_DINING_URL = (slug: string): string =>
   `${PENN_DINING_BASE_URL}/${slug}`
