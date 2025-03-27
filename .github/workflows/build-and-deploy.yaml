@@ -3,7 +3,7 @@ on: push
 jobs:
   react:
     name: React
-    uses: pennlabs/shared-actions/.github/workflows/react.yaml@main
+    uses: pennlabs/shared-actions/.github/workflows/react.yaml@v0.1.9
     with:
       imageName: penn-basics
       path: .
@@ -14,7 +14,7 @@ jobs:
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   deployment:
     name: Deploy
-    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@main
+    uses: pennlabs/shared-actions/.github/workflows/deployment.yaml@v0.1.9
     with:
       githubRef: ${{ github.ref }}
     secrets:
